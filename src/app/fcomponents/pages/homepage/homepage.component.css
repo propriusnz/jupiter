@@ -1,3 +1,15 @@
+.back1 {
+    background-repeat: no-repeat; 
+    background-image: url(https://www.thebigletterco.com.au/wp-content/uploads/2017/11/slide-bg-01.jpg); 
+    background-size: cover; 
+    background-position: center center;
+    width: 100%; 
+    height: 100%; 
+    opacity: 1; 
+    visibility: inherit;
+    z-index: 20;
+    padding-top:100px
+}
 .homeTopLogo1 img{
     width: 400px;
     height: 324px;

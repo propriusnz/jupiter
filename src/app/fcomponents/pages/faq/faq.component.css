@@ -39,3 +39,9 @@ a:hover {
 .collapsed .fa:before {
     content: "\f067";
 }
+.faqImg{
+    background-image: url(https://www.thebigletterco.com.au/wp-content/uploads/2013/05/305.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size:cover;
+}

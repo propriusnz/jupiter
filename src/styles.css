@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* color theme:gold */
+/* #b2823f */
+
+
 /* nav bar style start */
 
 
@@ -61,7 +64,7 @@
     font-weight: bold;
 }
 .s2blue{
-    color:#0099FF;
+    color:#b2823f;
     font-size: 15px;
 }
 .s3{
