@@ -1,0 +1,27 @@
+.homeTopLogo1 img{
+    width: 400px;
+    height: 324px;
+}
+.homeTopLogo2 img{
+    height: auto;
+    max-width: 100%;
+}
+.homeTopLogo3 span{
+    color: rgb(255, 255, 255);
+    visibility: inherit;
+    line-height: 60px;
+    font-weight: 800;
+    font-size: 4.5vw;
+    white-space: nowrap;
+}
+.productsOverview img{
+    height: auto;
+    max-width: 100%;
+}
+i{
+    color:#b2823f;
+    font-size:70px;
+}
+ul li{
+    margin-top:15px
+}

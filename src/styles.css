@@ -1,0 +1,126 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* color theme:gold */
+/* nav bar style start */
+
+
+ /* General Font style Section Start */
+ .j1{
+    font-size:50px;
+    font-weight: bold;
+    color:white;
+}
+.j2{
+    font-size:40px;
+    font-weight: bold;
+    color:white;
+}
+
+@media (max-width: 576px) {
+    .j1{
+        font-size:40px;
+    }
+}
+@media (max-width: 576px) {
+    .fc-time-grid-container {
+        height: 12rem !important;
+    }
+}
+
+.l1{
+    font-size: 40px;
+    font-weight: bold;
+    color:#363636;
+}
+.l2{
+    font-size: 30px;
+    font-weight: bold;
+    color:#363636;
+}
+.m1{
+    font-size:25px;
+    color:#525252;
+    font-weight: bold;
+}
+.m2{
+    font-size:20px;
+    color:#525252;
+    font-weight: bold;
+}
+.s1{
+    font-size:18px;
+    color:#424242;
+}
+.s2{
+    font-size:15px;
+    color:#424242;
+}
+.s2bold{
+    font-size:15px;
+    color:#424242;
+    font-weight: bold;
+}
+.s2blue{
+    color:#0099FF;
+    font-size: 15px;
+}
+.s3{
+    font-size:14px;
+    color:#424242;
+}
+.s3Blue{
+    font-size: 14px;
+    color:#0099FF;
+}
+.s3bold{
+    font-size:13px;
+    color:#4b4b4b;
+    font-weight: bold;
+}
+.s4{
+    font-size: 12px;
+    color:#424242;
+    font-weight: normal;
+}
+s4{
+    font-size:13px;
+    color:#0099FF;
+}
+.error-feedback{
+    color:#b30000;
+    font-size: 18px;
+    text-align:center;
+}
+.invalid_feedback{
+    color:red;
+    font-size: 12px;
+}
+
+/* General Button styles */
+.btn_blue{
+    background-color: #0099FF;
+    width: 85px;
+    height: 30px;
+    font-size:13px;
+    border-width:0px;
+    padding:5px;
+    border-radius: 5px;
+    bottom:2px;
+    right:20px;
+    color:white;
+}
+
+.btn_blue_large{
+    font-size: 20px;
+    background-color: #0099FF;
+    margin-bottom: 13px;
+    padding: 10px 13px 10px 13px;
+    text-decoration: bold;
+    color:white;
+    border-color:white;
+    border-width: 1px;
+}
+
+.btn{
+    cursor:pointer;
+}
