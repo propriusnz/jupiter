@@ -1,3 +1,104 @@
-<p>
-  contactUs works!
-</p>
+<div class="container-fliud">
+  google maps
+</div>
+<div class="container">
+  <div class="row">
+    <!-- facebook -->
+    <div class="col-4">
+      <div class="l2">Get Social</div>
+      <div class="row"><div class="col-4"><i class="fab fa-facebook-square"></i></div><div class="col-4"><i class="fab fa-instagram"></i></div></div>
+      <div class="l2">Contact Info</div>
+      <div class="row"> <div class="col-3"><i class="fas fa-map-marker-alt"></i></div><div class="col-9">25 stock street</div></div>
+      <div class="row"><div class="col-3"><i class="fas fa-phone-volume"></i></div><div class="col-9">11122233456</div></div>
+      <div class="row"><div class="col-3"> <i class="fas fa-envelope"></i></div><div class="col-9">info@thebigletterco.com.au</div></div>
+    </div>
+
+    <!-- form -->
+    <div class="col-8">
+      <div class="row l1">Get in touch with us</div>
+      <form class="col-12" novalidate #f="ngForm" (ngSubmit)="onSubmit(f)" style="padding-left:0;">
+        <div class="row">
+          <div class="col-6">
+            <!-- name -->
+              <div class="form-group">  
+                  <div class="invalid_feedback" *ngIf="name.errors?.required && name.touched">Please enter your name</div>
+                  <div class="invalid_feedback" *ngIf=" name.errors?.minlength && name.touched ">
+                     Your name shall be at least 2 characters
+                  </div>
+                  <input class="form-control" type="name" required minlength="2" name="name" placeholder="Name *"
+                  [ngClass]="{'is-invalid':name.errors?.required && name.touched}" [(ngModel)]="contactFrom.name" #name="ngModel">
+               </div>
+              <!-- email -->
+               <div class="form-group">
+                  <div class="invalid_feedback" *ngIf="email.errors?.required && email.touched">Please input your E-mail</div>
+                  <div class="invalid_feedback" *ngIf="email.errors?.pattern && email.touched">Incorrect email entered</div>
+                  <input class="form-control" type="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" minlength="6" name="email" placeholder="Email*" 
+                  [ngClass]="{'is-invalid':email.errors?.required && email.touched}" [(ngModel)]="contactFrom.email" #email="ngModel">
+               </div>
+               <!-- phone number -->
+               <div class="form-group">
+                  <div class="invalid_feedback" *ngIf="phone.errors?.required && phone.touched">Please input your Phone number</div>
+                  <div class="invalid_feedback" *ngIf="phone.errors?.pattern && phone.touched">
+                     Phone number length should at least 7 characters
+                  </div>
+                  <input class="form-control" type="tel" required pattern="[0-9]{7,15}" minlength="7" name="phone" placeholder="Phone number*" 
+                  [ngClass]="{'is-invalid':phone.errors?.required && phone.touched}" [(ngModel)]="contactFrom.phone" #phone="ngModel">
+               </div>
+               <!-- company -->
+              <div><input type="text" placeholder="Company"  [(ngModel)]="contactFrom.company" name="company"></div>
+               <!-- date of event -->
+              <!-- <div><input type="text" placeholder="Date of event *"></div>
+              <div class="form-group">
+                  <div class="invalid_feedback" *ngIf="dateOfEvent.errors?.required && dateOfEvent.touched">Date of event is required</div>
+                  <mat-form-field>
+                      <input matInput [matDatepicker]="picker" placeholder="Choose a date" class="form-control" type="dateOfEvent" required  name="phone" placeholder="Data of event*" 
+                      [ngClass]="{'is-invalid':phone.dateOfEvent?.required && dateOfEvent.touched}" [(ngModel)]="contactFrom.dateOfEvent" #dateOfEvent="ngModel">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+               </div> -->
+              <!-- location of event -->
+              <div><input type="text" placeholder="Location of event *"></div>      
+          </div>
+
+          <div class="col-6">
+            <!-- how do you find use -->
+            <div class="form-group">  
+                <div class="invalid_feedback" *ngIf="findUs.errors?.required && findUs.touched">Field is required</div>              
+                <select class="custom-select form-control" placeholder="find us" type="findUs" required name="findUs"
+                [ngClass]="{'is-invalid':findUs.errors?.required && findUs.touched}" [(ngModel)]="contactFrom.findUs" #findUs="ngModel">
+                    <!-- <option selected>How did you find us?</option> -->
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+             </div>
+                <!-- type of event -->
+                <div class="form-group">  
+                    <div class="invalid_feedback" *ngIf="eventType.errors?.required && eventType.touched">Type of data is required</div>              
+                    <select class="custom-select form-control"  type="eventType" required name="eventType"
+                    [ngClass]="{'is-invalid':eventType.errors?.required && eventType.touched}" [(ngModel)]="contactFrom.eventType" #eventType="ngModel">
+                        <option selected>Type of event</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                 </div>
+
+                <!-- message -->
+                <div class="form-group">  
+                    <div class="invalid_feedback" *ngIf="message.errors?.required && message.touched">Message is required</div>
+                    <div class="invalid_feedback" *ngIf=" message.errors?.minlength && message.touched ">
+                       Message shall be at least 4 characters
+                    </div>
+                    <input class="form-control" type="message" required minlength="2" name="message" placeholder="message *"
+                    [ngClass]="{'is-invalid':message.errors?.required && message.touched}" [(ngModel)]="contactFrom.message" #message="ngModel">
+                 </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+    </div>
+  </div>

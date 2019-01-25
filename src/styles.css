@@ -1,11 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
-/* color theme:gold */
-/* #c48f45 */
-
-
+.gold{
+    color:#c48f45
+}
 /* nav bar style start */
-
+/* https://stackoverflow.com/questions/18529274/change-navbar-color-in-twitter-bootstrap */
 
  /* General Font style Section Start */
 .j1{
@@ -13,7 +12,6 @@
     font-weight: bold;
     color:white;
 }
-
 @media (max-width: 576px) {
     .j1{
         font-size:32px;
@@ -90,30 +88,45 @@ s4{
 }
 
 /* General Button styles */
-.btn_blue{
-    background-color: #0099FF;
-    width: 85px;
-    height: 30px;
-    font-size:13px;
-    border-width:0px;
-    padding:5px;
-    border-radius: 5px;
-    bottom:2px;
-    right:20px;
+.btn.btn_gold{
+    font-weight: bold;
+    border-radius: 3.5px;
+    border-width: 2px;
+    border-color: #c48f45;
+    border-style: solid;
+    color: white;
+    background: #c48f45;
+}
+.btn.btn_gold:hover{
     color:white;
+    background: #cf984b;
 }
 
-.btn_blue_large{
+.btn.btn-outline-gold{
+    font-weight: bold;
+    border-radius: 3.5px;
+    border-width: 2px;
+    border-color: #c48f45;
+    border-style: solid;
+    color: #c48f45;
+}
+.btn.btn-outline-gold:hover{
+    background-color: #c48f45;
+    color: white;
+}
+.btn.btn_gold_large{
     font-size: 20px;
-    background-color: #0099FF;
+    border-radius: 3.5px;
     margin-bottom: 13px;
-    padding: 10px 13px 10px 13px;
-    text-decoration: bold;
-    color:white;
-    border-color:white;
-    border-width: 1px;
+    font-weight: bold;
+    color: #c48f45;
+    border-color: #c48f45;
+    border-width: 2px;
 }
-
+.btn.btn_gold_large:hover{
+    background-color: #c48f45;
+    color: white;
+}
 .btn{
     cursor:pointer;
 }
