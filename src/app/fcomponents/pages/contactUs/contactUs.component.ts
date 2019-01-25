@@ -11,7 +11,7 @@ export class ContactUsComponent implements OnInit {
   contactFrom={
     name:'',
     email:'',
-    phoneNumber:'',
+    phone:'',
     company:'',
     dateOfEvent:'',
     locationOfEvent:'',
@@ -35,5 +35,8 @@ export class ContactUsComponent implements OnInit {
       console.log(this.contactFrom)
       this.successMessage ='Successfully submitted.';
     }
+  }
+  formCheck(){
+    console.log(this.contactFrom)
   }
 }

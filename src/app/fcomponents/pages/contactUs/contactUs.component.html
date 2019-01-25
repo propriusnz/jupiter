@@ -1,6 +1,5 @@
-<div class="container-fliud">
-  google maps
-</div>
+<div class="container-fliud">google maps</div>
+<button class="btn btn-outline-gold" (click)= "formCheck()">Check form</button>
 <div class="container">
   <div class="row">
     <!-- facebook -->
@@ -47,16 +46,15 @@
                <!-- company -->
               <div><input type="text" placeholder="Company"  [(ngModel)]="contactFrom.company" name="company"></div>
                <!-- date of event -->
-              <!-- <div><input type="text" placeholder="Date of event *"></div>
-              <div class="form-group">
-                  <div class="invalid_feedback" *ngIf="dateOfEvent.errors?.required && dateOfEvent.touched">Date of event is required</div>
-                  <mat-form-field>
-                      <input matInput [matDatepicker]="picker" placeholder="Choose a date" class="form-control" type="dateOfEvent" required  name="phone" placeholder="Data of event*" 
-                      [ngClass]="{'is-invalid':phone.dateOfEvent?.required && dateOfEvent.touched}" [(ngModel)]="contactFrom.dateOfEvent" #dateOfEvent="ngModel">
-                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                      <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
-               </div> -->
+               <div style="border:1px">
+               <mat-form-field>
+                  <input matInput [matDatepicker]="myDatepicker"  placeholder="Date of event" type="dateOfEvent" required name="dateOfEvent"
+                  [ngClass]="{'is-invalid':dateOfEvent.errors?.required && dateOfEvent.touched}" [(ngModel)]="contactFrom.dateOfEvent" #dateOfEvent="ngModel">
+                  <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                  <mat-datepicker #myDatepicker></mat-datepicker>
+                  <mat-error *ngIf="dateOfEvent.invalid">You must enter a value</mat-error>
+                </mat-form-field>
+              </div>
               <!-- location of event -->
               <div><input type="text" placeholder="Location of event *"></div>      
           </div>
@@ -67,7 +65,7 @@
                 <div class="invalid_feedback" *ngIf="findUs.errors?.required && findUs.touched">Field is required</div>              
                 <select class="custom-select form-control" placeholder="find us" type="findUs" required name="findUs"
                 [ngClass]="{'is-invalid':findUs.errors?.required && findUs.touched}" [(ngModel)]="contactFrom.findUs" #findUs="ngModel">
-                    <!-- <option selected>How did you find us?</option> -->
+                    <option value="" disabled selected>How did you find us*</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>
@@ -75,10 +73,10 @@
              </div>
                 <!-- type of event -->
                 <div class="form-group">  
-                    <div class="invalid_feedback" *ngIf="eventType.errors?.required && eventType.touched">Type of data is required</div>              
+                    <div class="invalid_feedback" *ngIf="eventType.errors?.required && eventType.touched">Type of data is required</div>
                     <select class="custom-select form-control"  type="eventType" required name="eventType"
                     [ngClass]="{'is-invalid':eventType.errors?.required && eventType.touched}" [(ngModel)]="contactFrom.eventType" #eventType="ngModel">
-                        <option selected>Type of event</option>
+                    <option value="" disabled selected>Type of event*</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
