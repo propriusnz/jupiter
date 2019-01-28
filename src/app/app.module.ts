@@ -4,8 +4,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule,MatInputModule,MatFormFieldModule,MatNativeDateModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule,Routes }   from '@angular/router';
+import {HttpClientModule} from '@angular/common/http';
 
 // All service follow
+import{ProductService} from './service/product.service'
+
 
 //All components follow
 import { AppRoutingModule } from './app-routing.module';
@@ -27,7 +30,8 @@ const appRoutes: Routes=[
   {path:'aboutUs',component:AboutUsComponent},
   {path:'faq',component:FaqComponent},
   {path:'homepage',component:HomepageComponent},
-  {path:'products',component:ProductComponent},
+  {path:'',component:HomepageComponent},
+  {path:'products',component:ProductListComponent},
 ]
 
 @NgModule({
@@ -51,9 +55,12 @@ const appRoutes: Routes=[
     MatFormFieldModule,
     MatNativeDateModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    ProductService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

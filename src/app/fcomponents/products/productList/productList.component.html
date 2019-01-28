@@ -1,12 +1,27 @@
-<div class="container-fluid">
-
+<div class="container-fluid productsBackImg" >
+  <div class="row py-5"> &nbsp;</div>
+  <div class="row py-5"><div class="col-12 text-center j1 my-5">Our products</div></div>
+  <div class="row my-5"> &nbsp;</div>
 </div>
+
 <div class="container">
-  <div class="row">
-    <div class="col-6">testing-01</div>
-    <div class="col-6">testing-02</div>
-    <div class="col-6">testing-03</div>
-    <div class="col-6">testing-04</div>
-    <div class="col-6">testing-05</div>
+  <div class="row py-3">
+      <div class="col-12 text-center">
+          Bringing your party vision to life can be exhausting, so we aim to be there with you as much as you need. If you have a clear idea already, that’s great. If not, we can help bring the wow factor to your event like never before. Contact us to talk over details and receive a quote.</div>
+      <div class="col-12 mb-2 l1 text-center">  Our Products</div>
+      <div class="col-12 text-center">All prices are in AUD. Damage waiver, delivery & pick up fees are additional</div>
+  </div>
+
+
+  <div class="row py-5">
+    <div class='col-12 col-md-6 text-center' *ngFor="let product of allProducts">
+      <div class="l1">{{product.Title}}</div>
+      <div>{{product.SubTitle}}</div>
+      <div>{{product.Description}}</div>
+      <div>ProductCategoryName:{{product.CategroyName}}</div>
+      <div>ProductTypeName:{{product.ProdTypeName}}</div>
+      <div>TotalStock{{product.TotalStock}}</div>
+    </div>
+
   </div>
 </div>

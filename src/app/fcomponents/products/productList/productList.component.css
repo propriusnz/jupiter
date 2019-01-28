@@ -1,0 +1,8 @@
+.productsBackImg{
+    background-image: url("https://www.thebigletterco.com.au/wp-content/uploads/2013/05/products-banner-page.jpg"); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-position: 50% -290px; */
+    background-position: center center;
+
+}
