@@ -1,5 +1,4 @@
 <div class="container-fliud">google maps</div>
-<button class="btn btn-outline-gold" (click)= "formCheck()">Check form</button>
 <div class="container">
   <div class="row">
     <!-- facebook -->
@@ -38,7 +37,7 @@
                <div class="form-group">
                   <div class="invalid_feedback" *ngIf="phone.errors?.required && phone.touched">Please input your Phone number</div>
                   <div class="invalid_feedback" *ngIf="phone.errors?.pattern && phone.touched">
-                     Phone number length should at least 7 characters
+                     Please enter the correct phone number.
                   </div>
                   <input class="form-control" type="tel" required pattern="[0-9]{7,15}" minlength="7" name="phone" placeholder="Phone number*" 
                   [ngClass]="{'is-invalid':phone.errors?.required && phone.touched}" [(ngModel)]="contactFrom.phone" #phone="ngModel">
@@ -48,7 +47,7 @@
                <!-- date of event -->
                <div style="border:1px">
                <mat-form-field>
-                  <input matInput [matDatepicker]="myDatepicker"  placeholder="Date of event" type="dateOfEvent" required name="dateOfEvent"
+                  <input matInput [matDatepicker]="myDatepicker" [min] = "minDate" placeholder="Date of event" type="dateOfEvent" required name="dateOfEvent"
                   [ngClass]="{'is-invalid':dateOfEvent.errors?.required && dateOfEvent.touched}" [(ngModel)]="contactFrom.dateOfEvent" #dateOfEvent="ngModel">
                   <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
                   <mat-datepicker #myDatepicker></mat-datepicker>
