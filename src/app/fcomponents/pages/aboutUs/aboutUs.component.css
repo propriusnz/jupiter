@@ -1,0 +1,17 @@
+/* section1--------------------------------------------------------------------------------------------------------------------- */
+#section1
+{
+    height: 40vh;
+    width: 100%;
+    background-image: url("../../../../assets/images/headerimage.jpg");
+    background-size: cover;
+}
+hr{
+    width: 30%;
+}
+.about-us-side-image
+{
+    width: 100%;
+    overflow: hidden;
+    text-align: -webkit-center;
+}
