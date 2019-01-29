@@ -17,7 +17,6 @@ export class ProductListComponent implements OnInit {
   ngOnInit() {
     this.typeName = this.route.snapshot.data['some_data'];
     console.log(this.typeName)
-
     if(this.typeName == 'hire'){
       this.productService.indexProduct().subscribe(
       (res)=>{
