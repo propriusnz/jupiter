@@ -1,5 +1,5 @@
 <div class="container-fliud ">
- <img src="assets/images/location.PNG" style="width:100%;overflow: hidden;"/>
+ <img src="assets/images/location.PNG" style="width:100%;overflow: hidden;filter: brightness(90%);"/>
 </div>
 
 <div class="container">
@@ -16,7 +16,7 @@
 
     <!-- form -->
     <div class="col-12 col-md-8">
-      <div class="row l2">Get in touch with us</div>
+      <div class="row"><div class="col-12 l2">Get in touch with us</div> </div>
       <form class="col-12" novalidate #f="ngForm" (ngSubmit)="onSubmit(f)" style="padding-left:0;">
         <div class="row">
           <div class="col-12 col-md-6">
@@ -46,10 +46,10 @@
                   [ngClass]="{'is-invalid':phone.errors?.required && phone.touched}" [(ngModel)]="contactFrom.phone" #phone="ngModel">
                </div>
                <!-- company -->
-              <div><input type="text" placeholder="Company"  [(ngModel)]="contactFrom.company" name="company"></div>
+              <div><input class="form-control" type="text" placeholder="Company"  [(ngModel)]="contactFrom.company" name="company"></div>
                <!-- date of event -->
-               <div style="border:1px">
-               <mat-form-field>
+               <div>
+               <mat-form-field style="width:100%">
                   <input matInput [matDatepicker]="myDatepicker" [min] = "minDate" placeholder="Date of event" type="dateOfEvent" required name="dateOfEvent"
                   [ngClass]="{'is-invalid':dateOfEvent.errors?.required && dateOfEvent.touched}" [(ngModel)]="contactFrom.dateOfEvent" #dateOfEvent="ngModel">
                   <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
