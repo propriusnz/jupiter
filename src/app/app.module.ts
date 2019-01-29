@@ -20,6 +20,7 @@ import {ContactUsComponent} from './fcomponents/pages/contactUs/contactUs.compon
 import {ProductListComponent} from './fcomponents/products/productList/productList.component'
 import { AboutUsComponent } from './fcomponents/pages/aboutUs/aboutUs.component';
 import { ProductComponent } from './fcomponents/products/product/product.component';
+import { FooterComponent } from './fcomponents/basic/footer/footer.component';
 
 
 
@@ -43,7 +44,8 @@ const appRoutes: Routes=[
     ContactUsComponent,
     ProductListComponent,
     AboutUsComponent,
-    ProductComponent
+    ProductComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
