@@ -1,16 +1,13 @@
 .footertop
 {
     background-color: black;
-    height: 110px;
 }
 .icon
 {
     border: 2px solid #333333;
     text-align: center;
-    float: left;
     height: 50px;
     width: 50px;
-    margin-left:10px;
     border-radius: 5px;
 }
 i
@@ -40,6 +37,5 @@ i
 .footerbot
 {
     background-color: #111111;
-    height: 110px;
     color:#555555;
 }
