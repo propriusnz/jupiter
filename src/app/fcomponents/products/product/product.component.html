@@ -9,7 +9,13 @@
     <div>{{productDetail.ProdTypeName}}</div>
     <div>${{productDetail.Price}}</div>
     <div>In stock {{productDetail.TotalStock}}</div>
-    <div><button class='btn btn_gold'>Add to cart</button></div>
+    <div>Quantity:
+        <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+         type="number" [value] = "quantity"  min="1" max="{{productDetail.TotalStock}}" [(ngModel)]="quantity" (ngModelChange)="quanCheck($event)" 
+        maxlength= "{{quantityLength}}"> 
+        <button class='btn btn_gold'>Add to cart</button>
+    </div>
+    <div *ngIf="!quantityFilled">Please enter Quantity</div>
   </div>
   <div class="col-3">
     
