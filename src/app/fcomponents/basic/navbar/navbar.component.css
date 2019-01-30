@@ -4,3 +4,20 @@
     background-color: transparent;
     width:100%;
 }   
+ a.nav-link
+{
+    color: white;
+}
+a.nav-link:focus
+{
+    color: gold;
+}
+#navbarId.bg-light.navbar-light
+{
+    color: aqua;
+}
+#navbarId
+{
+    padding-top: 0px;
+    padding-bottom: 0px;
+}

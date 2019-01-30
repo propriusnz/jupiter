@@ -1,5 +1,13 @@
 <nav class="navbar navbar-expand-md" id="navbarId" [ngClass]="{'navbar-light': !isTop, 'bg-light':!isTop}">
-  <a class="navbar-brand" routerLink='/homepage' routerLinkActive="active">HomeLogo</a>
+  <a class="navbar-brand" routerLink='/homepage' routerLinkActive="active" >
+    <div *ngIf="isTop; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+        <img src="../../../../assets/images/logo_white.png">
+    </ng-template>
+    <ng-template #elseBlock>
+      <img src="../../../../assets/images/logo_black.png">
+    </ng-template>
+  </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
