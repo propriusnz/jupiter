@@ -1,3 +1,18 @@
-<p>
-  product works!
-</p>
+<div class="container-fliud py-3">&nbsp;</div>
+<div class="container">
+  <div class="row py-5">
+  <div class="col-4">
+    <img src="http://localhost:56662/ImgTest/test2.jpeg" class="d-block w-100">
+  </div>
+  <div *ngIf="!productDetail || productDetail.length == 0">This product is unavailable right now. Sorry</div>
+  <div class="col-5" *ngIf="productDetail">
+    <div>{{productDetail.ProdTypeName}}</div>
+    <div>${{productDetail.Price}}</div>
+    <div>In stock {{productDetail.TotalStock}}</div>
+    <div><button class='btn btn_gold'>Add to cart</button></div>
+  </div>
+  <div class="col-3">
+    
+  </div>
+</div>
+</div>

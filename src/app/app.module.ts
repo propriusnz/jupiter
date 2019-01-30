@@ -35,6 +35,7 @@ const appRoutes: Routes=[
   {path:'hire',component:ProductListComponent,data : {some_data : 'hire'}},
   {path:'services',component:ProductListComponent,data : {some_data : 'service'}},
   {path:'packages',component:ProductListComponent,data : {some_data : 'package'}},
+  {path:'product/:id',component:ProductComponent}
 ]
 
 @NgModule({

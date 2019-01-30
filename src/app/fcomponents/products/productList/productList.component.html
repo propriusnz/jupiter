@@ -52,6 +52,7 @@
       <div>ProductCategoryName:{{product.CategroyName}}</div>
       <div>ProductTypeName:{{product.ProdTypeName}}</div>
       <div>TotalStock{{product.TotalStock}}</div>
+      <div> <a [routerLink] = "['/product/'+product.ProdId]">View Detail:{{product.ProdId}}</a> </div>
     </div>
 
   </div>

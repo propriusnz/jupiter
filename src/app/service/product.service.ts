@@ -11,12 +11,15 @@ baseUrl = environment.baseUrl;
 constructor( public http: HttpClient) { }
 
   indexProduct(){
-    return this.http.get(this.baseUrl + '/Product/3');
+    return this.http.get(this.baseUrl + '/productbytype/3');
   }
   indexService(){
-    return this.http.get(this.baseUrl + '/Product/1');
+    return this.http.get(this.baseUrl + '/productbytype/1');
   }
   indexPackage(){
-    return this.http.get(this.baseUrl + '/Product/2');
+    return this.http.get(this.baseUrl + '/productbytype/2');
+  }
+  showProduct(id:number){
+    return this.http.get(this.baseUrl + '/Product/' + id);
   }
 }
