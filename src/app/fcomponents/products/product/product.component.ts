@@ -39,7 +39,7 @@ export class ProductComponent implements OnInit {
       if(e>this.productDetail.TotalStock){
         this.quantity = this.productDetail.TotalStock
       }
-      if(e.toString().slice(0,1)=='-'){
+      if(e.toString().slice(0,1)=='-' || e.toString().slice(0,1)=='+'){
         this.quantity = 1
       }
     }
