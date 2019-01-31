@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit {
           headerTop.style.background="rgba(255,255,255,0."+h*1.4+")"; 
           headerTop.style.color="rgba(66,66,66,0."+h*1.4+")";
           headerTop.style.height="60px";
-          headerTop.style.transitionDuration="1s";  
+          headerTop.style.transitionDuration="0.5s";  
    
         }            
    

@@ -40,8 +40,3 @@ li.nav-item
     -o-transition: all .5s; 
     transition: all .5s;
 }
-/* img {
-    transition-property: transform, background-color, box-shadow, line-height, height;
-    transition-duration: 0.3s;
-
-} */
