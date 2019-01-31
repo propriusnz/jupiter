@@ -2,18 +2,29 @@
 <div class="container">
   <div class="row py-5">
   <div class="col-4">
-    <img src="http://localhost:56662/ImgTest/test2.jpeg" class="d-block w-100">
+    <img src="{{defaultImgUrl}}" class="d-block w-100 imgTrans">
+    <br>
+    <div class="row">
+      <div class="col-3 pr-0"><img class="smallImg" src="http://localhost:56662/ImgTest/test1.png" (mouseover)="changeImg($event)" ></div>
+      <div class="col-3 pr-0"><img class="smallImg" src="http://localhost:56662/ImgTest/test2.jpeg" (mouseover)="changeImg($event)"></div>
+      <div class="col-3 pr-0"><img class="smallImg" src="http://localhost:56662/ImgTest/test3.jpeg" (mouseover)="changeImg($event)"></div>
+    </div>
   </div>
   <div *ngIf="!productDetail || productDetail.length == 0">This product is unavailable right now. Sorry</div>
   <div class="col-5" *ngIf="productDetail">
-    <div>{{productDetail.ProdTypeName}}</div>
-    <div>${{productDetail.Price}}</div>
-    <div>In stock {{productDetail.TotalStock}}</div>
-    <div>Quantity:
-        <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+    <div class="m2">{{productDetail.Title}}</div>
+    <div>$<span class="s1">{{productDetail.Price}}</span></div>
+    <br/>
+    <div class="s2">{{productDetail.Description}}</div>
+    <br/>
+    <div class="row justify-content-between">
+      <div class="col-6">
+        Quantity:<input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
          type="number" [value] = "quantity"  min="1" max="{{productDetail.TotalStock}}" [(ngModel)]="quantity" (ngModelChange)="quanCheck($event)" 
         maxlength= "{{quantityLength}}"> 
-        <button class='btn btn_gold'>Add to cart</button>
+        <span class="s3">({{productDetail.TotalStock}} in stock)</span>
+      </div>
+      <div class="col-4"><button class='btn btn_gold float-right'>Add to cart</button></div>
     </div>
     <div *ngIf="!quantityFilled">Please enter Quantity</div>
   </div>

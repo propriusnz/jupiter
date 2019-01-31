@@ -15,6 +15,7 @@ export class ProductComponent implements OnInit {
   quantityLength:number;
   quantityError:boolean = false
   quantityFilled:boolean = true
+  defaultImgUrl:string = 'http://localhost:56662/ImgTest/test1.png'
   constructor(
     private route:ActivatedRoute,
     private productService:ProductService
@@ -46,5 +47,8 @@ export class ProductComponent implements OnInit {
     if(!e){
       this.quantityFilled = false
     }
+  }
+  changeImg(e){
+    this.defaultImgUrl = e.srcElement.attributes[2].nodeValue
   }
 }

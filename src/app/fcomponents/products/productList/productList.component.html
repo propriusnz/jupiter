@@ -19,12 +19,14 @@
       <div class="col-12 text-center">All prices are in AUD. Damage waiver, delivery & pick up fees are additional</div>
   </div>
 
-  <div class="row"><div class="col-12 col-md-6 s2bold" *ngIf="!allProducts || allProducts.length ==0">Sorry, We can not find any products at this moment.</div></div>
+  <div class="row"><div class="col-6 col-md-3 s2bold" *ngIf="!allProducts || allProducts.length ==0">Sorry, We can not find any products at this moment.</div></div>
   <div class="row py-5">
-    <div class='col-12 col-md-6 text-center' *ngFor="let product of allProducts">
+    <div class='col-6 col-md-3' *ngFor="let product of allProducts; index as i">
 
-        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel" data-interval="3000">
-            <div class="carousel-inner">
+        <div id="carouselExampleFade{{i}}" class="carousel slide carousel-fade" data-ride="carousel" data-interval="false">
+            <a [routerLink] = "['/product/'+product.ProdId]">
+            <div class="carousel-inner" >
+                <!-- active -->
               <div class="carousel-item active">
                 <img src="http://localhost:56662/ImgTest/test1.png" class="d-block w-100">
               </div>
@@ -35,24 +37,19 @@
                 <img src="http://localhost:56662/ImgTest/test3.jpeg" class="d-block w-100">
               </div>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+            </a>
+            <a class="carousel-control-prev" href="#carouselExampleFade{{i}}" role="button" data-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
               <span class="sr-only">Previous</span>
             </a>
-            <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+            <a class="carousel-control-next" href="#carouselExampleFade{{i}}" role="button" data-slide="next">
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="sr-only">Next</span>
             </a>
           </div>
-
-      <div class="l1">{{product.Title}}</div>
-      <div>{{product.ProdTypeId}}</div>
-      <div>{{product.SubTitle}}</div>
-      <div>{{product.Description}}</div>
-      <div>ProductCategoryName:{{product.CategroyName}}</div>
-      <div>ProductTypeName:{{product.ProdTypeName}}</div>
-      <div>TotalStock{{product.TotalStock}}</div>
-      <div> <a [routerLink] = "['/product/'+product.ProdId]">View Detail:{{product.ProdId}}</a> </div>
+      <div><a  class="m2" [routerLink] = "['/product/'+product.ProdId]">{{product.Title}} </a></div>
+      <div>${{product.Price}}</div>
+      <div class="s3">{{product.CategroyName}},{{product.ProdTypeName}}</div>
     </div>
 
   </div>
