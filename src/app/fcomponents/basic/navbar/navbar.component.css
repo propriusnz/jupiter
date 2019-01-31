@@ -7,10 +7,12 @@
  a.nav-link
 {
     color: white;
+    padding-top:20px;
+    padding-bottom: 16px;
 }
 a.nav-link:focus
 {
-    color: gold;
+    color: #c48f45;
 }
 #navbarId.bg-light.navbar-light
 {
@@ -21,3 +23,25 @@ a.nav-link:focus
     padding-top: 0px;
     padding-bottom: 0px;
 }
+li.nav-item
+{
+   height:100%;
+   
+}
+
+.navbar-light li.nav-item :hover
+{
+    background-color: #c48f45;
+    text-align: center; 
+    cursor: pointer; 
+    -webkit-transition: all .5s; 
+    -moz-transition: all .5s; 
+    -ms-transition: all .5s; 
+    -o-transition: all .5s; 
+    transition: all .5s;
+}
+/* img {
+    transition-property: transform, background-color, box-shadow, line-height, height;
+    transition-duration: 0.3s;
+
+} */
