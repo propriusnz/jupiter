@@ -4,5 +4,8 @@
     background-size: cover;
     /* background-position: 50% -290px; */
     background-position: center center;
-
+}
+a{
+    text-decoration: none;
+    color: inherit;
 }
