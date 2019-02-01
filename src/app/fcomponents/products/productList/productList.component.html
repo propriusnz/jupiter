@@ -19,9 +19,9 @@
       <div class="col-12 text-center">All prices are in AUD. Damage waiver, delivery & pick up fees are additional</div>
   </div>
 
-  <div class="row"><div class="col-6 col-md-3 s2bold" *ngIf="!allProducts || allProducts.length ==0">Sorry, We can not find any products at this moment.</div></div>
+  <div class="row"><div class="col-12 col-md-6 s2bold" *ngIf="!allProducts || allProducts.length ==0">Sorry, We can not find any products at this moment.</div></div>
   <div class="row py-5">
-    <div class='col-6 col-md-3' *ngFor="let product of allProducts; index as i">
+    <div class='col-12 col-md-6' *ngFor="let product of allProducts; index as i">
 
         <div id="carouselExampleFade{{i}}" class="carousel slide carousel-fade" data-ride="carousel" data-interval="false">
             <a [routerLink] = "['/product/'+product.ProdId]">
@@ -47,9 +47,10 @@
               <span class="sr-only">Next</span>
             </a>
           </div>
-      <div><a  class="m2" [routerLink] = "['/product/'+product.ProdId]">{{product.Title}} </a></div>
-      <div>${{product.Price}}</div>
-      <div class="s3">{{product.CategroyName}},{{product.ProdTypeName}}</div>
+      <div class="my-3"><a  class="l2" [routerLink] = "['/product/'+product.ProdId]">{{product.Title}} </a></div>
+      <div class="s1">${{product.Price}}</div>
+      <div class="s3 my-3">{{product.CategroyName}},{{product.ProdTypeName}}</div>
+      <div class="s3">{{product.Description}}</div>
     </div>
 
   </div>

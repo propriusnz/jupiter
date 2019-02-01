@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {ProductService} from '../../../service/product.service'
-import { error } from '@angular/compiler/src/util';
-
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -13,16 +11,17 @@ export class ProductComponent implements OnInit {
   productDetail:any;
   quantity:number=1 ;
   quantityLength:number;
-  quantityError:boolean = false
-  quantityFilled:boolean = true
-  defaultImgUrl:string = 'http://localhost:56662/ImgTest/test1.png'
+  quantityFilled:boolean = true;
+  defaultImgUrl:string = 'http://localhost:56662/ImgTest/test1.png';
+  // 1: add to cart; 2: successfully added 3:failed
+  inCart:number = 1;
+  cartList = [];
   constructor(
     private route:ActivatedRoute,
-    private productService:ProductService
+    private productService:ProductService,
   ) { 
     this.productId = this.route.snapshot.params['id'];
   }
-
   ngOnInit() {
     console.log(this.productId)
     this.productService.showProduct(this.productId).subscribe( 
@@ -33,7 +32,8 @@ export class ProductComponent implements OnInit {
       },
       (error)=>console.log(error)
     )
-  }
+    this.setStorage()
+    }
   quanCheck(e){
     if(e){
       this.quantityFilled = true
@@ -50,5 +50,42 @@ export class ProductComponent implements OnInit {
   }
   changeImg(e){
     this.defaultImgUrl = e.srcElement.attributes[2].nodeValue
+  }
+  setStorage(){
+    if ('cartList' in localStorage){
+      this.cartList = JSON.parse(localStorage.getItem('cartList'))
+    }else{
+      localStorage.setItem('cartList',JSON.stringify(this.cartList))
+    }
+    localStorage.setItem('userId','aaa ')
+  }
+  addToCart(){
+    let item = {
+      Title:this.productDetail.Title,
+      Quantity:this.quantity
+    }    
+    let a:boolean = false
+    this.cartList = JSON.parse(localStorage.getItem('cartList'))
+
+    if (this.cartList.length>0){
+      for (let i=0; i<this.cartList.length;i++){
+        if(this.cartList[i].Title == this.productDetail.Title){
+          a = true
+          this.cartList[i].Quantity += this.quantity
+          localStorage.setItem('cartList',JSON.stringify(this.cartList))
+          console.log(this.cartList)
+        }
+      }
+      if (a==false){
+        this.cartList.push(item)
+        localStorage.setItem('cartList',JSON.stringify(this.cartList))  
+      }
+    }else{
+      this.cartList = JSON.parse(localStorage.getItem('cartList'))
+      this.cartList.push(item)
+      localStorage.setItem('cartList',JSON.stringify(this.cartList))
+    }
+
+
   }
 }
