@@ -27,6 +27,7 @@ li.nav-item
 .bg-light li.nav-item :focus{color: #c48f45 !important;}
 .bg-light li.nav-item :hover
 {
+    color:rgb(85, 74, 74) !important;
     background-color: #c48f45;
     text-align: center; 
     cursor: pointer; 
