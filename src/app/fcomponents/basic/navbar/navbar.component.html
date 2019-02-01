@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-light" id="navbarId" [ngClass]="{ 'bg-light':!isTop}">
   <a class="navbar-brand" routerLink='/homepage' routerLinkActive="active" >
-    <div *ngIf="smallwindow; then smallwindow else bigwindow"></div>
+    <div *ngIf="smallwindow; then bigwindow else smallwindow"></div>
     <ng-template #bigwindow>
     <div *ngIf="isTop; then thenBlock else elseBlock"></div>
     <ng-template #thenBlock>
@@ -11,7 +11,7 @@
     </ng-template>
   </ng-template>
   <ng-template #smallwindow>
-    <img src="../../../../assets/images/logo_black.png">
+    <img id="smallwindow" src="../../../../assets/images/logo_black.png">
   </ng-template>
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,7 +22,6 @@
       <!-- <li class="nav-item active">
         <a class="nav-link s2gold" routerLink='/homepage' routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
       </li> -->
-      
       <!-- https://blog.csdn.net/zhuxufeifei/article/details/83065034 -->
 
       <li class="nav-item" >

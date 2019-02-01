@@ -28,15 +28,13 @@ export class NavbarComponent implements OnInit {
    
         }            
    
-      }      
+      }    
     };
   }
   
   @HostListener('window:scroll', ['$event']) onScrollEvent($event){
     let positionNav:number = window.pageYOffset
-    if(window.innerWidth>768){
-      this.smallwindow = false;
-    }
+    
      
     if (positionNav <= 70){
       this.isTop = true;
