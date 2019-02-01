@@ -11,7 +11,7 @@ export class NavbarComponent implements OnInit {
   smallwindow:boolean=true;
   constructor() { }
   ngOnInit() {
-    
+   
     window.onscroll=function(){
       var h =document.documentElement.scrollTop||document.body.scrollTop;    
       var headerTop =document.getElementById("navbarId");            
