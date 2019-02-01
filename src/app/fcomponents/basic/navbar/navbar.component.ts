@@ -13,12 +13,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
    
     window.onscroll=function(){
-<<<<<<< HEAD
-      var h =document.documentElement.scrollTop||document.body.scrollTop;
-      // console.log(h*1.4);      
-=======
       var h =document.documentElement.scrollTop||document.body.scrollTop;    
->>>>>>> b85a4bbb53d00818fa94378ca4485135b3490539
       var headerTop =document.getElementById("navbarId");            
    if(window.innerWidth>768){
         if(h<70){
