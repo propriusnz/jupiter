@@ -32,7 +32,7 @@ export class ProductComponent implements OnInit {
       },
       (error)=>console.log(error)
     )
-    this.setStorage()
+    // this.setStorage()
     }
   quanCheck(e){
     if(e){

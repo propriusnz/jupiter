@@ -1,7 +1,7 @@
 <div class="container-fliud py-3">&nbsp;</div>
 <div class="container">
   <div class="row py-5">
-  <div class="col-4">
+  <div class="col-12 col-md-6 col-lg-5">
     <img src="{{defaultImgUrl}}" class="d-block w-100 imgTrans">
     <br>
     <div class="row">
@@ -10,7 +10,7 @@
       <div class="col-3 pr-0"><img class="smallImg" src="http://localhost:56662/ImgTest/test3.jpeg" (mouseover)="changeImg($event)"></div>
     </div>
   </div>
-  <div *ngIf="!productDetail || productDetail.length == 0">This product is unavailable right now. Sorry</div>
+  <!-- <div *ngIf="!productDetail || productDetail.length == 0">This product is unavailable right now. Sorry</div>
   <div class="col-5" *ngIf="productDetail">
     <div class="m2">{{productDetail.Title}}</div>
     <div>$<span class="s1">{{productDetail.Price}}</span></div>
@@ -30,10 +30,24 @@
 
     </div>
     <div *ngIf="!quantityFilled">Please enter Quantity</div>
-  </div>
-  <div class="col-3">
-    
-  </div>
-</div>
+  </div> -->
+  <div class="col-12 col-md-6 col-lg-5">
+    <div class="m2">Name of Product</div>
+    <div>$<span class="s1">160</span></div>
+    <br/>
+    <div class="s2">Description of this product</div>
+    <br/>
+    <div class="row justify-content-between">
+      <div class="col-8">
+        Quantity:<input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+         type="number" [value] = "quantity"  min="1" max="10" [(ngModel)]="quantity" (ngModelChange)="quanCheck($event)" 
+        maxlength= "{{quantityLength}}"> 
+        <span class="s3">(only 11 in stock)</span>
+      </div>
+      <!-- <div class="col-4" *ngIf="inCart==1"><button class='btn btn_gold float-right' (click)="addToCart()">Add to cart</button></div> -->
+      <div class="col-4" *ngIf="inCart==1"><button class='btn btn_gold float-right'><b>+</b>Cart</button></div>
+    </div>
 
+   </div>
+ </div>
 </div>
