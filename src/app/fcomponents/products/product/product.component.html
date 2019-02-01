@@ -24,7 +24,10 @@
         maxlength= "{{quantityLength}}"> 
         <span class="s3">({{productDetail.TotalStock}} in stock)</span>
       </div>
-      <div class="col-4"><button class='btn btn_gold float-right'>Add to cart</button></div>
+      <div class="col-4" *ngIf="inCart==1"><button class='btn btn_gold float-right' (click)="addToCart()">Add to cart</button></div>
+      <div class="col-4" *ngIf="inCart==2"> Successful</div>
+      <div class="col-4" *ngIf="inCart==3"> Error</div>
+
     </div>
     <div *ngIf="!quantityFilled">Please enter Quantity</div>
   </div>
@@ -32,4 +35,5 @@
     
   </div>
 </div>
+
 </div>

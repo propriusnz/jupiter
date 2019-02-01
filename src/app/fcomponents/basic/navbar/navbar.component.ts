@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit {
     
     window.onscroll=function(){
       var h =document.documentElement.scrollTop||document.body.scrollTop;
-      console.log(h*1.4);      
+      // console.log(h*1.4);      
       var headerTop =document.getElementById("navbarId");            
       if( h >=70) {       //header.height= 70px;     
         headerTop.style.background="#fff";            
