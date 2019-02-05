@@ -5,9 +5,13 @@
     <img src="{{defaultImgUrl}}" class="d-block w-100 imgTrans">
     <br>
     <div class="row">
-      <div class="col-3 pr-0"><img class="smallImg" src="http://localhost:56662/ImgTest/test1.png" (mouseover)="changeImg($event)" ></div>
+      <!-- <div class="col-3 pr-0"><img class="smallImg" src="http://localhost:56662/ImgTest/test1.png" (mouseover)="changeImg($event)" ></div>
       <div class="col-3 pr-0"><img class="smallImg" src="http://localhost:56662/ImgTest/test2.jpeg" (mouseover)="changeImg($event)"></div>
-      <div class="col-3 pr-0"><img class="smallImg" src="http://localhost:56662/ImgTest/test3.jpeg" (mouseover)="changeImg($event)"></div>
+      <div class="col-3 pr-0"><img class="smallImg" src="http://localhost:56662/ImgTest/test3.jpeg" (mouseover)="changeImg($event)"></div> -->
+      <div class="col-3 pr-0"><img class="smallImg" src="../../../../assets/images/productImg1.jpeg" (mouseover)="changeImg($event)" ></div>
+      <div class="col-3 pr-0"><img class="smallImg" src="../../../../assets/images/productImg2.jpeg" (mouseover)="changeImg($event)"></div>
+      <div class="col-3 pr-0"><img class="smallImg" src="../../../../assets/images/productImg3.png" (mouseover)="changeImg($event)"></div>
+
     </div>
   </div>
   <!-- <div *ngIf="!productDetail || productDetail.length == 0">This product is unavailable right now. Sorry</div>
@@ -45,7 +49,7 @@
         <span class="s3">(only 11 in stock)</span>
       </div>
       <!-- <div class="col-4" *ngIf="inCart==1"><button class='btn btn_gold float-right' (click)="addToCart()">Add to cart</button></div> -->
-      <div class="col-4" *ngIf="inCart==1"><button class='btn btn_gold float-right'><b>+</b>Cart</button></div>
+      <div class="col-4" *ngIf="inCart==1"><button class='btn btn_gold float-right' routerLink='/shoppingCart'><i class="fas fa-cart-plus"></i></button></div>
     </div>
 
    </div>

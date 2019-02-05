@@ -1,0 +1,12 @@
+img{
+    width:100%;
+}
+.bg-gray{
+    background-color: rgb(245, 243, 243)
+}
+a{
+    text-decoration: none;
+}
+a:hover{
+    color: inherit;
+}
