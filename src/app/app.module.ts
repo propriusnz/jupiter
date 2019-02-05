@@ -21,7 +21,7 @@ import {ProductListComponent} from './fcomponents/products/productList/productLi
 import { AboutUsComponent } from './fcomponents/pages/aboutUs/aboutUs.component';
 import { ProductComponent } from './fcomponents/products/product/product.component';
 import { FooterComponent } from './fcomponents/basic/footer/footer.component';
-
+import {Shopping_cartComponent} from './fcomponents/shopping_cart/shopping_cart.component'
 
 
 //All Routes follow
@@ -48,7 +48,8 @@ const appRoutes: Routes=[
     ProductListComponent,
     AboutUsComponent,
     ProductComponent,
-    FooterComponent
+    FooterComponent,
+    Shopping_cartComponent
   ],
   imports: [
     BrowserModule,
