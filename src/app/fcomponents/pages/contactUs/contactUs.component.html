@@ -100,15 +100,15 @@
                     <div class="invalid_feedback" *ngIf=" message.errors?.minlength && message.touched ">
                        Message shall be at least 4 characters
                     </div>
-                    <input class="form-control" type="message" required minlength="2" name="message" placeholder="message *"
-                    [ngClass]="{'is-invalid':message.errors?.required && message.touched}" [(ngModel)]="contactFrom.message" #message="ngModel" style="height: 170px;">
+                    <textarea class="form-control" rows="5" type="message" required minlength="2" name="message" placeholder="message *"
+                    [ngClass]="{'is-invalid':message.errors?.required && message.touched}" [(ngModel)]="contactFrom.message" #message="ngModel">
+                    </textarea>
                  </div>
                  <div>{{feedback_message}}</div>
           </div>
         </div>
-
+        <div class="row"><div class="col-12 text-center"><button class="btn btn-outline-gold" type="submit" >Submit</button></div></div>
       </form>
-      <div class="row"><div class="col-12 text-center"><button class="btn btn-outline-gold" (click) = "onSubmit" >Submit</button></div></div>
     </div>
 
     </div>

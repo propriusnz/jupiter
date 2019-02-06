@@ -1,0 +1,86 @@
+<div class="container" style="padding-top:300px;">
+  <!-- <div class="row my-5"> &nbsp;</div> -->
+  <div class="row">
+     <!-- form -->
+          <div class="col-8">
+            <div class="col-12"> Contact info</div>
+          <form class="col-12" novalidate #f="ngForm" (ngSubmit)="onSubmit(f)" style="padding-left:0;">
+              <div class="row">
+                  <!-- first name -->
+                  <div class="col-6">
+                    <div class="form-group">  
+                        <div class="invalid_feedback" *ngIf="firstName.errors?.required && firstName.touched">Please enter your first name</div>
+                        <div class="invalid_feedback" *ngIf=" firstName.errors?.minlength && firstName.touched ">
+                           Your first name shall be at least 2 characters
+                        </div>
+                        <input class="form-control" type="firstName" required minlength="2" name="firstName" placeholder="first name *"
+                        [ngClass]="{'is-invalid':firstName.errors?.required && firstName.touched}" [(ngModel)]="userInfo.firstName" #firstName="ngModel">
+                     </div>
+                  </div>
+
+                  <!-- last name -->
+                     <div class="form-group col-6">  
+                        <div class="invalid_feedback" *ngIf="lastName.errors?.required && lastName.touched">Please enter your lastName</div>
+                        <div class="invalid_feedback" *ngIf=" lastName.errors?.minlength && lastName.touched ">
+                           Your last shall be at least 2 characters
+                        </div>
+                        <input class="form-control" type="lastName" required minlength="2" name="lastName" placeholder="lastName *"
+                        [ngClass]="{'is-invalid':lastName.errors?.required && lastName.touched}" [(ngModel)]="userInfo.lastName" #lastName="ngModel">
+                     </div>
+                    <!-- email -->
+                     <div class="form-group col-6">
+                        <div class="invalid_feedback" *ngIf="email.errors?.required && email.touched">Please input your E-mail</div>
+                        <div class="invalid_feedback" *ngIf="email.errors?.pattern && email.touched">Incorrect email entered</div>
+                        <input class="form-control" type="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" minlength="6" name="email" placeholder="Email*" 
+                        [ngClass]="{'is-invalid':email.errors?.required && email.touched}" [(ngModel)]="userInfo.email" #email="ngModel">
+                     </div>
+                     <!-- phone number -->
+                     <div class="form-group col-6">
+                        <div class="invalid_feedback" *ngIf="phone.errors?.required && phone.touched">Please input your Phone number</div>
+                        <div class="invalid_feedback" *ngIf="phone.errors?.pattern && phone.touched">
+                           Please enter the correct phone number.
+                        </div>
+                        <input class="form-control" type="tel" required pattern="[0-9]{7,15}" minlength="7" name="phone" placeholder="Phone number*" 
+                        [ngClass]="{'is-invalid':phone.errors?.required && phone.touched}" [(ngModel)]="userInfo.phone" #phone="ngModel">
+                     </div>
+                     <!-- company -->
+                    <div class="form-group col-6"><input class="form-control" type="text" placeholder="Company"  [(ngModel)]="userInfo.company" name="company"></div>
+                    <!-- city -->
+                    <div class="form-group col-6">
+                        <div class="invalid_feedback" *ngIf="city.errors?.required && city.touched">Please enter your city</div>
+                          <div class="invalid_feedback" *ngIf=" city.errors?.minlength && city.touched ">
+                             Please enter the corrct city.
+                          </div>
+                          <input class="form-control" type="city" required minlength="2" name="city" placeholder="city *"
+                          [ngClass]="{'is-invalid':city.errors?.required && city.touched}" [(ngModel)]="userInfo.city" #city="ngModel">
+                      </div>
+                    <!-- street address -->
+                    <div class="form-group col-12">
+                      <div class="invalid_feedback" *ngIf="streetAddress.errors?.required && streetAddress.touched">Please enter your street address</div>
+                        <div class="invalid_feedback" *ngIf=" streetAddress.errors?.minlength && streetAddress.touched ">
+                           Please enter the corrct address.
+                        </div>
+                        <input class="form-control" type="streetAddress" required minlength="2" name="streetAddress" placeholder="street address *"
+                        [ngClass]="{'is-invalid':streetAddress.errors?.required && streetAddress.touched}" [(ngModel)]="userInfo.streetAddress" #streetAddress="ngModel">
+                    </div>
+                   <!-- comment -->
+                   <div class="form-group col-8">  
+                      <textarea class="form-control" rows="5" type="comment" name="comment" placeholder="Enter you comment:" [(ngModel)]="userInfo.comment" #comment="ngModel">
+                      </textarea>
+                   </div>
+      
+              </div>
+              <div>{{feedback_message}}</div>
+              <div class="row"><div class="col-12 text-center"><button class="btn btn-outline-gold" type = "submit" >Submit</button></div></div>  
+            </form>
+          </div>
+
+        <!-- order summary -->
+        <div class="col-4 border-left">
+          <div class="row">Order Summary</div>
+          <div class="row"> <div class="col-5"> <img src="../../../assets/images/productImg1.jpeg" class="w-100"></div></div>
+          <div class="row"><div class="col-8"><span>Product1152</span></div> <div class="col-4"></div></div>
+          <div class="row"><div class="col-5"><span>Quantity:1</span></div>
+        </div>
+  </div>
+</div>
