@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light" id="navbarId" [ngClass]="{ 'bg-light':!isTop}">
+<!-- <nav class="navbar navbar-expand-md navbar-light" id="navbarId" [ngClass]="{ 'bg-light':!isTop}">
   <a class="navbar-brand" routerLink='/homepage' routerLinkActive="active" >
     <div *ngIf="smallwindow; then bigwindow else smallwindow"></div>
     <ng-template #bigwindow>
@@ -19,11 +19,6 @@
   </button>
   <div class="collapse navbar-collapse" style="height:60px;" id="navbarNavDropdown">
     <ul class="navbar-nav ml-auto " id="dropdown-menu" style="height:100%">
-      <!-- <li class="nav-item active">
-        <a class="nav-link s2gold" routerLink='/homepage' routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
-      </li> -->
-      <!-- https://blog.csdn.net/zhuxufeifei/article/details/83065034 -->
-
       <li class="nav-item" >
         <a class="nav-link s2" routerLink='/hire' routerLinkActive="active">Hire</a>
       </li>
@@ -44,4 +39,41 @@
       </li>
     </ul>
   </div>
+</nav> -->
+
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item pl-md-5">
+                <a class="nav-link" routerLink='/hire' routerLinkActive="active">Hire</a>
+            </li>
+            <li class="nav-item pl-md-5">
+                <a class="nav-link" routerLink='/services' routerLinkActive="active">Party Services</a>
+            </li>
+            <li class="nav-item pl-md-5">
+                <a class="nav-link" routerLink='/packages' routerLinkActive="active">Party Packages</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="mx-auto order-0">
+        <a class="nav-link" routerLink='/homepage' routerLinkActive="active"><img src="../../../../assets/images/Asset1-4x-big.png" style="zoom:0.5;" /></a>
+    </div>
+    <div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2"><span class="navbar-toggler-icon"></span></button>
+    </div>
+    
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item pr-md-5">
+                <a class="nav-link" routerLink ='/aboutUs' routerLinkActive="active">About us</a>
+            </li>
+            <li class="nav-item pr-md-5">
+                <a class="nav-link" routerLink ='/faq' routerLinkActive="active">FAQ</a>
+            </li>
+            <li class="nav-item pr-md-5">
+                <a class="nav-link" routerLink='/contactUs' routerLinkActive="active">Contact Us</a>
+            </li>
+        </ul>
+    </div>
 </nav>
