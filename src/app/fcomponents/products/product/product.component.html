@@ -1,8 +1,9 @@
-<div class="container-fliud py-3">&nbsp;</div>
-<div class="container">
-  <div class="row py-5">
+<div class="container-fluid py-3 mb-5">&nbsp;</div>
+<div class="container-fluid px-5" #container>
+  <div class="row my-5">
   <div class="col-12 col-md-6 col-lg-5">
-    <img src="{{defaultImgUrl}}" class="d-block w-100 imgTrans">
+    <img src="{{defaultImgUrl}}" class="d-block w-100 h-90" id="small" #small (mouseover)="mouseOver()" (mouseleave)="mouseLeave()" (mousemove)="mouseMove($event)">
+    <b id="shadow" #shadow></b>
     <br>
     <div class="row">
       <!-- <div class="col-3 pr-0"><img class="smallImg" src="http://localhost:56662/ImgTest/test1.png" (mouseover)="changeImg($event)" ></div>
@@ -11,7 +12,6 @@
       <div class="col-3 pr-0"><img class="smallImg" src="../../../../assets/images/productImg1.jpeg" (mouseover)="changeImg($event)" ></div>
       <div class="col-3 pr-0"><img class="smallImg" src="../../../../assets/images/productImg2.jpeg" (mouseover)="changeImg($event)"></div>
       <div class="col-3 pr-0"><img class="smallImg" src="../../../../assets/images/productImg3.png" (mouseover)="changeImg($event)"></div>
-
     </div>
   </div>
   <!-- <div *ngIf="!productDetail || productDetail.length == 0">This product is unavailable right now. Sorry</div>
@@ -36,12 +36,18 @@
     <div *ngIf="!quantityFilled">Please enter Quantity</div>
   </div> -->
   <div class="col-12 col-md-6 col-lg-5">
-    <div class="m2">Name of Product</div>
-    <div>$<span class="s1">160</span></div>
+    <!-- large part of img -->
+    <div id="showDetails" #showDetails>
+      <!-- <span class="l2" #showDetails>the testing area</span> -->
+      <img src="{{defaultImgUrl}}" alt="" #detailImg>
+    </div>
+
+    <div class="l2"><br/>Name of Product<br/></div>
+    <div class="my-5">$<span class="s1">160</span></div>
     <br/>
-    <div class="s2">Description of this product</div>
+    <div class="s2 mb-2">Description of this product</div>
     <br/>
-    <div class="row justify-content-between">
+    <div class="row justify-content-between mt-4">
       <div class="col-8">
         Quantity:<input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
          type="number" [value] = "quantity"  min="1" max="10" [(ngModel)]="quantity" (ngModelChange)="quanCheck($event)" 

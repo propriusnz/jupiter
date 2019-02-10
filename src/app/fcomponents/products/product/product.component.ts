@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {ProductService} from '../../../service/product.service'
 @Component({
@@ -12,26 +12,32 @@ export class ProductComponent implements OnInit {
   quantity:number=1 ;
   quantityLength:number;
   quantityFilled:boolean = true;
-  defaultImgUrl:string = 'http://localhost:56662/ImgTest/test1.png';
+  defaultImgUrl:string = '../../../../assets/images/productImg1.jpeg';
   // 1: add to cart; 2: successfully added 3:failed
   inCart:number = 1;
   cartList = [];
+  @ViewChild('small') small: ElementRef;
+  @ViewChild('shadow') shadow: ElementRef;
+  @ViewChild('showDetails') showDetails: ElementRef;
+  @ViewChild('container') container: ElementRef;
+  @ViewChild('detailImg') detailImg: ElementRef;
+
   constructor(
     private route:ActivatedRoute,
-    private productService:ProductService,
+    private productService:ProductService,    
   ) { 
     this.productId = this.route.snapshot.params['id'];
   }
   ngOnInit() {
     console.log(this.productId)
-    this.productService.showProduct(this.productId).subscribe( 
-      (res)=>{
-        this.productDetail = res['Data']
-        this.quantityLength = this.productDetail.TotalStock.toString().length;
-        console.log(this.productDetail)
-      },
-      (error)=>console.log(error)
-    )
+    // this.productService.showProduct(this.productId).subscribe( 
+    //   (res)=>{
+    //     this.productDetail = res['Data']
+    //     this.quantityLength = this.productDetail.TotalStock.toString().length;
+    //     console.log(this.productDetail)
+    //   },
+    //   (error)=>console.log(error)
+    // )
     // this.setStorage()
     }
   quanCheck(e){
@@ -87,5 +93,44 @@ export class ProductComponent implements OnInit {
     }
 
 
+  }
+  mouseOver(){
+    this.shadow.nativeElement.style.display = "block";
+    this.showDetails.nativeElement.style.display = "block";	
+  }
+  mouseLeave(){
+    this.shadow.nativeElement.style.display = "none";
+    this.showDetails.nativeElement.style.display = "none";	
+  }
+  mouseMove(e){
+      const box = this.container.nativeElement;	
+			const smallBox = this.small.nativeElement;
+			const mask = this.shadow.nativeElement;
+			const bigImg = this.detailImg.nativeElement;
+ 
+			let x = e.pageX - box.offsetLeft;
+			let y = e.pageY - box.offsetTop;	
+			x = x - mask.offsetWidth/2;
+			y = y - mask.offsetHeight/2;
+ 
+			if (x < 0) {
+				x = 0
+			}
+			if (x > smallBox.offsetWidth - mask.offsetWidth) {
+				x = smallBox.offsetWidth - mask.offsetWidth;
+			}
+			
+			if (y < 0) {
+				y = 0
+			}
+			if (y > smallBox.offsetHeight - mask.offsetHeight) {
+				y = smallBox.offsetHeight - mask.offsetHeight
+			}
+ 
+			mask.style.left = x + "px";
+			mask.style.top = y + "px";
+ 
+			bigImg.style.left = -bigImg.offsetWidth/smallBox.offsetWidth * x + "px"; 
+			bigImg.style.top = -bigImg.offsetHeight/smallBox.offsetHeight * y + "px";
   }
 }
