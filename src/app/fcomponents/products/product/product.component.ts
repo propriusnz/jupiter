@@ -94,7 +94,7 @@ export class ProductComponent implements OnInit {
 
 
   }
-  mouseOver(){
+  mouseEnter(){
     this.shadow.nativeElement.style.display = "block";
     this.showDetails.nativeElement.style.display = "block";	
   }

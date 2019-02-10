@@ -2,8 +2,10 @@
 <div class="container-fluid px-5" #container>
   <div class="row my-5">
   <div class="col-12 col-md-6 col-lg-5">
-    <img src="{{defaultImgUrl}}" class="d-block w-100 h-90" id="small" #small (mouseover)="mouseOver()" (mouseleave)="mouseLeave()" (mousemove)="mouseMove($event)">
-    <b id="shadow" #shadow></b>
+    <div (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()" (mousemove)="mouseMove($event)">
+        <img src="{{defaultImgUrl}}" class="d-block w-100 h-90" id="small" #small>
+        <b id="shadow" #shadow></b>
+    </div>
     <br>
     <div class="row">
       <!-- <div class="col-3 pr-0"><img class="smallImg" src="http://localhost:56662/ImgTest/test1.png" (mouseover)="changeImg($event)" ></div>
