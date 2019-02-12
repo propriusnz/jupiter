@@ -12,7 +12,7 @@ export class ProductComponent implements OnInit {
   quantity:number=1 ;
   quantityLength:number;
   quantityFilled:boolean = true;
-  defaultImgUrl:string = '../../../../assets/images/productImg1.jpeg';
+  defaultImgUrl:string = '../../../../assets/images/5da0c82500e7be45dc17d023ea7e2c83.jpg';
   // 1: add to cart; 2: successfully added 3:failed
   inCart:number = 1;
   cartList = [];

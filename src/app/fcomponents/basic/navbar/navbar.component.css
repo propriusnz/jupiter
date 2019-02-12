@@ -69,3 +69,8 @@ button.navbar-toggler
 {
     color: #c48f45 !important;
 }
+a.nav-link:hover
+{
+    color: #c48f45 !important;
+}
+

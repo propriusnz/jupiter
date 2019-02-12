@@ -3,7 +3,7 @@
   <div class="row my-5">
   <div class="col-12 col-md-6 col-lg-5">
     <div (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()" (mousemove)="mouseMove($event)">
-        <img src="{{defaultImgUrl}}" class="d-block w-100 h-90" id="small" #small>
+        <img src="{{defaultImgUrl}}" class="d-block w-100" id="small" #small style="zoom:70%">
         <b id="shadow" #shadow></b>
     </div>
     <br>
@@ -11,9 +11,9 @@
       <!-- <div class="col-3 pr-0"><img class="smallImg" src="http://localhost:56662/ImgTest/test1.png" (mouseover)="changeImg($event)" ></div>
       <div class="col-3 pr-0"><img class="smallImg" src="http://localhost:56662/ImgTest/test2.jpeg" (mouseover)="changeImg($event)"></div>
       <div class="col-3 pr-0"><img class="smallImg" src="http://localhost:56662/ImgTest/test3.jpeg" (mouseover)="changeImg($event)"></div> -->
-      <div class="col-3 pr-0"><img class="smallImg" src="../../../../assets/images/productImg1.jpeg" (mouseover)="changeImg($event)" ></div>
+      <!-- <div class="col-3 pr-0"><img class="smallImg" src="../../../../assets/images/productImg1.jpeg" (mouseover)="changeImg($event)" ></div>
       <div class="col-3 pr-0"><img class="smallImg" src="../../../../assets/images/productImg2.jpeg" (mouseover)="changeImg($event)"></div>
-      <div class="col-3 pr-0"><img class="smallImg" src="../../../../assets/images/productImg3.png" (mouseover)="changeImg($event)"></div>
+      <div class="col-3 pr-0"><img class="smallImg" src="../../../../assets/images/productImg3.png" (mouseover)="changeImg($event)"></div> -->
     </div>
   </div>
   <!-- <div *ngIf="!productDetail || productDetail.length == 0">This product is unavailable right now. Sorry</div>
@@ -37,7 +37,7 @@
     </div>
     <div *ngIf="!quantityFilled">Please enter Quantity</div>
   </div> -->
-  <div class="col-12 col-md-6 col-lg-5">
+  <div class="col-12 col-md-6 col-lg-7 pl-lg-5">
     <!-- large part of img -->
     <div id="showDetails" #showDetails>
       <!-- <span class="l2" #showDetails>the testing area</span> -->
@@ -45,11 +45,11 @@
     </div>
 
     <div class="l2"><br/>Name of Product<br/></div>
-    <div class="my-5">$<span class="s1">160</span></div>
+    <div class="my-4">$<span class="s1">160</span></div>
     <br/>
-    <div class="s2 mb-2">Description of this product</div>
+    <div class="s2 mb-2">Description of this productDescription of this productDescription of this productDescription of this productDescription of this product</div>
     <br/>
-    <div class="row justify-content-between mt-4">
+    <div class="row justify-content-between mt-3">
       <div class="col-8">
         Quantity:<input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
          type="number" [value] = "quantity"  min="1" max="10" [(ngModel)]="quantity" (ngModelChange)="quanCheck($event)" 
@@ -57,7 +57,7 @@
         <span class="s3">(only 11 in stock)</span>
       </div>
       <!-- <div class="col-4" *ngIf="inCart==1"><button class='btn btn_gold float-right' (click)="addToCart()">Add to cart</button></div> -->
-      <div class="col-4" *ngIf="inCart==1"><button class='btn btn_gold float-right' routerLink='/shoppingCart'><i class="fas fa-cart-plus"></i></button></div>
+      <div class="col-4" *ngIf="inCart==1"><button class='btn btn_gold' routerLink='/shoppingCart'>Add To Cart</button></div>
     </div>
 
    </div>
