@@ -33,3 +33,6 @@ ul li{
     background: url("../../../../assets/images/de6b214cf3bb498104b6ac05dcf9b37c.jpg");
     background-attachment: fixed;
 }
+.hireCollection img{
+    height:150px;
+}

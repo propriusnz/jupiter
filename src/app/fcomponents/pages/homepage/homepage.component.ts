@@ -21,15 +21,13 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
     window.onscroll = ()=>{
       let top1 = this.bgat.nativeElement.offsetTop;
-      if (top1 - window.pageYOffset < window.innerHeight && top1>window.pageYOffset){
-        console.log("Reached bgat");
+      if (top1 - window.pageYOffset < window.innerHeight && top1+this.bgat.nativeElement.offsetHeight>window.pageYOffset){
         this.backgroundscroll(top1 - window.pageYOffset)
       }
 
     }
   }
   backgroundscroll(e){
-    console.log(e)
     this.bgat.nativeElement.style.backgroundPosition = "0%"+ e/3 +"%"
   }
 }
