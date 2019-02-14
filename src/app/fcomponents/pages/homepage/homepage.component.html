@@ -1,7 +1,7 @@
-<div class="container-fluid">
+<div class="container-fluid" (scroll)="scrollHandler($event)">
 
 <!-- top img -->
-<div class="row ">
+<!-- <div class="row ">
   <div class="col-12 back1">
     <div class='container'>
       <div class="row homeTopLogo1 text-center"> <div class="col-12">
@@ -13,12 +13,54 @@
     </div>
       </div>
     </div>
+  </div> -->
+  <div class="row">
+      <div class="col-12 p-0">
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" style="height: 60vh">
+          <div class="carousel-item active">
+            <img src="../../../../assets/images/productImg1.jpeg" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="../../../../assets/images/productImg2.jpeg" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="../../../../assets/images/productImg3.png" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <!-- <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a> -->
+      </div>
+    </div>
   </div>
 
   <!-- product pics -->
   
   <div style="background-image: url(https://www.thebigletterco.com.au/wp-content/uploads/2013/10/logo-watermark-02.png);background-size: cover; background-position: center center;width: auto; height: 100%; opacity: 1;">
-      <div class="container my-5 border-top pt-5"> <div class="row mt-5 productsOverview"><div class=' col-sm-12 col-md-3' *ngFor="let product of products"><img src={{product.imgLink}} title={{productName}}></div></div>
+      <div class="container my-5 border-top pt-5"> 
+        <div class="m1 text-center my-3">
+          This is title
+       </div>
+       <div class="px-5 text-center"> 
+          From the smallest detail to the grandest event, Got It Covered can take care of all the details. With the largest hire range in Nelson and Marlborough and with 13+ years experience our professional team of event stylists and florists love helping create memorable events.
+       </div>
+       <div class="px-5 my-5 text-center">
+          Whether you are planning a wedding, corporate event, birthday, bridal shower, engagement party, baby shower, ball, anniversary or any kind of party, Got It Covered has an extensive range of hire items that cater to a large range of styles and events.
+       </div>
+       <div class="px-5 text-center">
+          You’re not boring, so why should your event decor be.
+       </div>
       </div>
       <div class="row justify-content-md-center my-5"> <div class="col-12 text-center"><button type="button" class="btn btn-outline-gold">View our products</button></div>
       </div>
@@ -55,6 +97,14 @@
         <div class="my-3">The Big Letter Co. is Melbourne’s leading letter hire company. If you are planning an event, large or small, and want to add something extra special, our large range of illuminated letters and numbers will certainly make an impression!</div>
         <div class="my-3">Are you getting married and want to get your message of love across in a unique way? Is it that special someone’s birthday and a simple birthday card just won’t cut it? Or do you want to add some wow factor to a Christmas party? Our giant letters can spell out any message and will certainly add dramatic effect, making your event one to be remembered.</div>
       </div>
+    </div>
+  </div>
+
+  <div class="bgat" #bgat >
+    <div class="container my-5">
+      <div class="row my-5"> Let's testing the background!</div>
+      <div class="row my-5"> Let's testing the background!</div>
+      <div class="row my-5"> Let's testing the background!</div>
     </div>
   </div>
   <!-- service -->

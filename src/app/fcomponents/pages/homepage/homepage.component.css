@@ -29,3 +29,7 @@ i{
 ul li{
     margin-top:15px
 }
+.bgat{
+    background: url("../../../../assets/images/de6b214cf3bb498104b6ac05dcf9b37c.jpg");
+    background-attachment: fixed;
+}
