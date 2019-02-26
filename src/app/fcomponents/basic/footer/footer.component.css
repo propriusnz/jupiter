@@ -12,8 +12,9 @@
 }
 i
 {
-    padding-top: 10px;
-    font-size: 25px;
+    color: rgba(150, 150, 150, 0.89);
+    font-size: 28px;
+    cursor: pointer;
 }
 .phonenumber{
   color: #b2823f !important;
@@ -45,4 +46,17 @@ ul{
 .imgBlocks{
     width:100%;
     height: 161.20px;
+}
+.fab.fa-facebook-square:hover{
+    color: white;
+    background: #42599c;
+}
+.far.fa-envelope:hover{
+    color: white;
+    background: #96a2a2;
+}
+.fab.fa-instagram:hover{
+    color: white;
+    background:radial-gradient(circle farthest-corner at 35% 100%, #fec564, transparent 50%),radial-gradient(circle farthest-corner at 10% 140%, #feda7e, transparent 50%),
+    radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%),radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%),radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%),radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%),radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent),linear-gradient(#6559ca, #bc318f 30%, #e42e66 50%, #fa5332 70%, #ffdc80 100%);
 }
