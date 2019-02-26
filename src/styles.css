@@ -9,7 +9,7 @@
  /* General Font style Section Start */
 .j1{
     font-size:4.5vw;
-    font-weight: bold;
+    font-weight: 700;
     color:white;
 }
 @media (max-width: 576px) {
@@ -23,29 +23,49 @@
     }
 }
 
+.l0{
+    font-size: 50px;
+    font-weight: 700;
+    color:#363636;
+}
 .l1{
     font-size: 40px;
-    font-weight: bold;
+    font-weight: 700;
     color:#363636;
 }
 .l2{
     font-size: 30px;
-    font-weight: bold;
+    font-weight: 700;
     color:#363636;
 }
 .m1{
     font-size:25px;
     color:#525252;
-    font-weight: bold;
+    font-weight: 700;
 }
 .m2{
-    font-size:20px;
+    font-size:21px;
     color:#525252;
-    font-weight: bold;
+    font-weight: 700;
 }
 .s1{
     font-size:18px;
     color:#424242;
+}
+.s1gold{
+    font-size:18px;
+    color:#c48f45;
+}
+.s1bold{
+    font-size:18px;
+    color:#424242;
+    font-weight: 700;
+}
+.s1goldbold{
+    color:#c48f45;
+    font-size: 18px;
+    font-weight: 700;
+
 }
 .s2{
     font-size:15px;
@@ -54,29 +74,31 @@
 .s2bold{
     font-size:15px;
     color:#424242;
-    font-weight: bold;
+    font-weight: 700;
 }
 .s2gold{
     color:#c48f45;
     font-size: 15px;
 }
+.s2goldbold{
+    color:#c48f45;
+    font-size: 15px;
+    font-weight: 700;
+}
 .s3{
-    font-size:14px;
+    font-size:10px;
     color:#424242;
 }
 .s3gold{
-    font-size: 14px;
+    font-size: 10px;
     color:#c48f45;
 }
 .s3bold{
     font-size:13px;
     color:#4b4b4b;
-    font-weight: bold;
+    font-weight: 700;
 }
-.s4{
-    font-size:13px;
-    color:#424242;
-}
+
 .error-feedback{
     color:#b30000;
     font-size: 18px;
@@ -89,7 +111,7 @@
 
 /* General Button styles */
 .btn.btn_gold{
-    font-weight: bold;
+    font-weight: 700;
     border-radius: 3.5px;
     border-width: 2px;
     border-color: #c48f45;
@@ -103,7 +125,7 @@
 }
 
 .btn.btn-outline-gold{
-    font-weight: bold;
+    font-weight: 700;
     border-radius: 3.5px;
     border-width: 2px;
     border-color: #c48f45;
@@ -118,7 +140,7 @@
     font-size: 20px;
     border-radius: 3.5px;
     margin-bottom: 13px;
-    font-weight: bold;
+    font-weight: 700;
     color: #c48f45;
     border-color: #c48f45;
     border-width: 2px;
