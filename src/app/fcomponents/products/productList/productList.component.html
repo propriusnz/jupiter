@@ -9,7 +9,7 @@
 </div>
 
 <div class="container">
-  <div class="row py-3">
+  <div class="row">
       <div class="col-12 text-center">
           Bringing your party vision to life can be exhausting, so we aim to be there with you as much as you need. If you have a clear idea already, that’s great. If not, we can help bring the wow factor to your event like never before. Contact us to talk over details and receive a quote.</div>
       <div class="col-12 mb-2 l1 text-center" *ngIf="typeName == 'hire'">  Our Hires</div>
@@ -20,8 +20,8 @@
   </div>
 
   <div class="row"><div class="col-12 col-md-6 s2bold" *ngIf="!allProducts || allProducts.length ==0">Sorry, We can not find any products at this moment.</div></div>
-  <div class="row py-5">
-    <div class='col-12 col-md-6' *ngFor="let product of allProducts; index as i">
+  <div class="row py-3">
+    <div class='col-12 col-md-6 py-5 border-bottom' *ngFor="let product of allProducts; index as i">
 
         <div id="carouselExampleFade{{i}}" class="carousel slide carousel-fade" data-ride="carousel" data-interval="false">
             <a [routerLink] = "['/product/'+product.ProdId]">
@@ -55,8 +55,8 @@
           </div>
       <div class="my-3"><a  class="l2" [routerLink] = "['/product/'+product.ProdId]">{{product.Title}} </a></div>
       <div class="s1">${{product.Price}}</div>
-      <div class="s3 my-3">{{product.CategroyName}},{{product.ProdTypeName}}</div>
-      <div class="s3">{{product.Description}}</div>
+      <div class="s2 my-3">{{product.CategroyName}},{{product.ProdTypeName}}</div>
+      <div class="s2">{{product.Description}}</div>
     </div>
 
   </div>
