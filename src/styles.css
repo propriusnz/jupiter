@@ -98,7 +98,12 @@
     color:#4b4b4b;
     font-weight: 700;
 }
-
+.lspace-3{
+    letter-spacing: 3px;
+}
+.lspace-5{
+    letter-spacing: 5px;
+}
 .error-feedback{
     color:#b30000;
     font-size: 18px;

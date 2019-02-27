@@ -1,47 +1,14 @@
-.footertop
-{
-    background-color: black;
-}
-.icon
-{
-    border: 2px solid #333333;
-    text-align: center;
-    height: 50px;
-    width: 50px;
-    border-radius: 5px;
-}
 i
 {
     color: rgba(150, 150, 150, 0.89);
     font-size: 28px;
     cursor: pointer;
 }
-.phonenumber{
-  color: #b2823f !important;
-  font-size: 30px;
-  font-weight: 400;
-}
-.contectus_btn
-{
-    font-size: 20px;
-    background-color: black;
-    margin-bottom: 13px;
-    padding: 8px 23px 8px 23px;
-    text-decoration: bold;
-    color:#b2823f;
-    border-color:#b2823f;
-    border-width: 1px;
-    border-radius: 5px;
-    outline: 0 !important;
-    cursor:pointer;
-}
-.footerbot
-{
-    background-color: #111111;
-    color:#555555;
-}
 ul{
     list-style-type: none;
+}
+ul li {
+    cursor: pointer;
 }
 .imgBlocks{
     width:100%;
@@ -59,7 +26,4 @@ ul{
     color: white;
     background:radial-gradient(circle farthest-corner at 35% 100%, #fec564, transparent 50%),radial-gradient(circle farthest-corner at 10% 140%, #feda7e, transparent 50%),
     radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%),radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%),radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%),radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%),radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent),linear-gradient(#6559ca, #bc318f 30%, #e42e66 50%, #fa5332 70%, #ffdc80 100%);
-}
-ul li {
-    cursor: pointer;
 }
