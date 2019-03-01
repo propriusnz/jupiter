@@ -22,4 +22,7 @@ constructor( public http: HttpClient) { }
   showProduct(id:number){
     return this.http.get(this.baseUrl + '/Product/' + id);
   }
+  indexCategory(){
+    return this.http.get(this.baseUrl + '/ProductCategory');
+  }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import {ProductService} from '../../../service/product.service'
+import {ProductService} from '../../../service/product.service';
+import {Location} from '@angular/common';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -24,7 +25,8 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private route:ActivatedRoute,
-    private productService:ProductService,    
+    private productService:ProductService, 
+    private _location:Location   
   ) { 
     this.productId = this.route.snapshot.params['id'];
   }
@@ -132,5 +134,8 @@ export class ProductComponent implements OnInit {
  
 			bigImg.style.left = -bigImg.offsetWidth/smallBox.offsetWidth * x + "px"; 
 			bigImg.style.top = -bigImg.offsetHeight/smallBox.offsetHeight * y + "px";
+  }
+  backClicked(){
+    this._location.back();
   }
 }

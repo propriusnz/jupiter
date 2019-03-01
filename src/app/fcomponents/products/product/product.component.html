@@ -1,8 +1,7 @@
-<div class="container-fluid py-3 mb-5">&nbsp;</div>
-<div class="container-fluid px-5" #container>
-  <div class="row"><div class="col-4 s2goldbold">productType > product Name</div></div>
+<div class="container" #container>
+  <div class="row mt-5"><div class="col-12 s2goldbold"><a (click)="backClicked()"> Dinnerware and Glassware </a> > Golden Glassline Plate</div></div>
   <div class="row my-5">
-  <div class="col-12 col-md-6 col-lg-5">
+  <div class="col-12 col-md-6 col-lg-6 p-0">
     <div (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()" (mousemove)="mouseMove($event)">
         <img src="{{defaultImgUrl}}" class="d-block w-100" id="small" #small style="height:500px;">
         <b id="shadow" #shadow></b>
@@ -38,35 +37,35 @@
     </div>
     <div *ngIf="!quantityFilled">Please enter Quantity</div>
   </div> -->
-  <div class="col-12 col-md-6 col-lg-5 pl-lg-5">
+  <div class="col-12 col-md-6 col-lg-6 pl-lg-6">
     <!-- large part of img -->
     <div id="showDetails" #showDetails>
       <!-- <span class="l2" #showDetails>the testing area</span> -->
       <img src="{{defaultImgUrl}}" alt="" #detailImg>
     </div>
 
-    <div class="l2"><br/>Name of Product<br/></div>
-    <div class="my-4">$<span class="s1">160</span></div>
+    <div class="l2">Golden Glassline Plate<br/></div>
+    <div class="my-4">$<span class="s1"> 5.00</span></div>
     <br/>
-    <div class="s2 mb-2">Description of this productDescription of this productDescription of this productDescription of this productDescription of this product</div>
+    <div class="s2 mb-2">Dine with our luxury european styled glass and golden lined plates.</div>
     <br/>
     <div class="row justify-content-between mt-3">
       <div class="col-8">
         Quantity:<input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
          type="number" [value] = "quantity"  min="1" max="10" [(ngModel)]="quantity" (ngModelChange)="quanCheck($event)" 
         maxlength= "{{quantityLength}}"> 
-        <span class="s3">(only 11 in stock)</span>
+        <span class="s3 pl-2"> (only 11 in stock)</span>
       </div>
       <!-- <div class="col-4" *ngIf="inCart==1"><button class='btn btn_gold float-right' (click)="addToCart()">Add to cart</button></div> -->
       <div class="col-4" *ngIf="inCart==1"><button class='btn btn_gold' routerLink='/shoppingCart'>Add To Cart</button></div>
     </div>
 
    </div>
-   <div class="col-2">
+   <!-- <div class="col-2">
      Products On Sale!
      <div><img src="../../../../assets/images/productImg1.jpeg" class="w-100"></div>
      <div><span></span><span></span></div>
      <div><img src="../../../../assets/images/productImg2.jpeg" class="w-100"></div>
-   </div>
+   </div> -->
  </div>
 </div>

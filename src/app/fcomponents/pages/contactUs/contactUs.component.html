@@ -10,23 +10,26 @@
   <div class="row py-5">
     <!-- facebook -->
     <div class="col-12 col-md-4">
-      <div class="l2">Get Social</div>
-      <div class="row"><div class="col-1"><i class="fab fa-facebook-square"></i></div><div class="col-1"><i class="fab fa-instagram"></i></div></div>
-      <div class="l2">Contact Info</div>
-      <div class="row"> <div class="col-3"><i class="fas fa-map-marker-alt"></i></div><div class="col-9">25 stock street</div></div>
-      <div class="row"><div class="col-3"><i class="fas fa-phone-volume"></i></div><div class="col-9">11122233456</div></div>
-      <div class="row"><div class="col-3"> <i class="fas fa-envelope"></i></div><div class="col-9">info@thebigletterco.com.au</div></div>
+      <div class="l2 pb-3">Get Social</div>
+      <div class="row" id="socialIcons">
+        <div class="col-3"><i class="fab fa-facebook-square p-2 rounded"></i></div>
+        <div class="col-3"><i class="fab fa-instagram p-2 rounded"></i></div>
+      </div>
+      <div class="l2 mt-3 pb-3">Contact Info</div>
+      <div class="row py-2"> <div class="col-3"><img src="../../../../assets/images/locationIcon.jpg" alt="" style="height:26px;width:26px;"></div><div class="col-9">25 stock street</div></div>
+      <div class="row py-2"><div class="col-3"><img src="../../../../assets/images/phoneIcon.png" alt="" style="height:25px;width:25px;"></div><div class="col-9">11122233456</div></div>
+      <div class="row py-2"><div class="col-3"> <img src="../../../../assets/images/gmailLogo.png" alt="" style="height:25px;width:36px;"></div><div class="col-9">info@thebigletterco.com.au</div></div>
     </div>
 
     <!-- form -->
     <div class="col-12 col-md-8">
-      <div class="row"><div class="col-12 l2">Get in touch with us</div> </div>
+      <div class="row mb-4"><div class="col-12 l2">Get in touch with us</div> </div>
       <form class="col-12" novalidate #f="ngForm" (ngSubmit)="onSubmit(f)" style="padding-left:0;">
         <div class="row">
           <div class="col-12 col-md-6">
             <!-- name -->
               <div class="form-group">  
-                  <div class="invalid_feedback" *ngIf="name.errors?.required && name.touched">Please enter your name</div>
+                  <div class="invalid_feedback" *ngIf="name.errors?.required && name.touched">Please enter your Name</div>
                   <div class="invalid_feedback" *ngIf=" name.errors?.minlength && name.touched ">
                      Your name shall be at least 2 characters
                   </div>
@@ -35,18 +38,18 @@
                </div>
               <!-- email -->
                <div class="form-group">
-                  <div class="invalid_feedback" *ngIf="email.errors?.required && email.touched">Please input your E-mail</div>
-                  <div class="invalid_feedback" *ngIf="email.errors?.pattern && email.touched">Incorrect email entered</div>
-                  <input class="form-control" type="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" minlength="6" name="email" placeholder="Email*" 
+                  <div class="invalid_feedback" *ngIf="email.errors?.required && email.touched">Please enter your Email</div>
+                  <div class="invalid_feedback" *ngIf="email.errors?.pattern && email.touched">Incorrect Email entered</div>
+                  <input class="form-control" type="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" minlength="6" name="email" placeholder="Email *" 
                   [ngClass]="{'is-invalid':email.errors?.required && email.touched}" [(ngModel)]="contactFrom.email" #email="ngModel">
                </div>
                <!-- phone number -->
                <div class="form-group">
-                  <div class="invalid_feedback" *ngIf="phone.errors?.required && phone.touched">Please input your Phone number</div>
+                  <div class="invalid_feedback" *ngIf="phone.errors?.required && phone.touched">Please enter your Phone number</div>
                   <div class="invalid_feedback" *ngIf="phone.errors?.pattern && phone.touched">
-                     Please enter the correct phone number.
+                     Please enter the correct Phone number.
                   </div>
-                  <input class="form-control" type="tel" required pattern="[0-9]{7,15}" minlength="7" name="phone" placeholder="Phone number*" 
+                  <input class="form-control" type="tel" required pattern="[0-9]{7,15}" minlength="7" name="phone" placeholder="Phone number *" 
                   [ngClass]="{'is-invalid':phone.errors?.required && phone.touched}" [(ngModel)]="contactFrom.phone" #phone="ngModel">
                </div>
                <!-- company -->
@@ -58,12 +61,12 @@
                   [ngClass]="{'is-invalid':dateOfEvent.errors?.required && dateOfEvent.touched}" [(ngModel)]="contactFrom.dateOfEvent" #dateOfEvent="ngModel">
                   <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
                   <mat-datepicker #myDatepicker></mat-datepicker>
-                  <mat-error *ngIf="dateOfEvent.invalid">You must enter a value</mat-error>
+                  <mat-error *ngIf="dateOfEvent.invalid">Please enter a Date</mat-error>
                 </mat-form-field>
               </div>
               <!-- location of event -->
               <div class="form-group">  
-                <div class="invalid_feedback" *ngIf="locationOfEvent.errors?.required && locationOfEvent.touched">Location is required</div>
+                <div class="invalid_feedback" *ngIf="locationOfEvent.errors?.required && locationOfEvent.touched">Please enter Location</div>
                 <input class="form-control" type="locationOfEvent" required name="locationOfEvent" placeholder="Location of event *"
                 [ngClass]="{'is-invalid':locationOfEvent.errors?.required && locationOfEvent.touched}" [(ngModel)]="contactFrom.locationOfEvent" #locationOfEvent="ngModel">
              </div>
@@ -74,40 +77,40 @@
           <div class="col-12 col-md-6">
             <!-- how do you find use -->
             <div class="form-group">  
-                <div class="invalid_feedback" *ngIf="findUs.errors?.required && findUs.touched">Field is required</div>              
+                <div class="invalid_feedback" *ngIf="findUs.errors?.required && findUs.touched">Please enter the field.</div>              
                 <select class="custom-select form-control" placeholder="find us" type="findUs" required name="findUs"
                 [ngClass]="{'is-invalid':findUs.errors?.required && findUs.touched}" [(ngModel)]="contactFrom.findUs" #findUs="ngModel">
-                    <option value="" disabled selected>How did you find us*</option>
+                    <option value="" disabled selected>How did you find us *</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>
                   </select>
              </div>
                 <!-- type of event -->
-                <div class="form-group">  
-                    <div class="invalid_feedback" *ngIf="eventType.errors?.required && eventType.touched">Type of data is required</div>
-                    <select class="custom-select form-control"  type="eventType" required name="eventType"
-                    [ngClass]="{'is-invalid':eventType.errors?.required && eventType.touched}" [(ngModel)]="contactFrom.eventType" #eventType="ngModel">
-                    <option value="" disabled selected>Type of event*</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </select>
-                 </div>             
-                <!-- message -->
-                <div class="form-group">  
-                    <div class="invalid_feedback" *ngIf="message.errors?.required && message.touched">Message is required</div>
-                    <div class="invalid_feedback" *ngIf=" message.errors?.minlength && message.touched ">
-                       Message shall be at least 4 characters
-                    </div>
-                    <textarea class="form-control" rows="5" type="message" required minlength="2" name="message" placeholder="message *"
-                    [ngClass]="{'is-invalid':message.errors?.required && message.touched}" [(ngModel)]="contactFrom.message" #message="ngModel">
-                    </textarea>
-                 </div>
-                 <div>{{feedback_message}}</div>
+            <div class="form-group">  
+                <div class="invalid_feedback" *ngIf="eventType.errors?.required && eventType.touched">Please enter Type of event</div>
+                <select class="custom-select form-control"  type="eventType" required name="eventType"
+                [ngClass]="{'is-invalid':eventType.errors?.required && eventType.touched}" [(ngModel)]="contactFrom.eventType" #eventType="ngModel">
+                <option value="" disabled selected>Type of event *</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+              </div>             
+            <!-- message -->
+            <div class="form-group">  
+                <div class="invalid_feedback" *ngIf="message.errors?.required && message.touched">Please enter Message</div>
+                <div class="invalid_feedback" *ngIf=" message.errors?.minlength && message.touched ">
+                    Message shall be at least 4 characters
+                </div>
+                <textarea class="form-control" rows="5" type="message" required minlength="2" name="message" placeholder="Message *"
+                [ngClass]="{'is-invalid':message.errors?.required && message.touched}" [(ngModel)]="contactFrom.message" #message="ngModel">
+                </textarea>
+              </div>
+              <div>{{feedback_message}}</div>
+             <button class="btn btn-outline-gold float-right" type="submit" >Submit</button>
           </div>
         </div>
-        <div class="row"><div class="col-12 text-center"><button class="btn btn-outline-gold" type="submit" >Submit</button></div></div>
       </form>
     </div>
 

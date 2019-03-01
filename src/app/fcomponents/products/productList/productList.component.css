@@ -9,3 +9,29 @@ a{
     text-decoration: none;
     color: inherit;
 }
+.btn.btn-secondary.dropdown-toggle{
+    /* color: black; */
+    background-color: transparent;
+    border-color: transparent;
+}
+/* .dropdown-toggle::after{
+    border:0;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+.btn{
+    border:0px;
+} */
+.btn.btn-secondary.dropdown-toggle .active{
+    border:0;
+}
+.btn{
+    box-shadow: none!important;
+}
+.btn:hover{
+    color:black;    
+}
+.show .btn-secondary.dropdown-toggle{
+    color:black;
+}

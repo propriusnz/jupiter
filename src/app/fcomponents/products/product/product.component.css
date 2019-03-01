@@ -26,3 +26,7 @@
     position: absolute;
     zoom:1.5;
 }
+a{
+    text-decoration: none;
+    cursor: pointer;
+}
