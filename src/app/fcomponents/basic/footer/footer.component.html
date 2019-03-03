@@ -25,31 +25,27 @@
     </div>
 
       <!-- lists -->
-    <div class="row mt-3">
-      <div class="col-3 s3bold">
-        <ul> <span class="s2bold text-white">SITEMAP</span> 
-          <li class="mt-2 pt-2 text-decoration-underline text-white-50">Home</li>
-          <li class="mt-2 text-decoration-underline text-white-50">About us</li>
-          <li class="mt-2 text-decoration-underline text-white-50">Contact</li>
-          <!-- <li class="text-white-50">
-            <i class="fab fa-facebook-square rounded-lg p-3 rounded"></i>
-            <i class="fab fa-instagram rounded-lg p-3 rounded"></i>
-            <i class="far fa-envelope rounded-lg p-3 rounded"></i>
-          </li> -->
+    <div class="row mt-3 text-center">
+      <div class="col-4 s3bold">
+        <ul> <span class="s2bold text-white">Lux Dream Event Hire</span> 
+          <li class="mt-2 pt-2 text-decoration-underline text-white-50"><a [routerLink]="['/aboutUs']">About us</a></li>
+          <li class="mt-2 text-decoration-underline text-white-50"> <a [routerLink]="[ '/contactUs']">Contact</a> </li>
+          <li class="mt-2 text-decoration-underline text-white-50"><a [routerLink]="[ '/faq']">FAQ</a></li>
         </ul> 
        </div>
-      <div class="col-3 s3bold">
-        <ul><span class="s2bold text-white">SERVICES</span>
-          <li class="mt-2 pt-2 text-decoration-underline text-white-50">Hire</li>
-          <li class="mt-2 text-decoration-underline text-white-50">Packages</li>
-          <li class="mt-2 text-decoration-underline text-white-50">Services</li>
+      <div class="col-4 s3bold">
+        <ul><span class="s2bold text-white">Our Services</span>
+          <li class="mt-2 pt-2 text-decoration-underline text-white-50"><a [routerLink]="[ '/hire']">Hire</a></li>
+          <li class="mt-2 text-decoration-underline text-white-50"><a [routerLink]="[ '/services']">Event services</a></li>
+          <li class="mt-2 text-decoration-underline text-white-50"><a [routerLink]="[ '/packages']">Event packages</a></li>
         </ul>
       </div>
-      <div class="col-3 s3bold">
-        <ul><span class="s2bold text-white">CONTACT US</span>
-          <li class="mt-2 pt-2 text-decoration-underline text-white-50">Email</li>
-          <li class="mt-2 text-decoration-underline text-white-50">Phone</li>
-          <li class="mt-2 text-decoration-underline text-white-50">Facebook</li>
+      <div class="col-4 s3bold">
+        <ul><span class="s2bold text-white">Contact us</span>
+          <li class="mt-2 pt-2 text-decoration-underline text-white-50">Phone</li>
+          <li class="mt-2 text-decoration-underline text-white-50">Email</li>
+          <li class="mt-2 text-decoration-underline text-white-50">Address</li>
+          <li class="mt-2 text-decoration-underline text-white-50">WeChat</li>
         </ul>
       </div>
     </div>
