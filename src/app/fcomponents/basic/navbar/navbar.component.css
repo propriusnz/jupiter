@@ -76,3 +76,14 @@ a.nav-link:hover
 /* .nav-item a {
     letter-spacing: 2px;
 } */
+.navbar-collapse{
+    padding-left:20px;
+}
+.navbar-toggler{
+    border:0;
+    position: absolute;
+    z-index: 99;
+    top:28px;
+    right:10px;
+
+}
