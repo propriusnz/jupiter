@@ -1,20 +1,5 @@
 <div class="container-fluid">
-
-  <!-- top img -->
-  <!-- <div class="row ">
-    <div class="col-12 back1">
-      <div class='container'>
-        <div class="row homeTopLogo1 text-center"> <div class="col-12">
-          <img src="../../../../assets/images/Asset1-4x-big.png"></div></div>
-        <div class="row homeTopLogo2 pb-5 text-center"><div class="col-12">
-            <h1 class="j1">Auckland Leading</h1>
-          </div> </div>
-        <div class="row text-center"><div class="col-12 mb-5" ><span class="j1">Letter & Event Hire Company</span> </div>
-      </div>
-        </div>
-      </div>
-    </div> -->
-  <div class="row">
+  <div class="row" #imgContainer>
     <div class="col-12 p-0">
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -22,46 +7,47 @@
           <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>
-        <div class="carousel-inner" style="height: 60vh">
-          <div class="carousel-item active">
-            <img src="../../../../assets/images/productImg1.jpeg" class="d-block w-100" alt="...">
+        <!-- <div class="carousel-inner" style="height: 60vh"> -->
+        <div class="carousel-inner" #imgScroll>
+          <div class="carousel-item active h-100">
+            <img src="../../../../assets/images/productImg1.jpeg" class="d-block w-100 img100" alt="..." >
           </div>
-          <div class="carousel-item">
-            <img src="../../../../assets/images/productImg2.jpeg" class="d-block w-100" alt="...">
+          <div class="carousel-item h-100">
+            <img src="../../../../assets/images/productImg2.jpeg" class="d-block w-100 img100" alt="...">
           </div>
-          <div class="carousel-item">
-            <img src="../../../../assets/images/productImg3.png" class="d-block w-100" alt="...">
+          <div class="carousel-item h-100">
+            <img src="../../../../assets/images/productImg3.png" class="d-block w-100 img100" alt="...">
           </div>
         </div>
-        <!-- <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
         </a>
         <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
-        </a> -->
+        </a>
       </div>
     </div>
   </div>
 
-
+  <!-- hireCollection -->
   <div class="container p-0 my-5 hireCollection">
       <div class="text-center mb-5 l2 lspace-3">Hire Collection</div>
       <div class="row">
-        <div class="col-3"><img src="../../../../assets/images/productImg1.jpeg">
+        <div class="col-6 col-md-3 "><img src="../../../../assets/images/productImg1.jpeg" class="img100">
           <div>Oblong Trestle Tables</div>
           <div>$120</div>
         </div>
-        <div class="col-3"><img src="../../../../assets/images/productImg2.jpeg">
+        <div class="col-6 col-md-3"><img src="../../../../assets/images/productImg2.jpeg" class="img100">
           <div>Round Tables</div>
           <div>$120</div>
         </div>
-        <div class="col-3"><img src="../../../../assets/images/productImg3.png">
+        <div class="col-6 col-md-3"><img src="../../../../assets/images/productImg3.png" class="img100">
           <div>Round Tables</div>
           <div>$120</div>
         </div>
-        <div class="col-3"><img src="../../../../assets/images/productImg2.jpeg">
+        <div class="col-6 col-md-3"><img src="../../../../assets/images/productImg2.jpeg" class="img100">
           <div>Round Tables</div>
           <div>$120</div>
         </div>
@@ -74,9 +60,8 @@
     </div>
 
   <!-- product pics -->
-
   <div
-    style="background-image: url(https://www.thebigletterco.com.au/wp-content/uploads/2013/10/logo-watermark-02.png);background-size: cover; background-position: center center;width: auto; height: 100%; opacity: 1;">
+    >
     <div class="container my-5 border-top pt-5">
       <div class="m1 text-center my-3">
         This is title
@@ -96,36 +81,16 @@
       </div>
     </div>
   </div>
-  <!-- Hire Products -->
-  <!-- <div style="background-color: #f2f2f2;margin-left: -15px; margin-right: -15px;" >
-    <div class="container my-5 py-2">
-      <div class="row my-5">
-        <div class="col-sm-12 col-md-4">
-          <div class="row my-2 "><i class="fa fa-star col-12 text-center "></i> </div>
-          <div class="row my-2"><span class="col-12 text-center">CREATIVITY</span> </div>
-          <div class="row my-2"><span class="col-12 text-center">Great for weddings, engagements, birthdays, kids parties, Christmas parties</span></div>
-        </div>
-        <div class="col-sm-12 col-md-4">
-          <div class="row my-2"><i class="fa fa-flask col-12 text-center"></i></div>
-          <div class="row my-2"> <span class="col-12 text-center">INNOVATION</span></div>
-          <div class="row my-2"><span class="col-12 text-center">Great for corporate events including product launches and branding</span></div>
-        </div>
-        <div class="col-sm-12 col-md-4">
-          <div class="row my-2"> <i class="fa fa-adjust col-12 text-center"></i></div>
-          <div class="row my-2"> <span class="col-12 text-center">SIMPLICITY</span></div>
-          <div class="row my-2"> <span class="col-12 text-center">Large range of freestanding illuminated letters and numbers for all events</span></div>
-        </div>
-      </div> 
-    </div>
-  </div> -->
+  
 
   <div class="container p-0 my-2">
     <div class="row">
-      <div class="col-6"><img src="../../../../assets/images/cebb995345f82a73cd0fea85a7bc899c.jpg"
-                              class=" d-block ml-auto " style="position: absolute;
-        clip: rect(0px,auto,500px,0px);"></div>
-      <div class="col-6 pt-5">
-        <br><br><br>
+      <div class="col-12 col-md-6" style="height:550px;">
+        <!-- <img src="../../../../assets/images/cebb995345f82a73cd0fea85a7bc899c.jpg"class=" d-block ml-auto " style="position: absolute;clip: rect(0px,auto,500px,0px);"> -->
+        <img src="../../../../assets/images/cebb995345f82a73cd0fea85a7bc899c.jpg"style="height:100%;width:100%;"/>
+        </div>
+      <div class="col-12 col-md-6">
+        <br><br>
         <div class="l2 mt-5 lspace-5">STYLING</div>
         <div class="my-3">Want a Pinterest worthy event but just not sure where to start or how to bring all the
           elements together to create a picture-perfect setting?<br/><br/>Got It Covered love to create incredible
@@ -135,68 +100,68 @@
         <br><br><br>
       </div>
     </div>
+
+    <div class="row mt-5">
+        <div class="col-12 col-md-6 pt-4 order-1 order-md-0">
+          <br><br>
+          <div class="l2 mt-5 lspace-5">CORPORATE EVENTS</div>
+          <div class="my-3">So you are planning a corporate event and need help with the styling and theming? Let us help
+            you create the wow factor and give your guests an event to remember!<br/><br/>From the smallest detail to the
+            grandest event, Got It Covered has set up and styled events in venues throughout the Nelson and Marlborough
+            region since 2005 with an established reputation for excellence.
+          </div>
+          <button type="button" class="btn btn-outline-gold my-5 lspace-3">View our products</button>
+          <br><br>
+        </div>
+        <!-- <div class="col-12 col-md-6"><img src="../../../../assets/images/5da0c82500e7be45dc17d023ea7e2c83.jpg "class=" d-block ml-auto " style="position: absolute;
+          clip: rect(0px,auto,500px,0px);"></div> -->
+          <div class="col-12 col-md-6 order-0 order-md-1" style="height:550px;"><img src="../../../../assets/images/5da0c82500e7be45dc17d023ea7e2c83.jpg " style="height:100%;width:100%;"></div>
+      </div>
   </div>
 
-  <div class="container p-0 my-2">
-    <div class="row">
-      <div class="col-6 pt-4">
-        <div class="l2 mt-5 lspace-5">CORPORATE EVENTS</div>
-        <div class="my-3">So you are planning a corporate event and need help with the styling and theming? Let us help
-          you create the wow factor and give your guests an event to remember!<br/><br/>From the smallest detail to the
-          grandest event, Got It Covered has set up and styled events in venues throughout the Nelson and Marlborough
-          region since 2005 with an established reputation for excellence.
-        </div>
-        <button type="button" class="btn btn-outline-gold my-5 lspace-3">View our products</button>
-        <br><br>
-      </div>
-      <div class="col-6"><img src="../../../../assets/images/5da0c82500e7be45dc17d023ea7e2c83.jpg "
-                              class=" d-block ml-auto " style="position: absolute;
-        clip: rect(0px,auto,500px,0px);"></div>
-    </div>
-  </div>
   <!-- scrolling background -->
   <div class="bgat" #bgat>
     <div class="container my-5">
-      <br/>
-      <div class="row my-5"> Let's testing the background!</div>
-      <br/>
-    </div>
-  </div>
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner text-center">
+          <div class="carousel-item active">
+              <div>
+                <br/><br><br/>
+                  <h5>First slide label</h5>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <br/><br>
+                </div>
+          </div>
+          <div class="carousel-item">
+              <div>
+                  <br/><br><br/>
+                  <h5>Second slide label</h5>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <br/><br>
+                </div>
+          </div>
+          <div class="carousel-item">
+              <div>
+                  <br/><br><br/>
+                  <h5>Third slide label</h5>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <br/><br>
+                </div>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleSlidesOnly" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleSlidesOnly" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+      </div>
+      <br> <br>
+      <div class="row"><div class="col-12 text-center">FOR MORE IMAGES OF OUR WORK VISIT THE GOT IT COVERED GALLERY</div></div>
+      <div class="row"><div class="col-12 text-center"><button type="button" class="btn btn-outline-gold my-5 lspace-3">View our products</button></div></div>
 
-  <!-- service -->
-  <!-- <div class="container border-bottom py-5">
-    <div class="row">
-      <div class="col-12"><h2 class="text-center">Personalised, Professional Service</h2></div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12 col-md-6">
-        <ul class="s3">
-          <li>Large range of freestanding illuminated letters, numbers and words for hire.</li>
-          <li>Large vintage Hollywood lightbox personalised to your needs.</li>
-          <li>Quality custom made products.</li>
-          <li>All our products are safe and meet Australian safety standards.</li>
-        </ul>
-      </div>
-      <div class="col-sm-12 col-md-6">
-        <ul class="s3">
-          <li>We take pride in our service and guarantee 100% satisfaction.</li>
-          <li>We will work closely with you offering our advice when needed to ensure your event shines.</li>
-          <li>Great for corporate events, birthdays, Christmas parties, kids parties, weddings, engagements or
-            photo-shoots.
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div> -->
-  <!-- contact -->
-  <div class="container">
-    <div class="mt-5">Just imagine the feeling of dancing in the glow of the big lights shining from your letters of
-      LOVE, hand in hand with the love of your life. Or be transported in time gathering with friends aside our large
-      Hollywood lightbox, glass of champagne in hand. Sound amazing hey?
-    </div>
-    <div class="my-4">Whatever the occasion, add some lights and glamour with our personalised illuminated letters. Call
-      The Big Letter Co. for more information on 1300 001 802 or Email us: info@thebigletterco.com.au
-    </div>
   </div>
 </div>
 

@@ -13,7 +13,8 @@ ul li {
 }
 .imgBlocks{
     width:100%;
-    height: 221px;
+    /* height: 221px; */
+    height:100%;
 }
 .fab.fa-facebook-square:hover{
     color: white;
