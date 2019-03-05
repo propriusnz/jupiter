@@ -21,9 +21,9 @@ import {ProductListComponent} from './fcomponents/products/productList/productLi
 import { AboutUsComponent } from './fcomponents/pages/aboutUs/aboutUs.component';
 import { ProductComponent } from './fcomponents/products/product/product.component';
 import { FooterComponent } from './fcomponents/basic/footer/footer.component';
-import {Shopping_cartComponent} from './fcomponents/shopping_cart/shopping_cart.component'
-import{UserInfoComponent} from './fcomponents/userInfo/userInfo.component'
-
+import {Shopping_cartComponent} from './fcomponents/shopping_cart/shopping_cart.component';
+import{UserInfoComponent} from './fcomponents/userInfo/userInfo.component';
+import{GalleryComponent} from './fcomponents/gallery/gallery.component';
 
 //All Routes follow
 
@@ -38,7 +38,8 @@ const appRoutes: Routes=[
   {path:'packages',component:ProductListComponent,data : {some_data : 'package'}},
   {path:'product/:id',component:ProductComponent},
   {path:'shoppingCart',component:Shopping_cartComponent},
-  {path:'userInfo',component:UserInfoComponent}
+  {path:'userInfo',component:UserInfoComponent},
+  {path:'gallery',component:GalleryComponent}
 ]
 
 @NgModule({
@@ -53,7 +54,8 @@ const appRoutes: Routes=[
     ProductComponent,
     FooterComponent,
     Shopping_cartComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    GalleryComponent
   ],
   imports: [
     BrowserModule,

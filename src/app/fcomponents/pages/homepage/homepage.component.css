@@ -1,3 +1,4 @@
+
 .productsOverview img{
     height: auto;
     max-width: 100%;
@@ -14,7 +15,7 @@ ul li{
     background-attachment: fixed;
 }
 .hireCollection img{
-    height:120px;
+    height:180px;
 }
 /* .carousel-caption{
     position:static;
