@@ -1,0 +1,9 @@
+.egbg{
+    background-image: url("../../../assets/images/productImg2.jpeg");
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+}
+.h480{
+    height:480px;
+}
