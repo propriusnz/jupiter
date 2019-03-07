@@ -67,7 +67,7 @@ const appRoutes: Routes=[
     MatFormFieldModule,
     MatNativeDateModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes,{scrollPositionRestoration: 'enabled'}),
     HttpClientModule
   ],
   providers: [
