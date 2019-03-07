@@ -1,9 +1,20 @@
 .egbg{
     background-image: url("../../../assets/images/productImg2.jpeg");
     background-repeat: no-repeat;
-    background-size: auto;
+    background-size: fixed;
     background-position: center;
 }
 .h480{
-    height:480px;
+    height:500px;
+}
+.gallaryBlocks{
+    background-image: url("../../../assets/images/productImg2.jpeg");
+    width: 100%;
+    padding-bottom: 75%;
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+}
+.pb-30{
+    padding-bottom:30px;
 }
