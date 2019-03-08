@@ -1,9 +1,5 @@
 .mapImg{
-    background-image: url("../../../../assets/images/location.PNG" );
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size:cover;
-    filter: brightness(85%);
+    width:100%;
 }
 i{
     font-size:28px;
