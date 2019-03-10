@@ -8,8 +8,8 @@ ul{
     list-style-type: none;
     padding-left: 0px;
 }
-ul li {
-    cursor: pointer;
+ul li a:hover{
+    color: rgb(112, 112, 112);
 }
 .imgBlocks{
     width:100%;

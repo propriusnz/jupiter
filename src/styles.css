@@ -1,5 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@font-face{
+    font-family: Oxygen;
+    src:url(assets/fonts/Oxygen-Regular.ttf) format("opentype");
+}
+@font-face{
+    font-family: GreatVibes;
+    src: url(assets/fonts/GreatVibes-Regular.ttf) format("opentype");
+}
 .gold{
     color:#c48f45
 }
@@ -11,6 +19,7 @@
     font-size:4.5vw;
     font-weight: 700;
     color:white;
+    font-family: 'GreatVibes', cursive;
 }
 @media (max-width: 576px) {
     .j1{
