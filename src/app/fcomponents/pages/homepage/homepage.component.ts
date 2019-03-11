@@ -28,14 +28,15 @@ export class HomepageComponent implements OnInit {
     window.onscroll = ()=>{
       let top1 = this.bgat.nativeElement.offsetTop;
       if (top1 - window.pageYOffset < window.innerHeight && top1+this.bgat.nativeElement.offsetHeight>window.pageYOffset){
-        this.backgroundscroll(top1 - window.pageYOffset)
+        this.backgroundscroll(window.pageYOffset);
       }
     }
   }
   ngAfterViewInit(): void {
   }
+  // controll scrolling speed
   backgroundscroll(e){
-    this.bgat.nativeElement.style.backgroundPosition = "0%"+ e/3 +"%"
+    this.bgat.nativeElement.style.backgroundPosition = "0%"+ e/50 +"%"
   }
 
 }

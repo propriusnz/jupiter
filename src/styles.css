@@ -52,6 +52,7 @@
     font-weight: 700;
     color:#363636;
     letter-spacing: 3px;
+    font-style: italic;
 }
 .l1{
     font-family: 'Source Serif Pro', serif;
@@ -59,6 +60,7 @@
     font-weight: 700;
     color:#363636;
     letter-spacing: 3px;
+    font-style: italic;
 }
 .l2{
     font-family: 'Source Serif Pro', serif;
@@ -66,18 +68,21 @@
     font-weight: 700;
     color:#363636;
     letter-spacing: 3px;
+    font-style: italic;
 }
 .m1{
     font-family: 'Source Serif Pro', serif;
     font-size:27px;
     color:#525252;
     font-weight: 700;
+    font-style: italic;
 }
 .m2{
     font-family: 'Source Serif Pro', serif;
     font-size:23px;
     color:#525252;
     font-weight: 700;
+    font-style: italic;
 }
 .s1{
     font-family: 'Source Serif Pro', serif;

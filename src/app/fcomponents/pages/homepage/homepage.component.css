@@ -11,8 +11,11 @@ ul li{
     margin-top:15px
 }
 .bgat{
-    background: url("../../../../assets/images/de6b214cf3bb498104b6ac05dcf9b37c.jpg");
+    background: url("../../../../assets/gallery/gallery3.jpg");
     background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-position: 0% 100%; */
 }
 .hireCollection img{
     height:180px;
