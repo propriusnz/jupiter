@@ -1,9 +1,9 @@
 .navbar{
-    height:190px;
+    /* height:190px; */
 }
 @media only screen and (max-width: 767px) {
     .navbar{
-        height:100px;
+        /* min-height:100px; */
     }
   }
 .navbar-light .navbar-nav .nav-link.active

@@ -1,15 +1,17 @@
 <div class="container-fluid">
   <div class="px-0 px-md-5 mx-2">
 
-    <div class="row py-3">
+    <!-- title -->
+    <div class="row py-5">
         <div class="col-12 mb-2 l1 text-center" *ngIf="typeName == 'hire'">  Our Hires</div>
         <div class="col-12 mb-2 l1 text-center" *ngIf="typeName == 'service'">  Our Services</div>
         <div class="col-12 mb-2 l1 text-center" *ngIf="typeName == 'package'">  Our Packages</div>
     </div>
+
     <!-- categories and search -->
     <div class="row justify-content-center">
         <div class="s1 border-bottom" style="padding:6px 0;">Categories:</div>
-        <div class="col-4 p-0 border-bottom">
+        <div class="col-8 col-md-4 p-0 border-bottom">
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle w-100 text-left s1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {{selectedCate}}</button>
