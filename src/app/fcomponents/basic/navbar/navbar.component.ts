@@ -1,7 +1,8 @@
 import { Component, OnInit ,HostListener } from '@angular/core';
+declare var $: any;
 
 @Component({
-  selector: 'app-navbar',
+  selector: 'app-navbar', 
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
@@ -11,6 +12,9 @@ export class NavbarComponent implements OnInit {
   smallwindow:boolean=true;
   constructor() { }
   ngOnInit() {
+    $('.navbar-nav>li>a').on('click', function(){
+      $('.navbar-collapse').collapse('hide');
+  });
    
   //   window.onscroll=function(){
   //     var h =document.documentElement.scrollTop||document.body.scrollTop;    
