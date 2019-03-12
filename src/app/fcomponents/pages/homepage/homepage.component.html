@@ -36,45 +36,46 @@
     <div class="text-center my-5 l2 lspace-3">Hire Specials</div>
     <div class="row">
       <div class="col-6 col-md-3 "><img src="../../../../assets/images/productImg1.jpeg" class="img100">
-        <div>Oblong Trestle Tables</div>
-        <div><span class="s2goldbold mr-5">$100</span>&nbsp; <s>$120</s></div>
+        <div class="s1">Oblong Trestle Tables</div>
+        <div><span class="s2goldbold mr-3">$100</span><s>$120</s></div>
       </div>
       <div class="col-6 col-md-3"><img src="../../../../assets/images/productImg2.jpeg" class="img100">
-        <div>Round Tables</div>
-        <div><span class="s2goldbold mr-5">$100</span> &nbsp;<s>$120</s></div>
+        <div class="s1">Round Tables</div>
+        <div><span class="s2goldbold mr-3">$100</span><s>$120</s></div>
       </div>
       <div class="col-6 col-md-3"><img src="../../../../assets/images/productImg3.png" class="img100">
-        <div>Round Tables</div>
-        <div><span class="s2goldbold mr-5">$100</span> &nbsp;<s>$120</s></div>
+        <div class="s1">Round Tables</div>
+        <div><span class="s2goldbold mr-3">$100</span><s>$120</s></div>
       </div>
       <div class="col-6 col-md-3"><img src="../../../../assets/images/productImg2.jpeg" class="img100">
-        <div>Round Tables</div>
-        <div><span class="s2goldbold mr-5">$100</span> &nbsp;<s>$120</s></div>
+        <div  class="s1">Round Tables</div>
+        <div><span class="s2goldbold mr-3">$100</span><s>$120</s></div>
       </div>
     </div>
     <div class="row justify-content-md-center my-3">
         <div class="col-12 text-center">
-          <button type="button" class="btn btn-outline-gold lspace-3">View our products</button>
+          <button type="button" class="btn btn-outline-gold lspace-3" [routerLink]="[ '/hire']">View our products</button>
         </div>
       </div>
     </div>
+
   <!-- Title paragraph -->
-    <div class="m1 text-center mt-5">
+    <div class="l2 text-center mt-5">
         This is title
     </div>
       <br>
-      <div class="px-5 text-center">
+      <div class="px-5 text-center s1">
         From the smallest detail to the grandest event, Got It Covered can take care of all the details. With the
         largest hire range in Nelson and Marlborough and with 13+ years experience our professional team of event
         stylists and florists love helping create memorable events.
       </div>
-      <div class="px-5 my-5 text-center">
+      <div class="px-5 my-5 text-center s1">
         Whether you are planning a wedding, corporate event, birthday, bridal shower, engagement party, baby shower,
         ball, anniversary or any kind of party, Got It Covered has an extensive range of hire items that cater to a
         large range of styles and events.
       </div>
-      <div class="row"><div class="col-12 text-center">FOR MORE IMAGES OF OUR WORK VISIT THE GOT IT COVERED GALLERY</div></div>
-      <div class="row mb-5"><div class="col-12 text-center"><button type="button" class="btn btn-outline-gold my-4 lspace-3">View our work</button></div></div>
+      <div class="row"><div class="col-12 text-center s1">For more images of our work galleries</div></div>
+      <div class="row mb-5"><div class="col-12 text-center"><button type="button" class="btn btn-outline-gold my-4 lspace-3" [routerLink]="[ '/gallery']"> View Our Works</button></div></div>
 
       <!-- styling -->
       <div class="row">
@@ -85,11 +86,11 @@
           <div class="col-12 col-md-6">
             <div class="d-none d-md-block"><br><br></div>
             <div class="l2 mt-5 lspace-5">STYLING</div>
-            <div class="my-3">Want a Pinterest worthy event but just not sure where to start or how to bring all the
+            <div class="my-3 s2">Want a Pinterest worthy event but just not sure where to start or how to bring all the
               elements together to create a picture-perfect setting?<br/><br/>Got It Covered love to create incredible
               events that inspire and excite!
             </div>
-            <button type="button" class="btn btn-outline-gold my-md-5 lspace-3">View our products</button>
+            <button type="button" class="btn btn-outline-gold my-md-5 lspace-3" [routerLink]="[ '/hire']">View our products</button>
           </div>
         </div>
     
@@ -98,12 +99,12 @@
             <div class="col-12 col-md-6 pt-md-4 order-1 order-md-0">
             <div class="d-none d-md-block"><br><br></div>
               <div class="l2 mt-5 lspace-5">CORPORATE EVENTS</div>
-              <div class="my-3">So you are planning a corporate event and need help with the styling and theming? Let us help
+              <div class="my-3 s2">So you are planning a corporate event and need help with the styling and theming? Let us help
                 you create the wow factor and give your guests an event to remember!<br/><br/>From the smallest detail to the
                 grandest event, Got It Covered has set up and styled events in venues throughout the Nelson and Marlborough
                 region since 2005 with an established reputation for excellence.
               </div>
-              <button type="button" class="btn btn-outline-gold my-md-5 lspace-3">View our products</button>
+              <button type="button" class="btn btn-outline-gold my-md-5 lspace-3" [routerLink]="[ '/hire']">View our products</button>
             </div>
             <!-- <div class="col-12 col-md-6"><img src="../../../../assets/images/5da0c82500e7be45dc17d023ea7e2c83.jpg "class=" d-block ml-auto " style="position: absolute;
               clip: rect(0px,auto,500px,0px);"></div> -->
@@ -115,15 +116,15 @@
         <div class="row">
         <div class="col-12 bgat mt-5" #bgat >
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner text-center">
+                <div class="carousel-inner text-center text-white">
                   <div class="carousel-item active">
-                      <div><br/><br><br/><h5>First slide label</h5><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><br/><br></div>
+                      <div><br/><br><br/><h5>First slide label</h5><p class="testimonial">"Lorem ipsum dolor sit amet, consectetur adipiscing elit."</p><br/><br></div>
                   </div>
                   <div class="carousel-item">
-                      <div><br/><br><br/><h5>Second slide label</h5><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><br/><br></div>
+                      <div><br/><br><br/><h5>Second slide label</h5><p class="testimonial">"Lorem ipsum dolor sit amet, consectetur adipiscing elit."</p><br/><br></div>
                   </div>
                   <div class="carousel-item">
-                      <div><br/><br><br/><h5>Third slide label</h5><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><br/><br></div>
+                      <div><br/><br><br/><h5>Third slide label</h5><p class="testimonial">"Lorem ipsum dolor sit amet, consectetur adipiscing elit."</p><br/><br></div>
                   </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleSlidesOnly" role="button" data-slide="prev">

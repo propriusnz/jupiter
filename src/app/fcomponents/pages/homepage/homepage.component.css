@@ -1,4 +1,6 @@
-
+a{
+    text-decoration: none;
+}
 .productsOverview img{
     height: auto;
     max-width: 100%;
@@ -15,15 +17,15 @@ ul li{
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
-    /* background-position: 0% 100%; */
 }
 .hireCollection img{
     height:180px;
 }
-/* .carousel-caption{
-    position:static;
-} */
 .img100{
     height:100%;
     width:100%;
+}
+.testimonial{
+    font-family: 'GreatVibes', cursive;
+    font-size:2rem;
 }
