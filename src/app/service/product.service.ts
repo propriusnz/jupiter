@@ -25,4 +25,7 @@ constructor( public http: HttpClient) { }
   indexCategory(){
     return this.http.get(this.baseUrl + '/ProductCategory');
   }
+  getCarts(){
+    return this.http.get(this.baseUrl + '/Carts')
+  }
 }
