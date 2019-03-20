@@ -21,6 +21,12 @@
     src: url(assets/fonts/SourceSerifPro-Regular.ttf) format("opentype");
 }
 
+@font-face{
+    font-family: RobotoThin;
+    src: url(assets/fonts/Roboto-Light.ttf) format("opentype");
+}
+
+
 /* color */
 .gold{
     color:#c48f45
@@ -55,7 +61,7 @@
     font-style: italic;
 }
 .l1{
-    font-family: 'Source Serif Pro', serif;
+    font-family: 'GreatVibes', cursive;
     font-size: 42px;
     font-weight: 700;
     color:#363636;
@@ -85,7 +91,7 @@
     font-style: italic;
 }
 .s1{
-    font-family: 'Source Serif Pro', serif;
+    font-family: 'RobotoThin', serif;
     font-size: 20px;
     color:#535353;
 }
@@ -108,7 +114,7 @@
 
 }
 .s2{
-    font-family: 'Source Serif Pro', serif;
+    font-family: 'RobotoThin', serif;
     font-size: 17px;
     color:#535353;
 }
