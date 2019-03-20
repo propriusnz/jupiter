@@ -40,7 +40,7 @@ const appRoutes: Routes=[
   {path:'shoppingCart',component:Shopping_cartComponent},
   {path:'userInfo',component:UserInfoComponent},
   {path:'galleries', component:GalleryListComponent},
-  // {path:'galleries',component:GalleryComponent}
+  {path:'galleries/:id',component:GalleryComponent}
 ]
 
 @NgModule({
