@@ -30,7 +30,7 @@
     <div class='col-12 col-md-4 pt-4 pb-2' *ngFor="let product of allProducts; index as i">
 
         <div id="carouselExampleFade{{i}}" class="carousel slide carousel-fade" data-ride="carousel" data-interval="false">
-            <a [routerLink] = "['/product/'+product.ProdId]">
+            <a [routerLink] = "['/product/',product.prodId]">
             <div class="carousel-inner" >
                 <!-- active -->
               <div class="carousel-item active">
@@ -59,8 +59,8 @@
               <span class="sr-only">Next</span>
             </a>
           </div>
-      <div><a  class="m1" [routerLink] = "['/product/'+product.ProdId]">{{product.Title}} </a></div>
-      <div class="row"><div class="s2gold col-4">$ {{product.Price}}</div><div class="s2 col-6">Hired: 12</div></div>
+      <div><a [routerLink] = "['/product/',product.prodId]" class="m1">{{product.title}}</a></div>
+      <div class="row"><div class="s2gold col-4">$ {{product.price}}</div><div class="s2 col-6">Hired: 12</div></div>
     </div>
   </div>
 </div>
