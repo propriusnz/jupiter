@@ -38,24 +38,25 @@
     </div>
     <div *ngIf="!quantityFilled">Please enter Quantity</div>
   </div> -->
-  <div class="col-12 col-md-6 col-lg-6 pl-lg-5">
+  <div *ngIf="productDetail" class="col-12 col-md-6 col-lg-6 pl-lg-5">
     <!-- large part of img -->
     <div id="showDetails" #showDetails>
       <!-- <span class="l2" #showDetails>the testing area</span> -->
       <img src="{{defaultImgUrl}}" alt="" #detailImg>
     </div>
 
-    <div class="l2">Golden Glassline Plate<br/></div>
-    <div class="my-4">$<span class="s1"> 5.00</span></div>
+    <div class="l2">{{productDetail.title}}<br/></div>
+    <div class="my-4">$<span class="s1"> {{productDetail.price}}</span></div>
     <br/>
-    <div class="s2 mb-2">Dine with our luxury european styled glass and golden lined plates.</div>
+    <div class="s2 mb-2">{{productDetail.description}}</div>
     <br/>
     <div class="row justify-content-between mt-3">
       <div class="col-8">
-        Quantity:<input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-         type="number" [value] = "quantity"  min="1" max="10" [(ngModel)]="quantity" (ngModelChange)="quanCheck($event)" 
-        maxlength= "{{quantityLength}}"> 
-        <span class="s3 pl-2"> (only 11 in stock)</span>
+        <!-- Quantity:<input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+         type="number" [value] = "quantity"  min="1" max={{productDetail.availableStock}} [(ngModel)]="quantity" (ngModelChange)="quanCheck($event)" 
+        maxlength= "{{quantityLength}}">  -->
+        Quantity:<input type="number" [value] = "quantity"  min="1" max={{productDetail.availableStock}} [(ngModel)]="quantity">
+        <span class="s3 pl-2"> (only {{productDetail.availableStock}} in stock)</span>
       </div>
       <!-- <div class="col-4" *ngIf="inCart==1"><button class='btn btn_gold float-right' (click)="addToCart()">Add to cart</button></div> -->
       <div class="col-4" *ngIf="inCart==1"><button class='btn btn_gold' routerLink='/shoppingCart'>Add To Cart</button></div>

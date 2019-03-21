@@ -32,15 +32,15 @@ export class ProductComponent implements OnInit {
   }
   ngOnInit() {
     console.log(this.productId)
-    // this.productService.showProduct(this.productId).subscribe( 
-    //   (res)=>{
-    //     this.productDetail = res['Data']
-    //     this.quantityLength = this.productDetail.TotalStock.toString().length;
-    //     console.log(this.productDetail)
-    //   },
-    //   (error)=>console.log(error)
-    // )
-    // this.setStorage()
+    this.productService.showProduct(this.productId).subscribe( 
+      (res)=>{
+        this.productDetail = res
+        this.quantityLength = this.productDetail.totalStock.toString().length;
+        console.log(this.productDetail)
+      },
+      (error)=>console.log(error)
+    )
+    this.setStorage()
     }
   quanCheck(e){
     if(e){

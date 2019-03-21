@@ -10,22 +10,27 @@ baseUrl = environment.baseUrl;
 
 constructor( public http: HttpClient) { }
 
-  indexProduct(){
-    return this.http.get(this.baseUrl + '/productbytype/3');
-  }
-  indexService(){
-    return this.http.get(this.baseUrl + '/productbytype/1');
-  }
-  indexPackage(){
-    return this.http.get(this.baseUrl + '/productbytype/2');
-  }
+  //Products
   showProduct(id:number){
-    return this.http.get(this.baseUrl + '/Product/' + id);
+    return this.http.get(this.baseUrl + '/Products/' + id);
   }
+
+  //Category
   indexCategory(){
-    return this.http.get(this.baseUrl + '/ProductCategory');
+    return this.http.get(this.baseUrl + '/ProductCategories');
   }
+
+  //type
+  indexType(id:number){
+    return this.http.get(this.baseUrl + '/ProductTypes/' + id);
+  }
+  //Carts
   getCarts(){
     return this.http.get(this.baseUrl + '/Carts')
+  }
+
+  //Contacts
+  getContacts(){
+    return this.http.get(this.baseUrl + '/Contacts')
   }
 }

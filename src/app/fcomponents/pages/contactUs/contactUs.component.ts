@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
+import{ ProductService } from '../../../service/product.service';
 
 @Component({
   selector: 'app-contactUs',
@@ -21,10 +22,10 @@ export class ContactUsComponent implements OnInit {
     eventType:'',
     message:''
   }
-  constructor() { }
+  constructor(private productService: ProductService) { }
 
   ngOnInit() {
-    this.minDate = moment().format()  
+    this.minDate = moment().format();
   }
   onSubmit({valid}:{valid:boolean}) {
     console.log(valid);
