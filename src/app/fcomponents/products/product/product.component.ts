@@ -68,31 +68,36 @@ export class ProductComponent implements OnInit {
     localStorage.setItem('userId','aaa ')
   }
   addToCart(){
+    // cartId?
     let item = {
-      Title:this.productDetail.Title,
-      Quantity:this.quantity
+      Title:this.productDetail.title,
+      Quantity:this.quantity,
+      ProductId:this.productId,
+      Price:this.quantity*this.productDetail.price
     }    
-    let a:boolean = false
+    // let a:boolean = false
     this.cartList = JSON.parse(localStorage.getItem('cartList'))
-
-    if (this.cartList.length>0){
-      for (let i=0; i<this.cartList.length;i++){
-        if(this.cartList[i].Title == this.productDetail.Title){
-          a = true
-          this.cartList[i].Quantity += this.quantity
-          localStorage.setItem('cartList',JSON.stringify(this.cartList))
-          console.log(this.cartList)
-        }
-      }
-      if (a==false){
-        this.cartList.push(item)
-        localStorage.setItem('cartList',JSON.stringify(this.cartList))  
-      }
-    }else{
-      this.cartList = JSON.parse(localStorage.getItem('cartList'))
       this.cartList.push(item)
       localStorage.setItem('cartList',JSON.stringify(this.cartList))
-    }
+
+    // if (this.cartList.length>0){
+    //   for (let i=0; i<this.cartList.length;i++){
+    //     if(this.cartList[i].Title == this.productDetail.Title){
+    //       a = true
+    //       this.cartList[i].Quantity += this.quantity
+    //       localStorage.setItem('cartList',JSON.stringify(this.cartList))
+    //       console.log(this.cartList)
+    //     }
+    //   }
+    //   if (a==false){
+    //     this.cartList.push(item)
+    //     localStorage.setItem('cartList',JSON.stringify(this.cartList))  
+    //   }
+    // }else{
+    //   this.cartList = JSON.parse(localStorage.getItem('cartList'))
+    //   this.cartList.push(item)
+    //   localStorage.setItem('cartList',JSON.stringify(this.cartList))
+    // }
 
 
   }

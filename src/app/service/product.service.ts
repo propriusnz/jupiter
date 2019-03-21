@@ -26,9 +26,13 @@ constructor( public http: HttpClient) { }
   }
   //Carts
   getCarts(){
-    return this.http.get(this.baseUrl + '/Carts')
+    return this.http.get(this.baseUrl + '/Carts');
   }
 
+  //cartProd
+  addMultiCartProd(cartProdList){
+    return this.http.post(this.baseUrl + '/CartProds', cartProdList);
+  }
   //Contacts
   getContacts(){
     return this.http.get(this.baseUrl + '/Contacts')
