@@ -38,3 +38,11 @@ ul li{
 .col-6, .col-md-3 img{
     object-fit: cover;
 } 
+
+.getintouch{
+    color:#c48f45;
+
+}
+.getintouch:hover{
+    text-decoration: underline;
+}
