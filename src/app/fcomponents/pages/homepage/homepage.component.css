@@ -29,3 +29,12 @@ ul li{
     font-family: 'GreatVibes', cursive;
     font-size:2rem;
 }
+.carousel-item img{    
+    object-fit: cover;
+}
+.col-12, .col-md-6 img{
+    object-fit: cover;
+}
+.col-6, .col-md-3 img{
+    object-fit: cover;
+} 
