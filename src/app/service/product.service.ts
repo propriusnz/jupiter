@@ -30,7 +30,7 @@ constructor( public http: HttpClient) { }
   }
 
   //cartProd
-  addMultiCartProd(cartProdList){
+  addCartProd(cartProdList:any){
     return this.http.post(this.baseUrl + '/CartProds', cartProdList);
   }
   //Contacts

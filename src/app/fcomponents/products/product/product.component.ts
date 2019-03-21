@@ -70,10 +70,10 @@ export class ProductComponent implements OnInit {
   addToCart(){
     // cartId?
     let item = {
+      ProdId:Number(this.productId),
+      Price:this.quantity*this.productDetail.price,
       Title:this.productDetail.title,
-      Quantity:this.quantity,
-      ProductId:this.productId,
-      Price:this.quantity*this.productDetail.price
+      Quantity:this.quantity
     }    
     // let a:boolean = false
     this.cartList = JSON.parse(localStorage.getItem('cartList'))
