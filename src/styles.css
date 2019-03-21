@@ -26,6 +26,11 @@
     src: url(assets/fonts/Roboto-Light.ttf) format("opentype");
 }
 
+@font-face{
+    font-family: LuxeDream;
+    src: url(assets/fonts/LuxeDream.ttf) format("opentype");
+}
+
 
 /* color */
 .gold{
@@ -53,28 +58,25 @@
 }
 
 .l0{
-    font-family: 'Source Serif Pro', serif;
+    font-family: 'LuxeDream';
     font-size: 52px;
     font-weight: 700;
     color:#363636;
     letter-spacing: 3px;
-    font-style: italic;
 }
 .l1{
-    font-family: 'GreatVibes', cursive;
+    font-family: 'LuxeDream';
     font-size: 42px;
-    font-weight: 700;
+    font-weight: 400;
     color:#363636;
     letter-spacing: 3px;
-    font-style: italic;
 }
 .l2{
-    font-family: 'Source Serif Pro', serif;
+    font-family: 'LuxeDream';
     font-size: 32px;
-    font-weight: 700;
+    font-weight: 400;
     color:#363636;
     letter-spacing: 3px;
-    font-style: italic;
 }
 .m1{
     font-family: 'Source Serif Pro', serif;
