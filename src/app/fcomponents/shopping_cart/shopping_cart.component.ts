@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { type } from 'os';
 
 @Component({
   selector: 'app-shopping_cart',
@@ -11,8 +10,7 @@ export class Shopping_cartComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.prodsInCart = localStorage.getItem('cartList')
-    console.log(typeof(this.prodsInCart));
+    this.prodsInCart = JSON.parse(localStorage.getItem("cartList") || "[]");
   }
 
 }
