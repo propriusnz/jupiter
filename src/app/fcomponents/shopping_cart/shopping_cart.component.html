@@ -1,7 +1,7 @@
 <div class="container-fluid pt-2">
   <div class="px-0 px-md-5 mx-2">
   <div class="row py-5"> <div class="col-12 s2goldbold">>Shopping cart</div></div>
-  <div class="row py-1">
+  <div class="row py-1" *ngIf="prodsInCart.length!=0">
       <div class="col-6 s2bold"> Product Detail</div>
       <div class="col-2 s2bold ">Unit price</div>
       <div class="col-1 s2bold">Amount</div>  
@@ -9,19 +9,20 @@
       <div class="col-2 s2bold text-center">Action</div>
   </div>
   <div class="row mt-3" *ngFor="let prod of prodsInCart; index as i">
-      <div class="col-2"> <img src="../../../assets/images/productImg1.jpeg"></div>
+      <div class="col-2"> <img src="../../../assets/Products/{{prod.ProdId}}.jpg" class="cartProdHeight"></div>
       <div class="col-4"><span class="m2">{{prod.Title}}</span></div>
       <div class="col-2 ">{{prod.Price}}</div>
       <div class="col-1 ">{{prod.Quantity}}</div>
       <div class="col-1 bg-gray">{{prod.Price}}</div>
       <div class="col-2 text-center">
           <div (click)="deleteCart(i)">Delete</div>
-          <div>View Detail</div>
+          <div> <a [routerLink]="[ '/product/', prod.ProdId ]">View Detail</a></div>
       </div>  
     </div>
+    <div *ngIf="prodsInCart.length==0">Your Cart is empty now. Please add some products. <button class="btn btn-outline-gold" [routerLink]="[ '/hire' ]">View Our Products</button></div>
 
     <!-- static data -->
-    <div class="row mt-3">
+    <!-- <div class="row mt-3">
       <div class="col-2"><img src="../../../assets/images/productImg2.jpeg"></div>
       <div class="col-4"><span class="m2">Signature Letter Range</span></div>
       <div class="col-2">$120</div>
@@ -42,8 +43,8 @@
           <div>Delete</div>
           <div>View Detail</div>
         </div>
-      </div>
-      <div class="row justify-content-end py-3">
+      </div> -->
+      <div class="row justify-content-end py-3" *ngIf="prodsInCart.length!=0">
           <div class="col-8 py-2"><a class='s2gold' [routerLink]="['/']"><i class="fas fa-arrow-left"></i>&nbsp; Continue Shopping</a> </div>
           <div class="col-2 py-2 text-right">Total Price: <span class="s2bold">$1230</span></div>
           <div class="col-2 text-center"><button class="btn btn-outline-gold" routerLink = '/userInfo'>Submit cart</button></div>

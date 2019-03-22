@@ -103,45 +103,45 @@ export class ProductComponent implements OnInit {
 
 
   }
-  mouseEnter(){
-    this.shadow.nativeElement.style.display = "block";
-    this.showDetails.nativeElement.style.display = "block";	
-  }
-  mouseLeave(){
-    this.shadow.nativeElement.style.display = "none";
-    this.showDetails.nativeElement.style.display = "none";	
-  }
-  mouseMove(e){
-      const box = this.container.nativeElement;	
-			const smallBox = this.small.nativeElement;
-			const mask = this.shadow.nativeElement;
-			const bigImg = this.detailImg.nativeElement;
+  // mouseEnter(){
+  //   this.shadow.nativeElement.style.display = "block";
+  //   this.showDetails.nativeElement.style.display = "block";	
+  // }
+  // mouseLeave(){
+  //   this.shadow.nativeElement.style.display = "none";
+  //   this.showDetails.nativeElement.style.display = "none";	
+  // }
+  // mouseMove(e){
+  //     const box = this.container.nativeElement;	
+	// 		const smallBox = this.small.nativeElement;
+	// 		const mask = this.shadow.nativeElement;
+	// 		const bigImg = this.detailImg.nativeElement;
  
-			let x = e.pageX - box.offsetLeft;
-			let y = e.pageY - box.offsetTop;	
-			x = x - mask.offsetWidth/2;
-			y = y - mask.offsetHeight/2;
+	// 		let x = e.pageX - box.offsetLeft;
+	// 		let y = e.pageY - box.offsetTop;	
+	// 		x = x - mask.offsetWidth/2;
+	// 		y = y - mask.offsetHeight/2;
  
-			if (x < 0) {
-				x = 0
-			}
-			if (x > smallBox.offsetWidth - mask.offsetWidth) {
-				x = smallBox.offsetWidth - mask.offsetWidth;
-			}
+	// 		if (x < 0) {
+	// 			x = 0
+	// 		}
+	// 		if (x > smallBox.offsetWidth - mask.offsetWidth) {
+	// 			x = smallBox.offsetWidth - mask.offsetWidth;
+	// 		}
 			
-			if (y < 0) {
-				y = 0
-			}
-			if (y > smallBox.offsetHeight - mask.offsetHeight) {
-				y = smallBox.offsetHeight - mask.offsetHeight
-			}
+	// 		if (y < 0) {
+	// 			y = 0
+	// 		}
+	// 		if (y > smallBox.offsetHeight - mask.offsetHeight) {
+	// 			y = smallBox.offsetHeight - mask.offsetHeight
+	// 		}
  
-			mask.style.left = x + "px";
-			mask.style.top = y + "px";
+	// 		mask.style.left = x + "px";
+	// 		mask.style.top = y + "px";
  
-			bigImg.style.left = -bigImg.offsetWidth/smallBox.offsetWidth * x + "px"; 
-			bigImg.style.top = -bigImg.offsetHeight/smallBox.offsetHeight * y + "px";
-  }
+	// 		bigImg.style.left = -bigImg.offsetWidth/smallBox.offsetWidth * x + "px"; 
+	// 		bigImg.style.top = -bigImg.offsetHeight/smallBox.offsetHeight * y + "px";
+  // }
   backClicked(){
     this._location.back();
   }

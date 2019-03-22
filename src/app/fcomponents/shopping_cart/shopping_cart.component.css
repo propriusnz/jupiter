@@ -6,7 +6,16 @@ img{
 }
 a{
     text-decoration: none;
+    color: inherit;
 }
 a:hover{
     color: inherit;
+}
+.cartProdHeight{
+    height: 150px;
+}
+@media (max-width:767px){
+    .cartProdHeight{
+        height: 120px;
+    }
 }

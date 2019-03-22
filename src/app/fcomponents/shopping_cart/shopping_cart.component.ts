@@ -6,6 +6,7 @@ import { ProductService } from '../../service/product.service';
   styleUrls: ['./shopping_cart.component.css']
 })
 export class Shopping_cartComponent implements OnInit {
+  totalPrice:number = 0;
   prodsInCart:any;
   constructor(private productService : ProductService) { }
 
@@ -17,4 +18,8 @@ export class Shopping_cartComponent implements OnInit {
     this.prodsInCart.splice(id,1)
     localStorage.setItem("cartList",JSON.stringify(this.prodsInCart))
   }
+  price(){
+    
+  }
+
 }
