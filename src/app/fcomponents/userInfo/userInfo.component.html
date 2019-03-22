@@ -9,39 +9,39 @@
                   <!-- first name -->
                   <div class="col-6">
                     <div class="form-group">  
-                        <div class="invalid_feedback" *ngIf="firstName.errors?.required && firstName.touched">Please enter your first name</div>
-                        <div class="invalid_feedback" *ngIf=" firstName.errors?.minlength && firstName.touched ">
+                        <div class="invalid_feedback" *ngIf="FirstName.errors?.required && FirstName.touched">Please enter your first name</div>
+                        <div class="invalid_feedback" *ngIf=" FirstName.errors?.minlength && FirstName.touched ">
                            Your first name shall be at least 2 characters
                         </div>
-                        <input class="form-control" type="firstName" required minlength="2" name="firstName" placeholder="first name *"
-                        [ngClass]="{'is-invalid':firstName.errors?.required && firstName.touched}" [(ngModel)]="userInfo.firstName" #firstName="ngModel">
+                        <input class="form-control" type="FirstName" required minlength="2" name="FirstName" placeholder="first name *"
+                        [ngClass]="{'is-invalid':FirstName.errors?.required && FirstName.touched}" [(ngModel)]="userInfo.FirstName" #FirstName="ngModel">
                      </div>
                   </div>
 
                   <!-- last name -->
                      <div class="form-group col-6">  
-                        <div class="invalid_feedback" *ngIf="lastName.errors?.required && lastName.touched">Please enter your lastName</div>
-                        <div class="invalid_feedback" *ngIf=" lastName.errors?.minlength && lastName.touched ">
+                        <div class="invalid_feedback" *ngIf="LastName.errors?.required && LastName.touched">Please enter your LastName</div>
+                        <div class="invalid_feedback" *ngIf=" LastName.errors?.minlength && LastName.touched ">
                            Your last shall be at least 2 characters
                         </div>
-                        <input class="form-control" type="lastName" required minlength="2" name="lastName" placeholder="lastName *"
-                        [ngClass]="{'is-invalid':lastName.errors?.required && lastName.touched}" [(ngModel)]="userInfo.lastName" #lastName="ngModel">
+                        <input class="form-control" type="LastName" required minlength="2" name="LastName" placeholder="LastName *"
+                        [ngClass]="{'is-invalid':LastName.errors?.required && LastName.touched}" [(ngModel)]="userInfo.LastName" #LastName="ngModel">
                      </div>
-                    <!-- email -->
+                    <!-- Email -->
                      <div class="form-group col-6">
-                        <div class="invalid_feedback" *ngIf="email.errors?.required && email.touched">Please input your E-mail</div>
-                        <div class="invalid_feedback" *ngIf="email.errors?.pattern && email.touched">Incorrect email entered</div>
-                        <input class="form-control" type="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" minlength="6" name="email" placeholder="Email*" 
-                        [ngClass]="{'is-invalid':email.errors?.required && email.touched}" [(ngModel)]="userInfo.email" #email="ngModel">
+                        <div class="invalid_feedback" *ngIf="Email.errors?.required && Email.touched">Please input your E-mail</div>
+                        <div class="invalid_feedback" *ngIf="Email.errors?.pattern && Email.touched">Incorrect Email entered</div>
+                        <input class="form-control" type="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" minlength="6" name="Email" placeholder="Email*" 
+                        [ngClass]="{'is-invalid':Email.errors?.required && Email.touched}" [(ngModel)]="userInfo.Email" #Email="ngModel">
                      </div>
                      <!-- phone number -->
                      <div class="form-group col-6">
-                        <div class="invalid_feedback" *ngIf="phone.errors?.required && phone.touched">Please input your Phone number</div>
-                        <div class="invalid_feedback" *ngIf="phone.errors?.pattern && phone.touched">
+                        <div class="invalid_feedback" *ngIf="PhoneNum.errors?.required && PhoneNum.touched">Please input your Phone number</div>
+                        <div class="invalid_feedback" *ngIf="PhoneNum.errors?.pattern && PhoneNum.touched">
                            Please enter the correct phone number.
                         </div>
-                        <input class="form-control" type="tel" required pattern="[0-9]{7,15}" minlength="7" name="phone" placeholder="Phone number*" 
-                        [ngClass]="{'is-invalid':phone.errors?.required && phone.touched}" [(ngModel)]="userInfo.phone" #phone="ngModel">
+                        <input class="form-control" type="tel" required pattern="[0-9]{7,15}" minlength="7" name="PhoneNum" placeholder="Phone number*" 
+                        [ngClass]="{'is-invalid':PhoneNum.errors?.required && PhoneNum.touched}" [(ngModel)]="userInfo.PhoneNum" #PhoneNum="ngModel">
                      </div>
                      <!-- company -->
                     <div class="form-group col-6"><input class="form-control" type="text" placeholder="Company"  [(ngModel)]="userInfo.company" name="company"></div>
@@ -63,9 +63,9 @@
                         <input class="form-control" type="streetAddress" required minlength="2" name="streetAddress" placeholder="street address *"
                         [ngClass]="{'is-invalid':streetAddress.errors?.required && streetAddress.touched}" [(ngModel)]="userInfo.streetAddress" #streetAddress="ngModel">
                     </div>
-                   <!-- comment -->
+                   <!-- Message -->
                    <div class="form-group col-8">  
-                      <textarea class="form-control" rows="5" type="comment" name="comment" placeholder="Enter you comment:" [(ngModel)]="userInfo.comment" #comment="ngModel">
+                      <textarea class="form-control" rows="5" type="Message" name="Message" placeholder="Enter you Message:" [(ngModel)]="userInfo.Message" #Message="ngModel">
                       </textarea>
                    </div>
       

@@ -12,10 +12,4 @@ export class Shopping_cartComponent implements OnInit {
   ngOnInit() {
     this.prodsInCart = JSON.parse(localStorage.getItem("cartList") || "[]");
   }
-  submitCart(){
-    console.log(typeof(this.prodsInCart));
-    this.productService.addCartProd(this.prodsInCart).subscribe(
-      (res)=>console.log(res),
-      (error)=>console.log(error));
-  }
 }

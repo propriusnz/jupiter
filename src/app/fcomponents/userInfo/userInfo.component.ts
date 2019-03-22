@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../../service/product.service'
 
 @Component({
   selector: 'app-userInfo',
@@ -9,16 +10,17 @@ export class UserInfoComponent implements OnInit {
   feedback_message:string;
   successMessage:string;
   userInfo={
-    firstName:'',
-    lastName:'',
-    email:'',
-    phone:'',
+    FirstName:'',
+    LastName:'',
+    Email:'',
+    PhoneNum:'',
     company:'',
     streetAddress:'',
     city:'',
-    comment:''
+    Message:''
   }
-  constructor() { }
+
+  constructor(private productService:ProductService) { }
 
   ngOnInit() {
   }
@@ -26,15 +28,47 @@ export class UserInfoComponent implements OnInit {
   onSubmit({valid}:{valid:boolean}) {
     console.log(valid);
     if(!valid){
-      console.log('no');
+      console.log('no')
       this.feedback_message = 'Please check all inputs.'
     }
     else{
-      this.feedback_message = '';
-      console.log('success');
-      console.log(this.userInfo)
-      this.successMessage ='Successfully submitted.';
+      let { FirstName, LastName, PhoneNum, Email, Message} = this.userInfo
+      let post = {
+        FirstName: FirstName,
+        LastName: LastName,
+        PhoneNum: PhoneNum,
+        Email: Email,
+        Message: Message
+      }
+      this.submitCart(post);
     }
+    this.cleanStorage()
+  }
+
+  submitCart(post){
+    //let data = JSON.parse(localStorage.getItem("cartList"))
+    let data = JSON.parse(localStorage.getItem("cartList") || "[]");
+    let cartdata = {
+      location: "123",
+      price:"231",
+      CartProd: data
+    };
+    let cartContact = {
+      CartModel: cartdata,
+      ContactModel: post
+    };
+    this.productService.addCart(cartContact).subscribe(
+      (res)=>{
+        console.log(res)
+      },
+      (error)=>{
+        console.log(error)
+        this.feedback_message = 'Error'
+      });
+  }
+
+  cleanStorage(){
+
   }
 
 }

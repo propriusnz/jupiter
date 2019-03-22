@@ -2,16 +2,16 @@
   <div class="px-0 px-md-5 mx-2">
   <div class="row l1 text-center"><div class="col-12 my-2 my-md-5">Frequently asked questions</div></div>
   <div id="panel panel-default">
-      <div class="card" *ngFor='let question of questions; index as i'>
+      <div class="card" *ngFor='let data of faqdata; index as i'>
         <div class="card-header">
           <h5 class="mb-0">
             <a class="s1 collapsed" data-toggle="collapse" href="#collapse{{i}}">
-              <i class="fa"></i> {{question.question}}
+              <i class="fa"></i> {{data.question}}
             </a>
           </h5>
       </div>
         <div id="collapse{{i}}" class="collapse">
-          <div class="card-body s2"><b>A.</b> {{question.answer}}</div>
+          <div class="card-body s2"><b>A.</b> {{data.answer}}</div>
         </div>
     </div>
     <br><br>

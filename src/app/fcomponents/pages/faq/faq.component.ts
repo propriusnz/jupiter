@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ProductService } from '../../../service/product.service';
 @Component({
   selector: 'app-faq',
   templateUrl: './faq.component.html',
   styleUrls: ['./faq.component.css']
 })
 export class FaqComponent implements OnInit {
-
+  faqdata:any;
   questions: any[] = [
     {
       question: 'What happens in a free Gradspace consultation?',
@@ -28,9 +28,15 @@ export class FaqComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(private productService:ProductService) { }
 
   ngOnInit() {
+    this.productService.getFaq().subscribe((res)=>
+    {
+      console.log(res)
+      this.faqdata = res;
+    },
+    (error)=>console.log(error));
   }
 
 }
