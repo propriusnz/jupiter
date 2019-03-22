@@ -21,12 +21,12 @@
       </div>
       <div class="row py-2">
         <div class="col-12 s2">
-          <img src="../../../../assets/images/phoneIcon.png" alt="" style="height:26px;width:26px;">&nbsp;&nbsp;&nbsp;&nbsp;02108547654
+          <img src="../../../../assets/images/phoneIcon.png" alt="" style="height:26px;width:26px;">&nbsp;&nbsp;&nbsp;&nbsp;(64)2108547654
         </div>
       </div>
       <div class="row py-2">
         <div class="col-12 s2">
-          <img src="../../../../assets/images/gmailLogo.png" alt="" style="height:20px;width:26px;">&nbsp;&nbsp;&nbsp;&nbsp;yuxiaochen1987@outlook.com
+          <img src="../../../../assets/images/gmailLogo.png" alt="" style="height:20px;width:26px;">&nbsp;&nbsp;&nbsp;&nbsp;luxedreameventhire@gmail.com
         </div>
       </div>
     </div>
@@ -88,13 +88,8 @@
             <!-- how do you find use -->
             <div class="form-group">  
                 <div class="invalid_feedback" *ngIf="findUs.errors?.required && findUs.touched">Please enter the field.</div>              
-                <select class="custom-select form-control" placeholder="find us" type="findUs" required name="findUs"
+                <input class="form-control" type="findUs" required name="findUs" placeholder="How did you find about us?"
                 [ngClass]="{'is-invalid':findUs.errors?.required && findUs.touched}" [(ngModel)]="contactFrom.findUs" #findUs="ngModel">
-                    <option value="" disabled selected>How did you find us *</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
              </div>
                 <!-- type of event -->
             <div class="form-group">  
@@ -102,9 +97,15 @@
                 <select class="custom-select form-control"  type="eventType" required name="eventType"
                 [ngClass]="{'is-invalid':eventType.errors?.required && eventType.touched}" [(ngModel)]="contactFrom.eventType" #eventType="ngModel">
                 <option value="" disabled selected>Type of event *</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="1">Wedding</option>
+                    <option value="2">Birthday Party</option>
+                    <option value="3">Children's Birthday Party</option>
+                    <option value="4">Girls Night</option>
+                    <option value="5">Bachelor & Bachelorette Party</option>
+                    <option value="6">Corporate Event</option>
+                    <option value="7">Other Event</option>
+
+
                   </select>
               </div>             
             <!-- message -->

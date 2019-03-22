@@ -35,12 +35,17 @@ export class ContactUsComponent implements OnInit {
     }
     else{
       this.feedback_message = '';
-      console.log('success');
+
       console.log(this.contactFrom)
-      this.successMessage ='Successfully submitted.';
+      this.contactApiCall();
     }
   }
-  formCheck(){
-    console.log(this.contactFrom)
+
+  // Passes data to service
+  contactApiCall(){
+    this.productService.addContacts(this.contactFrom).subscribe(
+      (res)=>{console.log(res), this.feedback_message="Thank you for contacting us, we'll be in touch very shortly."},
+      (err)=>{console.warn(err), this.feedback_message="Opps, something went wrong."}
+    )
   }
 }

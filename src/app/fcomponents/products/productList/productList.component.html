@@ -2,7 +2,7 @@
   <div class="px-0 px-md-5 mx-2">
 
     <!-- title -->
-    <div class="row py-2 py-md-5">
+    <div class="row py-2 py-md-3">
         <div class="col-12 mb-2 l1 text-center" *ngIf="typeName == 'hire'">  Our Hires</div>
         <div class="col-12 mb-2 l1 text-center" *ngIf="typeName == 'service'">  Our Services</div>
         <div class="col-12 mb-2 l1 text-center" *ngIf="typeName == 'package'">  Our Packages</div>
@@ -21,11 +21,9 @@
           </div>
         </div>
     </div>
-    <br><br>
     <div class="s2" style="text-align: center;" *ngIf="errorMessage">
       Sorry, {{errorMessage}}
     </div>
-    <br>
   <!-- display products -->
   <div class="row py-3">
     <div class='col-12 col-md-4 pt-4 pb-2' *ngFor="let product of allProducts; index as i">
@@ -53,7 +51,7 @@
               <span class="sr-only">Next</span>
             </a>
           </div>
-      <div><a [routerLink] = "['/product/',product.prodId]" class="m1">{{product.title}}</a></div>
+      <h1><a [routerLink] = "['/product/',product.prodId]" class="m1">{{product.title}}</a></h1>
       <div class="row"><div class="s2gold col-4">$ {{product.price}}</div><div class="s2 col-6">Hired: 12</div></div>
     </div>
   </div>
