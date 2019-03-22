@@ -41,3 +41,11 @@ a.dropdown-item:hover{
 .show .btn-secondary.dropdown-toggle{
     color:black;
 }
+.h480{
+    height:480px;
+}
+@media (max-width:767px){
+    .h480{
+        height:300px;
+    }
+}
