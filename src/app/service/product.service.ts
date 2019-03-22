@@ -43,7 +43,7 @@ constructor( public http: HttpClient) { }
   addContacts(contact:any){
     return this.http.post(this.baseUrl + '/Contacts', contact);
   }
-  
+
   //FAQ
   getFaq(){
     return this.http.get(this.baseUrl + '/Faqs');
