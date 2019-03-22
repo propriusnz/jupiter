@@ -14,5 +14,7 @@ export class Shopping_cartComponent implements OnInit {
   }
   deleteCart(id){
     console.log(id);
+    this.prodsInCart.splice(id,1)
+    localStorage.setItem("cartList",JSON.stringify(this.prodsInCart))
   }
 }
