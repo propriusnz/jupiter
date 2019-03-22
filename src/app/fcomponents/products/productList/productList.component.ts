@@ -55,6 +55,7 @@ export class ProductListComponent implements OnInit {
 
       this.productService.indexType(this.typeCode).subscribe(
         (res) => {
+          console.log(res);
           this.allProducts = res['product']
           console.log(this.allProducts)
         },

@@ -10,6 +10,7 @@ import {Location} from '@angular/common';
 export class ProductComponent implements OnInit {
   productId:number
   productDetail:any;
+  prodMediaUrl:any;
   quantity:number=1 ;
   quantityLength:number;
   quantityFilled:boolean = true;
@@ -35,6 +36,7 @@ export class ProductComponent implements OnInit {
     this.productService.showProduct(this.productId).subscribe( 
       (res)=>{
         this.productDetail = res
+        this.prodMediaUrl =  this.productDetail.productMedia[0].url;
         this.quantityLength = this.productDetail.totalStock.toString().length;
         console.log(this.productDetail)
       },

@@ -4,8 +4,8 @@
   <div class="row my-5">
   <div class="col-12 col-md-6 col-lg-6 p-0">
     <div (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()" (mousemove)="mouseMove($event)">
-        <img src="{{defaultImgUrl}}" class="d-block w-100" id="small" #small style="height:500px;">
-        <b id="shadow" #shadow></b>
+        <img src="../../../../assets/Products/{{prodMediaUrl}}.jpg" class="d-block w-100" id="small" #small style="height:500px;">
+        <!-- <b id="shadow" #shadow></b> -->
     </div>
     <br>
     <div class="row">
@@ -40,10 +40,9 @@
   </div> -->
   <div *ngIf="productDetail" class="col-12 col-md-6 col-lg-6 pl-lg-5">
     <!-- large part of img -->
-    <div id="showDetails" #showDetails>
-      <!-- <span class="l2" #showDetails>the testing area</span> -->
+    <!-- <div id="showDetails" #showDetails>
       <img src="{{defaultImgUrl}}" alt="" #detailImg>
-    </div>
+    </div> -->
 
     <div class="l2">{{productDetail.title}}<br/></div>
     <div class="my-4">$<span class="s1"> {{productDetail.price}}</span></div>
