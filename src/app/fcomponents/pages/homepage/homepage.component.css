@@ -25,10 +25,6 @@ ul li{
     height:100%;
     width:100%;
 }
-.testimonial{
-    font-family: 'GreatVibes', cursive;
-    font-size:2rem;
-}
 .carousel-item img{    
     object-fit: cover;
 }

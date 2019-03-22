@@ -60,9 +60,9 @@
     </div>
 
   <!-- Title paragraph -->
-    <div class="l2 text-center mt-5">
+    <h1 class="l2 text-center mt-5">
         One stop event hire
-    </div>
+    </h1>
       <br><br>
       <div class="px-5 text-center s1">
         We have what you need for any occasion, wedding, birthday, corporate gathering, family reunion, or just an special girls night we cater for all events. 
@@ -72,7 +72,7 @@
         <a class="getintouch" style="color:#c48f45" href="" routerLink="/contactUs">Get in touch now for a quote</a> !
       </div>
       <br>
-      <div class="row"><div class="col-12 text-center s1">For more images of our work galleries</div></div>
+      <div class="row"><div class="col-12 text-center s1">Or see our work galleries</div></div>
       <div class="row mb-5"><div class="col-12 text-center"><button type="button" class="btn btn-outline-gold my-4 lspace-3" [routerLink]="[ '/galleries']"> View Our Gallery</button></div></div>
 
       <!-- styling -->
@@ -83,9 +83,10 @@
             </div>
           <div class="col-12 col-md-6">
             <div class="d-none d-md-block"><br><br></div>
-            <div class="l2 mt-5 lspace-5">Our event services</div>
-            <div class="my-3 s2">Want a Pinterest worthy event but just not sure where to start or how to bring all the
-              elements together to create a picture-perfect setting?<br/><br/>Got It Covered love to create incredible
+            <h2 class="l2 mt-5 lspace-5">Our event services</h2>
+            <div class="my-3 s2">
+              Want a Instagram worthy event but just not sure where to start or how to bring all the
+              elements together to create a picture-perfect setting?<br/><br/>Luxe Dream Event Hire love to create incredible
               events that inspire and excite!
             </div>
             <button type="button" class="btn btn-outline-gold my-md-5 lspace-3" [routerLink]="[ '/services']">View our services</button>
@@ -96,11 +97,10 @@
         <div class="row mt-5">
             <div class="col-12 col-md-6 pt-md-4 order-1 order-md-0">
             <div class="d-none d-md-block"><br><br></div>
-              <div class="l2 mt-5 lspace-5">Our event packages</div>
-              <div class="my-3 s2">So you are planning a corporate event and need help with the styling and theming? Let us help
-                you create the wow factor and give your guests an event to remember!<br/><br/>From the smallest detail to the
-                grandest event, Got It Covered has set up and styled events in venues throughout the Nelson and Marlborough
-                region since 2005 with an established reputation for excellence.
+              <h2 class="l2 mt-5 lspace-5">Our event packages</h2>
+              <div class="my-3 s2">
+                Find a event rental package that suit your needs from weddings to parties.
+                Whether you need tables and stands for your event or want to spell out something special with our beautiful letters, we've got you sorted without ripping your wallet.
               </div>
               <button type="button" class="btn btn-outline-gold my-md-5 lspace-3" [routerLink]="[ '/packages']">View our packages</button>
             </div>
@@ -113,17 +113,19 @@
         <!-- scrolling background -->
         <div class="row">
         <div class="col-12 bgat mt-5" #bgat >
-            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner text-center text-white">
+            <div id="carouselExampleSlidesOnly" class="carousel slide" style="height:260px;" data-ride="carousel">
+                <div class="carousel-inner text-center text-white"><br><br><br>
                   <div class="carousel-item active">
-                      <div><br/><br><br/><h5>First slide label</h5><p class="testimonial">"Lorem ipsum dolor sit amet, consectetur adipiscing elit."</p><br/><br></div>
+                    <h5>Sarah</h5>
+                    <p style="color:white" class="s1">"Not only are the pieces completely unique and always a focal point at wedding receptions, but the team at Lux Dream are the absolute best to work with. They always deliver and pick up promptly on the day of the event. Emma helps immensely with pre-planning leading up to the event. She’s prompt at making revisions to orders and sending over invoices efficiently."
+                    </p>
                   </div>
                   <div class="carousel-item">
-                      <div><br/><br><br/><h5>Second slide label</h5><p class="testimonial">"Lorem ipsum dolor sit amet, consectetur adipiscing elit."</p><br/><br></div>
+                    <h5>Bianca</h5>
+                    <p style="color:white" class="s1">"We used Luxe Dream for our wedding and the letter/service was awesome! It allowed us to create a look that felt personalized and relaxed. We had so many people say how lovely the lounge areas and the whole atmosphere was."
+                  </p>
                   </div>
-                  <div class="carousel-item">
-                      <div><br/><br><br/><h5>Third slide label</h5><p class="testimonial">"Lorem ipsum dolor sit amet, consectetur adipiscing elit."</p><br/><br></div>
-                  </div>
+
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleSlidesOnly" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -138,5 +140,3 @@
         </div>
       </div>
  </div>
-
-
