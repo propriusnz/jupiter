@@ -11,7 +11,7 @@
   <div class="row mt-3" *ngFor="let prod of prodsInCart; index as i">
       <div class="col-2"> <img src="../../../assets/Products/{{prod.ProdId}}.jpg" class="cartProdHeight"></div>
       <div class="col-4"><span class="m2">{{prod.Title}}</span></div>
-      <div class="col-2 ">{{prod.Price}}</div>
+      <div class="col-2 ">{{prod.Price/prod.Quantity}}</div>
       <div class="col-1 ">{{prod.Quantity}}</div>
       <div class="col-1 bg-gray">{{prod.Price}}</div>
       <div class="col-2 text-center">
@@ -46,7 +46,7 @@
       </div> -->
       <div class="row justify-content-end py-3" *ngIf="prodsInCart.length!=0">
           <div class="col-8 py-2"><a class='s2gold' [routerLink]="['/']"><i class="fas fa-arrow-left"></i>&nbsp; Continue Shopping</a> </div>
-          <div class="col-2 py-2 text-right">Total Price: <span class="s2bold">$1230</span></div>
+          <div class="col-2 py-2 text-right">Total Price: <span class="s2bold">{{totalPrice}}</span></div>
           <div class="col-2 text-center"><button class="btn btn-outline-gold" routerLink = '/userInfo'>Submit cart</button></div>
       </div>
 </div>

@@ -40,17 +40,18 @@ export class UserInfoComponent implements OnInit {
         Email: Email,
         Message: Message
       }
-      this.submitCart(post);
+      this.submitCart(post)
+      this.cleanStorage()
     }
-    this.cleanStorage()
   }
 
   submitCart(post){
     //let data = JSON.parse(localStorage.getItem("cartList"))
     let data = JSON.parse(localStorage.getItem("cartList") || "[]");
+
     let cartdata = {
-      location: "123",
-      price:"231",
+      location: `${this.userInfo.streetAddress}, ${this.userInfo.city}`,
+      price:Number(localStorage.getItem('totalPrice')),
       CartProd: data
     };
     let cartContact = {
@@ -68,7 +69,7 @@ export class UserInfoComponent implements OnInit {
   }
 
   cleanStorage(){
-
+    localStorage.clear()
   }
 
 }

@@ -12,14 +12,20 @@ export class Shopping_cartComponent implements OnInit {
 
   ngOnInit() {
     this.prodsInCart = JSON.parse(localStorage.getItem("cartList") || "[]");
+    this.price()
   }
   deleteCart(id){
     console.log(id);
     this.prodsInCart.splice(id,1)
     localStorage.setItem("cartList",JSON.stringify(this.prodsInCart))
+    this.price()
   }
   price(){
-    
+    this.totalPrice = 0
+    this.prodsInCart.forEach(prod => {
+      this.totalPrice += prod.Price
+    });
+    localStorage.setItem('totalPrice', JSON.stringify(this.totalPrice))
   }
 
 }
