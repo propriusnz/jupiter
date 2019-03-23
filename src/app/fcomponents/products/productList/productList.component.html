@@ -16,7 +16,8 @@
             <button class="btn btn-secondary dropdown-toggle w-100 text-left s1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {{selectedCate}}</button>
             <div class="dropdown-menu w-100 text-left s1" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" (click)="changeCate($event)" *ngFor="let cate of allCategories">{{cate}}</a>
+                <a class="dropdown-item" (click)="ngOnInit()">All Products</a>
+              <div *ngFor="let category of allCategories"> <a class="dropdown-item" (click)="changeCate(category.categoryId,$event)">{{category.categoryName}}</a> </div>
             </div>
           </div>
         </div>

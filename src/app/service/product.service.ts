@@ -19,6 +19,9 @@ constructor( public http: HttpClient) { }
   indexCategory(){
     return this.http.get(this.baseUrl + '/ProductCategories');
   }
+  indexCategoryId(id:number){
+    return this.http.get(this.baseUrl + '/ProductCategories/'+id);
+  }
 
   //type
   indexType(id:number){

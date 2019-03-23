@@ -8,9 +8,10 @@ import { ActivatedRoute } from '@angular/router'
 })
 export class ProductListComponent implements OnInit {
   allProducts: any = []
+  allCategories:any = []
   typeName: any
   selectedCate: string = "All Products"
-  allCategories: any = ['Chairs and Covers', 'Candles and Candleholders', 'Dinnerware and Glassware', 'Bouncing castle', 'Letter and numbers', 'Plinth', 'Backdrop']
+  // allCategories: any = ['Chairs and Covers', 'Candles and Candleholders', 'Dinnerware and Glassware', 'Bouncing castle', 'Letter and numbers', 'Plinth', 'Backdrop']
   typeCode:number;
   errorMessage:string;
 
@@ -52,18 +53,22 @@ export class ProductListComponent implements OnInit {
       this.typeCode = 3;
     }
 
+    this.productService.indexType(this.typeCode).subscribe(
+      (res) => {
+        //console.log(res);
+        this.allProducts = res['product']
+        console.log(this.allProducts)
+        if (this.typeCode ==1){
+          this.getCategories()
+        }
+      },
+      (err) => {console.log(err),this.errorMessage = 'Server fault'}
+      )
 
-      this.productService.indexType(this.typeCode).subscribe(
-        (res) => {
-          console.log(res);
-          this.allProducts = res['product']
-          console.log(this.allProducts)
-        },
-        (err) => {console.log(err),this.errorMessage = 'Server fault'}
-        )
+      this.selectedCate = "All Products"
+    }
 
-  }
-  changeCate(e) {
+  changeCate(id,e) {
     // console.log(e)
     // this.selectedCate = e.srcElement.innerHTML;
     // if (this.selectedCate == "Dinnerware and Glassware"){
@@ -73,5 +78,24 @@ export class ProductListComponent implements OnInit {
     //   this.allProducts = [];
     //   this.allProducts = this.hireData;
     // }
+    this.selectedCate = e.srcElement.innerHTML
+    this.productService.indexCategoryId(id).subscribe((res)=>{
+      this.allProducts = res['product']
+      console.log(this.allProducts)
+    },(error)=>{
+      console.log(error)
+    })
+  }
+  getCategories(){
+    this.productService.indexCategory().subscribe((res)=>{
+      this.allCategories = res
+      console.log(this.allCategories);
+    },(error)=>{console.log(error),this.errorMessage = 'Server fault'})
+  }
+  sortByCategory(id){
+    this.productService.indexCategoryId(id).subscribe((res)=>{
+      console.log(res)
+      this.allProducts = res['product']
+    },(error)=>{console.log(error),this.errorMessage = 'Server fault'})
   }
 }
