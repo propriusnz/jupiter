@@ -42,3 +42,18 @@ ul li{
 .getintouch:hover{
     text-decoration: underline;
 }
+
+.testimonial-carousel{
+    padding-top:70px;
+}
+#carouselExampleSlidesOnly{
+    height: 270px;
+}
+@media (max-width:767px){
+    .testimonial-carousel{
+        padding-top:20px;
+    }
+    #carouselExampleSlidesOnly{
+        height:370px;
+    }
+}
