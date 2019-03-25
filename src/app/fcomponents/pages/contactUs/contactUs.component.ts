@@ -14,12 +14,12 @@ export class ContactUsComponent implements OnInit {
   contactFrom={
     name:'',
     email:'',
-    phone:'',
+    PhoneNumber:'',
     company:'',
     dateOfEvent:'',
-    locationOfEvent:'',
+    LocationOfEvent:'',
     findUs:'',
-    eventType:'',
+    TypeOfEvent:'',
     message:''
   }
   constructor(private productService: ProductService) { }
@@ -37,15 +37,19 @@ export class ContactUsComponent implements OnInit {
       this.feedback_message = '';
 
       console.log(this.contactFrom)
-      this.contactApiCall();
+      this.sendEmail();
     }
   }
 
   // Passes data to service
-  contactApiCall(){
-    this.productService.addContacts(this.contactFrom).subscribe(
+  sendEmail(){
+    // this.productService.addContacts(this.contactFrom).subscribe(
+    //   (res)=>{console.log(res), this.feedback_message="Thank you for contacting us, we'll be in touch very shortly."},
+    //   (err)=>{console.warn(err), this.feedback_message="Opps, something went wrong."}
+    // )
+    this.productService.sendContectEmail(this.contactFrom).subscribe(
       (res)=>{console.log(res), this.feedback_message="Thank you for contacting us, we'll be in touch very shortly."},
-      (err)=>{console.warn(err), this.feedback_message="Opps, something went wrong."}
+      (error)=>{console.log(error), this.feedback_message="Opps, something went wrong."}
     )
   }
 }

@@ -77,29 +77,27 @@ export class ProductComponent implements OnInit {
       Title:this.productDetail.title,
       Quantity:this.quantity
     }    
-    // let a:boolean = false
-    this.cartList = JSON.parse(localStorage.getItem('cartList'))
+
+    let a:boolean = false
+    if (this.cartList.length>0){
+      for (let i=0; i<this.cartList.length;i++){
+        if(this.cartList[i].Title == item.Title){
+          a = true
+          this.cartList[i].Quantity += item.Quantity
+          this.cartList[i].Price = this.cartList[i].Quantity*this.productDetail.price
+          localStorage.setItem('cartList',JSON.stringify(this.cartList))
+          console.log(this.cartList)
+        }
+      }
+      if (a==false){
+        this.cartList.push(item)
+        localStorage.setItem('cartList',JSON.stringify(this.cartList))  
+      }
+    }else{
+      this.cartList = JSON.parse(localStorage.getItem('cartList'))
       this.cartList.push(item)
       localStorage.setItem('cartList',JSON.stringify(this.cartList))
-
-    // if (this.cartList.length>0){
-    //   for (let i=0; i<this.cartList.length;i++){
-    //     if(this.cartList[i].Title == this.productDetail.Title){
-    //       a = true
-    //       this.cartList[i].Quantity += this.quantity
-    //       localStorage.setItem('cartList',JSON.stringify(this.cartList))
-    //       console.log(this.cartList)
-    //     }
-    //   }
-    //   if (a==false){
-    //     this.cartList.push(item)
-    //     localStorage.setItem('cartList',JSON.stringify(this.cartList))  
-    //   }
-    // }else{
-    //   this.cartList = JSON.parse(localStorage.getItem('cartList'))
-    //   this.cartList.push(item)
-    //   localStorage.setItem('cartList',JSON.stringify(this.cartList))
-    // }
+    }
 
 
   }

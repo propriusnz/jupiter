@@ -52,4 +52,9 @@ constructor( public http: HttpClient) { }
     return this.http.get(this.baseUrl + '/Faqs');
   }
 
+  //contact email
+  sendContectEmail(contactEmail){
+    return this.http.post(this.baseUrl + '/ContactEmails', contactEmail)
+  }
+
 }

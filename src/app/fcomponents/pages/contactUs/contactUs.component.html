@@ -55,12 +55,12 @@
                </div>
                <!-- phone number -->
                <div class="form-group">
-                  <div class="invalid_feedback" *ngIf="phone.errors?.required && phone.touched">Please enter your Phone number</div>
-                  <div class="invalid_feedback" *ngIf="phone.errors?.pattern && phone.touched">
+                  <div class="invalid_feedback" *ngIf="PhoneNumber.errors?.required && PhoneNumber.touched">Please enter your Phone number</div>
+                  <div class="invalid_feedback" *ngIf="PhoneNumber.errors?.pattern && PhoneNumber.touched">
                      Please enter the correct Phone number.
                   </div>
-                  <input class="form-control" type="tel" required pattern="[0-9]{7,15}" minlength="7" name="phone" placeholder="Phone number *" 
-                  [ngClass]="{'is-invalid':phone.errors?.required && phone.touched}" [(ngModel)]="contactFrom.phone" #phone="ngModel">
+                  <input class="form-control" type="tel" required pattern="[0-9]{7,15}" minlength="7" name="PhoneNumber" placeholder="Phone number *" 
+                  [ngClass]="{'is-invalid':PhoneNumber.errors?.required && PhoneNumber.touched}" [(ngModel)]="contactFrom.PhoneNumber" #PhoneNumber="ngModel">
                </div>
                <!-- company -->
               <div><input class="form-control" type="text" placeholder="Company"  [(ngModel)]="contactFrom.company" name="company"></div>
@@ -76,9 +76,9 @@
               </div>
               <!-- location of event -->
               <div class="form-group">  
-                <div class="invalid_feedback" *ngIf="locationOfEvent.errors?.required && locationOfEvent.touched">Please enter Location</div>
-                <input class="form-control" type="locationOfEvent" required name="locationOfEvent" placeholder="Location of event *"
-                [ngClass]="{'is-invalid':locationOfEvent.errors?.required && locationOfEvent.touched}" [(ngModel)]="contactFrom.locationOfEvent" #locationOfEvent="ngModel">
+                <div class="invalid_feedback" *ngIf="LocationOfEvent.errors?.required && LocationOfEvent.touched">Please enter Location</div>
+                <input class="form-control" type="LocationOfEvent" required name="LocationOfEvent" placeholder="Location of event *"
+                [ngClass]="{'is-invalid':LocationOfEvent.errors?.required && LocationOfEvent.touched}" [(ngModel)]="contactFrom.LocationOfEvent" #LocationOfEvent="ngModel">
              </div>
 
 
@@ -93,9 +93,9 @@
              </div>
                 <!-- type of event -->
             <div class="form-group">  
-                <div class="invalid_feedback" *ngIf="eventType.errors?.required && eventType.touched">Please enter Type of event</div>
-                <select class="custom-select form-control"  type="eventType" required name="eventType"
-                [ngClass]="{'is-invalid':eventType.errors?.required && eventType.touched}" [(ngModel)]="contactFrom.eventType" #eventType="ngModel">
+                <div class="invalid_feedback" *ngIf="TypeOfEvent.errors?.required && TypeOfEvent.touched">Please enter Type of event</div>
+                <select class="custom-select form-control"  type="TypeOfEvent" required name="TypeOfEvent"
+                [ngClass]="{'is-invalid':TypeOfEvent.errors?.required && TypeOfEvent.touched}" [(ngModel)]="contactFrom.TypeOfEvent" #TypeOfEvent="ngModel">
                 <option value="" disabled selected>Type of event *</option>
                     <option value="1">Wedding</option>
                     <option value="2">Birthday Party</option>
