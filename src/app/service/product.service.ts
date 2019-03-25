@@ -14,7 +14,10 @@ constructor( public http: HttpClient) { }
   showProduct(id:number){
     return this.http.get(this.baseUrl + '/Products/' + id);
   }
-
+  //Gallery
+  indexGallery(){
+    return this.http.get(this.baseUrl + '/projects');
+  }
   //Category
   indexCategory(){
     return this.http.get(this.baseUrl + '/ProductCategories');
@@ -22,7 +25,6 @@ constructor( public http: HttpClient) { }
   indexCategoryId(id:number){
     return this.http.get(this.baseUrl + '/ProductCategories/'+id);
   }
-
   //type
   indexType(id:number){
     return this.http.get(this.baseUrl + '/ProductTypes/' + id);
@@ -34,7 +36,6 @@ constructor( public http: HttpClient) { }
   addCart(newcart:any){
     return this.http.post(this.baseUrl + '/Carts', newcart);
   }
-
   //cartProd
   addCartProd(cartProdList:any){
     return this.http.post(this.baseUrl + '/CartProds', cartProdList);
@@ -46,12 +47,10 @@ constructor( public http: HttpClient) { }
   addContacts(contact:any){
     return this.http.post(this.baseUrl + '/Contacts', contact);
   }
-
   //FAQ
   getFaq(){
     return this.http.get(this.baseUrl + '/Faqs');
   }
-
   //contact email
   sendContectEmail(contactEmail){
     return this.http.post(this.baseUrl + '/ContactEmails', contactEmail)
