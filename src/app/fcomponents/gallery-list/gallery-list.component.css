@@ -1,9 +1,7 @@
-/* .egbg{
-    background-image: url("../../../assets/images/productImg2.jpeg");
-    background-repeat: no-repeat;
-    background-size: fixed;
-    background-position: center;
-} */
+.pb-30 a{
+    color: white;
+
+}
 .gallaryBlocks{
     /* background-image: url("../../../assets/images/productImg2.jpeg"); */
     width: 100%;
