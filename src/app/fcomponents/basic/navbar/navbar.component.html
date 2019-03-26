@@ -5,9 +5,19 @@
             <li class="nav-item pl-md-3">
                     <a class="nav-link s2bold" routerLink='/' routerLinkActive="active"><h1 class="s2bold">Home</h1></a>
             </li>
-            <li class="nav-item pl-md-3">
+            <!-- <li class="nav-item pl-md-3">
                 <a class="nav-link s2bold" routerLink='/hire' routerLinkActive="active"><h1 class="s2bold">Hire</h1></a>
+            </li> -->
+
+            <li class="nav-item dropdown pl-md-3">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <h1 class="s2bold">Hire</h1>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" *ngFor="let category of allCategories" [routerLink]="[ '/category/', category.categoryId ]" >{{category.categoryName}}</a>
+                </div>
             </li>
+
             <li class="nav-item pl-md-3">
                 <a class="nav-link s2bold" routerLink='/services' routerLinkActive="active"><h1 class="s2bold">Party Services</h1></a>
             </li>
