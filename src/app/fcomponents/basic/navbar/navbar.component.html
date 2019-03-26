@@ -5,17 +5,24 @@
             <li class="nav-item pl-md-3">
                     <a class="nav-link s2bold" routerLink='/' routerLinkActive="active"><h1 class="s2bold">Home</h1></a>
             </li>
-            <!-- <li class="nav-item pl-md-3">
-                <a class="nav-link s2bold" routerLink='/hire' routerLinkActive="active"><h1 class="s2bold">Hire</h1></a>
-            </li> -->
 
             <li class="nav-item dropdown pl-md-3">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="-100,-50">
                     <h1 class="s2bold">Hire</h1>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" *ngFor="let category of allCategories" [routerLink]="[ '/category/', category.categoryId ]" >{{category.categoryName}}</a>
                 </div>
+                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item s2 d-none d-md-block" *ngFor="let category of allCategories" [routerLink]="[ '/category/', category.categoryId ]">{{category.categoryName}}</a>
+                    <a class="dropdown-item s2 d-block d-md-none" *ngFor="let category of allCategories" data-toggle="collapse" data-target=".navbar-collapse"> 
+                        <a [routerLink]="[ '/category/', category.categoryId ]">{{category.categoryName}}</a>
+                    </a>
+                </div>
+                <!-- <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item s2">123123</a>
+                    <a class="dropdown-item s2">123123</a>
+                    <a class="dropdown-item s2">123123</a>
+                    <a class="dropdown-item s2">123123</a>
+                    <a class="dropdown-item s2">123123</a>
+                </div> -->
             </li>
 
             <li class="nav-item pl-md-3">

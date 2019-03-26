@@ -17,12 +17,13 @@ export class NavbarComponent implements OnInit {
     $('.navbar-nav>li>a').on('click', function(){
       $('.navbar-collapse').collapse('hide');
   })
+
     this.getCategories()
   }
+
   @HostListener('window:scroll', ['$event']) onScrollEvent($event){
     let positionNav:number = window.pageYOffset
     
-     
     if (positionNav <= 70){
       this.isTop = true;
     }else{
