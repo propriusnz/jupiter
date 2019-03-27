@@ -1,73 +1,91 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light border-bottom p-0 lspace-3">
-    
-    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item pl-md-3">
-                    <a class="nav-link s2bold" routerLink='/' routerLinkActive="active"><h1 class="s2bold">Home</h1></a>
-            </li>
 
-            <li class="nav-item dropdown pl-md-3">
-                <div class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="-100,-50">
-                    <h1 class="s2bold">Hire</h1>
-                </div>
-                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
-                    <!-- !large screen dropdown -->
-                    <a class="dropdown-item s2 d-none d-md-block" [routerLink]="[ '/hire' ]"> All Products</a>
-                    <a class="dropdown-item s2 d-none d-md-block" *ngFor="let category of allCategories" [routerLink]="[ '/category/', category.categoryId ]">{{category.categoryName}}</a>
-                    <!-- !mobile dropdown -->
-                    <a class="dropdown-item s2 d-block d-md-none" data-toggle="collapse" data-target=".navbar-collapse"> 
-                        <a [routerLink]="[ '/hire' ]">All Products</a>
-                    </a>
-                    <a class="dropdown-item s2 d-block d-md-none" *ngFor="let category of allCategories" data-toggle="collapse" data-target=".navbar-collapse"> 
-                        <a class="s2" [routerLink]="[ '/category/', category.categoryId ]">{{category.categoryName}}</a>
-                    </a>
-                </div>
-                <!-- <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
+  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item pl-md-3">
+        <a class="nav-link s2bold" routerLink='/' routerLinkActive="active">
+          <h1 class="s2bold">Home</h1>
+        </a>
+      </li>
+
+      <li class="nav-item dropdown pl-md-3">
+        <div class="nav-link dropdown-toggle s2bold" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false" data-offset="-100,-50">
+          <h1 class="s2bold">Hire</h1>
+        </div>
+        <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
+          <!-- !large screen dropdown -->
+          <a class="dropdown-item s2 d-none d-md-block" [routerLink]="[ '/hire' ]"> All Products</a>
+          <a class="dropdown-item s2 d-none d-md-block" *ngFor="let category of allCategories"
+            [routerLink]="[ '/category/', category.categoryId ]">{{category.categoryName}}</a>
+          <!-- !mobile dropdown -->
+          <a class="dropdown-item s2 d-block d-md-none" data-toggle="collapse" data-target=".navbar-collapse">
+            <a [routerLink]="[ '/hire' ]">All Products</a>
+          </a>
+          <a class="dropdown-item s2 d-block d-md-none" *ngFor="let category of allCategories" data-toggle="collapse"
+            data-target=".navbar-collapse">
+            <a class="s2" [routerLink]="[ '/category/', category.categoryId ]">{{category.categoryName}}</a>
+          </a>
+        </div>
+        <!-- <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item s2">123123</a>
                     <a class="dropdown-item s2">123123</a>
                     <a class="dropdown-item s2">123123</a>
                     <a class="dropdown-item s2">123123</a>
                     <a class="dropdown-item s2">123123</a>
                 </div> -->
-            </li>
+      </li>
 
-            <li class="nav-item pl-md-3">
-                <a class="nav-link s2bold" routerLink='/services' routerLinkActive="active"><h1 class="s2bold">Party Services</h1></a>
-            </li>
-            <li class="nav-item pl-md-3">
-                <a class="nav-link " routerLink='/packages' routerLinkActive="active"><h1 class="s2bold">Party Packages</h1></a>
-            </li>
-        </ul>
-    </div>
-
-    <div class="mx-auto order-0">
-        <a class="nav-link p-0 p-md-1" routerLink='/homepage' routerLinkActive="active">
-          <img class="d-none d-lg-block" src="../../../../assets/images/Asset1-4x-big.png" style="zoom:0.5;" />
-          <img class="d-md-block d-lg-none" src="../../../../assets/images/Asset1-4x-mid.png" style="zoom:0.8;" />
+      <li class="nav-item pl-md-3">
+        <a class="nav-link s2bold" routerLink='/services' routerLinkActive="active">
+          <h1 class="s2bold">Party Services</h1>
         </a>
-        <button class="navbar-toggler mr-2" type="button" data-toggle="collapse" data-target=".dual-collapse2"><span class="navbar-toggler-icon"></span></button>
-    </div>
-    
-    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item pr-md-5">
-                <a class="nav-link s2bold" routerLink ='/galleries' routerLinkActive="active"><h1 class="s2bold">Gallery</h1></a>
-            </li>
-            <li class="nav-item pr-md-5">
-                <a class="nav-link s2bold" routerLink ='/aboutUs' routerLinkActive="active"><h1 class="s2bold">About us</h1></a>
-            </li>
-            <li class="nav-item pr-md-5">
-                <a class="nav-link s2bold" routerLink ='/faq' routerLinkActive="active"><h1 class="s2bold">FAQ</h1></a>
-            </li>
-            <li class="nav-item pr-md-3">
-                <a class="nav-link s2bold" routerLink='/contactUs' routerLinkActive="active"><h1 class="s2bold">Contact Us</h1></a>
-            </li>
-            <li class="nav-item ">
-                    <a class="nav-link s2bold" routerLink='/shoppingCart' routerLinkActive="active">
-                        <h1 class="s2bold"><i class="fas fa-shopping-cart" title="View Shopping Cart" ></i>
-                        </h1>
-                    </a>
-            </li>
-        </ul>
-    </div>
+      </li>
+      <li class="nav-item pl-md-3">
+        <a class="nav-link s2bold" routerLink='/packages' routerLinkActive="active">
+          <h1 class="s2bold">Party Packages</h1>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="mx-auto order-0">
+    <a class="nav-link p-0 p-md-1" routerLink='/homepage' routerLinkActive="active">
+      <img class="d-none d-lg-block" src="../../../../assets/images/Asset1-4x-big.png" style="zoom:0.5;" />
+      <img class="d-md-block d-lg-none" src="../../../../assets/images/Asset1-4x-mid.png" style="zoom:0.8;" />
+    </a>
+    <button class="navbar-toggler mr-2" type="button" data-toggle="collapse" data-target=".dual-collapse2"><span
+        class="navbar-toggler-icon"></span></button>
+  </div>
+
+  <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item pr-md-5">
+        <a class="nav-link s2bold" routerLink='/galleries' routerLinkActive="active">
+          <h1 class="s2bold">Gallery</h1>
+        </a>
+      </li>
+      <li class="nav-item pr-md-5">
+        <a class="nav-link s2bold" routerLink='/aboutUs' routerLinkActive="active">
+          <h1 class="s2bold">About us</h1>
+        </a>
+      </li>
+      <li class="nav-item pr-md-5">
+        <a class="nav-link s2bold" routerLink='/faq' routerLinkActive="active">
+          <h1 class="s2bold">FAQ</h1>
+        </a>
+      </li>
+      <li class="nav-item pr-md-3">
+        <a class="nav-link s2bold" routerLink='/contactUs' routerLinkActive="active">
+          <h1 class="s2bold">Contact Us</h1>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link s2bold" routerLink='/shoppingCart' routerLinkActive="active">
+          <h1 class="s2bold"><i class="fas fa-shopping-cart" title="View Shopping Cart"></i>
+          </h1>
+        </a>
+      </li>
+    </ul>
+  </div>
 </nav>
