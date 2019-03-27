@@ -1,5 +1,8 @@
 import { Component, OnInit, ElementRef, ViewChild} from '@angular/core';
-import { ProductService } from '../../../service/product.service'
+import { ProductService } from '../../../service/product.service';
+import { Meta, Title } from '@angular/platform-browser';
+import { isPlatformBrowser } from '@angular/common';
+
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
@@ -14,7 +17,17 @@ export class HomepageComponent implements OnInit {
   @ViewChild ('imgScroll') imgScroll:ElementRef
   @ViewChild ('list') list:ElementRef
 
-  constructor(private productService : ProductService) { }
+  constructor(
+    private productService : ProductService,
+    private meta: Meta,
+    private titleService: Title,
+    ) {
+    this.meta.addTags([
+      { name: 'keywords', content: 'Luxedream Hire, Party hire, wedding hire, birthday party hire, event hire, auckland event hire'},
+      { name: 'description', content: 'One stop event and party hire and services in Auckland.'},
+    ])
+    this.titleService.setTitle('Luxe Dream Auckland Event and Party Hire | Home');
+  }
 
   ngOnInit() {
     // large screen

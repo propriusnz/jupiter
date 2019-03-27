@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import{ ProductService } from '../../../service/product.service';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-contactUs',
@@ -22,7 +23,17 @@ export class ContactUsComponent implements OnInit {
     TypeOfEvent:'',
     message:''
   }
-  constructor(private productService: ProductService) { }
+  constructor(
+    private productService: ProductService,
+    private meta: Meta,
+    private titleService: Title,
+    ) {
+    this.meta.addTags([
+      { name: 'keywords', content: 'Luxedream Hire, Party hire, wedding hire, birthday party hire, event hire, auckland event hire'},
+      { name: 'description', content: 'One stop event and party hire and services in Auckland.'},
+    ])
+    this.titleService.setTitle('Luxe Dream Auckland Event Hire | Contact us');
+  }
 
   ngOnInit() {
     this.minDate = moment().format();
