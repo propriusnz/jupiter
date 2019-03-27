@@ -15,9 +15,6 @@ a:hover {
   color: inherit;
 }
 
-.cartProdHeight {
-  height: 150px;
-}
 .shoppingcarttop{
     padding-bottom: 5px;
     border-bottom: 1px solid #e0e0e0;
@@ -28,45 +25,51 @@ a:hover {
     border-bottom: 1px dashed #e0e0e0;
 }
 
-@media (max-width:767px) {
-  .cartProdHeight {
-    height: 120px;
-  }
-
-  .col-6 p {
-    margin: 0;
-  }
-
-  .cartdelete {
-    float: left;
-    margin-left: 5px;
-    margin-right: 20px;
-  }
-
-  .cartviewdetail {
-    float: left;
-  }
-
-  .btn.btn-outline-red {
-    padding:0 5px; 
-    font-weight: 500;
-    border-radius: 5.5px;
-    border-width: 1px;
-    border-color: #ff7575;
-    border-style: solid;
-    color: #ff7575;
-    font-size: 12px;
-  }
-
-  .btn.btn-outline-blue {
-    padding:0 5px; 
-    font-weight: 500;
-    border-radius: 5.5px;
-    border-width: 1px;
-    border-color: #c48f45;
-    border-style: solid;
-    color: #c48f45;
-    font-size: 12px;
-  }
-
+.btn.btn-outline-red {
+  border-color: #ff7575;
+  color: #ff7575;
 }
+
+.btn.btn-outline-blue {
+  border-color: #c48f45;
+  color: #c48f45;
+}
+
+.btn.btn-outline-red, .btn.btn-outline-blue{
+  padding:0 5px; 
+  font-weight: 700;
+  border-radius: 5.5px;
+  border-width: 2px;
+  border-style: solid;
+  font-size: 17px;
+}
+
+.divdetails{
+  height: 20%;
+}
+
+.bg-gray, .divdetails{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.col-12, .s2goldbold > div {
+  padding-bottom: 5px;
+  border-bottom: 1px solid #dcdcdc;
+}
+
+.productdiv {
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed #dcdcdc;
+}
+
+@media (max-width:767px) {
+
+  .btn.btn-outline-red, .btn.btn-outline-blue {
+    font-weight: 500;
+    border-width: 1px;
+    font-size: 12px;
+  }
+}
+

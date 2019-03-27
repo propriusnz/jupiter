@@ -1,121 +1,37 @@
-<div class="container-fluid pt-2">
+<div class="container pt-2">
   <div class="px-0 px-md-5 mx-2">
-    <!--Hidden a row of Cart tittle during xs-->
-    <div class="d-none d-sm-block">
-      <div class="row py-5">
-        <div class="col-12 s2goldbold">> Shopping cart</div>
-      </div>
+    <div class="row py-4">
+      <div class="col-12 s2goldbold">> Shopping cart</div>
     </div>
-    <!--End hidden a row of Cart tittle during xs-->
-    <!--Visible a row of Cart tittle during xs-->
-    <div class="d-block d-sm-none">
-      <div class="s2goldbold shoppingcarttop">> Shopping cart</div>
-    </div>
-    <!--End visible a row of Cart tittle during xs-->
 
-    <!--Hidden a row of Cart main body during xs-->
-    <div class="d-none d-sm-block">
-      <div class="row py-1" *ngIf="prodsInCart.length!=0">
-        <div class="col-6 s2bold"> Product Detail</div>
-        <div class="col-2 s2bold ">Unit price</div>
-        <div class="col-1 s2bold">Amount</div>
-        <div class="col-1 s2bold">Totally</div>
-        <div class="col-2 s2bold text-center">Action</div>
+    <div class="row mb-3 productdiv" *ngFor="let prod of prodsInCart; index as i">
+      <div class="col-4 col-sm-4 col-md-4 col-lg-3">
+        <img src="../../../assets/Products/{{prod.ProdId}}.jpg" class="cartProdHeight">
       </div>
-      <div class="row mt-3" *ngFor="let prod of prodsInCart; index as i">
-        <div class="col-2"> <img src="../../../assets/Products/{{prod.ProdId}}.jpg" class="cartProdHeight"></div>
-        <div class="col-4"><span class="m2">{{prod.Title}}</span></div>
-        <div class="col-2 ">{{prod.Price/prod.Quantity}}</div>
-        <div class="col-1 ">{{prod.Quantity}}</div>
-        <div class="col-1 bg-gray">{{prod.Price}}</div>
-        <div class="col-2 text-center">
-          <div (click)="deleteCart(i)">Delete</div>
-          <div> <a [routerLink]="[ '/product/', prod.ProdId ]">View Detail</a></div>
+      <div class="col-8 col-sm-8 col-md-8 col-lg-9">
+        <div class="divdetails"><span class="m2">{{prod.Title}}</span></div>
+        <div class="divdetails">Unit Price: ${{prod.Price/prod.Quantity}}</div>
+        <div class="divdetails">Amount: {{prod.Quantity}}</div>
+        <div class="bg-gray divdetails">Total: ${{prod.Price}}</div>
+        <div class="mt-2 divdetails">
+          <button class="btn btn-outline-blue" [routerLink]="[ '/product/', prod.ProdId ]">View Detail</button>
+          <button class="btn btn-outline-red" (click)="deleteCart(i)" style="float:right;">Delete</button>
         </div>
       </div>
     </div>
-    <!--End Hidden a row of Cart main body during xs-->
-
-    <!--Visible a row of Cart main body during xs-->
-    <div class="d-block d-sm-none">
-      <div class="row mt-3 cartdetil" *ngFor="let prod of prodsInCart; index as i">
-        <div class="col-6">
-          <img src="../../../assets/Products/{{prod.ProdId}}.jpg" class="cartProdHeight">
-        </div>
-        <div class="col-6">
-          <span class="m2">{{prod.Title}}</span>
-          <p>Unit price: ${{prod.Price/prod.Quantity}}</p>
-          <p>Amount: {{prod.Quantity}}</p>
-          <p>Totally: ${{prod.Price}}</p>
-          <div class="col-xs-12 text-center" style="margin-top:5px">
-            <div class="col-xs-4 cartdelete" (click)="deleteCart(i)">
-                <button class="btn btn-outline-red">Delete</button>
-            </div>
-            <div class="col-xs-8 cartviewdetail">
-              <button class="btn btn-outline-blue" [routerLink]="[ '/product/', prod.ProdId ]">View Detail</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--End Visible a row of Cart main body during xs-->
 
     <div *ngIf="prodsInCart.length==0">
       Your Cart is empty now. Please add some products.
       <button class="btn btn-outline-gold" [routerLink]="[ '/hire' ]">View Our Products</button>
     </div>
-
-    <!-- static data -->
-    <!-- <div class="row mt-3">
-      <div class="col-2"><img src="../../../assets/images/productImg2.jpeg"></div>
-      <div class="col-4"><span class="m2">Signature Letter Range</span></div>
-      <div class="col-2">$120</div>
-      <div class="col-1">3</div>
-      <div class="col-1 bg-gray">$360</div>
-      <div class="col-2 text-center">
-        <div>Delete</div>
-        <div>View Detail</div>
-      </div>
+    <div class="text-right mb-2">
+      Total Price: $<span class="s2bold">{{totalPrice}}</span>
     </div>
-    <div class="row mt-3">
-        <div class="col-2"><img src="../../../assets/images/productImg3.png"></div>
-        <div class="col-4"><span class="m2">LOVE in White</span></div>
-        <div class="col-2">$140</div>
-        <div class="col-1">3</div>
-        <div class="col-1 bg-gray">$420</div>
-        <div class="col-2 text-center">
-          <div>Delete</div>
-          <div>View Detail</div>
-        </div>
-    </div> -->
-
-    <div class="d-none d-sm-block">
-      <!--Hidden the row of Cart footer during xs-->
-      <div class="row justify-content-end py-3" *ngIf="prodsInCart.length!=0">
-        <div class="col-md-8 col-xs-8 py-2"><a class='s2gold' [routerLink]="['/']"><i
-              class="fas fa-arrow-left"></i>&nbsp; Continue Shopping</a> </div>
-        <div class="col-md-2 col-xs-2 py-2 text-right">Total Price: <span class="s2bold">{{totalPrice}}</span></div>
-        <div class="col-md-2 col-xs-2 text-center"><button class="btn btn-outline-gold" routerLink='/userInfo'>Submit
-            cart</button></div>
-      </div>
+    <div class="justify-content-end mb-3" *ngIf="prodsInCart.length!=0">
+      <button class="btn btn_gold btn-sm" [routerLink]="['/']" type="button">
+        <i class="fas fa-arrow-left"></i>&nbsp;Continue Shopping
+      </button>
+      <button class="btn btn-outline-gold btn-sm" routerLink='/userInfo' style="float:right;">Process to checkout</button>
     </div>
-    <!--End Hidden the row of Cart footer during xs-->
-    <div class="d-block d-sm-none">
-      <!--Visible the row of Cart footer during xs-->
-      <div class="row justify-content-end" *ngIf="prodsInCart.length!=0" style="margin-bottom:10px;">
-        <div class="col-4">
-          <a class='s2gold' [routerLink]="['/']" style="font-size:10px;">
-            <i class="fas fa-arrow-left"></i>
-            Continue Shopping
-          </a>
-        </div>
-        <div class="col-4 text-center py-1" style="font-size:10px;">Total Price: <span class="s2bold"
-            style="font-size:12px;">${{totalPrice}}</span></div>
-        <div class="col-4 text-center">
-            <button class="btn btn-outline-gold" routerLink='/userInfo' style="font-size:10px;">Submit cart</button>
-        </div>
-      </div>
-    </div>
-    <!--End Visible the row of Cart footer during xs-->
   </div>
 </div>
