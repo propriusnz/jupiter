@@ -14,6 +14,9 @@ constructor( public http: HttpClient) { }
   showProduct(id:number){
     return this.http.get(this.baseUrl + '/Products/' + id);
   }
+  getSpecialProduct(){
+    return this.http.get(this.baseUrl + '/Products/GetSpecialProduct');
+  }
   //Gallery
   indexGallery(){
     return this.http.get(this.baseUrl + '/projects');
