@@ -31,11 +31,12 @@
     </div>
   </div>
 <div class="px-0 px-md-5 mx-2">
-    <!-- hireCollection -->
-<div class="hireCollection">
+
+    <!-- !SecialProducts -->
+<div class="hireCollection" *ngIf="specialProducts">
     <h1 class="text-center my-5 l2 lspace-3">Event Hire Specials</h1>
-    <div class="row">
-      <div class="col-6 col-md-3 "><img src="../../../../assets/images/homep4.jpg" class="img100">
+    <!-- <div class="row"> -->
+      <!-- <div class="col-6 col-md-3 "><img src="../../../../assets/images/homep4.jpg" class="img100">
         <div class="s1">Oblong Trestle Tables</div>
         <div><span class="s2goldbold mr-3">$100</span><s>$120</s></div>
       </div>
@@ -50,8 +51,35 @@
       <div class="col-6 col-md-3"><img src="../../../../assets/images/homep7.jpg" class="img100">
         <div  class="s1">Round Tables</div>
         <div><span class="s2goldbold mr-3">$100</span><s>$120</s></div>
-      </div>
-    </div>
+      </div> -->
+          <!-- <div class="col-6 col-md-3" *ngFor="let specials of specialProducts"><img src="../../../../assets/images/homep4.jpg" class="img100">
+            <div class="s1">{{specials.title}}</div>
+            <div><span class="s2goldbold mr-3">${{specials.price - specials.discount}}</span><s>${{specials.price}}</s></div>
+          </div>
+    </div> -->
+
+        <div id="carouselExampleControls" class="carousel slide pt-5" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item" *ngFor="let specials of groupedSpecials, index as i" [ngClass]="{'active': i == 0}">
+                <div class="row">
+                  <div class="col-3" *ngFor="let spe of specials"> 
+                      <img src="../../../../assets/Products/{{spe.productMedia[0].url}}.jpg" class="img100" [routerLink]="[ '/product/', spe.prodId]">
+                      <div class="s1">{{spe.title}}</div>
+                      <div><span class="s2goldbold mr-3">${{spe.price - spe.discount}}</span><s>${{spe.price}}</s></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="carousel-control-prev gold" href="#carouselExampleControls" role="button" data-slide="prev">
+              <i class="fas fa-chevron-left" aria-hidden="true"></i>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next gold" href="#carouselExampleControls" role="button" data-slide="next">
+              <i class="fas fa-chevron-right" aria-hidden="true"></i>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+
     <div class="row justify-content-md-center my-3">
         <div class="col-12 text-center">
           <button type="button" class="btn btn-outline-gold lspace-3" [routerLink]="[ '/hire']">View our products</button>

@@ -57,3 +57,16 @@ ul li{
         height:370px;
     }
 }
+
+.carousel-control-next-icon
+{
+  content: '>';
+  font-size: 55px;
+  color: red;
+}
+
+.carousel-control-prev-icon {
+  content: '<';
+  font-size: 55px;
+  color: red;
+}
