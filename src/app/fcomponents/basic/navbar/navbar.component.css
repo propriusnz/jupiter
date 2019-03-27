@@ -34,6 +34,9 @@ a{
     top: 30px;
     left: -4px;
 }
+.nav-link, .s2bold > h1 {
+    font-size: 0.8rem;
+}
 @media (min-width: 768px) {
     .dropdown-menu li:hover .sub-menu {
         visibility: visible;
