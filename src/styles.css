@@ -31,6 +31,9 @@
   src: url(assets/fonts/LuxeDream.ttf) format("opentype");
 }
 
+body{
+  font-size:14px;
+}
 
 /* color */
 .gold {
