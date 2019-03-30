@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from 'src/app/service/product.service'
 import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
@@ -10,7 +9,6 @@ import { Meta, Title } from '@angular/platform-browser';
 export class AboutUsComponent implements OnInit {
 
   constructor(
-    private productService: ProductService,
     private meta: Meta,
     private titleService: Title,
     ) {
@@ -23,12 +21,6 @@ export class AboutUsComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.productService.getCarts().subscribe(
-      (res)=>{
-        console.log(res);
-      },
-      (error)=>{console.log(error)})
-      console.log("aboutus");
   }
 
 }

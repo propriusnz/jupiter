@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from 'src/app/service/product.service'
+import { ProductService } from '../../../service/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
 
@@ -21,7 +21,7 @@ export class ProductListComponent implements OnInit {
     private productService: ProductService,
     private route: ActivatedRoute,
     private meta: Meta,
-    private titleService: Title,
+    private titleService: Title
   ) {
     // Following section in constructor for SEO Purposes 
     this.meta.addTags([

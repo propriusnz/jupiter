@@ -5,6 +5,7 @@ import { MatDatepickerModule,MatInputModule,MatFormFieldModule,MatNativeDateModu
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule,Routes }   from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
+import * as $ from 'jquery'
 
 // All service follow
 import{ProductService} from './service/product.service'

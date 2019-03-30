@@ -8,7 +8,9 @@ import { ProductService } from '../../service/product.service';
 export class Shopping_cartComponent implements OnInit {
   totalPrice:number = 0;
   prodsInCart:any;
-  constructor(private productService : ProductService) { }
+  constructor(
+    private productService : ProductService
+    ){}
 
   ngOnInit() {
     this.prodsInCart = JSON.parse(localStorage.getItem("cartList") || "[]");
@@ -17,7 +19,7 @@ export class Shopping_cartComponent implements OnInit {
   deleteCart(id){
     console.log(id);
     this.prodsInCart.splice(id,1)
-    localStorage.setItem("cartList",JSON.stringify(this.prodsInCart))
+      localStorage.setItem("cartList",JSON.stringify(this.prodsInCart))
     this.price()
   }
   price(){
@@ -25,7 +27,7 @@ export class Shopping_cartComponent implements OnInit {
     this.prodsInCart.forEach(prod => {
       this.totalPrice += prod.Price
     });
-    localStorage.setItem('totalPrice', JSON.stringify(this.totalPrice))
-  }
+      localStorage.setItem('totalPrice', JSON.stringify(this.totalPrice))
+    }
 
 }

@@ -1,7 +1,7 @@
-import { Component, OnInit, ElementRef, ViewChild} from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Inject, PLATFORM_ID} from '@angular/core';
 import { ProductService } from '../../../service/product.service';
 import { Meta, Title } from '@angular/platform-browser';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 @Component({
   selector: 'app-homepage',
@@ -13,15 +13,20 @@ export class HomepageComponent implements OnInit {
   num: number = 0;
   specialProducts:any=[];
   groupedSpecials:any=[];
+  isBrowser:Boolean = false;
   @ViewChild ('bgat') bgat:ElementRef
   @ViewChild ('imgScroll') imgScroll:ElementRef
   @ViewChild ('list') list:ElementRef
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId,
     private productService : ProductService,
     private meta: Meta,
     private titleService: Title,
     ) {
+    if (isPlatformBrowser(this.platformId)) {
+      this.isBrowser = true
+    }
     this.meta.addTags([
       { name: 'keywords', content: 'Luxedream Hire, Party hire, wedding hire, birthday party hire, event hire, auckland event hire'},
       { name: 'description', content: 'One stop event and party hire and services in Auckland.'},
@@ -31,20 +36,21 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit() {
     // large screen
-    console.log(window);
-    this.imgScroll.nativeElement.style.height = window.innerHeight - 190 + 'px';
-    // mobile screen
-    if (window.innerWidth < 768) {
-      this.imgScroll.nativeElement.style.height = window.innerHeight - 100 + 'px';
-    }
-    console.log(this.imgScroll);
-
-    window.onscroll = () => {
-      let top1 = this.bgat.nativeElement.offsetTop;
-      if (top1 - window.pageYOffset < window.innerHeight && top1 + this.bgat.nativeElement.offsetHeight > window.pageYOffset) {
-        this.backgroundscroll(window.pageYOffset);
+    if (this.isBrowser){
+      this.imgScroll.nativeElement.style.height = window.innerHeight - 190 + 'px';
+      // mobile screen
+      if (window.innerWidth < 768) {
+        this.imgScroll.nativeElement.style.height = window.innerHeight - 100 + 'px';
       }
-    };
+      console.log(this.imgScroll);
+  
+      window.onscroll = () => {
+        let top1 = this.bgat.nativeElement.offsetTop;
+        if (top1 - window.pageYOffset < window.innerHeight && top1 + this.bgat.nativeElement.offsetHeight > window.pageYOffset) {
+          this.backgroundscroll(window.pageYOffset);
+        }
+      };
+    }
     this.getSpeicals()
   }
   // tslint:disable-next-line:use-life-cycle-interface

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../service/product.service'
+import { ProductService } from '../../service/product.service';
 
 @Component({
   selector: 'app-userInfo',
@@ -20,7 +20,9 @@ export class UserInfoComponent implements OnInit {
     Message:''
   }
 
-  constructor(private productService:ProductService) { }
+  constructor(
+    private productService:ProductService
+    ) { }
 
   ngOnInit() {
   }
@@ -47,7 +49,7 @@ export class UserInfoComponent implements OnInit {
 
   submitCart(post){
     //let data = JSON.parse(localStorage.getItem("cartList"))
-    let data = JSON.parse(localStorage.getItem("cartList") || "[]");
+      let data = JSON.parse(localStorage.getItem("cartList") || "[]");
 
     let cartdata = {
       location: `${this.userInfo.streetAddress}, ${this.userInfo.city}`,
