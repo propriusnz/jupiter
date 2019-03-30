@@ -14,6 +14,9 @@ a{
 .navbar-collapse{
     padding-left:20px;
 }
+.navspace{
+    width:6%;
+}
 .navbar-toggler{
     border:0;
     position: absolute;
@@ -41,9 +44,12 @@ a{
     .dropdown-menu li:hover .sub-menu {
         visibility: visible;
     }
+    .dropdown:hover .dropdown-menu {
+        display: block;
+   }
 }
- @media (min-width: 768px) {
-     .dropdown:hover .dropdown-menu {
-         display: block;
-    }
+ @media (max-width: 991px) {
+.s2bold > h1 {
+    font-size:0.5rem;
+}
 }
