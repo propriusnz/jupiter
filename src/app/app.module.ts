@@ -26,7 +26,8 @@ import { Shopping_cartComponent } from './fcomponents/shopping_cart/shopping_car
 import { UserInfoComponent} from './fcomponents/userInfo/userInfo.component';
 import { GalleryComponent} from './fcomponents/gallery/gallery.component';
 import { GalleryListComponent } from './fcomponents/gallery-list/gallery-list.component';
-import { AdminComponent } from './fcomponents/admin/admin.component'
+import { AdminComponent } from './fcomponents/admin/admin.component';
+import { LoginComponent } from './fcomponents/login/login.component'
 //All Routes follow
 
 const appRoutes: Routes=[
@@ -44,7 +45,8 @@ const appRoutes: Routes=[
   {path:'userInfo',component:UserInfoComponent},
   {path:'galleries', component:GalleryListComponent},
   {path:'galleries/:id',component:GalleryComponent},
-  {path:'admin',component:AdminComponent}
+  {path:'admin',component:AdminComponent},
+  {path:'login',component:LoginComponent}
 ]
 
 @NgModule({
@@ -62,7 +64,8 @@ const appRoutes: Routes=[
     UserInfoComponent,
     GalleryComponent,
     GalleryListComponent,
-    AdminComponent
+    AdminComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

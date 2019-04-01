@@ -1,3 +1,4 @@
+import { LOCAL_STORAGE } from '@ng-toolkit/universal';
 import { Injectable,Inject } from '@angular/core';
 import {HttpClient,HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment.prod';
@@ -6,9 +7,15 @@ import { environment } from '../../environments/environment.prod';
   providedIn: 'root'
 })
 export class ProductService {
-baseUrl = environment.baseUrl;
+  httpHeader1:HttpHeaders;
+  baseUrl = environment.baseUrl;
 
-constructor( public http: HttpClient) { }
+constructor( 
+  //@Inject(LOCAL_STORAGE)
+  private http: HttpClient
+  ){
+     this.httpHeader1= new HttpHeaders({'Authorization': "Bearer "+sessionStorage.getItem('access_token')});
+   }
 
   //Products
   showProduct(id:number){
@@ -58,5 +65,11 @@ constructor( public http: HttpClient) { }
   sendContectEmail(contactEmail){
     return this.http.post(this.baseUrl + '/ContactEmails', contactEmail)
   }
-
+  //admin
+  login(adminModel){
+    return this.http.post(this.baseUrl + '/admins', adminModel)
+  }
+  getUser(){
+    return this.http.get(this.baseUrl + '/admins', { headers: this.httpHeader1 })
+  }
 }

@@ -1,5 +1,8 @@
+//import { SESSION_STORAGE } from '@ng-toolkit/universal';
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../service/product.service' 
+import { ProductService } from '../../service/product.service';
+import { Router } from '@angular/router';
+import { Inject } from '@angular/core'; 
 
 @Component({
   selector: 'app-admin',
@@ -11,7 +14,17 @@ export class AdminComponent implements OnInit {
   //Dashbard:1; Hires:2; Packages:3; Services:4; Gallery:5; Faq:6; Carts:7; 
   blockCode:string = "1"
   displayData:any
-  constructor(private productService:ProductService) { }
+  constructor(
+    //@Inject(LOCAL_STORAGE)
+    //private localStorage: any,
+    private router : Router,
+    private productService:ProductService
+    ){ 
+      // !if no JWT, redirect to login page
+      if (sessionStorage.getItem('access_token') == '' || sessionStorage.getItem('access_token') == null){
+        this.router.navigate(['/login'])
+      }
+    }
 
   ngOnInit() {
   } 
@@ -24,7 +37,6 @@ export class AdminComponent implements OnInit {
   getData(){
     switch (this.blockCode){
       case "1":{
-        this.displayData = "This is dashboard"
         break
       }
       case "2":{

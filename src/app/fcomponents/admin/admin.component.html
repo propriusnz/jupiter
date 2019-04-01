@@ -1,5 +1,6 @@
 <div class="container-fluid">
     <div class="row">
+      <!-- !sidebar -->
       <nav class="col-md-2 d-none d-md-block bg-light sidebar">
         <div class="sidebar-sticky">
           <ul class="nav flex-column">
@@ -50,12 +51,12 @@
       </nav>
   
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-        <!-- Dashboard -->
+        <!-- !Dashboard -->
         <div *ngIf="blockCode == '1'">
           This is Dashboard
         </div>
 
-        <!-- Hire || Service || Package-->
+        <!-- !Hire || Service || Package-->
         <div *ngIf="blockCode == '2' || blockCode == '3' || blockCode == '4'">
           <div *ngIf="blockCode == 2"><h2>Hires</h2></div>
           <div *ngIf="blockCode == 3"><h2>Services</h2></div>
@@ -69,14 +70,14 @@
             </thead>
             <tbody *ngIf="displayData">
               <tr *ngFor="let data of displayData">
-                <th scope="row">{{data.prodId}}</th><td>{{data.title}}</td><td>{{data.subTitle}}</td><td *ngIf="blockCode == 2">{{data.category.categoryName}}</td>
+                <th scope="row">{{data.prodId}}</th><td>{{data.title}}</td><td>{{data.subTitle}}</td><td *ngIf="blockCode == 2"><div *ngIf="data.category">{{data.category.categoryName}}</div></td>
                 <td>{{data.totalStock}}</td><td>{{data.description}}</td>
               </tr>
               </tbody>
             </table>
         </div>
 
-        <!-- Gallery -->
+        <!-- !Gallery -->
         <div *ngIf="blockCode == '5'">
             <table class="table">
               <thead>
@@ -87,14 +88,14 @@
               </thead>
               <tbody *ngIf="displayData">
                 <tr *ngFor="let data of displayData">
-                  <th scope="row">{{data.prodjectId}}</th><td>{{data.title}}</td><td>{{data.customerName}}</td><td>{{data.eventtype.eventName}}</td>
+                  <th scope="row">{{data.prodjectId}}</th><td>{{data.title}}</td><td>{{data.customerName}}</td><td *ngIf="data.eventtype">{{data.eventtype.eventName}}</td>
                   <td>{{data.description}}</td>
                 </tr>
                 </tbody>
               </table>
         </div>
 
-        <!-- Faq -->
+        <!-- !Faq -->
         <div *ngIf="blockCode == '6'">
           <h2>Faq</h2>
           <table class="table">
@@ -111,7 +112,7 @@
               </table>
         </div>
 
-        <!-- Cart -->
+        <!-- !Cart -->
         <div *ngIf="blockCode == '7'">
           <h2>Carts</h2>
           <table class="table">
@@ -129,7 +130,7 @@
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           View Products
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" *ngIf="data.cartProd">
                           <div *ngFor="let cart of data.cartProd">
                               <div class="dropdown-item">
                                 <b>Title:</b>{{cart.title}} 
