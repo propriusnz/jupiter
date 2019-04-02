@@ -72,7 +72,8 @@
               <tr *ngFor="let data of displayData">
                 <th scope="row">{{data.prodId}}</th><td>{{data.title}}</td><td>{{data.subTitle}}</td><td *ngIf="blockCode == 2"><div *ngIf="data.category">{{data.category.categoryName}}</div></td>
                 <td>{{data.totalStock}}</td><td>{{data.description}}</td>
-              </tr>
+                <td><i class="far fa-edit" (click)="openProduct(data)" title="Edit"></i></td>
+                <td><i class="far fa-trash-alt" title="Delete" (click)="deleteProduct(data)"></i></td>              </tr>
               </tbody>
             </table>
         </div>

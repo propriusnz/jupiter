@@ -29,6 +29,7 @@ import { AdminComponent } from './fcomponents/admin/admin.component';
 import { LoginComponent } from './fcomponents/login/login.component'
 import { FaqDialogComponent } from './fcomponents/AdminDialogs/FaqDialog/FaqDialog.component'
 import { GalleryDialogComponent } from './fcomponents/AdminDialogs/galleryDialog/galleryDialog.component'
+import { ProductDialogComponent } from './fcomponents/AdminDialogs/productDialog/productDialog.component'
 
 //All Routes follow
 
@@ -70,7 +71,8 @@ const appRoutes: Routes=[
     AdminComponent,
     LoginComponent,
     FaqDialogComponent,
-    GalleryDialogComponent
+    GalleryDialogComponent,
+    ProductDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -92,7 +94,8 @@ const appRoutes: Routes=[
   bootstrap: [AppComponent],
   entryComponents:[
     FaqDialogComponent,
-    GalleryDialogComponent
+    GalleryDialogComponent,
+    ProductDialogComponent
   ]
 })
 export class AppModule { }

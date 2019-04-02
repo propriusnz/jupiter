@@ -5,6 +5,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { MatDialog, MatDialogConfig} from "@angular/material";
 import { FaqDialogComponent } from '../AdminDialogs/FaqDialog/FaqDialog.component';
 import { GalleryDialogComponent } from '../AdminDialogs/galleryDialog/galleryDialog.component';
+import { ProductDialogComponent } from '../AdminDialogs/productDialog/productDialog.component'
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -185,6 +186,7 @@ export class AdminComponent implements OnInit {
       this.getData();
   });
   }
+  //TODO: createGallery
   createGallery(){
 
   }
@@ -203,4 +205,22 @@ export class AdminComponent implements OnInit {
         // Do nothing!
     }
   }
+  openProduct(data){
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      id: 1,
+      title: 'Update Gallery',
+      data: data,
+      action:'update'
+    }
+    let dialogRef = this.dialog.open(GalleryDialogComponent,dialogConfig);
+    dialogRef.afterClosed().subscribe(() => {
+      this.getData();
+  });
+  }
+
 }
