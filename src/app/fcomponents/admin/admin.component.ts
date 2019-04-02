@@ -1,8 +1,11 @@
-//import { SESSION_STORAGE } from '@ng-toolkit/universal';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { ProductService } from '../../service/product.service';
 import { Router } from '@angular/router';
-import { Inject } from '@angular/core'; 
+import { isPlatformBrowser } from '@angular/common';
+import { MatDialog, MatDialogConfig} from "@angular/material";
+import { AdminDialogComponent } from '../adminDialog/adminDialog.component';
+import { FaqDialogComponent } from '../AdminDialogs/FaqDialog/FaqDialog.component';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-admin',
@@ -15,18 +18,22 @@ export class AdminComponent implements OnInit {
   blockCode:string = "1"
   displayData:any
   constructor(
-    //@Inject(LOCAL_STORAGE)
-    //private localStorage: any,
+    @Inject(PLATFORM_ID) private platformId,
     private router : Router,
-    private productService:ProductService
+    private productService:ProductService,
+    private dialog: MatDialog
     ){ 
+      if (isPlatformBrowser(this.platformId)){
       // !if no JWT, redirect to login page
       if (sessionStorage.getItem('access_token') == '' || sessionStorage.getItem('access_token') == null){
         this.router.navigate(['/login'])
-      }
+      }}
     }
 
   ngOnInit() {
+    $(function () {
+      $('[data-toggle="popover"]').popover()
+    })
   } 
 
   changeBoard(e){
@@ -53,21 +60,21 @@ export class AdminComponent implements OnInit {
       }
       case "5":{
         this.productService.indexGallery().subscribe(
-          (res)=>{console.log(res),this.displayData = res},
+          (res)=>{this.displayData = res},
           (error)=>{console.log(error)}
         )
         break;
       }
       case "6":{
         this.productService.getFaq().subscribe(
-          (res)=>{console.log(res),this.displayData = res},
+          (res)=>{this.displayData = res},
           (error)=>{console.log(error)}
         )
         break
       }
       case "7":{
         this.productService.getCarts().subscribe(
-          (res)=>{console.log(res),this.displayData = res},
+          (res)=>{this.displayData = res},
           (error)=>{console.log(error)}
         )
         break
@@ -79,10 +86,55 @@ export class AdminComponent implements OnInit {
     this.productService.indexType(typeCode).subscribe(
       (res) => {
         this.displayData = res['product']
-        console.log('this.displayData: ', this.displayData)
       },
       (err) => {console.log(err)}
       )
   }
+  //update Faq
+  openDialog(dataRecord){
+    const dialogConfig = new MatDialogConfig();
 
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      id: 1,
+      title: 'Update FAQ',
+      data: dataRecord,
+      action:'update'
+    }
+    let dialogRef = this.dialog.open(FaqDialogComponent,dialogConfig);
+    dialogRef.afterClosed().subscribe(() => {
+      this.getData();
+  });
+  }
+  // create new Faq
+  createFaq(){
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      id: 1,
+      title: 'Create FAQ',
+      action:'create'
+    }
+    let dialogRef = this.dialog.open(FaqDialogComponent,dialogConfig);
+    dialogRef.afterClosed().subscribe(() => {
+      this.getData();
+  });
+  }
+  // delete Faq
+  deleteFaq(data){
+    let id = data.id
+    this.productService.deleteFaq(id).subscribe(
+      (res)=>{
+        this.getData()
+        alert('Success')
+      },(error)=>{
+        console.log(error)
+        alert('failed')
+      })
+  }
 }

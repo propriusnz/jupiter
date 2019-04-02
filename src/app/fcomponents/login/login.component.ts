@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { LOCAL_STORAGE } from '@ng-toolkit/universal';
-import { Inject } from '@angular/core';
 import { ProductService } from '../../service/product.service';
 import { Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,18 +16,24 @@ export class LoginComponent implements OnInit {
     username: '',
     password:''
   }
+  isBrowser:Boolean;
+
   constructor(
     //@Inject(LOCAL_STORAGE)
     //private localStorage: any,
+    @Inject(PLATFORM_ID) private platformId,
     private productservice : ProductService,
     public router: Router
-  ) { }
+  ) {
+    if (isPlatformBrowser(this.platformId)) {
+      this.isBrowser = true
+    }
+   }
 
   ngOnInit() {
   }
 
   onSubmit({valid}:{valid: boolean})  {
-    console.log(this.user);
     console.log(valid)
     //*login failed
     if(!valid) {
@@ -37,8 +44,9 @@ export class LoginComponent implements OnInit {
     else{
       this.productservice.login(this.user)
       .subscribe((res)=>{
-        console.log(res)
-        sessionStorage.setItem('access_token',res['token'])
+        if (this.isBrowser = true){
+          sessionStorage.setItem('access_token',res['token'])
+        }
         this.router.navigate(['/admin']);
       },(error)=>{
         console.log(error)

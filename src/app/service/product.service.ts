@@ -1,7 +1,8 @@
 import { LOCAL_STORAGE } from '@ng-toolkit/universal';
-import { Injectable,Inject } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import {HttpClient,HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment.prod';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,12 @@ export class ProductService {
   baseUrl = environment.baseUrl;
 
 constructor( 
-  //@Inject(LOCAL_STORAGE)
+  @Inject(PLATFORM_ID) private platformId,
   private http: HttpClient
   ){
-     this.httpHeader1= new HttpHeaders({'Authorization': "Bearer "+sessionStorage.getItem('access_token')});
+    if (isPlatformBrowser(this.platformId)){
+      this.httpHeader1= new HttpHeaders({'Authorization': "Bearer "+sessionStorage.getItem('access_token')});
+    }
    }
 
   //Products
@@ -57,9 +60,18 @@ constructor(
   addContacts(contact:any){
     return this.http.post(this.baseUrl + '/Contacts', contact);
   }
-  //FAQ
+  //!FAQ
   getFaq(){
     return this.http.get(this.baseUrl + '/Faqs');
+  }
+  updateFaq(id,faq){
+    return this.http.put(this.baseUrl + '/Faqs?id=' + id, faq)
+  }
+  addFaq(faq){
+    return this.http.post(this.baseUrl + '/Faqs', faq)
+  }
+  deleteFaq(id){
+    return this.http.delete(this.baseUrl +'/Faqs/' + id)
   }
   //contact email
   sendContectEmail(contactEmail){

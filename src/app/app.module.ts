@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDatepickerModule,MatInputModule,MatFormFieldModule,MatNativeDateModule } from '@angular/material';
+import { MatDatepickerModule,MatInputModule,MatFormFieldModule,MatNativeDateModule, MatDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule,Routes }   from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
@@ -28,6 +28,10 @@ import { GalleryComponent} from './fcomponents/gallery/gallery.component';
 import { GalleryListComponent } from './fcomponents/gallery-list/gallery-list.component';
 import { AdminComponent } from './fcomponents/admin/admin.component';
 import { LoginComponent } from './fcomponents/login/login.component'
+import { AdminDialogComponent } from './fcomponents/adminDialog/adminDialog.component'
+import { CartDialogComponent } from './fcomponents/AdminDialogs/CartDialog/CartDialog.component'
+import { FaqDialogComponent } from './fcomponents/AdminDialogs/FaqDialog/FaqDialog.component'
+
 //All Routes follow
 
 const appRoutes: Routes=[
@@ -65,7 +69,9 @@ const appRoutes: Routes=[
     GalleryComponent,
     GalleryListComponent,
     AdminComponent,
-    LoginComponent
+    LoginComponent,
+    AdminDialogComponent,
+    FaqDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -76,6 +82,7 @@ const appRoutes: Routes=[
     MatInputModule,
     MatFormFieldModule,
     MatNativeDateModule,
+    MatDialogModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes,{scrollPositionRestoration: 'enabled'}),
     HttpClientModule
@@ -83,6 +90,10 @@ const appRoutes: Routes=[
   providers: [
     ProductService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[
+    AdminDialogComponent, 
+    FaqDialogComponent
+  ]
 })
 export class AppModule { }

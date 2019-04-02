@@ -19,13 +19,13 @@
             <li class="nav-item">
               <a class="nav-link" id="3" (click)="changeBoard($event)">
                 <i class="fas fa-gift"></i>
-                Packages
+                Services
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="4" (click)="changeBoard($event)">
                 <i class="fas fa-briefcase"></i>
-                Services
+                Packages
               </a>
             </li>
             <li class="nav-item">
@@ -53,7 +53,7 @@
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <!-- !Dashboard -->
         <div *ngIf="blockCode == '1'">
-          This is Dashboard
+          This is Dashboard<br>
         </div>
 
         <!-- !Hire || Service || Package-->
@@ -97,7 +97,11 @@
 
         <!-- !Faq -->
         <div *ngIf="blockCode == '6'">
-          <h2>Faq</h2>
+          <h2>Faq</h2> <i class="fas fa-plus" (click)="createFaq()"></i>
+          <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
+          sagittis lacus vel augue laoreet rutrum faucibus.">
+            Popover on bottom
+          </button>
           <table class="table">
               <thead>
                 <tr>
@@ -107,6 +111,9 @@
               <tbody *ngIf="displayData">
                 <tr *ngFor="let data of displayData">
                   <th scope="row">{{data.id}}</th><td>{{data.question}}</td><td>{{data.answer}}</td>
+                  <td><i class="far fa-edit" (click)="openDialog(data)" title="Edit"></i></td>
+                  <!-- TODO:popover -->
+                  <td><i class="far fa-trash-alt" type="button" title="Delete" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."></i></td>
                 </tr>
                 </tbody>
               </table>
@@ -162,6 +169,7 @@
                   
                   <td>{{data.createOn | date:'medium'}}</td>
                   <td>{{data.location}}</td><td>{{data.price}}</td><td>{{data.updateOn | date:'medium'}}</td>
+                  
                 </tr>
                 </tbody>
               </table>

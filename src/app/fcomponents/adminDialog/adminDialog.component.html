@@ -1,0 +1,60 @@
+<h2 mat-dialog-title>{{description}}</h2>
+
+<!-- Dialog Content -->
+<!-- !hires || Packages || Services -->
+<mat-dialog-content *ngIf="typeCode == '2' || typeCode == '3' || typeCode == '4'">
+  
+    <mat-form-field>
+        <input matInput
+                placeholder="Course Description"
+>
+    </mat-form-field>
+    {{displayData}}
+</mat-dialog-content>
+
+<!-- !Gallery -->
+<mat-dialog-content *ngIf="typeCode == '5'">
+  
+  <mat-form-field>
+      <input matInput
+              placeholder="Course Description">
+  </mat-form-field>
+  {{displayData}}
+</mat-dialog-content>
+
+<!-- !Faq -->
+<mat-dialog-content *ngIf="typeCode == '6'">
+  
+  <div class="form-group">
+    <div class="invalid_feedback" *ngIf="PhoneNumber.errors?.required && PhoneNumber.touched">Please enter your Phone number</div>
+    <div class="invalid_feedback" *ngIf="PhoneNumber.errors?.pattern && PhoneNumber.touched">
+        Please enter the correct Phone number.
+    </div>
+    <input class="form-control" type="tel" required pattern="[0-9]{7,15}" minlength="7" name="PhoneNumber" placeholder="Phone number *" 
+    [ngClass]="{'is-invalid':PhoneNumber.errors?.required && PhoneNumber.touched}" [(ngModel)]="contactFrom.PhoneNumber" #PhoneNumber="ngModel">
+  </div>
+  <div class="form-group">
+      <div class="invalid_feedback" *ngIf="PhoneNumber.errors?.required && PhoneNumber.touched">Please enter your Phone number</div>
+      <div class="invalid_feedback" *ngIf="PhoneNumber.errors?.pattern && PhoneNumber.touched">
+          Please enter the correct Phone number.
+      </div>
+      <input class="form-control" type="tel" required pattern="[0-9]{7,15}" minlength="7" name="PhoneNumber" placeholder="Phone number *" 
+      [ngClass]="{'is-invalid':PhoneNumber.errors?.required && PhoneNumber.touched}" [(ngModel)]="contactFrom.PhoneNumber" #PhoneNumber="ngModel">
+    </div>
+</mat-dialog-content>
+
+<!-- !Carts -->
+<mat-dialog-content *ngIf="typeCode == '7'">
+  
+  <mat-form-field>
+      <input matInput
+              placeholder="Course Description">
+  </mat-form-field>
+  {{displayData}}
+</mat-dialog-content>
+
+<!-- actions -->
+<mat-dialog-actions>
+    <button class="mat-raised-button"(click)="close()">Close</button>
+    <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
+</mat-dialog-actions>
