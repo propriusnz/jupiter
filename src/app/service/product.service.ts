@@ -27,6 +27,9 @@ constructor(
   getSpecialProduct(){
     return this.http.get(this.baseUrl + '/Products/GetSpecialProduct');
   }
+  updateProduct(id, newProduct){
+    return this.http.put(this.baseUrl + '/Products/' + id, newProduct);
+  }
   //!Gallery
   indexGallery(){
     return this.http.get(this.baseUrl + '/projects');

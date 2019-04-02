@@ -186,7 +186,6 @@ export class AdminComponent implements OnInit {
       this.getData();
   });
   }
-  //TODO: createGallery
   createGallery(){
     const dialogConfig = new MatDialogConfig();
 
@@ -228,9 +227,10 @@ export class AdminComponent implements OnInit {
       id: 1,
       title: 'Update Gallery',
       data: data,
-      action:'update'
+      action:'update',
+      blockCode: this.blockCode
     }
-    let dialogRef = this.dialog.open(GalleryDialogComponent,dialogConfig);
+    let dialogRef = this.dialog.open(ProductDialogComponent,dialogConfig);
     dialogRef.afterClosed().subscribe(() => {
       this.getData();
   });
