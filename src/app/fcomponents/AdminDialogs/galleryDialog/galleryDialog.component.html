@@ -6,16 +6,20 @@
         <input class="form-control" name="CustomerName" placeholder="CustomerName *" [(ngModel)]="galleryForm.CustomerName" #CustomerName="ngModel">
      </div>
      <!-- Event Name -->
-     <div>
-        <h3>EventName: {{galleryForm.eventName}}</h3>
-     </div>
-
       <!-- type of event -->
       <div class="form-group">  
-         <select class="custom-select form-control"  type="eventtypeId" name="eventtypeId"
+         <!-- !when update Gallery -->
+         <select *ngIf="displayData" class="custom-select form-control"  type="eventtypeId" name="eventtypeId"
          [(ngModel)]="galleryForm.eventtypeId" #eventtypeId="ngModel">
-            <option *ngFor="let event of events, index as i" value= {{event.typeId}} [selected]="displayData.eventtype.typeId == event.typeId">{{event.eventName}}</option>
+               <option *ngFor="let event of events, index as i" value= {{event.typeId}} [selected]="displayData.eventtype.typeId == event.typeId">{{event.eventName}}</option>
          </select>
+         <!-- !when create Gallery -->
+         <select *ngIf="!displayData" class="custom-select form-control"  type="eventtypeId" name="eventtypeId"
+         [(ngModel)]="galleryForm.eventtypeId" #eventtypeId="ngModel">
+               <option value="0" disabled selected>Choose an event type</option>
+               <option *ngFor="let event of events, index as i" value= {{event.typeId}}>{{event.eventName}}</option>
+         </select>
+
        </div>  
 
      <!-- Description -->
@@ -28,5 +32,5 @@
 <mat-dialog-actions>
     <button class="mat-raised-button"(click)="close()">Close</button>
     <button class="mat-raised-button mat-primary"(click)="save()" *ngIf="status == 'update'">Save</button>
-    <button class="mat-raised-button mat-primary"(click)="create()" *ngIf="status == 'create'" [disabled]="faqForm.Answer == '' || faqForm.Question == ''">Create</button>
+    <button class="mat-raised-button mat-primary"(click)="create()" *ngIf="status == 'create'">Create</button>
 </mat-dialog-actions>

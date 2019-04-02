@@ -188,7 +188,20 @@ export class AdminComponent implements OnInit {
   }
   //TODO: createGallery
   createGallery(){
+    const dialogConfig = new MatDialogConfig();
 
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      id: 1,
+      title: 'Create Gallery',
+      action:'create'
+    }
+    let dialogRef = this.dialog.open(GalleryDialogComponent,dialogConfig);
+    dialogRef.afterClosed().subscribe(() => {
+      this.getData();
+  });
   }
   deleteGallery(data){
     let id = data.prodjectId

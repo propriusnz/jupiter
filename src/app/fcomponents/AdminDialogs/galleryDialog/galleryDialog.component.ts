@@ -11,7 +11,7 @@ export class GalleryDialogComponent implements OnInit {
   id:number;
   galleryForm = {
     CustomerName:'',
-    eventtypeId:1,
+    eventtypeId:0,
     Description:''
   }
   status:string
@@ -23,8 +23,8 @@ export class GalleryDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data,
     private productService : ProductService
   ) { 
-    if(data.data){
-      this.displayData = data.data
+    if(data.action=='update'){
+      this.displayData = data.data 
       this.id = data.data['prodjectId']
       this.galleryForm.CustomerName = data.data['customerName']
       this.galleryForm.eventtypeId = data.data['eventtype']['typeId']
@@ -42,6 +42,7 @@ export class GalleryDialogComponent implements OnInit {
     this.productService.getEventType().subscribe(
       (res)=>{
       this.events = res
+      console.log(this.events)
     },(error)=>{
       console.log(error)
     }
@@ -54,6 +55,16 @@ export class GalleryDialogComponent implements OnInit {
         console.log(res);
         console.log(this.galleryForm)
         this.dialogRef.close()
+    },(error) =>{
+      console.log(error)
+    }
+    )
+  }
+  create(){
+    this.productService.addGallery(this.galleryForm).subscribe(
+      (res)=>{
+      console.log(this.galleryForm);
+      this.dialogRef.close()
     },(error) =>{
       console.log(error)
     }
