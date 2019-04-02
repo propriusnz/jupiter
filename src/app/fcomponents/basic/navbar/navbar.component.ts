@@ -1,4 +1,5 @@
-import { Component, OnInit ,HostListener } from '@angular/core';
+import { Component, OnInit ,HostListener, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 import { ProductService } from '../../../service/product.service';
 declare var $: any;
@@ -15,8 +16,13 @@ export class NavbarComponent implements OnInit {
   isBrowser:boolean = false;
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId,
     private productService : ProductService) 
-    {}
+    {
+      if (isPlatformBrowser(this.platformId)) {
+        this.isBrowser = true
+      }
+    }
   ngOnInit() {
     $('.navbar-nav>li>a').on('click', function(){
       $('.navbar-collapse').collapse('hide');

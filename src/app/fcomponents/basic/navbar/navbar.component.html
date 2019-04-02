@@ -4,7 +4,10 @@
     <ul class="navbar-nav text-center" style="width:75%; margin:0 auto;">
       <!--Home-->
       <li class="nav-item">
-        <a class="nav-link s2bold" routerLink='/' routerLinkActive="active">
+        <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/' routerLinkActive="active">
+          <h1 class="s2bold">Home</h1>
+        </a>
+        <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/'>
           <h1 class="s2bold">Home</h1>
         </a>
       </li>
@@ -17,12 +20,15 @@
         </div>
         <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
           <!-- !large screen dropdown -->
-          <a class="dropdown-item s2 d-none d-md-block" [routerLink]="[ '/hire' ]"> All Products</a>
+          <a *ngIf="isBrowser==true" class="dropdown-item s2 d-none d-md-block" routerLink='/hire'> All Products</a>
+          <a *ngIf="isBrowser==false" class="dropdown-item s2 d-none d-md-block" href='http://luxedreameventhire.co.nz/hire'> All Products</a>
+
           <a class="dropdown-item s2 d-none d-md-block" *ngFor="let category of allCategories"
             [routerLink]="[ '/category/', category.categoryId ]">{{category.categoryName}}</a>
           <!-- !mobile dropdown -->
           <a class="dropdown-item s2 d-block d-md-none" data-toggle="collapse" data-target=".navbar-collapse">
-            <a [routerLink]="[ '/hire' ]">All Products</a>
+            <a *ngIf="isBrowser==true" routerLink='/hire'>All Products</a>
+            <a *ngIf="isBrowser==false" href='http://luxedreameventhire.co.nz/hire'>All Products</a>
           </a>
           <a class="dropdown-item s2 d-block d-md-none" *ngFor="let category of allCategories" data-toggle="collapse"
             data-target=".navbar-collapse">
@@ -40,23 +46,34 @@
       <span class="navspace"></span>
       <!--Party services-->
       <li class="nav-item">
-        <a class="nav-link s2bold" routerLink='/services' routerLinkActive="active">
+        <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/services' routerLinkActive="active">
+          <h1 class="s2bold">Party Services</h1>
+        </a>
+        <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/services'>
           <h1 class="s2bold">Party Services</h1>
         </a>
       </li>
       <span class="navspace"></span>
       <!--Party Packages-->
       <li class="nav-item">
-        <a class="nav-link s2bold" routerLink='/packages' routerLinkActive="active">
+        <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/packages' routerLinkActive="active">
           <h1 class="s2bold">Party Packages</h1>
         </a>
+        <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/packages'>
+          <h1 class="s2bold">Party Packages</h1>
+        </a>
+
       </li>
 
     </ul>
   </div>
 
   <div class="mx-auto order-0">
-    <a class="nav-link p-0 p-md-1" routerLink='/homepage' routerLinkActive="active">
+    <a *ngIf="isBrowser==true" class="nav-link p-0 p-md-1" routerLink='/homepage' routerLinkActive="active">
+      <img class="d-none d-lg-block" src="../../../../assets/images/Asset1-4x-big.png" style="zoom:0.5;" />
+      <img class="d-md-block d-lg-none" src="../../../../assets/images/Asset1-4x-mid.png" style="zoom:0.8;" />
+    </a>
+    <a *ngIf="isBrowser==false" class="nav-link p-0 p-md-1" href='http://luxedreameventhire.co.nz/homepage'>
       <img class="d-none d-lg-block" src="../../../../assets/images/Asset1-4x-big.png" style="zoom:0.5;" />
       <img class="d-md-block d-lg-none" src="../../../../assets/images/Asset1-4x-mid.png" style="zoom:0.8;" />
     </a>
@@ -68,34 +85,52 @@
     <ul class="navbar-nav" style="width:80%;margin:0 auto;">
       <!--Gallery-->
       <li class="nav-item">
-        <a class="nav-link s2bold" routerLink='/galleries' routerLinkActive="active">
+        <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/galleries' routerLinkActive="active">
           <h1 class="s2bold">Gallery</h1>
         </a>
+        <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/galleries'>
+          <h1 class="s2bold">Gallery</h1>
+        </a>
+
       </li>
       <span class="navspace"></span>
       <!--About us-->
       <li class="nav-item">
-        <a class="nav-link s2bold" routerLink='/aboutUs' routerLinkActive="active">
+        <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/aboutUs' routerLinkActive="active">
+          <h1 class="s2bold">About us</h1>
+        </a>
+        <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/aboutUs'>
           <h1 class="s2bold">About us</h1>
         </a>
       </li>
       <span class="navspace"></span>
       <!--FAQ-->
       <li class="nav-item">
-        <a class="nav-link s2bold" routerLink='/faq' routerLinkActive="active">
+        <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/faq' routerLinkActive="active">
+          <h1 class="s2bold">FAQ</h1>
+        </a>
+        <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/faq'>
           <h1 class="s2bold">FAQ</h1>
         </a>
       </li>
       <span class="navspace"></span>
       <!--/Contact us-->
       <li class="nav-item">
-        <a class="nav-link s2bold" routerLink='/contactUs' routerLinkActive="active">
+        <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/contactUs' routerLinkActive="active">
+          <h1 class="s2bold">Contact us</h1>
+        </a>
+        <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/contactUs'>
           <h1 class="s2bold">Contact us</h1>
         </a>
       </li>
       <!--Shooping Cart-->
       <li class="nav-item">
-        <a class="nav-link s2bold" routerLink='/shoppingCart' routerLinkActive="active">
+        <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/shoppingCart' routerLinkActive="active">
+          <h1 class="s2bold">
+              <i class="fas fa-shopping-cart" title="View Shopping Cart"></i>
+          </h1>
+        </a>
+        <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/shoppingCart'>
           <h1 class="s2bold">
               <i class="fas fa-shopping-cart" title="View Shopping Cart"></i>
           </h1>
