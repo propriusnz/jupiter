@@ -3,9 +3,8 @@ import { ProductService } from '../../service/product.service';
 import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { MatDialog, MatDialogConfig} from "@angular/material";
-import { AdminDialogComponent } from '../adminDialog/adminDialog.component';
 import { FaqDialogComponent } from '../AdminDialogs/FaqDialog/FaqDialog.component';
-import * as $ from 'jquery';
+import { CartDialogComponent } from '../AdminDialogs/CartDialog/CartDialog.component'
 
 @Component({
   selector: 'app-admin',
@@ -31,9 +30,6 @@ export class AdminComponent implements OnInit {
     }
 
   ngOnInit() {
-    $(function () {
-      $('[data-toggle="popover"]').popover()
-    })
   } 
 
   changeBoard(e){
@@ -91,7 +87,7 @@ export class AdminComponent implements OnInit {
       )
   }
   //update Faq
-  openDialog(dataRecord){
+  openFaq(dataRecord){
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
@@ -128,13 +124,49 @@ export class AdminComponent implements OnInit {
   // delete Faq
   deleteFaq(data){
     let id = data.id
-    this.productService.deleteFaq(id).subscribe(
-      (res)=>{
-        this.getData()
-        alert('Success')
-      },(error)=>{
-        console.log(error)
-        alert('failed')
-      })
+    if (confirm('Are you sure you want to delete this Faq?')) {
+      this.productService.deleteFaq(id).subscribe(
+        (res)=>{
+          this.getData()
+          alert('Success')
+        },(error)=>{
+          console.log(error)
+          alert('failed')
+        })
+    } else {
+        // Do nothing!
+    }
+  }
+  openCart(data){
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      id: 1,
+      title: 'Update FAQ',
+      data: data,
+      action:'update'
+    }
+    let dialogRef = this.dialog.open(CartDialogComponent,dialogConfig);
+    dialogRef.afterClosed().subscribe(() => {
+      this.getData();
+  });
+  }
+  deleteCart(data){
+    let id = data.cartId
+    if (confirm('Are you sure you want to delete this Cart?')) {
+      this.productService.deleteCart(id).subscribe(
+        (res)=>{
+          this.getData()
+          alert('Success')
+        },(error)=>{
+          console.log(error)
+          alert('failed')
+        })
+    } else {
+        // Do nothing!
+    }
   }
 }

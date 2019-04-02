@@ -79,10 +79,13 @@
 
         <!-- !Gallery -->
         <div *ngIf="blockCode == '5'">
+            <h2>Gallery</h2>
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">Id</th><th scope="col">Customer</th><th scope="col">Event Type</th>
+                  <th scope="col">Id</th> 
+                  <th scope="col">Title</th> 
+                  <th scope="col">Customer</th><th scope="col">Event Type</th>
                   <th scope="col">Description</th>
                 </tr>
               </thead>
@@ -98,10 +101,6 @@
         <!-- !Faq -->
         <div *ngIf="blockCode == '6'">
           <h2>Faq</h2> <i class="fas fa-plus" (click)="createFaq()"></i>
-          <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
-          sagittis lacus vel augue laoreet rutrum faucibus.">
-            Popover on bottom
-          </button>
           <table class="table">
               <thead>
                 <tr>
@@ -111,9 +110,8 @@
               <tbody *ngIf="displayData">
                 <tr *ngFor="let data of displayData">
                   <th scope="row">{{data.id}}</th><td>{{data.question}}</td><td>{{data.answer}}</td>
-                  <td><i class="far fa-edit" (click)="openDialog(data)" title="Edit"></i></td>
-                  <!-- TODO:popover -->
-                  <td><i class="far fa-trash-alt" type="button" title="Delete" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."></i></td>
+                  <td><i class="far fa-edit" (click)="openFaq(data)" title="Edit"></i></td>
+                  <td><i class="far fa-trash-alt" title="Delete" (click)="deleteFaq(data)"></i></td>
                 </tr>
                 </tbody>
               </table>
@@ -169,7 +167,8 @@
                   
                   <td>{{data.createOn | date:'medium'}}</td>
                   <td>{{data.location}}</td><td>{{data.price}}</td><td>{{data.updateOn | date:'medium'}}</td>
-                  
+                  <!-- <td><i class="far fa-edit" (click)="openCart(data)" title="Edit"></i></td> -->
+                  <td><i class="far fa-trash-alt" title="Delete" (click)="deleteCart(data)"></i></td>
                 </tr>
                 </tbody>
               </table>

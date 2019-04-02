@@ -30,8 +30,7 @@ export class FaqDialogComponent implements OnInit {
     this.status = data.action
   }
 
-  ngOnInit() {
-    console.log(this.status);
+  ngOnInit() { 
   }
   save(){
     this.productService.updateFaq(this.id,this.faqForm).subscribe(

@@ -27,9 +27,15 @@ constructor(
   getSpecialProduct(){
     return this.http.get(this.baseUrl + '/Products/GetSpecialProduct');
   }
-  //Gallery
+  //!Gallery
   indexGallery(){
     return this.http.get(this.baseUrl + '/projects');
+  }
+  updateGallery(id, newGallery){
+    return this.http.put(this.baseUrl + '/projects?id=' + id, newGallery);
+  }
+  addGallery(newGallery){
+    return this.http.post(this.baseUrl + '/projects', newGallery);
   }
   //Category
   indexCategory(){
@@ -42,12 +48,18 @@ constructor(
   indexType(id:number){
     return this.http.get(this.baseUrl + '/ProductTypes/' + id);
   }
-  //Carts
+  //!Carts
   getCarts(){
     return this.http.get(this.baseUrl + '/Carts');
   }
   addCart(newcart:any){
     return this.http.post(this.baseUrl + '/Carts', newcart);
+  }
+  updateCart(id, newcart){
+    return this.http.put(this.baseUrl + '/Carts?id=' + id, newcart);
+  }
+  deleteCart(id){
+    return this.http.delete(this.baseUrl + '/Carts/' + id)
   }
   //cartProd
   addCartProd(cartProdList:any){

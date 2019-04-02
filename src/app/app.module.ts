@@ -5,7 +5,6 @@ import { MatDatepickerModule,MatInputModule,MatFormFieldModule,MatNativeDateModu
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule,Routes }   from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
-import * as $ from 'jquery'
 
 // All service follow
 import{ProductService} from './service/product.service'
@@ -28,7 +27,6 @@ import { GalleryComponent} from './fcomponents/gallery/gallery.component';
 import { GalleryListComponent } from './fcomponents/gallery-list/gallery-list.component';
 import { AdminComponent } from './fcomponents/admin/admin.component';
 import { LoginComponent } from './fcomponents/login/login.component'
-import { AdminDialogComponent } from './fcomponents/adminDialog/adminDialog.component'
 import { CartDialogComponent } from './fcomponents/AdminDialogs/CartDialog/CartDialog.component'
 import { FaqDialogComponent } from './fcomponents/AdminDialogs/FaqDialog/FaqDialog.component'
 
@@ -71,8 +69,8 @@ const appRoutes: Routes=[
     GalleryListComponent,
     AdminComponent,
     LoginComponent,
-    AdminDialogComponent,
-    FaqDialogComponent
+    FaqDialogComponent,
+    CartDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -93,8 +91,8 @@ const appRoutes: Routes=[
   ],
   bootstrap: [AppComponent],
   entryComponents:[
-    AdminDialogComponent, 
-    FaqDialogComponent
+    FaqDialogComponent,
+    CartDialogComponent
   ]
 })
 export class AppModule { }
