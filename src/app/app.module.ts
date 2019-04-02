@@ -34,6 +34,7 @@ import { FaqDialogComponent } from './fcomponents/AdminDialogs/FaqDialog/FaqDial
 
 //All Routes follow
 
+//All Routes follow
 const appRoutes: Routes=[
   {path:'contactUs', component:ContactUsComponent},
   {path:'aboutUs', component:AboutUsComponent},
