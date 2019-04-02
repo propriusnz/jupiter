@@ -27,9 +27,10 @@ import { UserInfoComponent} from './fcomponents/userInfo/userInfo.component';
 import { GalleryComponent} from './fcomponents/gallery/gallery.component';
 import { GalleryListComponent } from './fcomponents/gallery-list/gallery-list.component';
 import { AdminComponent } from './fcomponents/admin/admin.component';
-import { LoginComponent } from './fcomponents/login/login.component'
-//All Routes follow
+import { LoginComponent } from './fcomponents/login/login.component';
 
+
+//All Routes follow
 const appRoutes: Routes=[
   {path:'contactUs', component:ContactUsComponent},
   {path:'aboutUs', component:AboutUsComponent},
