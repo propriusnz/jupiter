@@ -4,8 +4,7 @@ import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { MatDialog, MatDialogConfig} from "@angular/material";
 import { FaqDialogComponent } from '../AdminDialogs/FaqDialog/FaqDialog.component';
-import { CartDialogComponent } from '../AdminDialogs/CartDialog/CartDialog.component'
-
+import { GalleryDialogComponent } from '../AdminDialogs/galleryDialog/galleryDialog.component';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -137,23 +136,23 @@ export class AdminComponent implements OnInit {
         // Do nothing!
     }
   }
-  openCart(data){
-    const dialogConfig = new MatDialogConfig();
+  // openCart(data){
+  //   const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
+  //   dialogConfig.disableClose = true;
+  //   dialogConfig.autoFocus = true;
 
-    dialogConfig.data = {
-      id: 1,
-      title: 'Update FAQ',
-      data: data,
-      action:'update'
-    }
-    let dialogRef = this.dialog.open(CartDialogComponent,dialogConfig);
-    dialogRef.afterClosed().subscribe(() => {
-      this.getData();
-  });
-  }
+  //   dialogConfig.data = {
+  //     id: 1,
+  //     title: 'Update FAQ',
+  //     data: data,
+  //     action:'update'
+  //   }
+  //   let dialogRef = this.dialog.open(CartDialogComponent,dialogConfig);
+  //   dialogRef.afterClosed().subscribe(() => {
+  //     this.getData();
+  // });
+  // }
   deleteCart(data){
     let id = data.cartId
     if (confirm('Are you sure you want to delete this Cart?')) {
@@ -168,5 +167,22 @@ export class AdminComponent implements OnInit {
     } else {
         // Do nothing!
     }
+  }
+  openGallery(data){
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      id: 1,
+      title: 'Update Gallery',
+      data: data,
+      action:'update'
+    }
+    let dialogRef = this.dialog.open(GalleryDialogComponent,dialogConfig);
+    dialogRef.afterClosed().subscribe(() => {
+      this.getData();
+  });
   }
 }

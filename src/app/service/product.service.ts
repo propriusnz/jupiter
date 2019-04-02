@@ -32,7 +32,7 @@ constructor(
     return this.http.get(this.baseUrl + '/projects');
   }
   updateGallery(id, newGallery){
-    return this.http.put(this.baseUrl + '/projects?id=' + id, newGallery);
+    return this.http.put(this.baseUrl + '/projects/' + id, newGallery);
   }
   addGallery(newGallery){
     return this.http.post(this.baseUrl + '/projects', newGallery);

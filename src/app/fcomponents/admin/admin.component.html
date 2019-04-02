@@ -84,15 +84,16 @@
               <thead>
                 <tr>
                   <th scope="col">Id</th> 
-                  <th scope="col">Title</th> 
                   <th scope="col">Customer</th><th scope="col">Event Type</th>
                   <th scope="col">Description</th>
                 </tr>
               </thead>
               <tbody *ngIf="displayData">
                 <tr *ngFor="let data of displayData">
-                  <th scope="row">{{data.prodjectId}}</th><td>{{data.title}}</td><td>{{data.customerName}}</td><td *ngIf="data.eventtype">{{data.eventtype.eventName}}</td>
+                  <th scope="row">{{data.prodjectId}}</th><td>{{data.customerName}}</td><td *ngIf="data.eventtype">{{data.eventtype.eventName}}</td>
                   <td>{{data.description}}</td>
+                  <td><i class="far fa-edit" (click)="openGallery(data)" title="Edit"></i></td>
+                  <td><i class="far fa-trash-alt" title="Delete" (click)="deleteGallery(data)"></i></td>
                 </tr>
                 </tbody>
               </table>
