@@ -185,4 +185,22 @@ export class AdminComponent implements OnInit {
       this.getData();
   });
   }
+  createGallery(){
+
+  }
+  deleteGallery(data){
+    let id = data.prodjectId
+    if (confirm('Are you sure you want to delete this Gallery?')) {
+      this.productService.deleteGallery(id).subscribe(
+        (res)=>{
+          this.getData()
+          alert('Success')
+        },(error)=>{
+          console.log(error)
+          alert('failed')
+        })
+    } else {
+        // Do nothing!
+    }
+  }
 }

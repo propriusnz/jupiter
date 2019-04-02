@@ -35,7 +35,15 @@ export class GalleryDialogComponent implements OnInit {
   ngOnInit() {
     console.log(this.galleryForm);
   }
-
+  getEventNames(){
+    this.productService.getEventType().subscribe(
+      (res)=>{
+      
+    },(error)=>{
+      console.log(error)
+    }
+    )
+  }
   save(){
     let form = {
       customerName:this.galleryForm.CustomerName,

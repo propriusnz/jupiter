@@ -20,7 +20,7 @@ constructor(
     }
    }
 
-  //Products
+  //!Products
   showProduct(id:number){
     return this.http.get(this.baseUrl + '/Products/' + id);
   }
@@ -37,14 +37,17 @@ constructor(
   addGallery(newGallery){
     return this.http.post(this.baseUrl + '/projects', newGallery);
   }
-  //Category
+  deleteGallery(id){
+    return this.http.delete(this.baseUrl + '/projects/' + id);
+  }
+  //!Category
   indexCategory(){
     return this.http.get(this.baseUrl + '/ProductCategories');
   }
   indexCategoryId(id:number){
     return this.http.get(this.baseUrl + '/ProductCategories/'+id);
   }
-  //type
+  //!Product Type
   indexType(id:number){
     return this.http.get(this.baseUrl + '/ProductTypes/' + id);
   }
@@ -61,11 +64,11 @@ constructor(
   deleteCart(id){
     return this.http.delete(this.baseUrl + '/Carts/' + id)
   }
-  //cartProd
+  //!cartProd
   addCartProd(cartProdList:any){
     return this.http.post(this.baseUrl + '/CartProds', cartProdList);
   }
-  //Contacts
+  //!Contacts
   getContacts(){
     return this.http.get(this.baseUrl + '/Contacts')
   }
@@ -85,11 +88,15 @@ constructor(
   deleteFaq(id){
     return this.http.delete(this.baseUrl +'/Faqs/' + id)
   }
-  //contact email
+  //!contact email
   sendContectEmail(contactEmail){
     return this.http.post(this.baseUrl + '/ContactEmails', contactEmail)
   }
-  //admin
+  //!EventType
+  getEventType(){
+    return this.http.get(this.baseUrl + '/EventTyps')
+  }
+  //!admin
   login(adminModel){
     return this.http.post(this.baseUrl + '/admins', adminModel)
   }
