@@ -11,21 +11,23 @@ export class GalleryDialogComponent implements OnInit {
   id:number;
   galleryForm = {
     CustomerName:'',
-    eventName:'',
+    eventtypeId:1,
     Description:''
   }
   status:string
   displayData:any
   title:string
+  events:any;
   constructor(
     private dialogRef: MatDialogRef<GalleryDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data,
     private productService : ProductService
   ) { 
     if(data.data){
+      this.displayData = data.data
       this.id = data.data['prodjectId']
       this.galleryForm.CustomerName = data.data['customerName']
-      this.galleryForm.eventName = data.data['eventtype']['eventName']
+      this.galleryForm.eventtypeId = data.data['eventtype']['typeId']
       this.galleryForm.Description = data.data['description']
     }
     this.title = data.title
@@ -34,27 +36,30 @@ export class GalleryDialogComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.galleryForm);
+    this.getEventNames()
   }
   getEventNames(){
     this.productService.getEventType().subscribe(
       (res)=>{
-      
+      this.events = res
     },(error)=>{
       console.log(error)
     }
     )
   }
   save(){
-    let form = {
-      customerName:this.galleryForm.CustomerName,
-      Description:this.galleryForm.Description
-    }
-    this.productService.updateGallery(this.id,form).subscribe(
+    this.galleryForm.eventtypeId = Number(this.galleryForm.eventtypeId)
+    this.productService.updateGallery(this.id,this.galleryForm).subscribe(
       (res)=>{
+        console.log(res);
+        console.log(this.galleryForm)
         this.dialogRef.close()
     },(error) =>{
       console.log(error)
     }
     )
+  }
+  close(){
+    this.dialogRef.close()
   }
 }

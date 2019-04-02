@@ -94,7 +94,7 @@ constructor(
   }
   //!EventType
   getEventType(){
-    return this.http.get(this.baseUrl + '/EventTyps')
+    return this.http.get(this.baseUrl + '/EventTypes')
   }
   //!admin
   login(adminModel){

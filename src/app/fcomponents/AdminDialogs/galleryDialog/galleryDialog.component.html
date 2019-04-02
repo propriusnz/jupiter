@@ -9,6 +9,15 @@
      <div>
         <h3>EventName: {{galleryForm.eventName}}</h3>
      </div>
+
+      <!-- type of event -->
+      <div class="form-group">  
+         <select class="custom-select form-control"  type="eventtypeId" name="eventtypeId"
+         [(ngModel)]="galleryForm.eventtypeId" #eventtypeId="ngModel">
+            <option *ngFor="let event of events, index as i" value= {{event.typeId}} [selected]="displayData.eventtype.typeId == event.typeId">{{event.eventName}}</option>
+         </select>
+       </div>  
+
      <!-- Description -->
      <div class="form-group">
         <input class="form-control" name="Description" placeholder="Description *" [(ngModel)]="galleryForm.Description" #Description="ngModel">
