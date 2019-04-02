@@ -30,6 +30,10 @@ constructor(
   updateProduct(id, newProduct){
     return this.http.put(this.baseUrl + '/Products/' + id, newProduct);
   }
+  addProduct(newProduct){
+    return this.http.post(this.baseUrl + '/Products', newProduct);
+ 
+  }
   //!Gallery
   indexGallery(){
     return this.http.get(this.baseUrl + '/projects');

@@ -225,9 +225,27 @@ export class AdminComponent implements OnInit {
 
     dialogConfig.data = {
       id: 1,
-      title: 'Update Gallery',
+      title: 'Update Product',
       data: data,
       action:'update',
+      blockCode: this.blockCode
+    }
+    let dialogRef = this.dialog.open(ProductDialogComponent,dialogConfig);
+    dialogRef.afterClosed().subscribe(() => {
+      this.getData();
+  });
+  }
+
+  createProduct(){
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      id: 1,
+      title: 'Create Product',
+      action:'create',
       blockCode: this.blockCode
     }
     let dialogRef = this.dialog.open(ProductDialogComponent,dialogConfig);

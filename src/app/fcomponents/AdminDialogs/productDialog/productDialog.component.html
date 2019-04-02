@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{title}}</h2>
+<h2 mat-dialog-title>{{dialogTitle}}</h2>
 
 <mat-dialog-content>
     <!-- title -->
@@ -16,12 +16,15 @@
     <!-- description -->
     <div class="form-group">
         <input class="form-control" name="description" placeholder="description *" [(ngModel)]="productForm.description" #description="ngModel">
+    <!-- Event Type -->
+
     </div>
+    
 
 </mat-dialog-content>
 
 <mat-dialog-actions>
     <button class="mat-raised-button"(click)="close()">Close</button>
     <button class="mat-raised-button mat-primary"(click)="save()" *ngIf="status == 'update'">Save</button>
-    <button class="mat-raised-button mat-primary"(click)="create()" *ngIf="status == 'create'" [disabled]="faqForm.Answer == '' || faqForm.Question == ''">Create</button>
+    <button class="mat-raised-button mat-primary"(click)="create()" *ngIf="status == 'create'">Create</button>
 </mat-dialog-actions>

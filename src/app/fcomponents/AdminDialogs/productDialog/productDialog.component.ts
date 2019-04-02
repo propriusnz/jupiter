@@ -13,50 +13,34 @@ export class ProductDialogComponent implements OnInit {
     title:'',
     subTitle:'',
     totalStock:0,
-    description:''
+    description:'',
+    prodTypeId:0
   }
   status:string
   displayData:any
-  title:string
-  type:string
+  dialogTitle:string
   constructor(
     private dialogRef: MatDialogRef<ProductDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data,
     private productService : ProductService
   ) { 
     //TODO: use map
-    this.productForm.title = data.data['title']
-    this.productForm.subTitle = data.data['subTitle']
-    this.productForm.totalStock = data.data['totalStock']
-    this.productForm.description = data.data['description']
-
-
-    this.type = data.blockCode
-    this.id = data.data['prodId']
-    this.title = data.title
-    this.status = data.action
-
-    switch (this.type) {
-      case "2":{
-        //Hire
-        break;
-      }
-      case "3":{
-        //Services
-        break;
-      }
-      case "4":{
-        //Packages
-        break;
-      }
-     
+    if (data.action == 'update'){
+      this.id = data.data['prodId']
+      this.productForm.title = data.data['title']
+      this.productForm.subTitle = data.data['subTitle']
+      this.productForm.totalStock = data.data['totalStock']
+      this.productForm.description = data.data['description']
     }
+    this.productForm.prodTypeId = Number(data.blockCode)-1
+    this.dialogTitle = data.title
+    this.status = data.action
   }
 
   ngOnInit() {
+    console.log(this.productForm)
   }
   save(){
-    //this.galleryForm.eventtypeId = Number(this.galleryForm.eventtypeId)
     this.productService.updateProduct(this.id,this.productForm).subscribe(
       (res)=>{
         console.log(res)
@@ -69,5 +53,14 @@ export class ProductDialogComponent implements OnInit {
   close(){
     this.dialogRef.close()
   }
-
+  create(){
+    this.productService.addProduct(this.productForm).subscribe(
+      (res)=>{
+      console.log(this.productForm);
+      this.dialogRef.close()
+    },(error) =>{
+      console.log(error)
+    }
+    )
+  }
 }
