@@ -9,16 +9,25 @@ import { ProductService } from '../../../service/product.service'
 })
 export class ProductDialogComponent implements OnInit {
   id:number;
-  productForm = {
+  productForm : {
+    title:string,
+    subTitle:string,
+    totalStock:number,
+    description:string,
+    prodTypeId:number,
+    categoryId:number
+  } = {
     title:'',
     subTitle:'',
     totalStock:0,
     description:'',
-    prodTypeId:0
+    prodTypeId:0,
+    categoryId:null
   }
   status:string
   displayData:any
   dialogTitle:string
+  allCategories:any;
   constructor(
     private dialogRef: MatDialogRef<ProductDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data,
@@ -26,11 +35,13 @@ export class ProductDialogComponent implements OnInit {
   ) { 
     //TODO: use map
     if (data.action == 'update'){
+      this.displayData = data.data 
       this.id = data.data['prodId']
       this.productForm.title = data.data['title']
       this.productForm.subTitle = data.data['subTitle']
       this.productForm.totalStock = data.data['totalStock']
       this.productForm.description = data.data['description']
+      this.productForm.categoryId = data.data['categoryId']
     }
     this.productForm.prodTypeId = Number(data.blockCode)-1
     this.dialogTitle = data.title
@@ -38,7 +49,7 @@ export class ProductDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.productForm)
+    this.getCategories()
   }
   save(){
     this.productService.updateProduct(this.id,this.productForm).subscribe(
@@ -62,5 +73,15 @@ export class ProductDialogComponent implements OnInit {
       console.log(error)
     }
     )
+  }
+  getCategories(){
+    this.productService.indexCategory().subscribe(
+      (res)=>{
+        console.log(res)
+        this.allCategories = res
+      },
+      (error)=>{
+        console.log(error)
+      })
   }
 }

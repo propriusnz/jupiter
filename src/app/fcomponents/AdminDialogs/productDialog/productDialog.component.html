@@ -16,8 +16,19 @@
     <!-- description -->
     <div class="form-group">
         <input class="form-control" name="description" placeholder="description *" [(ngModel)]="productForm.description" #description="ngModel">
+    </div>
     <!-- Event Type -->
-
+    <div class="form-group">
+      <!-- !when update hire product -->
+      <select *ngIf="displayData && productForm.prodTypeId==1" class="custom-select form-control" name="categoryId"
+      [(ngModel)]="productForm.categoryId" #categoryId="ngModel">
+            <option *ngFor="let cate of allCategories, index as i" value= {{cate.categoryId}} [selected]="displayData.categoryId == cate.categoryId">{{cate.categoryName}}</option>
+      </select>
+      <!-- !when create hire product -->
+      <select *ngIf="!displayData && productForm.prodTypeId==1" class="custom-select form-control" name="categoryId" [(ngModel)]="productForm.categoryId" #categoryId="ngModel">
+            <option value="null" disabled selected>Choose a product type</option>
+            <option *ngFor="let cate of allCategories, index as i" value= {{cate.categoryId}}>{{cate.categoryName}}</option>
+      </select>
     </div>
     
 

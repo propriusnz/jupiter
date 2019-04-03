@@ -32,7 +32,9 @@ constructor(
   }
   addProduct(newProduct){
     return this.http.post(this.baseUrl + '/Products', newProduct);
- 
+  }
+  deleteProduct(id){
+    return this.http.delete(this.baseUrl + '/Products/' + id);
   }
   //!Gallery
   indexGallery(){

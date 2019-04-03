@@ -253,5 +253,21 @@ export class AdminComponent implements OnInit {
       this.getData();
   });
   }
+  deleteProduct(data){
+
+    let id = data.prodId
+    if (confirm('Are you sure you want to delete this Product?')) {
+      this.productService.deleteProduct(id).subscribe(
+        (res)=>{
+          this.getData()
+          console.log(res)
+        },(error)=>{
+          console.log(error)
+        }
+      )
+    } else {
+        // Do nothing!
+    }
+  }
 
 }
