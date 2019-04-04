@@ -88,7 +88,7 @@
             <!-- how do you find use -->
             <div class="form-group">  
                 <div class="invalid_feedback" *ngIf="findUs.errors?.required && findUs.touched">Please enter the field.</div>              
-                <input class="form-control" type="findUs" required name="findUs" placeholder="How did you find about us?"
+                <input class="form-control" type="findUs" required name="findUs" placeholder="How did you find about us?*"
                 [ngClass]="{'is-invalid':findUs.errors?.required && findUs.touched}" [(ngModel)]="contactFrom.findUs" #findUs="ngModel">
              </div>
                 <!-- type of event -->

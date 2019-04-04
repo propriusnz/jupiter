@@ -38,7 +38,6 @@ const appRoutes: Routes=[
   {path:'contactUs', component:ContactUsComponent},
   {path:'aboutUs', component:AboutUsComponent},
   {path:'faq', component:FaqComponent},
-  {path:'homepage', component:HomepageComponent},
   {path:'', component:HomepageComponent},
   {path:'category/:id', component:ProductListComponent,data : {some_data : 'category'}},
   {path:'hire', component:ProductListComponent,data : {some_data : 'hire'}},
