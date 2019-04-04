@@ -30,141 +30,170 @@
       </div>
     </div>
   </div>
-<div class="px-0 px-md-5 mx-2">
+  <div class="px-0 px-md-5 mx-2">
 
     <!-- !SecialProducts -->
-<div class="hireCollection" *ngIf="specialProducts">
-    <h1 class="text-center my-5 l2 lspace-3">Event Hire Specials</h1>
-    <!-- <div class="row"> -->
-      <!-- <div class="col-6 col-md-3 "><img src="../../../../assets/images/homep4.jpg" class="img100">
-        <div class="s1">Oblong Trestle Tables</div>
-        <div><span class="s2goldbold mr-3">$100</span><s>$120</s></div>
-      </div>
-      <div class="col-6 col-md-3"><img src="../../../../assets/images/homep5.jpg" class="img100">
-        <div class="s1">Round Tables</div>
-        <div><span class="s2goldbold mr-3">$100</span><s>$120</s></div>
-      </div>
-      <div class="col-6 col-md-3"><img src="../../../../assets/images/homep6.jpg" class="img100">
-        <div class="s1">Round Tables</div>
-        <div><span class="s2goldbold mr-3">$100</span><s>$120</s></div>
-      </div>
-      <div class="col-6 col-md-3"><img src="../../../../assets/images/homep7.jpg" class="img100">
-        <div  class="s1">Round Tables</div>
-        <div><span class="s2goldbold mr-3">$100</span><s>$120</s></div>
-      </div> -->
-          <!-- <div class="col-6 col-md-3" *ngFor="let specials of specialProducts"><img src="../../../../assets/images/homep4.jpg" class="img100">
-            <div class="s1">{{specials.title}}</div>
-            <div><span class="s2goldbold mr-3">${{specials.price - specials.discount}}</span><s>${{specials.price}}</s></div>
-          </div>
-    </div> -->
+    <div class="hireCollection" *ngIf="specialProducts">
+      <h1 class="text-center my-5 l2 lspace-3">Event Hire Specials</h1>
 
-        <div id="carouselExampleControls" class="carousel slide pt-5" data-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item" *ngFor="let specials of groupedSpecials, index as i" [ngClass]="{'active': i == 0}">
-                <div class="row">
-                  <div class="col-3" *ngFor="let spe of specials"> 
-                      <img src="../../../../assets/Products/{{spe.productMedia[0].url}}.jpg" class="img100" [routerLink]="[ '/product/', spe.prodId]">
-                      <div class="s1">{{spe.title}}</div>
-                      <div><span class="s2goldbold mr-3">${{spe.price - spe.discount}}</span><s>${{spe.price}}</s></div>
-                  </div>
+      <!--Carousel Area of Special Products-->
+      <div id="carouselExampleControls" class="carousel slide pt-5" data-ride="carousel">
+        <!--Pictures of Carousel-->
+        <div class="carousel-inner">
+          <div class="carousel-item" *ngFor="let specials of groupedSpecials, index as i"
+            [ngClass]="{'active': i == 0}">
+            <div class="d-none d-sm-block">
+              <div class="row">
+                <div class="col-3" *ngFor="let spe of specials">
+                  <img src="../../../../assets/Products/{{spe.productMedia[0].url}}.jpg" class="img100"
+                    [routerLink]="[ '/product/', spe.prodId]">
+                  <div class="s1">{{spe.title}}</div>
+                  <div><span class="s2goldbold mr-3">${{spe.price - spe.discount}}</span><s>${{spe.price}}</s></div>
                 </div>
+                <!--end col-3-->
               </div>
+              <!--end row-->
             </div>
-            <a class="carousel-control-prev gold" href="#carouselExampleControls" role="button" data-slide="prev">
-              <i class="fas fa-chevron-left" aria-hidden="true"></i>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next gold" href="#carouselExampleControls" role="button" data-slide="next">
-              <i class="fas fa-chevron-right" aria-hidden="true"></i>
-              <span class="sr-only">Next</span>
-            </a>
-          </div>
 
-    <div class="row justify-content-md-center my-3">
+            <div class="d-block d-sm-none">
+              <div class="row">
+                <div class="col-6" *ngFor="let spe of specials">
+                  <img src="../../../../assets/Products/{{spe.productMedia[0].url}}.jpg" class="img100"
+                    [routerLink]="[ '/product/', spe.prodId]">
+                  <div class="s1">{{spe.title}}</div>
+                  <div><span class="s2goldbold mr-3">${{spe.price - spe.discount}}</span><s>${{spe.price}}</s></div>
+                </div>
+                <!--end col-3-->
+              </div>
+              <!--end row-->
+            </div>
+
+          </div>
+          <!--end carousel-item-->
+
+
+
+        </div>
+        <!--end carousel-inner-->
+        <!--End Pictures of Carousel-->
+        <!--Carousel Arrow Buttons of left and right-->
+        <a class="carousel-control-prev gold" href="#carouselExampleControls" role="button" data-slide="prev">
+          <i class="fas fa-chevron-left" aria-hidden="true"></i>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next gold" href="#carouselExampleControls" role="button" data-slide="next">
+          <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          <span class="sr-only">Next</span>
+        </a>
+        <!--End Carousel Arrow Buttons of left and right-->
+      </div>
+      <!--End Carousel Area of Special Products-->
+
+      <!--Button of View Our Product-->
+      <div class="row justify-content-md-center my-3">
         <div class="col-12 text-center">
           <button type="button" class="btn btn-outline-gold lspace-3" routerLink="/hire">View our products</button>
         </div>
       </div>
+      <!--End Button of View Our Product-->
+    </div>
+    <!-- End !SecialProducts -->
+
+    <!-- Title paragraph -->
+    <h1 class="l2 text-center mt-5">
+      One stop event hire shop
+    </h1>
+    <br><br>
+    <div class="px-5 text-center s1">
+      We have what you need for any occasion, wedding, birthday, corporate gathering, family reunion, or just an special
+      girls night we cater for all events.
+      We offer very competitive prices and high-quality rental equipment.<br><br>
+      Being a locally owned business, Luxe Dream Event Hire has everything you'll need for a great party.
+      Our kid-friendly staff delivers to throughout Auckland. Our goal is to become your preferred event rental company.
+      <br>
+      <a class="getintouch" style="color:#c48f45" href="" routerLink="/contactUs">Get in touch now for a quote</a> !
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-12 text-center s1">Or see our work galleries</div>
+    </div>
+    <div class="row mb-5">
+      <div class="col-12 text-center"><button type="button" class="btn btn-outline-gold my-4 lspace-3"
+          routerLink="/galleries"> View Our Gallery</button></div>
     </div>
 
-  <!-- Title paragraph -->
-    <h1 class="l2 text-center mt-5">
-        One stop event hire shop
-    </h1>
-      <br><br>
-      <div class="px-5 text-center s1">
-        We have what you need for any occasion, wedding, birthday, corporate gathering, family reunion, or just an special girls night we cater for all events. 
-        We offer very competitive prices and high-quality rental equipment.<br><br>
-        Being a locally owned business, Luxe Dream Event Hire has everything you'll need for a great party. 
-        Our kid-friendly staff delivers to throughout Auckland. Our goal is to become your preferred event rental company. <br>
-        <a class="getintouch" style="color:#c48f45" href="" routerLink="/contactUs">Get in touch now for a quote</a> !
+    <!-- styling -->
+    <div class="row">
+      <div class="col-12 col-md-6" style="height:550px;">
+        <!-- <img src="../../../../assets/images/cebb995345f82a73cd0fea85a7bc899c.jpg"class=" d-block ml-auto " style="position: absolute;clip: rect(0px,auto,500px,0px);"> -->
+        <img src="../../../../assets/images/465b91cc5e0f427019fb4363fe65023d.jpg" style="height:100%;width:100%;" />
       </div>
-      <br>
-      <div class="row"><div class="col-12 text-center s1">Or see our work galleries</div></div>
-      <div class="row mb-5"><div class="col-12 text-center"><button type="button" class="btn btn-outline-gold my-4 lspace-3" routerLink="/galleries"> View Our Gallery</button></div></div>
-
-      <!-- styling -->
-      <div class="row">
-          <div class="col-12 col-md-6" style="height:550px;">
-            <!-- <img src="../../../../assets/images/cebb995345f82a73cd0fea85a7bc899c.jpg"class=" d-block ml-auto " style="position: absolute;clip: rect(0px,auto,500px,0px);"> -->
-            <img src="../../../../assets/images/465b91cc5e0f427019fb4363fe65023d.jpg"style="height:100%;width:100%;"/>
-            </div>
-          <div class="col-12 col-md-6">
-            <div class="d-none d-md-block"><br><br></div>
-            <h2 class="l2 mt-5 lspace-5">Our event services</h2>
-            <div class="my-3 s2">
-              Want a Instagram worthy event but just not sure where to start or how to bring all the
-              elements together to create a picture-perfect setting?<br/><br/>Luxe Dream Event Hire love to create incredible
-              events that inspire and excite!
-            </div>
-            <button type="button" class="btn btn-outline-gold my-md-5 lspace-3" routerLink="/services">View our services</button>
-          </div>
+      <div class="col-12 col-md-6">
+        <div class="d-none d-md-block"><br><br></div>
+        <h2 class="l2 mt-5 lspace-5">Our event services</h2>
+        <div class="my-3 s2">
+          Want a Instagram worthy event but just not sure where to start or how to bring all the
+          elements together to create a picture-perfect setting?<br /><br />Luxe Dream Event Hire love to create
+          incredible
+          events that inspire and excite!
         </div>
-    
-        <!-- CORPORATE EVENTS -->
-        <div class="row mt-5">
-            <div class="col-12 col-md-6 pt-md-4 order-1 order-md-0">
-            <div class="d-none d-md-block"><br><br></div>
-              <h2 class="l2 mt-5 lspace-5">Our event packages</h2>
-              <div class="my-3 s2">
-                Find a event rental package that suit your needs from weddings to parties.
-                Whether you need tables and stands for your event or want to spell out something special with our beautiful letters, we've got you sorted without ripping your wallet.
-              </div>
-              <button type="button" class="btn btn-outline-gold my-md-5 lspace-3" routerLink="/packages">View our packages</button>
-            </div>
-            <!-- <div class="col-12 col-md-6"><img src="../../../../assets/images/5da0c82500e7be45dc17d023ea7e2c83.jpg "class=" d-block ml-auto " style="position: absolute;
+        <button type="button" class="btn btn-outline-gold my-md-5 lspace-3" routerLink="/services">View our
+          services</button>
+      </div>
+    </div>
+
+    <!-- CORPORATE EVENTS -->
+    <div class="row mt-5">
+      <div class="col-12 col-md-6 pt-md-4 order-1 order-md-0">
+        <div class="d-none d-md-block"><br><br></div>
+        <h2 class="l2 mt-5 lspace-5">Our event packages</h2>
+        <div class="my-3 s2">
+          Find a event rental package that suit your needs from weddings to parties.
+          Whether you need tables and stands for your event or want to spell out something special with our beautiful
+          letters, we've got you sorted without ripping your wallet.
+        </div>
+        <button type="button" class="btn btn-outline-gold my-md-5 lspace-3" routerLink="/packages">View our
+          packages</button>
+      </div>
+      <!-- <div class="col-12 col-md-6"><img src="../../../../assets/images/5da0c82500e7be45dc17d023ea7e2c83.jpg "class=" d-block ml-auto " style="position: absolute;
               clip: rect(0px,auto,500px,0px);"></div> -->
-              <div class="col-12 col-md-6 order-0 order-md-1" style="height:550px;"><img src="../../../../assets/images/5da0c82500e7be45dc17d023ea7e2c83.jpg " style="height:100%;width:100%;"></div>
+      <div class="col-12 col-md-6 order-0 order-md-1" style="height:550px;"><img
+          src="../../../../assets/images/5da0c82500e7be45dc17d023ea7e2c83.jpg " style="height:100%;width:100%;"></div>
+    </div>
+  </div>
+
+  <!-- scrolling background -->
+  <div class="row">
+    <div class="col-12 bgat mt-5" #bgat>
+      <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+        <div class="container carousel-inner text-center text-white testimonial-carousel ">
+          <div class="carousel-item active">
+            <h5>Sarah</h5>
+            <p style="color:white" class="s1">"Not only are the pieces completely unique and always a focal point at
+              wedding receptions, but the team at Lux Dream are the absolute best to work with. They always deliver and
+              pick up promptly on the day of the event. Emma helps immensely with pre-planning leading up to the event.
+              She’s prompt at making revisions to orders and sending over invoices efficiently."
+            </p>
           </div>
-      </div>
+          <div class="carousel-item">
+            <h5>Bianca</h5>
+            <p style="color:white" class="s1">"We used Luxe Dream for our wedding and the letter/service was awesome! It
+              allowed us to create a look that felt personalized and relaxed. We had so many people say how lovely the
+              lounge areas and the whole atmosphere was."
+            </p>
+          </div>
 
-        <!-- scrolling background -->
-        <div class="row">
-        <div class="col-12 bgat mt-5" #bgat >
-            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                <div class="container carousel-inner text-center text-white testimonial-carousel ">
-                  <div class="carousel-item active">
-                    <h5>Sarah</h5>
-                    <p style="color:white" class="s1">"Not only are the pieces completely unique and always a focal point at wedding receptions, but the team at Lux Dream are the absolute best to work with. They always deliver and pick up promptly on the day of the event. Emma helps immensely with pre-planning leading up to the event. She’s prompt at making revisions to orders and sending over invoices efficiently."
-                    </p>
-                  </div>
-                  <div class="carousel-item">
-                    <h5>Bianca</h5>
-                    <p style="color:white" class="s1">"We used Luxe Dream for our wedding and the letter/service was awesome! It allowed us to create a look that felt personalized and relaxed. We had so many people say how lovely the lounge areas and the whole atmosphere was."
-                  </p>
-                  </div>
-
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleSlidesOnly" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="carousel-control-next" href="#carouselExampleSlidesOnly" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                  </a>
-              </div>
-              <br> <br>
         </div>
+        <a class="carousel-control-prev" href="#carouselExampleSlidesOnly" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleSlidesOnly" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
       </div>
- </div>
+      <br> <br>
+    </div>
+  </div>
+</div>

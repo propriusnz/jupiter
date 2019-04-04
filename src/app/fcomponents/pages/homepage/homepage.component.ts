@@ -1,7 +1,8 @@
-import { Component, OnInit, ElementRef, ViewChild, Inject, PLATFORM_ID} from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Inject, PLATFORM_ID } from '@angular/core';
 import { ProductService } from '../../../service/product.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+
 
 @Component({
   selector: 'app-homepage',
@@ -11,39 +12,39 @@ import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 export class HomepageComponent implements OnInit {
 
   num: number = 0;
-  specialProducts:any=[];
-  groupedSpecials:any=[];
-  isBrowser:Boolean = false;
-  @ViewChild ('bgat') bgat:ElementRef
-  @ViewChild ('imgScroll') imgScroll:ElementRef
-  @ViewChild ('list') list:ElementRef
+  specialProducts: any = [];
+  groupedSpecials: any = [];
+  isBrowser: Boolean = false;
+  @ViewChild('bgat') bgat: ElementRef;
+  @ViewChild('imgScroll') imgScroll: ElementRef;
+  @ViewChild('list') list: ElementRef;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId,
-    private productService : ProductService,
+    private productService: ProductService,
     private meta: Meta,
     private titleService: Title,
-    ) {
+  ) {
     if (isPlatformBrowser(this.platformId)) {
-      this.isBrowser = true
+      this.isBrowser = true;
     }
     this.meta.addTags([
-      { name: 'keywords', content: 'Luxedream Hire, Party hire, wedding hire, birthday party hire, event hire, auckland event hire'},
-      { name: 'description', content: 'One stop event and party hire and services in Auckland.'},
-    ])
+      { name: 'keywords', content: 'Luxedream Hire, Party hire, wedding hire, birthday party hire, event hire, auckland event hire' },
+      { name: 'description', content: 'One stop event and party hire and services in Auckland.' },
+    ]);
     this.titleService.setTitle('Luxe Dream Auckland Event and Party Hire | Home');
   }
 
   ngOnInit() {
     // large screen
-    if (this.isBrowser){
+    if (this.isBrowser) {
       this.imgScroll.nativeElement.style.height = window.innerHeight - 190 + 'px';
       // mobile screen
       if (window.innerWidth < 768) {
         this.imgScroll.nativeElement.style.height = window.innerHeight - 100 + 'px';
       }
       console.log(this.imgScroll);
-  
+
       window.onscroll = () => {
         let top1 = this.bgat.nativeElement.offsetTop;
         if (top1 - window.pageYOffset < window.innerHeight && top1 + this.bgat.nativeElement.offsetHeight > window.pageYOffset) {
@@ -51,7 +52,7 @@ export class HomepageComponent implements OnInit {
         }
       };
     }
-    this.getSpeicals()
+    this.getSpeicals();
   }
   // tslint:disable-next-line:use-life-cycle-interface
   ngAfterViewInit(): void {
@@ -61,22 +62,29 @@ export class HomepageComponent implements OnInit {
     this.bgat.nativeElement.style.backgroundPosition = '0%' + e / 50 + '%';
   }
 
-  getSpeicals(){
+  getSpeicals() {
     this.productService.getSpecialProduct().subscribe(
-      (res)=>{
+      (res) => {
         this.specialProducts = res['data'];
         this.seperateSpecials();
-      },(error)=>{
+      }, (error) => {
         console.log(error);
       }
-      )
+    );
   }
-  seperateSpecials(){
-    for (let i = 0; i<this.specialProducts.length; i+=4){
-      let mylist = this.specialProducts.slice(i, i+4);
+  seperateSpecials() {
+    if (window.innerWidth >= 768) {
+    for (let i = 0; i < this.specialProducts.length; i += 4) {
+      let mylist = this.specialProducts.slice(i, i + 4);
       this.groupedSpecials.push(mylist);
     }
-    console.log(this.groupedSpecials);
+  } else {
+    for (let i = 0; i < this.specialProducts.length; i += 2) {
+      let mylist1 = this.specialProducts.slice(i, i + 2);
+      this.groupedSpecials.push(mylist1);
+    }
+  }
+  console.log(this.groupedSpecials);
   }
 
 }
