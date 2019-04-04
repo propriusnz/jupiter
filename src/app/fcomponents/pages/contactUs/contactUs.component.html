@@ -32,7 +32,10 @@
     </div>
 
     <!-- form -->
-    <div class="col-12 col-md-8">
+    <div class="col-12 col-md-8" *ngIf="emailSent == true">
+      <div class="alert alert-success" role="alert">Thank you for contacting us, we'll be in touch very shortly.</div>
+    </div>
+    <div class="col-12 col-md-8" *ngIf="emailSent == false">
       <div class="row mb-4"><div class="col-12 l2">Get in touch with us</div> </div>
       <form class="col-12" novalidate #f="ngForm" (ngSubmit)="onSubmit(f)" style="padding-left:0;">
         <div class="row">

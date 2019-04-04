@@ -12,6 +12,7 @@ export class ContactUsComponent implements OnInit {
   minDate:any;
   feedback_message:string;
   successMessage:string;
+  emailSent:boolean = false;
   contactFrom={
     name:'',
     email:'',
@@ -54,12 +55,12 @@ export class ContactUsComponent implements OnInit {
 
   // Passes data to service
   sendEmail(){
-    // this.productService.addContacts(this.contactFrom).subscribe(
-    //   (res)=>{console.log(res), this.feedback_message="Thank you for contacting us, we'll be in touch very shortly."},
-    //   (err)=>{console.warn(err), this.feedback_message="Opps, something went wrong."}
-    // )
     this.productService.sendContectEmail(this.contactFrom).subscribe(
-      (res)=>{console.log(res), this.feedback_message="Thank you for contacting us, we'll be in touch very shortly."},
+      (res)=>{
+        console.log(res),
+        // this.feedback_message="Thank you for contacting us, we'll be in touch very shortly.",
+        this.emailSent = true
+        },
       (error)=>{console.log(error), this.feedback_message="Opps, something went wrong."}
     )
   }
