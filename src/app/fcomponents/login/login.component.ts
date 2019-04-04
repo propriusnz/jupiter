@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
     password:''
   }
   isBrowser:Boolean;
+  errorMessage:string;
 
   constructor(
     //@Inject(LOCAL_STORAGE)
@@ -50,6 +51,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/admin']);
       },(error)=>{
         console.log(error)
+        this.errorMessage = error
       })
     }
   }
