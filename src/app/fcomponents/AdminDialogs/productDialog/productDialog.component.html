@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>{{dialogTitle}}</h2>
+
+<mat-dialog-content>
+    <!-- title -->
+    <div class="form-group">
+        <input  class="form-control"  name="title" placeholder="title *" [(ngModel)]="productForm.title" #title="ngModel">
+     </div>
+     <!-- subtitle -->
+     <div class="form-group">
+        <input class="form-control" name="subTitle" placeholder="subTitle *" [(ngModel)]="productForm.subTitle" #subTitle="ngModel">
+     </div>
+     <!-- total stock -->
+     <div class="form-group">
+        <input class="form-control" type="number" name="totalStock" placeholder="totalStock *" [(ngModel)]="productForm.totalStock" #totalStock="ngModel">
+     </div>
+    <!-- description -->
+    <div class="form-group">
+        <input class="form-control" name="description" placeholder="description *" [(ngModel)]="productForm.description" #description="ngModel">
+    </div>
+    <!-- Event Type -->
+    <div class="form-group">
+      <!-- !when update hire product -->
+      <select *ngIf="displayData && productForm.prodTypeId==1" class="custom-select form-control" name="categoryId"
+      [(ngModel)]="productForm.categoryId" #categoryId="ngModel">
+            <option *ngFor="let cate of allCategories, index as i" value= {{cate.categoryId}} [selected]="displayData.categoryId == cate.categoryId">{{cate.categoryName}}</option>
+      </select>
+      <!-- !when create hire product -->
+      <select *ngIf="!displayData && productForm.prodTypeId==1" class="custom-select form-control" name="categoryId" [(ngModel)]="productForm.categoryId" #categoryId="ngModel">
+            <option value="null" disabled selected>Choose a product type</option>
+            <option *ngFor="let cate of allCategories, index as i" value= {{cate.categoryId}}>{{cate.categoryName}}</option>
+      </select>
+    </div>
+    
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button"(click)="close()">Close</button>
+    <button class="mat-raised-button mat-primary"(click)="save()" *ngIf="status == 'update'">Save</button>
+    <button class="mat-raised-button mat-primary"(click)="create()" *ngIf="status == 'create'">Create</button>
+</mat-dialog-actions>

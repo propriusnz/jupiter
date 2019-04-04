@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-dialog-content>
+    <!-- Customer -->
+    <div class="form-group">
+        <input class="form-control" name="CustomerName" placeholder="CustomerName *" [(ngModel)]="galleryForm.CustomerName" #CustomerName="ngModel">
+     </div>
+     <!-- Event Name -->
+      <!-- type of event -->
+      <div class="form-group">  
+         <!-- !when update Gallery -->
+         <select *ngIf="displayData" class="custom-select form-control"  type="eventtypeId" name="eventtypeId"
+         [(ngModel)]="galleryForm.eventtypeId" #eventtypeId="ngModel">
+               <option *ngFor="let event of events, index as i" value= {{event.typeId}} [selected]="displayData.eventtype.typeId == event.typeId">{{event.eventName}}</option>
+         </select>
+         <!-- !when create Gallery -->
+         <select *ngIf="!displayData" class="custom-select form-control"  type="eventtypeId" name="eventtypeId"
+         [(ngModel)]="galleryForm.eventtypeId" #eventtypeId="ngModel">
+               <option value="0" disabled selected>Choose an event type</option>
+               <option *ngFor="let event of events, index as i" value= {{event.typeId}}>{{event.eventName}}</option>
+         </select>
+
+       </div>  
+
+     <!-- Description -->
+     <div class="form-group">
+        <input class="form-control" name="Description" placeholder="Description *" [(ngModel)]="galleryForm.Description" #Description="ngModel">
+     </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button"(click)="close()">Close</button>
+    <button class="mat-raised-button mat-primary"(click)="save()" *ngIf="status == 'update'">Save</button>
+    <button class="mat-raised-button mat-primary"(click)="create()" *ngIf="status == 'create'">Create</button>
+</mat-dialog-actions>

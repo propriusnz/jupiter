@@ -13,11 +13,12 @@ ul li{
     margin-top:15px
 }
 .bgat{
-    background: url("../../../../assets/gallery/gallerypexels1.jpeg");
+    background: url("../../../../assets/images/homep5.jpg");
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 .hireCollection img{
     height:180px;
 }
@@ -25,7 +26,7 @@ ul li{
     height:100%;
     width:100%;
 }
-.carousel-item img{    
+.carousel-item img{
     object-fit: cover;
 }
 .col-12, .col-md-6 img{

@@ -1,7 +1,8 @@
-import { Component, OnInit ,HostListener } from '@angular/core';
+import { Component, OnInit ,HostListener, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 import { ProductService } from '../../../service/product.service';
-import * as $ from "jquery";
+declare var $: any;
 
 @Component({
   selector: 'app-navbar', 
@@ -11,13 +12,17 @@ import * as $ from "jquery";
 
 export class NavbarComponent implements OnInit {
   allCategories:any = [];
-  isTop:boolean = true;
   smallwindow:boolean = true;
   isBrowser:boolean = false;
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId,
     private productService : ProductService) 
-    {}
+    {
+      if (isPlatformBrowser(this.platformId)) {
+        this.isBrowser = true
+      }
+    }
   ngOnInit() {
     $('.navbar-nav>li>a').on('click', function(){
       $('.navbar-collapse').collapse('hide');
@@ -26,20 +31,9 @@ export class NavbarComponent implements OnInit {
     this.getCategories()
   }
 
-  @HostListener('window:scroll', ['$event']) onScrollEvent($event){
-    let positionNav:number = window.pageYOffset;
-    
-    if (positionNav <= 70){
-      this.isTop = true;
-    }else{
-      this.isTop = false;
-
-    }
-  } 
   getCategories(){
     this.productService.indexCategory().subscribe((res)=>{
       this.allCategories = res
-      console.log(this.allCategories);
     },(error)=>{console.log(error)})
   }
   

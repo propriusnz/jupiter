@@ -19,13 +19,13 @@
             <li class="nav-item">
               <a class="nav-link" id="3" (click)="changeBoard($event)">
                 <i class="fas fa-gift"></i>
-                Packages
+                Services
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="4" (click)="changeBoard($event)">
                 <i class="fas fa-briefcase"></i>
-                Services
+                Packages
               </a>
             </li>
             <li class="nav-item">
@@ -53,7 +53,7 @@
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <!-- !Dashboard -->
         <div *ngIf="blockCode == '1'">
-          This is Dashboard
+          This is Dashboard<br>
         </div>
 
         <!-- !Hire || Service || Package-->
@@ -61,6 +61,7 @@
           <div *ngIf="blockCode == 2"><h2>Hires</h2></div>
           <div *ngIf="blockCode == 3"><h2>Services</h2></div>
           <div *ngIf="blockCode == 4"><h2>Packages</h2></div>
+          <i class="fas fa-plus" (click)="createProduct()"></i>
           <table class="table">
             <thead>
               <tr>
@@ -72,24 +73,30 @@
               <tr *ngFor="let data of displayData">
                 <th scope="row">{{data.prodId}}</th><td>{{data.title}}</td><td>{{data.subTitle}}</td><td *ngIf="blockCode == 2"><div *ngIf="data.category">{{data.category.categoryName}}</div></td>
                 <td>{{data.totalStock}}</td><td>{{data.description}}</td>
-              </tr>
+                <td><i class="far fa-edit" (click)="openProduct(data)" title="Edit"></i></td>
+                <td><i class="far fa-trash-alt" title="Delete" (click)="deleteProduct(data)"></i></td></tr>
               </tbody>
             </table>
         </div>
 
         <!-- !Gallery -->
         <div *ngIf="blockCode == '5'">
+            <h2>Gallery</h2>
+            <i class="fas fa-plus" (click)="createGallery()"></i>
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">Id</th><th scope="col">Customer</th><th scope="col">Event Type</th>
+                  <th scope="col">Id</th> 
+                  <th scope="col">Customer</th><th scope="col">Event Type</th>
                   <th scope="col">Description</th>
                 </tr>
               </thead>
               <tbody *ngIf="displayData">
                 <tr *ngFor="let data of displayData">
-                  <th scope="row">{{data.prodjectId}}</th><td>{{data.title}}</td><td>{{data.customerName}}</td><td *ngIf="data.eventtype">{{data.eventtype.eventName}}</td>
+                  <th scope="row">{{data.prodjectId}}</th><td>{{data.customerName}}</td><td *ngIf="data.eventtype">{{data.eventtype.eventName}}</td>
                   <td>{{data.description}}</td>
+                  <td><i class="far fa-edit" (click)="openGallery(data)" title="Edit"></i></td>
+                  <td><i class="far fa-trash-alt" title="Delete" (click)="deleteGallery(data)"></i></td>
                 </tr>
                 </tbody>
               </table>
@@ -97,7 +104,7 @@
 
         <!-- !Faq -->
         <div *ngIf="blockCode == '6'">
-          <h2>Faq</h2>
+          <h2>Faq</h2> <i class="fas fa-plus" (click)="createFaq()"></i>
           <table class="table">
               <thead>
                 <tr>
@@ -107,6 +114,8 @@
               <tbody *ngIf="displayData">
                 <tr *ngFor="let data of displayData">
                   <th scope="row">{{data.id}}</th><td>{{data.question}}</td><td>{{data.answer}}</td>
+                  <td><i class="far fa-edit" (click)="openFaq(data)" title="Edit"></i></td>
+                  <td><i class="far fa-trash-alt" title="Delete" (click)="deleteFaq(data)"></i></td>
                 </tr>
                 </tbody>
               </table>
@@ -162,6 +171,8 @@
                   
                   <td>{{data.createOn | date:'medium'}}</td>
                   <td>{{data.location}}</td><td>{{data.price}}</td><td>{{data.updateOn | date:'medium'}}</td>
+                  <!-- <td><i class="far fa-edit" (click)="openCart(data)" title="Edit"></i></td> -->
+                  <td><i class="far fa-trash-alt" title="Delete" (click)="deleteCart(data)"></i></td>
                 </tr>
                 </tbody>
               </table>

@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild, Inject, PLATFORM_ID } from '@
 import { ProductService } from '../../../service/product.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+declare var $: any;
 
 
 @Component({
@@ -11,6 +12,7 @@ import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 })
 export class HomepageComponent implements OnInit {
 
+  // TODO $ is not defined
   num: number = 0;
   specialProducts: any = [];
   groupedSpecials: any = [];
@@ -40,15 +42,15 @@ export class HomepageComponent implements OnInit {
     if (this.isBrowser) {
       this.imgScroll.nativeElement.style.height = window.innerHeight - 190 + 'px';
       // mobile screen
-      if (window.innerWidth < 768) {
-        this.imgScroll.nativeElement.style.height = window.innerHeight - 100 + 'px';
+      if ($(window).innerWidth < 768) {
+        this.imgScroll.nativeElement.style.height = $(window).innerHeight - 100 + 'px';
       }
       console.log(this.imgScroll);
 
       window.onscroll = () => {
         let top1 = this.bgat.nativeElement.offsetTop;
-        if (top1 - window.pageYOffset < window.innerHeight && top1 + this.bgat.nativeElement.offsetHeight > window.pageYOffset) {
-          this.backgroundscroll(window.pageYOffset);
+        if (top1 - $(window).pageYOffset < $(window).innerHeight && top1 + this.bgat.nativeElement.offsetHeight > $(window).pageYOffset) {
+          this.backgroundscroll($(window).pageYOffset);
         }
       };
     }

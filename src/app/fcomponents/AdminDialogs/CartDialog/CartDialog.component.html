@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-dialog-content>
+  <!-- Question -->
+  <div class="form-group">
+      <input  class="form-control" type="Question" name="Question" placeholder="Question *" [(ngModel)]="faqForm.Question" #Question="ngModel">
+   </div>
+   <!-- Answer -->
+   <div class="form-group">
+      <input class="form-control" type="tel" name="Answer" placeholder="Answer *" [(ngModel)]="faqForm.Answer" #Answer="ngModel">
+   </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button"(click)="close()">Close</button>
+  <button class="mat-raised-button mat-primary"(click)="save()" *ngIf="status == 'update'">Save</button>
+  <button class="mat-raised-button mat-primary"(click)="create()" *ngIf="status == 'create'" [disabled]="faqForm.Answer == '' || faqForm.Question == ''">Create</button>
+</mat-dialog-actions>

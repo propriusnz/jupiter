@@ -1,3 +1,5 @@
+<br><br>
+<div class="container">
 <form novalidate #f="ngForm" (ngSubmit)="onSubmit(f)">
   <div class="form-group">
       <div *ngIf="username.errors?.required && username.touched" class="invalid_feedback">
@@ -20,6 +22,11 @@
       <input type="password" class="form-control" placeholder="Password" [(ngModel)]="user.password" name="password" #password="ngModel"  required pattern="((?=.*\d)(?=.*[a-z]).{7,20})" 
          [ngClass]="{'is-invalid': password.errors?.required && password.touched || password.errors?.pattern}"> 
        </div>
-      
-  <input type="submit" class="btn btn_blue_large btn-block" value="Log In">
+    <br>
+
+  <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+
+  <br><br><br><br><br>
 </form>
+
+</div>

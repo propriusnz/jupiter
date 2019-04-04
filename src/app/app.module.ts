@@ -1,11 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDatepickerModule,MatInputModule,MatFormFieldModule,MatNativeDateModule } from '@angular/material';
+import { MatDatepickerModule,MatInputModule,MatFormFieldModule,MatNativeDateModule, MatDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule,Routes }   from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
-import * as $ from 'jquery'
 
 // All service follow
 import{ProductService} from './service/product.service'
@@ -28,8 +27,13 @@ import { GalleryComponent} from './fcomponents/gallery/gallery.component';
 import { GalleryListComponent } from './fcomponents/gallery-list/gallery-list.component';
 import { AdminComponent } from './fcomponents/admin/admin.component';
 import { LoginComponent } from './fcomponents/login/login.component'
+import { FaqDialogComponent } from './fcomponents/AdminDialogs/FaqDialog/FaqDialog.component'
+import { GalleryDialogComponent } from './fcomponents/AdminDialogs/galleryDialog/galleryDialog.component'
+import { ProductDialogComponent } from './fcomponents/AdminDialogs/productDialog/productDialog.component'
+
 //All Routes follow
 
+//All Routes follow
 const appRoutes: Routes=[
   {path:'contactUs', component:ContactUsComponent},
   {path:'aboutUs', component:AboutUsComponent},
@@ -65,7 +69,10 @@ const appRoutes: Routes=[
     GalleryComponent,
     GalleryListComponent,
     AdminComponent,
-    LoginComponent
+    LoginComponent,
+    FaqDialogComponent,
+    GalleryDialogComponent,
+    ProductDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -76,6 +83,7 @@ const appRoutes: Routes=[
     MatInputModule,
     MatFormFieldModule,
     MatNativeDateModule,
+    MatDialogModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes,{scrollPositionRestoration: 'enabled'}),
     HttpClientModule
@@ -83,6 +91,11 @@ const appRoutes: Routes=[
   providers: [
     ProductService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[
+    FaqDialogComponent,
+    GalleryDialogComponent,
+    ProductDialogComponent
+  ]
 })
 export class AppModule { }
