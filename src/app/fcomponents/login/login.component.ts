@@ -10,6 +10,8 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  loginFailed:boolean = false
+  loginFailedMessage:string = ''
   fillAll:string
   JWTToken:string;
   user = {
@@ -50,6 +52,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/admin']);
       },(error)=>{
         console.log(error)
+        this.loginFailed = true
+        this.loginFailedMessage = error['error']
       })
     }
   }
