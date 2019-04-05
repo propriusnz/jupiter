@@ -22,9 +22,14 @@
           <!-- !large screen dropdown -->
           <a *ngIf="isBrowser==true" class="dropdown-item s2 d-none d-md-block" routerLink='/hire'> All Products</a>
           <a *ngIf="isBrowser==false" class="dropdown-item s2 d-none d-md-block" href='http://luxedreameventhire.co.nz/hire'> All Products</a>
-
-          <a class="dropdown-item s2 d-none d-md-block" *ngFor="let category of allCategories"
+          <div *ngIf="isBrowser==true">
+            <a class="dropdown-item s2 d-none d-md-block" *ngFor="let category of allCategories"
             [routerLink]="[ '/category/', category.categoryId ]">{{category.categoryName}}</a>
+          </div>
+          <div *ngIf="isBrowser==false">
+            <a class="dropdown-item s2 d-none d-md-block" *ngFor="let category of allCategories"
+            href = 'http://luxedreameventhire.co.nz/category/{{category.categoryId}}'>{{category.categoryName}}</a>
+          </div>
           <!-- !mobile dropdown -->
           <a class="dropdown-item s2 d-block d-md-none" data-toggle="collapse" data-target=".navbar-collapse">
             <a *ngIf="isBrowser==true" routerLink='/hire'>All Products</a>
@@ -32,16 +37,10 @@
           </a>
           <a class="dropdown-item s2 d-block d-md-none" *ngFor="let category of allCategories" data-toggle="collapse"
             data-target=".navbar-collapse">
-            <a class="s2" [routerLink]="[ '/category/', category.categoryId ]">{{category.categoryName}}</a>
+            <a *ngIf="isBrowser==true" class="s2" [routerLink]="[ '/category/', category.categoryId ]">{{category.categoryName}}</a>
+            <a *ngIf="isBrowser==false" class="s2" href='http://luxedreameventhire.co.nz/category/{{category.categoryId}}'>{{category.categoryName}}</a>
           </a>
         </div>
-        <!-- <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item s2">123123</a>
-                    <a class="dropdown-item s2">123123</a>
-                    <a class="dropdown-item s2">123123</a>
-                    <a class="dropdown-item s2">123123</a>
-                    <a class="dropdown-item s2">123123</a>
-                </div> -->
       </li>
       <span class="navspace"></span>
       <!--Party services-->
@@ -69,12 +68,12 @@
   </div>
 
   <div class="mx-auto order-0">
-    <a *ngIf="isBrowser==true" class="nav-link p-0 p-md-1" routerLink='/homepage' routerLinkActive="active">
-      <img class="d-none d-lg-block" src="../../../../assets/images/Asset1-4x-big.png" style="zoom:0.5;" />
+    <a *ngIf="isBrowser==true" class="nav-link p-0 p-md-1" routerLink='/' routerLinkActive="active">
+      <img class="d-none d-lg-block" src="../../../../assets/images/Asset1-4x-big.png" style="zoom:0.5;height:9.4rem;" />
       <img class="d-md-block d-lg-none" src="../../../../assets/images/Asset1-4x-mid.png" style="zoom:0.8;" />
     </a>
-    <a *ngIf="isBrowser==false" class="nav-link p-0 p-md-1" href='http://luxedreameventhire.co.nz/homepage'>
-      <img class="d-none d-lg-block" src="../../../../assets/images/Asset1-4x-big.png" style="zoom:0.5;" />
+    <a *ngIf="isBrowser==false" class="nav-link p-0 p-md-1" href='http://luxedreameventhire.co.nz'>
+      <img class="d-none d-lg-block" src="../../../../assets/images/Asset1-4x-big.png" style="zoom:0.5;height:9.4rem;" />
       <img class="d-md-block d-lg-none" src="../../../../assets/images/Asset1-4x-mid.png" style="zoom:0.8;" />
     </a>
     <button class="navbar-toggler mr-2" type="button" data-toggle="collapse" data-target=".dual-collapse2"><span

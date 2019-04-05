@@ -1,5 +1,8 @@
 <br><br>
 <div class="container">
+    <div *ngIf="loginFailed" class="alert alert-danger text-center s2" role="alert">
+        {{loginFailedMessage}}
+    </div>
 <form novalidate #f="ngForm" (ngSubmit)="onSubmit(f)">
   <div class="form-group">
       <div *ngIf="username.errors?.required && username.touched" class="invalid_feedback">

@@ -131,7 +131,7 @@ export class AdminComponent implements OnInit {
           alert('Success')
         },(error)=>{
           console.log(error)
-          alert('failed')
+          alert('Failed')
         })
     } else {
         // Do nothing!
@@ -163,7 +163,7 @@ export class AdminComponent implements OnInit {
           alert('Success')
         },(error)=>{
           console.log(error)
-          alert('failed')
+          alert('Failed')
         })
     } else {
         // Do nothing!
@@ -211,7 +211,7 @@ export class AdminComponent implements OnInit {
           alert('Success')
         },(error)=>{
           console.log(error)
-          alert('failed')
+          alert('Failed')
         })
     } else {
         // Do nothing!
@@ -260,9 +260,10 @@ export class AdminComponent implements OnInit {
       this.productService.deleteProduct(id).subscribe(
         (res)=>{
           this.getData()
-          console.log(res)
+          alert('Success')
         },(error)=>{
           console.log(error)
+          alert('Failed')
         }
       )
     } else {

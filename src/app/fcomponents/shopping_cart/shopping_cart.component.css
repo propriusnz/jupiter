@@ -44,10 +44,6 @@ a:hover {
   font-size: 17px;
 }
 
-.divdetails{
-  height: 20%;
-}
-
 .bg-gray, .divdetails{
   display: flex;
   justify-content: space-between;
