@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
     password:''
   }
   isBrowser:Boolean;
+  errorMessage:string;
 
   constructor(
     //@Inject(LOCAL_STORAGE)
