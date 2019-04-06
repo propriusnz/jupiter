@@ -1,6 +1,25 @@
 i {
     cursor: pointer;
+    font-size: 17px
 }
 .blue-snackbar {
     background: #2196F3;
+}
+.far.fa-trash-alt:hover{
+    color:red;
+}
+.far.fa-edit:hover{
+    color:rgb(55, 162, 233);
+}
+.nav-item{
+    padding-top:25px;
+}
+.nav-item a:hover{
+    cursor: pointer;
+    color:rgb(105, 105, 105);
+}
+th{
+    position: sticky;
+    top:0;
+    z-index:99;
 }

@@ -58,20 +58,26 @@
 
         <!-- !Hire || Service || Package-->
         <div *ngIf="blockCode == '2' || blockCode == '3' || blockCode == '4'">
-          <div *ngIf="blockCode == 2"><h2>Hires</h2></div>
-          <div *ngIf="blockCode == 3"><h2>Services</h2></div>
-          <div *ngIf="blockCode == 4"><h2>Packages</h2></div>
-          <i class="fas fa-plus" (click)="createProduct()"></i>
+          <div class="row mt-3">
+            <div>
+                <div class="d-inline" *ngIf="blockCode == 2"><h2>Hires</h2></div>
+                <div class="d-inline" *ngIf="blockCode == 3"><h2>Services</h2></div>
+                <div class="d-inline" *ngIf="blockCode == 4"><h2>Packages</h2></div>      
+            </div>
+            <div class="pl-3 pt-3">
+              <i class="fas fa-plus" title="Add" (click)="createProduct()"></i>
+            </div>
+          </div>
           <table class="table">
             <thead>
-              <tr>
+              <tr class="table-secondary">
                 <th scope="col">#</th><th scope="col">Title</th><th scope="col">Subtitle</th><th scope="col" *ngIf="blockCode == 2">Category</th>
-                <th scope="col">totalStock</th><th scope="col">Description</th>
+                <th scope="col">totalStock</th><th scope="col">Description</th><th scope="col">Edit</th><th scope="col">Delete</th>
               </tr>
             </thead>
             <tbody *ngIf="displayData">
               <tr *ngFor="let data of displayData">
-                <th scope="row">{{data.prodId}}</th><td>{{data.title}}</td><td>{{data.subTitle}}</td><td *ngIf="blockCode == 2"><div *ngIf="data.category">{{data.category.categoryName}}</div></td>
+                <td>{{data.prodId}}</td><td>{{data.title}}</td><td>{{data.subTitle}}</td><td *ngIf="blockCode == 2"><div *ngIf="data.category">{{data.category.categoryName}}</div></td>
                 <td>{{data.totalStock}}</td><td>{{data.description}}</td>
                 <td><i class="far fa-edit" (click)="openProduct(data)" title="Edit"></i></td>
                 <td><i class="far fa-trash-alt" title="Delete" (click)="deleteProduct(data)"></i></td></tr>
@@ -81,19 +87,23 @@
 
         <!-- !Gallery -->
         <div *ngIf="blockCode == '5'">
-            <h2>Gallery</h2>
-            <i class="fas fa-plus" (click)="createGallery()"></i>
+            <div class="row mt-3">
+              <div><h2>Gallery</h2></div>
+              <div class="pl-3 pt-3"><i class="fas fa-plus" title="Add" (click)="createGallery()"></i></div>
+            </div>
             <table class="table">
               <thead>
-                <tr>
+                <tr class="table-secondary">
                   <th scope="col">Id</th> 
                   <th scope="col">Customer</th><th scope="col">Event Type</th>
                   <th scope="col">Description</th>
+                  <th scope="col">Edit</th>
+                  <th scope="col">Delete</th>
                 </tr>
               </thead>
               <tbody *ngIf="displayData">
                 <tr *ngFor="let data of displayData">
-                  <th scope="row">{{data.prodjectId}}</th><td>{{data.customerName}}</td><td *ngIf="data.eventtype">{{data.eventtype.eventName}}</td>
+                  <td>{{data.prodjectId}}</td><td>{{data.customerName}}</td><td *ngIf="data.eventtype">{{data.eventtype.eventName}}</td>
                   <td>{{data.description}}</td>
                   <td><i class="far fa-edit" (click)="openGallery(data)" title="Edit"></i></td>
                   <td><i class="far fa-trash-alt" title="Delete" (click)="deleteGallery(data)"></i></td>
@@ -104,16 +114,22 @@
 
         <!-- !Faq -->
         <div *ngIf="blockCode == '6'">
-          <h2>Faq</h2> <i class="fas fa-plus" (click)="createFaq()"></i>
+          <div class="row mt-3">
+            <div><h2>Faq</h2> </div>
+            <div class="pl-3 pt-3">
+                <i class="fas fa-plus" title="Add" (click)="createFaq()"></i>
+            </div>
+          </div>
+
           <table class="table">
               <thead>
-                <tr>
-                  <th scope="col">Id</th><th scope="col">Question</th><th scope="col">Answer</th>
+                <tr class="table-secondary">
+                  <th scope="col">Id</th><th scope="col">Question</th><th scope="col">Answer</th><th scope="col">Edit</th><th scope="col">Delete</th>
                 </tr>
               </thead>
               <tbody *ngIf="displayData">
                 <tr *ngFor="let data of displayData">
-                  <th scope="row">{{data.id}}</th><td>{{data.question}}</td><td>{{data.answer}}</td>
+                  <td>{{data.id}}</td><td>{{data.question}}</td><td>{{data.answer}}</td>
                   <td><i class="far fa-edit" (click)="openFaq(data)" title="Edit"></i></td>
                   <td><i class="far fa-trash-alt" title="Delete" (click)="deleteFaq(data)"></i></td>
                 </tr>
@@ -123,17 +139,17 @@
 
         <!-- !Cart -->
         <div *ngIf="blockCode == '7'">
-          <h2>Carts</h2>
+          <div class="mt-3 pt-3"><h2>Carts</h2></div>
           <table class="table">
               <thead>
-                <tr>
+                <tr class="table-secondary">
                   <th scope="col">Id</th><th scope="col">CartProds</th><th scope="col">Contact</th> <th scope="col">CreateTime</th>
                   <th scope="col">Location</th><th>Price</th><th>UpdateTime</th>
                 </tr>
               </thead>
               <tbody *ngIf="displayData">
                 <tr *ngFor="let data of displayData">
-                  <th scope="row">{{data.cartId}}</th>
+                  <td>{{data.cartId}}</td>
                   <td>
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
