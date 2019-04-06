@@ -16,6 +16,7 @@ export class AdminComponent implements OnInit {
   //Dashbard:1; Hires:2; Packages:3; Services:4; Gallery:5; Faq:6; Carts:7; 
   blockCode:string = "1"
   displayData:any
+  selectedImg:File = null;
   constructor(
     @Inject(PLATFORM_ID) private platformId,
     private router : Router,
@@ -137,23 +138,6 @@ export class AdminComponent implements OnInit {
         // Do nothing!
     }
   }
-  // openCart(data){
-  //   const dialogConfig = new MatDialogConfig();
-
-  //   dialogConfig.disableClose = true;
-  //   dialogConfig.autoFocus = true;
-
-  //   dialogConfig.data = {
-  //     id: 1,
-  //     title: 'Update FAQ',
-  //     data: data,
-  //     action:'update'
-  //   }
-  //   let dialogRef = this.dialog.open(CartDialogComponent,dialogConfig);
-  //   dialogRef.afterClosed().subscribe(() => {
-  //     this.getData();
-  // });
-  // }
   deleteCart(data){
     let id = data.cartId
     if (confirm('Are you sure you want to delete this Cart?')) {
@@ -270,5 +254,4 @@ export class AdminComponent implements OnInit {
         // Do nothing!
     }
   }
-
 }

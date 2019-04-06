@@ -33,6 +33,7 @@
             <a [routerLink] = "['/product/',product.prodId]">
             <div class="carousel-inner " >
                 <!-- active -->
+                <!-- TODO: Fix img -->
               <div class="carousel-item active overflow-hidden h490" *ngFor="let media of product.productMedia">
                 <img src="../../../../assets/Products/{{media.url}}.jpg" class="d-block autofix"/>
               </div>

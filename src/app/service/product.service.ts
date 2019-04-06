@@ -112,4 +112,8 @@ constructor(
   getUser(){
     return this.http.get(this.baseUrl + '/admins', { headers: this.httpHeader1 })
   }
+  //!upload img
+  addImg(files){
+    return this.http.post(this.baseUrl + '/ProductMedias/',files)
+  }
 }

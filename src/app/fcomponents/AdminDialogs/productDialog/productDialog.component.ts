@@ -9,6 +9,8 @@ import { ProductService } from '../../../service/product.service'
 })
 export class ProductDialogComponent implements OnInit {
   id:number;
+  selectedImg:File = null;
+  newProduct:any;
   productForm : {
     title:string,
     subTitle:string,
@@ -55,7 +57,6 @@ export class ProductDialogComponent implements OnInit {
     this.productService.updateProduct(this.id,this.productForm).subscribe(
       (res)=>{
         console.log(res)
-        this.dialogRef.close()
     },(error) =>{
       console.log(error)
     }
@@ -67,7 +68,10 @@ export class ProductDialogComponent implements OnInit {
   create(){
     this.productService.addProduct(this.productForm).subscribe(
       (res)=>{
-      console.log(this.productForm);
+        if(res){
+          this.newProduct = res
+          this.onUpload()
+        }
       this.dialogRef.close()
     },(error) =>{
       console.log(error)
@@ -84,4 +88,21 @@ export class ProductDialogComponent implements OnInit {
         console.log(error)
       })
   }
+    //TODO: upload img
+    onFileSelected(e){
+      this.selectedImg =<File>e.target.files[0];
+    }
+    onUpload(){
+      let id = this.newProduct.data.prodId
+      const fd = new FormData();
+      fd.append('image',this.selectedImg, this.selectedImg.name)
+      fd.append('prodId',id)
+      console.log(fd)
+      this.productService.addImg(fd).subscribe((res)=>{
+        console.log(res)
+        this.dialogRef.close()
+      },(error)=>{
+        console.log(error)
+      })
+    }
 }

@@ -17,6 +17,11 @@
     <div class="form-group">
         <input class="form-control" name="description" placeholder="description *" [(ngModel)]="productForm.description" #description="ngModel">
     </div>
+    <!-- !upload img -->
+    <div>
+        <input type="file" (change)="onFileSelected($event)">
+        <!-- <button (click)="onUpload()">upload</button>     -->
+    </div>              
     <!-- Event Type -->
     <div class="form-group">
       <!-- !when update hire product -->
