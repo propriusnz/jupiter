@@ -42,11 +42,14 @@
         <div class="carousel-inner">
           <div class="carousel-item" *ngFor="let specials of groupedSpecials, index as i"
             [ngClass]="{'active': i == 0}">
-            <div class="d-none d-sm-block">
+
+            <div class="d-none d-md-block">
               <div class="row">
                 <div class="col-3" *ngFor="let spe of specials">
-                  <img src="../../../../assets/Products/{{spe.productMedia[0].url}}.jpg" class="img100"
-                    [routerLink]="[ '/product/', spe.prodId]">
+                  <div class="h490">
+                      <img src="../../../../assets/Products/{{spe.productMedia[0].url}}.jpg"
+                      [routerLink]="[ '/product/', spe.prodId]">
+                  </div>
                   <div class="s1">{{spe.title}}</div>
                   <div><span class="s2goldbold mr-3">${{spe.price - spe.discount}}</span><s>${{spe.price}}</s></div>
                 </div>
@@ -55,7 +58,7 @@
               <!--end row-->
             </div>
 
-            <div class="d-block d-sm-none">
+            <div class="d-block d-md-none">
               <div class="row">
                 <div class="col-6" *ngFor="let spe of specials">
                   <img src="../../../../assets/Products/{{spe.productMedia[0].url}}.jpg" class="img100"

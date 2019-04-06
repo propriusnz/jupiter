@@ -22,10 +22,6 @@ ul li{
 .hireCollection img{
     height:180px;
 }
-.img100{
-    height:100%;
-    width:100%;
-}
 .carousel-item img{
     object-fit: cover;
 }
@@ -71,3 +67,23 @@ ul li{
   font-size: 55px;
   color: red;
 }
+.h490{
+    position: relative;
+    padding-top: 100%;
+    width:100%;
+    display: block;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+.h490 img {
+	position:  absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+

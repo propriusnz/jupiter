@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Inject, PLATFORM_ID, HostListener } from '@angular/core';
 import { ProductService } from '../../../service/product.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
@@ -17,10 +17,15 @@ export class HomepageComponent implements OnInit {
   specialProducts: any = [];
   groupedSpecials: any = [];
   isBrowser: Boolean = false;
+  windowResize :number = window.innerWidth
   @ViewChild('bgat') bgat: ElementRef;
   @ViewChild('imgScroll') imgScroll: ElementRef;
   @ViewChild('list') list: ElementRef;
-
+  @HostListener('window:resize', ['$event'])
+  sizeChange(event) {
+    this.windowResize = window.innerWidth
+    this.seperateSpecials()
+  }
   constructor(
     @Inject(PLATFORM_ID) private platformId,
     private productService: ProductService,
@@ -75,18 +80,18 @@ export class HomepageComponent implements OnInit {
     );
   }
   seperateSpecials() {
-    if (window.innerWidth >= 768) {
-    for (let i = 0; i < this.specialProducts.length; i += 4) {
-      let mylist = this.specialProducts.slice(i, i + 4);
-      this.groupedSpecials.push(mylist);
+    this.groupedSpecials= []
+    if (this.windowResize >= 768) {
+      for (let i = 0; i < this.specialProducts.length; i += 4) {
+        let mylist = this.specialProducts.slice(i, i + 4);
+        this.groupedSpecials.push(mylist);
+      }
+    } else {
+      for (let i = 0; i < this.specialProducts.length; i += 2) {
+        let mylist1 = this.specialProducts.slice(i, i + 2);
+        this.groupedSpecials.push(mylist1);
+      }
     }
-  } else {
-    for (let i = 0; i < this.specialProducts.length; i += 2) {
-      let mylist1 = this.specialProducts.slice(i, i + 2);
-      this.groupedSpecials.push(mylist1);
-    }
-  }
-  console.log(this.groupedSpecials);
   }
 
 }

@@ -220,6 +220,7 @@ export class AdminComponent implements OnInit {
   });
   }
 
+  //TODO: add new product
   createProduct(){
     const dialogConfig = new MatDialogConfig();
 
