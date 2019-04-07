@@ -32,6 +32,8 @@ a{
 }
 .dropdown-item{
     cursor: pointer;
+    padding:0px;
+    padding-left: 0.7rem;
 }
 .dropdown-menu{
     top: 30px;
@@ -39,6 +41,9 @@ a{
 }
 .nav-link, .s2bold > h1 {
     font-size: 0.8rem;
+}
+.dropdown-menu{
+    border:0px;
 }
 @media (min-width: 768px) {
     .dropdown-menu li:hover .sub-menu {
@@ -48,8 +53,17 @@ a{
         display: block;
    }
 }
- @media (max-width: 991px) {
-.s2bold > h1 {
-    font-size:0.5rem;
+@media (max-width:768px){
+    .dropdown-menu{
+        background-color: transparent;
+    }
 }
+/* TODO: move to global css */
+@media (max-width: 991px) {
+    .s2bold > h1 {
+        font-size:0.7rem;
+    }
+    .dropdown-item{
+        padding: 0.7rem 0.7rem;
+    }
 }

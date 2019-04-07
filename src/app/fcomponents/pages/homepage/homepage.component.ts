@@ -17,14 +17,14 @@ export class HomepageComponent implements OnInit {
   specialProducts: any = [];
   groupedSpecials: any = [];
   isBrowser: Boolean = false;
-  windowResize :number = window.innerWidth
+  windowResize: number = window.innerWidth;
   @ViewChild('bgat') bgat: ElementRef;
   @ViewChild('imgScroll') imgScroll: ElementRef;
   @ViewChild('list') list: ElementRef;
   @HostListener('window:resize', ['$event'])
   sizeChange(event) {
-    this.windowResize = window.innerWidth
-    this.seperateSpecials()
+    this.windowResize = window.innerWidth;
+    this.seperateSpecials();
   }
   constructor(
     @Inject(PLATFORM_ID) private platformId,
@@ -45,7 +45,7 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
     // large screen
     if (this.isBrowser) {
-      // this.imgScroll.nativeElement.style.height = window.innerHeight - 190 + 'px';
+      this.imgScroll.nativeElement.style.height = window.innerHeight - 160 + 'px';
       // mobile screen
       if (window.innerWidth < 768) {
         this.imgScroll.nativeElement.style.height = window.innerHeight - 560 + 'px';
@@ -82,7 +82,7 @@ export class HomepageComponent implements OnInit {
     );
   }
   seperateSpecials() {
-    this.groupedSpecials= []
+    this.groupedSpecials = [];
     if (this.windowResize >= 768) {
       for (let i = 0; i < this.specialProducts.length; i += 4) {
         let mylist = this.specialProducts.slice(i, i + 4);
