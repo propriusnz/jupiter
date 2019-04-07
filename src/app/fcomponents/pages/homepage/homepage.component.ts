@@ -18,7 +18,6 @@ export class HomepageComponent implements OnInit {
   isBrowser: Boolean = false;
   windowResize: number;
   @ViewChild('bgat') bgat: ElementRef;
-  @ViewChild('imgScroll') imgScroll: ElementRef;
   @ViewChild('list') list: ElementRef;
   @HostListener('window:resize', ['$event'])
   sizeChange(event) {
@@ -47,14 +46,6 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
     // large screen
     if (this.isBrowser) {
-      // mobile screen
-      if (window.innerWidth < 768) {
-        this.imgScroll.nativeElement.style.height = $(window).innerHeight - 360 + 'px';
-      } else {
-        this.imgScroll.nativeElement.style.height = window.innerHeight - 160 + 'px';
-      }
-      console.log(this.imgScroll);
-
       window.onscroll = () => {
         let top1 = this.bgat.nativeElement.offsetTop;
         if (top1 - $(window).pageYOffset < $(window).innerHeight && top1 + this.bgat.nativeElement.offsetHeight > $(window).pageYOffset) {

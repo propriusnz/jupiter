@@ -7,16 +7,16 @@
           <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>
-        <!-- <div class="carousel-inner" style="height: 60vh"> -->
+        <!-- <div class="carousel-inner"> -->
         <div class="carousel-inner">
           <div class="carousel-item active homaimg">
-            <img src="../../../../assets/images/homep1.jpg" class="d-block w-100 img100" alt="...">
+            <img src="../../../../assets/images/homep1.jpg" class="d-block w-100" alt="...">
           </div>
           <div class="carousel-item homaimg">
-            <img src="../../../../assets/images/homep2.jpg" class="d-block w-100 img100" alt="...">
+            <img src="../../../../assets/images/homep2.jpg" class="d-block w-100" alt="...">
           </div>
           <div class="carousel-item homaimg">
-            <img src="../../../../assets/images/homep3.jpg" class="d-block w-100 img100" alt="...">
+            <img src="../../../../assets/images/homep3.jpg" class="d-block w-100" alt="...">
           </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -30,57 +30,47 @@
       </div>
     </div>
   </div>
-  <div class="px-0 px-md-5 mx-2">
 
+  <div class="px-0 px-md-5 mx-2">
     <!-- !SecialProducts -->
     <div class="hireCollection" *ngIf="specialProducts">
       <h1 class="text-center my-5 l2 lspace-3">Event Hire Specials</h1>
-
       <!--Carousel Area of Special Products-->
       <div id="carouselExampleControls" class="carousel slide pt-5" data-ride="carousel">
         <!--Pictures of Carousel-->
         <div class="carousel-inner">
-          <div class="carousel-item" *ngFor="let specials of groupedSpecials, index as i"
-            [ngClass]="{'active': i == 0}">
-
+          <div class="carousel-item" *ngFor="let specials of groupedSpecials, index as i" [ngClass]="{'active': i == 0}">
+            <!--PC screen-->
             <div class="d-none d-md-block">
               <div class="row">
                 <div class="col-3" *ngFor="let spe of specials">
                   <div class="h490">
-                    <img src="../../../../assets/Products/{{spe.productMedia[0].url}}.jpg"
-                      [routerLink]="[ '/product/', spe.prodId]">
+                    <img src="../../../../assets/Products/{{spe.productMedia[0].url}}.jpg" [routerLink]="[ '/product/', spe.prodId]">
                   </div>
                   <div class="s1">{{spe.title}}</div>
-                  <div><span class="s2goldbold mr-3">${{spe.price - spe.discount}}</span><s>${{spe.price}}</s></div>
-                </div>
-                <!--end col-3-->
-              </div>
-              <!--end row-->
-            </div>
-
+                  <div>
+                    <span class="s2goldbold mr-3">${{spe.price - spe.discount}}</span>
+                    <s>${{spe.price}}</s>
+                  </div>
+                </div><!--end col-3-->
+              </div><!--end row-->
+            </div><!--End d-none d-md-block-->
+            <!--mobile screen-->
             <div class="d-block d-md-none">
               <div class="row">
                 <div class="col-6" *ngFor="let spe of specials">
                   <div class="h490">
-                    <img src="../../../../assets/Products/{{spe.productMedia[0].url}}.jpg" class="img100"
-                      [routerLink]="[ '/product/', spe.prodId]">
+                    <img src="../../../../assets/Products/{{spe.productMedia[0].url}}.jpg" class="img100" [routerLink]="[ '/product/', spe.prodId]">
                   </div>
                   <div class="s1">{{spe.title}}</div>
                   <div><span class="s2goldbold mr-3">${{spe.price - spe.discount}}</span><s>${{spe.price}}</s></div>
-                </div>
-                <!--end col-3-->
-              </div>
-              <!--end row-->
-            </div>
-
-          </div>
-          <!--end carousel-item-->
-
-
-
-        </div>
-        <!--end carousel-inner-->
+                </div><!--end col-3-->
+              </div><!--end row-->
+            </div><!--End d-none d-md-block-->
+          </div><!--end carousel-item-->
+        </div><!--end carousel-inner-->
         <!--End Pictures of Carousel-->
+
         <!--Carousel Arrow Buttons of left and right-->
         <a class="carousel-control-prev gold" href="#carouselExampleControls" role="button" data-slide="prev">
           <i class="fas fa-chevron-left" aria-hidden="true"></i>
