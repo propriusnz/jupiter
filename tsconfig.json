@@ -12,6 +12,7 @@
     "importHelpers": true,
     "target": "es5",
     "typeRoots": [
+      "./src/app/typings",
       "node_modules/@types"
     ],
     "lib": [

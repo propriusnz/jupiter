@@ -33,15 +33,6 @@ export class CartDialogComponent implements OnInit {
   ngOnInit() {
     console.log(this.displayData);
   }
-  // save(){
-  //   this.productService.updateCart(this.id, this.cartForm).subscribe(
-  //     (res)=>{
-  //     this.dialogRef.close()
-  //   },(error) =>{
-  //     console.log(error)
-  //   }
-  //   )
-  // }
   close() {
     this.dialogRef.close();
   }

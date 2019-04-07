@@ -2,7 +2,6 @@ import { Component, OnInit, ElementRef, ViewChild, Inject, PLATFORM_ID, HostList
 import { ProductService } from '../../../service/product.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
-declare var $: any;
 
 
 @Component({
@@ -17,14 +16,16 @@ export class HomepageComponent implements OnInit {
   specialProducts: any = [];
   groupedSpecials: any = [];
   isBrowser: Boolean = false;
-  windowResize: number = window.innerWidth;
+  windowResize :number
   @ViewChild('bgat') bgat: ElementRef;
   @ViewChild('imgScroll') imgScroll: ElementRef;
   @ViewChild('list') list: ElementRef;
   @HostListener('window:resize', ['$event'])
   sizeChange(event) {
-    this.windowResize = window.innerWidth;
-    this.seperateSpecials();
+    if(this.isBrowser){
+      this.windowResize = window.innerWidth
+      this.seperateSpecials()  
+    }
   }
   constructor(
     @Inject(PLATFORM_ID) private platformId,
@@ -34,6 +35,7 @@ export class HomepageComponent implements OnInit {
   ) {
     if (isPlatformBrowser(this.platformId)) {
       this.isBrowser = true;
+      this.windowResize = window.innerWidth
     }
     this.meta.addTags([
       { name: 'keywords', content: 'Luxedream Hire, Party hire, wedding hire, birthday party hire, event hire, auckland event hire' },
@@ -48,9 +50,7 @@ export class HomepageComponent implements OnInit {
       this.imgScroll.nativeElement.style.height = window.innerHeight - 160 + 'px';
       // mobile screen
       if (window.innerWidth < 768) {
-        this.imgScroll.nativeElement.style.height = window.innerHeight - 560 + 'px';
-      } else {
-        this.imgScroll.nativeElement.style.height = window.innerHeight - 190 + 'px';
+        this.imgScroll.nativeElement.style.height = $(window).innerHeight - 100 + 'px';
       }
       console.log(this.imgScroll);
 
