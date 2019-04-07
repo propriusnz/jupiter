@@ -2,7 +2,6 @@ import { Component, OnInit ,HostListener, Inject, PLATFORM_ID } from '@angular/c
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 import { ProductService } from '../../../service/product.service';
-declare var $: any;
 
 @Component({
   selector: 'app-navbar', 
@@ -37,9 +36,4 @@ export class NavbarComponent implements OnInit {
       this.allCategories = res
     },(error)=>{console.log(error)})
   }
-  
-
-
-  
-
 }
