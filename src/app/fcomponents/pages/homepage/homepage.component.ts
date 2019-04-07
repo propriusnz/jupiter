@@ -16,15 +16,15 @@ export class HomepageComponent implements OnInit {
   specialProducts: any = [];
   groupedSpecials: any = [];
   isBrowser: Boolean = false;
-  windowResize :number
+  windowResize: number;
   @ViewChild('bgat') bgat: ElementRef;
   @ViewChild('imgScroll') imgScroll: ElementRef;
   @ViewChild('list') list: ElementRef;
   @HostListener('window:resize', ['$event'])
   sizeChange(event) {
-    if(this.isBrowser){
-      this.windowResize = window.innerWidth
-      this.seperateSpecials()  
+    if (this.isBrowser) {
+      this.windowResize = window.innerWidth;
+      this.seperateSpecials();
     }
   }
   constructor(
@@ -35,7 +35,7 @@ export class HomepageComponent implements OnInit {
   ) {
     if (isPlatformBrowser(this.platformId)) {
       this.isBrowser = true;
-      this.windowResize = window.innerWidth
+      this.windowResize = window.innerWidth;
     }
     this.meta.addTags([
       { name: 'keywords', content: 'Luxedream Hire, Party hire, wedding hire, birthday party hire, event hire, auckland event hire' },
@@ -47,10 +47,11 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
     // large screen
     if (this.isBrowser) {
-      this.imgScroll.nativeElement.style.height = window.innerHeight - 160 + 'px';
       // mobile screen
       if (window.innerWidth < 768) {
-        this.imgScroll.nativeElement.style.height = $(window).innerHeight - 100 + 'px';
+        this.imgScroll.nativeElement.style.height = $(window).innerHeight - 360 + 'px';
+      } else {
+        this.imgScroll.nativeElement.style.height = window.innerHeight - 160 + 'px';
       }
       console.log(this.imgScroll);
 
