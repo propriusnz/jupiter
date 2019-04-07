@@ -14,6 +14,7 @@ export class NavbarComponent implements OnInit {
   allCategories:any = [];
   smallwindow:boolean = true;
   isBrowser:boolean = false;
+  galleriesData = ['Weddings','Birthday', 'Girls Night', 'Corporate Event', 'Baby Shower', 'Luxe Dream Floral Studio']
 
   constructor(
     @Inject(PLATFORM_ID) private platformId,

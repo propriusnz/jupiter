@@ -21,7 +21,12 @@ export class GalleryComponent implements OnInit {
       { name: 'keywords', content: 'Luxedream Hire, Party hire, wedding hire, birthday party hire, event hire, auckland event hire'},
       { name: 'description', content: 'One stop event and party hire and services in Auckland.'},
     ])
-    this.gallery = this.route.snapshot.params['id'];
+    
+    this.route.params.subscribe(
+      params => {
+        this.gallery = this.route.snapshot.params['id'];
+      }
+    );
     this.titleService.setTitle('Luxe Dream Auckland | '+ this.gallery +' event hire gallery');
   }
 

@@ -11,7 +11,7 @@
         </a>
       </li>
       <span class="navspace"></span>
-      <!--Hire dropdown-->
+      <!--!Hire dropdown-->
       <li class="nav-item dropdown">
         <div class="nav-link dropdown-toggle s2bold" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false" data-offset="-100,-50">
@@ -81,16 +81,37 @@
 
   <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
     <ul class="navbar-nav" style="width:80%;margin:0 auto;">
-      <!--Gallery-->
-      <li class="nav-item">
-        <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/galleries' routerLinkActive="active">
+      <!--!Gallery-->
+      <li class="nav-item dropdown">
+        <div class="nav-link dropdown-toggle s2bold" id="navbarDropdownMenuLink2" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false" data-offset="-100,-50">
           <h1 class="s2bold">Gallery</h1>
-        </a>
-        <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/galleries'>
-          <h1 class="s2bold">Gallery</h1>
-        </a>
+        </div>
+        <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink2">
+          <!-- !large screen dropdown -->
+          <a *ngIf="isBrowser==true" class="dropdown-item d-none d-md-block s2bold" routerLink='/galleries'> <h1>All Galleries</h1></a>
+          <a *ngIf="isBrowser==false" class="dropdown-item d-none d-md-block" href='http://luxedreameventhire.co.nz/galleries'>All Galleries</a>
+          <div *ngIf="isBrowser==true">
+            <a class="dropdown-item d-none d-md-block s2bold" *ngFor="let gallery of galleriesData" routerLink= '/galleries/{{gallery}}'><h1>{{gallery}}</h1></a>
+          </div>
+          <div *ngIf="isBrowser==false">
+            <a class="dropdown-item d-none d-md-block" *ngFor="let gallery of galleriesData" href = 'http://luxedreameventhire.co.nz/category/galleries/{{gallery}}'>{{gallery}}</a>
+          </div>
 
+          <!-- !mobile dropdown -->
+          <a class="dropdown-item d-block d-md-none" data-toggle="collapse" data-target=".navbar-collapse1">
+            <a  class="s2bold" *ngIf="isBrowser==true" routerLink='/galleries'><h1>All Galleries</h1></a>
+            <a *ngIf="isBrowser==false" href='http://luxedreameventhire.co.nz/galleries'>All Galleries</a>
+          </a>
+          <a class="dropdown-item d-block d-md-none s2bold" *ngFor="let gallery of galleriesData" data-toggle="collapse"
+            data-target=".navbar-collapse">
+            <a class="s2bold" *ngIf="isBrowser==true" routerLink= '/galleries/{{gallery}}'><h1>{{gallery}}</h1></a>
+            <a *ngIf="isBrowser==false" href='http://luxedreameventhire.co.nz/category/galleries/{{gallery}}'>{{gallery}}</a>
+          </a>
+        </div>
       </li>
+
+
       <span class="navspace"></span>
       <!--About us-->
       <li class="nav-item">
