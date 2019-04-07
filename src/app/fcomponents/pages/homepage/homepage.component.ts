@@ -45,10 +45,12 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
     // large screen
     if (this.isBrowser) {
-      this.imgScroll.nativeElement.style.height = window.innerHeight - 190 + 'px';
+      // this.imgScroll.nativeElement.style.height = window.innerHeight - 190 + 'px';
       // mobile screen
-      if ($(window).innerWidth < 768) {
-        this.imgScroll.nativeElement.style.height = $(window).innerHeight - 100 + 'px';
+      if (window.innerWidth < 768) {
+        this.imgScroll.nativeElement.style.height = window.innerHeight - 560 + 'px';
+      } else {
+        this.imgScroll.nativeElement.style.height = window.innerHeight - 190 + 'px';
       }
       console.log(this.imgScroll);
 
