@@ -52,8 +52,8 @@
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       <!-- !Dashboard -->
-      <div *ngIf="blockCode == '1'">
-        This is Dashboard<br>
+      <div *ngIf="blockCode == '1'" style="text-align:center;padding-top:13%;">
+      <h1>Welcome to Dashboard</h1>
       </div>
 
       <!-- !Hire || Service || Package-->
@@ -82,31 +82,31 @@
             <tr class="table-secondary">
               <th scope="col">#<span style="font-size:10px;">编号</span></th>
               <th scope="col">Title<span style="font-size:10px;">标题</span></th>
-              <th scope="col" style="text-align:center;">Subtitle<span style="font-size:10px;">副标题</span></th>
-              <th scope="col" style="text-align:center;">Price<span style="font-size:10px;">价格</span></th>
-              <th scope="col" style="text-align:center;">Discount<span style="font-size:10px;">折后价</span></th>
-              <th scope="col" *ngIf="blockCode == 2" style="text-align:center;">Category<span
+              <th scope="col" >Subtitle<span style="font-size:10px;">副标题</span></th>
+              <th scope="col" >Price<span style="font-size:10px;">价格</span></th>
+              <th scope="col" >Discount<span style="font-size:10px;">折后价</span></th>
+              <th scope="col" *ngIf="blockCode == 2" >Category<span
                   style="font-size:10px;">类别</span></th>
-              <th scope="col" style="text-align:center;">Inventory<span style="font-size:10px;">库存</span></th>
-              <th scope="col" style="text-align:center;">Description<span style="font-size:10px;">描述</span></th>
-              <th scope="col" style="text-align:center;">Edit<span style="font-size:10px;">编辑</span></th>
-              <th scope="col" style="text-align:center;">Delete<span style="font-size:10px;">删除</span></th>
+              <th scope="col" >Inventory<span style="font-size:10px;">库存</span></th>
+              <th scope="col" >Description<span style="font-size:10px;">描述</span></th>
+              <th scope="col" >Edit<span style="font-size:10px;">编辑</span></th>
+              <th scope="col" >Delete<span style="font-size:10px;">删除</span></th>
             </tr>
           </thead>
           <tbody *ngIf="displayData">
             <tr *ngFor="let data of displayData">
               <td>{{data.prodId}}</td>
               <td>{{data.title}}</td>
-              <td style="text-align:center;">{{data.subTitle}}</td>
-              <td style="text-align:center;">${{data.price}}</td>
-              <td style="text-align:center;">${{data.price - data.discount}}</td>
-              <td *ngIf="blockCode == 2" style="text-align:center;">
+              <td >{{data.subTitle}}</td>
+              <td >${{data.price}}</td>
+              <td >${{data.price - data.discount}}</td>
+              <td *ngIf="blockCode == 2" >
                 <div *ngIf="data.category">{{data.category.categoryName}}</div>
               </td>
-              <td style="text-align:center;">{{data.totalStock}}</td>
+              <td >{{data.totalStock}}</td>
               <td style="text-align:center; font-size:10px;">{{data.description}}</td>
-              <td style="text-align:center;"><i class="far fa-edit" (click)="openProduct(data)" title="Edit"></i></td>
-              <td style="text-align:center;"><i class="far fa-trash-alt" title="Delete"
+              <td ><i class="far fa-edit" (click)="openProduct(data)" title="Edit"></i></td>
+              <td ><i class="far fa-trash-alt" title="Delete"
                   (click)="deleteProduct(data)"></i></td>
             </tr>
           </tbody>
@@ -189,18 +189,18 @@
               <th scope="col">Id</th>
               <th scope="col">CartProds</th>
               <th scope="col">Contact</th>
-              <th>Price</th>
+              <th scope="col">Price</th>
               <th scope="col">Location</th>
               <th scope="col">CreateTime</th>
               <th scope="col">EventDate</th>
-              <th>UpdateTime</th>
-              <th>Delete</th>
+              <th scope="col">UpdateTime</th>
+              <th scope="col">Delete</th>
             </tr>
           </thead>
           <tbody *ngIf="displayData">
             <tr *ngFor="let data of displayData">
               <td>{{data.cartId}}</td>
-              <!---->
+              <!--CartProds-->
               <td>
                 <div class="dropdown">
                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -210,16 +210,18 @@
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" *ngIf="data.cartProd">
                     <div *ngFor="let cart of data.cartProd">
                       <div class="dropdown-item">
-                        <b>Title:</b>{{cart.title}}
-                        <b>Subtitle:</b>{{cart.subtitle}}
-                        <b>Price:</b>{{cart.price}}
-                        <b>Quantity:</b>{{cart.quantity}}
+                        <b>{{cart.title}}</b> |
+                        <b>{{cart.subTitle}}</b>|
+                        <b>${{cart.price}}</b> |
+                        Qty:<b>{{cart.quantity}}</b>
                       </div>
                     </div>
                     <a class="dropdown-item" *ngIf="data.cartProd.length==0">Empty</a>
                   </div>
                 </div>
               </td>
+              <!--End CartProds-->
+              <!--Contact-->
               <td>
                 <div class="dropdown">
                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -228,21 +230,22 @@
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <div class="dropdown-item" *ngIf="data.contact">
-                      <b>Firstname:</b>{{data.contact.firstName}}
-                      <b>Lastname:</b>{{data.contact.lastName}}
-                      <b>Phone Number:</b>{{data.contact.phoneNum}}
-                      <b>Email:</b>{{data.contact.email}}
+                      Firstname: <b>{{data.contact.firstName}}</b><br>
+                      Lastname: <b>{{data.contact.lastName}}</b><br>
+                      Mob: <b>{{data.contact.phoneNum}}</b><br>
+                      Email: <b>{{data.contact.email}}</b>
                     </div>
                   </div>
                 </div>
               </td>
-
-              <td>{{data.createOn | date:'mediumDate'}}</td>
+              <!--End Contact-->
+              <td>${{data.price}}</td>
               <td>{{data.location}}</td>
-              <td>{{data.price}}</td>
-              <td>{{data.updateOn | date:'mediumDate'}}</td>
+              <td style="font-size:10px;">{{data.createOn | date:'mediumDate'}}</td>
+              <td style="font-size:10px;">{{data.plannedTime | date:'short'}}</td>
+              <td style="font-size:10px;">{{data.updateOn | date:'mediumDate'}}</td>
               <!-- <td><i class="far fa-edit" (click)="openCart(data)" title="Edit"></i></td> -->
-              <td><i class="far fa-trash-alt" title="Delete" (click)="deleteCart(data)"></i></td>
+              <td ><i class="far fa-trash-alt" title="Delete" (click)="deleteCart(data)"></i></td>
             </tr>
           </tbody>
         </table>
