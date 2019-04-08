@@ -10,58 +10,61 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginFailed:boolean = false
-  loginFailedMessage:string = ''
-  fillAll:string
-  JWTToken:string;
+  loginFailed: Boolean = false;
+  loginFailedMessage: string;
+  fillAll: string;
+  JWTToken: string;
   user = {
     username: '',
-    password:''
-  }
-  isBrowser:Boolean;
-  errorMessage:string;
+    password: ''
+  };
+  isBrowser: Boolean;
+  errorMessage: string;
 
   constructor(
-    //@Inject(LOCAL_STORAGE)
-    //private localStorage: any,
+    // @Inject(LOCAL_STORAGE)
+    // private localStorage: any,
     @Inject(PLATFORM_ID) private platformId,
-    private productservice : ProductService,
+    private productservice: ProductService,
     public router: Router
   ) {
     if (isPlatformBrowser(this.platformId)) {
-      this.isBrowser = true
+      this.isBrowser = true;
     }
    }
 
   ngOnInit() {
   }
 
-  onSubmit({valid}:{valid: boolean})  {
-    console.log(valid)
-    //*login failed
-    if(!valid) {
-      console.log("Dosn't Work");
-      this.fillAll = 'All fields must be filled.';
-    }
-    //*login successfully
-    else{
+  onSubmit({valid}: { valid: boolean})  {
+    console.log(valid);
+    // *login failed
+    if (!valid) {
+      console.log('Dosn\'t Work');
+      this.errorMessage = 'All fields must be filled.';
+    } else {
       this.productservice.login(this.user)
-      .subscribe((res)=>{
-        if (this.isBrowser = true){
-          sessionStorage.setItem('access_token',res['token'])
+      .subscribe((res) => {
+        if (this.isBrowser = true) {
+          sessionStorage.setItem('access_token', res['token']);
         }
         this.router.navigate(['/admin']);
-      },(error)=>{
-        console.log(error)
-        this.loginFailed = true
-        this.loginFailedMessage = error['error']
-      })
+      }, (error) => {
+        console.log(error);
+        this.loginFailed = true;
+        if (error['error'].status === 401) {
+          this.errorMessage = 'Incorrect Password or Username.';
+        } else {
+          this.errorMessage = 'Server Error.';
+        }
+
+      });
     }
   }
 }
 
-  //!login success 
-  //set JWT
-  //Redirect to admin page
+  // !login success
+  // set JWT
+  // Redirect to admin page
 
-  //!login error
+  // !login error
