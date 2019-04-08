@@ -50,14 +50,14 @@ export class HomepageComponent implements OnInit {
       this.imgScroll.nativeElement.style.height = window.innerHeight - 160 + 'px';
       // mobile screen
       if (window.innerWidth < 768) {
-        this.imgScroll.nativeElement.style.height = $(window).innerHeight - 100 + 'px';
+        this.imgScroll.nativeElement.style.height = window.innerHeight - 100 + 'px';
       }
       console.log(this.imgScroll);
 
       window.onscroll = () => {
         let top1 = this.bgat.nativeElement.offsetTop;
-        if (top1 - $(window).pageYOffset < $(window).innerHeight && top1 + this.bgat.nativeElement.offsetHeight > $(window).pageYOffset) {
-          this.backgroundscroll($(window).pageYOffset);
+        if (top1 - window.pageYOffset < window.innerHeight && top1 + this.bgat.nativeElement.offsetHeight > window.pageYOffset) {
+          this.backgroundscroll(window.pageYOffset);
         }
       };
     }
