@@ -54,9 +54,6 @@ export class HomepageComponent implements OnInit {
     }
     this.getSpeicals();
   }
-  // tslint:disable-next-line:use-life-cycle-interface
-  ngAfterViewInit(): void {
-  }
   // controll scrolling speed
   backgroundscroll(e) {
     this.bgat.nativeElement.style.backgroundPosition = '0%' + e / 50 + '%';
@@ -75,7 +72,6 @@ export class HomepageComponent implements OnInit {
   seperateSpecials() {
     this.groupedSpecials = [];
     if (this.windowResize >= 768) {
-      console.log("specials:",this.groupedSpecials)
       for (let i = 0; i < this.specialProducts.length; i += 4) {
         let mylist = this.specialProducts.slice(i, i + 4);
         this.groupedSpecials.push(mylist);
