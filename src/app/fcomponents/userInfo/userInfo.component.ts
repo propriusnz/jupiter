@@ -13,6 +13,8 @@ export class UserInfoComponent implements OnInit {
   feedback_message:string;
   successMessage:string;
   PlannedTime:any;
+  isSendingEmail:boolean = false;
+  isSendSuccess:boolean  = false;
   userInfo={
     FirstName:'',
     LastName:'',
@@ -60,6 +62,7 @@ export class UserInfoComponent implements OnInit {
   }
 
   submitCart(post){
+    this.isSendingEmail = true
     //let data = JSON.parse(localStorage.getItem("cartList"))
       let data = JSON.parse(localStorage.getItem("cartList") || "[]");
 
@@ -76,6 +79,8 @@ export class UserInfoComponent implements OnInit {
     this.productService.addCart(cartContact).subscribe(
       (res)=>{
         console.log(res)
+        this.isSendingEmail = false
+        this.isSendSuccess = true
       },
       (error)=>{
         console.log(error)

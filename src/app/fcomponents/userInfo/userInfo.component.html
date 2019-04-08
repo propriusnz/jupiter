@@ -4,7 +4,13 @@
      <!-- form -->
           <div class="col-12">
             <div class="col-12"> Contact info</div>
-          <form class="col-12" novalidate #f="ngForm" (ngSubmit)="onSubmit(f)" style="padding-left:0;">
+            <div *ngIf="isSendingEmail">We are processing your shopping cart. Please wait...
+               <div class="spinner-border text-info" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            <div *ngIf="isSendSuccess" class="alert alert-success" role="alert">Success! Thank you for placing the order!</div>
+          <form class="col-12" novalidate #f="ngForm" (ngSubmit)="onSubmit(f)" style="padding-left:0;" *ngIf="!isSendSuccess">
               <div class="row">
                   <!-- first name -->
                   <div class="col-6">
@@ -81,7 +87,7 @@
       
               </div>
               <div>{{feedback_message}}</div>
-              <div class="row"><div class="col-12 text-center"><button class="btn btn-outline-gold" type = "submit" >Submit</button></div></div>  
+              <div class="row"><div class="col-12 text-center"><button class="btn btn-outline-gold" type = "submit" [disabled]="isSendingEmail" >Submit</button></div></div>  
             </form>
           </div>
 

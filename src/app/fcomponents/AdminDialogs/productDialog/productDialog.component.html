@@ -38,7 +38,7 @@
             <option *ngFor="let cate of allCategories, index as i" value= {{cate.categoryId}}>{{cate.categoryName}}</option>
       </select>
     </div>
-    <button (click)="goEditImage()" *ngIf="status == 'update'">Edit product img</button>
+    <button (click)="goEditImage()" *ngIf="status == 'update'">Edit product image</button>
 </mat-dialog-content>
 
 <mat-dialog-content *ngIf="editImage">
@@ -59,7 +59,7 @@
         <input #imageInput type="file" (change)="onFileSelected($event)">
         <button (click)="onUpload()">upload</button>    
     </div> 
-    <button (click)="goEditProduct()">Edit product detial</button>
+    <button (click)="goEditProduct()">Edit product detail</button>
     <br>
     <div>
         {{feedbackMessage}}

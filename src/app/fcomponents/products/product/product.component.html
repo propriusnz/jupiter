@@ -67,7 +67,7 @@
         Quantity:<input type="number" [value] = "quantity"  min="1" max={{productDetail.availableStock}} [(ngModel)]="quantity">
         <!-- <span class="s3 pl-2"> (only {{productDetail.availableStock}} in stock)</span> -->
       </div>
-      <div class="col-6 col-lg-4" *ngIf="inCart==1"><button class='btn btn_gold float-right' (click)="addToCart()">Add to cart</button></div>
+      <div class="col-6 col-lg-4" *ngIf="inCart==1"><button class='btn btn_gold float-right' (click)="addToCart()" [disabled] = " 0 >=quantity ">Add to cart</button></div>
       <!-- <div class="col-4" *ngIf="inCart==1"><button class='btn btn_gold' routerLink='/shoppingCart'>Add To Cart</button></div> -->
     </div>
     <div class="row">
