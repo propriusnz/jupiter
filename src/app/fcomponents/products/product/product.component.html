@@ -4,10 +4,19 @@
   <div class="row my-5">
   <div class="col-12 col-md-6 col-lg-6 p-0">
     <!-- <div (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()" (mousemove)="mouseMove($event)"> -->
-    <div class="h490">
+    <!-- <div class="h490">
         <img src="../../../../assets/Products/{{prodMediaUrl}}.jpg" class="d-block autofix" id="small" #small>
-        <!-- <b id="shadow" #shadow></b> -->
+    </div> -->
+
+    <!-- TODO: add img scrolling -->
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item h490" *ngFor="let img of prodMediaUrl, index as i" [ngClass]="{'active': i == 0}">
+              <img src="http://localhost:5000/{{img.url}}" class="d-block autofix" alt="...">
+          </div>
+        </div>
     </div>
+
     <br>
     <div class="row">
       <!-- <div class="col-3 pr-0"><img class="smallImg" src="http://localhost:56662/ImgTest/test1.png" (mouseover)="changeImg($event)" ></div>
@@ -60,6 +69,13 @@
       </div>
       <div class="col-6 col-lg-4" *ngIf="inCart==1"><button class='btn btn_gold float-right' (click)="addToCart()">Add to cart</button></div>
       <!-- <div class="col-4" *ngIf="inCart==1"><button class='btn btn_gold' routerLink='/shoppingCart'>Add To Cart</button></div> -->
+    </div>
+    <div class="row">
+      <div class="col-6 col-lg-8"></div>
+
+      <div class="col-6 col-lg-4 alert alert-success mt-3" role="alert" *ngIf="isprodAdded">
+          {{quantity}} {{productDetail.title}} added into cart.
+      </div>
     </div>
 
    </div>

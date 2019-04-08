@@ -16,7 +16,6 @@ export class ProductDialogComponent implements OnInit {
   imageList:any
   isLoading:boolean = false
   @ViewChild('imageInput') imageInput : ElementRef
-  //TODO: add price, discount price, image
   productForm : {
     title:string,
     subTitle:string,
@@ -104,14 +103,12 @@ export class ProductDialogComponent implements OnInit {
         console.log(error)
       })
   }
-    //TODO: upload img
   onFileSelected(e){
     this.selectedImg =<File>e.target.files[0];
   }
   // !upload image
   onUpload(){
     this.isLoading = true
-    // TODO: feedbackMessage not work
     const fd = new FormData();
     fd.append('image',this.selectedImg, this.selectedImg.name)
     fd.append('prodId',JSON.stringify(this.id))

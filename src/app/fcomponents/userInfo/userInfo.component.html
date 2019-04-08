@@ -55,7 +55,7 @@
                           [ngClass]="{'is-invalid':city.errors?.required && city.touched}" [(ngModel)]="userInfo.city" #city="ngModel">
                       </div>
                     <!-- street address -->
-                    <div class="form-group col-12">
+                    <div class="form-group col-6">
                       <div class="invalid_feedback" *ngIf="streetAddress.errors?.required && streetAddress.touched">Please enter your street address</div>
                         <div class="invalid_feedback" *ngIf=" streetAddress.errors?.minlength && streetAddress.touched ">
                            Please enter the corrct address.
@@ -63,6 +63,16 @@
                         <input class="form-control" type="streetAddress" required minlength="2" name="streetAddress" placeholder="street address *"
                         [ngClass]="{'is-invalid':streetAddress.errors?.required && streetAddress.touched}" [(ngModel)]="userInfo.streetAddress" #streetAddress="ngModel">
                     </div>
+                    <!-- event data -->
+                    <div class="col-3">
+                        <mat-form-field style="width:100%">
+                           <input matInput [matDatepicker]="myDatepicker" [min] = "minDate" placeholder="Date of event" type="dateOfEvent" required name="dateOfEvent"
+                           [ngClass]="{'is-invalid':dateOfEvent.errors?.required && dateOfEvent.touched}" [(ngModel)]="PlannedTime" #dateOfEvent="ngModel">
+                           <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                           <mat-datepicker #myDatepicker></mat-datepicker>
+                           <mat-error *ngIf="dateOfEvent.invalid">Please enter a Date</mat-error>
+                         </mat-form-field>
+                       </div>
                    <!-- Message -->
                    <div class="form-group col-8">  
                       <textarea class="form-control" rows="5" type="Message" name="Message" placeholder="Enter you Message:" [(ngModel)]="userInfo.Message" #Message="ngModel">

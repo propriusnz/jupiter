@@ -11,7 +11,6 @@ import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 })
 export class HomepageComponent implements OnInit {
 
-  // TODO $ is not defined
   num: number = 0;
   specialProducts: any = [];
   groupedSpecials: any = [];
@@ -76,6 +75,7 @@ export class HomepageComponent implements OnInit {
   seperateSpecials() {
     this.groupedSpecials = [];
     if (this.windowResize >= 768) {
+      console.log("specials:",this.groupedSpecials)
       for (let i = 0; i < this.specialProducts.length; i += 4) {
         let mylist = this.specialProducts.slice(i, i + 4);
         this.groupedSpecials.push(mylist);

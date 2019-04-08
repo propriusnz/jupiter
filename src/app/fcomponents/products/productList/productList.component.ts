@@ -100,6 +100,7 @@ export class ProductListComponent implements OnInit {
     this.productService.indexType(id).subscribe(
       (res) => {
         this.allProducts = res['product']
+        console.log('allproduts:',this.allProducts)
         if (id ==1){
           this.getCategories()
         }
