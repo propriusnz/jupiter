@@ -46,7 +46,7 @@
     <!-- !show images -->
     <div *ngIf="imageList" >
         <div *ngFor="let img of imageList">
-            <img src="http://localhost:5000/{{img.url}}">
+            <img src="http://luxedreameventhire.co.nz:5000/{{img.url}}">
             <!-- !delete image -->
             <button id="{{img.id}}" (click)="deleteImage(img.id)" *ngIf="!isLoading">Delete</button>
         </div>
