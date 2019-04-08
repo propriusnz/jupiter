@@ -13,6 +13,14 @@
      <div class="form-group">
         <input class="form-control" type="number" name="totalStock" placeholder="totalStock *" [(ngModel)]="productForm.totalStock" #totalStock="ngModel">
      </div>
+     <!-- Price -->
+     <div class="form-group">
+        <input class="form-control" type="number" name="price" placeholder="Price" [(ngModel)]="productForm.price" #price="ngModel">
+     </div>
+     <!-- Discount -->
+     <div class="form-group">
+        <input class="form-control" type="number" name="discount" placeholder="Discount" [(ngModel)]="productForm.discount" #discount="ngModel">
+     </div>
     <!-- description -->
     <div class="form-group">
         <input class="form-control" name="description" placeholder="description *" [(ngModel)]="productForm.description" #description="ngModel">
