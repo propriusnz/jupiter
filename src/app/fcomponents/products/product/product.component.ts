@@ -1,7 +1,7 @@
 import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {ProductService} from '../../../service/product.service';
-import {Location} from '@angular/common';
+//import {Location} from '@angular/common';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -29,7 +29,6 @@ export class ProductComponent implements OnInit {
     private route:ActivatedRoute,
     private router:Router,
     private productService:ProductService, 
-    private _location:Location   
   ) { 
     this.productId = this.route.snapshot.params['id'];
   }
@@ -149,7 +148,6 @@ export class ProductComponent implements OnInit {
 	// 		bigImg.style.top = -bigImg.offsetHeight/smallBox.offsetHeight * y + "px";
   // }
   backClicked(id){
-    // this._location.back();
     this.router.navigate(['/category/',id]);
   }
 }

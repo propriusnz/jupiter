@@ -38,7 +38,7 @@
             <option *ngFor="let cate of allCategories, index as i" value= {{cate.categoryId}}>{{cate.categoryName}}</option>
       </select>
     </div>
-    <button (click)="goEditImage()" *ngIf="status == 'update'">Edit product image</button>
+    <button type="button" class="btn btn-outline-info" (click)="goEditImage()" *ngIf="status == 'update'">Edit product image</button>
 </mat-dialog-content>
 
 <mat-dialog-content *ngIf="editImage">
@@ -48,7 +48,7 @@
         <div *ngFor="let img of imageList">
             <img src="http://luxedreameventhire.co.nz:5000/{{img.url}}">
             <!-- !delete image -->
-            <button id="{{img.id}}" (click)="deleteImage(img.id)" *ngIf="!isLoading">Delete</button>
+            <button type="button" class="btn btn-outline-danger btn-sm" id="{{img.id}}" (click)="deleteImage(img.id)" *ngIf="!isLoading">Delete</button>
         </div>
     </div>
     <div class="spinner-border text-info" role="status" *ngIf="isLoading">

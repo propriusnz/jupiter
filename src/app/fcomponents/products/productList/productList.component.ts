@@ -15,7 +15,7 @@ export class ProductListComponent implements OnInit {
   selectedCate: string = "All Products"
   errorMessage:string
   categoryId:number
-
+  isLoading:boolean = false
 
   constructor(
     private productService: ProductService,
@@ -97,26 +97,31 @@ export class ProductListComponent implements OnInit {
 
   //sort product by type => Hire | Service | Package
   sortByType(id:number){
+    this.isLoading = true
     this.productService.indexType(id).subscribe(
       (res) => {
+        this.isLoading = false
         this.allProducts = res['product']
         console.log('allproduts:',this.allProducts)
         if (id ==1){
           this.getCategories()
         }
       },
-      (err) => {console.log(err),this.errorMessage = 'Server fault'}
+      (err) => {console.log(err),this.errorMessage = 'Server fault',this.isLoading = false}
       )
   }
   //sort product by category
   changeCate(id,e?) {
+    this.isLoading = true
     if(e){
       this.selectedCate = e.srcElement.innerHTML
     }
     this.productService.indexCategoryId(id).subscribe((res)=>{
+      this.isLoading = false
       this.allProducts = res['product']
       this.selectedCate = res['categoryName']
     },(error)=>{
+      this.isLoading = false
       console.log(error)
     })
   }
