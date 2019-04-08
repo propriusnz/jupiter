@@ -48,8 +48,8 @@ export class HomepageComponent implements OnInit {
     if (this.isBrowser) {
       window.onscroll = () => {
         let top1 = this.bgat.nativeElement.offsetTop;
-        if (top1 - $(window).pageYOffset < $(window).innerHeight && top1 + this.bgat.nativeElement.offsetHeight > $(window).pageYOffset) {
-          this.backgroundscroll($(window).pageYOffset);
+        if (top1 - window.pageYOffset < window.innerHeight && top1 + this.bgat.nativeElement.offsetHeight > window.pageYOffset) {
+          this.backgroundscroll(window.pageYOffset);
         }
       };
     }

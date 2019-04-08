@@ -3,6 +3,7 @@ import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import {HttpClient,HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment.prod';
 import { isPlatformBrowser } from '@angular/common';
+import { ReturnStatement } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -115,5 +116,8 @@ constructor(
   //!upload img
   addImg(files){
     return this.http.post(this.baseUrl + '/ProductMedias/',files)
+  }
+  getImg(id){
+    return this.http.get(this.baseUrl + '/ProductMedias/'+ id)
   }
 }

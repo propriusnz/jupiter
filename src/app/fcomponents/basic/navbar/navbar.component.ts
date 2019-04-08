@@ -24,10 +24,11 @@ export class NavbarComponent implements OnInit {
       }
     }
   ngOnInit() {
-    $('.navbar-nav>li>a').on('click', function(){
-      $('.navbar-collapse').collapse('hide');
-  });
-
+    if (isPlatformBrowser(this.platformId)) {
+      $('.navbar-nav>li>a').on('click', function(){
+        $('.navbar-collapse').collapse('hide');
+    });  
+    }
     this.getCategories()
   }
 

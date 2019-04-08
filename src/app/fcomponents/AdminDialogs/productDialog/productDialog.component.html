@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>{{dialogTitle}}</h2>
 
-<mat-dialog-content>
+<mat-dialog-content *ngIf="!editImage">
     <!-- title -->
     <div class="form-group">
         <input  class="form-control"  name="title" placeholder="title *" [(ngModel)]="productForm.title" #title="ngModel">
@@ -25,11 +25,15 @@
     <div class="form-group">
         <input class="form-control" name="description" placeholder="description *" [(ngModel)]="productForm.description" #description="ngModel">
     </div>
-    <!-- !upload img -->
-    <div>
-        <input type="file" (change)="onFileSelected($event)">
-        <!-- <button (click)="onUpload()">upload</button>     -->
-    </div>              
+    
+    <!-- !price -->
+    <!-- <div class="form-group">
+        <input class="form-control" name="price", placeholder="Price of product" [(ngModel)]="product.price" #price="ngModel">
+    </div> -->
+    <!-- !discount -->
+    <!-- <div class="form-group">
+        <input class="form-control" name="discount" placeholder="Discount price" [(ngModel)]="productForm.discount" #discount="ngModel">
+    </div> -->             
     <!-- Event Type -->
     <div class="form-group">
       <!-- !when update hire product -->
@@ -43,8 +47,27 @@
             <option *ngFor="let cate of allCategories, index as i" value= {{cate.categoryId}}>{{cate.categoryName}}</option>
       </select>
     </div>
-    
+    <button (click)="goEditImage()" *ngIf="status == 'update'">Edit product img</button>
+</mat-dialog-content>
 
+<mat-dialog-content *ngIf="editImage">
+    Edit Product Images
+    <!-- !show images -->
+    <div *ngIf="imageList" >
+        <div *ngFor="let img of imageList">
+            <img src="http://localhost:5000{{img.url}}">
+        </div>
+    </div>
+    <!-- !upload img -->
+    <div>
+        <input type="file" (change)="onFileSelected($event)">
+        <button (click)="onUpload()">upload</button>    
+    </div> 
+    <button (click)="goEditProduct()">Edit product detial</button>
+    <br>
+    <div>
+        {{feedbackMessage}}
+    </div>
 </mat-dialog-content>
 
 <mat-dialog-actions>
