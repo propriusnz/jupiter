@@ -16,15 +16,14 @@ export class HomepageComponent implements OnInit {
   specialProducts: any = [];
   groupedSpecials: any = [];
   isBrowser: Boolean = false;
-  windowResize :number
+  windowResize: number;
   @ViewChild('bgat') bgat: ElementRef;
-  @ViewChild('imgScroll') imgScroll: ElementRef;
   @ViewChild('list') list: ElementRef;
   @HostListener('window:resize', ['$event'])
   sizeChange(event) {
-    if(this.isBrowser){
-      this.windowResize = window.innerWidth
-      this.seperateSpecials()  
+    if (this.isBrowser) {
+      this.windowResize = window.innerWidth;
+      this.seperateSpecials();
     }
   }
   constructor(
@@ -35,7 +34,7 @@ export class HomepageComponent implements OnInit {
   ) {
     if (isPlatformBrowser(this.platformId)) {
       this.isBrowser = true;
-      this.windowResize = window.innerWidth
+      this.windowResize = window.innerWidth;
     }
     this.meta.addTags([
       { name: 'keywords', content: 'Luxedream Hire, Party hire, wedding hire, birthday party hire, event hire, auckland event hire' },
@@ -47,13 +46,6 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
     // large screen
     if (this.isBrowser) {
-      this.imgScroll.nativeElement.style.height = window.innerHeight - 160 + 'px';
-      // mobile screen
-      if (window.innerWidth < 768) {
-        this.imgScroll.nativeElement.style.height = window.innerHeight - 100 + 'px';
-      }
-      console.log(this.imgScroll);
-
       window.onscroll = () => {
         let top1 = this.bgat.nativeElement.offsetTop;
         if (top1 - window.pageYOffset < window.innerHeight && top1 + this.bgat.nativeElement.offsetHeight > window.pageYOffset) {
@@ -82,7 +74,7 @@ export class HomepageComponent implements OnInit {
     );
   }
   seperateSpecials() {
-    this.groupedSpecials= []
+    this.groupedSpecials = [];
     if (this.windowResize >= 768) {
       for (let i = 0; i < this.specialProducts.length; i += 4) {
         let mylist = this.specialProducts.slice(i, i + 4);
