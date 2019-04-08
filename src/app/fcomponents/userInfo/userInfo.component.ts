@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { ProductService } from '../../service/product.service';
+import { isPlatformBrowser } from '@angular/common';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-userInfo',
@@ -9,6 +12,9 @@ import { ProductService } from '../../service/product.service';
 export class UserInfoComponent implements OnInit {
   feedback_message:string;
   successMessage:string;
+  PlannedTime:any;
+  isSendingEmail:boolean = false;
+  isSendSuccess:boolean  = false;
   userInfo={
     FirstName:'',
     LastName:'',
@@ -21,8 +27,16 @@ export class UserInfoComponent implements OnInit {
   }
 
   constructor(
-    private productService:ProductService
-    ) { }
+    @Inject(PLATFORM_ID) private platformId,
+    private productService:ProductService,
+    private router: Router,
+    ) {
+      if (isPlatformBrowser(this.platformId)) {
+        // !if no JWT, redirect to login page
+        if (localStorage.getItem('cartList') === '' || localStorage.getItem('cartList') == null) {
+          this.router.navigate(['/shoppingCart']);
+        }}
+     }
 
   ngOnInit() {
   }
@@ -48,12 +62,14 @@ export class UserInfoComponent implements OnInit {
   }
 
   submitCart(post){
+    this.isSendingEmail = true
     //let data = JSON.parse(localStorage.getItem("cartList"))
       let data = JSON.parse(localStorage.getItem("cartList") || "[]");
 
     let cartdata = {
       location: `${this.userInfo.streetAddress}, ${this.userInfo.city}`,
       price:Number(localStorage.getItem('totalPrice')),
+      PlannedTime:this.PlannedTime,
       CartProd: data
     };
     let cartContact = {
@@ -63,6 +79,8 @@ export class UserInfoComponent implements OnInit {
     this.productService.addCart(cartContact).subscribe(
       (res)=>{
         console.log(res)
+        this.isSendingEmail = false
+        this.isSendSuccess = true
       },
       (error)=>{
         console.log(error)

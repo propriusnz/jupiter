@@ -29,13 +29,14 @@
   <!-- display products -->
   <div class="row py-3">
     <div class='col-12 col-sm-6 col-md-6 col-lg-4 pt-4 pb-2' *ngFor="let product of allProducts; index as i">
-        <div id="carouselExampleFade{{i}}" class="carousel slide carousel-fade" data-ride="carousel" data-interval="false">
+        <div id="carouselExampleFade{{i}}" class="carousel slide carousel-fade" data-ride="carousel">
             <a [routerLink] = "['/product/',product.prodId]">
             <div class="carousel-inner" >
                 <!-- active -->
-                <!-- TODO: Fix img -->
-              <div class="carousel-item active overflow-hidden h490" *ngFor="let media of product.productMedia">
-                <img src="../../../../assets/Products/{{media.url}}.jpg" class="d-block autofix"/>
+              <div class="carousel-item active overflow-hidden h490" *ngFor="let media of product.productMedia, index as i" [ngClass]="{'active': i == 0}">
+                <!-- TODO: change the baseUrl -->
+                <!-- <img src="../../../../assets/Products/{{media.url}}.jpg" class="d-block autofix"/> -->
+                <img src="http://luxedreameventhire.co.nz:5000/{{media.url}}" class="d-block autofix">
               </div>
             </div>
             </a>

@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   };
   isBrowser: Boolean;
   errorMessage: string;
+  isLoggingIn: boolean = false;
 
   constructor(
     // @Inject(LOCAL_STORAGE)
@@ -62,9 +63,3 @@ export class LoginComponent implements OnInit {
     }
   }
 }
-
-  // !login success
-  // set JWT
-  // Redirect to admin page
-
-  // !login error

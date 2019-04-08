@@ -14,6 +14,7 @@ export class ProductComponent implements OnInit {
   quantity:number=1 ;
   quantityLength:number;
   quantityFilled:boolean = true;
+  isprodAdded:boolean = false;
   defaultImgUrl:string = '../../../../assets/images/product1.jpg';
   // 1: add to cart; 2: successfully added 3:failed
   inCart:number = 1;
@@ -36,7 +37,7 @@ export class ProductComponent implements OnInit {
     this.productService.showProduct(this.productId).subscribe( 
       (res)=>{
         this.productDetail = res
-        this.prodMediaUrl =  this.productDetail.productMedia[0].url;
+        this.prodMediaUrl =  this.productDetail.productMedia;
         this.quantityLength = this.productDetail.totalStock.toString().length;
         console.log(this.productDetail)
       },
@@ -44,6 +45,7 @@ export class ProductComponent implements OnInit {
     )
     this.setStorage()
     }
+
   quanCheck(e){
     if(e){
       this.quantityFilled = true
@@ -70,6 +72,10 @@ export class ProductComponent implements OnInit {
       localStorage.setItem('userId','aaa ')
   }
   addToCart(){
+    this.isprodAdded = true
+    setTimeout( ()=>{
+      this.isprodAdded = false
+      }, 1000)
     // cartId?
     let item = {
       ProdId:Number(this.productId),

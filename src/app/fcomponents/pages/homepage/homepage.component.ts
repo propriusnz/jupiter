@@ -11,7 +11,6 @@ import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 })
 export class HomepageComponent implements OnInit {
 
-  // TODO $ is not defined
   num: number = 0;
   specialProducts: any = [];
   groupedSpecials: any = [];
@@ -48,15 +47,12 @@ export class HomepageComponent implements OnInit {
     if (this.isBrowser) {
       window.onscroll = () => {
         let top1 = this.bgat.nativeElement.offsetTop;
-        if (top1 - $(window).pageYOffset < $(window).innerHeight && top1 + this.bgat.nativeElement.offsetHeight > $(window).pageYOffset) {
-          this.backgroundscroll($(window).pageYOffset);
+        if (top1 - window.pageYOffset < window.innerHeight && top1 + this.bgat.nativeElement.offsetHeight > window.pageYOffset) {
+          this.backgroundscroll(window.pageYOffset);
         }
       };
     }
     this.getSpeicals();
-  }
-  // tslint:disable-next-line:use-life-cycle-interface
-  ngAfterViewInit(): void {
   }
   // controll scrolling speed
   backgroundscroll(e) {
