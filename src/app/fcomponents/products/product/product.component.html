@@ -1,6 +1,6 @@
 <div class="container-fluid" #container>
   <div class=" px-0 px-md-5 mx-2">
-  <div class="row mt-5"><div class="col-12 s2goldbold"><a (click)="backClicked()"> Dinnerware and Glassware </a> / Golden Glassline Plate</div></div>
+  <div class="row mt-5"><div class="col-12 s2goldbold" *ngIf="productDetail"><a (click)="backClicked(productDetail.categoryId)"> {{productDetail.category.categoryName}}</a> / {{productDetail.title}}</div></div>
   <div class="row my-5">
   <div class="col-12 col-md-6 col-lg-6 p-0">
     <!-- <div (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()" (mousemove)="mouseMove($event)"> -->

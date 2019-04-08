@@ -27,6 +27,7 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private route:ActivatedRoute,
+    private router:Router,
     private productService:ProductService, 
     private _location:Location   
   ) { 
@@ -147,7 +148,8 @@ export class ProductComponent implements OnInit {
 	// 		bigImg.style.left = -bigImg.offsetWidth/smallBox.offsetWidth * x + "px"; 
 	// 		bigImg.style.top = -bigImg.offsetHeight/smallBox.offsetHeight * y + "px";
   // }
-  backClicked(){
-    this._location.back();
+  backClicked(id){
+    // this._location.back();
+    this.router.navigate(['/category/',id]);
   }
 }
