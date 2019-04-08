@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import { ProductService } from '../../../service/product.service'
 
@@ -14,6 +14,8 @@ export class ProductDialogComponent implements OnInit {
   editImage:boolean = false;
   feedbackMessage:string
   imageList:any
+  isLoading:boolean = false
+  @ViewChild('imageInput') imageInput : ElementRef
   //TODO: add price, discount price, image
   productForm : {
     title:string,
@@ -106,20 +108,38 @@ export class ProductDialogComponent implements OnInit {
   onFileSelected(e){
     this.selectedImg =<File>e.target.files[0];
   }
+  // !upload image
   onUpload(){
+    this.isLoading = true
     // TODO: feedbackMessage not work
     const fd = new FormData();
     fd.append('image',this.selectedImg, this.selectedImg.name)
     fd.append('prodId',JSON.stringify(this.id))
     console.log(fd)
     this.productService.addImg(fd).subscribe((res)=>{
+      this.isLoading = false
       console.log(res)
       this.feedbackMessage = res['data']
       this.getProductImages()
+      this.imageInput.nativeElement.value = null;
     },(error)=>{
+      this.isLoading = false
       this.feedbackMessage = "upload failed"
       console.log(error)
     })
+  }
+  // ! delete image
+  deleteImage(id:number){
+    this.isLoading = true
+    this.productService.deleteImg(id).subscribe(
+      (res)=>{
+        this.isLoading = false
+        this.feedbackMessage = "Delete Successfully"
+        this.getProductImages()
+      },(error)=>{
+        this.isLoading = false
+        this.feedbackMessage = "Delete Failed"
+      })
   }
   goEditImage(){
     this.editImage = true
@@ -128,6 +148,7 @@ export class ProductDialogComponent implements OnInit {
   goEditProduct(){
     this.editImage = false
   }
+  //!refresh image data
   getProductImages(){
     this.productService.getImg(this.id).subscribe(
       (res)=>{

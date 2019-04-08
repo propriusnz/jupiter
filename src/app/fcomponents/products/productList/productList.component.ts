@@ -67,23 +67,18 @@ export class ProductListComponent implements OnInit {
 
 
 
-
-
-
-
-
-
   // Below error change to this format
 
   ngOnInit() {
     // Watch the changes of categoryId and reload component
     this.route.params.subscribe(
       params => {
-        this.categoryId = this.route.snapshot.params['id'];
+        if(this.route.snapshot.params['id']){
+          this.categoryId = this.route.snapshot.params['id'];
+          this.changeCate(this.categoryId)
+        }
         this.typeName = this.route.snapshot.data['some_data'];
-
         this.getCategories()
-        this.changeCate(this.categoryId)
       }
     );
 
@@ -105,7 +100,6 @@ export class ProductListComponent implements OnInit {
     this.productService.indexType(id).subscribe(
       (res) => {
         this.allProducts = res['product']
-        console.log(this.allProducts)
         if (id ==1){
           this.getCategories()
         }
@@ -121,7 +115,6 @@ export class ProductListComponent implements OnInit {
     this.productService.indexCategoryId(id).subscribe((res)=>{
       this.allProducts = res['product']
       this.selectedCate = res['categoryName']
-      console.log(this.allProducts)
     },(error)=>{
       console.log(error)
     })
@@ -130,7 +123,6 @@ export class ProductListComponent implements OnInit {
   getCategories(){
     this.productService.indexCategory().subscribe((res)=>{
       this.allCategories = res
-      console.log(this.allCategories);
     },(error)=>{console.log(error),this.errorMessage = 'Server fault'})
   }
 }

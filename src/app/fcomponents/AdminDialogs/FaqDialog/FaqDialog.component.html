@@ -6,6 +6,7 @@
         <!-- <div class="invalid_feedback" *ngIf="Question.errors?.required && Question.touched">Please enter your Question</div> -->
         <!-- <input class="form-control" type="Question" required minlength="6" name="Question" placeholder="Question *" 
         [ngClass]="{'is-invalid':Question.errors?.required && Question.touched}" [(ngModel)]="faqForm.Question" #Question="ngModel"> -->
+        Question:
         <textarea cols="70" rows="2"  class="form-control" type="Question" name="Question" placeholder="Question *" [(ngModel)]="faqForm.Question" #Question="ngModel"></textarea>
      </div>
      <!-- Answer -->
@@ -13,7 +14,8 @@
         <!-- <div class="invalid_feedback" *ngIf="Answer.errors?.required && Answer.touched">Please enter your Answer</div>
         <input class="form-control" type="tel" required minlength="7" name="Answer" placeholder="Answer *" 
         [ngClass]="{'is-invalid':Answer.errors?.required && Answer.touched}" [(ngModel)]="faqForm.Answer" #Answer="ngModel"> -->
-        <textarea cols="70" rows="5" class="form-control" type="tel" name="Answer" placeholder="Answer *" [(ngModel)]="faqForm.Answer" #Answer="ngModel"></textarea>
+        Answer:
+        <textarea rows="5" cols="70" class="form-control" name="Answer" placeholder="Answer *" [(ngModel)]="faqForm.Answer" #Answer="ngModel"></textarea>
      </div>
 
 </mat-dialog-content>

@@ -94,7 +94,7 @@ export class AdminComponent implements OnInit {
   openFaq(dataRecord) {
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = true;
+    // dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
     dialogConfig.data = {
@@ -112,7 +112,7 @@ export class AdminComponent implements OnInit {
   createFaq() {
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = true;
+    // dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
     dialogConfig.data = {
@@ -159,7 +159,7 @@ export class AdminComponent implements OnInit {
   openGallery(data){
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = true;
+    // dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
     dialogConfig.data = {
@@ -176,7 +176,7 @@ export class AdminComponent implements OnInit {
   createGallery(){
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = true;
+    // dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
     dialogConfig.data = {
@@ -207,7 +207,7 @@ export class AdminComponent implements OnInit {
   openProduct(data){
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = true;
+    // dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
     dialogConfig.data = {
@@ -227,7 +227,7 @@ export class AdminComponent implements OnInit {
   createProduct(){
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = true;
+    // dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
     dialogConfig.data = {
