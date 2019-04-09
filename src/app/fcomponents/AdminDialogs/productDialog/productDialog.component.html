@@ -44,24 +44,25 @@
 <mat-dialog-content *ngIf="editImage">
     Edit Product Images
     <!-- !show images -->
-    <div *ngIf="imageList" >
-        <div *ngFor="let img of imageList">
-            <img src="http://luxedreameventhire.co.nz:5000/{{img.url}}">
+    <div *ngIf="imageList" class="row mb-5" >
+        <div *ngFor="let img of imageList" class="ml-3">
+            <img src="http://luxedreameventhire.co.nz:5000/{{img.url}}"><br>
             <!-- !delete image -->
-            <button type="button" class="btn btn-outline-danger btn-sm" id="{{img.id}}" (click)="deleteImage(img.id)" *ngIf="!isLoading">Delete</button>
+            <button type="button" class="btn btn-outline-danger btn-sm mt-2" id="{{img.id}}" (click)="deleteImage(img.id)" *ngIf="!isLoading">Delete</button>
         </div>
     </div>
     <div class="spinner-border text-info" role="status" *ngIf="isLoading">
             <span class="sr-only">Loading...</span>
     </div>
     <!-- !upload img -->
-    <div>
+    <div class="mt-3">
         <input #imageInput type="file" (change)="onFileSelected($event)">
-        <button (click)="onUpload()">upload</button>    
+        <button type="button" class="btn btn-outline-info btn-sm" (click)="onUpload()">upload</button>    
     </div> 
-    <button (click)="goEditProduct()">Edit product detail</button>
+    <div *ngIf="isImageEmpty" style="color:red"> Please add a image</div>
+    <div class="mt-3"><button type="button" class="btn btn-outline-info" (click)="goEditProduct()">Edit product detail</button></div>
     <br>
-    <div>
+    <div *ngIf="feedbackMessage">
         {{feedbackMessage}}
     </div>
 </mat-dialog-content>

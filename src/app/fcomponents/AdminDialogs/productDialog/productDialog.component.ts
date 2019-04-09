@@ -15,6 +15,7 @@ export class ProductDialogComponent implements OnInit {
   feedbackMessage:string
   imageList:any
   isLoading:boolean = false
+  isImageEmpty:boolean = false
   @ViewChild('imageInput') imageInput : ElementRef
   productForm : {
     title:string,
@@ -105,25 +106,35 @@ export class ProductDialogComponent implements OnInit {
   }
   onFileSelected(e){
     this.selectedImg =<File>e.target.files[0];
+    if (this.selectedImg == null){
+      this.isImageEmpty = true
+    }else{
+      this.isImageEmpty = false
+    }
   }
   // !upload image
   onUpload(){
-    this.isLoading = true
-    const fd = new FormData();
-    fd.append('image',this.selectedImg, this.selectedImg.name)
-    fd.append('prodId',JSON.stringify(this.id))
-    console.log(fd)
-    this.productService.addImg(fd).subscribe((res)=>{
-      this.isLoading = false
-      console.log(res)
-      this.feedbackMessage = res['data']
-      this.getProductImages()
-      this.imageInput.nativeElement.value = null;
-    },(error)=>{
-      this.isLoading = false
-      this.feedbackMessage = "upload failed"
-      console.log(error)
-    })
+    if (this.selectedImg == null){
+      this.isImageEmpty = true
+    }else{
+      // this.isImageEmpty = true
+      // this.isLoading = true
+      // const fd = new FormData();
+      // fd.append('image',this.selectedImg, this.selectedImg.name)
+      // fd.append('prodId',JSON.stringify(this.id))
+      // console.log(fd)
+      // this.productService.addImg(fd).subscribe((res)=>{
+      //   this.isLoading = false
+      //   console.log(res)
+      //   this.feedbackMessage = res['data']
+      //   this.getProductImages()
+      //   this.imageInput.nativeElement.value = null;
+      // },(error)=>{
+      //   this.isLoading = false
+      //   this.feedbackMessage = "upload failed"
+      //   console.log(error)
+      // })
+    }
   }
   // ! delete image
   deleteImage(id:number){
