@@ -1,9 +1,14 @@
-<div class="container" style="padding-top:300px;">
-  <!-- <div class="row my-5"> &nbsp;</div> -->
-  <div class="row">
+
+<div class="container">
+   <section>
+
+
+   </section>
+
+   <div class="row">
      <!-- form -->
-          <div class="col-12">
-            <div class="col-12"> Contact info</div>
+          <div class="col-12"><br>
+            <div class="m1"> Contact info</div><br>
             <div *ngIf="isSendingEmail">We are processing your shopping cart. Please wait...
                <div class="spinner-border text-info" role="status">
                   <span class="sr-only">Loading...</span>
@@ -90,7 +95,7 @@
               <div class="row"><div class="col-12 text-center"><button class="btn btn-outline-gold" type = "submit" [disabled]="isSendingEmail" >Submit</button></div></div>  
             </form>
           </div>
-
+          <br><br>
         <!-- order summary -->
         <!-- <div class="col-4 border-left">
           <div class="row">Order Summary</div>
