@@ -8,12 +8,13 @@
    <form class="col-12" novalidate #f="ngForm" (ngSubmit)="onSubmit(f)" style="padding-left:0;" *ngIf="!isSendSuccess">
          <!-- first name -->
             <div class="form-group">
+               
                <div class="invalid_feedback" *ngIf="FirstName.errors?.required && FirstName.touched">Please enter your
                   First name</div>
                <div class="invalid_feedback" *ngIf=" FirstName.errors?.minlength && FirstName.touched ">
                   Your first name shall be at least 2 characters
                </div>
-               <input class="form-control" type="FirstName" required minlength="2" name="FirstName" placeholder="First name *"
+               <input class="form-control" type="FirstName" required minlength="2" name="FirstName" placeholder="Enter your first name"
                   [ngClass]="{'is-invalid':FirstName.errors?.required && FirstName.touched}" [(ngModel)]="userInfo.FirstName"
                   #FirstName="ngModel">
             </div>
@@ -25,7 +26,7 @@
             <div class="invalid_feedback" *ngIf=" LastName.errors?.minlength && LastName.touched ">
                Your last shall be at least 2 characters
             </div>
-            <input class="form-control" type="LastName" required minlength="2" name="LastName" placeholder="Last name *"
+            <input class="form-control" type="LastName" required minlength="2" name="LastName" placeholder="Enter your last name"
                [ngClass]="{'is-invalid':LastName.errors?.required && LastName.touched}" [(ngModel)]="userInfo.LastName"
                #LastName="ngModel">
          </div>
@@ -34,7 +35,7 @@
             <div class="invalid_feedback" *ngIf="Email.errors?.required && Email.touched">Please input your E-mail</div>
             <div class="invalid_feedback" *ngIf="Email.errors?.pattern && Email.touched">Incorrect Email entered</div>
             <input class="form-control" type="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
-               minlength="6" name="Email" placeholder="Email*" [ngClass]="{'is-invalid':Email.errors?.required && Email.touched}"
+               minlength="6" name="Email" placeholder="Enter your email" [ngClass]="{'is-invalid':Email.errors?.required && Email.touched}"
                [(ngModel)]="userInfo.Email" #Email="ngModel">
          </div>
          <!-- phone number -->
@@ -45,7 +46,7 @@
                Please enter the correct phone number.
             </div>
             <input class="form-control" type="tel" required pattern="[0-9]{7,15}" minlength="7" name="PhoneNum"
-               placeholder="Phone number*" [ngClass]="{'is-invalid':PhoneNum.errors?.required && PhoneNum.touched}"
+               placeholder="Enter your phone number" [ngClass]="{'is-invalid':PhoneNum.errors?.required && PhoneNum.touched}"
                [(ngModel)]="userInfo.PhoneNum" #PhoneNum="ngModel">
          </div>
          <!-- company -->
@@ -57,7 +58,7 @@
             <div class="invalid_feedback" *ngIf=" city.errors?.minlength && city.touched ">
                Please enter the corrct city.
             </div>
-            <input class="form-control" type="city" required minlength="2" name="city" placeholder="City *" [ngClass]="{'is-invalid':city.errors?.required && city.touched}"
+            <input class="form-control" type="city" required minlength="2" name="city" placeholder="Event city" [ngClass]="{'is-invalid':city.errors?.required && city.touched}"
                [(ngModel)]="userInfo.city" #city="ngModel">
          </div>
          <!-- street address -->
@@ -67,13 +68,13 @@
             <div class="invalid_feedback" *ngIf=" streetAddress.errors?.minlength && streetAddress.touched ">
                Please enter the corrct address.
             </div>
-            <input class="form-control" type="streetAddress" required minlength="2" name="streetAddress" placeholder="Street address *"
+            <input class="form-control" type="streetAddress" required minlength="2" name="streetAddress" placeholder="Event street address"
                [ngClass]="{'is-invalid':streetAddress.errors?.required && streetAddress.touched}" [(ngModel)]="userInfo.streetAddress"
                #streetAddress="ngModel">
          </div>
          <!-- event data -->
             <mat-form-field style="width:100%">
-               <input matInput [matDatepicker]="myDatepicker" [min]="minDate" placeholder="Date of event" type="dateOfEvent"
+               <input matInput [matDatepicker]="myDatepicker" [min]="minDate" placeholder="Event date" type="dateOfEvent"
                   required name="dateOfEvent" [ngClass]="{'is-invalid':dateOfEvent.errors?.required && dateOfEvent.touched}"
                   [(ngModel)]="PlannedTime" #dateOfEvent="ngModel">
                <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
