@@ -1,6 +1,24 @@
 <div class="container-fluid" #container>
   <div class=" px-0 px-md-5 mx-2">
-  <div class="row mt-5"><div class="col-12 " *ngIf="productDetail"><a (click)="backClicked(productDetail.categoryId)"> <h2 class="s2goldbold">{{productDetail.category.categoryName}}</a> / {{productDetail.title}}</h2></div></div>
+    <!-- !product path -->
+  <div class="row mt-5">
+    <div class="col-12" *ngIf="productDetail">
+      <!-- Hire -->
+      <a *ngIf="productDetail.category" (click)="backClicked(hire,productDetail.categoryId)">
+        <h2 class="s2goldbold">{{productDetail.category.categoryName}}</h2>
+      </a> 
+      <!-- Party Services -->
+      <a *ngIf="productDetail.prodTypeId == 2" (click)="backClicked('services')">
+          <h2 class="s2goldbold">Party Services</h2>
+      </a> 
+        <!-- Party Packages -->
+      <a *ngIf="productDetail.prodTypeId == 3" (click)="backClicked('packages')">
+          <h2 class="s2goldbold">Party Packages</h2>
+      </a> 
+
+      <h2 class="s2goldbold"> / {{productDetail.title}}</h2>
+    </div>
+  </div>
   <div class="row my-5">
   <div class="col-12 col-md-6 col-lg-6 p-0">
     <!-- <div (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()" (mousemove)="mouseMove($event)"> -->
@@ -55,7 +73,12 @@
     </div> -->
 
     <h1 class="l2">{{productDetail.title}}<br/></h1>
-    <div class="my-4">$<span class="s1"> {{productDetail.price}}</span></div>
+    <div class="my-4" *ngIf="productDetail.discount">
+      ${{productDetail.discount}}<s>$<span class="s1">{{productDetail.price}}</span></s>
+    </div>
+    <div class="my-4" *ngIf="!productDetail.discount">
+        $<span class="s1">{{productDetail.price}}</span>
+    </div>
     <br/>
     <h3 class="s2 mb-2">{{productDetail.description}}</h3>
     <br/>

@@ -147,7 +147,15 @@ export class ProductComponent implements OnInit {
 	// 		bigImg.style.left = -bigImg.offsetWidth/smallBox.offsetWidth * x + "px"; 
 	// 		bigImg.style.top = -bigImg.offsetHeight/smallBox.offsetHeight * y + "px";
   // }
-  backClicked(id){
-    this.router.navigate(['/category/',id]);
+  backClicked(type:string, id?:number){
+    if (id){
+      this.router.navigate(['/category/',id]);
+    }
+    if (type == 'services'){
+      this.router.navigate(['/services'])
+    }
+    if(type == 'packages'){
+      this.router.navigate(['/packages']);
+    }
   }
 }
