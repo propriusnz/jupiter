@@ -121,23 +121,23 @@ export class ProductDialogComponent implements OnInit {
     if (this.selectedImg == null){
       this.isImageEmpty = true
     }else{
-      // this.isImageEmpty = true
-      // this.isLoading = true
-      // const fd = new FormData();
-      // fd.append('image',this.selectedImg, this.selectedImg.name)
-      // fd.append('prodId',JSON.stringify(this.id))
-      // console.log(fd)
-      // this.productService.addImg(fd).subscribe((res)=>{
-      //   this.isLoading = false
-      //   console.log(res)
-      //   this.feedbackMessage = res['data']
-      //   this.getProductImages()
-      //   this.imageInput.nativeElement.value = null;
-      // },(error)=>{
-      //   this.isLoading = false
-      //   this.feedbackMessage = "upload failed"
-      //   console.log(error)
-      // })
+      this.isImageEmpty = false
+      this.isLoading = true
+      const fd = new FormData();
+      fd.append('image',this.selectedImg, this.selectedImg.name)
+      fd.append('prodId',JSON.stringify(this.id))
+      console.log(fd)
+      this.productService.addImg(fd).subscribe((res)=>{
+        this.isLoading = false
+        console.log(res)
+        this.feedbackMessage = res['data']
+        this.getProductImages()
+        this.imageInput.nativeElement.value = null;
+      },(error)=>{
+        this.isLoading = false
+        this.feedbackMessage = "upload failed"
+        console.log(error)
+      })
     }
   }
   // ! delete image
