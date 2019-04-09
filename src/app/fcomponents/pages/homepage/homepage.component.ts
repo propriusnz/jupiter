@@ -37,7 +37,7 @@ export class HomepageComponent implements OnInit {
     }
     this.meta.addTags([
       { name: 'keywords', content: 'Luxedream Hire, Party hire, wedding hire, birthday party hire, event hire, auckland event hire' },
-      { name: 'description', content: 'One stop event and party hire and services in Auckland.' },
+      { name: 'description', content: 'One stop event and party hire and services in Auckland. #1 best event hire company in Auckland, we work for weddings, birthday parties, bachelor parties, and all sort of events.' },
     ]);
     this.titleService.setTitle('Luxe Dream Auckland Event and Party Hire | Home');
   }

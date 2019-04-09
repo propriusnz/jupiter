@@ -4,7 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule,MatInputModule,MatFormFieldModule,MatNativeDateModule, MatDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule,Routes }   from '@angular/router';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxJsonLdModule } from 'ngx-json-ld';
 
 // All service follow
 import{ProductService} from './service/product.service'
@@ -44,8 +45,8 @@ const appRoutes: Routes=[
   {path:'services', component:ProductListComponent,data : {some_data : 'service'}},
   {path:'packages',component:ProductListComponent,data : {some_data : 'package'}},
   {path:'product/:id',component:ProductComponent},
-  {path:'shoppingCart',component:Shopping_cartComponent},
-  {path:'userInfo',component:UserInfoComponent},
+  // {path:'shoppingCart',component:Shopping_cartComponent},
+  // {path:'userInfo',component:UserInfoComponent},
   {path:'galleries', component:GalleryListComponent},
   {path:'galleries/:id',component:GalleryComponent},
   {path:'admin',component:AdminComponent},
@@ -78,6 +79,7 @@ const appRoutes: Routes=[
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    NgxJsonLdModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
