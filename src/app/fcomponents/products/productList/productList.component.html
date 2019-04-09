@@ -18,7 +18,7 @@
             <div class="dropdown-menu w-100 text-left s1" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" routerLink="/hire">All Products</a>
               <!-- <div *ngFor="let category of allCategories"> <a class="dropdown-item" (click)="changeCate(category.categoryId,$event)">{{category.categoryName}}</a></div> -->
-              <div *ngFor="let category of allCategories"> <a class="dropdown-item" [routerLink]="[ '/category/', category.categoryId ]">{{category.categoryName}}</a> </div>
+              <div *ngFor="let category of allCategories"> <a class="dropdown-item" [routerLink]="[ '/category/', category.categoryId ]"><h1 class="s1">{{category.categoryName}}</h1></a> </div>
             </div>
           </div>
         </div>
