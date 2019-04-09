@@ -24,13 +24,17 @@ export class ProductDialogComponent implements OnInit {
     description:string,
     prodTypeId:number,
     categoryId:number,
+    price:number,
+    discount:number
   } = {
     title:'',
     subTitle:'',
     totalStock:0,
     description:'',
     prodTypeId:0,
-    categoryId:null
+    categoryId:null,
+    price:null,
+    discount:null
   }
   status:string
   displayData:any
@@ -50,8 +54,8 @@ export class ProductDialogComponent implements OnInit {
       this.productForm.totalStock = data.data['totalStock']
       this.productForm.description = data.data['description']
       this.productForm.categoryId = data.data['categoryId']
-      // this.productForm.price = data.data['price']
-      // this.productForm.discount = data.data['discount']
+      this.productForm.price = data.data['price']
+      this.productForm.discount = data.data['discount']
     }
     this.productForm.prodTypeId = Number(data.blockCode)-1
     this.dialogTitle = data.title

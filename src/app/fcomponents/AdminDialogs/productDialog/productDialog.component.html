@@ -2,26 +2,32 @@
 
 <mat-dialog-content *ngIf="!editImage">
     <!-- title -->
+    Product Title:
     <div class="form-group">
         <input  class="form-control"  name="title" placeholder="title *" [(ngModel)]="productForm.title" #title="ngModel">
      </div>
      <!-- subtitle -->
+     Product Subtitle:
      <div class="form-group">
         <input class="form-control" name="subTitle" placeholder="subTitle *" [(ngModel)]="productForm.subTitle" #subTitle="ngModel">
      </div>
      <!-- total stock -->
+     Total stock:
      <div class="form-group">
         <input class="form-control" min="0" type="number" name="totalStock" placeholder="totalStock *" [(ngModel)]="productForm.totalStock" #totalStock="ngModel">
      </div>
      <!-- Price -->
+     Price:
      <div class="form-group">
         <input class="form-control"  min="0" type="number" name="price" placeholder="Price" [(ngModel)]="productForm.price" #price="ngModel">
      </div>
      <!-- Discount -->
+     Discount:
      <div class="form-group">
         <input class="form-control"  min="0" type="number" name="discount" placeholder="Discount" [(ngModel)]="productForm.discount" #discount="ngModel">
      </div>
     <!-- description -->
+    Description:
     <div class="form-group">
         <input class="form-control" name="description" placeholder="description *" [(ngModel)]="productForm.description" #description="ngModel">
     </div>
