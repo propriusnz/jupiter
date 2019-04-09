@@ -62,6 +62,7 @@ export class HomepageComponent implements OnInit {
   getSpeicals() {
     this.productService.getSpecialProduct().subscribe(
       (res) => {
+        console.log("specials:", res)
         this.specialProducts = res['data'];
         this.seperateSpecials();
       }, (error) => {

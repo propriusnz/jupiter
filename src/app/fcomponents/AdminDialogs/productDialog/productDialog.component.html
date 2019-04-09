@@ -75,6 +75,6 @@
 
 <mat-dialog-actions>
     <button class="mat-raised-button"(click)="close()">Close</button>
-    <button class="mat-raised-button mat-primary"(click)="save()" *ngIf="status == 'update'">Save</button>
-    <button class="mat-raised-button mat-primary"(click)="create()" *ngIf="status == 'create'">Create</button>
+    <button class="mat-raised-button mat-primary"(click)="save()" *ngIf="status == 'update'" [disabled] = "isLoading == true">Save</button>
+    <button class="mat-raised-button mat-primary"(click)="create()" *ngIf="status == 'create'" [disabled] = "isLoading == true">Create</button>
 </mat-dialog-actions>

@@ -66,10 +66,13 @@ export class ProductDialogComponent implements OnInit {
     this.getCategories()
   }
   save(){
+    this.isLoading = true
     this.productService.updateProduct(this.id,this.productForm).subscribe(
       (res)=>{
-        console.log(res)
+        this.isLoading = false
+        this.dialogRef.close()
     },(error) =>{
+      this.isLoading = false
       console.log(error)
     }
     )
@@ -87,13 +90,14 @@ export class ProductDialogComponent implements OnInit {
     // }
     //append product image
     // fd.append('ProductImage',this.selectedImg, this.selectedImg.name)
+    this.isLoading = true
     this.productService.addProduct(this.productForm).subscribe(
       (res)=>{
-        if(res){
-          this.newProduct = res
-        }
+        this.isLoading = false
+        this.newProduct = res
       this.dialogRef.close()
     },(error) =>{
+      this.isLoading = false
       console.log(error)
     }
     )
