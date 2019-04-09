@@ -73,10 +73,10 @@
     </div> -->
 
     <h1 class="l2">{{productDetail.title}}<br/></h1>
-    <div class="my-4" *ngIf="productDetail.discount">
-      <span class="s1gold mr-3">${{productDetail.discount}}</span><s><span class="s1">${{productDetail.price}}</span></s>
+    <div class="my-4" *ngIf="productDetail.discount && productDetail.discount>0">
+      <span class="s1gold mr-3">${{productDetail.price - productDetail.discount}}</span><s><span class="s1">${{productDetail.price}}</span></s>
     </div>
-    <div class="my-4" *ngIf="!productDetail.discount">
+    <div class="my-4" *ngIf="!productDetail.discount || productDetail.discount == 0">
         <span class="s1">${{productDetail.price}}</span>
     </div>
     <br/>

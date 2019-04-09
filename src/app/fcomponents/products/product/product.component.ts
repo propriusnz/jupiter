@@ -77,9 +77,10 @@ export class ProductComponent implements OnInit {
       this.isprodAdded = false
       }, 1000)
     // cartId?
+    var productPrice = (this.productDetail.discount && this.productDetail.discount>0) ? this.productDetail.price - this.productDetail.discount : this.productDetail.price
     let item = {
       ProdId:Number(this.productId),
-      Price:this.quantity*this.productDetail.price,
+      Price:this.quantity*productPrice,
       Title:this.productDetail.title,
       Quantity:this.quantity
     }    
@@ -91,7 +92,7 @@ export class ProductComponent implements OnInit {
           if(this.cartList[i].Title == item.Title){
             a = true
             this.cartList[i].Quantity += item.Quantity
-            this.cartList[i].Price = this.cartList[i].Quantity*this.productDetail.price
+            this.cartList[i].Price = this.cartList[i].Quantity*productPrice
             localStorage.setItem('cartList',JSON.stringify(this.cartList))
             console.log(this.cartList)
           }

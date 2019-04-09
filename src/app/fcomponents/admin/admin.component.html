@@ -99,7 +99,7 @@
               <td>{{data.title}}</td>
               <td style="text-align:center;">{{data.subTitle}}</td>
               <td style="text-align:center;">${{data.price}}</td>
-              <td style="text-align:center;">${{data.discount}}</td>
+              <td style="text-align:center;">${{data.price - data.discount}}</td>
               <td *ngIf="blockCode == 2" style="text-align:center;">
                 <div *ngIf="data.category">{{data.category.categoryName}}</div>
               </td>
