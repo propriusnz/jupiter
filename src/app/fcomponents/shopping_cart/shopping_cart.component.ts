@@ -8,12 +8,20 @@ import { ProductService } from '../../service/product.service';
 export class Shopping_cartComponent implements OnInit {
   totalPrice:number = 0;
   prodsInCart:any;
+  prodImage:any;
+  imageList = []
   constructor(
     private productService : ProductService
     ){}
 
   ngOnInit() {
     this.prodsInCart = JSON.parse(localStorage.getItem("cartList") || "[]");
+    this.prodsInCart.forEach(element => {
+      this.productService.getImg(element.ProdId).subscribe((res=>{
+        element.url = res[0]['url']
+      }))
+    });
+    console.log(this.prodsInCart)
     this.price()
   }
   deleteCart(id){
@@ -29,5 +37,4 @@ export class Shopping_cartComponent implements OnInit {
     });
       localStorage.setItem('totalPrice', JSON.stringify(this.totalPrice))
     }
-
 }

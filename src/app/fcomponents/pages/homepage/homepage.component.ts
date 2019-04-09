@@ -11,7 +11,6 @@ import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 })
 export class HomepageComponent implements OnInit {
 
-  // TODO $ is not defined
   num: number = 0;
   specialProducts: any = [];
   groupedSpecials: any = [];
@@ -54,9 +53,6 @@ export class HomepageComponent implements OnInit {
       };
     }
     this.getSpeicals();
-  }
-  // tslint:disable-next-line:use-life-cycle-interface
-  ngAfterViewInit(): void {
   }
   // controll scrolling speed
   backgroundscroll(e) {

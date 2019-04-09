@@ -1,13 +1,40 @@
 <div class="container-fluid" #container>
   <div class=" px-0 px-md-5 mx-2">
-  <div class="row mt-5"><div class="col-12 s2goldbold"><a (click)="backClicked()"> Dinnerware and Glassware </a> / Golden Glassline Plate</div></div>
+    <!-- !product path -->
+  <div class="row mt-5">
+    <div class="col-12" *ngIf="productDetail">
+      <!-- Hire -->
+      <a *ngIf="productDetail.category" (click)="backClicked(hire,productDetail.categoryId)">
+        <h2 class="s2goldbold">{{productDetail.category.categoryName}}</h2>
+      </a> 
+      <!-- Party Services -->
+      <a *ngIf="productDetail.prodTypeId == 2" (click)="backClicked('services')">
+          <h2 class="s2goldbold">Party Services</h2>
+      </a> 
+        <!-- Party Packages -->
+      <a *ngIf="productDetail.prodTypeId == 3" (click)="backClicked('packages')">
+          <h2 class="s2goldbold">Party Packages</h2>
+      </a> 
+
+      <h2 class="s2goldbold"> / {{productDetail.title}}</h2>
+    </div>
+  </div>
   <div class="row my-5">
   <div class="col-12 col-md-6 col-lg-6 p-0">
     <!-- <div (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()" (mousemove)="mouseMove($event)"> -->
-    <div class="h490">
+    <!-- <div class="h490">
         <img src="../../../../assets/Products/{{prodMediaUrl}}.jpg" class="d-block autofix" id="small" #small>
-        <!-- <b id="shadow" #shadow></b> -->
+    </div> -->
+
+    <!-- TODO: add img scrolling -->
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item h490" *ngFor="let img of prodMediaUrl, index as i" [ngClass]="{'active': i == 0}">
+              <img src="http://luxedreameventhire.co.nz:5000/{{img.url}}" class="d-block autofix" alt="...">
+          </div>
+        </div>
     </div>
+
     <br>
     <div class="row">
       <!-- <div class="col-3 pr-0"><img class="smallImg" src="http://localhost:56662/ImgTest/test1.png" (mouseover)="changeImg($event)" ></div>
@@ -45,10 +72,15 @@
       <img src="{{defaultImgUrl}}" alt="" #detailImg>
     </div> -->
 
-    <div class="l2">{{productDetail.title}}<br/></div>
-    <div class="my-4">$<span class="s1"> {{productDetail.price}}</span></div>
+    <h1 class="l2">{{productDetail.title}}<br/></h1>
+    <div class="my-4" *ngIf="productDetail.discount">
+      <span class="s1gold mr-3">${{productDetail.discount}}</span><s><span class="s1">${{productDetail.price}}</span></s>
+    </div>
+    <div class="my-4" *ngIf="!productDetail.discount">
+        <span class="s1">${{productDetail.price}}</span>
+    </div>
     <br/>
-    <div class="s2 mb-2">{{productDetail.description}}</div>
+    <h3 class="s2 mb-2">{{productDetail.description}}</h3>
     <br/>
     <div class="row justify-content-between mt-3">
       <div class="col-6 col-lg-8">
@@ -58,8 +90,15 @@
         Quantity:<input type="number" [value] = "quantity"  min="1" max={{productDetail.availableStock}} [(ngModel)]="quantity">
         <!-- <span class="s3 pl-2"> (only {{productDetail.availableStock}} in stock)</span> -->
       </div>
-      <div class="col-6 col-lg-4" *ngIf="inCart==1"><button class='btn btn_gold float-right' (click)="addToCart()">Add to cart</button></div>
+      <div class="col-6 col-lg-4" *ngIf="inCart==1"><button class='btn btn_gold float-right' (click)="addToCart()" [disabled] = " 0 >=quantity ">Add to cart</button></div>
       <!-- <div class="col-4" *ngIf="inCart==1"><button class='btn btn_gold' routerLink='/shoppingCart'>Add To Cart</button></div> -->
+    </div>
+    <div class="row">
+      <div class="col-6 col-lg-8"></div>
+
+      <div class="col-6 col-lg-4 alert alert-success mt-3" role="alert" *ngIf="isprodAdded">
+          {{quantity}} {{productDetail.title}} added into cart.
+      </div>
     </div>
 
    </div>

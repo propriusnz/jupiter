@@ -5,8 +5,8 @@
     </div>
 
     <div class="row mb-3 productdiv" *ngFor="let prod of prodsInCart; index as i">
-      <div class="col-4 col-sm-4 col-md-4 col-lg-3">
-        <img src="../../../assets/Products/{{prod.ProdId}}.jpg" class="cartProdHeight">
+      <div class="col-4 col-sm-4 col-md-4 col-lg-3" *ngIf="prod.url">
+        <img src="http://luxedreameventhire.co.nz:5000/{{prod.url}}" class="cartProdHeight">
       </div>
       <div class="col-8 col-sm-8 col-md-8 col-lg-9">
         <div class="divdetails"><span class="m2">{{prod.Title}}</span></div>

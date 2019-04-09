@@ -40,7 +40,7 @@ a{
     margin-bottom: 0px;
 }
 
-.h490 img {
+.carousel-inner .carousel-item img {
 	position:  absolute;
 	top: 0;
 	left: 0;
@@ -49,9 +49,11 @@ a{
     width: 100%;
     object-fit: cover;
 }
-
 .autofix{
 	width: 100%;
     height: 100%;
     object-fit: cover;
+}
+h2{
+    display: inline;
 }

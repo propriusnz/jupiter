@@ -113,11 +113,14 @@ constructor(
   getUser(){
     return this.http.get(this.baseUrl + '/admins', { headers: this.httpHeader1 })
   }
-  //!upload img
+  //!images
   addImg(files){
     return this.http.post(this.baseUrl + '/ProductMedias/',files)
   }
   getImg(id){
     return this.http.get(this.baseUrl + '/ProductMedias/'+ id)
+  }
+  deleteImg(id:number){
+    return this.http.delete(this.baseUrl + '/ProductMedias/'+ id)
   }
 }

@@ -15,7 +15,7 @@ export class ProductListComponent implements OnInit {
   selectedCate: string = "All Products"
   errorMessage:string
   categoryId:number
-
+  isLoading:boolean = false
 
   constructor(
     private productService: ProductService,
@@ -67,23 +67,18 @@ export class ProductListComponent implements OnInit {
 
 
 
-
-
-
-
-
-
   // Below error change to this format
 
   ngOnInit() {
     // Watch the changes of categoryId and reload component
     this.route.params.subscribe(
       params => {
-        this.categoryId = this.route.snapshot.params['id'];
+        if(this.route.snapshot.params['id']){
+          this.categoryId = this.route.snapshot.params['id'];
+          this.changeCate(this.categoryId)
+        }
         this.typeName = this.route.snapshot.data['some_data'];
-
         this.getCategories()
-        this.changeCate(this.categoryId)
       }
     );
 
@@ -102,27 +97,31 @@ export class ProductListComponent implements OnInit {
 
   //sort product by type => Hire | Service | Package
   sortByType(id:number){
+    this.isLoading = true
     this.productService.indexType(id).subscribe(
       (res) => {
+        this.isLoading = false
         this.allProducts = res['product']
-        console.log(this.allProducts)
+        console.log('allproduts:',this.allProducts)
         if (id ==1){
           this.getCategories()
         }
       },
-      (err) => {console.log(err),this.errorMessage = 'Server fault'}
+      (err) => {console.log(err),this.errorMessage = 'Server fault',this.isLoading = false}
       )
   }
   //sort product by category
   changeCate(id,e?) {
+    this.isLoading = true
     if(e){
       this.selectedCate = e.srcElement.innerHTML
     }
     this.productService.indexCategoryId(id).subscribe((res)=>{
+      this.isLoading = false
       this.allProducts = res['product']
       this.selectedCate = res['categoryName']
-      console.log(this.allProducts)
     },(error)=>{
+      this.isLoading = false
       console.log(error)
     })
   }
@@ -130,7 +129,6 @@ export class ProductListComponent implements OnInit {
   getCategories(){
     this.productService.indexCategory().subscribe((res)=>{
       this.allCategories = res
-      console.log(this.allCategories);
     },(error)=>{console.log(error),this.errorMessage = 'Server fault'})
   }
 }

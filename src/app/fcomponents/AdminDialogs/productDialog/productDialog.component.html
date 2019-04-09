@@ -11,30 +11,21 @@
      </div>
      <!-- total stock -->
      <div class="form-group">
-        <input class="form-control" type="number" name="totalStock" placeholder="totalStock *" [(ngModel)]="productForm.totalStock" #totalStock="ngModel">
+        <input class="form-control" min="0" type="number" name="totalStock" placeholder="totalStock *" [(ngModel)]="productForm.totalStock" #totalStock="ngModel">
      </div>
      <!-- Price -->
      <div class="form-group">
-        <input class="form-control" type="number" name="price" placeholder="Price" [(ngModel)]="productForm.price" #price="ngModel">
+        <input class="form-control"  min="0" type="number" name="price" placeholder="Price" [(ngModel)]="productForm.price" #price="ngModel">
      </div>
      <!-- Discount -->
      <div class="form-group">
-        <input class="form-control" type="number" name="discount" placeholder="Discount" [(ngModel)]="productForm.discount" #discount="ngModel">
+        <input class="form-control"  min="0" type="number" name="discount" placeholder="Discount" [(ngModel)]="productForm.discount" #discount="ngModel">
      </div>
     <!-- description -->
     <div class="form-group">
         <input class="form-control" name="description" placeholder="description *" [(ngModel)]="productForm.description" #description="ngModel">
     </div>
-    
-    <!-- !price -->
-    <!-- <div class="form-group">
-        <input class="form-control" name="price", placeholder="Price of product" [(ngModel)]="product.price" #price="ngModel">
-    </div> -->
-    <!-- !discount -->
-    <!-- <div class="form-group">
-        <input class="form-control" name="discount" placeholder="Discount price" [(ngModel)]="productForm.discount" #discount="ngModel">
-    </div> -->             
-    <!-- Event Type -->
+
     <div class="form-group">
       <!-- !when update hire product -->
       <select *ngIf="displayData && productForm.prodTypeId==1" class="custom-select form-control" name="categoryId"
@@ -47,25 +38,31 @@
             <option *ngFor="let cate of allCategories, index as i" value= {{cate.categoryId}}>{{cate.categoryName}}</option>
       </select>
     </div>
-    <button (click)="goEditImage()" *ngIf="status == 'update'">Edit product img</button>
+    <button type="button" class="btn btn-outline-info" (click)="goEditImage()" *ngIf="status == 'update'">Edit product image</button>
 </mat-dialog-content>
 
 <mat-dialog-content *ngIf="editImage">
     Edit Product Images
     <!-- !show images -->
-    <div *ngIf="imageList" >
-        <div *ngFor="let img of imageList">
-            <img src="http://localhost:5000{{img.url}}">
+    <div *ngIf="imageList" class="row mb-5" >
+        <div *ngFor="let img of imageList" class="ml-3">
+            <img src="http://luxedreameventhire.co.nz:5000/{{img.url}}"><br>
+            <!-- !delete image -->
+            <button type="button" class="btn btn-outline-danger btn-sm mt-2" id="{{img.id}}" (click)="deleteImage(img.id)" *ngIf="!isLoading">Delete</button>
         </div>
     </div>
+    <div class="spinner-border text-info" role="status" *ngIf="isLoading">
+            <span class="sr-only">Loading...</span>
+    </div>
     <!-- !upload img -->
-    <div>
-        <input type="file" (change)="onFileSelected($event)">
-        <button (click)="onUpload()">upload</button>    
+    <div class="mt-3">
+        <input #imageInput type="file" (change)="onFileSelected($event)">
+        <button type="button" class="btn btn-outline-info btn-sm" (click)="onUpload()">upload</button>    
     </div> 
-    <button (click)="goEditProduct()">Edit product detial</button>
+    <div *ngIf="isImageEmpty" style="color:red"> Please add a image</div>
+    <div class="mt-3"><button type="button" class="btn btn-outline-info" (click)="goEditProduct()">Edit product detail</button></div>
     <br>
-    <div>
+    <div *ngIf="feedbackMessage">
         {{feedbackMessage}}
     </div>
 </mat-dialog-content>
