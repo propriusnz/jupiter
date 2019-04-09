@@ -31,6 +31,7 @@ import { FaqDialogComponent } from './fcomponents/AdminDialogs/FaqDialog/FaqDial
 import { GalleryDialogComponent } from './fcomponents/AdminDialogs/galleryDialog/galleryDialog.component'
 import { ProductDialogComponent } from './fcomponents/AdminDialogs/productDialog/productDialog.component'
 import { CartDialogComponent } from './fcomponents/AdminDialogs/CartDialog/CartDialog.component'
+import { ShoppingCheckoutComponent } from './fcomponents/shopping-checkout/shopping-checkout.component'
 
 //All Routes follow
 const appRoutes: Routes=[
@@ -48,7 +49,8 @@ const appRoutes: Routes=[
   {path:'galleries', component:GalleryListComponent},
   {path:'galleries/:id',component:GalleryComponent},
   {path:'admin',component:AdminComponent},
-  {path:'login',component:LoginComponent}
+  {path:'login',component:LoginComponent},
+  {path:'checkout', component:ShoppingCheckoutComponent}
 ]
 
 @NgModule({
@@ -71,7 +73,8 @@ const appRoutes: Routes=[
     FaqDialogComponent,
     GalleryDialogComponent,
     ProductDialogComponent,
-    CartDialogComponent
+    CartDialogComponent,
+    ShoppingCheckoutComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
