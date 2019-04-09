@@ -74,10 +74,10 @@
 
     <h1 class="l2">{{productDetail.title}}<br/></h1>
     <div class="my-4" *ngIf="productDetail.discount">
-      ${{productDetail.discount}}<s>$<span class="s1">{{productDetail.price}}</span></s>
+      <span class="s1gold mr-3">${{productDetail.discount}}</span><s><span class="s1">${{productDetail.price}}</span></s>
     </div>
     <div class="my-4" *ngIf="!productDetail.discount">
-        $<span class="s1">{{productDetail.price}}</span>
+        <span class="s1">${{productDetail.price}}</span>
     </div>
     <br/>
     <h3 class="s2 mb-2">{{productDetail.description}}</h3>
