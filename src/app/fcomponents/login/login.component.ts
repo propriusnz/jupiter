@@ -39,21 +39,26 @@ export class LoginComponent implements OnInit {
 
   onSubmit({valid}: { valid: boolean})  {
     console.log(valid);
+    this.errorMessage = null
+    this.loginFailed = false;
     // *login failed
     if (!valid) {
       console.log('Dosn\'t Work');
       this.errorMessage = 'All fields must be filled.';
     } else {
+      this.isLoggingIn = true
       this.productservice.login(this.user)
       .subscribe((res) => {
+        this.isLoggingIn = false
         if (this.isBrowser = true) {
           sessionStorage.setItem('access_token', res['token']);
         }
         this.router.navigate(['/admin']);
       }, (error) => {
         console.log(error);
+        this.isLoggingIn = false
         this.loginFailed = true;
-        if (error['error'].status === 401) {
+        if (error['status'] === 401) {
           this.errorMessage = 'Incorrect Password or Username.';
         } else {
           this.errorMessage = 'Server Error.';

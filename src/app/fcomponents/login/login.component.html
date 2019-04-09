@@ -1,5 +1,11 @@
 <br><br>
 <div class="container">
+  <div class="row" *ngIf="isLoggingIn">
+      <div> Logging in...Please wait...</div>
+      <div class="spinner-border text-info" role="status" *ngIf="isLoggingIn">
+          <span class="sr-only">Loading...</span>
+      </div>
+  </div>
   <div *ngIf="loginFailed || errorMessage" class="alert alert-danger text-center s2" role="alert">
     {{errorMessage}}
   </div>
@@ -29,7 +35,7 @@
     </div>
     <br>
 
-    <button id="submit" class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+    <button id="submit" class="btn btn-primary btn-lg btn-block" type="submit" [disabled] = "isLoggingIn">Login</button>
     <br><br><br><br><br>
   </form>
 
