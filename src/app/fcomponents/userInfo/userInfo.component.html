@@ -90,7 +90,7 @@
 
       <div>{{feedback_message}}</div>
       <div class="row">
-         <div class="col-12 text-center"><button class="btn btn-outline-gold btn-block" type="submit" [disabled]="isSendingEmail">Submit</button></div>
+         <div class="col-12 text-center"><button class="btn btn-outline-gold btn-block" type="submit" [disabled]="isSendingEmail || isCartEmpty">Submit</button></div>
       </div>
    </form>
    <!-- order summary -->

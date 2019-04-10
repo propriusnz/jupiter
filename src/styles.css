@@ -241,3 +241,6 @@ body{
 .btn {
   cursor: pointer;
 }
+.btn.disabled, .btn:disabled{
+  opacity: 0.3;
+}

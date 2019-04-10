@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef, Inject, PLATFORM_ID } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {ProductService} from '../../../service/product.service';
 //import {Location} from '@angular/common';
