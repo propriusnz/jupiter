@@ -68,6 +68,7 @@ export class ProductDialogComponent implements OnInit {
   save(){
     this.productService.updateProduct(this.id,this.productForm).subscribe(
       (res)=>{
+        console.log('productForm:', this.productForm)
         this.dialogRef.close()
     },(error) =>{
       console.log(error)

@@ -29,26 +29,26 @@ constructor(
     return this.http.get(this.baseUrl + '/Products/GetSpecialProduct');
   }
   updateProduct(id, newProduct){
-    return this.http.put(this.baseUrl + '/Products/' + id, newProduct);
+    return this.http.put(this.baseUrl + '/Products/' + id, newProduct, { headers: this.httpHeader1 });
   }
   addProduct(newProduct){
-    return this.http.post(this.baseUrl + '/Products', newProduct);
+    return this.http.post(this.baseUrl + '/Products', newProduct, { headers: this.httpHeader1 });
   }
   deleteProduct(id){
-    return this.http.delete(this.baseUrl + '/Products/' + id);
+    return this.http.delete(this.baseUrl + '/Products/' + id, { headers: this.httpHeader1 });
   }
   //!Gallery
   indexGallery(){
     return this.http.get(this.baseUrl + '/projects');
   }
   updateGallery(id, newGallery){
-    return this.http.put(this.baseUrl + '/projects/' + id, newGallery);
+    return this.http.put(this.baseUrl + '/projects/' + id, newGallery, { headers: this.httpHeader1 });
   }
   addGallery(newGallery){
-    return this.http.post(this.baseUrl + '/projects', newGallery);
+    return this.http.post(this.baseUrl + '/projects', newGallery, { headers: this.httpHeader1 });
   }
   deleteGallery(id){
-    return this.http.delete(this.baseUrl + '/projects/' + id);
+    return this.http.delete(this.baseUrl + '/projects/' + id, { headers: this.httpHeader1 });
   }
   //!Category
   indexCategory(){
@@ -63,16 +63,16 @@ constructor(
   }
   //!Carts
   getCarts(){
-    return this.http.get(this.baseUrl + '/Carts');
+    return this.http.get(this.baseUrl + '/Carts', { headers: this.httpHeader1 });
   }
   addCart(newcart:any){
     return this.http.post(this.baseUrl + '/Carts', newcart);
   }
   updateCart(id, newcart){
-    return this.http.put(this.baseUrl + '/Carts?id=' + id, newcart);
+    return this.http.put(this.baseUrl + '/Carts?id=' + id, newcart, { headers: this.httpHeader1 });
   }
   deleteCart(id){
-    return this.http.delete(this.baseUrl + '/Carts/' + id)
+    return this.http.delete(this.baseUrl + '/Carts/' + id, { headers: this.httpHeader1 })
   }
   //!cartProd
   addCartProd(cartProdList:any){
@@ -90,13 +90,13 @@ constructor(
     return this.http.get(this.baseUrl + '/Faqs');
   }
   updateFaq(id,faq){
-    return this.http.put(this.baseUrl + '/Faqs?id=' + id, faq)
+    return this.http.put(this.baseUrl + '/Faqs?id=' + id, faq, { headers: this.httpHeader1 })
   }
   addFaq(faq){
-    return this.http.post(this.baseUrl + '/Faqs', faq)
+    return this.http.post(this.baseUrl + '/Faqs', faq, { headers: this.httpHeader1 })
   }
   deleteFaq(id){
-    return this.http.delete(this.baseUrl +'/Faqs/' + id)
+    return this.http.delete(this.baseUrl +'/Faqs/' + id, { headers: this.httpHeader1 })
   }
   //!contact email
   sendContectEmail(contactEmail){
@@ -115,12 +115,12 @@ constructor(
   }
   //!images
   addImg(files){
-    return this.http.post(this.baseUrl + '/ProductMedias/',files)
+    return this.http.post(this.baseUrl + '/ProductMedias/',files, { headers: this.httpHeader1 })
   }
   getImg(id){
     return this.http.get(this.baseUrl + '/ProductMedias/'+ id)
   }
   deleteImg(id:number){
-    return this.http.delete(this.baseUrl + '/ProductMedias/'+ id)
+    return this.http.delete(this.baseUrl + '/ProductMedias/'+ id, { headers: this.httpHeader1 })
   }
 }
