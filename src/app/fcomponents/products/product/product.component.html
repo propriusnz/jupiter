@@ -79,7 +79,7 @@
         <span class="s1">${{productDetail.price}}</span>
     </div>
     <br/>
-    <h3 class="s2 mb-2">{{productDetail.description}}</h3>
+    <h3 class="s2 mb-2" style="white-space: pre-line">{{productDetail.description}}</h3>
     <br/>
     <div class="row justify-content-between mt-3">
       <div class="col-6 col-lg-8 s1">
@@ -90,7 +90,6 @@
         <!-- <span class="s3 pl-2"> (only {{productDetail.availableStock}} in stock)</span> -->
       </div>
       <div class="col-6 col-lg-4" *ngIf="inCart==1"><button class='btn btn_gold float-right' (click)="addToCart()" [disabled] = " 0 >=quantity ">Add to cart</button></div>
-      <!-- <div class="col-4" *ngIf="inCart==1"><button class='btn btn_gold' routerLink='/shoppingCart'>Add To Cart</button></div> -->
     </div>
     <div class="row">
       <div class="col-6 col-lg-8"></div>

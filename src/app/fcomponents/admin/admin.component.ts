@@ -84,7 +84,6 @@ export class AdminComponent implements OnInit {
   getProducts(typeCode: number) {
     this.productService.indexType(typeCode).subscribe(
       (res) => {
-        console.log(res);
         this.displayData = res['product'];
       },
       (err) => { console.log(err); }
@@ -96,7 +95,8 @@ export class AdminComponent implements OnInit {
 
     // dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-
+    dialogConfig.height = '550px'
+    dialogConfig.width = '750px'
     dialogConfig.data = {
       id: 1,
       title: 'Update FAQ',
@@ -162,6 +162,9 @@ export class AdminComponent implements OnInit {
     // dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
+    dialogConfig.height = '550px'
+    dialogConfig.width = '750px'
+
     dialogConfig.data = {
       id: 1,
       title: 'Update Gallery',
@@ -209,7 +212,8 @@ export class AdminComponent implements OnInit {
 
     // dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-
+    dialogConfig.height = '550px'
+    dialogConfig.width = '750px'
     dialogConfig.data = {
       id: 1,
       title: 'Update Product',

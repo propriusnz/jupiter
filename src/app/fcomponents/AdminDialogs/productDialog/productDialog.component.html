@@ -29,9 +29,9 @@
     <!-- description -->
     Description:
     <div class="form-group">
-        <input class="form-control" name="description" placeholder="description *" [(ngModel)]="productForm.description" #description="ngModel">
+        <textarea rows="4" cols="50" class="form-control" name="description" placeholder="description *" [(ngModel)]="productForm.description" #description="ngModel"></textarea>
     </div>
-
+    <!-- choose categoty -->
     <div class="form-group">
       <!-- !when update hire product -->
       <select *ngIf="displayData && productForm.prodTypeId==1" class="custom-select form-control" name="categoryId"

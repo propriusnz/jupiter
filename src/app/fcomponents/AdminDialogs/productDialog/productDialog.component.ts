@@ -66,13 +66,11 @@ export class ProductDialogComponent implements OnInit {
     this.getCategories()
   }
   save(){
-    this.isLoading = true
     this.productService.updateProduct(this.id,this.productForm).subscribe(
       (res)=>{
-        this.isLoading = false
+        console.log('productForm:', this.productForm)
         this.dialogRef.close()
     },(error) =>{
-      this.isLoading = false
       console.log(error)
     }
     )

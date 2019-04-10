@@ -22,7 +22,7 @@
       <br>
       <br>
     </div>
-    <div class="text-right mb-2">
+    <div class="text-right mb-2" *ngIf="totalPrice!=0">
       Total Price: NZ$<span class="s2bold">{{totalPrice}}</span>
     </div>
     <div class="justify-content-end mb-3" *ngIf="prodsInCart.length!=0">

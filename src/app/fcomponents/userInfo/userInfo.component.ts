@@ -15,6 +15,7 @@ export class UserInfoComponent implements OnInit {
   PlannedTime:any;
   isSendingEmail:boolean = false;
   isSendSuccess:boolean  = false;
+  isCartEmpty:boolean = false;
   userInfo={
     FirstName:'',
     LastName:'',
@@ -32,9 +33,8 @@ export class UserInfoComponent implements OnInit {
     private router: Router,
     ) {
       if (isPlatformBrowser(this.platformId)) {
-        // !if no JWT, redirect to login page
         if (localStorage.getItem('cartList') === '' || localStorage.getItem('cartList') == null) {
-          this.router.navigate(['/shoppingCart']);
+          this.isCartEmpty = true
         }}
      }
 
@@ -63,7 +63,6 @@ export class UserInfoComponent implements OnInit {
 
   submitCart(post){
     this.isSendingEmail = true
-    //let data = JSON.parse(localStorage.getItem("cartList"))
       let data = JSON.parse(localStorage.getItem("cartList") || "[]");
 
     let cartdata = {
@@ -81,6 +80,7 @@ export class UserInfoComponent implements OnInit {
         console.log(res)
         this.isSendingEmail = false
         this.isSendSuccess = true
+        this.router.navigate(['/thankYou']);
       },
       (error)=>{
         console.log(error)
