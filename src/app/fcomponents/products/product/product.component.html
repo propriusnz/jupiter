@@ -1,5 +1,4 @@
-<div class="container-fluid" #container>
-  <div class=" px-0 px-md-5 mx-2">
+<div class="container">
     <!-- !product path -->
   <div class="row mt-5">
     <div class="col-12" *ngIf="productDetail">
@@ -20,7 +19,7 @@
     </div>
   </div>
   <div class="row my-5">
-  <div class="col-12 col-md-6 col-lg-6 p-0">
+  <div class="col-12 col-md-6 col-lg-7 ">
     <!-- <div (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()" (mousemove)="mouseMove($event)"> -->
     <!-- <div class="h490">
         <img src="../../../../assets/Products/{{prodMediaUrl}}.jpg" class="d-block autofix" id="small" #small>
@@ -36,14 +35,14 @@
     </div>
 
     <br>
-    <div class="row">
+    <!-- <div class="row"> -->
       <!-- <div class="col-3 pr-0"><img class="smallImg" src="http://localhost:56662/ImgTest/test1.png" (mouseover)="changeImg($event)" ></div>
       <div class="col-3 pr-0"><img class="smallImg" src="http://localhost:56662/ImgTest/test2.jpeg" (mouseover)="changeImg($event)"></div>
       <div class="col-3 pr-0"><img class="smallImg" src="http://localhost:56662/ImgTest/test3.jpeg" (mouseover)="changeImg($event)"></div> -->
       <!-- <div class="col-3 pr-0"><img class="smallImg" src="../../../../assets/images/productImg1.jpeg" (mouseover)="changeImg($event)" ></div>
       <div class="col-3 pr-0"><img class="smallImg" src="../../../../assets/images/productImg2.jpeg" (mouseover)="changeImg($event)"></div>
       <div class="col-3 pr-0"><img class="smallImg" src="../../../../assets/images/productImg3.png" (mouseover)="changeImg($event)"></div> -->
-    </div>
+    <!-- </div> -->
   </div>
   <!-- <div *ngIf="!productDetail || productDetail.length == 0">This product is unavailable right now. Sorry</div>
   <div class="col-5" *ngIf="productDetail">
@@ -66,7 +65,7 @@
     </div>
     <div *ngIf="!quantityFilled">Please enter Quantity</div>
   </div> -->
-  <div *ngIf="productDetail" class="col-12 col-md-6 col-lg-6 pl-lg-5">
+  <div *ngIf="productDetail" class="col-12 col-md-6 col-lg-5 pl-lg-5">
     <!-- large part of img -->
     <!-- <div id="showDetails" #showDetails>
       <img src="{{defaultImgUrl}}" alt="" #detailImg>
@@ -83,11 +82,11 @@
     <h3 class="s2 mb-2">{{productDetail.description}}</h3>
     <br/>
     <div class="row justify-content-between mt-3">
-      <div class="col-6 col-lg-8">
+      <div class="col-6 col-lg-8 s1">
         <!-- Quantity:<input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
          type="number" [value] = "quantity"  min="1" max={{productDetail.availableStock}} [(ngModel)]="quantity" (ngModelChange)="quanCheck($event)" 
         maxlength= "{{quantityLength}}">  -->
-        Quantity:<input type="number" [value] = "quantity"  min="1" max={{productDetail.availableStock}} [(ngModel)]="quantity">
+        Quantity: <input type="number" [value] = "quantity"  min="1" max={{productDetail.availableStock}} [(ngModel)]="quantity">
         <!-- <span class="s3 pl-2"> (only {{productDetail.availableStock}} in stock)</span> -->
       </div>
       <div class="col-6 col-lg-4" *ngIf="inCart==1"><button class='btn btn_gold float-right' (click)="addToCart()" [disabled] = " 0 >=quantity ">Add to cart</button></div>
@@ -103,5 +102,4 @@
 
    </div>
  </div>
-</div>
 </div>

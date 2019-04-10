@@ -19,5 +19,4 @@ export class AppComponent {
       "contactType": "Customer service"
     }
   };
-
 }

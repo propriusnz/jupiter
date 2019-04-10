@@ -33,12 +33,18 @@ a{
 .h490{
     /* height: */
     position: relative;
-    padding-top: 100%;
-    width:100%;
+    padding-top: 86%;
+    width:86%;
     display: block;
     padding-bottom: 0px;
     margin-bottom: 0px;
 }
+@media (max-width:767px) {
+    .h490 {
+        padding-top: 100%;
+        width:100%;
+    }
+  }
 
 .carousel-inner .carousel-item img {
 	position:  absolute;
@@ -48,6 +54,7 @@ a{
 	right: 0;
     width: 100%;
     object-fit: cover;
+
 }
 .autofix{
 	width: 100%;
