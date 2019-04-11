@@ -101,7 +101,7 @@ export class ProductListComponent implements OnInit {
     this.productService.indexType(id).subscribe(
       (res) => {
         this.isLoading = false
-        this.allProducts = res['product']
+        this.allProducts = res
         console.log('allproduts:',this.allProducts)
         if (id ==1){
           this.getCategories()
@@ -118,8 +118,8 @@ export class ProductListComponent implements OnInit {
     }
     this.productService.indexCategoryId(id).subscribe((res)=>{
       this.isLoading = false
-      this.allProducts = res['product']
-      this.selectedCate = res['categoryName']
+      this.allProducts = res
+      this.selectedCate = res[0]['category']['categoryName']
     },(error)=>{
       this.isLoading = false
       console.log(error)

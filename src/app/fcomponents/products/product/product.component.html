@@ -20,29 +20,19 @@
   </div>
   <div class="row my-5">
   <div class="col-12 col-md-6 col-lg-7 ">
-    <!-- <div (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()" (mousemove)="mouseMove($event)"> -->
-    <!-- <div class="h490">
-        <img src="../../../../assets/Products/{{prodMediaUrl}}.jpg" class="d-block autofix" id="small" #small>
-    </div> -->
-
     <!-- TODO: add img scrolling -->
-    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+    <div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleControls" data-slide-to="i" class="active" *ngFor="let img of prodMediaUrl, index as i" [ngClass]="{'active': i == 0}"></li>
+          </ol>
         <div class="carousel-inner">
-          <div class="carousel-item h490" *ngFor="let img of prodMediaUrl, index as i" [ngClass]="{'active': i == 0}">
-              <img src="http://luxedreameventhire.co.nz:5000/{{img.url}}" class="d-block autofix" alt="...">
+          <div class="carousel-item h490 active" *ngFor="let img of prodMediaUrl, index as i" [ngClass]="{'active': i == 0}">
+              <img src="http://luxedreameventhire.co.nz:5000/{{img.url}}" class="d-block autofix">
           </div>
         </div>
     </div>
 
     <br>
-    <!-- <div class="row"> -->
-      <!-- <div class="col-3 pr-0"><img class="smallImg" src="http://localhost:56662/ImgTest/test1.png" (mouseover)="changeImg($event)" ></div>
-      <div class="col-3 pr-0"><img class="smallImg" src="http://localhost:56662/ImgTest/test2.jpeg" (mouseover)="changeImg($event)"></div>
-      <div class="col-3 pr-0"><img class="smallImg" src="http://localhost:56662/ImgTest/test3.jpeg" (mouseover)="changeImg($event)"></div> -->
-      <!-- <div class="col-3 pr-0"><img class="smallImg" src="../../../../assets/images/productImg1.jpeg" (mouseover)="changeImg($event)" ></div>
-      <div class="col-3 pr-0"><img class="smallImg" src="../../../../assets/images/productImg2.jpeg" (mouseover)="changeImg($event)"></div>
-      <div class="col-3 pr-0"><img class="smallImg" src="../../../../assets/images/productImg3.png" (mouseover)="changeImg($event)"></div> -->
-    <!-- </div> -->
   </div>
   <!-- <div *ngIf="!productDetail || productDetail.length == 0">This product is unavailable right now. Sorry</div>
   <div class="col-5" *ngIf="productDetail">

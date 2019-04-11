@@ -6,6 +6,7 @@ import { MatDialog, MatDialogConfig} from '@angular/material';
 import { FaqDialogComponent } from '../AdminDialogs/FaqDialog/FaqDialog.component';
 import { GalleryDialogComponent } from '../AdminDialogs/galleryDialog/galleryDialog.component';
 import { ProductDialogComponent } from '../AdminDialogs/productDialog/productDialog.component'
+import { CartDialogComponent } from '../AdminDialogs/CartDialog/CartDialog.component'
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -84,7 +85,7 @@ export class AdminComponent implements OnInit {
   getProducts(typeCode: number) {
     this.productService.indexType(typeCode).subscribe(
       (res) => {
-        this.displayData = res['product'];
+        this.displayData = res;
       },
       (err) => { console.log(err); }
       );
@@ -261,4 +262,22 @@ export class AdminComponent implements OnInit {
         // Do nothing!
     }
   }
+  openCart(data){
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '550px'
+    dialogConfig.width = '750px'
+    dialogConfig.data = {
+      id: 1,
+      title: 'Cart Detail',
+      data: data,
+      action: 'update'
+    }
+    let dialogRef = this.dialog.open(CartDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(() => {
+      this.getData();
+  });
+  }
+  
 }

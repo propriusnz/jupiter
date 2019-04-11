@@ -195,7 +195,7 @@
           <thead>
             <tr class="table-secondary">
               <th scope="col">Id</th>
-              <th scope="col">CartProds</th>
+              <th scope="col">Detail</th>
               <th scope="col">Contact</th>
               <th scope="col">Price</th>
               <th scope="col">Location</th>
@@ -211,11 +211,10 @@
               <!--CartProds-->
               <td>
                 <div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    View Products
+                  <button class="btn btn-secondary" type="button" (click)="openCart(data)">
+                    View Detail
                   </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" *ngIf="data.cartProd">
+                  <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" *ngIf="data.cartProd">
                     <div *ngFor="let cart of data.cartProd">
                       <div class="dropdown-item">
                         <b>{{cart.title}}</b> |
@@ -224,7 +223,7 @@
                       </div>
                     </div>
                     <a class="dropdown-item" *ngIf="data.cartProd.length==0">Empty</a>
-                  </div>
+                  </div> -->
                 </div>
               </td>
               <!--End CartProds-->

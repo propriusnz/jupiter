@@ -72,11 +72,17 @@ constructor(
     return this.http.put(this.baseUrl + '/Carts?id=' + id, newcart, { headers: this.httpHeader1 });
   }
   deleteCart(id){
-    return this.http.delete(this.baseUrl + '/Carts/' + id, { headers: this.httpHeader1 })
+    return this.http.delete(this.baseUrl + '/Carts/' + id, { headers: this.httpHeader1 });
   }
   //!cartProd
+  getCardProd(id:number){
+    return this.http.get(this.baseUrl + '/CartProds/GetCartProdByCart/' + id, { headers: this.httpHeader1 });
+  }
   addCartProd(cartProdList:any){
     return this.http.post(this.baseUrl + '/CartProds', cartProdList);
+  }
+  deleteCartProd(id:number){
+    return this.http.delete(this.baseUrl + '/CartProds/' + id, { headers: this.httpHeader1 });
   }
   //!Contacts
   getContacts(){
@@ -84,6 +90,9 @@ constructor(
   }
   addContacts(contact:any){
     return this.http.post(this.baseUrl + '/Contacts', contact);
+  }
+  updateContacts(id:number, contact){
+    return this.http.put(this.baseUrl + '/Contacts/' + id, contact, { headers: this.httpHeader1 });
   }
   //!FAQ
   getFaq(){

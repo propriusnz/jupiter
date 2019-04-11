@@ -1,15 +1,47 @@
 <h2 mat-dialog-title>{{title}}</h2>
 
 <mat-dialog-content>
-  <!-- Question -->
-  <!-- <div class="form-group">
-      <input  class="form-control" type="Question" name="Question" placeholder="Question *" [(ngModel)]="faqForm.Question" #Question="ngModel">
-   </div> -->
-   <!-- Answer -->
-   <!-- <div class="form-group">
-      <input class="form-control" type="tel" name="Answer" placeholder="Answer *" [(ngModel)]="faqForm.Answer" #Answer="ngModel">
-   </div> -->
-   This is Cart Dialog.
+   <!-- !contact detail -->
+   <div class="row">
+      <div class="col-12">Customer:</div>
+      <div class="col-6">First Name</div><div class="col-6">Last Name</div>
+      <div class="form-group col-6">
+         <input class="form-control" name="firstName" [(ngModel)]="contactForm.firstName" #firstName="ngModel">
+      </div>
+      <div class="form-group col-6">
+         <input class="form-control" name="lastName" [(ngModel)]="contactForm.lastName" #lastName="ngModel">
+      </div>
+      <div class="col-6">Email</div><div class="col-6">Phone number</div>
+      <div class="form-group col-6">
+         <input class="form-control" name="email" [(ngModel)]="contactForm.email" #email="ngModel">
+      </div>
+      <div class="form-group col-6">
+         <input class="form-control" name="phoneNum" [(ngModel)]="contactForm.phoneNum" #phoneNum="ngModel">
+      </div>
+      <div class="col-12">Customer Message</div>
+      <div class="form-group col-12">
+         <textarea rows="4" cols="50" class="form-control" name="phoneNum" [(ngModel)]="contactForm.phoneNum" #phoneNum="ngModel" style="white-space: pre-line"></textarea>
+      </div>
+      <button (click)="updateContact()">Save changes to customer</button>
+   </div>
+
+   <!-- !cartProd Detail -->
+   <div class="row"> 
+      <div class="col-12">Products in cart</div>
+      <div class="col-12" *ngFor="let prod of cartProdList"> 
+         Title: {{prod.title}}, Quantity: {{prod.quantity}}, Price: {{prod.price}} 
+         <button (click)="deleteCardProd(prod.cartId)">Delete</button>
+      </div>
+   </div>
+
+   <!-- !cart Detail -->
+   <div class="row">
+      <div class="col-12">Cart Detail</div>
+      <div class="col-12">Location: {{displayData.location}}</div>
+      <div class="col-12">Event Date: {{displayData.plannedTime | date:'short'}}</div>
+      <div class="col-6">Price: {{displayData.price}}</div>
+      <div class="col-6"><button (click)="updateCart()"></button></div>
+   </div>
 </mat-dialog-content>
 
 <mat-dialog-actions>
