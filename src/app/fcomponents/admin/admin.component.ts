@@ -16,6 +16,7 @@ export class AdminComponent implements OnInit {
   // blockCodeList:
   // Dashbard:1; Hires:2; Packages:3; Services:4; Gallery:5; Faq:6; Carts:7; 
   blockCode: string = '1';
+  isDataChanged : boolean = false;
   displayData: any;
   selectedImg: File = null;
   constructor(
@@ -275,8 +276,17 @@ export class AdminComponent implements OnInit {
       action: 'update'
     }
     let dialogRef = this.dialog.open(CartDialogComponent, dialogConfig);
+    this.isDataChanged = false
+    const sub = dialogRef.componentInstance.dataChanges.subscribe(() => {
+      this.isDataChanged = true
+    });
     dialogRef.afterClosed().subscribe(() => {
-      this.getData();
+      if(this.isDataChanged == true){
+        this.getData();
+        console.log('data refreshed');
+      }else{
+        console.log('data not changed');
+      }
   });
   }
   

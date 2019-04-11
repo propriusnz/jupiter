@@ -37,15 +37,16 @@
    <!-- !cart Detail -->
    <div class="row">
       <div class="col-12">Cart Detail</div>
-      <div class="col-12">Location: {{displayData.location}}</div>
-      <div class="col-12">Event Date: {{displayData.plannedTime | date:'short'}}</div>
-      <div class="col-6">Price: {{displayData.price}}</div>
-      <div class="col-6"><button (click)="updateCart()"></button></div>
+      <input class="form-control" type = "text" name="location" [(ngModel)]="cartForm.location" #location="ngModel">
+      <mat-form-field style="width:100%">
+         <input matInput [matDatepicker]="myDatepicker" placeholder="Date of event" type="plannedTime"  name="plannedTime" [(ngModel)]="cartForm.plannedTime" #plannedTime="ngModel">
+         <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+         <mat-datepicker #myDatepicker></mat-datepicker>
+       </mat-form-field>
+      <div class="col-6"><button (click)="updateCart()">update cart information</button></div>
    </div>
 </mat-dialog-content>
 
 <mat-dialog-actions>
   <button class="mat-raised-button"(click)="close()">Close</button>
-  <!-- <button class="mat-raised-button mat-primary"(click)="save()" *ngIf="status == 'update'">Save</button>
-  <button class="mat-raised-button mat-primary"(click)="create()" *ngIf="status == 'create'" [disabled]="faqForm.Answer == '' || faqForm.Question == ''">Create</button> -->
 </mat-dialog-actions>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, EventEmitter } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import { ProductService } from '../../../service/product.service'
 
@@ -14,6 +14,7 @@ export class CartDialogComponent implements OnInit {
   displayData:any
   title:string
   cartProdList:any
+  dataChanges = new EventEmitter();
   isCardProdDeleted:boolean = false
   contactForm = {
     email:'',
@@ -41,15 +42,21 @@ export class CartDialogComponent implements OnInit {
 
     //!cartProd
     //!cart
+
+    this.cartForm.location = data.data['location']
+    this.cartForm.plannedTime = data.data['plannedTime']
+    this.cartForm.price  = data.data['price']
+
+
+
     this.cartId = data.data['id']
     this.displayData = data.data
-    console.log(data)
     this.title = data.title
     this.status = data.action
   }
 
   ngOnInit() {
-    console.log(this.displayData['cartProd']);
+    console.log(this.displayData);
     this.getCartProds()
   }
   close() {
@@ -59,18 +66,26 @@ export class CartDialogComponent implements OnInit {
     this.productService.updateContacts(this.displayData['contactId'], this.contactForm).subscribe(
       (res)=>{
         console.log(res)
+        this.dataChanges.emit();
       },(error)=>{
         console.log(error)
       })
   }
   updateCart(){
-
+    this.productService.updateCart(this.displayData.cartId, this.cartForm).subscribe(
+      (res)=>{
+        console.log(res);
+        this.dataChanges.emit();
+      },(error)=>{
+        console.log(error)
+      }
+    )
   }
   updateCardProd(id ){
 
   }
   getCartProds(){
-    this.productService.getCardProd(this.cartId).subscribe(
+    this.productService.getCardProd(this.displayData.cartId).subscribe(
       (res)=>{
         this.cartProdList = res
       },(error)=>{

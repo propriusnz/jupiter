@@ -16,9 +16,7 @@ constructor(
   @Inject(PLATFORM_ID) private platformId,
   private http: HttpClient
   ){
-    if (isPlatformBrowser(this.platformId)){
       this.httpHeader1= new HttpHeaders({'Authorization': "Bearer "+sessionStorage.getItem('access_token')});
-    }
    }
 
   //!Products
@@ -47,7 +45,7 @@ constructor(
   addGallery(newGallery){
     return this.http.post(this.baseUrl + '/projects', newGallery, { headers: this.httpHeader1 });
   }
-  deleteGallery(id){
+  deleteGallery(id:number){
     return this.http.delete(this.baseUrl + '/projects/' + id, { headers: this.httpHeader1 });
   }
   //!Category
@@ -68,10 +66,10 @@ constructor(
   addCart(newcart:any){
     return this.http.post(this.baseUrl + '/Carts', newcart);
   }
-  updateCart(id, newcart){
-    return this.http.put(this.baseUrl + '/Carts?id=' + id, newcart, { headers: this.httpHeader1 });
+  updateCart(id:number, newcart){
+    return this.http.put(this.baseUrl + '/Carts/' + id, newcart, { headers: this.httpHeader1 });
   }
-  deleteCart(id){
+  deleteCart(id:number){
     return this.http.delete(this.baseUrl + '/Carts/' + id, { headers: this.httpHeader1 });
   }
   //!cartProd
@@ -98,13 +96,13 @@ constructor(
   getFaq(){
     return this.http.get(this.baseUrl + '/Faqs');
   }
-  updateFaq(id,faq){
+  updateFaq(id:number,faq){
     return this.http.put(this.baseUrl + '/Faqs?id=' + id, faq, { headers: this.httpHeader1 })
   }
   addFaq(faq){
     return this.http.post(this.baseUrl + '/Faqs', faq, { headers: this.httpHeader1 })
   }
-  deleteFaq(id){
+  deleteFaq(id:number){
     return this.http.delete(this.baseUrl +'/Faqs/' + id, { headers: this.httpHeader1 })
   }
   //!contact email
@@ -126,7 +124,7 @@ constructor(
   addImg(files){
     return this.http.post(this.baseUrl + '/ProductMedias/',files, { headers: this.httpHeader1 })
   }
-  getImg(id){
+  getImg(id:number){
     return this.http.get(this.baseUrl + '/ProductMedias/'+ id)
   }
   deleteImg(id:number){
