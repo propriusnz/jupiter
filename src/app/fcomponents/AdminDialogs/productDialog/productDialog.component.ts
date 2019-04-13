@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { ProductService } from '../../../service/product.service'
 
 @Component({
@@ -16,11 +17,17 @@ export class ProductDialogComponent implements OnInit {
   imageList:any
   isLoading:boolean = false
   isImageEmpty:boolean = false
+  
+  detailList=[]
+  detailForm: FormGroup;
+  detailItems: FormArray;
+
   @ViewChild('imageInput') imageInput : ElementRef
   productForm : {
     title:string,
     subTitle:string,
     totalStock:number,
+    availableStock:number,
     description:string,
     prodTypeId:number,
     categoryId:number,
@@ -30,6 +37,7 @@ export class ProductDialogComponent implements OnInit {
     title:'',
     subTitle:'',
     totalStock:0,
+    availableStock:0,
     description:'',
     prodTypeId:0,
     categoryId:null,
@@ -43,19 +51,25 @@ export class ProductDialogComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<ProductDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data,
-    private productService : ProductService
+    private productService : ProductService,
+    private formBuilder: FormBuilder
   ) { 
     //TODO: use map
     if (data.action == 'update'){
       this.displayData = data.data 
+      console.log('this.displayData: ', this.displayData);
       this.id = data.data['prodId']
       this.productForm.title = data.data['title']
       this.productForm.subTitle = data.data['subTitle']
       this.productForm.totalStock = data.data['totalStock']
+      this.productForm.availableStock = data.data['availableStock']
       this.productForm.description = data.data['description']
       this.productForm.categoryId = data.data['categoryId']
       this.productForm.price = data.data['price']
       this.productForm.discount = data.data['discount']
+      if (data.data['productDetail']){
+        this.detailList = data.data['productDetail']
+      }
     }
     this.productForm.prodTypeId = Number(data.blockCode)-1
     this.dialogTitle = data.title
@@ -64,6 +78,10 @@ export class ProductDialogComponent implements OnInit {
 
   ngOnInit() {
     this.getCategories()
+    this.detailForm = this.formBuilder.group({
+      detailItems: this.formBuilder.array([])
+    })
+    this.getDetails()
   }
   save(){
     this.productService.updateProduct(this.id,this.productForm).subscribe(
@@ -79,15 +97,6 @@ export class ProductDialogComponent implements OnInit {
     this.dialogRef.close()
   }
   create(){
-    // const fd = new FormData();
-    // for (let key of Object.keys(this.productForm)){
-    //   if  (this.productForm[key] == null){
-    //     continue
-    //   }
-    //   fd.append(key, this.productForm[key])
-    // }
-    //append product image
-    // fd.append('ProductImage',this.selectedImg, this.selectedImg.name)
     this.isLoading = true
     this.productService.addProduct(this.productForm).subscribe(
       (res)=>{
@@ -170,5 +179,34 @@ export class ProductDialogComponent implements OnInit {
       },(error)=>{
         console.log(error)
       })
+  }
+  getDetails(){
+    this.detailList.forEach(prod => {
+      let control = <FormArray>this.detailForm.controls.detailItems
+      control.push(
+        this.formBuilder.group({
+          Title:prod.productDetail1,
+          Quantity:prod.quantity,
+          Price: prod.price,
+          Discount: prod.discount,
+          TotalStock: prod.totalStock,
+          AvailableStock: prod.availableStock
+        })
+      )
+    });
+  }
+  addDetails(){
+    let control = <FormArray>this.detailForm.controls.detailItems
+    control.push(
+      this.formBuilder.group({
+        Title:null,
+        Quantity:null,
+        Price: null,
+        Discount: null,
+        TotalStock: null,
+        AvailableStock: null
+      })
+    )
+
   }
 }

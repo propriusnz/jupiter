@@ -86,6 +86,7 @@ export class AdminComponent implements OnInit {
   getProducts(typeCode: number) {
     this.productService.indexType(typeCode).subscribe(
       (res) => {
+        console.log(res)
         this.displayData = res;
       },
       (err) => { console.log(err); }

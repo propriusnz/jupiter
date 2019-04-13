@@ -1,50 +1,76 @@
 <h2 mat-dialog-title>{{dialogTitle}}</h2>
 
 <mat-dialog-content *ngIf="!editImage">
-    <!-- title -->
-    Product Title:
-    <div class="form-group">
-        <input  class="form-control"  name="title" placeholder="title *" [(ngModel)]="productForm.title" #title="ngModel">
-     </div>
-     <!-- subtitle -->
-     Product Subtitle:
-     <div class="form-group">
-        <input class="form-control" name="subTitle" placeholder="subTitle *" [(ngModel)]="productForm.subTitle" #subTitle="ngModel">
-     </div>
-     <!-- total stock -->
-     Total stock:
-     <div class="form-group">
+    <!-- title && subtitle-->
+    <div class="row">
+        <div class="col-6">Product Title:</div><div class="col-6"> Product Subtitle:</div>
+        <div class="form-group col-6">
+            <input  class="form-control"  name="title" placeholder="title *" [(ngModel)]="productForm.title" #title="ngModel">
+         </div>
+         <div class="form-group col-6">
+            <input class="form-control" name="subTitle" placeholder="subTitle *" [(ngModel)]="productForm.subTitle" #subTitle="ngModel">
+         </div>
+    
+     <!-- total stock %% available stock-->
+     <div class="col-6">Total stock:</div>  <div class="col-6">Available Stock:</div>
+     <div class="form-group col-6">
         <input class="form-control" min="0" type="number" name="totalStock" placeholder="totalStock *" [(ngModel)]="productForm.totalStock" #totalStock="ngModel">
      </div>
-     <!-- Price -->
-     Price:
-     <div class="form-group">
-        <input class="form-control"  min="0" type="number" name="price" placeholder="Price" [(ngModel)]="productForm.price" #price="ngModel">
-     </div>
-     <!-- Discount -->
-     Discount:
-     <div class="form-group">
-        <input class="form-control"  min="0" type="number" name="discount" placeholder="Discount" [(ngModel)]="productForm.discount" #discount="ngModel">
-     </div>
-    <!-- description -->
-    Description:
-    <div class="form-group">
-        <textarea rows="4" cols="50" class="form-control" name="description" placeholder="description *" [(ngModel)]="productForm.description" #description="ngModel"></textarea>
+     <div class="form-group col-6">
+        <input class="form-control" min="0" type="number" name="availableStock" placeholder="availableStock *" [(ngModel)]="productForm.availableStock" #availableStock="ngModel">
     </div>
-    <!-- choose categoty -->
-    <div class="form-group">
-      <!-- !when update hire product -->
-      <select *ngIf="displayData && productForm.prodTypeId==1" class="custom-select form-control" name="categoryId"
-      [(ngModel)]="productForm.categoryId" #categoryId="ngModel">
+     <!-- Price && Discount -->
+     <div class="col-6">Price:</div> <div class="col-6">Discount:</div>
+        <div class="form-group col-6">
+            <input class="form-control"  min="0" type="number" name="price" placeholder="Price" [(ngModel)]="productForm.price" #price="ngModel">
+        </div>            
+    <div class="form-group col-6">
+        <input class="form-control"  min="0" type="number" name="discount" placeholder="Discount" [(ngModel)]="productForm.discount" #discount="ngModel">
+    </div>            
+     <!-- choose categoty -->
+    <div class="col-6">Choose category of product:</div>
+    <div class="form-group col-6">
+        <!-- !when update hire product -->
+        <select *ngIf="displayData && productForm.prodTypeId==1" class="custom-select form-control" name="categoryId"
+        [(ngModel)]="productForm.categoryId" #categoryId="ngModel">
             <option *ngFor="let cate of allCategories, index as i" value= {{cate.categoryId}} [selected]="displayData.categoryId == cate.categoryId">{{cate.categoryName}}</option>
-      </select>
-      <!-- !when create hire product -->
-      <select *ngIf="!displayData && productForm.prodTypeId==1" class="custom-select form-control" name="categoryId" [(ngModel)]="productForm.categoryId" #categoryId="ngModel">
+        </select>
+        <!-- !when create hire product -->
+        <select *ngIf="!displayData && productForm.prodTypeId==1" class="custom-select form-control" name="categoryId" [(ngModel)]="productForm.categoryId" #categoryId="ngModel">
             <option value="null" disabled selected>Choose a product type</option>
             <option *ngFor="let cate of allCategories, index as i" value= {{cate.categoryId}}>{{cate.categoryName}}</option>
-      </select>
+        </select>
+    </div>
+      
+    <!-- !Details of Product -->
+    <div class="col-12" *ngIf="detailList.length != 0">Detail of Products:</div>
+    <div class="row">
+        <div class="col-2">Title:</div><div class="col-2">Quantity:</div><div class="col-2">Price:</div>
+        <div class="col-2">Discount:</div><div class="col-2">TotalStock:</div><div class="col-2">AvailableStock:</div>        
+    </div>
+
+        <form [formGroup]="detailForm" class="col-12">
+            <div formArrayName="detailItems">
+                <div *ngFor="let detail of detailForm.controls.detailItems.controls, index as i">
+                    <div [formGroupName]="i">
+                    <input class="col-2" type="text" formControlName="Title" placeholder="Title">
+                    <input class="col-2" type="number" min="0" formControlName="Quantity" placeholder="Quantity">
+                    <input class="col-2" type="number" min="0" formControlName="Price" placeholder="Price">
+                    <input class="col-2" type="number" min="0" formControlName="Discount" placeholder="Discount">
+                    <input class="col-2" type="number" min="0" formControlName="TotalStock" placeholder="totalStock">
+                    <input class="col-2" type="number" min="0" formControlName="AvailableStock" placeholder="availableStock">
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    <!-- description -->
+    <div class="col-12">Description:</div>
+    <div class="form-group col-12">
+        <textarea rows="4" cols="50" class="form-control" name="description" placeholder="description *" [(ngModel)]="productForm.description" #description="ngModel"></textarea>
     </div>
     <button type="button" class="btn btn-outline-info" (click)="goEditImage()" *ngIf="status == 'update'">Edit product image</button>
+</div>
 </mat-dialog-content>
 
 <mat-dialog-content *ngIf="editImage">
