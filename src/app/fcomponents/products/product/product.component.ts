@@ -1,6 +1,7 @@
 import { Component, OnInit,ViewChild,ElementRef, Inject, PLATFORM_ID } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {ProductService} from '../../../service/product.service';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 //import {Location} from '@angular/common';
 @Component({
   selector: 'app-product',
@@ -12,39 +13,54 @@ export class ProductComponent implements OnInit {
   productDetail:any;
   prodMediaUrl:any;
   quantity:number=1 ;
-  quantityLength:number;
   quantityFilled:boolean = true;
   isprodAdded:boolean = false;
-  defaultImgUrl:string = '../../../../assets/images/product1.jpg';
-  // 1: add to cart; 2: successfully added 3:failed
   inCart:number = 1;
   cartList = [];
-  @ViewChild('small') small: ElementRef;
-  @ViewChild('shadow') shadow: ElementRef;
-  @ViewChild('showDetails') showDetails: ElementRef;
-  @ViewChild('container') container: ElementRef;
-  @ViewChild('detailImg') detailImg: ElementRef;
+
+  cartForm: FormGroup;
+  cartItems: FormArray;
 
   constructor(
     private route:ActivatedRoute,
     private router:Router,
     private productService:ProductService, 
+    private formBuilder: FormBuilder
   ) { 
     this.productId = this.route.snapshot.params['id'];
   }
   ngOnInit() {
-    console.log(this.productId)
+    this.cartForm = this.formBuilder.group({
+      cartItems: this.formBuilder.array([])
+    });    
     this.productService.showProduct(this.productId).subscribe( 
       (res)=>{
         this.productDetail = res
+        this.createItem(res)
         this.prodMediaUrl =  this.productDetail.productMedia;
-        this.quantityLength = this.productDetail.totalStock.toString().length;
-        console.log(this.productDetail)
+        console.log('prod detail',this.productDetail)
       },
       (error)=>console.log(error)
     )
     this.setStorage()
     }
+
+  createItem(res){
+    res['productDetail'].forEach(prod => {
+      let control = <FormArray>this.cartForm.controls.cartItems
+      control.push(
+        this.formBuilder.group({
+          ProdId:prod.prodId,
+          Title:prod.productDetail1,
+          Quantity:0,
+          Price:(prod.discount && prod.discount>0) ? prod.price - prod.discount: prod.price,
+          Discount:prod.discount,
+          AvailableStock: prod.availableStock
+        })
+      )
+    });
+
+  } 
 
   quanCheck(e){
     if(e){
@@ -60,9 +76,7 @@ export class ProductComponent implements OnInit {
       this.quantityFilled = false
     }
   }
-  changeImg(e){
-    this.defaultImgUrl = e.srcElement.attributes[2].nodeValue
-  }
+
   setStorage(){
       if ('cartList' in localStorage){
         this.cartList = JSON.parse(localStorage.getItem('cartList'))
@@ -71,83 +85,68 @@ export class ProductComponent implements OnInit {
       }
       localStorage.setItem('userId','aaa ')
   }
-  addToCart(){
+
+  manageCartProds(){
+    let newCartList = []
+   
+      //if product detail exist
+    if(this.productDetail['productDetail'] && this.productDetail['productDetail'].length!=0){
+      this.cartForm.controls.cartItems['value'].forEach(cartItem => {
+        // cartItem.Title = this.productDetail.title + ': ' + cartItem.Title
+        let item = {
+          ProdId:cartItem.ProdId,
+          Price: cartItem.Price*cartItem.Quantity,
+          Title: this.productDetail.title + ': ' + cartItem.Title,
+          Quantity:cartItem.Quantity
+        }
+       newCartList.push(item)
+      })
+      this.addToCart(newCartList)
+    }else{
+      //if no product detail
+      var productPrice = (this.productDetail.discount && this.productDetail.discount>0) ? this.productDetail.price - this.productDetail.discount : this.productDetail.price
+      let item = {
+        ProdId:Number(this.productId),
+        Price:this.quantity*productPrice,
+        Title:this.productDetail.title,
+        Quantity:this.quantity
+      }
+      newCartList.push(item)
+      this.addToCart(newCartList)
+    }
+
+  }
+
+  addToCart(list){
     this.isprodAdded = true
     setTimeout( ()=>{
       this.isprodAdded = false
       }, 1000)
-    // cartId?
-    var productPrice = (this.productDetail.discount && this.productDetail.discount>0) ? this.productDetail.price - this.productDetail.discount : this.productDetail.price
-    let item = {
-      ProdId:Number(this.productId),
-      Price:this.quantity*productPrice,
-      Title:this.productDetail.title,
-      Quantity:this.quantity
-    }    
 
-    let a:boolean = false
+      list.forEach(item => {
+        let a:boolean = false
 
-      if (this.cartList.length>0){
-        for (let i=0; i<this.cartList.length;i++){
-          if(this.cartList[i].Title == item.Title){
-            a = true
-            this.cartList[i].Quantity += item.Quantity
-            this.cartList[i].Price = this.cartList[i].Quantity*productPrice
-            localStorage.setItem('cartList',JSON.stringify(this.cartList))
-            console.log(this.cartList)
+        if (this.cartList.length>0){
+          for (let i=0; i<this.cartList.length;i++){
+            if(this.cartList[i].Title == item.Title){
+              a = true
+              this.cartList[i].Quantity += item.Quantity
+              this.cartList[i].Price = this.cartList[i].Quantity*item.Price
+              localStorage.setItem('cartList',JSON.stringify(this.cartList))
+              console.log('cartList',this.cartList)
+            }
           }
-        }
-        if (a==false){
+          if (a==false){
+            this.cartList.push(item)
+            localStorage.setItem('cartList',JSON.stringify(this.cartList))  
+          }
+        }else{
+          this.cartList = JSON.parse(localStorage.getItem('cartList'))
           this.cartList.push(item)
-          localStorage.setItem('cartList',JSON.stringify(this.cartList))  
+          localStorage.setItem('cartList',JSON.stringify(this.cartList))
         }
-      }else{
-        this.cartList = JSON.parse(localStorage.getItem('cartList'))
-        this.cartList.push(item)
-        localStorage.setItem('cartList',JSON.stringify(this.cartList))
-      }
-  
-  
+      });
   }
-  // mouseEnter(){
-  //   this.shadow.nativeElement.style.display = "block";
-  //   this.showDetails.nativeElement.style.display = "block";	
-  // }
-  // mouseLeave(){
-  //   this.shadow.nativeElement.style.display = "none";
-  //   this.showDetails.nativeElement.style.display = "none";	
-  // }
-  // mouseMove(e){
-  //     const box = this.container.nativeElement;	
-	// 		const smallBox = this.small.nativeElement;
-	// 		const mask = this.shadow.nativeElement;
-	// 		const bigImg = this.detailImg.nativeElement;
- 
-	// 		let x = e.pageX - box.offsetLeft;
-	// 		let y = e.pageY - box.offsetTop;	
-	// 		x = x - mask.offsetWidth/2;
-	// 		y = y - mask.offsetHeight/2;
- 
-	// 		if (x < 0) {
-	// 			x = 0
-	// 		}
-	// 		if (x > smallBox.offsetWidth - mask.offsetWidth) {
-	// 			x = smallBox.offsetWidth - mask.offsetWidth;
-	// 		}
-			
-	// 		if (y < 0) {
-	// 			y = 0
-	// 		}
-	// 		if (y > smallBox.offsetHeight - mask.offsetHeight) {
-	// 			y = smallBox.offsetHeight - mask.offsetHeight
-	// 		}
- 
-	// 		mask.style.left = x + "px";
-	// 		mask.style.top = y + "px";
- 
-	// 		bigImg.style.left = -bigImg.offsetWidth/smallBox.offsetWidth * x + "px"; 
-	// 		bigImg.style.top = -bigImg.offsetHeight/smallBox.offsetHeight * y + "px";
-  // }
   backClicked(type:string, id?:number){
     if (id){
       this.router.navigate(['/category/',id]);
@@ -158,5 +157,8 @@ export class ProductComponent implements OnInit {
     if(type == 'packages'){
       this.router.navigate(['/packages']);
     }
+  }
+  showForm(){
+    console.log('Forms: ',this.cartForm.controls.cartItems['value']);
   }
 }

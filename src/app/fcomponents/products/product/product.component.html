@@ -21,7 +21,7 @@
   <div class="row my-5">
   <div class="col-12 col-md-6 col-lg-7 ">
     <!-- TODO: add img scrolling -->
-    <div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel">
+    <div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel" *ngIf="prodMediaUrl">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleControls" data-slide-to="i" class="active" *ngFor="let img of prodMediaUrl, index as i" [ngClass]="{'active': i == 0}"></li>
           </ol>
@@ -71,22 +71,36 @@
     <br/>
     <h3 class="s2 mb-2" style="white-space: pre-line">{{productDetail.description}}</h3>
     <br/>
+
+    <div *ngIf="this.productDetail['productDetail'] && this.productDetail['productDetail'].length!=0">
+      <form [formGroup]="cartForm">
+        <div formArrayName="cartItems">
+          <div *ngFor="let detail of cartForm.controls.cartItems.controls, index as i">
+              <div [formGroupName]="i">
+                <input type="text" formControlName="Title" disabled>
+                <input type="number" min="0" formControlName="Quantity" placeholder="Quantity">
+              </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
     <div class="row justify-content-between mt-3">
-      <div class="col-6 col-lg-8 s1">
+      <div class="col-6 col-lg-8 s1" *ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length==0">
         <!-- Quantity:<input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
          type="number" [value] = "quantity"  min="1" max={{productDetail.availableStock}} [(ngModel)]="quantity" (ngModelChange)="quanCheck($event)" 
         maxlength= "{{quantityLength}}">  -->
         Quantity: <input type="number" [value] = "quantity"  min="1" max={{productDetail.availableStock}} [(ngModel)]="quantity">
         <!-- <span class="s3 pl-2"> (only {{productDetail.availableStock}} in stock)</span> -->
       </div>
-      <div class="col-6 col-lg-4" *ngIf="inCart==1"><button class='btn btn_gold float-right' (click)="addToCart()" [disabled] = " 0 >=quantity ">Add to cart</button></div>
+      <div class="col-6 col-lg-4" *ngIf="inCart==1"><button class='btn btn_gold float-right' (click)="manageCartProds()" [disabled] = " 0 >=quantity ">Add to cart</button></div>
     </div>
     <div class="row">
       <div class="col-6 col-lg-8"></div>
 
-      <div class="col-6 col-lg-4 alert alert-success mt-3" role="alert" *ngIf="isprodAdded">
+      <!-- <div class="col-6 col-lg-4 alert alert-success mt-3" role="alert" *ngIf="isprodAdded">
           {{quantity}} {{productDetail.title}} added into cart.
-      </div>
+      </div> -->
     </div>
 
    </div>
