@@ -130,4 +130,11 @@ constructor(
   deleteImg(id:number){
     return this.http.delete(this.baseUrl + '/ProductMedias/'+ id, { headers: this.httpHeader1 })
   }
+  //!productDetails
+  updateProductDetails(productId,detailList){
+    return this.http.put(this.baseUrl + '/ProductDetails/'+ productId, detailList, { headers: this.httpHeader1 })
+  }
+  deleteProductDetail(id:number){
+    return this.http.delete(this.baseUrl + '/ProductDetails/'+ id, { headers: this.httpHeader1 })
+  }
 }

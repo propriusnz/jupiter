@@ -5,3 +5,9 @@ img{
 .btn-sm{
     font-size:0.7rem;
 }
+.fas.fa-trash-alt{
+    cursor: pointer;
+}
+.fas.fa-trash-alt:hover{
+    color:red;
+}

@@ -17,6 +17,7 @@ export class ProductDialogComponent implements OnInit {
   imageList:any
   isLoading:boolean = false
   isImageEmpty:boolean = false
+  isDetailFormChanged:boolean = false
   
   detailList=[]
   detailForm: FormGroup;
@@ -82,6 +83,9 @@ export class ProductDialogComponent implements OnInit {
       detailItems: this.formBuilder.array([])
     })
     this.getDetails()
+    this.detailForm.valueChanges.subscribe(
+      changes=>this.isDetailFormChanged = true
+    )
   }
   save(){
     this.productService.updateProduct(this.id,this.productForm).subscribe(
@@ -90,8 +94,10 @@ export class ProductDialogComponent implements OnInit {
         this.dialogRef.close()
     },(error) =>{
       console.log(error)
+    })
+    if (this.isDetailFormChanged == true){
+      this.updateDetails()
     }
-    )
   }
   close(){
     this.dialogRef.close()
@@ -108,6 +114,7 @@ export class ProductDialogComponent implements OnInit {
       console.log(error)
     }
     )
+    this.updateDetails()
   }
   getCategories(){
     this.productService.indexCategory().subscribe(
@@ -185,12 +192,13 @@ export class ProductDialogComponent implements OnInit {
       let control = <FormArray>this.detailForm.controls.detailItems
       control.push(
         this.formBuilder.group({
-          Title:prod.productDetail1,
-          Quantity:prod.quantity,
+          Id:prod.id,
+          ProdId:this.id,
+          ProductDetail1:prod.productDetail1,
+          TotalStock: prod.totalStock,
+          AvailableStock: prod.availableStock,
           Price: prod.price,
           Discount: prod.discount,
-          TotalStock: prod.totalStock,
-          AvailableStock: prod.availableStock
         })
       )
     });
@@ -199,14 +207,33 @@ export class ProductDialogComponent implements OnInit {
     let control = <FormArray>this.detailForm.controls.detailItems
     control.push(
       this.formBuilder.group({
-        Title:null,
-        Quantity:null,
+        Id:0,
+        ProdId:this.id,
+        ProductDetail1:null,
+        TotalStock: null,
+        AvailableStock: null,
         Price: null,
         Discount: null,
-        TotalStock: null,
-        AvailableStock: null
       })
     )
-
+  }
+  deleteDetail(detail,i){
+    let control = <FormArray>this.detailForm.controls.detailItems
+    control.removeAt(i)
+    this.productService.deleteProductDetail(detail.value.Id).subscribe(
+      (res)=>{
+      },(error)=>{
+        console.log(error)
+      }
+    )
+  }
+  updateDetails(){
+    let detailList = this.detailForm.controls.detailItems['value']
+    
+    this.productService.updateProductDetails(this.id, detailList).subscribe((res)=>{
+      console.log(res)
+    },(error)=>{
+      console.log(error)
+    })
   }
 }

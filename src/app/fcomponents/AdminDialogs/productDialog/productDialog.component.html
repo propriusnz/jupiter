@@ -43,22 +43,20 @@
     </div>
       
     <!-- !Details of Product -->
-    <div class="col-12" *ngIf="detailList.length != 0">Detail of Products:</div>
-    <div class="row">
-        <div class="col-2">Title:</div><div class="col-2">Quantity:</div><div class="col-2">Price:</div>
-        <div class="col-2">Discount:</div><div class="col-2">TotalStock:</div><div class="col-2">AvailableStock:</div>        
-    </div>
+    <div class="col-9">Detail of Products:</div> <div class="col-3"><button (click)="addDetails()">Add new detail</button></div>
+    <div class="col-2">Title:</div><div class="col-2">Price:</div><div class="col-2">Discount:</div>
+    <div class="col-2">TotalStock:</div><div class="col-2">AvailableStock:</div><div class="col-2">Delete</div>        
 
         <form [formGroup]="detailForm" class="col-12">
             <div formArrayName="detailItems">
                 <div *ngFor="let detail of detailForm.controls.detailItems.controls, index as i">
                     <div [formGroupName]="i">
-                    <input class="col-2" type="text" formControlName="Title" placeholder="Title">
-                    <input class="col-2" type="number" min="0" formControlName="Quantity" placeholder="Quantity">
+                    <input class="col-2" type="text" formControlName="ProductDetail1" placeholder="Title">
                     <input class="col-2" type="number" min="0" formControlName="Price" placeholder="Price">
                     <input class="col-2" type="number" min="0" formControlName="Discount" placeholder="Discount">
                     <input class="col-2" type="number" min="0" formControlName="TotalStock" placeholder="totalStock">
                     <input class="col-2" type="number" min="0" formControlName="AvailableStock" placeholder="availableStock">
+                    <i class="fas fa-trash-alt col-2 pl-3" (click)="deleteDetail(detail,i)"></i>
                     </div>
                 </div>
             </div>
