@@ -16,7 +16,9 @@ constructor(
   @Inject(PLATFORM_ID) private platformId,
   private http: HttpClient
   ){
-      this.httpHeader1= new HttpHeaders({'Authorization': "Bearer "+sessionStorage.getItem('access_token')});
+      //this.httpHeader1= new HttpHeaders({'Authorization': "Bearer " + 'qwerqwer'});
+      this.httpHeader1= new HttpHeaders({'Authorization': "Bearer " + sessionStorage.getItem('access_token')});
+
    }
 
   //!Products
@@ -61,6 +63,8 @@ constructor(
   }
   //!Carts
   getCarts(){
+    console.log('header1:',this.httpHeader1)
+    console.log('token:',sessionStorage.getItem('access_token'));
     return this.http.get(this.baseUrl + '/Carts', { headers: this.httpHeader1 });
   }
   addCart(newcart:any){

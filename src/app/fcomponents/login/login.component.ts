@@ -23,8 +23,6 @@ export class LoginComponent implements OnInit {
   isLoggingIn: boolean = false;
 
   constructor(
-    // @Inject(LOCAL_STORAGE)
-    // private localStorage: any,
     @Inject(PLATFORM_ID) private platformId,
     private productservice: ProductService,
     public router: Router
@@ -43,7 +41,6 @@ export class LoginComponent implements OnInit {
     this.loginFailed = false;
     // *login failed
     if (!valid) {
-      console.log('Dosn\'t Work');
       this.errorMessage = 'All fields must be filled.';
     } else {
       this.isLoggingIn = true
@@ -53,7 +50,7 @@ export class LoginComponent implements OnInit {
         if (this.isBrowser = true) {
           sessionStorage.setItem('access_token', res['token']);
         }
-        this.router.navigate(['/admin']);
+        this.router.navigate(['/admin'])
       }, (error) => {
         console.log(error);
         this.isLoggingIn = false

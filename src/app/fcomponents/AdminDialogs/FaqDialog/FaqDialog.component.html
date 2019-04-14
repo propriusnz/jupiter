@@ -21,7 +21,8 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button class="mat-raised-button"(click)="close()">Close</button>
-    <button class="mat-raised-button mat-primary"(click)="save()" *ngIf="status == 'update'">Save</button>
-    <button class="mat-raised-button mat-primary"(click)="create()" *ngIf="status == 'create'" [disabled]="faqForm.Answer == '' || faqForm.Question == ''">Create</button>
+    <button type="button" class="btn btn-outline-secondary" (click)="close()">Close</button>
+    <button type="button" class="btn btn-outline-primary ml-80" (click)="save()" *ngIf="status == 'update'" [disabled] = "isLoading == true">Save</button>
+    <button type="button" class="btn btn-outline-primary ml-80" (click)="create()" *ngIf="status == 'create'" [disabled] = "isLoading == true || faqForm.Answer == '' || faqForm.Question == ''">Create</button>
+
 </mat-dialog-actions>

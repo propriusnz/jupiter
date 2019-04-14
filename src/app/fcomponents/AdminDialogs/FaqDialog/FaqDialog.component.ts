@@ -13,6 +13,7 @@ export class FaqDialogComponent implements OnInit {
     Question:'',
     Answer:''
   }
+  isLoading:boolean = false
   status:string
   displayData:any
   title:string
@@ -33,20 +34,26 @@ export class FaqDialogComponent implements OnInit {
   ngOnInit() { 
   }
   save(){
+    this.isLoading = true
     this.productService.updateFaq(this.id,this.faqForm).subscribe(
       (res)=>{
+        this.isLoading = false
         this.dialogRef.close()
     },(error) =>{
+      this.isLoading = false
       console.log(error)
     }
     )
   }
   create(){
+    this.isLoading = true
     this.productService.addFaq(this.faqForm).subscribe(
       (res)=>{
+      this.isLoading = false
       console.log(this.faqForm);
       this.dialogRef.close()
     },(error) =>{
+      this.isLoading = false
       console.log(error)
     }
     )

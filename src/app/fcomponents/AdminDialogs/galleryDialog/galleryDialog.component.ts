@@ -18,6 +18,7 @@ export class GalleryDialogComponent implements OnInit {
   displayData:any
   title:string
   events:any;
+  isLoading:boolean = false
   constructor(
     private dialogRef: MatDialogRef<GalleryDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data,
@@ -49,23 +50,26 @@ export class GalleryDialogComponent implements OnInit {
     )
   }
   save(){
+    this.isLoading = true
     this.galleryForm.eventtypeId = Number(this.galleryForm.eventtypeId)
     this.productService.updateGallery(this.id,this.galleryForm).subscribe(
       (res)=>{
-        console.log(res);
-        console.log(this.galleryForm)
+        this.isLoading = false
         this.dialogRef.close()
     },(error) =>{
+      this.isLoading = false
       console.log(error)
     }
     )
   }
   create(){
+    this.isLoading = true
     this.productService.addGallery(this.galleryForm).subscribe(
       (res)=>{
-      console.log(this.galleryForm);
+        this.isLoading = false
       this.dialogRef.close()
     },(error) =>{
+      this.isLoading = false
       console.log(error)
     }
     )

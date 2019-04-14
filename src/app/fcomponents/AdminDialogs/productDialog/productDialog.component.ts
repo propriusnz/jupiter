@@ -114,7 +114,6 @@ export class ProductDialogComponent implements OnInit {
       console.log(error)
     }
     )
-    this.updateDetails()
   }
   getCategories(){
     this.productService.indexCategory().subscribe(

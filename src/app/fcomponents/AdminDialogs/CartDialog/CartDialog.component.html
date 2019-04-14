@@ -22,7 +22,7 @@
       <div class="form-group col-12">
          <textarea rows="4" cols="50" class="form-control" name="phoneNum" [(ngModel)]="contactForm.phoneNum" #phoneNum="ngModel" style="white-space: pre-line"></textarea>
       </div>
-      <button (click)="updateContact()">Save changes to customer</button>
+      <button (click)="updateContact()" [disabled] = "isLoading==true">Save changes to customer</button>
    </div>
 
    <!-- !cartProd Detail -->
@@ -43,10 +43,10 @@
          <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
          <mat-datepicker #myDatepicker></mat-datepicker>
        </mat-form-field>
-      <div class="col-6"><button (click)="updateCart()">update cart information</button></div>
+      <div class="col-6"><button (click)="updateCart()" [disabled] = "isLoading==true">update cart information</button></div>
    </div>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button class="mat-raised-button"(click)="close()">Close</button>
+   <button type="button" class="btn btn-outline-secondary" (click)="close()">Close</button>
 </mat-dialog-actions>

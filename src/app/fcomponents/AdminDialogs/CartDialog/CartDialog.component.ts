@@ -15,6 +15,7 @@ export class CartDialogComponent implements OnInit {
   title:string
   cartProdList:any
   dataChanges = new EventEmitter();
+  isLoading:boolean = false
   isCardProdDeleted:boolean = false
   contactForm = {
     email:'',
@@ -63,20 +64,26 @@ export class CartDialogComponent implements OnInit {
     this.dialogRef.close();
   }
   updateContact(){
+    this.isLoading = true
     this.productService.updateContacts(this.displayData['contactId'], this.contactForm).subscribe(
       (res)=>{
+        this.isLoading = false
         console.log(res)
         this.dataChanges.emit();
       },(error)=>{
+        this.isLoading = false
         console.log(error)
       })
   }
   updateCart(){
+    this.isLoading = true
     this.productService.updateCart(this.displayData.cartId, this.cartForm).subscribe(
       (res)=>{
         console.log(res);
+        this.isLoading = false
         this.dataChanges.emit();
       },(error)=>{
+        this.isLoading = false
         console.log(error)
       }
     )
