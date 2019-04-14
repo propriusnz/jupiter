@@ -16,7 +16,8 @@ export class ProductListComponent implements OnInit {
   errorMessage:string
   categoryId:number
   isLoading:boolean = false
-
+  groupedProducts:any = []
+  isProductsGrouped:boolean = false
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
@@ -102,9 +103,11 @@ export class ProductListComponent implements OnInit {
       (res) => {
         this.isLoading = false
         this.allProducts = res
-        console.log('allproduts:',this.allProducts)
         if (id ==1){
           this.getCategories()
+        }
+        if(this.allProducts.length>11){
+          this.groupProducts()
         }
       },
       (err) => {console.log(err),this.errorMessage = 'Server fault',this.isLoading = false}
@@ -119,6 +122,9 @@ export class ProductListComponent implements OnInit {
     this.productService.indexCategoryId(id).subscribe((res)=>{
       this.isLoading = false
       this.allProducts = res
+      if(this.allProducts.length >11){
+        this.groupProducts()
+      }
       this.selectedCate = res[0]['category']['categoryName']
     },(error)=>{
       this.isLoading = false
@@ -130,5 +136,16 @@ export class ProductListComponent implements OnInit {
     this.productService.indexCategory().subscribe((res)=>{
       this.allCategories = res
     },(error)=>{console.log(error),this.errorMessage = 'Server fault'})
+  }
+  groupProducts(){
+    this.isProductsGrouped = true
+    for (let i = 0; i < this.allProducts.length; i += 12) {
+      let mylist = this.allProducts.slice(i, i + 12);
+      this.groupedProducts.push(mylist);
+    }
+    this.allProducts = this.groupedProducts[0]
+  }
+  changePage(page:number){
+    this.allProducts = this.groupedProducts[page]
   }
 }
