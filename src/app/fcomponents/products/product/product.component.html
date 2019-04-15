@@ -72,14 +72,17 @@
     <h3 class="s2 mb-2" style="white-space: pre-line">{{productDetail.description}}</h3>
     <br/>
 
-    <div *ngIf="this.productDetail['productDetail'] && this.productDetail['productDetail'].length!=0">
+    <div  *ngIf="this.productDetail['productDetail'] && this.productDetail['productDetail'].length!=0">
+      <div class="s2">Select the specifications</div><br>
       <form [formGroup]="cartForm">
-        <div formArrayName="cartItems">
+        <div  formArrayName="cartItems">
+          <div style="margin-left:202px;" class="s2">Quantity</div>
           <div *ngFor="let detail of cartForm.controls.cartItems.controls, index as i">
-              <div [formGroupName]="i">
-                <input type="text" formControlName="Title" disabled>
-                <input type="number" min="0" formControlName="Quantity" placeholder="Quantity">
-              </div>
+            <div [formGroupName]="i">
+              <input style="background-color:white; border-width: 0px; width:144px;" type="text" formControlName="Title" disabled>
+              $<input style="background-color:white; border-width: 0px; width:49px;" type="text" formControlName="Price" disabled>
+              <input style="width:50px; height:22px;" type="number" min="0" formControlName="Quantity" placeholder="Quantity">
+            </div>
           </div>
         </div>
       </form>
@@ -93,7 +96,7 @@
         Quantity: <input type="number" [value] = "quantity"  min="1" max={{productDetail.availableStock}} [(ngModel)]="quantity">
         <!-- <span class="s3 pl-2"> (only {{productDetail.availableStock}} in stock)</span> -->
       </div>
-      <div class="col-6 col-lg-4" *ngIf="inCart==1"><button class='btn btn_gold float-right' (click)="manageCartProds()" [disabled] = " 0 >=quantity ">Add to cart</button></div>
+      <div class="col-6 col-lg-6" *ngIf="inCart==1"><button class='btn btn_gold float-right' (click)="manageCartProds()" [disabled] = " 0 >=quantity ">Add to cart</button></div>
     </div>
     <div class="row">
       <div class="col-6 col-lg-8"></div>

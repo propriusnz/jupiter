@@ -65,7 +65,8 @@ export class HomepageComponent implements OnInit {
         console.log("specials:", res)
         this.specialProducts = res['data'];
         this.seperateSpecials();
-      }, (error) => {
+      },
+      (error) => {
         console.log(error);
       }
     );
@@ -83,6 +84,9 @@ export class HomepageComponent implements OnInit {
         this.groupedSpecials.push(mylist1);
       }
     }
+
+
   }
 
+  
 }

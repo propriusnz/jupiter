@@ -89,21 +89,21 @@ export class ProductComponent implements OnInit {
   manageCartProds(){
     let newCartList = []
    
-      //if product detail exist
+      // if product detail exist
     if(this.productDetail['productDetail'] && this.productDetail['productDetail'].length!=0){
       this.cartForm.controls.cartItems['value'].forEach(cartItem => {
         // cartItem.Title = this.productDetail.title + ': ' + cartItem.Title
         let item = {
           ProdId:cartItem.ProdId,
           Price: cartItem.Price*cartItem.Quantity,
-          Title: this.productDetail.title + ': ' + cartItem.Title,
+          Title: this.productDetail.title + ': ' + cartItem.Title, 
           Quantity:cartItem.Quantity
         }
        newCartList.push(item)
       })
       this.addToCart(newCartList)
     }else{
-      //if no product detail
+      // if no product detail
       var productPrice = (this.productDetail.discount && this.productDetail.discount>0) ? this.productDetail.price - this.productDetail.discount : this.productDetail.price
       let item = {
         ProdId:Number(this.productId),
