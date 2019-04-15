@@ -1,6 +1,5 @@
-i {
-    cursor: pointer;
-    font-size: 17px
+i{
+    font-size: 17px;
 }
 .blue-snackbar {
     background: #2196F3;
@@ -12,7 +11,7 @@ i {
     color:rgb(55, 162, 233);
 }
 .nav-item{
-    padding-top:25px;
+    padding-top:20px;
 }
 .nav-item a:hover{
     cursor: pointer;
@@ -31,4 +30,7 @@ td{
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.table-secondary  span{
+    font-size: 10px;
 }
