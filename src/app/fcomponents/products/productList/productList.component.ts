@@ -83,7 +83,6 @@ export class ProductListComponent implements OnInit {
       }
     );
 
-    console.log(this.typeName)
     if (this.typeName == 'hire') {
       this.sortByType(1)
     }

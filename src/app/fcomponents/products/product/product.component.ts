@@ -36,7 +36,6 @@ export class ProductComponent implements OnInit {
         this.productDetail = res
         this.createItem(res)
         this.prodMediaUrl =  this.productDetail.productMedia;
-        console.log('prod detail',this.productDetail)
       },
       (error)=>console.log(error)
     )

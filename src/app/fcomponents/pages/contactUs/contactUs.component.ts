@@ -43,13 +43,10 @@ export class ContactUsComponent implements OnInit {
   onSubmit({valid}:{valid:boolean}) {
     this.isSendingEmail = true
     if(!valid){
-      console.log('no');
       this.feedback_message = 'Please fill all inputs.'
     }
     else{
       this.feedback_message = '';
-
-      console.log(this.contactFrom)
       this.sendEmail();
     }
   }
@@ -58,7 +55,6 @@ export class ContactUsComponent implements OnInit {
   sendEmail(){
     this.productService.sendContactEmail(this.contactFrom).subscribe(
       (res)=>{
-        console.log(res),
         this.isSendingEmail = false
         // this.feedback_message="Thank you for contacting us, we'll be in touch very shortly.",
         this.emailSent = true

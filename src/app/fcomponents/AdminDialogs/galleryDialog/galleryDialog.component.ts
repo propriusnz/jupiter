@@ -42,14 +42,12 @@ export class GalleryDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.galleryForm);
     this.getEventNames()
   }
   getEventNames(){
     this.productService.getEventType().subscribe(
       (res)=>{
       this.events = res
-      console.log(this.events)
     },(error)=>{
       console.log(error)
     }
@@ -102,10 +100,8 @@ export class GalleryDialogComponent implements OnInit {
       const fd = new FormData();
       fd.append('image',this.selectedImg, this.selectedImg.name)
       fd.append('ProjectId',JSON.stringify(this.id))
-      console.log(fd)
       this.productService.addGalleryImg(fd).subscribe((res)=>{
         this.isLoading = false
-        console.log(res)
         this.feedbackMessage = res['data']
         this.getGalleryImages()
         this.imageInput.nativeElement.value = null;
@@ -126,7 +122,6 @@ export class GalleryDialogComponent implements OnInit {
   getGalleryImages(){
     this.productService.getGalleryImg(this.id).subscribe(
       (res)=>{
-        console.log(res)
         this.imageList = res
       },(error)=>{
         console.log(error)

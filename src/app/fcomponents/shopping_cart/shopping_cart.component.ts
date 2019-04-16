@@ -21,12 +21,10 @@ export class Shopping_cartComponent implements OnInit {
         element.url = res[0]['url']
       }))
     });
-    console.log(this.prodsInCart)
     this.price()
   }
   //delete items of shopping cart
   deleteCart(id){
-    console.log(id);
     this.prodsInCart.splice(id,1)
       localStorage.setItem("cartList",JSON.stringify(this.prodsInCart))
     this.price()

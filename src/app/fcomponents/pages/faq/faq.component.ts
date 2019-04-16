@@ -25,7 +25,6 @@ export class FaqComponent implements OnInit {
   ngOnInit() {
     this.productService.getFaq().subscribe((res)=>
     {
-      console.log(res)
       this.faqdata = res;
     },
     (error)=>console.log(error));

@@ -50,7 +50,6 @@ export class FaqDialogComponent implements OnInit {
     this.productService.addFaq(this.faqForm).subscribe(
       (res)=>{
       this.isLoading = false
-      console.log(this.faqForm);
       this.dialogRef.close()
     },(error) =>{
       this.isLoading = false

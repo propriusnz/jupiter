@@ -57,7 +57,6 @@ export class CartDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.displayData);
     this.getCartProds()
   }
   close() {
@@ -68,7 +67,6 @@ export class CartDialogComponent implements OnInit {
     this.productService.updateContacts(this.displayData['contactId'], this.contactForm).subscribe(
       (res)=>{
         this.isLoading = false
-        console.log(res)
         this.dataChanges.emit();
       },(error)=>{
         this.isLoading = false
@@ -79,7 +77,6 @@ export class CartDialogComponent implements OnInit {
     this.isLoading = true
     this.productService.updateCart(this.displayData.cartId, this.cartForm).subscribe(
       (res)=>{
-        console.log(res);
         this.isLoading = false
         this.dataChanges.emit();
       },(error)=>{
@@ -103,7 +100,6 @@ export class CartDialogComponent implements OnInit {
   deleteCardProd(id){
     this.productService.deleteCartProd(id).subscribe(
       (res)=>{
-        console.log(res)
         this.getCartProds()
     }, (error)=>{
       console.log(error)

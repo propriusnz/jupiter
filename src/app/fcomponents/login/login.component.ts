@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit({valid}: { valid: boolean})  {
-    console.log(valid);
     this.errorMessage = null
     this.loginFailed = false;
     // *login failed

@@ -42,9 +42,7 @@ export class UserInfoComponent implements OnInit {
   }
 
   onSubmit({valid}:{valid:boolean}) {
-    console.log(valid);
     if(!valid){
-      console.log('no')
       this.feedback_message = 'Please check all inputs.'
     }
     else{
@@ -77,7 +75,6 @@ export class UserInfoComponent implements OnInit {
     };
     this.productService.addCart(cartContact).subscribe(
       (res)=>{
-        console.log(res)
         this.isSendingEmail = false
         this.isSendSuccess = true
         this.router.navigate(['/thankYou']);
