@@ -13,6 +13,7 @@ export class ContactUsComponent implements OnInit {
   feedback_message:string;
   successMessage:string;
   emailSent:boolean = false;
+  isSendingEmail = false;
   contactFrom={
     name:'',
     email:'',
@@ -40,7 +41,7 @@ export class ContactUsComponent implements OnInit {
     this.minDate = moment().format();
   }
   onSubmit({valid}:{valid:boolean}) {
-    console.log(valid);
+    this.isSendingEmail = true
     if(!valid){
       console.log('no');
       this.feedback_message = 'Please fill all inputs.'
@@ -55,13 +56,18 @@ export class ContactUsComponent implements OnInit {
 
   // Passes data to service
   sendEmail(){
-    this.productService.sendContectEmail(this.contactFrom).subscribe(
+    this.productService.sendContactEmail(this.contactFrom).subscribe(
       (res)=>{
         console.log(res),
+        this.isSendingEmail = false
         // this.feedback_message="Thank you for contacting us, we'll be in touch very shortly.",
         this.emailSent = true
         },
-      (error)=>{console.log(error), this.feedback_message="Opps, something went wrong."}
+      (error)=>{
+        console.log(error)
+        this.feedback_message="Opps, something went wrong."
+        this.isSendingEmail = false
+    }
     )
   }
 }

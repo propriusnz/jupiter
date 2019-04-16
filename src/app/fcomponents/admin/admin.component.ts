@@ -117,6 +117,8 @@ export class AdminComponent implements OnInit {
 
     // dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.height = '550px'
+    dialogConfig.width = '750px'
 
     dialogConfig.data = {
       id: 1,
@@ -184,6 +186,9 @@ export class AdminComponent implements OnInit {
 
     // dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.height = '550px'
+    dialogConfig.width = '750px'
+
 
     dialogConfig.data = {
       id: 1,

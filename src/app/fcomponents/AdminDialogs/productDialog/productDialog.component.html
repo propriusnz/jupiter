@@ -5,19 +5,18 @@
     <div class="row">
         <div class="col-6">Product Title:</div><div class="col-6"> Product Subtitle:</div>
         <div class="form-group col-6">
-            <input  class="form-control"  name="title" placeholder="title *" [(ngModel)]="productForm.title" #title="ngModel">
+            <input  class="form-control"  name="title" placeholder="Title *" [(ngModel)]="productForm.title" #title="ngModel">
          </div>
          <div class="form-group col-6">
-            <input class="form-control" name="subTitle" placeholder="subTitle *" [(ngModel)]="productForm.subTitle" #subTitle="ngModel">
+            <input class="form-control" name="subTitle" placeholder="Subtitle *" [(ngModel)]="productForm.subTitle" #subTitle="ngModel">
          </div>
-    
      <!-- total stock %% available stock-->
      <div class="col-6">Total stock:</div>  <div class="col-6">Available Stock:</div>
      <div class="form-group col-6">
-        <input class="form-control" min="0" type="number" name="totalStock" placeholder="totalStock *" [(ngModel)]="productForm.totalStock" #totalStock="ngModel">
+        <input class="form-control" min="0" type="number" name="totalStock" placeholder="Total stock *" [(ngModel)]="productForm.totalStock" #totalStock="ngModel">
      </div>
      <div class="form-group col-6">
-        <input class="form-control" min="0" type="number" name="availableStock" placeholder="availableStock *" [(ngModel)]="productForm.availableStock" #availableStock="ngModel">
+        <input class="form-control" min="0" type="number" name="availableStock" placeholder="Available stock *" [(ngModel)]="productForm.availableStock" #availableStock="ngModel">
     </div>
      <!-- Price && Discount -->
      <div class="col-6">General Price:</div> <div class="col-6">Discount:</div>
@@ -28,8 +27,8 @@
         <input class="form-control"  min="0" type="number" name="discount" placeholder="Discount" [(ngModel)]="productForm.discount" #discount="ngModel">
     </div>            
      <!-- choose categoty -->
-    <div class="col-6">Choose category of product:</div>
-    <div class="form-group col-6">
+    <div class="col-12">Choose category of product:</div>
+    <div class="form-group col-12">
         <!-- !when update hire product -->
         <select *ngIf="displayData && productForm.prodTypeId==1" class="custom-select form-control" name="categoryId"
         [(ngModel)]="productForm.categoryId" #categoryId="ngModel">
@@ -58,8 +57,8 @@
                     <input class="col-2" type="text" formControlName="ProductDetail1" placeholder="Title">
                     <input class="col-2" type="number" min="0" formControlName="Price" placeholder="Price">
                     <input class="col-2" type="number" min="0" formControlName="Discount" placeholder="Discount">
-                    <input class="col-2" type="number" min="0" formControlName="TotalStock" placeholder="totalStock">
-                    <input class="col-2" type="number" min="0" formControlName="AvailableStock" placeholder="availableStock">
+                    <input class="col-2" type="number" min="0" formControlName="TotalStock" placeholder="Total stock">
+                    <input class="col-2" type="number" min="0" formControlName="AvailableStock" placeholder="Available stock">
                     <i class="fas fa-trash-alt col-2 pl-3" (click)="deleteDetail(detail,i)"></i>
                     </div>
                 </div>
@@ -70,7 +69,7 @@
     <!-- description -->
     <div style="margin-top:14px;" class="col-12">Description:</div>
     <div class="form-group col-12">
-        <textarea rows="4" cols="50" class="form-control" name="description" placeholder="description *" [(ngModel)]="productForm.description" #description="ngModel"></textarea>
+        <textarea rows="4" cols="50" class="form-control" name="description" placeholder="Description *" [(ngModel)]="productForm.description" #description="ngModel"></textarea>
     </div>
     <div><button type="button" class="btn btn-outline-info" (click)="goEditImage()" *ngIf="status == 'update'">Edit product image</button></div>
 </div>

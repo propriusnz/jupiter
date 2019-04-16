@@ -11,7 +11,6 @@ import { ProductService } from '../../../service/product.service';
 
 export class NavbarComponent implements OnInit {
   allCategories:any = [];
-  smallwindow:boolean = true;
   isBrowser:boolean = false;
   galleriesData = ['Weddings','Birthday', 'Girls Night', 'Corporate Event', 'Baby Shower', 'Luxe Dream Floral Studio']
 

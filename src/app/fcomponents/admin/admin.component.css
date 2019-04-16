@@ -23,6 +23,9 @@ th{
     z-index:99;
     text-align:center;
 }
+th:first-child{
+    width:56px;
+}
 td{
     text-align:center;
 }
@@ -33,4 +36,7 @@ td{
 }
 .table-secondary  span{
     font-size: 10px;
+}
+.table td{
+    padding: 0.4rem;
 }

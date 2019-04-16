@@ -122,7 +122,14 @@
                 </textarea>
               </div>
               <div>{{feedback_message}}</div>
-             <button class="btn btn-outline-gold float-right" type="submit" >Submit</button>
+              <!-- Sending Email -->
+              <div *ngIf="isSendingEmail">
+                Sending Email, Please wait...
+                <div class="spinner-border text-info" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+             <button class="btn btn-outline-gold float-right" type="submit" [disabled] = "isSendingEmail" >Submit</button>
           </div>
         </div>
       </form>

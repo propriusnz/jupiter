@@ -106,7 +106,7 @@ constructor(
     return this.http.delete(this.baseUrl +'/Faqs/' + id, { headers: new HttpHeaders({'Authorization': "Bearer " + sessionStorage.getItem('access_token')}) })
   }
   //!contact email
-  sendContectEmail(contactEmail){
+  sendContactEmail(contactEmail){
     return this.http.post(this.baseUrl + '/ContactEmails', contactEmail)
   }
   //!EventType
