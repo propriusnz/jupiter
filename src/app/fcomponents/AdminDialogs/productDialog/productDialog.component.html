@@ -82,7 +82,7 @@
         <div *ngFor="let img of imageList" class="ml-3">
             <img src="http://luxedreameventhire.co.nz:5000/{{img.url}}"><br>
             <!-- !delete image -->
-            <button type="button" class="btn btn-outline-danger btn-sm mt-2" id="{{img.id}}" (click)="deleteImage(img.id)" *ngIf="!isLoading">Delete</button>
+            <button type="button" class="btn btn-outline-danger btn-sm mt-2" id="{{img.id}}" (click)="deleteImage(img.id)" *ngIf="!isLoading" [disabled] = "isLoading">Delete</button>
         </div>
     </div>
     <div class="spinner-border text-info" role="status" *ngIf="isLoading">
@@ -91,7 +91,7 @@
     <!-- !upload img -->
     <div class="mt-3">
         <input #imageInput type="file" (change)="onFileSelected($event)">
-        <button type="button" class="btn btn-outline-info btn-sm" (click)="onUpload()">upload</button>    
+        <button type="button" class="btn btn-outline-info btn-sm" (click)="onUpload()" [disabled] = "isLoading">upload</button>    
     </div> 
     <div *ngIf="isImageEmpty" style="color:red"> Please add a image</div>
     <div class="mt-3"><button type="button" class="btn btn-outline-info" (click)="goEditProduct()">Edit product detail</button></div>

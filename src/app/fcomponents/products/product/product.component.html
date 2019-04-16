@@ -63,12 +63,12 @@
       </form>
     </div>
 
-    <div class="row justify-content-between mt-3">
-      <div class="col-6 col-lg-8 s1" *ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length==0">
+    <div class="row mt-3">
+      <div class="col-6 col-lg-6 s1" *ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length==0">
         Quantity: <input type="number" [value] = "quantity"  min="1" max={{productDetail.availableStock}} [(ngModel)]="quantity">
         <!-- <span class="s3 pl-2"> (only {{productDetail.availableStock}} in stock)</span> -->
       </div>
-      <div class="col-6 col-lg-6"><button class='btn btn_gold float-right' (click)="manageCartProds()" [disabled] = " 0>= quantity ||cartForm.invalid">Add to cart</button></div>
+      <div class="col-6 col-lg-6"><button class='btn btn_gold' (click)="manageCartProds()" [disabled] = " 0>= quantity ||cartForm.invalid">Add to cart</button></div>
     </div>
 
     <div class="row justify-content-end">

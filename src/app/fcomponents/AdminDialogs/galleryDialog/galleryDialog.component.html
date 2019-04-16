@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>{{title}}</h2>
 
-<mat-dialog-content>
+<mat-dialog-content *ngIf="!editImage">
     <!-- Customer -->
     <div class="form-group">
         <input class="form-control" name="CustomerName" placeholder="Customer name *" [(ngModel)]="galleryForm.CustomerName" #CustomerName="ngModel">
@@ -26,8 +26,37 @@
      <div class="form-group">
         <input class="form-control" name="Description" placeholder="Description *" [(ngModel)]="galleryForm.Description" #Description="ngModel">
      </div>
-
+     <div><button type="button" class="btn btn-outline-info" (click)="goEditImage()" *ngIf="status == 'update'">Edit product image</button></div>
 </mat-dialog-content>
+
+ <!-- Edit Gallery image -->
+ <mat-dialog-content *ngIf="editImage">
+  Edit Product Images
+  <!-- !show images -->
+  <div *ngIf="imageList" class="row mb-5" >
+      <div *ngFor="let img of imageList" class="ml-3">
+        <!-- TODO: change url -->
+          <img src="http://localhost:5000/{{img.url}}"><br>
+          <!-- !delete image -->
+          <button type="button" class="btn btn-outline-danger btn-sm mt-2" id="{{img.id}}" (click)="deleteImage(img.id)" *ngIf="!isLoading" [disabled] = "isLoading">Delete</button>
+      </div>
+  </div>
+  <div class="spinner-border text-info" role="status" *ngIf="isLoading">
+          <span class="sr-only">Loading...</span>
+  </div>
+  <!-- !upload img -->
+  <div class="mt-3">
+      <input #imageInput type="file" (change)="onFileSelected($event)">
+      <button type="button" class="btn btn-outline-info btn-sm" (click)="onUpload()" [disabled] = "isLoading">upload</button>    
+  </div> 
+  <div *ngIf="isImageEmpty" style="color:red"> Please add a image</div>
+  <div class="mt-3"><button type="button" class="btn btn-outline-info" (click)="goEditProduct()">Edit product detail</button></div>
+  <br>
+  <div *ngIf="feedbackMessage">
+      {{feedbackMessage}}
+  </div>
+</mat-dialog-content>
+
 
 <mat-dialog-actions>
   <button type="button" class="btn btn-outline-secondary" (click)="close()">Close</button>

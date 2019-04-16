@@ -127,8 +127,17 @@ constructor(
   getImg(id:number){
     return this.http.get(this.baseUrl + '/ProductMedias/'+ id)
   }
+  addGalleryImg(files){
+    return this.http.post(this.baseUrl + '/ProjectMedias/',files, { headers: new HttpHeaders({'Authorization': "Bearer " + sessionStorage.getItem('access_token')}) })
+  }
+  getGalleryImg(id:number){
+    return this.http.get(this.baseUrl + '/ProjectMedias/'+ id)
+  }
   deleteImg(id:number){
     return this.http.delete(this.baseUrl + '/ProductMedias/'+ id, { headers: new HttpHeaders({'Authorization': "Bearer " + sessionStorage.getItem('access_token')}) })
+  }
+  deleteGalleryImg(id:number){
+    return this.http.delete(this.baseUrl + '/ProjectMedias/'+ id, { headers: new HttpHeaders({'Authorization': "Bearer " + sessionStorage.getItem('access_token')}) })
   }
   //!productDetails
   updateProductDetails(productId,detailList){

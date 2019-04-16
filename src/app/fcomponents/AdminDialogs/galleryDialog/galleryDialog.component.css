@@ -1,3 +1,16 @@
 .ml-80{
     margin-left:80%;
 }
+img{
+    height:100px;
+    width:100px;
+}
+.btn-sm{
+    font-size:0.7rem;
+}
+.fas.fa-trash-alt{
+    cursor: pointer;
+}
+.fas.fa-trash-alt:hover{
+    color:red;
+}
