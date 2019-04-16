@@ -15,10 +15,11 @@ import { CartDialogComponent } from '../AdminDialogs/CartDialog/CartDialog.compo
 export class AdminComponent implements OnInit {
   // blockCodeList:
   // Dashbard:1; Hires:2; Packages:3; Services:4; Gallery:5; Faq:6; Carts:7; 
-  blockCode: string = '1';
-  isDataChanged : boolean = false;
-  displayData: any;
-  selectedImg: File = null;
+  blockCode: string = '1'
+  isDataChanged : boolean = false
+  displayData: any
+  selectedImg: File = null
+  isLoading: boolean = false
   constructor(
     @Inject(PLATFORM_ID) private platformId,
     private router: Router,
@@ -40,6 +41,7 @@ export class AdminComponent implements OnInit {
   }
 
   getData(){
+    this.isLoading = true
     switch (this.blockCode){
       case "1":{
         break
@@ -58,25 +60,37 @@ export class AdminComponent implements OnInit {
       }
       case '5' : {
         this.productService.indexGallery().subscribe(
-          (res) => { this.displayData = res; },
-          (error) => { console.log(error); }
+          (res) => { 
+            this.displayData = res
+            this.isLoading = false},
+          (error) => { 
+            console.log(error)
+            this.isLoading = false}
         );
         break;
       }
       case '6' : {
         this.productService.getFaq().subscribe(
-          (res) => { this.displayData = res; },
-          (error) => {
-            console.log(error);
+          (res) => {
+            this.displayData = res
+            this.isLoading = false}
+          ,(error) => {
+            console.log(error)
+            this.isLoading = false
           }
         );
         break;
       }
       case '7' : {
         this.productService.getCarts().subscribe(
-          (res) => { this.displayData = res;
+          (res) => { 
+            this.displayData = res
+            this.isLoading = false
           console.log(res) },
-          (error) => { console.log(error); }
+          (error) => { 
+            console.log(error)
+            this.isLoading = false
+          }
         );
         break;
       }
@@ -86,10 +100,13 @@ export class AdminComponent implements OnInit {
   getProducts(typeCode: number) {
     this.productService.indexType(typeCode).subscribe(
       (res) => {
-        console.log(res)
+        this.isLoading = false
         this.displayData = res;
       },
-      (err) => { console.log(err); }
+      (err) => { 
+        this.isLoading = false
+        console.log(err)
+       }
       );
   }
   // update Faq

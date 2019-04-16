@@ -11,13 +11,14 @@ export class ProductComponent implements OnInit {
   productId: number;
   productDetail: any;
   prodMediaUrl: any;
-  quantity = 1 ;
+  quantity = 0 ;
   isprodAdded:boolean = false;
   isStockAvailable:boolean = true;
   cartList = [];
   cartForm: FormGroup;
   cartItems: FormArray;
-
+  isInputZero:boolean = true
+  isLoading:boolean = true
   constructor(
     private route:ActivatedRoute,
     private router:Router,
@@ -33,13 +34,18 @@ export class ProductComponent implements OnInit {
     // get the detail of product
     this.productService.showProduct(this.productId).subscribe( 
       (res)=>{
+        this.isLoading = false
         this.productDetail = res
         this.createItem(res)
         this.prodMediaUrl =  this.productDetail.productMedia;
       },
-      (error)=>console.log(error)
+      (error)=>{
+        console.log(error)
+        this.isLoading = false
+      }
     )
     this.setStorage()
+    this.detectInputAmount()
     }
 
   // add product descriptions into formArray
@@ -50,7 +56,8 @@ export class ProductComponent implements OnInit {
         this.formBuilder.group({
           ProdId: prod.prodId,
           Title: prod.productDetail1,
-          Quantity: [0,[Validators.min(0), Validators.max(prod.availableStock)]],
+          // Quantity: [0,[Validators.min(0), Validators.max(prod.availableStock)]],
+          Quantity: [0,[Validators.min(0), Validators.max(150)]],
           Price: (prod.discount && prod.discount>0) ? prod.price - prod.discount: prod.price,
           Discount: prod.discount,
           AvailableStock: prod.availableStock
@@ -152,5 +159,21 @@ export class ProductComponent implements OnInit {
     if(type == 'packages'){
       this.router.navigate(['/packages']);
     }
+  }
+  detectInputAmount(){
+    this.cartForm.valueChanges.subscribe(dt => 
+      {
+        let a:number = 0
+        this.cartForm.controls.cartItems['value'].forEach(item => {
+          if (item.Quantity == 0){
+            a+=1
+          }
+        })
+        if (a == this.cartForm.controls.cartItems['value'].length){
+          this.isInputZero = true
+        }else{
+          this.isInputZero = false
+        }
+      });
   }
 }

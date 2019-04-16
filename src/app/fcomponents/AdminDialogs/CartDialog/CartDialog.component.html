@@ -26,7 +26,7 @@
    </div>
 
    <!-- !cartProd Detail -->
-   <div class="row"> 
+   <div class="row pt-2"> 
       <div class="col-12">Products in cart</div>
       <div class="col-12" *ngFor="let prod of cartProdList"> 
          Title: {{prod.title}}, Quantity: {{prod.quantity}}, Price: {{prod.price}} 
@@ -35,10 +35,10 @@
    </div>
 
    <!-- !cart Detail -->
-   <div class="row">
+   <div class="row pt-2">
       <div class="col-12">Cart Detail</div>
       <input class="form-control" type = "text" name="location" [(ngModel)]="cartForm.location" #location="ngModel">
-      <mat-form-field style="width:100%">
+      <mat-form-field style="width:100%" class="pt-3">
          <input matInput [matDatepicker]="myDatepicker" placeholder="Date of event" type="plannedTime"  name="plannedTime" [(ngModel)]="cartForm.plannedTime" #plannedTime="ngModel">
          <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
          <mat-datepicker #myDatepicker></mat-datepicker>

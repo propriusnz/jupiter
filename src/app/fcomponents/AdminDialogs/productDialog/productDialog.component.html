@@ -44,10 +44,10 @@
     <br>
     <!-- !Details of Product -->
     <div style="margin-top:14px;" class="col-12" *ngIf="status=='update'">
-    <div class="row">
-        <div class="col-9">Products specification:</div> <div class="col-3"><button (click)="addDetails()">Add new detail</button></div>
+    <div class="row text-center">
+        <div class="col-9 text-left">Products specification:</div> <div class="col-3 text-right"><button type="button" class="btn btn-outline-secondary btn-sm" (click)="addDetails()">Add new detail</button></div>
         <div class="col-2">Title:</div><div class="col-2">Price:</div><div class="col-2">Discount:</div>
-        <div class="col-2">TotalStock:</div><div class="col-2">AvailableStock:</div><div class="col-2">Delete</div>
+        <div class="col-2">Total stock:</div><div class="col-3">Available stock:</div><div class="col-1 p-0">Delete</div>
     </div>
 
         <form [formGroup]="detailForm">
@@ -58,8 +58,8 @@
                     <input class="col-2" type="number" min="0" formControlName="Price" placeholder="Price">
                     <input class="col-2" type="number" min="0" formControlName="Discount" placeholder="Discount">
                     <input class="col-2" type="number" min="0" formControlName="TotalStock" placeholder="Total stock">
-                    <input class="col-2" type="number" min="0" formControlName="AvailableStock" placeholder="Available stock">
-                    <i class="fas fa-trash-alt col-2 pl-3" (click)="deleteDetail(detail,i)"></i>
+                    <input class="col-3" type="number" min="0" formControlName="AvailableStock" placeholder="Available stock">
+                    <i class="fas fa-trash-alt col-1 text-center" (click)="deleteDetail(detail,i)"></i>
                     </div>
                 </div>
             </div>
