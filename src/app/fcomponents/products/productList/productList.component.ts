@@ -137,6 +137,7 @@ export class ProductListComponent implements OnInit {
       this.allCategories = res
     },(error)=>{console.log(error),this.errorMessage = 'Server fault'})
   }
+  //pagination
   groupProducts(){
     this.isProductsGrouped = true
     for (let i = 0; i < this.allProducts.length; i += 12) {

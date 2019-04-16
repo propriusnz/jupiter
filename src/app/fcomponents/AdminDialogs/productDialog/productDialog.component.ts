@@ -55,7 +55,6 @@ export class ProductDialogComponent implements OnInit {
     private productService : ProductService,
     private formBuilder: FormBuilder
   ) { 
-    //TODO: use map
     if (data.action == 'update'){
       this.displayData = data.data 
       console.log('this.displayData: ', this.displayData);

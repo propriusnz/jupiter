@@ -34,33 +34,7 @@
 
     <br>
   </div>
-  <!-- <div *ngIf="!productDetail || productDetail.length == 0">This product is unavailable right now. Sorry</div>
-  <div class="col-5" *ngIf="productDetail">
-    <div class="m2">{{productDetail.Title}}</div>
-    <div>$<span class="s1">{{productDetail.Price}}</span></div>
-    <br/>
-    <div class="s2">{{productDetail.Description}}</div>
-    <br/>
-    <div class="row justify-content-between">
-      <div class="col-6">
-        Quantity:<input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-         type="number" [value] = "quantity"  min="1" max="{{productDetail.TotalStock}}" [(ngModel)]="quantity" (ngModelChange)="quanCheck($event)" 
-        maxlength= "{{quantityLength}}"> 
-        <span class="s3">({{productDetail.TotalStock}} in stock)</span>
-      </div>
-      <div class="col-4" *ngIf="inCart==1"><button class='btn btn_gold float-right' (click)="addToCart()">Add to cart</button></div>
-      <div class="col-4" *ngIf="inCart==2"> Successful</div>
-      <div class="col-4" *ngIf="inCart==3"> Error</div>
-
-    </div>
-    <div *ngIf="!quantityFilled">Please enter Quantity</div>
-  </div> -->
   <div *ngIf="productDetail" class="col-12 col-md-6 col-lg-5 pl-lg-5">
-    <!-- large part of img -->
-    <!-- <div id="showDetails" #showDetails>
-      <img src="{{defaultImgUrl}}" alt="" #detailImg>
-    </div> -->
-
     <h1 class="l2">{{productDetail.title}}<br/></h1>
     <div class="my-4" *ngIf="productDetail.discount && productDetail.discount>0">
       <span class="s1gold mr-3">${{productDetail.price - productDetail.discount}}</span><s><span class="s1">${{productDetail.price}}</span></s>
@@ -82,6 +56,7 @@
               <input style="background-color:white; border-width: 0px; width:144px;" type="text" formControlName="Title" disabled>
               $<input style="background-color:white; border-width: 0px; width:49px;" type="text" formControlName="Price" disabled>
               <input style="width:50px; height:22px;" type="number" min="0" formControlName="Quantity" placeholder="Quantity">
+              <div *ngIf="cartForm.controls.cartItems.controls[i].controls.Quantity.invalid" class="indicator" >No more stock</div>
             </div>
           </div>
         </div>
@@ -90,20 +65,17 @@
 
     <div class="row justify-content-between mt-3">
       <div class="col-6 col-lg-8 s1" *ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length==0">
-        <!-- Quantity:<input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-         type="number" [value] = "quantity"  min="1" max={{productDetail.availableStock}} [(ngModel)]="quantity" (ngModelChange)="quanCheck($event)" 
-        maxlength= "{{quantityLength}}">  -->
         Quantity: <input type="number" [value] = "quantity"  min="1" max={{productDetail.availableStock}} [(ngModel)]="quantity">
         <!-- <span class="s3 pl-2"> (only {{productDetail.availableStock}} in stock)</span> -->
       </div>
-      <div class="col-6 col-lg-6" *ngIf="inCart==1"><button class='btn btn_gold float-right' (click)="manageCartProds()" [disabled] = " 0 >=quantity ">Add to cart</button></div>
+      <div class="col-6 col-lg-6"><button class='btn btn_gold float-right' (click)="manageCartProds()" [disabled] = " 0>= quantity ||cartForm.invalid">Add to cart</button></div>
     </div>
-    <div class="row">
-      <div class="col-6 col-lg-8"></div>
 
-      <!-- <div class="col-6 col-lg-4 alert alert-success mt-3" role="alert" *ngIf="isprodAdded">
-          {{quantity}} {{productDetail.title}} added into cart.
-      </div> -->
+    <div class="row justify-content-end">
+      <div class="col-6 col-lg-4 alert alert-danger mt-3" role="alert" *ngIf="!isStockAvailable" >No more stock</div>
+      <div class="col-6 col-lg-4 alert alert-success mt-3" role="alert" *ngIf="isprodAdded && isStockAvailable">
+          Added into cart.
+      </div>
     </div>
 
    </div>

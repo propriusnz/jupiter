@@ -24,12 +24,14 @@ export class Shopping_cartComponent implements OnInit {
     console.log(this.prodsInCart)
     this.price()
   }
+  //delete items of shopping cart
   deleteCart(id){
     console.log(id);
     this.prodsInCart.splice(id,1)
       localStorage.setItem("cartList",JSON.stringify(this.prodsInCart))
     this.price()
   }
+  //calculate total price of shopping cart
   price(){
     this.totalPrice = 0
     this.prodsInCart.forEach(prod => {

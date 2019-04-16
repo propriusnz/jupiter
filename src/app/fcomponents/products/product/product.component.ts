@@ -1,8 +1,7 @@
 import { Component, OnInit,ViewChild,ElementRef, Inject, PLATFORM_ID } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {ProductService} from '../../../service/product.service';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
-//import {Location} from '@angular/common';
+import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -13,11 +12,9 @@ export class ProductComponent implements OnInit {
   productDetail:any;
   prodMediaUrl:any;
   quantity:number=1 ;
-  quantityFilled:boolean = true;
   isprodAdded:boolean = false;
-  inCart:number = 1;
+  isStockAvailable:boolean = true;
   cartList = [];
-
   cartForm: FormGroup;
   cartItems: FormArray;
 
@@ -33,6 +30,7 @@ export class ProductComponent implements OnInit {
     this.cartForm = this.formBuilder.group({
       cartItems: this.formBuilder.array([])
     });    
+    //get the detail of product
     this.productService.showProduct(this.productId).subscribe( 
       (res)=>{
         this.productDetail = res
@@ -45,6 +43,7 @@ export class ProductComponent implements OnInit {
     this.setStorage()
     }
 
+  //add product descriptions into formArray
   createItem(res){
     res['productDetail'].forEach(prod => {
       let control = <FormArray>this.cartForm.controls.cartItems
@@ -52,7 +51,7 @@ export class ProductComponent implements OnInit {
         this.formBuilder.group({
           ProdId:prod.prodId,
           Title:prod.productDetail1,
-          Quantity:0,
+          Quantity:[0,[Validators.min(0), Validators.max(prod.availableStock)]],
           Price:(prod.discount && prod.discount>0) ? prod.price - prod.discount: prod.price,
           Discount:prod.discount,
           AvailableStock: prod.availableStock
@@ -62,21 +61,7 @@ export class ProductComponent implements OnInit {
 
   } 
 
-  quanCheck(e){
-    if(e){
-      this.quantityFilled = true
-      if(e>this.productDetail.TotalStock){
-        this.quantity = this.productDetail.TotalStock
-      }
-      if(e.toString().slice(0,1)=='-' || e.toString().slice(0,1)=='+'){
-        this.quantity = 1
-      }
-    }
-    if(!e){
-      this.quantityFilled = false
-    }
-  }
-
+  //get cartlist from localStorage 
   setStorage(){
       if ('cartList' in localStorage){
         this.cartList = JSON.parse(localStorage.getItem('cartList'))
@@ -85,21 +70,22 @@ export class ProductComponent implements OnInit {
       }
       localStorage.setItem('userId','aaa ')
   }
-
+  //add product into a list
   manageCartProds(){
     let newCartList = []
-   
       // if product detail exist
     if(this.productDetail['productDetail'] && this.productDetail['productDetail'].length!=0){
       this.cartForm.controls.cartItems['value'].forEach(cartItem => {
-        // cartItem.Title = this.productDetail.title + ': ' + cartItem.Title
         let item = {
           ProdId:cartItem.ProdId,
           Price: cartItem.Price*cartItem.Quantity,
           Title: this.productDetail.title + ': ' + cartItem.Title, 
           Quantity:cartItem.Quantity
         }
-       newCartList.push(item)
+        //add product into cart only if amount > 0
+        if(item.Quantity != 0){
+          newCartList.push(item)
+        }
       })
       this.addToCart(newCartList)
     }else{
@@ -111,13 +97,19 @@ export class ProductComponent implements OnInit {
         Title:this.productDetail.title,
         Quantity:this.quantity
       }
-      newCartList.push(item)
-      this.addToCart(newCartList)
+      //Quantity check
+      if(this.quantity <= this.productDetail.availableStock){
+        newCartList.push(item)
+        this.addToCart(newCartList)
+      }else{
+        this.isStockAvailable = false
+      }
     }
 
   }
-
+  // add cartlist into locastorage
   addToCart(list){
+    this.isStockAvailable = true
     this.isprodAdded = true
     setTimeout( ()=>{
       this.isprodAdded = false
@@ -126,27 +118,31 @@ export class ProductComponent implements OnInit {
       list.forEach(item => {
         let a:boolean = false
 
+        // if cartlist if not empty
         if (this.cartList.length>0){
           for (let i=0; i<this.cartList.length;i++){
+            //if product already exists in cartlist
             if(this.cartList[i].Title == item.Title){
               a = true
               this.cartList[i].Quantity += item.Quantity
               this.cartList[i].Price = this.cartList[i].Quantity*item.Price
               localStorage.setItem('cartList',JSON.stringify(this.cartList))
-              console.log('cartList',this.cartList)
             }
           }
+          //if product not in cartlist
           if (a==false){
             this.cartList.push(item)
             localStorage.setItem('cartList',JSON.stringify(this.cartList))  
           }
         }else{
+          // if nothing in cartlist
           this.cartList = JSON.parse(localStorage.getItem('cartList'))
           this.cartList.push(item)
           localStorage.setItem('cartList',JSON.stringify(this.cartList))
         }
       });
   }
+  // click the path and renavigate
   backClicked(type:string, id?:number){
     if (id){
       this.router.navigate(['/category/',id]);
@@ -157,8 +153,5 @@ export class ProductComponent implements OnInit {
     if(type == 'packages'){
       this.router.navigate(['/packages']);
     }
-  }
-  showForm(){
-    console.log('Forms: ',this.cartForm.controls.cartItems['value']);
   }
 }
