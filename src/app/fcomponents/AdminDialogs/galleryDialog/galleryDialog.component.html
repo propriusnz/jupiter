@@ -36,7 +36,7 @@
   <div *ngIf="imageList" class="row mb-5" >
       <div *ngFor="let img of imageList" class="ml-3">
         <!-- TODO: change url -->
-          <img src="http://localhost:5000/{{img.url}}"><br>
+          <img src="http://luxedreameventhire.co.nz:5000/{{img.url}}"><br>
           <!-- !delete image -->
           <button type="button" class="btn btn-outline-danger btn-sm mt-2" id="{{img.id}}" (click)="deleteImage(img.id)" *ngIf="!isLoading" [disabled] = "isLoading">Delete</button>
       </div>

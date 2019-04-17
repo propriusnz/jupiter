@@ -7,6 +7,8 @@ import { FaqDialogComponent } from '../AdminDialogs/FaqDialog/FaqDialog.componen
 import { GalleryDialogComponent } from '../AdminDialogs/galleryDialog/galleryDialog.component';
 import { ProductDialogComponent } from '../AdminDialogs/productDialog/productDialog.component'
 import { CartDialogComponent } from '../AdminDialogs/CartDialog/CartDialog.component'
+import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
+import { trigger } from '@angular/animations';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -20,11 +22,17 @@ export class AdminComponent implements OnInit {
   displayData: any
   selectedImg: File = null
   isLoading: boolean = false
+  categoryList:any
+  categoryForm: FormGroup;
+  categoryItems: FormArray;
+  isLoadingCategory: boolean = false
+  feedbackMessage:string=''
   constructor(
     @Inject(PLATFORM_ID) private platformId,
     private router: Router,
     private productService: ProductService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private formBuilder: FormBuilder
     ) {
       if (isPlatformBrowser(this.platformId)) {
       // !if no JWT, redirect to login page
@@ -34,6 +42,7 @@ export class AdminComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.getData()
   }
   changeBoard(e) {
     this.blockCode = e.srcElement.id;
@@ -44,6 +53,8 @@ export class AdminComponent implements OnInit {
     this.isLoading = true
     switch (this.blockCode){
       case "1":{
+        this.isLoading = false
+        this.loadCategory()
         break
       }
       case "2":{
@@ -315,5 +326,73 @@ export class AdminComponent implements OnInit {
       }
   });
   }
-  
+  loadCategory(){
+    this.isLoadingCategory = true
+    // build category form
+    this.categoryForm = this.formBuilder.group({
+      categoryItems: this.formBuilder.array([])
+    })
+    // get categories
+    this.productService.indexCategory().subscribe(
+      (res)=>{
+        this.isLoadingCategory = false
+        this.categoryList = res
+        // add categories into formarray
+        this.categoryList.forEach(prod => {
+          let control = <FormArray>this.categoryForm.controls.categoryItems
+          control.push(
+            this.formBuilder.group({
+              categoryId:prod.categoryId,
+              categoryName:prod.categoryName
+            })
+          )
+        });
+      },(error)=>{
+        this.isLoadingCategory = false
+        console.log(error)
+      }
+    )
+  }
+  addCategory(){
+    let control = <FormArray>this.categoryForm.controls.categoryItems
+    control.push(
+      this.formBuilder.group({
+        categoryId:0,
+        categoryName:null
+      })
+    )
+  }
+  updateCategory(){
+    this.isLoadingCategory = true
+    let cateList = this.categoryForm.controls.categoryItems['value']
+    let id = 0
+    this.productService.updateCategory(id,cateList).subscribe((res)=>{
+      this.isLoadingCategory = false
+      this.feedbackMessage = 'Save Successfully'
+    },(error)=>{
+      this.isLoadingCategory = false
+      this.feedbackMessage = 'Save Failed'
+      console.log(error)
+    })
+  }
+  deleteCate(cate,i){
+    let control = <FormArray>this.categoryForm.controls.categoryItems
+    if(cate.value.categoryId === 0){
+      control.removeAt(i)
+      this.feedbackMessage = 'Delete Successfully'
+    }else{
+      this.isLoadingCategory = true
+      this.productService.deleteCategory(cate.value.categoryId).subscribe(
+        (res)=>{
+          this.isLoadingCategory = false
+          this.feedbackMessage = 'Delete Successfully'
+          control.removeAt(i)
+        },(error)=>{
+          this.isLoadingCategory = false
+          this.feedbackMessage = 'Delete Failed'
+          console.log(error)
+        }
+      )  
+    }
+  }
 }

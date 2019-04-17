@@ -55,6 +55,12 @@ constructor(
   indexCategoryId(id:number){
     return this.http.get(this.baseUrl + '/ProductCategories/'+id);
   }
+  updateCategory(id:number, cateList){
+    return this.http.put(this.baseUrl + '/ProductCategories/'+id, cateList, { headers: new HttpHeaders({'Authorization': "Bearer " + sessionStorage.getItem('access_token')}) });
+  }
+  deleteCategory(id:number){
+    return this.http.delete(this.baseUrl + '/ProductCategories/'+ id, { headers: new HttpHeaders({'Authorization': "Bearer " + sessionStorage.getItem('access_token')}) })
+  }
   //!Product Type
   indexType(id:number){
     return this.http.get(this.baseUrl + '/ProductTypes/' + id);
