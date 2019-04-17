@@ -46,14 +46,14 @@
                   <div class="invalid_feedback" *ngIf=" name.errors?.minlength && name.touched ">
                      Your name shall be at least 2 characters
                   </div>
-                  <input class="form-control" type="name" required minlength="2" name="name" placeholder="Name *"
+                  <input class="form-control s2" type="name" required minlength="2" name="name" placeholder="Name *"
                   [ngClass]="{'is-invalid':name.errors?.required && name.touched}" [(ngModel)]="contactFrom.name" #name="ngModel">
                </div>
               <!-- email -->
                <div class="form-group">
                   <div class="invalid_feedback" *ngIf="email.errors?.required && email.touched">Please enter your Email</div>
                   <div class="invalid_feedback" *ngIf="email.errors?.pattern && email.touched">Incorrect Email entered</div>
-                  <input class="form-control" type="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" minlength="6" name="email" placeholder="Email *" 
+                  <input class="form-control s2" type="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" minlength="6" name="email" placeholder="Email *" 
                   [ngClass]="{'is-invalid':email.errors?.required && email.touched}" [(ngModel)]="contactFrom.email" #email="ngModel">
                </div>
                <!-- phone number -->
@@ -62,11 +62,11 @@
                   <div class="invalid_feedback" *ngIf="PhoneNumber.errors?.pattern && PhoneNumber.touched">
                      Please enter the correct Phone number.
                   </div>
-                  <input class="form-control" type="tel" required pattern="[0-9]{7,15}" minlength="7" name="PhoneNumber" placeholder="Phone number *" 
+                  <input class="form-control s2" type="tel" required pattern="[0-9]{7,15}" minlength="7" name="PhoneNumber" placeholder="Phone number *" 
                   [ngClass]="{'is-invalid':PhoneNumber.errors?.required && PhoneNumber.touched}" [(ngModel)]="contactFrom.PhoneNumber" #PhoneNumber="ngModel">
                </div>
                <!-- company -->
-              <div><input class="form-control" type="text" placeholder="Company"  [(ngModel)]="contactFrom.company" name="company"></div>
+              <div><input class="form-control s2" type="text" placeholder="Company"  [(ngModel)]="contactFrom.company" name="company"></div>
                <!-- date of event -->
                <div>
                <mat-form-field style="width:100%">
@@ -80,7 +80,7 @@
               <!-- location of event -->
               <div class="form-group">  
                 <div class="invalid_feedback" *ngIf="LocationOfEvent.errors?.required && LocationOfEvent.touched">Please enter Location</div>
-                <input class="form-control" type="LocationOfEvent" required name="LocationOfEvent" placeholder="Location of event *"
+                <input class="form-control s2" type="LocationOfEvent" required name="LocationOfEvent" placeholder="Location of event *"
                 [ngClass]="{'is-invalid':LocationOfEvent.errors?.required && LocationOfEvent.touched}" [(ngModel)]="contactFrom.LocationOfEvent" #LocationOfEvent="ngModel">
              </div>
 
@@ -91,13 +91,13 @@
             <!-- how do you find use -->
             <div class="form-group">  
                 <div class="invalid_feedback" *ngIf="findUs.errors?.required && findUs.touched">Please enter the field.</div>              
-                <input class="form-control" type="findUs" required name="findUs" placeholder="How did you find about us?*"
+                <input class="form-control s2" type="findUs" required name="findUs" placeholder="How did you find about us?*"
                 [ngClass]="{'is-invalid':findUs.errors?.required && findUs.touched}" [(ngModel)]="contactFrom.findUs" #findUs="ngModel">
              </div>
                 <!-- type of event -->
             <div class="form-group">  
                 <div class="invalid_feedback" *ngIf="TypeOfEvent.errors?.required && TypeOfEvent.touched">Please enter Type of event</div>
-                <select class="custom-select form-control"  type="TypeOfEvent" required name="TypeOfEvent"
+                <select class="custom-select form-control s2"  type="TypeOfEvent" required name="TypeOfEvent"
                 [ngClass]="{'is-invalid':TypeOfEvent.errors?.required && TypeOfEvent.touched}" [(ngModel)]="contactFrom.TypeOfEvent" #TypeOfEvent="ngModel">
                 <option value="" disabled selected>Type of event *</option>
                     <option value="1">Wedding</option>
@@ -117,7 +117,7 @@
                 <div class="invalid_feedback" *ngIf=" message.errors?.minlength && message.touched ">
                     Message shall be at least 4 characters
                 </div>
-                <textarea class="form-control" rows="5" type="message" required minlength="2" name="message" placeholder="Message *"
+                <textarea class="form-control s2" rows="5" type="message" required minlength="2" name="message" placeholder="Message *"
                 [ngClass]="{'is-invalid':message.errors?.required && message.touched}" [(ngModel)]="contactFrom.message" #message="ngModel">
                 </textarea>
               </div>

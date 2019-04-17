@@ -63,12 +63,13 @@
       <div *ngIf="!isLoading">
 
       <!-- !Dashboard -->
-      <div *ngIf="blockCode == '1'" style="text-align:center;padding-top:13%;">
-      <h1>Welcome to Dashboard</h1>
+      <div *ngIf="blockCode == '1'" style="text-align:center;padding-top:4%;">
+      <h1>Welcome to Dashboard</h1><br>
+      <hr><br>
       <!-- Edit productCategory -->
-      <div class="row mt-5 pt-5">
+      <div class="row ">
         <div class="col-6">
-          <h2>Categories: </h2>
+          <h2>Edit Categories </h2>
             <form [formGroup]="categoryForm">
                 <div formArrayName="categoryItems">
                     <div *ngFor="let cate of categoryForm.controls.categoryItems.controls, index as i">
@@ -93,8 +94,9 @@
             </div>
            <div>{{feedbackMessage}}</div>
         </div>
+      </div><br><br>
       </div>
-      </div>
+      
 
       <!-- !Hire || Service || Package-->
       <div *ngIf="blockCode == '2' || blockCode == '3' || blockCode == '4'">

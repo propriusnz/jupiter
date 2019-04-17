@@ -61,9 +61,9 @@
           <div style="margin-left:202px;" class="s2">Quantity</div>
           <div *ngFor="let detail of cartForm.controls.cartItems.controls, index as i">
             <div [formGroupName]="i">
-              <input style="background-color:white; border-width: 0px; width:144px;" type="text" formControlName="Title" disabled>
-              $<input style="background-color:white; border-width: 0px; width:49px;" type="text" formControlName="Price" disabled>
-              <input style="width:50px; height:22px;" type="number" min="0" formControlName="Quantity" placeholder="Quantity">
+              <input class="s2" style="background-color:white; border-width: 0px; width:144px;" type="text" formControlName="Title" disabled>
+              $<input class="s2" style="background-color:white; border-width: 0px; width:49px;" type="text" formControlName="Price" disabled>
+              <input class="s2" style="width:50px; height:22px;" type="number" min="0" formControlName="Quantity" placeholder="Quantity">
               <div *ngIf="cartForm.controls.cartItems.controls[i].controls.Quantity.invalid" class="indicator" >No more stock</div>
             </div>
           </div>
