@@ -18,3 +18,34 @@
 .pb-30{
     padding-bottom:30px;
 }
+.h490{
+    /* height: */
+    position: relative;
+    padding-top: 86%;
+    width:86%;
+    display: block;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+@media (max-width:767px) {
+    .h490 {
+        padding-top: 100%;
+        width:100%;
+    }
+  }
+
+.h490 img {
+	position:  absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+    width: 100%;
+    object-fit: cover;
+
+}
+.autofix{
+	width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

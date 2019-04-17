@@ -3,6 +3,21 @@
     {{gallery}}
 </div>
 <br><br>
-
+ <!-- Show gallery list -->
+ <div class="container">
+     <div class="row" *ngIf="galleryList">
+        <div class="col-4" *ngFor="let item of galleryList">
+            <div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item h490 active" *ngFor="let img of item.projectMedia, index as i" [ngClass]="{'active': i == 0}">
+                        <img src="http://luxedreameventhire.co.nz:5000/{{img.url}}" class="d-block autofix">
+                    </div>
+                </div>
+            </div>
+    
+            <div>{{item.description}}</div>
+        </div>
+    </div>
+</div>
 
 <br><br>

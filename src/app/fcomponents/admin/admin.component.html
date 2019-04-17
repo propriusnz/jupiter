@@ -66,8 +66,9 @@
       <div *ngIf="blockCode == '1'" style="text-align:center;padding-top:13%;">
       <h1>Welcome to Dashboard</h1>
       <!-- Edit productCategory -->
-      <div class="row mt-5">
+      <div class="row mt-5 pt-5">
         <div class="col-6">
+          <h2>Categories: </h2>
             <form [formGroup]="categoryForm">
                 <div formArrayName="categoryItems">
                     <div *ngFor="let cate of categoryForm.controls.categoryItems.controls, index as i">

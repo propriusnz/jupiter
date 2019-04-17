@@ -81,9 +81,13 @@ export class ProductDialogComponent implements OnInit {
     this.detailForm = this.formBuilder.group({
       detailItems: this.formBuilder.array([])
     })
-    this.getDetails()
-    this.detailForm.valueChanges.subscribe(
-      changes=>this.isDetailFormChanged = true
+    this.getDetails() 
+
+    //Detect array changes
+    this.detailForm.controls.detailItems.valueChanges.subscribe(
+      changes=>{
+        this.isDetailFormChanged = true
+      }
     )
   }
   save(){

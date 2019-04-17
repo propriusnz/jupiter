@@ -8,7 +8,6 @@ import { GalleryDialogComponent } from '../AdminDialogs/galleryDialog/galleryDia
 import { ProductDialogComponent } from '../AdminDialogs/productDialog/productDialog.component'
 import { CartDialogComponent } from '../AdminDialogs/CartDialog/CartDialog.component'
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
-import { trigger } from '@angular/animations';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',

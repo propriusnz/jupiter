@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
+import { ProductService } from '../../service/product.service';
 
 @Component({
   selector: 'app-gallery',
@@ -9,13 +10,14 @@ import { Meta, Title } from '@angular/platform-browser';
 })
 export class GalleryComponent implements OnInit {
   gallery:any
-
+  galleryList:any
 
 
   constructor(
     private route:ActivatedRoute,
     private meta: Meta,
     private titleService: Title,
+    private productService: ProductService,
   ) {
     this.meta.addTags([
       { name: 'keywords', content: 'Luxedream Hire, Party hire, wedding hire, birthday party hire, event hire, auckland event hire'},
@@ -31,6 +33,14 @@ export class GalleryComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.productService.indexGallery().subscribe(
+      (res)=>{
+        console.log(res)
+        this.galleryList = res
+      },(error)=>{
+        console.log(error)
+      }
+    )
   }
 
 }
