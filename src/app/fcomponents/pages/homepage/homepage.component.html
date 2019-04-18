@@ -49,8 +49,8 @@
                     </div>
                   <div class="s1">{{spe.title}}</div>
                   <div>
-                    <span class="s2goldbold mr-3">${{spe.price - spe.discount}}</span>
-                    <s>${{spe.price}}</s>
+                    <span class="s2 mr-3">Price: ${{spe.price - spe.discount}}</span>
+                    <!-- <s>${{spe.price}}</s> -->
                   </div>
                 </div><!--end col-3-->
               </div><!--end row-->
@@ -63,7 +63,10 @@
                     <img src="http://luxedreameventhire.co.nz:5000/{{spe.productMedia[0].url}}" class="img100" [routerLink]="[ '/product/', spe.prodId]">
                   </div>
                   <div class="s1">{{spe.title}}</div>
-                  <div><span class="s2goldbold mr-3">${{spe.price - spe.discount}}</span><s>${{spe.price}}</s></div>
+                  <div>
+                    <span class="s2 mr-3">Price: ${{spe.price - spe.discount}}</span>
+                    <!-- <s>${{spe.price}}</s> -->
+                  </div>
                 </div><!--end col-3-->
               </div><!--end row-->
             </div><!--End d-none d-md-block-->
