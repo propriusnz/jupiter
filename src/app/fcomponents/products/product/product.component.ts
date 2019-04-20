@@ -56,8 +56,8 @@ export class ProductComponent implements OnInit {
         this.formBuilder.group({
           ProdId: prod.prodId,
           Title: prod.productDetail1,
-          // Quantity: [0,[Validators.min(0), Validators.max(prod.availableStock)]],
-          Quantity: [0,[Validators.min(0), Validators.max(150)]],
+          Quantity: [0,[Validators.min(0), Validators.max(prod.availableStock),Validators.required]],
+          // Quantity: [0,[Validators.min(0), Validators.max(150)]],
           Price: (prod.discount && prod.discount>0) ? prod.price - prod.discount: prod.price,
           Discount: prod.discount,
           AvailableStock: prod.availableStock
