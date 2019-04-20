@@ -44,7 +44,7 @@
           </a>
       </div>
 
-      <h1><a [routerLink] = "['/product/',product.prodId]" class="m1">{{product.title}}</a></h1>
+      <h1 style="margin:0px; line-height: 24px; margin-block-start:0px;"><a [routerLink] = "['/product/',product.prodId]" class="m1">{{product.title}}</a></h1>
       <div class="row">
         <div class="col-4" *ngIf="product.discount && product.discount>0">
           <span class="s2 mr-3">Price: ${{product.price - product.discount}}</span>

@@ -42,9 +42,9 @@
     <br>
   </div>
   <div *ngIf="productDetail" class="col-12 col-md-6 col-lg-5 pl-lg-5">
-    <h1 class="l2">{{productDetail.title}}<br/></h1>
+    <h1 class="l3">{{productDetail.title}}<br/></h1>
     <div class="my-4" *ngIf="productDetail.discount && productDetail.discount>0">
-      <span class="s1 mr-3">${{productDetail.price - productDetail.discount}}</span>
+      <span class="s1 mr-3">Price: ${{productDetail.price - productDetail.discount}}</span>
       <!-- <s><span class="s1">${{productDetail.price}}</span></s> -->
     </div>
     <div class="my-4" *ngIf="!productDetail.discount || productDetail.discount == 0">
@@ -55,15 +55,15 @@
     <br/>
 
     <div  *ngIf="this.productDetail['productDetail'] && this.productDetail['productDetail'].length!=0">
-      <div class="s2">Select the specifications</div><br>
+      <div class="s2"><b>Select specifications</b></div>
       <form [formGroup]="cartForm">
         <div  formArrayName="cartItems">
           <div style="margin-left:202px;" class="s2">Quantity</div>
           <div *ngFor="let detail of cartForm.controls.cartItems.controls, index as i">
-            <div [formGroupName]="i">
-              <input class="s2" style="background-color:white; border-width: 0px; width:144px;" type="text" formControlName="Title" disabled>
-              $<input class="s2" style="background-color:white; border-width: 0px; width:49px;" type="text" formControlName="Price" disabled>
-              <input class="s2" style="width:50px; height:22px;" type="number" min="0" formControlName="Quantity" placeholder="Quantity">
+            <div class="s2" [formGroupName]="i">
+              <input  style="background-color:white; border-width: 0px; width:144px;" type="text" formControlName="Title" disabled>
+              $<input style="background-color:white; border-width: 0px; width:49px;" type="text" formControlName="Price" disabled>
+              <input  style="width:50px; height:22px;" type="number" min="0" formControlName="Quantity" placeholder="Quantity">
               <div *ngIf="cartForm.controls.cartItems.controls[i].controls.Quantity.invalid" class="indicator" >No more stock</div>
             </div>
           </div>
