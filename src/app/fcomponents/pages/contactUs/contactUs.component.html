@@ -66,7 +66,7 @@
                   [ngClass]="{'is-invalid':PhoneNumber.errors?.required && PhoneNumber.touched}" [(ngModel)]="contactFrom.PhoneNumber" #PhoneNumber="ngModel">
                </div>
                <!-- company -->
-              <div><input class="form-control s2" type="text" placeholder="Company"  [(ngModel)]="contactFrom.company" name="company"></div>
+              <div><input class="form-control s2" type="text" placeholder="Company (optional)"  [(ngModel)]="contactFrom.company" name="company"></div>
                <!-- date of event -->
                <div>
                <mat-form-field style="width:100%">

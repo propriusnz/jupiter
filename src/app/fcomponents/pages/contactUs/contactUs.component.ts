@@ -61,7 +61,7 @@ export class ContactUsComponent implements OnInit {
         },
       (error)=>{
         console.log(error)
-        this.feedback_message="Opps, something went wrong."
+        this.feedback_message="Oops, something went wrong."
         this.isSendingEmail = false
     }
     )
