@@ -121,7 +121,7 @@
                 [ngClass]="{'is-invalid':message.errors?.required && message.touched}" [(ngModel)]="contactFrom.message" #message="ngModel">
                 </textarea>
               </div>
-              <div>{{feedback_message}}</div>
+              <div style="color: rgb(248, 82, 82)">{{feedback_message}}</div>
               <!-- Sending Email -->
               <div *ngIf="isSendingEmail">
                 Sending Email, Please wait...

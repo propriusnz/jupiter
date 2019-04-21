@@ -41,7 +41,6 @@ export class ContactUsComponent implements OnInit {
     this.minDate = moment().format();
   }
   onSubmit({valid}:{valid:boolean}) {
-    this.isSendingEmail = true
     if(!valid){
       this.feedback_message = 'Please fill all inputs.'
     }
@@ -53,6 +52,7 @@ export class ContactUsComponent implements OnInit {
 
   // Passes data to service
   sendEmail(){
+    this.isSendingEmail = true
     this.productService.sendContactEmail(this.contactFrom).subscribe(
       (res)=>{
         this.isSendingEmail = false
