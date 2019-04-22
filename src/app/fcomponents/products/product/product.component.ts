@@ -19,12 +19,13 @@ export class ProductComponent implements OnInit {
   cartItems: FormArray;
   isInputZero:boolean = true
   isLoading:boolean = true
+
   constructor(
     private route:ActivatedRoute,
     private router:Router,
     private productService:ProductService, 
     private formBuilder: FormBuilder
-  ) { 
+  ) {
     this.productId = this.route.snapshot.params['id'];
   }
   ngOnInit() {
@@ -64,7 +65,6 @@ export class ProductComponent implements OnInit {
         })
       )
     });
-
   } 
 
   // get cartlist from localStorage 
