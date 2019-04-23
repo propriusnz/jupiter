@@ -54,7 +54,7 @@
     <h3 class="s2 mb-2" style="white-space: pre-line">{{productDetail.description}}</h3>
     <br/>
 
-    <div  *ngIf="this.productDetail['productDetail'] && this.productDetail['productDetail'].length!=0">
+    <div  *ngIf="productDetail['productDetail'] && productDetail['productDetail'].length!=0 && cartForm.controls.cartItems['controls'].length != 0">
       <div class="s2"><b>Select specifications</b></div>
       <form [formGroup]="cartForm">
         <div  formArrayName="cartItems">
@@ -71,10 +71,11 @@
       </form>
     </div>
 
-    <div class="row mt-3">
-      <div class="col-6 col-lg-6 s1" *ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length==0">
+    <!-- ngIf="cartForm.controls.cartItems['controls'].length != 0 || productDetail.price > 0" -->
+    <div class="row mt-3" *ngIf="!productDetail['productDetail'] || (productDetail['productDetail'].length == 0 && productDetail.price > 0)">
+    <!-- ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length==0" -->
+      <div class="col-6 col-lg-6 s1">
         Quantity: <input type="number" [value] = "quantity"  min="0" max={{productDetail.availableStock}} [(ngModel)]="quantity">
-        <!-- <span class="s3 pl-2"> (only {{productDetail.availableStock}} in stock)</span> -->
       </div>
       <div class="col-6 col-lg-6">
         <button class='btn btn_gold' (click)="manageCartProds()" [disabled] = "(0>= this.quantity || this.quantity > this.productDetail.availableStock) && (this.cartForm.invalid || this.isInputZero)">Add to cart</button>

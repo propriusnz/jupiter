@@ -2,7 +2,6 @@ import { Component, OnInit,ViewChild,ElementRef, Inject, PLATFORM_ID, SimpleChan
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {ProductService} from '../../../service/product.service';
 import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
-import { DISABLED } from '@angular/forms/src/model';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
