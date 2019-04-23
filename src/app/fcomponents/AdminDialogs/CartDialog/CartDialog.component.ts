@@ -34,21 +34,16 @@ export class CartDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data,
     private productService : ProductService
   ) { 
-    //!contact
+    // fill in contact form
     this.contactForm.email = data.data['contact']['email']
     this.contactForm.firstName = data.data['contact']['firstName']
     this.contactForm.lastName = data.data['contact']['lastName']
     this.contactForm.phoneNum = data.data['contact']['phoneNum']
     this.contactForm.message = data.data['contact']['message']
-
-    //!cartProd
-    //!cart
-
+    // fill in cart form
     this.cartForm.location = data.data['location']
     this.cartForm.plannedTime = data.data['plannedTime']
     this.cartForm.price  = data.data['price']
-
-
 
     this.cartId = data.data['id']
     this.displayData = data.data
@@ -85,9 +80,7 @@ export class CartDialogComponent implements OnInit {
       }
     )
   }
-  updateCardProd(id ){
-
-  }
+  // get the products in shopping cart
   getCartProds(){
     this.productService.getCardProd(this.displayData.cartId).subscribe(
       (res)=>{

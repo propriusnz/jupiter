@@ -23,6 +23,7 @@ export class FaqDialogComponent implements OnInit {
     private productService : ProductService
   ) { 
     if(data.data){
+      // fill in faq form
       this.id = data.data['id']
       this.faqForm.Question = data.data['question']
       this.faqForm.Answer = data.data['answer']  
@@ -33,6 +34,7 @@ export class FaqDialogComponent implements OnInit {
 
   ngOnInit() { 
   }
+  // save changes to faq
   save(){
     this.isLoading = true
     this.productService.updateFaq(this.id,this.faqForm).subscribe(
@@ -45,6 +47,7 @@ export class FaqDialogComponent implements OnInit {
     }
     )
   }
+  // create new faq
   create(){
     this.isLoading = true
     this.productService.addFaq(this.faqForm).subscribe(
@@ -57,6 +60,7 @@ export class FaqDialogComponent implements OnInit {
     }
     )
   }
+  // close this dialog
   close() {
     this.dialogRef.close();
   }

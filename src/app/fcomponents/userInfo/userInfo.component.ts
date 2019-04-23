@@ -40,7 +40,7 @@ export class UserInfoComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  // check whether form is valid
   onSubmit({valid}:{valid:boolean}) {
     if(!valid){
       this.feedback_message = 'Please check all inputs.'
@@ -58,10 +58,9 @@ export class UserInfoComponent implements OnInit {
       this.submitCart(post)
     }
   }
-
+  // group data into two groups: cart part and contact part
   submitCart(post){
-      let data = JSON.parse(localStorage.getItem("cartList") || "[]");
-
+    let data = JSON.parse(localStorage.getItem("cartList") || "[]");
     // combine shopping cart data
     let cartdata = {
       location: `${this.userInfo.streetAddress}, ${this.userInfo.city}`,
@@ -75,7 +74,7 @@ export class UserInfoComponent implements OnInit {
     };
     this.addCart(cartContact)
   }
-  //call api
+  //pass data to api
   addCart(cartContact){
     this.isSendingEmail = true
     this.productService.addCart(cartContact).subscribe(

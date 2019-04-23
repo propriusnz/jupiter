@@ -53,6 +53,7 @@ export class ProductDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<ProductDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data,
     private productService : ProductService,
+    //initial formBuilder
     private formBuilder: FormBuilder
   ) { 
     if (data.action == 'update'){
@@ -89,6 +90,7 @@ export class ProductDialogComponent implements OnInit {
       }
     )
   }
+  // save changes to product and close this dialog
   save(){
     this.productService.updateProduct(this.id,this.productForm).subscribe(
       (res)=>{
@@ -100,9 +102,11 @@ export class ProductDialogComponent implements OnInit {
       this.updateDetails()
     }
   }
+  // close this dialog
   close(){
     this.dialogRef.close()
   }
+  // create a new product
   create(){
     this.isLoading = true
     this.productService.addProduct(this.productForm).subscribe(
@@ -116,6 +120,7 @@ export class ProductDialogComponent implements OnInit {
     }
     )
   }
+  // get the categories of product
   getCategories(){
     this.productService.indexCategory().subscribe(
       (res)=>{
@@ -125,6 +130,7 @@ export class ProductDialogComponent implements OnInit {
         console.log(error)
       })
   }
+  // select file need to be uploaded
   onFileSelected(e){
     this.selectedImg =<File>e.target.files[0];
     if (this.selectedImg == null){
@@ -133,7 +139,7 @@ export class ProductDialogComponent implements OnInit {
       this.isImageEmpty = false
     }
   }
-  // !upload image
+  // upload images
   onUpload(){
     if (this.selectedImg == null){
       this.isImageEmpty = true
@@ -155,7 +161,7 @@ export class ProductDialogComponent implements OnInit {
       })
     }
   }
-  // ! delete image
+  // delete images of product
   deleteImage(id:number){
     this.isLoading = true
     this.productService.deleteImg(id).subscribe(
@@ -168,14 +174,16 @@ export class ProductDialogComponent implements OnInit {
         this.feedbackMessage = "Delete Failed"
       })
   }
+  // go to the panel of editing images of product
   goEditImage(){
     this.editImage = true
     this.getProductImages()
   }
+  // go to the panel of editing details of product
   goEditProduct(){
     this.editImage = false
   }
-  //!refresh image data
+  // get images of product
   getProductImages(){
     this.productService.getImg(this.id).subscribe(
       (res)=>{
@@ -184,6 +192,7 @@ export class ProductDialogComponent implements OnInit {
         console.log(error)
       })
   }
+  // get existed product specifications 
   getDetails(){
     this.detailList.forEach(prod => {
       let control = <FormArray>this.detailForm.controls.detailItems
@@ -200,6 +209,7 @@ export class ProductDialogComponent implements OnInit {
       )
     });
   }
+  // add a new specification to product
   addDetails(){
     let control = <FormArray>this.detailForm.controls.detailItems
     control.push(
@@ -214,6 +224,7 @@ export class ProductDialogComponent implements OnInit {
       })
     )
   }
+  // delete a specification of product
   deleteDetail(detail,i){
     let control = <FormArray>this.detailForm.controls.detailItems
     control.removeAt(i)
@@ -224,6 +235,7 @@ export class ProductDialogComponent implements OnInit {
       }
     )
   }
+  // update the specifications of product
   updateDetails(){
     let detailList = this.detailForm.controls.detailItems['value']
     
