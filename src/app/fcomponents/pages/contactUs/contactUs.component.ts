@@ -42,7 +42,7 @@ export class ContactUsComponent implements OnInit {
   }
   onSubmit({valid}:{valid:boolean}) {
     if(!valid){
-      this.feedback_message = 'Please fill all inputs.'
+      this.feedback_message = 'Please fill all required inputs.'
     }
     else{
       this.feedback_message = '';

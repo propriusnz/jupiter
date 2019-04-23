@@ -1,7 +1,8 @@
-import { Component, OnInit,ViewChild,ElementRef, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef, Inject, PLATFORM_ID, SimpleChanges } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {ProductService} from '../../../service/product.service';
 import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { DISABLED } from '@angular/forms/src/model';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -52,22 +53,35 @@ export class ProductComponent implements OnInit {
   // add product descriptions into formArray
   createItem(res){
     res['productDetail'].forEach(prod => {
-      let control = <FormArray>this.cartForm.controls.cartItems
-      control.push(
-        this.formBuilder.group({
-          ProdId: prod.prodId,
-          Title: prod.productDetail1,
-          Quantity: [0,[Validators.min(0), Validators.max(prod.availableStock),Validators.required]],
-          // Quantity: [0,[Validators.min(0), Validators.max(150)]],
-          Price: (prod.discount && prod.discount>0) ? prod.price - prod.discount: prod.price,
-          Discount: prod.discount,
-          AvailableStock: prod.availableStock
-        })
-      )
+      if (this.validateItem(prod)){
+        let control = <FormArray>this.cartForm.controls.cartItems
+        control.push(
+          this.formBuilder.group({
+            ProdId: prod.prodId,
+            // Title: ({value : prod.productDetail1, disabled : true}),
+            Title: prod.productDetail1,
+            Quantity: [0,[Validators.min(0), Validators.max(prod.availableStock),Validators.required]],
+            Price: (prod.discount && prod.discount>0) ? prod.price - prod.discount: prod.price,
+            Discount: prod.discount,
+            AvailableStock: prod.availableStock
+          })
+        )  
+      }
     });
   } 
-
-  // get cartlist from localStorage 
+  //check incomplete specifications
+  validateItem(item):boolean{
+    let price = item.price
+    let stock = item.availableStock
+    if (price == null || price == 0 || price - item.discount <0){
+      return false
+    } else if (stock > item.totalStock || stock <= 0 || stock == null){
+      return false
+    } else {
+      return true
+    }
+  }
+  // get cartList from localStorage 
   setStorage(){
       if ('cartList' in localStorage){
         this.cartList = JSON.parse(localStorage.getItem('cartList'))
@@ -113,21 +127,19 @@ export class ProductComponent implements OnInit {
     }
 
   }
-  // add cartlist into locastorage
+  // add cartList into localStorage
   addToCart(list){
     this.isStockAvailable = true
     this.isprodAdded = true
     setTimeout( ()=>{
       this.isprodAdded = false
       }, 1000)
-
       list.forEach(item => {
         let a:boolean = false
-
-        // if cartlist if not empty
+        // if cartList if not empty
         if (this.cartList.length>0){
           for (let i=0; i<this.cartList.length;i++){
-            //if product already exists in cartlist
+            //if product already exists in cartList
             if(this.cartList[i].Title == item.Title){
               a = true
               this.cartList[i].Quantity += item.Quantity
@@ -135,20 +147,20 @@ export class ProductComponent implements OnInit {
               localStorage.setItem('cartList',JSON.stringify(this.cartList))
             }
           }
-          //if product not in cartlist
+          //if product not in cartList
           if (a==false){
             this.cartList.push(item)
             localStorage.setItem('cartList',JSON.stringify(this.cartList))  
           }
         }else{
-          // if nothing in cartlist
+          // if nothing in cartList
           this.cartList = JSON.parse(localStorage.getItem('cartList'))
           this.cartList.push(item)
           localStorage.setItem('cartList',JSON.stringify(this.cartList))
         }
       });
   }
-  // click the path and renavigate
+  // click the path and re-navigate
   backClicked(type:string, id?:number){
     if (id){
       this.router.navigate(['/category/',id]);

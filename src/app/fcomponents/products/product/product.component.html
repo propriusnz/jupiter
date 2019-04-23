@@ -61,8 +61,8 @@
           <div style="margin-left:202px;" class="s2">Quantity</div>
           <div *ngFor="let detail of cartForm.controls.cartItems.controls, index as i">
             <div class="s2" [formGroupName]="i">
-              <input style="background-color:white; border-width: 0px; width:144px;" type="text" formControlName="Title" disabled>
-              $<input style="background-color:white; border-width: 0px; width:49px;" type="text" formControlName="Price" disabled>
+              <input style="background-color:white; border-width: 0px; width:144px;" type="text" formControlName="Title" [attr.disabled]="true">
+              $<input style="background-color:white; border-width: 0px; width:49px;" type="text" formControlName="Price" [attr.disabled]="true">
               <input style="width:50px; height:22px;" type="number" min="0" formControlName="Quantity" placeholder="Quantity">
               <div *ngIf="cartForm.controls.cartItems.controls[i].controls.Quantity.invalid" class="invalid_feedback" style="padding-bottom:10px;" role="alert" >Only {{detail.value.AvailableStock}} are available. Please contact us if you need more!</div>
             </div>
@@ -77,7 +77,7 @@
         <!-- <span class="s3 pl-2"> (only {{productDetail.availableStock}} in stock)</span> -->
       </div>
       <div class="col-6 col-lg-6">
-        <button class='btn btn_gold' (click)="manageCartProds()" [disabled] = " (0>= quantity || quantity > productDetail.availableStock) && (cartForm.invalid || isInputZero)">Add to cart</button>
+        <button class='btn btn_gold' (click)="manageCartProds()" [disabled] = "(0>= this.quantity || this.quantity > this.productDetail.availableStock) && (this.cartForm.invalid || this.isInputZero)">Add to cart</button>
       </div>
     </div>
 
