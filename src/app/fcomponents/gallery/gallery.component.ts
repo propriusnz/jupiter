@@ -35,7 +35,6 @@ export class GalleryComponent implements OnInit {
   ngOnInit() {
     this.productService.indexGallery().subscribe(
       (res)=>{
-        console.log(res)
         this.galleryList = res
       },(error)=>{
         console.log(error)

@@ -73,7 +73,6 @@ export class UserInfoComponent implements OnInit {
       CartModel: cartdata,
       ContactModel: post
     };
-    console.log(cartContact)
     this.addCart(cartContact)
   }
   //call api

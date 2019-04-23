@@ -57,7 +57,6 @@ export class ProductDialogComponent implements OnInit {
   ) { 
     if (data.action == 'update'){
       this.displayData = data.data 
-      console.log('this.displayData: ', this.displayData);
       this.id = data.data['prodId']
       this.productForm.title = data.data['title']
       this.productForm.subTitle = data.data['subTitle']
@@ -93,7 +92,6 @@ export class ProductDialogComponent implements OnInit {
   save(){
     this.productService.updateProduct(this.id,this.productForm).subscribe(
       (res)=>{
-        console.log('productForm:', this.productForm)
         this.dialogRef.close()
     },(error) =>{
       console.log(error)
@@ -121,7 +119,6 @@ export class ProductDialogComponent implements OnInit {
   getCategories(){
     this.productService.indexCategory().subscribe(
       (res)=>{
-        console.log(res)
         this.allCategories = res
       },
       (error)=>{
@@ -146,10 +143,8 @@ export class ProductDialogComponent implements OnInit {
       const fd = new FormData();
       fd.append('image',this.selectedImg, this.selectedImg.name)
       fd.append('prodId',JSON.stringify(this.id))
-      console.log(fd)
       this.productService.addImg(fd).subscribe((res)=>{
         this.isLoading = false
-        console.log(res)
         this.feedbackMessage = res['data']
         this.getProductImages()
         this.imageInput.nativeElement.value = null;
@@ -233,7 +228,6 @@ export class ProductDialogComponent implements OnInit {
     let detailList = this.detailForm.controls.detailItems['value']
     
     this.productService.updateProductDetails(this.id, detailList).subscribe((res)=>{
-      console.log(res)
     },(error)=>{
       console.log(error)
     })
