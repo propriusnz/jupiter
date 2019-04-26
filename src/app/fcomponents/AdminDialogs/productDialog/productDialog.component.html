@@ -26,7 +26,7 @@
     <div class="form-group col-6">
         <input class="form-control"  min="0" type="number" name="discount" placeholder="Discount" [(ngModel)]="productForm.discount" #discount="ngModel">
     </div>            
-     <!-- choose categoty -->
+     <!-- choose category -->
     <div class="col-12">Choose category of product:</div>
     <div class="form-group col-12">
         <!-- !when update hire product -->
@@ -40,9 +40,12 @@
             <option *ngFor="let cate of allCategories, index as i" value= {{cate.categoryId}}>{{cate.categoryName}}</option>
         </select>
     </div>
-
-    <br>
-    <!-- !Details of Product -->
+    <!-- choose special order displayed on homepage-->
+    <div class="col-12">Display order (Please enter 1 ~ 100, 1 will be displayed firstly):</div>
+    <div class="form-group col-12">
+        <input class="form-control" type="number" name="specialOrder" placeholder="special order" [(ngModel)]="productForm.specialOrder" #specialOrder="ngModel">
+    </div>            
+    <!-- Details of Product -->
     <div style="margin-top:14px;" class="col-12" *ngIf="status=='update'">
     <div class="row text-center">
         <div class="col-9 text-left">Products specification:</div> <div class="col-3 text-right"><button type="button" class="btn btn-outline-secondary btn-sm" (click)="addDetails()">Add new detail</button></div>

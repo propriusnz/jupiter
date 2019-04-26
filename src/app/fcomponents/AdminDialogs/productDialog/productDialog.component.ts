@@ -33,7 +33,8 @@ export class ProductDialogComponent implements OnInit {
     prodTypeId:number,
     categoryId:number,
     price:number,
-    discount:number
+    discount:number,
+    specialOrder:number
   } = {
     title:'',
     subTitle:'',
@@ -43,7 +44,8 @@ export class ProductDialogComponent implements OnInit {
     prodTypeId:0,
     categoryId:null,
     price:null,
-    discount:null
+    discount:null,
+    specialOrder:null
   }
   status:string
   displayData:any
@@ -67,6 +69,7 @@ export class ProductDialogComponent implements OnInit {
       this.productForm.categoryId = data.data['categoryId']
       this.productForm.price = data.data['price']
       this.productForm.discount = data.data['discount']
+      this.productForm.specialOrder = data.data['specialOrder']
       if (data.data['productDetail']){
         this.detailList = data.data['productDetail']
       }
@@ -92,6 +95,13 @@ export class ProductDialogComponent implements OnInit {
   }
   // save changes to product and close this dialog
   save(){
+    console.log(this.productForm);
+    if ( this.productForm.discount == null){
+      this.productForm.discount = 0
+    }
+    if (this.productForm.specialOrder == null){
+      this.productForm.specialOrder = 200
+    }
     this.productService.updateProduct(this.id,this.productForm).subscribe(
       (res)=>{
         this.dialogRef.close()
