@@ -119,6 +119,7 @@ export class AdminComponent implements OnInit {
       (res) => {
         this.isLoading = false
         this.displayData = res;
+        console.log(res)
       },
       (err) => { 
         this.isLoading = false

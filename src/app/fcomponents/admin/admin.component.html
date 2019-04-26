@@ -128,6 +128,7 @@
               <th scope="col" *ngIf="blockCode == 2" >Category<br><span>类别</span></th>
               <th scope="col" >Total stock<br><span>总库存</span></th>
               <th scope="col" >Available stock<br><span>现库存</span></th>
+              <th scope="col" >Special Order<br><span>特殊展示</span></th>
               <th scope="col" >Description<br><span>描述</span></th>
               <th scope="col" >Edit<br><span>编辑</span></th>
               <th scope="col" >Delete<br><span>删除</span></th>
@@ -145,6 +146,8 @@
               </td>
               <td >{{data.totalStock}}</td>
               <td>{{data.availableStock}}</td>
+              <td>{{data.specialOrder}}</td>
+
               <td style="text-align:center; font-size:10px;">{{data.description}}</td>
               <td ><i class="far fa-edit" (click)="openProduct(data)" title="Edit"></i></td>
               <td ><i class="far fa-trash-alt" title="Delete"
