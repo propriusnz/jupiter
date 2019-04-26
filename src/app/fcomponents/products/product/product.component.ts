@@ -2,7 +2,6 @@ import { Component, OnInit,ViewChild,ElementRef, Inject, PLATFORM_ID, SimpleChan
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {ProductService} from '../../../service/product.service';
 import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
-import { DISABLED } from '@angular/forms/src/model';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -81,14 +80,14 @@ export class ProductComponent implements OnInit {
       return true
     }
   }
-  // get cartList from localStorage 
+  // get cartList from localStorage or initialize cartList in localStorage
   setStorage(){
       if ('cartList' in localStorage){
         this.cartList = JSON.parse(localStorage.getItem('cartList'))
       }else{
         localStorage.setItem('cartList', JSON.stringify(this.cartList))
       }
-      localStorage.setItem('userId', 'aaa ')
+      // localStorage.setItem('userId', 'aaa ')
   }
   // add product into a list
   manageCartProds(){
@@ -125,7 +124,6 @@ export class ProductComponent implements OnInit {
         this.isStockAvailable = false
       }
     }
-
   }
   // add cartList into localStorage
   addToCart(list){
@@ -172,6 +170,7 @@ export class ProductComponent implements OnInit {
       this.router.navigate(['/packages']);
     }
   }
+  // check whether all of the input value of specifications are 0
   detectInputAmount(){
     this.cartForm.valueChanges.subscribe(dt => 
       {

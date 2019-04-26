@@ -31,6 +31,7 @@ export class GalleryDialogComponent implements OnInit {
     private productService : ProductService
   ) { 
     if(data.action=='update'){
+      // fill in gallery form
       this.displayData = data.data 
       this.id = data.data['prodjectId']
       this.galleryForm.CustomerName = data.data['customerName']
@@ -53,6 +54,7 @@ export class GalleryDialogComponent implements OnInit {
     }
     )
   }
+  //save changes to galleries
   save(){
     this.isLoading = true
     this.galleryForm.eventtypeId = Number(this.galleryForm.eventtypeId)
@@ -66,6 +68,7 @@ export class GalleryDialogComponent implements OnInit {
     }
     )
   }
+  // create new gallery
   create(){
     this.isLoading = true
     this.productService.addGallery(this.galleryForm).subscribe(
@@ -78,10 +81,11 @@ export class GalleryDialogComponent implements OnInit {
     }
     )
   }
+  // close this dialog
   close(){
     this.dialogRef.close()
   }
-
+  // select gallery image
   onFileSelected(e){
     this.selectedImg =<File>e.target.files[0];
     if (this.selectedImg == null){
@@ -90,7 +94,7 @@ export class GalleryDialogComponent implements OnInit {
       this.isImageEmpty = false
     }
   }
-  // !upload image
+  // upload gallery image
   onUpload(){
     if (this.selectedImg == null){
       this.isImageEmpty = true
@@ -112,13 +116,16 @@ export class GalleryDialogComponent implements OnInit {
       })
     }
   }
+  // go to editing gallery image panel
   goEditImage(){
     this.editImage = true
     this.getGalleryImages()
   }
+  // go to editing gallery detail panel
   goEditProduct(){
     this.editImage = false
   }
+  // get images of gallery
   getGalleryImages(){
     this.productService.getGalleryImg(this.id).subscribe(
       (res)=>{
@@ -127,6 +134,7 @@ export class GalleryDialogComponent implements OnInit {
         console.log(error)
       })
   }
+  // delete image of gallery
   deleteImage(id:number){
     this.isLoading = true
     this.productService.deleteGalleryImg(id).subscribe(

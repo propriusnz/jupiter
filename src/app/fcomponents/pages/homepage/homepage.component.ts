@@ -22,7 +22,7 @@ export class HomepageComponent implements OnInit {
   sizeChange(event) {
     if (this.isBrowser) {
       this.windowResize = window.innerWidth;
-      this.seperateSpecials();
+      this.separateSpecials();
     }
   }
   constructor(
@@ -48,43 +48,44 @@ export class HomepageComponent implements OnInit {
       window.onscroll = () => {
         let top1 = this.bgat.nativeElement.offsetTop;
         if (top1 - window.pageYOffset < window.innerHeight && top1 + this.bgat.nativeElement.offsetHeight > window.pageYOffset) {
-          this.backgroundscroll(window.pageYOffset);
+          this.backgroundScroll(window.pageYOffset);
         }
       };
     }
-    this.getSpeicals();
+    this.getSpecials();
   }
-  // controll scrolling speed
-  backgroundscroll(e) {
+  // control scrolling speed
+  backgroundScroll(e) {
     this.bgat.nativeElement.style.backgroundPosition = '0%' + e / 50 + '%';
   }
-
-  getSpeicals() {
+  // get all the products on special
+  getSpecials() {
     this.productService.getSpecialProduct().subscribe(
       (res) => {
         this.specialProducts = res['data'];
-        this.seperateSpecials();
+        this.separateSpecials();
       },
       (error) => {
         console.log(error);
       }
     );
   }
-  seperateSpecials() {
+  // separate special products into groups
+  separateSpecials() {
     this.groupedSpecials = [];
     if (this.windowResize >= 768) {
+      // four special products in each group on large screen
       for (let i = 0; i < this.specialProducts.length; i += 4) {
-        let mylist = this.specialProducts.slice(i, i + 4);
-        this.groupedSpecials.push(mylist);
+        let myList = this.specialProducts.slice(i, i + 4);
+        this.groupedSpecials.push(myList);
       }
     } else {
+      // two special products in each group on mobile screen
       for (let i = 0; i < this.specialProducts.length; i += 2) {
-        let mylist1 = this.specialProducts.slice(i, i + 2);
-        this.groupedSpecials.push(mylist1);
+        let myList1 = this.specialProducts.slice(i, i + 2);
+        this.groupedSpecials.push(myList1);
       }
     }
-
-
   }
 
   

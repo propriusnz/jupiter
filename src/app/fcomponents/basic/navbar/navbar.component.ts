@@ -24,13 +24,14 @@ export class NavbarComponent implements OnInit {
     }
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
+      // on mobile screen, click navItems and hide navbar
       $('.navbar-nav>li>a').on('click', function(){
         $('.navbar-collapse').collapse('hide');
     });  
     }
     this.getCategories()
   }
-
+  // get all the categories and show on navbar
   getCategories(){
     this.productService.indexCategory().subscribe((res)=>{
       this.allCategories = res

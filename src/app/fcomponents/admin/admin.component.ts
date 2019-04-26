@@ -51,23 +51,28 @@ export class AdminComponent implements OnInit {
   getData(){
     this.isLoading = true
     switch (this.blockCode){
+      // show dashboard, edit category panel
       case "1":{
         this.isLoading = false
         this.loadCategory()
         break
       }
+      // show products for hire
       case "2":{
         this.getProducts(1)
         break
       }
+      // show services
       case "3":{
         this.getProducts(2)
         break
       }
+      // show packages
       case "4":{
         this.getProducts(3)
         break
       }
+      // show galleries
       case '5' : {
         this.productService.indexGallery().subscribe(
           (res) => { 
@@ -79,6 +84,7 @@ export class AdminComponent implements OnInit {
         );
         break;
       }
+      // show faqs
       case '6' : {
         this.productService.getFaq().subscribe(
           (res) => {
@@ -91,6 +97,7 @@ export class AdminComponent implements OnInit {
         );
         break;
       }
+      // show carts
       case '7' : {
         this.productService.getCarts().subscribe(
           (res) => { 
@@ -106,7 +113,7 @@ export class AdminComponent implements OnInit {
       }
     }
   }
-
+  // get product details
   getProducts(typeCode: number) {
     this.productService.indexType(typeCode).subscribe(
       (res) => {
