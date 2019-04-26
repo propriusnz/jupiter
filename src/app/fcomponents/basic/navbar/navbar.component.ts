@@ -12,8 +12,8 @@ import { ProductService } from '../../../service/product.service';
 export class NavbarComponent implements OnInit {
   allCategories:any = [];
   isBrowser:boolean = false;
-  galleriesData = ['Weddings','Birthday', 'Girls Night', 'Corporate Event', 'Baby Shower', 'Luxe Dream Floral Studio']
-
+  // galleriesData = ['Weddings','Birthday', 'Girls Night', 'Corporate Event', 'Baby Shower', 'Luxe Dream Floral Studio']
+  galleriesData:any;
   constructor(
     @Inject(PLATFORM_ID) private platformId,
     private productService : ProductService) 
@@ -30,11 +30,22 @@ export class NavbarComponent implements OnInit {
     });  
     }
     this.getCategories()
+    this.getGalleryTypes()
   }
   // get all the categories and show on navbar
   getCategories(){
     this.productService.indexCategory().subscribe((res)=>{
       this.allCategories = res
     },(error)=>{console.log(error)})
+  }
+  getGalleryTypes(){
+    this.productService.getEventType().subscribe(
+      (res)=>{
+        this.galleriesData = res
+        console.log('gallery,',this.galleriesData);
+      },(error)=>{
+        console.log(error)
+      }
+    )
   }
 }

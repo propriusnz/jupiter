@@ -39,6 +39,9 @@ constructor(
   indexGallery(){
     return this.http.get(this.baseUrl + '/projects');
   }
+  getGalleryByType(id:number){
+    return this.http.get(this.baseUrl + '/projects/GetProjectByType/' + id);
+  }
   updateGallery(id, newGallery){
     return this.http.put(this.baseUrl + '/projects/' + id, newGallery, { headers: new HttpHeaders({'Authorization': "Bearer " + sessionStorage.getItem('access_token')}) });
   }
@@ -118,6 +121,9 @@ constructor(
   //!EventType
   getEventType(){
     return this.http.get(this.baseUrl + '/EventTypes')
+  }
+  getEventTypeById(id:number){
+    return this.http.get(this.baseUrl + '/EventTypes/' + id)
   }
   //!admin
   login(adminModel){

@@ -11,7 +11,7 @@ import { ProductService } from '../../service/product.service';
 export class GalleryComponent implements OnInit {
   gallery:any
   galleryList:any
-
+  galleryName:any
 
   constructor(
     private route:ActivatedRoute,
@@ -24,22 +24,46 @@ export class GalleryComponent implements OnInit {
       { name: 'description', content: 'One stop event and party hire and services in Auckland.'},
     ])
     
-    this.route.params.subscribe(
-      params => {
-        this.gallery = this.route.snapshot.params['id'];
-      }
-    );
+    // this.route.params.subscribe(
+    //   params => {
+    //     this.gallery = this.route.snapshot.params['id'];
+    //   }
+    // );
     this.titleService.setTitle('Luxe Dream Auckland | '+ this.gallery +' event hire gallery');
   }
 
   ngOnInit() {
-    this.productService.indexGallery().subscribe(
+    this.route.params.subscribe(
+      params => {
+        // if(this.route.snapshot.params['id']){
+        //   this.categoryId = this.route.snapshot.params['id'];
+        //   this.changeCate(this.categoryId)
+        // }
+        // this.typeName = this.route.snapshot.data['some_data'];
+        // this.getCategories()
+        this.gallery = this.route.snapshot.params['id'];
+        this.getGalleryName()
+        this.getGalleryType()
+      }
+    );
+  }
+
+  getGalleryType(){
+    this.productService.getGalleryByType(this.gallery).subscribe(
       (res)=>{
         this.galleryList = res
       },(error)=>{
-        console.log(error)
+        console.log(error);
       }
     )
   }
-
+  getGalleryName(){
+    this.productService.getEventTypeById(this.gallery).subscribe(
+      (res)=>{
+        this.galleryName = res['eventName']
+      },(error)=>{
+        console.log(error);
+      }
+    )
+  }
 }

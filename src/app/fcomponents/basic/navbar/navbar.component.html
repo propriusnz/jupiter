@@ -92,7 +92,7 @@
           <a *ngIf="isBrowser==true" class="dropdown-item d-none d-md-block s2bold" routerLink='/galleries'> <h1>All Galleries</h1></a>
           <a *ngIf="isBrowser==false" class="dropdown-item d-none d-md-block" href='http://luxedreameventhire.co.nz/galleries'>All Galleries</a>
           <div *ngIf="isBrowser==true">
-            <a class="dropdown-item d-none d-md-block s2bold" *ngFor="let gallery of galleriesData" routerLink= '/galleries/{{gallery}}'><h1>{{gallery}}</h1></a>
+            <a class="dropdown-item d-none d-md-block s2bold" *ngFor="let gallery of galleriesData" routerLink= '/galleries/{{gallery.typeId}}'><h1>{{gallery.eventName}}</h1></a>
           </div>
           <div *ngIf="isBrowser==false">
             <a class="dropdown-item d-none d-md-block" *ngFor="let gallery of galleriesData" href = 'http://luxedreameventhire.co.nz/category/galleries/{{gallery}}'>{{gallery}}</a>
