@@ -10,7 +10,7 @@
   <div class="row mt-5">
     <div class="col-12" *ngIf="productDetail">
       <!-- Hire -->
-      <a *ngIf="productDetail.category" (click)="backClicked(hire,productDetail.categoryId)">
+      <a *ngIf="productDetail.category" (click)="backClicked('hire',productDetail.categoryId)">
         <h2 class="s2goldbold">{{productDetail.category.categoryName}}</h2>
       </a> 
       <!-- Party Services -->

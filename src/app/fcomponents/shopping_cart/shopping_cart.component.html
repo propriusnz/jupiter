@@ -5,7 +5,19 @@
       <div class="col-8 col-sm-8 col-md-8 col-lg-9">
         <div class="divdetails"><span class="m2">{{prod.Title}}</span></div>
         <div class="divdetails">Unit Price: ${{prod.Price/prod.Quantity}}</div>
-        <div class="divdetails">Amount: {{prod.Quantity}}</div>
+
+        <div>
+          Amount:
+          <div class="number-input">
+            <i class="fas fa-minus" (click)="quantityMinus(i)"></i>
+            <input #quantityInput class="quantityInput quantity" value={{prod.Quantity}} (change)="quantityChanged($event,i)" type="number" min="1" />
+            <i class="fas fa-plus" (click)="quantityPlus(i)"></i>
+          </div>
+          <div class="invalid_feedback mt-3" role="alert" *ngIf="prod.Quantity > prodsInCart[i].availableStock " >
+            Only {{prodsInCart[i].availableStock}} are available. Please contact us if you need more!
+          </div>
+        </div>
+
         <div class="bg-gray divdetails"> NZ${{prod.Price}}</div>
         <div class="mt-2 divdetails">
           <button class="btn btn-outline-blue" [routerLink]="[ '/product/', prod.ProdId ]">View Detail</button>

@@ -42,7 +42,6 @@ export class NavbarComponent implements OnInit {
     this.productService.getEventType().subscribe(
       (res)=>{
         this.galleriesData = res
-        console.log('gallery,',this.galleriesData);
       },(error)=>{
         console.log(error)
       }
