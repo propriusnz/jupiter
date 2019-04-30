@@ -12,7 +12,6 @@ export class Shopping_cartComponent implements OnInit {
   productDetail: any;
   stockUnavailable = false;
   userInputQuantityArray = [];
-  errors = 0;
   @ViewChild('quantityInput') quantityInput: ElementRef;
   constructor(
     private productService: ProductService
@@ -58,16 +57,14 @@ export class Shopping_cartComponent implements OnInit {
     this.userInputQuantityArray[i] = e.srcElement.valueAsNumber;
     let unitPrice = this.prodsInCart[i].Price / this.prodsInCart[i].Quantity;
     let totalPriceOfProduct = unitPrice * this.userInputQuantityArray[i];
-    // shopping cart in valid
+    // update localStorage when shoppingCart is valid
     if (this.prodsInCart[i].availableStock >= this.userInputQuantityArray[i]) {
-      // this.productService.setShoppingCartStatus(true);
       this.prodsInCart[i].Quantity = this.userInputQuantityArray[i];
       this.prodsInCart[i].Price = totalPriceOfProduct;
       this.price();
       localStorage.setItem('cartList', JSON.stringify(this.prodsInCart));
-    } else {
-      // this.productService.setShoppingCartStatus(false);
     }
+    // get the amount of invalid input
     for (let a = 0; a < this.userInputQuantityArray.length; a++) {
       if (this.userInputQuantityArray[a] > this.prodsInCart[a].availableStock) {
         errorAmount += 0;
@@ -76,8 +73,10 @@ export class Shopping_cartComponent implements OnInit {
       }
     }
     if (errorAmount === 3) {
+      // all inputs are valid, user can submit shopping cart
       this.productService.setShoppingCartStatus(true);
     } else {
+      // one or more inputs is/are invalid, disable the submit button
       this.productService.setShoppingCartStatus(false);
     }
   }
