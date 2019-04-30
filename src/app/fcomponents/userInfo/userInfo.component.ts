@@ -27,7 +27,7 @@ export class UserInfoComponent implements OnInit {
     streetAddress: '',
     city: '',
     Message: ''
-  }
+  };
   constructor(
     @Inject(PLATFORM_ID) private platformId,
     private productService: ProductService,
@@ -45,8 +45,8 @@ export class UserInfoComponent implements OnInit {
 
   ngOnInit() {}
   // check whether form is valid
-  onSubmit({valid}:{valid: boolean}) {
-    if(!valid){
+  onSubmit({valid}: {valid: boolean}) {
+    if (!valid) {
       this.feedback_message = 'Please check all inputs.';
     } else {
       // combine user info data
@@ -57,7 +57,7 @@ export class UserInfoComponent implements OnInit {
         PhoneNum: PhoneNum,
         Email: Email,
         Message: Message
-      }
+      };
       this.submitCart(post);
     }
   }
@@ -77,7 +77,7 @@ export class UserInfoComponent implements OnInit {
       CartModel: cartData,
       ContactModel: post
     };
-    this.addCart(cartContact)
+    this.addCart(cartContact);
   }
   // pass data to api
   addCart(cartContact) {
@@ -87,7 +87,7 @@ export class UserInfoComponent implements OnInit {
         this.isSendingEmail = false;
         this.isSendSuccess = true;
         this.router.navigate(['/thankYou']);
-        this.cleanStorage()
+        this.cleanStorage();
       },
       (error) => {
         this.isSendingEmail = false;

@@ -11,7 +11,7 @@ import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 })
 export class HomepageComponent implements OnInit {
 
-  num: number = 0;
+  num = 0;
   specialProducts: any = [];
   groupedSpecials: any = [];
   isBrowser: Boolean = false;
@@ -46,7 +46,7 @@ export class HomepageComponent implements OnInit {
     // large screen
     if (this.isBrowser) {
       window.onscroll = () => {
-        let top1 = this.bgat.nativeElement.offsetTop;
+        const top1 = this.bgat.nativeElement.offsetTop;
         if (top1 - window.pageYOffset < window.innerHeight && top1 + this.bgat.nativeElement.offsetHeight > window.pageYOffset) {
           this.backgroundScroll(window.pageYOffset);
         }
@@ -76,17 +76,17 @@ export class HomepageComponent implements OnInit {
     if (this.windowResize >= 768) {
       // four special products in each group on large screen
       for (let i = 0; i < this.specialProducts.length; i += 4) {
-        let myList = this.specialProducts.slice(i, i + 4);
+        const myList = this.specialProducts.slice(i, i + 4);
         this.groupedSpecials.push(myList);
       }
     } else {
       // two special products in each group on mobile screen
       for (let i = 0; i < this.specialProducts.length; i += 2) {
-        let myList1 = this.specialProducts.slice(i, i + 2);
+        const myList1 = this.specialProducts.slice(i, i + 2);
         this.groupedSpecials.push(myList1);
       }
     }
   }
 
-  
+
 }
