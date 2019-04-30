@@ -8,12 +8,8 @@
 
         <div>
           Amount:
-          <div class="number-input">
-            <i class="fas fa-minus" (click)="quantityMinus(i)"></i>
-            <input #quantityInput class="quantityInput quantity" value={{prod.Quantity}} (change)="quantityChanged($event,i)" type="number" min="1" />
-            <i class="fas fa-plus" (click)="quantityPlus(i)"></i>
-          </div>
-          <div class="invalid_feedback mt-3" role="alert" *ngIf="prod.Quantity > prodsInCart[i].availableStock " >
+          <input #quantityInput class="quantityInput quantity" value={{userInputQuantityArray[i]}} (change)="quantityChanged($event,i)" type="number" min="1" />
+          <div class="invalid_feedback" role="alert" *ngIf="userInputQuantityArray[i] > prodsInCart[i].availableStock " >
             Only {{prodsInCart[i].availableStock}} are available. Please contact us if you need more!
           </div>
         </div>

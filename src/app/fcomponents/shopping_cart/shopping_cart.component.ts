@@ -10,6 +10,8 @@ export class Shopping_cartComponent implements OnInit {
   totalPrice = 0;
   prodsInCart: any;
   productDetail: any;
+  stockUnavailable = false;
+  userInputQuantityArray = [];
   @ViewChild('quantityInput') quantityInput: ElementRef;
   constructor(
     private productService: ProductService
@@ -23,6 +25,7 @@ export class Shopping_cartComponent implements OnInit {
       this.productService.getImg(element.ProdId).subscribe((res => {
         element.url = res[0]['url'];
       }));
+      this.userInputQuantityArray.push(element.Quantity);
     });
     this.getAllStock();
     this.price();
@@ -31,7 +34,7 @@ export class Shopping_cartComponent implements OnInit {
   deleteCart(id) {
     this.prodsInCart.splice(id, 1);
       localStorage.setItem('cartList', JSON.stringify(this.prodsInCart));
-    this.price()
+    this.price();
   }
   // calculate total price of shopping cart
   price(){
@@ -39,7 +42,7 @@ export class Shopping_cartComponent implements OnInit {
     this.prodsInCart.forEach(prod => {
       this.totalPrice += prod.Price;
     });
-      localStorage.setItem('totalPrice', JSON.stringify(this.totalPrice));
+    localStorage.setItem('totalPrice', JSON.stringify(this.totalPrice));
   }
   getAllStock() {
     this.prodsInCart.forEach(element => {
@@ -50,24 +53,18 @@ export class Shopping_cartComponent implements OnInit {
   }
 
   quantityChanged(e, i) {
-    let newQuantity = e.srcElement.valueAsNumber;
+    this.userInputQuantityArray[i] = e.srcElement.valueAsNumber;
     let unitPrice = this.prodsInCart[i].Price / this.prodsInCart[i].Quantity;
-    let totalPriceOfProduct = unitPrice * newQuantity;
-    this.prodsInCart[i].Quantity = newQuantity;
-    this.prodsInCart[i].Price = totalPriceOfProduct;
-    // if (this.prodsInCart[i].availableStock >= newQuantity){
-      // update localStorage
-      // localStorage.setItem("cartList",JSON.stringify(this.prodsInCart));
+    let totalPriceOfProduct = unitPrice * this.userInputQuantityArray[i];
+    // shopping cart in valid
+    if (this.prodsInCart[i].availableStock >= this.userInputQuantityArray[i]) {
+      this.productService.setShoppingCartStatus(true);
+      this.prodsInCart[i].Quantity = this.userInputQuantityArray[i];
+      this.prodsInCart[i].Price = totalPriceOfProduct;
       this.price();
-    // }
+      localStorage.setItem('cartList', JSON.stringify(this.prodsInCart));
+    } else {
+      this.productService.setShoppingCartStatus(false);
+    }
   }
-  quantityMinus(i) {
-    // this.prodsInCart[i].Quantity -= 1;
-    this.quantityInput.nativeElement.stepDown();
-  }
-  quantityPlus(i) {
-    // this.prodsInCart[i].Quantity += 1;
-    this.quantityInput.nativeElement.stepUp();
-  }
-
 }

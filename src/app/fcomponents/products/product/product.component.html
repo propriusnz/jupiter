@@ -27,7 +27,6 @@
   </div>
   <div class="row my-5">
   <div class="col-12 col-md-6 col-lg-7 ">
-    <!-- TODO: add img scrolling -->
     <div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel" *ngIf="prodMediaUrl">
         <ol class="carousel-indicators" *ngIf="prodMediaUrl > 1">
             <li data-target="#carouselExampleControls" data-slide-to="i" class="active" *ngFor="let img of prodMediaUrl, index as i" [ngClass]="{'active': i == 0}"></li>
@@ -72,9 +71,9 @@
     </div>
 
     <!-- ngIf="cartForm.controls.cartItems['controls'].length != 0 || productDetail.price > 0" -->
-    <div class="row mt-3" *ngIf="!productDetail['productDetail'] || (productDetail['productDetail'].length == 0 && productDetail.price > 0)">
+    <div class="row mt-3" *ngIf="productDetail['productDetail'] || (productDetail['productDetail'].length == 0 && productDetail.price > 0)">
     <!-- ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length==0" -->
-      <div class="col-6 col-lg-6 s1">
+      <div class="col-6 col-lg-6 s1" *ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length==0">
         Quantity: <input type="number" [value] = "quantity"  min="0" max={{productDetail.availableStock}} [(ngModel)]="quantity">
       </div>
       <div class="col-6 col-lg-6">

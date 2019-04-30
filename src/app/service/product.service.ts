@@ -4,6 +4,7 @@ import {HttpClient,HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment.prod';
 import { isPlatformBrowser } from '@angular/common';
 import { ReturnStatement } from '@angular/compiler';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { ReturnStatement } from '@angular/compiler';
 export class ProductService {
   httpHeader1:HttpHeaders;
   baseUrl = environment.baseUrl;
-
+  isShoppingCartValid = new Subject<any>();
 constructor( 
   @Inject(PLATFORM_ID) private platformId,
   private http: HttpClient
@@ -157,5 +158,17 @@ constructor(
   }
   deleteProductDetail(id:number){
     return this.http.delete(this.baseUrl + '/ProductDetails/'+ id, { headers: new HttpHeaders({'Authorization': "Bearer " + sessionStorage.getItem('access_token')}) })
+  }
+  //!share status of shopping cart
+  setShoppingCartStatus(isValid: boolean){
+    if (isValid) {
+      this.isShoppingCartValid.next({isValid : true});
+
+    } else {
+      this.isShoppingCartValid.next({isValid : false});
+    }
+  }
+  getShoppingCartStatus(){
+    return this.isShoppingCartValid.asObservable();
   }
 }
