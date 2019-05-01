@@ -27,8 +27,9 @@
   </div>
   <div class="row my-5">
   <div class="col-12 col-md-6 col-lg-7 ">
+     <!-- images display -->
     <div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel" *ngIf="prodMediaUrl">
-        <ol class="carousel-indicators" *ngIf="prodMediaUrl > 1">
+        <ol class="carousel-indicators" *ngIf="prodMediaUrl.length > 1">
             <li data-target="#carouselExampleControls" data-slide-to="i" class="active" *ngFor="let img of prodMediaUrl, index as i" [ngClass]="{'active': i == 0}"></li>
           </ol>
         <div class="carousel-inner">
@@ -42,12 +43,15 @@
   </div>
   <div *ngIf="productDetail" class="col-12 col-md-6 col-lg-5 pl-lg-5">
     <h1 class="l3">{{productDetail.title}}<br/></h1>
+    <!-- products with discount -->
     <div class="my-4" *ngIf="productDetail.discount && productDetail.discount>0">
-      <span class="s1 mr-3">Price: ${{productDetail.price - productDetail.discount}}</span>
-      <!-- <s><span class="s1">${{productDetail.price}}</span></s> -->
+      <span class="s1 mr-3" *ngIf="1 > productDetail.productDetail.length">Price: ${{productDetail.price - productDetail.discount}}</span>
+      <span class="s1 mr-3" *ngIf="productDetail.productDetail.length > 1">Starting from: ${{productDetail.price - productDetail.discount}}</span>
     </div>
+    <!-- products without discount -->
     <div class="my-4" *ngIf="!productDetail.discount || productDetail.discount == 0">
-        <span class="s1">${{productDetail.price}}</span>
+        <span class="s1" *ngIf="1 > productDetail.productDetail.length">${{productDetail.price}}</span>
+        <span class="s1 mr-3" *ngIf="productDetail.productDetail.length > 1">Starting from: ${{productDetail.price}}</span>
     </div>
     <br/>
     <h3 class="s2 mb-2" style="white-space: pre-line">{{productDetail.description}}</h3>
