@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, ElementRef, ViewChild } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
-import { ProductService } from '../../../service/product.service'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { ProductService } from '../../../service/product.service';
 
 @Component({
   selector: 'app-galleryDialog',
@@ -8,143 +8,143 @@ import { ProductService } from '../../../service/product.service'
   styleUrls: ['./galleryDialog.component.css']
 })
 export class GalleryDialogComponent implements OnInit {
-  id:number;
-  imageList:any
-  selectedImg:File = null
-  isImageEmpty:boolean = false
-  @ViewChild('imageInput') imageInput : ElementRef
+  id: number;
+  imageList: any;
+  selectedImg: File = null;
+  isImageEmpty = false;
+  @ViewChild('imageInput') imageInput: ElementRef;
   galleryForm = {
-    CustomerName:'',
-    eventtypeId:0,
-    Description:''
-  }
-  status:string
-  displayData:any
-  title:string
-  events:any;
-  editImage:boolean = false
-  isLoading:boolean = false
-  feedbackMessage:string
+    CustomerName: '',
+    eventtypeId: 0,
+    Description: ''
+  };
+  status: string;
+  displayData: any;
+  title: string;
+  events: any;
+  editImage = false;
+  isLoading = false;
+  feedbackMessage: string;
   constructor(
     private dialogRef: MatDialogRef<GalleryDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data,
-    private productService : ProductService
-  ) { 
-    if(data.action=='update'){
+    private productService: ProductService
+  ) {
+    if (data.action === 'update') {
       // fill in gallery form
-      this.displayData = data.data 
-      this.id = data.data['prodjectId']
-      this.galleryForm.CustomerName = data.data['customerName']
-      this.galleryForm.eventtypeId = data.data['eventtype']['typeId']
-      this.galleryForm.Description = data.data['description']
+      this.displayData = data.data;
+      this.id = data.data['prodjectId'];
+      this.galleryForm.CustomerName = data.data['customerName'];
+      this.galleryForm.eventtypeId = data.data['eventtype']['typeId'];
+      this.galleryForm.Description = data.data['description'];
     }
-    this.title = data.title
-    this.status = data.action
+    this.title = data.title;
+    this.status = data.action;
   }
 
   ngOnInit() {
-    this.getEventNames()
+    this.getEventNames();
   }
-  getEventNames(){
+  getEventNames() {
     this.productService.getEventType().subscribe(
-      (res)=>{
-      this.events = res
-    },(error)=>{
-      console.log(error)
+      (res) => {
+      this.events = res;
+    }, (error) => {
+      console.log(error);
     }
-    )
+    );
   }
-  //save changes to galleries
-  save(){
-    this.isLoading = true
-    this.galleryForm.eventtypeId = Number(this.galleryForm.eventtypeId)
-    this.productService.updateGallery(this.id,this.galleryForm).subscribe(
-      (res)=>{
-        this.isLoading = false
-        this.dialogRef.close()
-    },(error) =>{
-      this.isLoading = false
-      console.log(error)
+  // save changes to galleries
+  save() {
+    this.isLoading = true;
+    this.galleryForm.eventtypeId = Number(this.galleryForm.eventtypeId);
+    this.productService.updateGallery(this.id, this.galleryForm).subscribe(
+      (res) => {
+        this.isLoading = false;
+        this.dialogRef.close();
+    }, (error) => {
+      this.isLoading = false;
+      console.log(error);
     }
-    )
+    );
   }
   // create new gallery
-  create(){
-    this.isLoading = true
+  create() {
+    this.isLoading = true;
     this.productService.addGallery(this.galleryForm).subscribe(
-      (res)=>{
-        this.isLoading = false
-      this.dialogRef.close()
-    },(error) =>{
-      this.isLoading = false
-      console.log(error)
+      (res) => {
+        this.isLoading = false;
+      this.dialogRef.close();
+    }, (error) => {
+      this.isLoading = false;
+      console.log(error);
     }
-    )
+    );
   }
   // close this dialog
-  close(){
-    this.dialogRef.close()
+  close() {
+    this.dialogRef.close();
   }
   // select gallery image
-  onFileSelected(e){
-    this.selectedImg =<File>e.target.files[0];
-    if (this.selectedImg == null){
-      this.isImageEmpty = true
-    }else{
-      this.isImageEmpty = false
+  onFileSelected(e) {
+    this.selectedImg = <File>e.target.files[0];
+    if (this.selectedImg == null) {
+      this.isImageEmpty = true;
+    } else {
+      this.isImageEmpty = false;
     }
   }
   // upload gallery image
-  onUpload(){
-    if (this.selectedImg == null){
-      this.isImageEmpty = true
-    }else{
-      this.isImageEmpty = false
-      this.isLoading = true
+  onUpload() {
+    if (this.selectedImg == null) {
+      this.isImageEmpty = true;
+    } else {
+      this.isImageEmpty = false;
+      this.isLoading = true;
       const fd = new FormData();
-      fd.append('image',this.selectedImg, this.selectedImg.name)
-      fd.append('ProjectId',JSON.stringify(this.id))
-      this.productService.addGalleryImg(fd).subscribe((res)=>{
-        this.isLoading = false
-        this.feedbackMessage = res['data']
-        this.getGalleryImages()
+      fd.append('image', this.selectedImg, this.selectedImg.name);
+      fd.append('ProjectId', JSON.stringify(this.id));
+      this.productService.addGalleryImg(fd).subscribe((res) => {
+        this.isLoading = false;
+        this.feedbackMessage = res['data'];
+        this.getGalleryImages();
         this.imageInput.nativeElement.value = null;
-      },(error)=>{
-        this.isLoading = false
-        this.feedbackMessage = "upload failed"
-        console.log(error)
-      })
+      }, (error) => {
+        this.isLoading = false;
+        this.feedbackMessage = 'upload failed'
+        console.log(error);
+      });
     }
   }
   // go to editing gallery image panel
-  goEditImage(){
-    this.editImage = true
-    this.getGalleryImages()
+  goEditImage() {
+    this.editImage = true;
+    this.getGalleryImages();
   }
   // go to editing gallery detail panel
-  goEditProduct(){
-    this.editImage = false
+  goEditProduct() {
+    this.editImage = false;
   }
   // get images of gallery
-  getGalleryImages(){
+  getGalleryImages() {
     this.productService.getGalleryImg(this.id).subscribe(
-      (res)=>{
-        this.imageList = res
-      },(error)=>{
-        console.log(error)
-      })
+      (res) => {
+        this.imageList = res;
+      }, (error) => {
+        console.log(error);
+      });
   }
   // delete image of gallery
-  deleteImage(id:number){
-    this.isLoading = true
+  deleteImage(id: number) {
+    this.isLoading = true;
     this.productService.deleteGalleryImg(id).subscribe(
-      (res)=>{
-        this.isLoading = false
-        this.feedbackMessage = "Delete Successfully"
-        this.getGalleryImages()
-      },(error)=>{
-        this.isLoading = false
-        this.feedbackMessage = "Delete Failed"
-      })
+      (res) => {
+        this.isLoading = false;
+        this.feedbackMessage = 'Delete Successfully'
+        this.getGalleryImages();
+      }, (error) => {
+        this.isLoading = false;
+        this.feedbackMessage = 'Delete Failed'
+      });
   }
 }

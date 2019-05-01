@@ -8,7 +8,7 @@ import { Meta, Title } from '@angular/platform-browser';
   styleUrls: ['./faq.component.css']
 })
 export class FaqComponent implements OnInit {
-  faqdata:any;
+  faqdata: any;
 
   constructor(
     private productService:ProductService,
@@ -27,7 +27,7 @@ export class FaqComponent implements OnInit {
     {
       this.faqdata = res;
     },
-    (error)=>console.log(error));
+    (error) => console.log(error));
   }
 
 }

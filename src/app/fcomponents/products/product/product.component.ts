@@ -19,6 +19,10 @@ export class ProductComponent implements OnInit {
   cartItems: FormArray;
   isInputZero = true;
   isLoading = true;
+  rightCarouselControlPosition: number;
+  @ViewChild ('imageContainer') imageContainer: ElementRef;
+  @ViewChild ('prodImage') prodImage: ElementRef;
+  @ViewChild ('rightControl') rightControl: ElementRef;
 
   constructor(
     private route: ActivatedRoute,
@@ -49,6 +53,12 @@ export class ProductComponent implements OnInit {
     this.setStorage();
     this.detectInputAmount();
     }
+// tslint:disable-next-line: use-life-cycle-interface
+    ngAfterViewChecked() {
+      if (this.imageContainer && this.prodImage && this.rightControl) {
+        this.showElements();
+      }
+    }
 
   // add product descriptions into formArray
   createItem(res) {
@@ -65,7 +75,7 @@ export class ProductComponent implements OnInit {
             Discount: prod.discount,
             AvailableStock: prod.availableStock
           })
-        );  
+        );
       }
     });
   }
@@ -73,7 +83,7 @@ export class ProductComponent implements OnInit {
   validateItem(item): boolean {
     const price = item.price;
     const stock = item.availableStock;
-    if (price == null || price == 0 || price - item.discount < 0) {
+    if (price == null || price === 0 || price - item.discount < 0) {
       return false;
     } else if (stock > item.totalStock || stock <= 0 || stock == null) {
       return false;
@@ -103,14 +113,15 @@ export class ProductComponent implements OnInit {
           Quantity: cartItem.Quantity
         };
         // add product into cart only if amount > 0
-        if (item.Quantity != 0) {
+        if (item.Quantity !== 0) {
           newCartList.push(item);
         }
       });
       this.addToCart(newCartList);
     } else {
       // if no product detail
-      let productPrice = (this.productDetail.discount && this.productDetail.discount > 0) ? this.productDetail.price - this.productDetail.discount : this.productDetail.price;
+      let productPrice = (this.productDetail.discount && this.productDetail.discount > 0) ?
+      this.productDetail.price - this.productDetail.discount : this.productDetail.price;
       const item = {
         ProdId: Number(this.productId),
         Price: this.quantity * productPrice,
@@ -139,7 +150,7 @@ export class ProductComponent implements OnInit {
         if (this.cartList.length > 0) {
           for (let i = 0; i < this.cartList.length; i++) {
             // if product already exists in cartList
-            if (this.cartList[i].Title == item.Title) {
+            if (this.cartList[i].Title === item.Title) {
               a = true;
               this.cartList[i].Quantity += item.Quantity;
               this.cartList[i].Price = this.cartList[i].Quantity * item.Price;
@@ -147,9 +158,9 @@ export class ProductComponent implements OnInit {
             }
           }
           // if product not in cartList
-          if (a == false) {
+          if (a === false) {
             this.cartList.push(item);
-            localStorage.setItem('cartList', JSON.stringify(this.cartList));  
+            localStorage.setItem('cartList', JSON.stringify(this.cartList));
           }
         } else {
           // if nothing in cartList
@@ -164,10 +175,10 @@ export class ProductComponent implements OnInit {
     if (id) {
       this.router.navigate(['/category/', id]);
     }
-    if (type == 'services') {
+    if (type === 'services') {
       this.router.navigate(['/services']);
     }
-    if (type == 'packages') {
+    if (type === 'packages') {
       this.router.navigate(['/packages']);
     }
   }
@@ -176,15 +187,21 @@ export class ProductComponent implements OnInit {
     this.cartForm.valueChanges.subscribe(dt => {
         let a = 0;
         this.cartForm.controls.cartItems['value'].forEach(item => {
-          if (item.Quantity == 0) {
+          if (item.Quantity === 0) {
             a += 1;
           }
         });
-        if (a == this.cartForm.controls.cartItems['value'].length) {
+        if (a === this.cartForm.controls.cartItems['value'].length) {
           this.isInputZero = true;
         } else {
           this.isInputZero = false;
         }
       });
+  }
+  showElements() {
+    const containerWidth = this.imageContainer.nativeElement.clientWidth;
+    const imageWidth = this.prodImage.nativeElement.clientWidth;
+    this.rightCarouselControlPosition = containerWidth - imageWidth;
+    this.rightControl.nativeElement.style.right = this.rightCarouselControlPosition + 'px';
   }
 }

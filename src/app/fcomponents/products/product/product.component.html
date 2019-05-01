@@ -25,6 +25,8 @@
       <h2 class="s2goldbold"> / {{productDetail.title}}</h2>
     </div>
   </div>
+  <!-- TODO: delete this button -->
+  <!-- <button (click)="showElements()">show elements</button> -->
   <div class="row my-5">
   <div class="col-12 col-md-6 col-lg-7 ">
      <!-- images display -->
@@ -32,15 +34,23 @@
         <ol class="carousel-indicators" *ngIf="prodMediaUrl.length > 1">
             <li data-target="#carouselExampleControls" data-slide-to="i" class="active" *ngFor="let img of prodMediaUrl, index as i" [ngClass]="{'active': i == 0}"></li>
           </ol>
-        <div class="carousel-inner">
+        <div #imageContainer class="carousel-inner">
           <div class="carousel-item h490 active" *ngFor="let img of prodMediaUrl, index as i" [ngClass]="{'active': i == 0}">
-              <img src="http://luxedreameventhire.co.nz:5000/{{img.url}}" class="d-block autofix">
+              <img #prodImage src="http://luxedreameventhire.co.nz:5000/{{img.url}}" class="d-block autofix">
           </div>
         </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a #rightControl class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
     </div>
-
     <br>
   </div>
+
   <div *ngIf="productDetail" class="col-12 col-md-6 col-lg-5 pl-lg-5">
     <h1 class="l3">{{productDetail.title}}<br/></h1>
     <!-- products with discount -->

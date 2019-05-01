@@ -9,12 +9,12 @@ import { ProductService } from '../../service/product.service';
   styleUrls: ['./gallery.component.css']
 })
 export class GalleryComponent implements OnInit {
-  gallery:any
-  galleryList:any
-  galleryName:any
+  gallery: any;
+  galleryList: any;
+  galleryName: any;
 
   constructor(
-    private route:ActivatedRoute,
+    private route: ActivatedRoute,
     private meta: Meta,
     private titleService: Title,
     private productService: ProductService,
@@ -22,14 +22,14 @@ export class GalleryComponent implements OnInit {
     this.meta.addTags([
       { name: 'keywords', content: 'Luxedream Hire, Party hire, wedding hire, birthday party hire, event hire, auckland event hire'},
       { name: 'description', content: 'One stop event and party hire and services in Auckland.'},
-    ])
-    
+    ]);
+
     // this.route.params.subscribe(
     //   params => {
     //     this.gallery = this.route.snapshot.params['id'];
     //   }
     // );
-    this.titleService.setTitle('Luxe Dream Auckland | '+ this.gallery +' event hire gallery');
+    this.titleService.setTitle('Luxe Dream Auckland | ' + this.gallery + ' event hire gallery');
   }
 
   ngOnInit() {
@@ -42,28 +42,28 @@ export class GalleryComponent implements OnInit {
         // this.typeName = this.route.snapshot.data['some_data'];
         // this.getCategories()
         this.gallery = this.route.snapshot.params['id'];
-        this.getGalleryName()
-        this.getGalleryType()
+        this.getGalleryName();
+        this.getGalleryType();
       }
     );
   }
 
-  getGalleryType(){
+  getGalleryType() {
     this.productService.getGalleryByType(this.gallery).subscribe(
-      (res)=>{
-        this.galleryList = res
-      },(error)=>{
+      (res) => {
+        this.galleryList = res;
+      }, (error) => {
         console.log(error);
       }
-    )
+    );
   }
-  getGalleryName(){
+  getGalleryName() {
     this.productService.getEventTypeById(this.gallery).subscribe(
-      (res)=>{
-        this.galleryName = res['eventName']
-      },(error)=>{
+      (res) => {
+        this.galleryName = res['eventName'];
+      }, (error) => {
         console.log(error);
       }
-    )
+    );
   }
 }

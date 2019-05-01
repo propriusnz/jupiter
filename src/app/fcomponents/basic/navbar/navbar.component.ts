@@ -1,50 +1,50 @@
-import { Component, OnInit ,HostListener, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit , HostListener, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 import { ProductService } from '../../../service/product.service';
 
 @Component({
-  selector: 'app-navbar', 
+  selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 
 export class NavbarComponent implements OnInit {
-  allCategories:any = [];
-  isBrowser:boolean = false;
+  allCategories: any = [];
+  isBrowser = false;
   // galleriesData = ['Weddings','Birthday', 'Girls Night', 'Corporate Event', 'Baby Shower', 'Luxe Dream Floral Studio']
-  galleriesData:any;
+  galleriesData: any;
   constructor(
     @Inject(PLATFORM_ID) private platformId,
-    private productService : ProductService) 
+    private productService: ProductService)
     {
       if (isPlatformBrowser(this.platformId)) {
-        this.isBrowser = true
+        this.isBrowser = true;
       }
     }
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       // on mobile screen, click navItems and hide navbar
-      $('.navbar-nav>li>a').on('click', function(){
+      $('.navbar-nav>li>a').on('click', function() {
         $('.navbar-collapse').collapse('hide');
-    });  
+    });
     }
-    this.getCategories()
-    this.getGalleryTypes()
+    this.getCategories();
+    this.getGalleryTypes();
   }
   // get all the categories and show on navbar
-  getCategories(){
-    this.productService.indexCategory().subscribe((res)=>{
-      this.allCategories = res
-    },(error)=>{console.log(error)})
+  getCategories() {
+    this.productService.indexCategory().subscribe((res) => {
+      this.allCategories = res;
+    }, (error) => {console.log(error);});
   }
-  getGalleryTypes(){
+  getGalleryTypes() {
     this.productService.getEventType().subscribe(
-      (res)=>{
-        this.galleriesData = res
-      },(error)=>{
-        console.log(error)
+      (res) => {
+        this.galleriesData = res;
+      }, (error) => {
+        console.log(error);
       }
-    )
+    );
   }
 }
