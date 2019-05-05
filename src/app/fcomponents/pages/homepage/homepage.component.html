@@ -53,7 +53,10 @@
                     </div>
                   <div class="s1">{{spe.title}}</div>
                   <div>
-                    <span class="s2 mr-3">Price: ${{spe.price - spe.discount}}</span>
+                    <span class="s2 mr-3" *ngIf="spe.productDetail.length==0 && spe.discount == null">Price: ${{spe.price}}</span>
+                    <span class="s2 mr-3" *ngIf="spe.productDetail.length==0 && spe.discount >= 0">Price: ${{spe.price - spe.discount}}</span>
+                    <span class="s2 mr-3" *ngIf="spe.productDetail.length>0 && spe.discount == null" >Starting from: $ {{spe.price}}</span>
+                    <span class="s2 mr-3" *ngIf="spe.productDetail.length>0 && spe.discount >= 0" >Starting from: $ {{spe.price - spe.discount}}</span>
                     <!-- <s>${{spe.price}}</s> -->
                   </div>
                 </div><!--end col-3-->
@@ -68,8 +71,11 @@
                   </div>
                   <div class="s1">{{spe.title}}</div>
                   <div>
-                    <span class="s2 mr-3">Price: ${{spe.price - spe.discount}}</span>
-                    <!-- <s>${{spe.price}}</s> -->
+                      <span class="s2 mr-3" *ngIf="spe.productDetail.length==0 && spe.discount == null">Price: ${{spe.price}}</span>
+                      <span class="s2 mr-3" *ngIf="spe.productDetail.length==0 && spe.discount >= 0">Price: ${{spe.price - spe.discount}}</span>
+                      <span class="s2 mr-3" *ngIf="spe.productDetail.length>0 && spe.discount == null" >Starting from: $ {{spe.price}}</span>
+                      <span class="s2 mr-3" *ngIf="spe.productDetail.length>0 && spe.discount >= 0" >Starting from: $ {{spe.price - spe.discount}}</span>
+                      <!-- <s>${{spe.price}}</s> -->
                   </div>
                 </div><!--end col-3-->
               </div><!--end row-->
