@@ -51,7 +51,7 @@
     <br>
   </div>
 
-  <div *ngIf="productDetail" class="col-12 col-md-6 col-lg-5 pl-lg-5">
+  <div style="padding:0px;" *ngIf="productDetail" class="col-12 col-md-6 col-lg-5 ">
     <h1 class="l3">{{productDetail.title}}<br/></h1>
     <!-- products with discount -->
     <div class="my-4" *ngIf="productDetail.discount && productDetail.discount>0">
@@ -68,15 +68,15 @@
     <br/>
 
     <div  *ngIf="productDetail['productDetail'] && productDetail['productDetail'].length!=0 && cartForm.controls.cartItems['controls'].length != 0">
-      <div class="s2"><b>Select specifications</b></div>
-      <form [formGroup]="cartForm">
-        <div  formArrayName="cartItems">
-          <div style="margin-left:202px;" class="s2">Quantity</div>
-          <div *ngFor="let detail of cartForm.controls.cartItems.controls, index as i">
-            <div class="s2" [formGroupName]="i">
-              <input style="background-color:white; border-width: 0px; width:144px;" type="text" formControlName="Title" [attr.disabled]="true">
-              $<input style="background-color:white; border-width: 0px; width:49px;" type="text" formControlName="Price" [attr.disabled]="true">
-              <input style="width:50px; height:22px;" type="number" min="0" formControlName="Quantity" placeholder="Quantity">
+      <div class="s2"><b>Select specifications</b></div><br>
+      <form  [formGroup]="cartForm">
+        <div class="row"  style="padding:0px;"  formArrayName="cartItems">
+          <!-- <div style="margin-left:152px; font-size:13px;" class="s2">Quantity</div> -->
+          <div style="font-size:16px; padding-right:0px; " class="col-md-6 col-sm-6 col-xs-12 s2" *ngFor="let detail of cartForm.controls.cartItems.controls, index as i">
+            <div [formGroupName]="i">
+              <input style="background-color:white; border-width: 0px; width:90px;" type="text" formControlName="Title" [attr.disabled]="true">
+              $<input style="background-color:white; border-width: 0px; width:42px;" type="text" formControlName="Price" [attr.disabled]="true">
+              <input style="width:40px; height:20px; font-size:14px; border:none; border-bottom:1px solid #919191" type="number" min="0" formControlName="Quantity" placeholder="Quantity">
               <div *ngIf="cartForm.controls.cartItems.controls[i].controls.Quantity.invalid" class="invalid_feedback" style="padding-bottom:10px;" role="alert" >Only {{detail.value.AvailableStock}} are available. Please contact us if you need more!</div>
             </div>
           </div>

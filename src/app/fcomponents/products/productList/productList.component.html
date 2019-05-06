@@ -49,8 +49,8 @@
         <div class="col-12">
           <span class="s2 mr-3" *ngIf="product.productDetail.length==0 && product.discount == null">Price: ${{product.price}}</span>
           <span class="s2 mr-3" *ngIf="product.productDetail.length==0 && product.discount >= 0">Price: ${{product.price - product.discount}}</span>
-          <span class="s2 mr-3" *ngIf="product.productDetail.length>0 && product.discount == null" >Starting from: $ {{product.price}}</span>
-          <span class="s2 mr-3" *ngIf="product.productDetail.length>0 && product.discount >= 0" >Starting from: $ {{product.price - product.discount}}</span>
+          <span class="s2 mr-3" *ngIf="product.productDetail.length>0 && product.discount == null" >Starting from: ${{product.price}}</span>
+          <span class="s2 mr-3" *ngIf="product.productDetail.length>0 && product.discount >= 0" >Starting from: ${{product.price - product.discount}}</span>
           <!-- <s>${{product.price}}</s> -->
         </div>
         <!-- <div class="s2 col-4" *ngIf="!product.discount || product.discount == 0">Price: ${{product.price}}</div> -->
