@@ -58,8 +58,8 @@ export class ProductDialogComponent implements OnInit {
     // initial formBuilder
     private formBuilder: FormBuilder
   ) {
-    if (data.action == 'update') {
-      this.displayData = data.data; 
+    if (data.action === 'update') {
+      this.displayData = data.data;
       this.id = data.data['prodId'];
       this.productForm.title = data.data['title'];
       this.productForm.subTitle = data.data['subTitle'];
@@ -84,7 +84,7 @@ export class ProductDialogComponent implements OnInit {
     this.detailForm = this.formBuilder.group({
       detailItems: this.formBuilder.array([])
     });
-    this.getDetails()
+    this.getDetails();
 
     // Detect array changes
     this.detailForm.controls.detailItems.valueChanges.subscribe(
@@ -108,7 +108,7 @@ export class ProductDialogComponent implements OnInit {
     }, (error) => {
       console.log(error);
     });
-    if (this.isDetailFormChanged == true) {
+    if (this.isDetailFormChanged === true) {
       this.updateDetails();
     }
   }

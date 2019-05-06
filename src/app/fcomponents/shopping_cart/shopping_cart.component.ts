@@ -20,6 +20,9 @@ export class Shopping_cartComponent implements OnInit {
   ngOnInit() {
     // get the current shopping cart
     this.prodsInCart = JSON.parse(localStorage.getItem('cartList') || '[]');
+    if (this.prodsInCart == null || this.prodsInCart.length === 0) {
+      this.productService.setShoppingCartStatus(false);
+    }
     // get the image of product
     this.prodsInCart.forEach(element => {
       this.productService.getImg(element.ProdId).subscribe((res => {
@@ -33,11 +36,14 @@ export class Shopping_cartComponent implements OnInit {
   // delete items of shopping cart
   deleteCart(id) {
     this.prodsInCart.splice(id, 1);
-      localStorage.setItem('cartList', JSON.stringify(this.prodsInCart));
+    localStorage.setItem('cartList', JSON.stringify(this.prodsInCart));
+    if (this.prodsInCart.length === 0) {
+      this.productService.setShoppingCartStatus(false);
+    }
     this.price();
   }
   // calculate total price of shopping cart
-  price(){
+  price() {
     this.totalPrice = 0;
     this.prodsInCart.forEach(prod => {
       this.totalPrice += prod.Price;
@@ -72,7 +78,7 @@ export class Shopping_cartComponent implements OnInit {
         errorAmount += 1;
       }
     }
-    if (errorAmount === 3) {
+    if (errorAmount === this.prodsInCart.length) {
       // all inputs are valid, user can submit shopping cart
       this.productService.setShoppingCartStatus(true);
     } else {
