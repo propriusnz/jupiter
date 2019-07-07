@@ -1,6 +1,6 @@
 import { LOCAL_STORAGE } from '@ng-toolkit/universal';
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
-import {HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment.prod';
 import { isPlatformBrowser } from '@angular/common';
 import { ReturnStatement } from '@angular/compiler';
