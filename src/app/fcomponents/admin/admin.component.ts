@@ -399,7 +399,7 @@ export class AdminComponent implements OnInit {
           this.feedbackMessage = 'Delete Failed';
           console.log(error);
         }
-      );  
+      );
     }
   }
 }
