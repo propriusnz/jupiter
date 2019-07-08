@@ -6,36 +6,14 @@
     </div>
 
     <!-- Gallery List -->
-    <div class="row j1">
-      <div class="col-12 col-md-6 pb-30">
-        <!-- Weddings -->
-        <a [routerLink]="['/galleries/', 1]">
-          <div class="gallaryBlocks" style="background-image:url('../../../assets/gallery/gallery2.jpg');">Weddings</div>
-        </a></div>
-        <!-- Birthday -->
-      <div class="col-12 col-md-6 pb-30"><a style="color:white " [routerLink]="['/galleries/', 2]">
-          <div class="gallaryBlocks" style="background-image:url('../../../assets/gallery/gallery1.jpg');">Birthday
-            Party</div>
-        </a></div>
-        <!-- Girls Night -->
-      <div class="col-12 col-md-6 pb-30"><a [routerLink]="['/galleries/', 3]">
-          <div class="gallaryBlocks" style="background-image:url('../../../assets/gallery/gallery3.jpg');">Girls Night</div>
-        </a></div>
-        <!-- Corporate Event -->
-      <div class="col-12 col-md-6 pb-30"><a [routerLink]="['/galleries/', 4]">
-          <div class="gallaryBlocks" style="background-image:url('../../../assets/gallery/gallery4.jpg');">Corporate
-            Event</div>
-        </a></div>
-        <!-- Baby Shower -->
-      <div class="col-12 col-md-6 pb-30"><a [routerLink]="['/galleries/', 5]">
-          <div class="gallaryBlocks" style="background-image:url('../../../assets/gallery/babyshower.jpg');">Baby
-            Shower</div>
-        </a></div>
-      <!-- Floral Studio -->
-      <div class="col-12 col-md-6 pb-30"><a [routerLink]="['/galleries/', 6]">
-          <div class="gallaryBlocks" style="background-image:url('../../../assets/gallery/flower.jpg');">Floral Studio</div>
-        </a></div>
-
+    <div class="row j1" *ngIf="eventTypeList">
+      <div *ngFor="let event of eventTypeList" class="col-12 col-md-6 pb-30">
+        <a [routerLink] = "['/galleries/', event.typeId]">
+          <div class="gallaryBlocks" [ngStyle]="{'background-image': 'url('+ 'http://localhost:5000/' + event.eventTypeImage + ')'}">
+            {{event.eventName}}
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 </div>

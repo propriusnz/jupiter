@@ -40,8 +40,22 @@ td{
 .table td{
     padding: 0.4rem;
 }
-
 .eventTypeImage {
     height: 100px;
     width: 100px;
 }
+.eventTypeImageEditor{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+.eventTypeImageEditorBlocks{
+    width: 50%;
+}
+/* .eventTypeImageEditorTools{
+    display: none;
+}
+.eventTypeImageEditor:hover > .eventTypeImageEditorTools{
+    display: block;
+} */
