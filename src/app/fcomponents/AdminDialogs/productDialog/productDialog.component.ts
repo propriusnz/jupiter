@@ -177,11 +177,11 @@ export class ProductDialogComponent implements OnInit {
     this.productService.deleteImg(id).subscribe(
       (res) => {
         this.isLoading = false;
-        this.feedbackMessage = 'Delete Successfully'
+        this.feedbackMessage = 'Delete Successfully';
         this.getProductImages();
       }, (error) => {
         this.isLoading = false;
-        this.feedbackMessage = 'Delete Failed'
+        this.feedbackMessage = 'Delete Failed';
       });
   }
   // go to the panel of editing images of product

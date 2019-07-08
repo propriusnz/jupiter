@@ -170,6 +170,15 @@
               </button>
             </div>
         </div>
+        <div class="row" *ngIf="allEventTypes">
+          <div *ngFor="let event of allEventTypes" class="col-2">
+            <span>{{event.eventName}}</span>
+            <img src="http://localhost:5000/{{event.eventTypeImage}}" class="eventTypeImage">
+            <input #eventImageInput type="file" (change)="onEventTypeImageSelected($event)">
+            <button type="button" class="btn btn-outline-info btn-sm" (click)="onUploadEventTypeImage(event)" [disabled] = "isLoading">upload</button>
+          </div>
+        </div>
+
         <table class="table">
           <thead>
             <tr class="table-secondary">

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, ElementRef, ViewChild } from '@angular/core';
 import { ProductService } from '../../service/product.service';
 import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
@@ -25,7 +25,12 @@ export class AdminComponent implements OnInit {
   categoryForm: FormGroup;
   categoryItems: FormArray;
   isLoadingCategory = false;
-  feedbackMessage= '';
+  feedbackMessage = '';
+  allEventTypes: any;
+  isEventTypeImageEmpty: boolean;
+
+  @ViewChild('eventImageInput') eventImageInput: ElementRef;
+
   constructor(
     @Inject(PLATFORM_ID) private platformId,
     private router: Router,
@@ -82,6 +87,15 @@ export class AdminComponent implements OnInit {
             console.log(error);
             this.isLoading = false; }
         );
+        this.productService.getEventType().subscribe(
+          (res) => {
+            this.allEventTypes = res;
+            console.log( this.allEventTypes );
+          },
+          (error) => {
+            console.log(error);
+          }
+        )
         break;
       }
       // show faqs
@@ -402,4 +416,35 @@ export class AdminComponent implements OnInit {
       );
     }
   }
+  onEventTypeImageSelected(e) {
+    this.selectedImg = <File>e.target.files[0];
+    if (this.selectedImg == null) {
+      this.isEventTypeImageEmpty = true;
+    } else {
+      this.isEventTypeImageEmpty = false;
+    }
+  }
+  onUploadEventTypeImage(eventDetail) {
+    if (this.selectedImg == null) {
+      this.isEventTypeImageEmpty = true;
+    } else {
+      this.isEventTypeImageEmpty = false;
+      this.isLoading = true;
+      const fd = new FormData();
+      fd.append('FormFile', this.selectedImg, this.selectedImg.name);
+      fd.append('Id', JSON.stringify(eventDetail.typeId));
+      this.productService.updateEventTypeImage(fd).subscribe((res) => {
+        this.isLoading = false;
+        this.feedbackMessage = res['data'];
+        this.getData();
+        // this.eventImageInput.nativeElement.value = null;
+      }, (error) => {
+        this.isLoading = false;
+        this.feedbackMessage = 'upload failed';
+        console.log(error);
+      });
+    }
+
+  }
+
 }
