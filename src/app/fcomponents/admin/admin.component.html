@@ -172,21 +172,21 @@
         </div>
 
         <div class="accordion mb-4" id="accordionExample">
-          <div class="card">
-            <div class="card-header" id="headingOne">
-              <h2 class="mb-0">
-                <button class="btn dropdown-toggle" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                  Edit images of event types
+          <div class="card eventTypeImageToggle">
+            <div class = "pt-3" id="headingOne">
+              <!-- <h2 class = "mb-0"> -->
+                <button class="btn dropdown-toggle eventTypeImageToggle pl-0" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                  <b>Edit images of event types</b>
                 </button>
-              </h2>
+              <!-- </h2> -->
             </div>
         
             <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionExample">
               <div class="card-body">
                 <div *ngIf="allEventTypes" class="eventTypeImageEditor">
-                  <div *ngFor="let event of allEventTypes" class="eventTypeImageEditorBlocks">
-                    <span>{{event.eventName}}</span><br>
-                    <img *ngIf="event.eventName" src="http://luxedreameventhire.co.nz:5000/{{event.eventTypeImage}}" class="eventTypeImage">
+                  <div *ngFor="let event of allEventTypes" class="eventTypeImageEditorBlocks pt-2">
+                    <span class="s2">{{event.eventName}}</span><br>
+                    <img *ngIf="event.eventName" src="http://luxedreameventhire.co.nz:5000/{{event.eventTypeImage}}" class="eventTypeImage mr-2">
                     <input #eventImageInput type="file" (change)="onEventTypeImageSelected($event)" class="eventTypeImageEditorTools">
                     <button type="button" class="btn btn-outline-info btn-sm eventTypeImageEditorTools" (click)="onUploadEventTypeImage(event)" [disabled] = "isLoading">upload</button>
                   </div>

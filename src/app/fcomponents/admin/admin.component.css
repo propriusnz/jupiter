@@ -53,9 +53,10 @@ td{
 .eventTypeImageEditorBlocks{
     width: 50%;
 }
-/* .eventTypeImageEditorTools{
-    display: none;
-}
-.eventTypeImageEditor:hover > .eventTypeImageEditorTools{
-    display: block;
-} */
+.btn.eventTypeImageToggle:focus,.btn.eventTypeImageToggle:active {
+    outline: none !important;
+    box-shadow: none;
+ }
+ .card.eventTypeImageToggle {
+     border:0px;
+ }
