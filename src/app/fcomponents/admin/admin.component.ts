@@ -90,7 +90,6 @@ export class AdminComponent implements OnInit {
         this.productService.getEventType().subscribe(
           (res) => {
             this.allEventTypes = res;
-            console.log( this.allEventTypes );
           },
           (error) => {
             console.log(error);

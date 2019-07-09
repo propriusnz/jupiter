@@ -9,7 +9,7 @@
     <div class="row j1" *ngIf="eventTypeList">
       <div *ngFor="let event of eventTypeList" class="col-12 col-md-6 pb-30">
         <a [routerLink] = "['/galleries/', event.typeId]">
-          <div class="gallaryBlocks" [ngStyle]="{'background-image': 'url('+ 'http://localhost:5000/' + event.eventTypeImage + ')'}">
+          <div class="gallaryBlocks" [ngStyle]="{'background-image': 'url('+ 'http://luxedreameventhire.co.nz:5000/' + event.eventTypeImage + ')'}">
             {{event.eventName}}
           </div>
         </a>
