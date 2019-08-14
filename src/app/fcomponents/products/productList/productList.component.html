@@ -39,7 +39,7 @@
       <div>
           <a [routerLink] = "['/product/',product.prodId]">
             <div class="h490" *ngIf="product.productMedia[0]">
-            <img src="http://luxedreameventhire.co.nz:5000/{{product.productMedia[0].url}}" class="d-block autofix">
+            <img src="{{baseImageLink}}{{product.productMedia[0].url}}" class="d-block autofix">
             </div>
           </a>
       </div>

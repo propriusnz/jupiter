@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
 import { ProductService } from '../../service/product.service';
 
+import { environment } from '../../../environments/environment.prod';
+
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
@@ -13,6 +15,7 @@ export class GalleryComponent implements OnInit {
   galleryList: any;
   galleryName: any;
 
+  baseImageLink = environment.baseLink;
   constructor(
     private route: ActivatedRoute,
     private meta: Meta,

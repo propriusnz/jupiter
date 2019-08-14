@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../service/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
+import { environment } from '../../../../environments/environment.prod';
 
 @Component({
   selector: 'app-productList',
@@ -18,6 +19,7 @@ export class ProductListComponent implements OnInit {
   isLoading = false;
   groupedProducts: any = [];
   isProductsGrouped = false;
+  baseImageLink = environment.baseLink;
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
@@ -26,8 +28,8 @@ export class ProductListComponent implements OnInit {
   ) {
     // Following section in constructor for SEO Purposes
     this.meta.addTags([
-      { name: 'keywords', content: 'Luxedream Hire, Party hire, wedding hire, birthday party hire, event hire, auckland event hire'},
-      { name: 'description', content: 'One stop event and party hire and services in Auckland.'},
+      { name: 'keywords', content: 'Luxedream Hire, Party hire, wedding hire, birthday party hire, event hire, auckland event hire' },
+      { name: 'description', content: 'One stop event and party hire and services in Auckland.' },
     ]);
     this.titleService.setTitle('Luxe Dream Auckland Event and Party Hire | Hire');
   }
@@ -92,7 +94,7 @@ export class ProductListComponent implements OnInit {
     if (this.typeName == 'package') {
       this.sortByType(3);
     }
-      // this.selectedCate = "All Products"
+    // this.selectedCate = "All Products"
   }
 
   // sort product by type => Hire | Service | Package
@@ -109,8 +111,8 @@ export class ProductListComponent implements OnInit {
           this.groupProducts();
         }
       },
-      (err) => {console.log(err), this.errorMessage = 'Server fault', this.isLoading = false;}
-      );
+      (err) => { console.log(err), this.errorMessage = 'Server fault', this.isLoading = false; }
+    );
   }
   // sort product by category
   changeCate(id, e?) {
@@ -134,7 +136,7 @@ export class ProductListComponent implements OnInit {
   getCategories() {
     this.productService.indexCategory().subscribe((res) => {
       this.allCategories = res;
-    }, (error) => {console.log(error), this.errorMessage = 'Server fault';});
+    }, (error) => { console.log(error), this.errorMessage = 'Server fault'; });
   }
   // pagination
   groupProducts() {

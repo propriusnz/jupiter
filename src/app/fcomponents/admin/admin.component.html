@@ -186,7 +186,7 @@
                 <div *ngIf="allEventTypes" class="eventTypeImageEditor">
                   <div *ngFor="let event of allEventTypes" class="eventTypeImageEditorBlocks pt-2">
                     <span class="s2">{{event.eventName}}</span><br>
-                    <img *ngIf="event.eventName" src="http://luxedreameventhire.co.nz:5000/{{event.eventTypeImage}}" class="eventTypeImage mr-2">
+                    <img *ngIf="event.eventName" src="{{baseImageLink}}{{event.eventTypeImage}}" class="eventTypeImage mr-2">
                     <input #eventImageInput type="file" (change)="onEventTypeImageSelected($event)" class="eventTypeImageEditorTools">
                     <button type="button" class="btn btn-outline-info btn-sm eventTypeImageEditorTools" (click)="onUploadEventTypeImage(event)" [disabled] = "isLoading">upload</button>
                   </div>
