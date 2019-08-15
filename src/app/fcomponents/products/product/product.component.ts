@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef, Inject, PLATFORM_ID, SimpleCh
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {ProductService} from '../../../service/product.service';
 import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { environment } from '../../../../environments/environment.prod';
+
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -20,6 +22,7 @@ export class ProductComponent implements OnInit {
   isInputZero = true;
   isLoading = true;
   rightCarouselControlPosition: number;
+  baseImageLink = environment.baseLink;
   @ViewChild ('imageContainer') imageContainer: ElementRef;
   @ViewChild ('prodImage') prodImage: ElementRef;
   @ViewChild ('rightControl') rightControl: ElementRef;

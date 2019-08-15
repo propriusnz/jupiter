@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { ProductService } from '../../../service/product.service';
+import {environment} from '../../../../environments/environment.prod';
 
 @Component({
   selector: 'app-productDialog',
@@ -22,6 +23,8 @@ export class ProductDialogComponent implements OnInit {
   detailList = [];
   detailForm: FormGroup;
   detailItems: FormArray;
+
+  baseImageUrl = environment.baseLink;
 
   @ViewChild('imageInput') imageInput: ElementRef;
   productForm: {

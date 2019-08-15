@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild, Inject, PLATFORM_ID, HostList
 import { ProductService } from '../../../service/product.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
-
+import { environment } from '../../../../environments/environment.prod';
 
 @Component({
   selector: 'app-homepage',
@@ -16,6 +16,7 @@ export class HomepageComponent implements OnInit {
   groupedSpecials: any = [];
   isBrowser: Boolean = false;
   windowResize: number;
+  baseImageLink = environment.baseLink;
   @ViewChild('bgat') bgat: ElementRef;
   @ViewChild('list') list: ElementRef;
   @HostListener('window:resize', ['$event'])
@@ -36,8 +37,14 @@ export class HomepageComponent implements OnInit {
       this.windowResize = window.innerWidth;
     }
     this.meta.addTags([
-      { name: 'keywords', content: 'Luxedream Hire, Party hire, wedding hire, birthday party hire, event hire, auckland event hire' },
-      { name: 'description', content: 'One stop event and party hire and services in Auckland. #1 best event hire company in Auckland, we work for weddings, birthday parties, bachelor parties, and all sort of events.' },
+      {
+        name: 'keywords',
+        content: 'Luxedream Hire, Party hire, wedding hire, birthday party hire, event hire, auckland event hire'
+      },
+      {
+        name: 'description',
+        content: 'One stop event and party hire and services in Auckland. #1 best event hire company in Auckland, we work for weddings, birthday parties, bachelor parties, and all sort of events.'
+      },
     ]);
     this.titleService.setTitle('Luxe Dream Auckland Event and Party Hire | Home');
   }

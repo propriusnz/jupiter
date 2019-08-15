@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ProductService } from '../../service/product.service';
+import { environment } from '../../../environments/environment.prod';
 
 @Component({
   selector: 'app-shopping_cart',
@@ -12,6 +13,7 @@ export class Shopping_cartComponent implements OnInit {
   productDetail: any;
   stockUnavailable = false;
   userInputQuantityArray = [];
+  baseImageLink = environment.baseLink;
   @ViewChild('quantityInput') quantityInput: ElementRef;
   constructor(
     private productService: ProductService

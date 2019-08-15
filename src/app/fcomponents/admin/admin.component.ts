@@ -8,6 +8,7 @@ import { GalleryDialogComponent } from '../AdminDialogs/galleryDialog/galleryDia
 import { ProductDialogComponent } from '../AdminDialogs/productDialog/productDialog.component';
 import { CartDialogComponent } from '../AdminDialogs/CartDialog/CartDialog.component';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
+import { environment } from '../../../environments/environment.prod';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -28,6 +29,7 @@ export class AdminComponent implements OnInit {
   feedbackMessage = '';
   allEventTypes: any;
   isEventTypeImageEmpty: boolean;
+  baseImageLink = environment.baseLink;
 
   @ViewChild('eventImageInput') eventImageInput: ElementRef;
 
