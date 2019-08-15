@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ProductService } from '../../../service/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
@@ -10,6 +10,7 @@ import { environment } from '../../../../environments/environment.prod';
   styleUrls: ['./productList.component.css']
 })
 export class ProductListComponent implements OnInit {
+  @ViewChild("categorySelection") categorySelectionElement: ElementRef;
   allProducts: any = [];
   allCategories: any = [];
   typeName: any;
@@ -20,7 +21,7 @@ export class ProductListComponent implements OnInit {
   groupedProducts: any = [];
   isProductsGrouped = false;
   baseImageLink = environment.baseLink;
-  currentPageNumber: number;
+  currentPageNumber = 0;
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
@@ -148,9 +149,9 @@ export class ProductListComponent implements OnInit {
     }
     this.allProducts = this.groupedProducts[0];
   }
-  changePage(page: number) {
+  changePage(page: number): void {
     this.currentPageNumber = page;
     this.allProducts = this.groupedProducts[page];
-    window.scrollTo(0, 0);
+    this.categorySelectionElement.nativeElement.scrollIntoView();
   }
 }

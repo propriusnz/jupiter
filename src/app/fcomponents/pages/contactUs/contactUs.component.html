@@ -1,5 +1,6 @@
 <div class="container-fluid">
-  <div class="row">  <iframe class="mapImg" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7880.475705276425!2d174.73684919358607!3d-36.77417950167517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6d0d399888fe1c79%3A0x939eff2509a7b5b9!2s19+Hillside+Rd%2C+Wairau+Valley%2C+Auckland+0627!5e0!3m2!1sen!2snz!4v1553138191305" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+  <div class="row">
+    <iframe class="mapImg" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3199.5255137844238!2d174.67843331528667!3d-36.68590787997223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6d0d3c986cb185ff%3A0x756deeec928f013c!2s21+Ashwood+Ave%2C+Dairy+Flat+0792!5e0!3m2!1sen!2snz!4v1565848678890!5m2!1sen!2snz" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
   </div>
 </div>
 
@@ -66,7 +67,9 @@
                   [ngClass]="{'is-invalid':PhoneNumber.errors?.required && PhoneNumber.touched}" [(ngModel)]="contactFrom.PhoneNumber" #PhoneNumber="ngModel">
                </div>
                <!-- company -->
-              <div><input class="form-control s2" type="text" placeholder="Company (optional)"  [(ngModel)]="contactFrom.company" name="company"></div>
+              <div>
+                <input class="form-control s2" type="text" placeholder="Company (optional)"  [(ngModel)]="contactFrom.company" name="company">
+              </div>
                <!-- date of event -->
                <div>
                <mat-form-field style="width:100%">
@@ -83,7 +86,6 @@
                 <input class="form-control s2" type="LocationOfEvent" required name="LocationOfEvent" placeholder="Location of event *"
                 [ngClass]="{'is-invalid':LocationOfEvent.errors?.required && LocationOfEvent.touched}" [(ngModel)]="contactFrom.LocationOfEvent" #LocationOfEvent="ngModel">
              </div>
-
 
           </div>
 
@@ -107,9 +109,7 @@
                     <option value="5">Bachelor & Bachelorette Party</option>
                     <option value="6">Corporate Event</option>
                     <option value="7">Other Event</option>
-
-
-                  </select>
+                </select>
               </div>             
             <!-- message -->
             <div class="form-group">  
@@ -120,7 +120,7 @@
                 <textarea class="form-control s2" rows="5" type="message" required minlength="2" name="message" placeholder="Message *"
                 [ngClass]="{'is-invalid':message.errors?.required && message.touched}" [(ngModel)]="contactFrom.message" #message="ngModel">
                 </textarea>
-              </div>
+            </div>
               <div style="color: rgb(248, 82, 82)">{{feedback_message}}</div>
               <!-- Sending Email -->
               <div *ngIf="isSendingEmail">

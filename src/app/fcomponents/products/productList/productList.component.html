@@ -2,14 +2,20 @@
   <div class="px-0 px-md-5 mx-2">
 
     <!-- title -->
-    <div class="row py-2 py-md-3">
+    <!-- <div class="row py-2 py-md-3">
         <div class="col-12 mb-2 l1 text-center" *ngIf="typeName == 'hire'">  Our Hires</div>
         <div class="col-12 mb-2 l1 text-center" *ngIf="typeName == 'service'">  Our Services</div>
         <div class="col-12 mb-2 l1 text-center" *ngIf="typeName == 'package'">  Our Packages</div>
+    </div> -->
+
+    <div class="row">
+        <div class="col-12 my-2 my-md-5 l1 text-center" *ngIf="typeName == 'hire' || typeName == 'category'">  Our Hires</div>
+        <div class="col-12 my-2 my-md-5 l1 text-center" *ngIf="typeName == 'service'">  Our Services</div>
+        <div class="col-12 my-2 my-md-5 l1 text-center" *ngIf="typeName == 'package'">  Our Packages</div>
     </div>
 
     <!-- categories and search -->
-    <div *ngIf="typeName == 'hire' || typeName == 'category'" class="row justify-content-center">
+    <div *ngIf="typeName == 'hire' || typeName == 'category'" class="row justify-content-center" #categorySelection>
         <div class="s1 border-bottom" style="padding:6px 0;">Categories:</div>
         <div class="col-8 col-md-4 p-0 border-bottom">
           <div class="dropdown">
@@ -18,7 +24,11 @@
             <div class="dropdown-menu w-100 text-left s1" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" routerLink="/hire">All Products</a>
               <!-- <div *ngFor="let category of allCategories"> <a class="dropdown-item" (click)="changeCate(category.categoryId,$event)">{{category.categoryName}}</a></div> -->
-              <div *ngFor="let category of allCategories"> <a class="dropdown-item" [routerLink]="[ '/category/', category.categoryId ]"><h1 class="s1">{{category.categoryName}}</h1></a> </div>
+              <div *ngFor="let category of allCategories">
+                <a class="dropdown-item" [routerLink]="[ '/category/', category.categoryId ]">
+                  <h1 class="s1">{{category.categoryName}}</h1>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -44,7 +54,9 @@
           </a>
       </div>
 
-      <h1 style="margin:0px; line-height: 24px; margin-block-start:0px;"><a [routerLink] = "['/product/',product.prodId]" class="m1">{{product.title}}</a></h1>
+      <h1 style="margin:0px; line-height: 24px; margin-block-start:0px;">
+        <a [routerLink] = "['/product/',product.prodId]" class="m1">{{product.title}}</a>
+      </h1>
       <div class="row">
         <div class="col-12">
           <span class="s2 mr-3" *ngIf="product.productDetail.length==0 && product.discount == null">Price: ${{product.price}}</span>
@@ -61,19 +73,17 @@
   <!-- !pagination -->
     <nav aria-label="Page navigation example" *ngIf="isProductsGrouped && groupedProducts">
       <ul class="pagination justify-content-center">
-        <!-- <li class="page-item"><a class="page-link" href="#">Previous</a></li> -->
         <li class="page-item gold"
           *ngFor="let prodGroup of groupedProducts, index as i"
           [ngClass]="{'active': i=== currentPageNumber}"
           (click)="changePage(i)">
-          <a class="page-link" href="javascript:;" [routerLink]=" ['./']">{{i+1}}
+          <a class="page-link">{{i+1}}
             <span class="sr-only">(current)</span>
           </a>
         </li>
-        <!-- <li class="page-item"><a class="page-link" href="#">Next</a></li> -->
       </ul>
     </nav>
   
 
-</div>
+  </div>
 </div>
