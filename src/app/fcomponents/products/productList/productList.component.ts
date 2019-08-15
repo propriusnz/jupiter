@@ -20,6 +20,7 @@ export class ProductListComponent implements OnInit {
   groupedProducts: any = [];
   isProductsGrouped = false;
   baseImageLink = environment.baseLink;
+  currentPageNumber: number;
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
@@ -148,6 +149,8 @@ export class ProductListComponent implements OnInit {
     this.allProducts = this.groupedProducts[0];
   }
   changePage(page: number) {
+    this.currentPageNumber = page;
     this.allProducts = this.groupedProducts[page];
+    window.scrollTo(0, 0);
   }
 }

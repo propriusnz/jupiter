@@ -62,7 +62,14 @@
     <nav aria-label="Page navigation example" *ngIf="isProductsGrouped && groupedProducts">
       <ul class="pagination justify-content-center">
         <!-- <li class="page-item"><a class="page-link" href="#">Previous</a></li> -->
-        <li class="page-item gold" *ngFor="let prodGroup of groupedProducts, index as i" (click)="changePage(i)"><a class="page-link">{{i+1}}<span class="sr-only">(current)</span></a></li>
+        <li class="page-item gold"
+          *ngFor="let prodGroup of groupedProducts, index as i"
+          [ngClass]="{'active': i=== currentPageNumber}"
+          (click)="changePage(i)">
+          <a class="page-link" href="javascript:;" [routerLink]=" ['./']">{{i+1}}
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
         <!-- <li class="page-item"><a class="page-link" href="#">Next</a></li> -->
       </ul>
     </nav>

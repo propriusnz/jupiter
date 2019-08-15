@@ -1,10 +1,3 @@
-/* .productsBackImg{
-    background-image: url("https://www.thebigletterco.com.au/wp-content/uploads/2013/05/products-banner-page.jpg"); 
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 50% -290px;
-    background-position: center center;
-} */
 a{
     text-decoration: none;
     color: inherit;
@@ -65,4 +58,16 @@ a.dropdown-item:hover{
 	width: 100%;
     height: 100%;
     object-fit: cover;
+}
+.page-link:hover{
+    color: #c48f45;
+}
+.page-link:focus{
+    box-shadow: 0 0 0 0;
+}
+
+.page-item.active .page-link {
+    background-color: #c48f45;
+    color: white;
+    border-color: transparent;
 }
