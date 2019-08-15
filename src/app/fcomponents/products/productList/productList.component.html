@@ -62,7 +62,7 @@
       </div>
     </div>
   </div>
-  <div class="row py-3" *ngIf="allProducts.length === 0">
+  <div class="row py-3" *ngIf="!isLoading && allProducts.length === 0">
     <div class="col-12 s2 text-center">Coming soon...</div>
   </div>
 
