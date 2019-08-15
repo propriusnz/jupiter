@@ -2,12 +2,6 @@
   <div class="px-0 px-md-5 mx-2">
 
     <!-- title -->
-    <!-- <div class="row py-2 py-md-3">
-        <div class="col-12 mb-2 l1 text-center" *ngIf="typeName == 'hire'">  Our Hires</div>
-        <div class="col-12 mb-2 l1 text-center" *ngIf="typeName == 'service'">  Our Services</div>
-        <div class="col-12 mb-2 l1 text-center" *ngIf="typeName == 'package'">  Our Packages</div>
-    </div> -->
-
     <div class="row">
         <div class="col-12 my-2 my-md-5 l1 text-center" *ngIf="typeName == 'hire' || typeName == 'category'">  Our Hires</div>
         <div class="col-12 my-2 my-md-5 l1 text-center" *ngIf="typeName == 'service'">  Our Services</div>
@@ -40,9 +34,9 @@
         <div class="spinner-border text-info" role="status">
           <span class="sr-only">Loading...</span>
         </div>
-      </div>
-  <!-- *display products -->
+    </div>
 
+  <!-- *display products -->
 
   <div class="row py-3" *ngIf="allProducts">
     <div class='col-12 col-sm-6 col-md-6 col-lg-4 pt-4 pb-2' *ngFor="let product of allProducts; index as i">
@@ -63,11 +57,13 @@
           <span class="s2 mr-3" *ngIf="product.productDetail.length==0 && product.discount >= 0">Price: ${{product.price - product.discount}}</span>
           <span class="s2 mr-3" *ngIf="product.productDetail.length>0 && product.discount == null" >Starting from: ${{product.price}}</span>
           <span class="s2 mr-3" *ngIf="product.productDetail.length>0 && product.discount >= 0" >Starting from: ${{product.price - product.discount}}</span>
-          <!-- <s>${{product.price}}</s> -->
         </div>
         <!-- <div class="s2 col-4" *ngIf="!product.discount || product.discount == 0">Price: ${{product.price}}</div> -->
       </div>
     </div>
+  </div>
+  <div class="row py-3" *ngIf="allProducts.length === 0">
+    <div class="col-12 s2 text-center">Coming soon...</div>
   </div>
 
   <!-- !pagination -->
@@ -84,6 +80,5 @@
       </ul>
     </nav>
   
-
   </div>
 </div>
