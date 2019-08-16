@@ -22,9 +22,9 @@ export class AdminComponent implements OnInit {
   displayData: any;
   selectedImg: File = null;
   isLoading = false;
-  categoryList: any;
-  categoryForm: FormGroup;
-  categoryItems: FormArray;
+  // categoryList: any;
+  // categoryForm: FormGroup;
+  // categoryItems: FormArray;
   isLoadingCategory = false;
   feedbackMessage = '';
   allEventTypes: any;
@@ -61,7 +61,7 @@ export class AdminComponent implements OnInit {
       // show dashboard, edit category panel
       case '1': {
         this.isLoading = false;
-        this.loadCategory();
+        // this.loadCategory();
         break;
       }
       // show products for hire
@@ -348,75 +348,75 @@ export class AdminComponent implements OnInit {
       }
   });
   }
-  loadCategory() {
-    this.isLoadingCategory = true;
-    // build category form
-    this.categoryForm = this.formBuilder.group({
-      categoryItems: this.formBuilder.array([])
-    });
-    // get categories
-    this.productService.indexCategory().subscribe(
-      (res) => {
-        this.isLoadingCategory = false;
-        this.categoryList = res;
-        // add categories into formarray
-        this.categoryList.forEach(prod => {
-          const control = <FormArray>this.categoryForm.controls.categoryItems;
-          control.push(
-            this.formBuilder.group({
-              categoryId: prod.categoryId,
-              categoryName: prod.categoryName
-            })
-          );
-        });
-      }, (error) => {
-        this.isLoadingCategory = false;
-        console.log(error);
-      }
-    );
-  }
-  addCategory() {
-    const control = <FormArray>this.categoryForm.controls.categoryItems;
-    control.push(
-      this.formBuilder.group({
-        categoryId: 0,
-        categoryName: null
-      })
-    );
-  }
-  updateCategory() {
-    this.isLoadingCategory = true;
-    const cateList = this.categoryForm.controls.categoryItems['value'];
-    const id = 0;
-    this.productService.updateCategory(id, cateList).subscribe((res) => {
-      this.isLoadingCategory = false;
-      this.feedbackMessage = 'Save Successfully';
-    }, (error) => {
-      this.isLoadingCategory = false;
-      this.feedbackMessage = 'Save Failed';
-      console.log(error);
-    });
-  }
-  deleteCate(cate, i) {
-    const control = <FormArray>this.categoryForm.controls.categoryItems;
-    if (cate.value.categoryId === 0) {
-      control.removeAt(i);
-      this.feedbackMessage = 'Delete Successfully';
-    } else {
-      this.isLoadingCategory = true;
-      this.productService.deleteCategory(cate.value.categoryId).subscribe(
-        (res) => {
-          this.isLoadingCategory = false;
-          this.feedbackMessage = 'Delete Successfully';
-          control.removeAt(i);
-        }, (error) => {
-          this.isLoadingCategory = false;
-          this.feedbackMessage = 'Delete Failed';
-          console.log(error);
-        }
-      );
-    }
-  }
+  // loadCategory() {
+  //   this.isLoadingCategory = true;
+  //   // build category form
+  //   this.categoryForm = this.formBuilder.group({
+  //     categoryItems: this.formBuilder.array([])
+  //   });
+  //   // get categories
+  //   this.productService.indexCategory().subscribe(
+  //     (res) => {
+  //       this.isLoadingCategory = false;
+  //       this.categoryList = res;
+  //       // add categories into formarray
+  //       this.categoryList.forEach(prod => {
+  //         const control = <FormArray>this.categoryForm.controls.categoryItems;
+  //         control.push(
+  //           this.formBuilder.group({
+  //             categoryId: prod.categoryId,
+  //             categoryName: prod.categoryName
+  //           })
+  //         );
+  //       });
+  //     }, (error) => {
+  //       this.isLoadingCategory = false;
+  //       console.log(error);
+  //     }
+  //   );
+  // }
+  // addCategory() {
+  //   const control = <FormArray>this.categoryForm.controls.categoryItems;
+  //   control.push(
+  //     this.formBuilder.group({
+  //       categoryId: 0,
+  //       categoryName: null
+  //     })
+  //   );
+  // }
+  // updateCategory() {
+  //   this.isLoadingCategory = true;
+  //   const cateList = this.categoryForm.controls.categoryItems['value'];
+  //   const id = 0;
+  //   this.productService.updateCategory(id, cateList).subscribe((res) => {
+  //     this.isLoadingCategory = false;
+  //     this.feedbackMessage = 'Save Successfully';
+  //   }, (error) => {
+  //     this.isLoadingCategory = false;
+  //     this.feedbackMessage = 'Save Failed';
+  //     console.log(error);
+  //   });
+  // }
+  // deleteCate(cate, i) {
+  //   const control = <FormArray>this.categoryForm.controls.categoryItems;
+  //   if (cate.value.categoryId === 0) {
+  //     control.removeAt(i);
+  //     this.feedbackMessage = 'Delete Successfully';
+  //   } else {
+  //     this.isLoadingCategory = true;
+  //     this.productService.deleteCategory(cate.value.categoryId).subscribe(
+  //       (res) => {
+  //         this.isLoadingCategory = false;
+  //         this.feedbackMessage = 'Delete Successfully';
+  //         control.removeAt(i);
+  //       }, (error) => {
+  //         this.isLoadingCategory = false;
+  //         this.feedbackMessage = 'Delete Failed';
+  //         console.log(error);
+  //       }
+  //     );
+  //   }
+  // }
   onEventTypeImageSelected(e) {
     this.selectedImg = <File>e.target.files[0];
     if (this.selectedImg == null) {

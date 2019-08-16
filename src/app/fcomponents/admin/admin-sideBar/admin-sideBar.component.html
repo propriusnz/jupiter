@@ -1,0 +1,48 @@
+<nav>
+  <div class="sidebar-sticky">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" id="1" routerLink='/admin/adminDashboard'>
+          <i class="fas fa-user-cog"></i>
+          Dashboard <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="2" [routerLink]="[ '/admin/adminProducts/', 1]">
+          <i class="fas fa-shopping-bag"></i>
+          Hires
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="3" [routerLink]="[ '/admin/adminProducts/', 2]">
+          <i class="fas fa-gift"></i>
+          Services
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="4" [routerLink]="[ '/admin/adminProducts/', 3]">
+          <i class="fas fa-briefcase"></i>
+          Packages
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="5" routerLink='/admin/adminGalleries'>
+          <i class="fas fa-folder-open"></i>
+          Gallery
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="6" routerLink='/admin/adminFaq'>
+          <i class="far fa-question-circle"></i>
+          Faq
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="7" routerLink='/admin/adminCarts'>
+          <i class="fas fa-shipping-fast"></i>
+          Carts
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

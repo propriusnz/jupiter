@@ -10,13 +10,6 @@ i{
 .far.fa-edit:hover{
     color:rgb(55, 162, 233);
 }
-.nav-item{
-    padding-top:20px;
-}
-.nav-item a:hover{
-    cursor: pointer;
-    color:rgb(105, 105, 105);
-}
 th{
     position: sticky;
     top:0;
@@ -28,11 +21,6 @@ th:first-child{
 }
 td{
     text-align:center;
-}
-.dashhfont{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 .table-secondary  span{
     font-size: 10px;

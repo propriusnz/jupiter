@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <!-- !sidebar -->
-    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <!-- <nav class="col-md-2 d-none d-md-block bg-light sidebar">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
@@ -48,10 +48,15 @@
           </li>
         </ul>
       </div>
-    </nav>
-
+    </nav> -->
+    <div class="col-md-2 d-none d-md-block bg-light sidebar">
+      <app-admin-sideBar></app-admin-sideBar>
+    </div>
 
     <main role="main" class="col-md-10 ml-sm-auto col-lg-10">
+      
+        <router-outlet></router-outlet>
+
       <!-- loading -->
       <div class="text-center mt-5 pt-5" *ngIf="isLoading">
           Loading Data...Please wait
@@ -63,10 +68,10 @@
       <div *ngIf="!isLoading">
 
       <!-- !Dashboard -->
-      <div *ngIf="blockCode == '1'" style="text-align:center;padding-top:4%;">
+      <!-- <div *ngIf="blockCode == '1'" style="text-align:center;padding-top:4%;">
       <h1>Welcome to Dashboard</h1><br>
       <hr><br>
-      <!-- Edit productCategory -->
+
       <div class="row ">
         <div class="col-6">
           <h2>Edit Categories </h2>
@@ -80,7 +85,7 @@
                     </div>
                 </div>
             </form>
-            <!-- category is loading... -->
+
             <div *ngIf="isLoadingCategory">
               Loading categories...
                 <div class="spinner-border text-info" role="status">
@@ -96,7 +101,7 @@
         </div>
       </div><br><br>
       </div>
-      
+       -->
 
       <!-- !Hire || Service || Package-->
       <div *ngIf="blockCode == '2' || blockCode == '3' || blockCode == '4'">
@@ -330,3 +335,4 @@
     </main>
   </div>
 </div>
+

@@ -1,0 +1,10 @@
+a {
+    color:inherit;
+}
+.nav-item{
+    padding-top:20px;
+}
+.nav-item a:hover{
+    cursor: pointer;
+    color:rgb(105, 105, 105);
+}
