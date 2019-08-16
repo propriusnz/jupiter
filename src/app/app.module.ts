@@ -34,6 +34,7 @@ import { ProductDialogComponent } from './fcomponents/AdminDialogs/productDialog
 import { CartDialogComponent } from './fcomponents/AdminDialogs/CartDialog/CartDialog.component';
 import { ShoppingCheckoutComponent } from './fcomponents/shopping-checkout/shopping-checkout.component';
 import { ThankYouComponent } from './fcomponents/thankYou/thankYou.component';
+import {LoadingComponent} from './fcomponents/basic/loading/loading.component';
 
 // admin components
 import { AdminFaqComponent } from './fcomponents/admin/admin-faq/admin-faq.component';
@@ -96,6 +97,7 @@ const appRoutes: Routes = [
     CartDialogComponent,
     ShoppingCheckoutComponent,
     ThankYouComponent,
+    LoadingComponent,
     AdminFaqComponent,
     AdminProductsComponent,
     AdminSideBarComponent,

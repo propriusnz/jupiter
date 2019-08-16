@@ -5,7 +5,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { MatDialog, MatDialogConfig} from '@angular/material';
 import { FaqDialogComponent } from '../AdminDialogs/FaqDialog/FaqDialog.component';
 import { GalleryDialogComponent } from '../AdminDialogs/galleryDialog/galleryDialog.component';
-import { ProductDialogComponent } from '../AdminDialogs/productDialog/productDialog.component';
+// import { ProductDialogComponent } from '../AdminDialogs/productDialog/productDialog.component';
 import { CartDialogComponent } from '../AdminDialogs/CartDialog/CartDialog.component';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { environment } from '../../../environments/environment.prod';
@@ -25,7 +25,7 @@ export class AdminComponent implements OnInit {
   // categoryList: any;
   // categoryForm: FormGroup;
   // categoryItems: FormArray;
-  isLoadingCategory = false;
+  // isLoadingCategory = false;
   feedbackMessage = '';
   allEventTypes: any;
   isEventTypeImageEmpty: boolean;
@@ -64,21 +64,18 @@ export class AdminComponent implements OnInit {
         // this.loadCategory();
         break;
       }
-      // show products for hire
-      case '2': {
-        this.getProducts(1);
-        break;
-      }
-      // show services
-      case '3': {
-        this.getProducts(2);
-        break;
-      }
-      // show packages
-      case '4': {
-        this.getProducts(3);
-        break;
-      }
+      // case '2': {
+      //   this.getProducts(1);
+      //   break;
+      // }
+      // case '3': {
+      //   this.getProducts(2);
+      //   break;
+      // }
+      // case '4': {
+      //   this.getProducts(3);
+      //   break;
+      // }
       // show galleries
       case '5' : {
         this.productService.indexGallery().subscribe(
@@ -129,19 +126,19 @@ export class AdminComponent implements OnInit {
     }
   }
   // get product details
-  getProducts(typeCode: number) {
-    this.productService.indexType(typeCode).subscribe(
-      (res) => {
-        this.isLoading = false;
-        this.displayData = res;
-        console.log(res);
-      },
-      (err) => {
-        this.isLoading = false;
-        console.log(err);
-       }
-      );
-  }
+  // getProducts(typeCode: number) {
+  //   this.productService.indexType(typeCode).subscribe(
+  //     (res) => {
+  //       this.isLoading = false;
+  //       this.displayData = res;
+  //       console.log(res);
+  //     },
+  //     (err) => {
+  //       this.isLoading = false;
+  //       console.log(err);
+  //      }
+  //     );
+  // }
   // update Faq
   openFaq(dataRecord) {
     const dialogConfig = new MatDialogConfig();
@@ -265,63 +262,63 @@ export class AdminComponent implements OnInit {
         // Do nothing!
     }
   }
-  openProduct(data) {
-    const dialogConfig = new MatDialogConfig();
+  // openProduct(data) {
+  //   const dialogConfig = new MatDialogConfig();
 
-    // dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.height = '650px';
-    dialogConfig.width = '750px';
-    dialogConfig.data = {
-      id: 1,
-      title: 'Update Product',
-      data: data,
-      action: 'update',
-      blockCode: this.blockCode
-    };
-    const dialogRef = this.dialog.open(ProductDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(() => {
-      this.getData();
-  });
-  }
+  //   // dialogConfig.disableClose = true;
+  //   dialogConfig.autoFocus = true;
+  //   dialogConfig.height = '650px';
+  //   dialogConfig.width = '750px';
+  //   dialogConfig.data = {
+  //     id: 1,
+  //     title: 'Update Product',
+  //     data: data,
+  //     action: 'update',
+  //     blockCode: this.blockCode
+  //   };
+  //   const dialogRef = this.dialog.open(ProductDialogComponent, dialogConfig);
+  //   dialogRef.afterClosed().subscribe(() => {
+  //     this.getData();
+  // });
+  // }
 
-  createProduct() {
-    const dialogConfig = new MatDialogConfig();
+  // createProduct() {
+  //   const dialogConfig = new MatDialogConfig();
 
-    // dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.height = '650px';
-    dialogConfig.width = '750px';
+  //   // dialogConfig.disableClose = true;
+  //   dialogConfig.autoFocus = true;
+  //   dialogConfig.height = '650px';
+  //   dialogConfig.width = '750px';
 
 
-    dialogConfig.data = {
-      id: 1,
-      title: 'Create Product',
-      action: 'create',
-      blockCode: this.blockCode
-    };
-    const dialogRef = this.dialog.open(ProductDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(() => {
-      this.getData();
-  });
-  }
-  deleteProduct(data) {
+  //   dialogConfig.data = {
+  //     id: 1,
+  //     title: 'Create Product',
+  //     action: 'create',
+  //     blockCode: this.blockCode
+  //   };
+  //   const dialogRef = this.dialog.open(ProductDialogComponent, dialogConfig);
+  //   dialogRef.afterClosed().subscribe(() => {
+  //     this.getData();
+  // });
+  // }
+  // deleteProduct(data) {
 
-    const id = data.prodId;
-    if (confirm('Are you sure you want to delete this Product?')) {
-      this.productService.deleteProduct(id).subscribe(
-        (res) => {
-          this.getData();
-          alert('Success');
-        }, (error) => {
-          console.log(error);
-          alert('Failed');
-        }
-      );
-    } else {
-        // Do nothing!
-    }
-  }
+  //   const id = data.prodId;
+  //   if (confirm('Are you sure you want to delete this Product?')) {
+  //     this.productService.deleteProduct(id).subscribe(
+  //       (res) => {
+  //         this.getData();
+  //         alert('Success');
+  //       }, (error) => {
+  //         console.log(error);
+  //         alert('Failed');
+  //       }
+  //     );
+  //   } else {
+  //       // Do nothing!
+  //   }
+  // }
   openCart(data) {
     const dialogConfig = new MatDialogConfig();
 

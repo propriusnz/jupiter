@@ -77,7 +77,7 @@ export class ProductDialogComponent implements OnInit {
         this.detailList = data.data['productDetail'];
       }
     }
-    this.productForm.prodTypeId = Number(data.blockCode) - 1;
+    this.productForm.prodTypeId = Number(data.blockCode);
     this.dialogTitle = data.title;
     this.status = data.action;
   }

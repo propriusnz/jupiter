@@ -1,3 +1,4 @@
-.far.fa-trash-alt:hover{
+.fas.fa-trash-alt:hover{
     color:red;
+    cursor: pointer;
 }

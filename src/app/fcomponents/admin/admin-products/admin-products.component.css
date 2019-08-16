@@ -1,0 +1,26 @@
+th{
+    position: sticky;
+    top:0;
+    z-index:99;
+    text-align:center;
+}
+th:first-child{
+    width:56px;
+}
+td{
+    text-align:center;
+}
+.table-secondary  span{
+    font-size: 10px;
+}
+.table td{
+    padding: 0.4rem;
+}
+.far.fa-trash-alt:hover{
+    color:red;
+    cursor: pointer;
+}
+.far.fa-edit:hover{
+    color:rgb(55, 162, 233);
+    cursor: pointer;
+}
