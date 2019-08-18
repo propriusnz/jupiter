@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../../../service/product.service';
+import { MatDialog, MatDialogConfig} from '@angular/material';
+import { GalleryDialogComponent } from '../../AdminDialogs/galleryDialog/galleryDialog.component';
+
 
 @Component({
   selector: 'app-admin-galleries',
@@ -7,7 +11,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminGalleriesComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private productService: ProductService,
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit() {
   }
