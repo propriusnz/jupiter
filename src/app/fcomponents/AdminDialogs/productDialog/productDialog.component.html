@@ -27,7 +27,7 @@
         <input class="form-control"  min="0" type="number" name="discount" placeholder="Discount" [(ngModel)]="productForm.discount" #discount="ngModel">
     </div>            
      <!-- choose category -->
-    <div class="col-12" *ngIf="displayData && productForm.prodTypeId==1">Choose category of product:</div>
+    <div class="col-12" *ngIf="displayData && productForm.prodTypeId !== 2 || 3 ">Choose category of product:</div>
     <div class="form-group col-12">
         <!-- !when update hire product -->
         <select *ngIf="displayData && productForm.prodTypeId==1" class="custom-select form-control" name="categoryId"

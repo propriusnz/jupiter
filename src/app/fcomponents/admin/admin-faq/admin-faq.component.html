@@ -1,3 +1,39 @@
-<p>
-  admin-faq works!
-</p>
+<div class="text-center mt-5 pt-5" *ngIf="isLoading || feedbackMessage">
+  <app-loading [feedbackMessage]= "feedbackMessage"></app-loading>
+</div>
+
+
+<div>
+  <div class="row mt-3">
+    <div class="col-1">
+      <h2>Faq</h2>
+    </div>
+    <div class="pt-2 col">
+        <button type="button" class="ml-2" style="border-radius: 5px;" title="Add" (click)="createFaq()">
+          <i class="fas fa-plus"></i>
+          <span>Add</span>
+        </button>
+      </div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr class="table-secondary">
+        <th scope="col">Id<br><span>编号</span></th>
+        <th scope="col">Question<br><span>问题</span></th>
+        <th scope="col">Answer<br><span>回答</span></th>
+        <th scope="col">Edit<br><span>编辑</span></th>
+        <th scope="col">Delete<br><span>删除</span></th>
+      </tr>
+    </thead>
+    <tbody *ngIf="displayedFaqData">
+      <tr *ngFor="let data of displayedFaqData">
+        <td>{{data.id}}</td>
+        <td>{{data.question}}</td>
+        <td>{{data.answer}}</td>
+        <td><i class="far fa-edit" (click)="openFaq(data)" title="Edit"></i></td>
+        <td><i class="far fa-trash-alt" title="Delete" (click)="deleteFaq(data)"></i></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,3 +1,7 @@
+<div class="text-center mt-5 pt-5" *ngIf="isLoading || feedbackMessage">
+  <app-loading [feedbackMessage]= "feedbackMessage"></app-loading>
+</div>
+
 <div>
   <div class="row mt-3">
     <div class="col-1">
@@ -23,8 +27,8 @@
   
       <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="card-body">
-          <div *ngIf="allEventTypes" class="eventTypeImageEditor">
-            <div *ngFor="let event of allEventTypes" class="eventTypeImageEditorBlocks pt-2">
+          <div *ngIf="displayedEventTypeData" class="eventTypeImageEditor">
+            <div *ngFor="let event of displayedEventTypeData" class="eventTypeImageEditorBlocks pt-2">
               <span class="s2">{{event.eventName}}</span><br>
               <img *ngIf="event.eventName" src="{{baseImageLink}}{{event.eventTypeImage}}" class="eventTypeImage mr-2">
               <input #eventImageInput type="file" (change)="onEventTypeImageSelected($event)" class="eventTypeImageEditorTools">
@@ -47,8 +51,8 @@
         <th scope="col">Delete<br><span>删除</span></th>
       </tr>
     </thead>
-    <tbody *ngIf="displayData">
-      <tr *ngFor="let data of displayData">
+    <tbody *ngIf="displayedGalleryData">
+      <tr *ngFor="let data of displayedGalleryData">
         <td>{{data.prodjectId}}</td>
         <td>{{data.customerName}}</td>
         <td *ngIf="data.eventtype">{{data.eventtype.eventName}}</td>

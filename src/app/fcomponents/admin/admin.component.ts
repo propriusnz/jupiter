@@ -3,10 +3,10 @@ import { ProductService } from '../../service/product.service';
 import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { MatDialog, MatDialogConfig} from '@angular/material';
-import { FaqDialogComponent } from '../AdminDialogs/FaqDialog/FaqDialog.component';
-import { GalleryDialogComponent } from '../AdminDialogs/galleryDialog/galleryDialog.component';
+// import { FaqDialogComponent } from '../AdminDialogs/FaqDialog/FaqDialog.component';
+// import { GalleryDialogComponent } from '../AdminDialogs/galleryDialog/galleryDialog.component';
 // import { ProductDialogComponent } from '../AdminDialogs/productDialog/productDialog.component';
-import { CartDialogComponent } from '../AdminDialogs/CartDialog/CartDialog.component';
+// import { CartDialogComponent } from '../AdminDialogs/CartDialog/CartDialog.component';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { environment } from '../../../environments/environment.prod';
 @Component({
@@ -77,52 +77,52 @@ export class AdminComponent implements OnInit {
       //   break;
       // }
       // show galleries
-      case '5' : {
-        this.productService.indexGallery().subscribe(
-          (res) => {
-            this.displayData = res;
-            this.isLoading = false; },
-          (error) => {
-            console.log(error);
-            this.isLoading = false; }
-        );
-        this.productService.getEventType().subscribe(
-          (res) => {
-            this.allEventTypes = res;
-          },
-          (error) => {
-            console.log(error);
-          }
-        )
-        break;
-      }
+      // case '5' : {
+      //   this.productService.indexGallery().subscribe(
+      //     (res) => {
+      //       this.displayData = res;
+      //       this.isLoading = false; },
+      //     (error) => {
+      //       console.log(error);
+      //       this.isLoading = false; }
+      //   );
+      //   this.productService.getEventType().subscribe(
+      //     (res) => {
+      //       this.allEventTypes = res;
+      //     },
+      //     (error) => {
+      //       console.log(error);
+      //     }
+      //   )
+      //   break;
+      // }
       // show faqs
-      case '6' : {
-        this.productService.getFaq().subscribe(
-          (res) => {
-            this.displayData = res;
-            this.isLoading = false; }
-          , (error) => {
-            console.log(error);
-            this.isLoading = false;
-          }
-        );
-        break;
-      }
+      // case '6' : {
+      //   this.productService.getFaq().subscribe(
+      //     (res) => {
+      //       this.displayData = res;
+      //       this.isLoading = false; }
+      //     , (error) => {
+      //       console.log(error);
+      //       this.isLoading = false;
+      //     }
+      //   );
+      //   break;
+      // }
       // show carts
-      case '7' : {
-        this.productService.getCarts().subscribe(
-          (res) => {
-            this.displayData = res;
-            this.isLoading = false;
-          console.log(res); },
-          (error) => {
-            console.log(error);
-            this.isLoading = false;
-          }
-        );
-        break;
-      }
+      // case '7' : {
+      //   this.productService.getCarts().subscribe(
+      //     (res) => {
+      //       this.displayData = res;
+      //       this.isLoading = false;
+      //     console.log(res); },
+      //     (error) => {
+      //       console.log(error);
+      //       this.isLoading = false;
+      //     }
+      //   );
+      //   break;
+      // }
     }
   }
   // get product details
@@ -140,128 +140,126 @@ export class AdminComponent implements OnInit {
   //     );
   // }
   // update Faq
-  openFaq(dataRecord) {
-    const dialogConfig = new MatDialogConfig();
+  // openFaq(dataRecord) {
+  //   const dialogConfig = new MatDialogConfig();
 
-    // dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.height = '550px';
-    dialogConfig.width = '750px';
-    dialogConfig.data = {
-      id: 1,
-      title: 'Update FAQ',
-      data: dataRecord,
-      action: 'update'
-    };
-    const dialogRef = this.dialog.open(FaqDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(() => {
-      this.getData();
-  });
-  }
+  //   dialogConfig.autoFocus = true;
+  //   dialogConfig.height = '550px';
+  //   dialogConfig.width = '750px';
+  //   dialogConfig.data = {
+  //     id: 1,
+  //     title: 'Update FAQ',
+  //     data: dataRecord,
+  //     action: 'update'
+  //   };
+  //   const dialogRef = this.dialog.open(FaqDialogComponent, dialogConfig);
+  //   dialogRef.afterClosed().subscribe(() => {
+  //     this.getData();
+  // });
+  // }
   // create new Faq
-  createFaq() {
-    const dialogConfig = new MatDialogConfig();
+  // createFaq() {
+  //   const dialogConfig = new MatDialogConfig();
 
-    // dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.height = '550px';
-    dialogConfig.width = '750px';
+  //   // dialogConfig.disableClose = true;
+  //   dialogConfig.autoFocus = true;
+  //   dialogConfig.height = '550px';
+  //   dialogConfig.width = '750px';
 
-    dialogConfig.data = {
-      id: 1,
-      title: 'Create FAQ',
-      action: 'create'
-    };
-    const dialogRef = this.dialog.open(FaqDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(() => {
-      this.getData();
-  });
-  }
+  //   dialogConfig.data = {
+  //     id: 1,
+  //     title: 'Create FAQ',
+  //     action: 'create'
+  //   };
+  //   const dialogRef = this.dialog.open(FaqDialogComponent, dialogConfig);
+  //   dialogRef.afterClosed().subscribe(() => {
+  //     this.getData();
+  // });
+  // }
   // delete Faq
-  deleteFaq(data) {
-    const id = data.id;
-    if (confirm('Are you sure you want to delete this Faq?')) {
-      this.productService.deleteFaq(id).subscribe(
-        (res) => {
-          this.getData();
-          alert('Success');
-        }, (error) => {
-          console.log(error);
-          alert('Failed');
-        });
-    } else {
-        // Do nothing!
-    }
-  }
-  deleteCart(data) {
-    const id = data.cartId;
-    if (confirm('Are you sure you want to delete this Cart?')) {
-      this.productService.deleteCart(id).subscribe(
-        (res) => {
-          this.getData();
-          alert('Success');
-        }, (error) => {
-          console.log(error);
-          alert('Failed');
-        });
-    } else {
-        // Do nothing!
-    }
-  }
-  openGallery(data) {
-    const dialogConfig = new MatDialogConfig();
+  // deleteFaq(data) {
+  //   const id = data.id;
+  //   if (confirm('Are you sure you want to delete this Faq?')) {
+  //     this.productService.deleteFaq(id).subscribe(
+  //       (res) => {
+  //         this.getData();
+  //         alert('Success');
+  //       }, (error) => {
+  //         console.log(error);
+  //         alert('Failed');
+  //       });
+  //   } else {
+  //       // Do nothing!
+  //   }
+  // }
+  // deleteCart(data) {
+  //   const id = data.cartId;
+  //   if (confirm('Are you sure you want to delete this Cart?')) {
+  //     this.productService.deleteCart(id).subscribe(
+  //       (res) => {
+  //         this.getData();
+  //         alert('Success');
+  //       }, (error) => {
+  //         console.log(error);
+  //         alert('Failed');
+  //       });
+  //   } else {
+  //       // Do nothing!
+  //   }
+  // }
+  // openGallery(data) {
+  //   const dialogConfig = new MatDialogConfig();
 
-    // dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
+  //   // dialogConfig.disableClose = true;
+  //   dialogConfig.autoFocus = true;
 
-    dialogConfig.height = '550px';
-    dialogConfig.width = '750px';
+  //   dialogConfig.height = '550px';
+  //   dialogConfig.width = '750px';
 
-    dialogConfig.data = {
-      id: 1,
-      title: 'Update Gallery',
-      data: data,
-      action: 'update'
-    };
-    const dialogRef = this.dialog.open(GalleryDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(() => {
-      this.getData();
-  });
-  }
-  createGallery() {
-    const dialogConfig = new MatDialogConfig();
+  //   dialogConfig.data = {
+  //     id: 1,
+  //     title: 'Update Gallery',
+  //     data: data,
+  //     action: 'update'
+  //   };
+  //   const dialogRef = this.dialog.open(GalleryDialogComponent, dialogConfig);
+  //   dialogRef.afterClosed().subscribe(() => {
+  //     this.getData();
+  // });
+  // }
+  // createGallery() {
+  //   const dialogConfig = new MatDialogConfig();
 
-    // dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.height = '550px';
-    dialogConfig.width = '750px';
+  //   // dialogConfig.disableClose = true;
+  //   dialogConfig.autoFocus = true;
+  //   dialogConfig.height = '550px';
+  //   dialogConfig.width = '750px';
 
 
-    dialogConfig.data = {
-      id: 1,
-      title: 'Create Gallery',
-      action: 'create'
-    };
-    const dialogRef = this.dialog.open(GalleryDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(() => {
-      this.getData();
-  });
-  }
-  deleteGallery(data) {
-    const id = data.prodjectId;
-    if (confirm('Are you sure you want to delete this Gallery?')) {
-      this.productService.deleteGallery(id).subscribe(
-        (res) => {
-          this.getData();
-          alert('Success');
-        }, (error) => {
-          console.log(error);
-          alert('Failed');
-        });
-    } else {
-        // Do nothing!
-    }
-  }
+  //   dialogConfig.data = {
+  //     id: 1,
+  //     title: 'Create Gallery',
+  //     action: 'create'
+  //   };
+  //   const dialogRef = this.dialog.open(GalleryDialogComponent, dialogConfig);
+  //   dialogRef.afterClosed().subscribe(() => {
+  //     this.getData();
+  // });
+  // }
+  // deleteGallery(data) {
+  //   const id = data.prodjectId;
+  //   if (confirm('Are you sure you want to delete this Gallery?')) {
+  //     this.productService.deleteGallery(id).subscribe(
+  //       (res) => {
+  //         this.getData();
+  //         alert('Success');
+  //       }, (error) => {
+  //         console.log(error);
+  //         alert('Failed');
+  //       });
+  //   } else {
+  //   }
+  // }
   // openProduct(data) {
   //   const dialogConfig = new MatDialogConfig();
 
@@ -319,44 +317,41 @@ export class AdminComponent implements OnInit {
   //       // Do nothing!
   //   }
   // }
-  openCart(data) {
-    const dialogConfig = new MatDialogConfig();
+  // openCart(data) {
+  //   const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.autoFocus = true;
-    dialogConfig.height = '650px';
-    dialogConfig.width = '750px';
-    dialogConfig.data = {
-      id: 1,
-      title: 'Cart Detail',
-      data: data,
-      action: 'update'
-    };
-    const dialogRef = this.dialog.open(CartDialogComponent, dialogConfig);
-    this.isDataChanged = false;
-    const sub = dialogRef.componentInstance.dataChanges.subscribe(() => {
-      this.isDataChanged = true;
-    });
-    dialogRef.afterClosed().subscribe(() => {
-      if (this.isDataChanged == true) {
-        this.getData();
-        console.log('data refreshed');
-      } else {
-        console.log('data not changed');
-      }
-  });
-  }
+  //   dialogConfig.autoFocus = true;
+  //   dialogConfig.height = '650px';
+  //   dialogConfig.width = '750px';
+  //   dialogConfig.data = {
+  //     id: 1,
+  //     title: 'Cart Detail',
+  //     data: data,
+  //     action: 'update'
+  //   };
+  //   const dialogRef = this.dialog.open(CartDialogComponent, dialogConfig);
+  //   this.isDataChanged = false;
+  //   const sub = dialogRef.componentInstance.dataChanges.subscribe(() => {
+  //     this.isDataChanged = true;
+  //   });
+  //   dialogRef.afterClosed().subscribe(() => {
+  //     if (this.isDataChanged == true) {
+  //       this.getData();
+  //       console.log('data refreshed');
+  //     } else {
+  //       console.log('data not changed');
+  //     }
+  // });
+  // }
   // loadCategory() {
   //   this.isLoadingCategory = true;
-  //   // build category form
   //   this.categoryForm = this.formBuilder.group({
   //     categoryItems: this.formBuilder.array([])
   //   });
-  //   // get categories
   //   this.productService.indexCategory().subscribe(
   //     (res) => {
   //       this.isLoadingCategory = false;
   //       this.categoryList = res;
-  //       // add categories into formarray
   //       this.categoryList.forEach(prod => {
   //         const control = <FormArray>this.categoryForm.controls.categoryItems;
   //         control.push(
@@ -414,35 +409,33 @@ export class AdminComponent implements OnInit {
   //     );
   //   }
   // }
-  onEventTypeImageSelected(e) {
-    this.selectedImg = <File>e.target.files[0];
-    if (this.selectedImg == null) {
-      this.isEventTypeImageEmpty = true;
-    } else {
-      this.isEventTypeImageEmpty = false;
-    }
-  }
-  onUploadEventTypeImage(eventDetail) {
-    if (this.selectedImg == null) {
-      this.isEventTypeImageEmpty = true;
-    } else {
-      this.isEventTypeImageEmpty = false;
-      this.isLoading = true;
-      const fd = new FormData();
-      fd.append('FormFile', this.selectedImg, this.selectedImg.name);
-      fd.append('Id', JSON.stringify(eventDetail.typeId));
-      this.productService.updateEventTypeImage(fd).subscribe((res) => {
-        this.isLoading = false;
-        this.feedbackMessage = res['data'];
-        this.getData();
-        // this.eventImageInput.nativeElement.value = null;
-      }, (error) => {
-        this.isLoading = false;
-        this.feedbackMessage = 'upload failed';
-        console.log(error);
-      });
-    }
-
-  }
+  // onEventTypeImageSelected(e) {
+  //   this.selectedImg = <File>e.target.files[0];
+  //   if (this.selectedImg == null) {
+  //     this.isEventTypeImageEmpty = true;
+  //   } else {
+  //     this.isEventTypeImageEmpty = false;
+  //   }
+  // }
+  // onUploadEventTypeImage(eventDetail) {
+  //   if (this.selectedImg == null) {
+  //     this.isEventTypeImageEmpty = true;
+  //   } else {
+  //     this.isEventTypeImageEmpty = false;
+  //     this.isLoading = true;
+  //     const fd = new FormData();
+  //     fd.append('FormFile', this.selectedImg, this.selectedImg.name);
+  //     fd.append('Id', JSON.stringify(eventDetail.typeId));
+  //     this.productService.updateEventTypeImage(fd).subscribe((res) => {
+  //       this.isLoading = false;
+  //       this.feedbackMessage = res['data'];
+  //       this.getData();
+  //     }, (error) => {
+  //       this.isLoading = false;
+  //       this.feedbackMessage = 'upload failed';
+  //       console.log(error);
+  //     });
+  //   }
+  // }
 
 }

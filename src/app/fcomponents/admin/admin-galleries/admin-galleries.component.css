@@ -24,3 +24,23 @@ td{
     color:rgb(55, 162, 233);
     cursor: pointer;
 }
+.eventTypeImage {
+    height: 100px;
+    width: 100px;
+}
+.eventTypeImageEditor{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+.eventTypeImageEditorBlocks{
+    width: 50%;
+}
+.btn.eventTypeImageToggle:focus,.btn.eventTypeImageToggle:active {
+    outline: none !important;
+    box-shadow: none;
+ }
+ .card.eventTypeImageToggle {
+     border:0px;
+ }
