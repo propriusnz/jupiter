@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 })
 export class AdminPanelService {
 
-  private panelStatus = new BehaviorSubject<string>('product');
+  private panelStatus = new BehaviorSubject<string>('Dashboard');
   currentPanel = this.panelStatus.asObservable();
   constructor() { }
   changePanel(status: string) {

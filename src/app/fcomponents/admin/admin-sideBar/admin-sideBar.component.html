@@ -7,10 +7,28 @@
           Dashboard <span class="sr-only">(current)</span>
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngFor="let item of displayedProductTypes, index as i">
+        <a class="nav-link" id="2" [routerLink]="[ '/admin/adminProducts/', item.prodTypeId]">
+          <i class={{navBarIconArray[i].Icon}}></i>
+          {{item.typeName}}
+        </a>
+      </li>
+      <!-- <li class="nav-item">
         <a class="nav-link" id="2" [routerLink]="[ '/admin/adminProducts/', 1]">
           <i class="fas fa-shopping-bag"></i>
           Hires
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="2" [routerLink]="[ '/admin/adminProducts/', 1]">
+          <i class="fas fa-shopping-bag"></i>
+          Florist
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="2" [routerLink]="[ '/admin/adminProducts/', 1]">
+          <i class="fas fa-shopping-bag"></i>
+          Face Painting
         </a>
       </li>
       <li class="nav-item">
@@ -24,7 +42,7 @@
           <i class="fas fa-briefcase"></i>
           Packages
         </a>
-      </li>
+      </li> -->
       <li class="nav-item">
         <a class="nav-link" id="5" routerLink='/admin/adminGalleries'>
           <i class="fas fa-folder-open"></i>

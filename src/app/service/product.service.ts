@@ -73,7 +73,12 @@ constructor(
     return this.http.delete(this.baseUrl + '/ProductCategories/' + id,
     { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
   }
+
   // !Product Type
+
+  getProductType() {
+    return this.http.get(this.baseUrl + '/ProductTypes');
+  }
   indexType(id: number) {
     return this.http.get(this.baseUrl + '/ProductTypes/' + id);
   }

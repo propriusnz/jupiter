@@ -96,8 +96,6 @@ export class AdminProductsComponent implements OnInit {
           alert('Failed');
         }
       );
-    } else {
-      // Do nothing!
     }
   }
 }
