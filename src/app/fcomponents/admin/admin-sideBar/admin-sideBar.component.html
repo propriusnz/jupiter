@@ -7,7 +7,7 @@
           Dashboard <span class="sr-only">(current)</span>
         </a>
       </li>
-      <li class="nav-item" *ngFor="let item of displayedProductTypes, index as i">
+      <li class="nav-item" *ngFor="let item of displayedProductTypes, index as i" (click)="updatePanel(item.typeName)">
         <a class="nav-link" id="2" [routerLink]="[ '/admin/adminProducts/', item.prodTypeId]">
           <i class={{navBarIconArray[i].Icon}}></i>
           {{item.typeName}}

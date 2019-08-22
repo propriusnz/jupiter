@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../service/product.service';
+import { AdminPanelService } from '../../../service/admin-panel.service';
 
 @Component({
   selector: 'app-admin-sideBar',
@@ -17,7 +18,8 @@ export class AdminSideBarComponent implements OnInit {
     {'Id': 6, 'Icon': 'fas fa-umbrella-beach'},
   ]
   constructor(
-    private productService: ProductService
+    private productService: ProductService,
+    private adminPanelService: AdminPanelService
   ) { }
 
   ngOnInit() {
@@ -25,9 +27,13 @@ export class AdminSideBarComponent implements OnInit {
   }
   getProductTypes() {
     this.productService.getProductType().toPromise()
-      .then(data => {
-        this.displayedProductTypes = Object.values(data);
-      })
-      .catch(err => console.log(err));
+    .then(data => {
+      this.displayedProductTypes = Object.values(data);
+    })
+    .catch(err => console.log(err));
+  }
+  
+  updatePanel(status: string) {
+    this.adminPanelService.changePanel(status);
   }
 }

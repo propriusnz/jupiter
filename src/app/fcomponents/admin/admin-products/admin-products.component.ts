@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from './../../../service/product.service';
+import { AdminPanelService } from '../../../service/admin-panel.service';
 import { ProductDialogComponent } from '../../AdminDialogs/productDialog/productDialog.component';
 import { MatDialog, MatDialogConfig } from '@angular/material';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-admin-products',
@@ -13,10 +16,14 @@ export class AdminProductsComponent implements OnInit {
   productTypeId: string;
   displayedProductData: any;
   isLoading = false;
+  productTitle: string;
+  subscription: Subscription;
+
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private adminPanelService: AdminPanelService
   ) { }
 
   ngOnInit() {
@@ -26,6 +33,11 @@ export class AdminProductsComponent implements OnInit {
         this.getProductData(this.productTypeId);
       }
     );
+
+    this.subscription = this.adminPanelService.currentPanel.subscribe(res => this.productTitle = res);
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   getProductData(typeId: string) {
