@@ -3,9 +3,8 @@
 </div>
 
 <div>
-  {{productTitle}}
     <div class="row mt-3">
-      <div class="col-1" *ngIf="productTypeId === '1'">
+      <!-- <div class="col-1" *ngIf="productTypeId === '1'">
         <h2>Hires</h2>
       </div>
       <div class="col-2" *ngIf="productTypeId === '2'">
@@ -13,6 +12,9 @@
       </div>
       <div class="col-2" *ngIf="productTypeId === '3'">
         <h2>Packages</h2>
+      </div> -->
+      <div class="col pr-5">
+        <h2>{{productTitle}}</h2>
       </div>
       <div class="pt-2 col">
         <button type="button" class="ml-2" style="border-radius: 5px;" title="Add" (click)="createProduct()">

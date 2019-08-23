@@ -34,6 +34,11 @@ export class AdminProductsComponent implements OnInit {
       }
     );
 
+    this.productService.getProductType().toPromise().then(typeNameList => {
+      const selectedElement = Object.values(typeNameList).find(item => item.prodTypeId === Number(this.productTypeId));
+      this.adminPanelService.changePanel(selectedElement.typeName);
+    });
+
     this.subscription = this.adminPanelService.currentPanel.subscribe(res => this.productTitle = res);
   }
   ngOnDestroy(): void {
