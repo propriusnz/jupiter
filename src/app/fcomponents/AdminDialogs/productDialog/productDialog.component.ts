@@ -135,7 +135,7 @@ export class ProductDialogComponent implements OnInit {
   }
   // get the categories of product
   getCategories() {
-    this.productService.indexCategory().subscribe(
+    this.productService.getCategoryByType(1).subscribe(
       (res) => {
         this.allCategories = res;
       },

@@ -31,7 +31,7 @@ export class AdminDashboardComponent implements OnInit {
       categoryItems: this.formBuilder.array([])
     });
     // get categories
-    this.productService.indexCategory().subscribe(
+    this.productService.getCategoryByType(1).subscribe(
       (res) => {
         this.isLoadingCategory = false;
         this.categoryList = res;

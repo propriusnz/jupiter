@@ -11,36 +11,98 @@
         </a>
       </li>
       <span class="navspace"></span>
+
+            <li class="nav-item dropdown" *ngFor="let typeItem of allTypes, index as i">
+                <div class="nav-link dropdown-toggle s2bold" id="navbarDropdownMenuLink{{i}}" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <h1 class="s2bold" [routerLink]="['/products', typeItem.prodTypeId, 0]" (click)="updateCategoryStatus('All '+ typeItem.typeName + 's')">{{typeItem.typeName}}</h1>
+                </div>
+                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink" *ngIf="allTypes">
+        
+                  <!-- !large screen dropdown -->
+                  <a *ngIf="isBrowser==true" class="dropdown-item d-none d-md-block s2bold" [routerLink]="['/products', typeItem.prodTypeId, 0]"
+                  (click)="updateCategoryStatus('All '+ typeItem.typeName + 's')">
+                    <h1>All {{typeItem.typeName}}s</h1>
+                  </a>
+                  <a *ngIf="isBrowser==false" class="dropdown-item d-none d-md-block"
+                  href='http://luxedreameventhire.co.nz/products/{{typeItem.prodTypeId}}'
+                  (click)="updateCategoryStatus('All '+ typeItem.typeName + 's')">
+                    All {{typeItem.typeName}}s
+                  </a>
+                  <div *ngIf="isBrowser==true">
+                    <a class="dropdown-item d-none d-md-block s2bold" *ngFor="let category of typeItem.productCategory"
+                    [routerLink]="[ '/products', typeItem.prodTypeId, category.categoryId ]"
+                    (click)="updateCategoryStatus(category.categoryName)">
+                      <h1>{{category.categoryName}}</h1>
+                    </a>
+                  </div>
+                  <div *ngIf="isBrowser==false">
+                    <a class="dropdown-item d-none d-md-block" *ngFor="let category of typeItem.productCategory"
+                    href = 'http://luxedreameventhire.co.nz/products/{{typeItem.prodTypeId}}/{{category.categoryId}}'
+                    (click)="updateCategoryStatus(category.categoryName)">
+                      {{category.categoryName}}
+                    </a>
+                  </div>
+        
+                  <!-- !mobile dropdown -->
+                  <a class="dropdown-item d-block d-md-none" data-toggle="collapse" data-target=".navbar-collapse">
+                    <a class="s2bold" *ngIf="isBrowser==true" [routerLink]="['/products', typeItem.prodTypeId, 0]"
+                    (click)="updateCategoryStatus('All '+ typeItem.typeName + 's')">
+                      <h1>All {{typeItem.typeName}}s</h1>
+                    </a>
+                    <a *ngIf="isBrowser==false" href='http://luxedreameventhire.co.nz/products/{{typeItem.prodTypeId}}'
+                    (click)="updateCategoryStatus('All '+ typeItem.typeName + 's')">
+                      All {{typeItem.typeName}}s
+                    </a>
+                  </a>
+                  <a class="dropdown-item d-block d-md-none s2bold" *ngFor="let category of typeItem.productCategory" data-toggle="collapse"
+                    data-target=".navbar-collapse">
+                    <a class="s2bold" *ngIf="isBrowser==true" [routerLink]="[ '/products', typeItem.prodTypeId, category.categoryId ]"
+                    (click)="updateCategoryStatus(category.categoryName)">
+                      <h1>{{category.categoryName}}</h1>
+                    </a>
+                    <a *ngIf="isBrowser==false" href='http://luxedreameventhire.co.nz/products/{{typeItem.prodTypeId}}/{{category.categoryId}}'
+                    (click)="updateCategoryStatus(category.categoryName)">
+                      {{category.categoryName}}
+                    </a>
+                  </a>
+                </div>
+              </li>
+        
+
       <!--!Hire dropdown-->
-      <li class="nav-item dropdown">
+      <!-- <li class="nav-item dropdown">
         <div class="nav-link dropdown-toggle s2bold" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           <h1 class="s2bold" routerLink='/hire'>Hire</h1>
         </div>
-        <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink" *ngIf="allCategories">
+        <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink" *ngIf="allCategories"> -->
+
           <!-- !large screen dropdown -->
-          <a *ngIf="isBrowser==true" class="dropdown-item d-none d-md-block s2bold" routerLink='/hire'> <h1>All Products</h1></a>
+          <!-- <a *ngIf="isBrowser==true" class="dropdown-item d-none d-md-block s2bold" routerLink='/hire'> <h1>All Products</h1></a>
           <a *ngIf="isBrowser==false" class="dropdown-item d-none d-md-block" href='http://luxedreameventhire.co.nz/hire'> All Products</a>
           <div *ngIf="isBrowser==true">
-            <a class="dropdown-item d-none d-md-block s2bold" *ngFor="let category of allCategories"
+            <a class="dropdown-item d-none d-md-block s2bold" *ngFor="let category of allCategories[1]"
             [routerLink]="[ '/category/', category.categoryId ]"><h1>{{category.categoryName}}</h1></a>
           </div>
           <div *ngIf="isBrowser==false">
-            <a class="dropdown-item d-none d-md-block" *ngFor="let category of allCategories"
+            <a class="dropdown-item d-none d-md-block" *ngFor="let category of allCategories[1]"
             href = 'http://luxedreameventhire.co.nz/category/{{category.categoryId}}'>{{category.categoryName}}</a>
-          </div>
+          </div> -->
+
           <!-- !mobile dropdown -->
-          <a class="dropdown-item d-block d-md-none" data-toggle="collapse" data-target=".navbar-collapse">
+          <!-- <a class="dropdown-item d-block d-md-none" data-toggle="collapse" data-target=".navbar-collapse">
             <a  class="s2bold" *ngIf="isBrowser==true" routerLink='/hire'><h1>All Products</h1></a>
             <a *ngIf="isBrowser==false" href='http://luxedreameventhire.co.nz/hire'>All Products</a>
           </a>
-          <a class="dropdown-item d-block d-md-none s2bold" *ngFor="let category of allCategories" data-toggle="collapse"
+          <a class="dropdown-item d-block d-md-none s2bold" *ngFor="let category of allCategories[1]" data-toggle="collapse"
             data-target=".navbar-collapse">
             <a class="s2bold" *ngIf="isBrowser==true" [routerLink]="[ '/category/', category.categoryId ]"><h1>{{category.categoryName}}</h1></a>
             <a *ngIf="isBrowser==false" href='http://luxedreameventhire.co.nz/category/{{category.categoryId}}'>{{category.categoryName}}</a>
           </a>
         </div>
-      </li>
+      </li> -->
+
       <span class="navspace"></span>
       <!--Party services-->
       <li class="nav-item">
@@ -52,20 +114,11 @@
         </a>
       </li>
       <span class="navspace"></span>
-      <!--Party Packages-->
-      <li class="nav-item">
-        <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/packages' routerLinkActive="active">
-          <h1 class="s2bold">Party Packages</h1>
-        </a>
-        <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/packages'>
-          <h1 class="s2bold">Party Packages</h1>
-        </a>
-
-      </li>
-
+      
     </ul>
   </div>
-
+  
+  <!-- website icon -->
   <div class="mx-auto order-0">
     <a *ngIf="isBrowser==true" class="nav-link p-0 p-md-1" routerLink='/' routerLinkActive="active">
       <img class="d-none d-lg-block" src="../../../../assets/images/Asset1-4x-big.png" style="zoom:0.5;height:9.4rem;" />
@@ -76,11 +129,20 @@
       <img class="d-md-block d-lg-none" src="../../../../assets/images/Asset1-4x-mid.png" style="zoom:0.8;" />
     </a>
     <button class="navbar-toggler mr-2" type="button" data-toggle="collapse" data-target=".dual-collapse2"><span
-        class="navbar-toggler-icon"></span></button>
-  </div>
-
-  <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-    <ul class="navbar-nav" style="width:80%;margin:0 auto;">
+      class="navbar-toggler-icon"></span></button>
+    </div>
+    
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+      <ul class="navbar-nav" style="width:80%;margin:0 auto;">
+          <!--Party Packages-->
+          <li class="nav-item">
+            <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/packages' routerLinkActive="active">
+              <h1 class="s2bold">Party Packages</h1>
+            </a>
+            <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/packages'>
+              <h1 class="s2bold">Party Packages</h1>
+            </a>
+          </li>
       <!--!Gallery-->
       <li class="nav-item dropdown">
         <div class="nav-link dropdown-toggle s2bold" id="navbarDropdownMenuLink2" role="button" data-toggle="dropdown"

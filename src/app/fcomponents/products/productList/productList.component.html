@@ -3,23 +3,25 @@
 
     <!-- title -->
     <div class="row">
-        <div class="col-12 my-2 my-md-5 l1 text-center" *ngIf="typeName == 'hire' || typeName == 'category'">  Our Hires</div>
+        <div class="col-12 my-2 my-md-5 l1 text-center" *ngIf="typeName == 'products'">  Our {{typeTitle}}s</div>
         <div class="col-12 my-2 my-md-5 l1 text-center" *ngIf="typeName == 'service'">  Our Services</div>
         <div class="col-12 my-2 my-md-5 l1 text-center" *ngIf="typeName == 'package'">  Our Packages</div>
     </div>
 
     <!-- categories and search -->
-    <div *ngIf="typeName == 'hire' || typeName == 'category'" class="row justify-content-center" #categorySelection>
+    <div *ngIf="typeName === 'products' " class="row justify-content-center" #categorySelection>
         <div class="s1 border-bottom" style="padding:6px 0;">Categories:</div>
         <div class="col-8 col-md-4 p-0 border-bottom">
           <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle w-100 text-left s1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              {{selectedCate}}</button>
+            <button class="btn btn-secondary dropdown-toggle w-100 text-left s1" type="button" id="dropdownMenuButton"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="selectedCate">
+              {{selectedCate}}
+            </button>
             <div class="dropdown-menu w-100 text-left s1" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" routerLink="/hire">All Products</a>
+                <a class="dropdown-item" routerLink="/hire">All {{typeTitle}}s</a>
               <!-- <div *ngFor="let category of allCategories"> <a class="dropdown-item" (click)="changeCate(category.categoryId,$event)">{{category.categoryName}}</a></div> -->
               <div *ngFor="let category of allCategories">
-                <a class="dropdown-item" [routerLink]="[ '/category/', category.categoryId ]">
+                <a class="dropdown-item" [routerLink]="[ '/products/', category.prodTypeId, category.categoryId ]">
                   <h1 class="s1">{{category.categoryName}}</h1>
                 </a>
               </div>

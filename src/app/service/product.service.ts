@@ -13,6 +13,8 @@ export class ProductService {
   httpHeader1: HttpHeaders;
   baseUrl = environment.baseUrl;
   isShoppingCartValid = new Subject<any>();
+  categoryStatus = new Subject<string>();
+  selectedCate: string;
 constructor(
   @Inject(PLATFORM_ID) private platformId,
   private http: HttpClient
@@ -59,8 +61,12 @@ constructor(
     { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
   }
   // !Category
-  indexCategory() {
-    return this.http.get(this.baseUrl + '/ProductCategories');
+  // getAllCategories() {
+  //   return this.http.get(this.baseUrl + '/ProductCategories');
+  // }
+
+  getCategoryByType(id) {
+    return this.http.get(this.baseUrl + '/ProductCategories/GetProductCategoriesByType/' + id);
   }
   indexCategoryId(id: number) {
     return this.http.get(this.baseUrl + '/ProductCategories/' + id);
@@ -202,5 +208,15 @@ constructor(
   }
   getShoppingCartStatus() {
     return this.isShoppingCartValid.asObservable();
+  }
+  setSelectedCategory(status: string) {
+    this.selectedCate = status;
+    this.categoryStatus.next(this.selectedCate);
+  }
+  getSelectedCategory() {
+    return this.categoryStatus.asObservable();
+  }
+  getCategory() {
+    return this.selectedCate;
   }
 }

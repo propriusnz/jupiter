@@ -9,8 +9,7 @@ export class AdminPanelService {
 
   private panelStatus = new BehaviorSubject<string>('');
   currentPanel = this.panelStatus.asObservable();
-  constructor(
-  ) {}
+  constructor() {}
 
   changePanel(status: string) {
     this.panelStatus.next(status);

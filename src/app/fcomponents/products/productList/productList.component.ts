@@ -14,9 +14,11 @@ export class ProductListComponent implements OnInit {
   allProducts: any = [];
   allCategories: any = [];
   typeName: any;
-  selectedCate = 'All Products';
+  typeTitle: string;
+  selectedCate: string;
   errorMessage: string;
-  categoryId: number;
+  typeId: number;
+  categoryId: string;
   isLoading = false;
   groupedProducts: any = [];
   isProductsGrouped = false;
@@ -75,28 +77,34 @@ export class ProductListComponent implements OnInit {
   // Below error change to this format
 
   ngOnInit() {
-    // Watch the changes of categoryId and reload component
+    // Watch the changes of route and reload component
     this.route.params.subscribe(
       params => {
-        if (this.route.snapshot.params['id']) {
-          this.categoryId = this.route.snapshot.params['id'];
-          this.changeCate(this.categoryId);
-        }
+        this.typeId = this.route.snapshot.params['productTypeId'];
+        this.categoryId = this.route.snapshot.params['categoryTypeId'];
         this.typeName = this.route.snapshot.data['some_data'];
-        this.getCategories();
+        if (this.typeName === 'products') {
+          this.getCategories(this.typeId);
+          if (this.categoryId !== '0') {
+            this.changeCate(this.categoryId);
+          } else {
+            this.sortByType(this.typeId);
+          }
+        }
       }
     );
-
-    if (this.typeName == 'hire') {
-      this.sortByType(1);
-    }
-    if (this.typeName == 'service') {
+    if (this.typeName === 'service') {
       this.sortByType(2);
     }
-    if (this.typeName == 'package') {
+    if (this.typeName === 'package') {
       this.sortByType(3);
     }
-    // this.selectedCate = "All Products"
+    this.selectedCate = this.productService.getCategory();
+    this.productService.getSelectedCategory().subscribe(
+      res => {
+        this.selectedCate = res;
+      }
+    );
   }
 
   // sort product by type => Hire | Service | Package
@@ -106,8 +114,8 @@ export class ProductListComponent implements OnInit {
       (res) => {
         this.isLoading = false;
         this.allProducts = res;
-        if (id == 1) {
-          this.getCategories();
+        if (id === 1) {
+          this.getCategories(this.typeId);
         }
         if (this.allProducts.length > 11) {
           this.groupProducts();
@@ -128,16 +136,20 @@ export class ProductListComponent implements OnInit {
       if (this.allProducts.length > 11) {
         this.groupProducts();
       }
-      this.selectedCate = res[0]['category']['categoryName'];
+      // if (res[0]['category']['categoryName']) {
+      //   this.selectedCate = res[0]['category']['categoryName'];
+      // }
     }, (error) => {
       this.isLoading = false;
       console.log(error);
     });
   }
   // Get all the categories => dropDown menu
-  getCategories() {
-    this.productService.indexCategory().subscribe((res) => {
-      this.allCategories = res;
+  getCategories(typeId: number) {
+    this.productService.getCategoryByType(typeId).subscribe((res) => {
+      this.allCategories = res['productCategory'];
+      this.typeTitle = res['typeName'];
+      console.log(res);
     }, (error) => { console.log(error), this.errorMessage = 'Server fault'; });
   }
   // pagination

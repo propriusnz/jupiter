@@ -33,18 +33,18 @@ export class AdminProductsComponent implements OnInit {
         this.getProductData(this.productTypeId);
       }
     );
-
-    this.productService.getProductType().toPromise().then(typeNameList => {
-      const selectedElement = Object.values(typeNameList).find(item => item.prodTypeId === Number(this.productTypeId));
-      this.adminPanelService.changePanel(selectedElement.typeName);
-    });
-
+      this.getDefaultTitle();
     this.subscription = this.adminPanelService.currentPanel.subscribe(res => this.productTitle = res);
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
+  getDefaultTitle() {
+    this.productService.getProductType().toPromise().then(typeNameList => {
+      const selectedElement = Object.values(typeNameList).find(item => item.prodTypeId === Number(this.productTypeId));
+      this.adminPanelService.changePanel(selectedElement.typeName);
+    });
+  }
   getProductData(typeId: string) {
     this.isLoading = true;
     this.productService.indexType(Number(typeId)).subscribe(
@@ -62,8 +62,6 @@ export class AdminProductsComponent implements OnInit {
 
   openProduct(data) {
     const dialogConfig = new MatDialogConfig();
-
-    // dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.height = '750px';
     dialogConfig.width = '750px';
@@ -82,12 +80,9 @@ export class AdminProductsComponent implements OnInit {
 
   createProduct() {
     const dialogConfig = new MatDialogConfig();
-
-    // dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.height = '750px';
     dialogConfig.width = '750px';
-
 
     dialogConfig.data = {
       id: 1,
