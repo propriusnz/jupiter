@@ -2,20 +2,19 @@
 {
     color: #c48f45 !important;
 }
-a.nav-link:hover
-{
-    color: #c48f45 !important;
+a>h1:hover {
+    color: #c48f45;
 }
 a{
     text-decoration: none;
     color: inherit;
     cursor: pointer;
 }
-.navbar-collapse{
+/* .navbar-collapse{
     padding-left:20px;
-}
+} */
 .navspace{
-    width:6%;
+    width:4%;
 }
 .navbar-toggler{
     border:0;

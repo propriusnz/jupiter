@@ -35,7 +35,6 @@ export class NavbarComponent implements OnInit {
     this.productService.getProductType().toPromise()
       .then((res) => {
         this.allTypes = Object.values(res).filter((v) => v.prodTypeId !== 2 && v.prodTypeId !== 3);
-        console.log('grouped', this.allTypes);
       })
       .catch(err => console.log(err));
   }
