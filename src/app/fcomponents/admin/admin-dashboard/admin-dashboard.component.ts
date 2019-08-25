@@ -34,7 +34,7 @@ export class AdminDashboardComponent implements OnInit {
     this.productService.getCategoryByType(1).subscribe(
       (res) => {
         this.isLoadingCategory = false;
-        this.categoryList = res;
+        this.categoryList = res['productCategory'];
         // add categories into formarray
         this.categoryList.forEach(prod => {
           const control = <FormArray>this.categoryForm.controls.categoryItems;
@@ -61,12 +61,21 @@ export class AdminDashboardComponent implements OnInit {
       })
     );
   }
-  
+
   updateCategory() {
     this.isLoadingCategory = true;
     const cateList = this.categoryForm.controls.categoryItems['value'];
+    let cateUpdatedList = [];
     const id = 0;
-    this.productService.updateCategory(id, cateList).subscribe((res) => {
+    const categoryFormControls = this.categoryForm.controls.categoryItems['controls'];
+    categoryFormControls.forEach(element => {
+      if (element.dirty) {
+        cateUpdatedList.push(element.value);
+      }
+    });
+    console.log('new cateList', cateUpdatedList);
+
+    this.productService.updateCategory(id, cateUpdatedList).subscribe((res) => {
       this.isLoadingCategory = false;
       this.feedbackMessage = 'Save Successfully';
     }, (error) => {

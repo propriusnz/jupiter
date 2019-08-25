@@ -72,7 +72,7 @@ constructor(
     return this.http.get(this.baseUrl + '/ProductCategories/' + id);
   }
   updateCategory(id: number, cateList) {
-    return this.http.put(this.baseUrl + '/ProductCategories/' + id, cateList,
+    return this.http.put(this.baseUrl + '/ProductCategoriess/' + id, cateList,
     { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
   }
   deleteCategory(id: number) {
