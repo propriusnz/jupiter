@@ -14,50 +14,62 @@ export class AdminDashboardComponent implements OnInit {
   categoryForm: FormGroup;
   categoryItems: FormArray;
   feedbackMessage = '';
-
+  displayedTypeData: Array<any>;
+  selectedType: Array<any>;
+  selectedTypeId: number;
   constructor(
     private productService: ProductService,
     private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
-    this.loadCategory();
+    this.loadType();
   }
 
-    loadCategory() {
+  loadType(): Promise<any> {
     this.isLoadingCategory = true;
+    return this.productService.getProductType().toPromise()
+      .then((data) => {
+        this.isLoadingCategory = false;
+        this.displayedTypeData = Object.values(data).filter((item) => {
+          return item.prodTypeId !== 2 && item.prodTypeId !== 3;
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        this.isLoadingCategory = false;
+      });
+  }
+
+  loadCategory(typeId: number) {
+    this.selectedTypeId = typeId;
     // build category form
     this.categoryForm = this.formBuilder.group({
       categoryItems: this.formBuilder.array([])
     });
     // get categories
-    this.productService.getCategoryByType(1).subscribe(
-      (res) => {
-        this.isLoadingCategory = false;
-        this.categoryList = res['productCategory'];
-        // add categories into formarray
-        this.categoryList.forEach(prod => {
-          const control = <FormArray>this.categoryForm.controls.categoryItems;
-          control.push(
-            this.formBuilder.group({
-              categoryId: prod.categoryId,
-              categoryName: prod.categoryName
-            })
-          );
-        });
-      }, (error) => {
-        this.isLoadingCategory = false;
-        console.log(error);
-      }
-    );
+    this.selectedType = this.displayedTypeData.filter(item => item.prodTypeId === typeId);
+
+    // add categories into formarray
+    this.selectedType['0'].productCategory.forEach(prod => {
+      const control = <FormArray>this.categoryForm.controls.categoryItems;
+      control.push(
+        this.formBuilder.group({
+          categoryId: prod.categoryId,
+          categoryName: prod.categoryName,
+          prodTypeId: typeId
+        })
+      );
+    });
   }
 
-  addCategory() {
+  addCategory(): void {
     const control = <FormArray>this.categoryForm.controls.categoryItems;
     control.push(
       this.formBuilder.group({
         categoryId: 0,
-        categoryName: null
+        categoryName: null,
+        prodTypeId: this.selectedTypeId
       })
     );
   }

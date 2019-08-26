@@ -2,9 +2,22 @@
     <h1>Welcome to Dashboard</h1><br>
     <hr><br>
     <!-- Edit productCategory -->
-    <div class="row ">
+    <h2>Edit Categories </h2>
+    <div class="row">
       <div class="col-6">
-        <h2>Edit Categories </h2>
+        <div class="dropdown">
+          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Specify the product type
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" *ngFor="let type of displayedTypeData" (click)="loadCategory(type.prodTypeId)">
+              {{type.typeName}}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6" *ngIf="selectedType">
           <form [formGroup]="categoryForm">
               <div formArrayName="categoryItems">
                   <div *ngFor="let cate of categoryForm.controls.categoryItems.controls, index as i">
@@ -29,6 +42,12 @@
           </div>
          <div>{{feedbackMessage}}</div>
       </div>
+
+
+      <!-- <div *ngIf="selectedType">
+        <div *ngFor="let cate of selectedType['0'].productCategory">{{cate.categoryName}}</div>
+      </div> -->
+
     </div><br><br>
     </div>
     
