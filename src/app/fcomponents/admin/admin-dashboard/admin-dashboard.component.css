@@ -2,3 +2,6 @@
     color:red;
     cursor: pointer;
 }
+.dropdown-item:hover {
+    cursor: pointer;
+}

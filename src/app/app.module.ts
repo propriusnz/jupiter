@@ -43,7 +43,7 @@ import { AdminSideBarComponent } from './fcomponents/admin/admin-sideBar/admin-s
 import { AdminCartComponent } from './fcomponents/admin/admin-cart/admin-cart.component';
 import { AdminDashboardComponent } from './fcomponents/admin/admin-dashboard/admin-dashboard.component';
 import { AdminGalleriesComponent } from './fcomponents/admin/admin-galleries/admin-galleries.component';
-
+import { AdminImagesComponent } from './fcomponents/admin/admin-images/admin-images.component';
 // All Routes follow
 const appRoutes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -66,6 +66,7 @@ const appRoutes: Routes = [
       {path: 'adminProducts/:productTypeId', component: AdminProductsComponent},
       {path: 'adminCarts', component: AdminCartComponent},
       {path: 'adminGalleries', component: AdminGalleriesComponent},
+      {path: 'adminImages', component: AdminImagesComponent},
     ]
   },
   {path: 'login', component: LoginComponent},
@@ -103,7 +104,8 @@ const appRoutes: Routes = [
     AdminSideBarComponent,
     AdminCartComponent,
     AdminDashboardComponent,
-    AdminGalleriesComponent
+    AdminGalleriesComponent,
+    AdminImagesComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
