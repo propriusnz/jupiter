@@ -5,6 +5,8 @@ import { AdminPanelService } from '../../../service/admin-panel.service';
 import { ProductDialogComponent } from '../../AdminDialogs/productDialog/productDialog.component';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Subscription } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 
 
 @Component({
@@ -18,6 +20,7 @@ export class AdminProductsComponent implements OnInit {
   isLoading = false;
   productTitle: string;
   subscription: Subscription;
+  searchField: FormControl = new FormControl();
 
   constructor(
     private route: ActivatedRoute,
@@ -35,6 +38,13 @@ export class AdminProductsComponent implements OnInit {
     );
       this.getDefaultTitle();
     this.subscription = this.adminPanelService.currentPanel.subscribe(res => this.productTitle = res);
+    const searchProduct$ = this.searchField.valueChanges.pipe(
+      debounceTime(1000),
+      distinctUntilChanged(),
+      switchMap((query) => this.productService.searchProducts(query))
+    ).subscribe(result => this.displayedProductData = result['data']);
+
+    this.subscription.add(searchProduct$);
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

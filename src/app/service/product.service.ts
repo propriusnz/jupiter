@@ -37,9 +37,13 @@ export class ProductService {
     return this.http.post(this.baseUrl + '/Products', newProduct,
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
-  deleteProduct(id) {
+  deleteProduct(id: number) {
     return this.http.delete(this.baseUrl + '/Products/' + id,
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
+  }
+  searchProducts(name: string) {
+    return this.http.get(this.baseUrl + '/Products/GetSearchedProduct/' + name,
+    { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   // !Gallery
   indexGallery() {
