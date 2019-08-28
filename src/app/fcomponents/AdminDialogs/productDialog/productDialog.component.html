@@ -27,15 +27,18 @@
         <input class="form-control"  min="0" type="number" name="discount" placeholder="Discount" [(ngModel)]="productForm.discount" #discount="ngModel">
     </div>            
      <!-- choose category -->
-    <div class="col-12" *ngIf="displayData && productForm.prodTypeId !== 2 || 3 ">Choose category of product:</div>
+    <div class="col-12" *ngIf="isCategoryDropdownShown('update') ">
+        Choose category of product:
+    </div>
     <div class="form-group col-12">
         <!-- !when update hire product -->
-        <select *ngIf="displayData && productForm.prodTypeId==1" class="custom-select form-control" name="categoryId"
+        <select *ngIf="isCategoryDropdownShown('update')" class="custom-select form-control" name="categoryId"
         [(ngModel)]="productForm.categoryId" #categoryId="ngModel">
             <option *ngFor="let cate of allCategories, index as i" value= {{cate.categoryId}} [selected]="displayData.categoryId == cate.categoryId">{{cate.categoryName}}</option>
         </select>
         <!-- !when create hire product -->
-        <select *ngIf="!displayData && productForm.prodTypeId==1" class="custom-select form-control" name="categoryId" [(ngModel)]="productForm.categoryId" #categoryId="ngModel">
+        <select *ngIf="isCategoryDropdownShown('create')" class="custom-select form-control" name="categoryId"
+        [(ngModel)]="productForm.categoryId" #categoryId="ngModel">
             <option value="null" disabled selected>Choose a product type</option>
             <option *ngFor="let cate of allCategories, index as i" value= {{cate.categoryId}}>{{cate.categoryName}}</option>
         </select>

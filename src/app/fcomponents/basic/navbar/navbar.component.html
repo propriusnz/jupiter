@@ -12,7 +12,7 @@
       </li>
       <!-- <span class="navspace"></span> -->
       <!-- !Products -->
-      <li class="nav-item dropdown pl-lg-3" *ngFor="let typeItem of allTypes, index as i">
+      <li class="nav-item dropdown pl-lg-2" *ngFor="let typeItem of allTypes, index as i">
           <div class="nav-link dropdown-toggle s2bold" id="navbarDropdownMenuLink{{i}}" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             <h1 class="s2bold" [routerLink]="['/products', typeItem.prodTypeId, 0]" (click)="updateCategoryStatus('All '+ typeItem.typeName + 's')">{{typeItem.typeName}}</h1>
@@ -105,7 +105,7 @@
 
       <!-- <span class="navspace"></span> -->
       <!--!Party services-->
-      <li class="nav-item">
+      <li class="nav-item pl-lg-2">
         <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/services' routerLinkActive="active">
           <h1 class="s2bold">Party Services</h1>
         </a>

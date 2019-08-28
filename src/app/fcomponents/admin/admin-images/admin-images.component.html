@@ -1,3 +1,27 @@
-<div class="row">
-  
+<div class="container">
+    <br>
+    <h3>Edit Product Images</h3>
+    <br>
+    <!-- !show images -->
+    <div *ngIf="displayedImages" class="row mb-5" >
+        <div *ngFor="let img of displayedImages" class="ml-3 col">
+            <img src="{{baseImageUrl}}{{img.imageUrl}}"><br>
+            <!-- !delete image -->
+            <button type="button" class="btn btn-outline-danger btn-sm mt-2" id="{{img.id}}" (click)="removeImageData(img.id)" *ngIf="!isLoading" [disabled] = "isLoading">Delete</button>
+        </div>
+    </div>
+    <div class="spinner-border text-info" role="status" *ngIf="isLoading">
+            <span class="sr-only">Loading...</span>
+    </div>
+    <!-- !upload img -->
+    <div class="mt-3">
+        <input #imageInput type="file" (change)="onFileSelected($event)">
+        <button type="button" class="btn btn-outline-info btn-sm" (click)="updateImageData()" [disabled] = "isLoading">upload</button>    
+    </div> 
+    <div *ngIf="isImageEmpty" style="color:red"> Please add a image</div>
+    <br>
+    <div *ngIf="feedbackMessage">
+        {{feedbackMessage}}
+    </div>
+
 </div>

@@ -17,6 +17,7 @@ export class HomepageComponent implements OnInit {
   isBrowser: Boolean = false;
   windowResize: number;
   baseImageLink = environment.baseLink;
+  displayedCarouselImages: any;
   @ViewChild('bgat') bgat: ElementRef;
   @ViewChild('list') list: ElementRef;
   @HostListener('window:resize', ['$event'])
@@ -60,6 +61,7 @@ export class HomepageComponent implements OnInit {
       };
     }
     this.getSpecials();
+    this.getCarouselImages();
   }
   // control scrolling speed
   backgroundScroll(e) {
@@ -95,6 +97,13 @@ export class HomepageComponent implements OnInit {
       }
     }
   }
-
+  getCarouselImages() {
+    this.productService.getHomepageCarousel().subscribe((res) => {
+      this.displayedCarouselImages = res;
+      console.log(res);
+    }, (err) => {
+      console.log(err);
+    });
+  }
 
 }
