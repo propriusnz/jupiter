@@ -6,7 +6,7 @@ import { ProductDialogComponent } from '../../AdminDialogs/productDialog/product
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, switchMap, filter } from 'rxjs/operators';
 
 
 @Component({
@@ -34,16 +34,12 @@ export class AdminProductsComponent implements OnInit {
       params => {
         this.productTypeId = this.route.snapshot.params['productTypeId'];
         this.getProductData(this.productTypeId);
+        this.searchField.reset();
       }
     );
-      this.getDefaultTitle();
+    this.getDefaultTitle();
     this.subscription = this.adminPanelService.currentPanel.subscribe(res => this.productTitle = res);
-    const searchProduct$ = this.searchField.valueChanges.pipe(
-      debounceTime(1000),
-      distinctUntilChanged(),
-      switchMap((query) => this.productService.searchProducts(query))
-    ).subscribe(result => this.displayedProductData = result['data']);
-
+    const searchProduct$ = this.liveSearchProduct();
     this.subscription.add(searchProduct$);
   }
   ngOnDestroy(): void {
@@ -60,7 +56,7 @@ export class AdminProductsComponent implements OnInit {
     this.productService.indexType(Number(typeId)).subscribe(
       (res) => {
         this.isLoading = false;
-        this.displayedProductData = res;
+        this.displayedProductData = res['data'];
         console.log(res);
       },
       (err) => {
@@ -119,5 +115,14 @@ export class AdminProductsComponent implements OnInit {
         }
       );
     }
+  }
+
+  liveSearchProduct() {
+    return this.searchField.valueChanges.pipe(
+      debounceTime(1000),
+      distinctUntilChanged(),
+      switchMap((query) => query ?
+        this.productService.searchProducts(Number(this.productTypeId), query) : this.productService.indexType(Number(this.productTypeId)))
+    ).subscribe(result => this.displayedProductData = result['data']);
   }
 }

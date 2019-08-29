@@ -24,3 +24,6 @@ td{
     color:rgb(55, 162, 233);
     cursor: pointer;
 }
+input{
+    width:300px;
+}

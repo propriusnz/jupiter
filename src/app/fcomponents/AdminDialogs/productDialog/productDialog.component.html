@@ -46,7 +46,8 @@
     <!-- choose special order displayed on homepage-->
     <div class="col-12">Display order (display from num 1 to 100):</div>
     <div class="form-group col-12">
-        <input class="form-control" type="number" name="specialOrder" placeholder="special order" [(ngModel)]="productForm.specialOrder" #specialOrder="ngModel">
+        <input class="form-control" type="number" name="specialOrder" placeholder="special order" min="0"
+        [(ngModel)]="productForm.specialOrder" #specialOrder="ngModel">
     </div>            
     <!-- Details of Product -->
     <div style="margin-top:14px;" class="col-12" *ngIf="status=='update'">
