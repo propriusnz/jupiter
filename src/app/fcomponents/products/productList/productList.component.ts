@@ -74,10 +74,6 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit() {
     this.routerSubscribe();
-    // Watch the changes of route and reload component
-    if (this.typeName === 'service') {
-      this.sortByType(2);
-    }
     if (this.typeName === 'package') {
       this.sortByType(3);
     }
@@ -94,7 +90,7 @@ export class ProductListComponent implements OnInit {
         this.typeId = this.route.snapshot.params['productTypeId'];
         this.categoryId = this.route.snapshot.params['categoryTypeId'];
         this.typeName = this.route.snapshot.data['some_data'];
-        if (this.typeName === 'products') {
+        if (this.typeName !== 'package') {
           this.getCategories(this.typeId);
           if (this.categoryId !== '0') {
             this.changeCate(this.categoryId);

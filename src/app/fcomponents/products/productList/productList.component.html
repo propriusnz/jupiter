@@ -3,13 +3,13 @@
 
     <!-- title -->
     <div class="row">
-        <div class="col-12 my-2 my-md-5 l1 text-center" *ngIf="typeName == 'products'">  Our {{typeTitle}}s</div>
-        <div class="col-12 my-2 my-md-5 l1 text-center" *ngIf="typeName == 'service'">  Our Services</div>
-        <div class="col-12 my-2 my-md-5 l1 text-center" *ngIf="typeName == 'package'">  Our Packages</div>
+        <div class="col-12 my-2 my-md-5 l1 text-center" *ngIf="typeName === 'products'">  Our {{typeTitle}}s</div>
+        <div class="col-12 my-2 my-md-5 l1 text-center" *ngIf="typeName === 'services'">  Our Services</div>
+        <div class="col-12 my-2 my-md-5 l1 text-center" *ngIf="typeName === 'package'">  Our Packages</div>
     </div>
 
     <!-- categories and search -->
-    <div *ngIf="typeName === 'products' " class="row justify-content-center" #categorySelection>
+    <div *ngIf="typeName !== 'package' " class="row justify-content-center" #categorySelection>
         <div class="s1 border-bottom" style="padding:6px 0;">Categories:</div>
         <div class="col-8 col-md-4 p-0 border-bottom">
           <div class="dropdown">
@@ -18,11 +18,11 @@
               {{selectedCate}}
             </button>
             <div class="dropdown-menu w-100 text-left s1" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" [routerLink]="[ '/products', 1, 0 ]" (click)="changeCate(0,$event)">
+                <a class="dropdown-item" [routerLink]="[ '/'+ typeName, typeId, 0 ]" (click)="changeCate(0,$event)">
                   All {{typeTitle}}s
                 </a>
               <div *ngFor="let category of allCategories">
-                <a class="dropdown-item" [routerLink]="[ '/products', 1, category.categoryId ]" (click)="changeCate(category.categoryId,$event)">
+                <a class="dropdown-item" [routerLink]="[ '/'+ typeName, typeId, category.categoryId ]" (click)="changeCate(category.categoryId,$event)">
                   {{category.categoryName}}
                 </a>
               </div>

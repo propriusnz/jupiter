@@ -53,7 +53,7 @@ const appRoutes: Routes = [
   {path: 'faq', component: FaqComponent},
   // {path: 'category/:id', component: ProductListComponent, data : {some_data : 'category'}},
   {path: 'products/:productTypeId/:categoryTypeId', component: ProductListComponent, data : {some_data : 'products'}},
-  {path: 'services', component: ProductListComponent, data : {some_data : 'service'}},
+  {path: 'services/:productTypeId/:categoryTypeId', component: ProductListComponent, data : {some_data : 'services'}},
   {path: 'packages', component: ProductListComponent, data : {some_data : 'package'}},
   {path: 'product/:id', component: ProductComponent},
   {path: 'galleries', component: GalleryListComponent},

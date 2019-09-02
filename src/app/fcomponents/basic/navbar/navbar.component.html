@@ -83,7 +83,7 @@
             (click)="updateCategoryStatus('All Hires')">
             <h1>All Hires</h1>
           </a>
-          <a *ngIf="isBrowser==false" class="dropdown-item d-none d-md-block" href='http://luxedreameventhire.co.nz/products/1'
+          <a *ngIf="isBrowser==false" class="dropdown-item d-none d-md-block" href='http://luxedreameventhire.co.nz/products/1/0'
             (click)="updateCategoryStatus('All Hires')">
             All Hires
           </a>
@@ -108,7 +108,7 @@
               (click)="updateCategoryStatus('All Hires')">
               <h1>All Hires</h1>
             </a>
-            <a *ngIf="isBrowser==false" href='http://luxedreameventhire.co.nz/products/1'
+            <a *ngIf="isBrowser==false" href='http://luxedreameventhire.co.nz/products/1/0'
               (click)="updateCategoryStatus('All Hires')">
               All Hires
             </a>
@@ -129,42 +129,42 @@
 
       <!-- <span class="navspace"></span> -->
       <!--!Party services-->
-      <li class="nav-item pl-lg-2">
+      <!-- <li class="nav-item pl-lg-2">
         <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/services' routerLinkActive="active">
           <h1 class="s2bold">Party Services</h1>
         </a>
         <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/services'>
           <h1 class="s2bold">Party Services</h1>
         </a>
-      </li>
+      </li> -->
 
       <!-- *duplicate hire start -->
       <li class="nav-item dropdown">
-          <div class="nav-link dropdown-toggle s2bold" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+          <div class="nav-link dropdown-toggle s2bold" id="navbarDropdownMenuLink2" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            <h1 class="s2bold" [routerLink]="['/products', 1, 0]" (click)="updateCategoryStatus('All Hires')">Hire</h1>
+            <h1 class="s2bold" [routerLink]="['/services', 2, 0]" (click)="updateCategoryStatus('All Services')">Party Services</h1>
           </div>
-          <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink" *ngIf="hireCategories">
+          <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink2" *ngIf="serviceCategories">
   
             <!-- !large screen dropdown -->
-            <a *ngIf="isBrowser==true" class="dropdown-item d-none d-md-block s2bold" [routerLink]="['/products', 1, 0]"
-              (click)="updateCategoryStatus('All Hires')">
-              <h1>All Hires</h1>
+            <a *ngIf="isBrowser==true" class="dropdown-item d-none d-md-block s2bold" [routerLink]="['/services', 2, 0]"
+              (click)="updateCategoryStatus('All Services')">
+              <h1>All Services</h1>
             </a>
-            <a *ngIf="isBrowser==false" class="dropdown-item d-none d-md-block" href='http://luxedreameventhire.co.nz/products/1'
-              (click)="updateCategoryStatus('All Hires')">
-              All Hires
+            <a *ngIf="isBrowser==false" class="dropdown-item d-none d-md-block" href='http://luxedreameventhire.co.nz/services/2/0'
+              (click)="updateCategoryStatus('All Services')">
+              All Services
             </a>
             <div *ngIf="isBrowser==true">
-              <a class="dropdown-item d-none d-md-block s2bold" *ngFor="let category of hireCategories"
-                [routerLink]="[ '/products', 1, category.categoryId ]"
+              <a class="dropdown-item d-none d-md-block s2bold" *ngFor="let category of serviceCategories"
+                [routerLink]="[ '/services', 2, category.categoryId ]"
                 (click)="updateCategoryStatus(category.categoryName)">
                 <h1>{{category.categoryName}}</h1>
               </a>
             </div>
             <div *ngIf="isBrowser==false">
-              <a class="dropdown-item d-none d-md-block" *ngFor="let category of hireCategories"
-                href = 'http://luxedreameventhire.co.nz/products/1/{{category.categoryId}}'
+              <a class="dropdown-item d-none d-md-block" *ngFor="let category of serviceCategories"
+                href = 'http://luxedreameventhire.co.nz/services/2/{{category.categoryId}}'
                 (click)="updateCategoryStatus(category.categoryName)">
                 {{category.categoryName}}
               </a>
@@ -172,22 +172,22 @@
   
             <!-- !mobile dropdown -->
             <a class="dropdown-item d-block d-md-none" data-toggle="collapse" data-target=".navbar-collapse">
-              <a  class="s2bold" *ngIf="isBrowser==true" [routerLink]="['/products', 1, 0]"
-                (click)="updateCategoryStatus('All Hires')">
-                <h1>All Hires</h1>
+              <a  class="s2bold" *ngIf="isBrowser==true" [routerLink]="['/services', 2, 0]"
+                (click)="updateCategoryStatus('All Services')">
+                <h1>All Services</h1>
               </a>
-              <a *ngIf="isBrowser==false" href='http://luxedreameventhire.co.nz/products/1'
-                (click)="updateCategoryStatus('All Hires')">
-                All Hires
+              <a *ngIf="isBrowser==false" href='http://luxedreameventhire.co.nz/services/2/0'
+                (click)="updateCategoryStatus('All Services')">
+                All Services
               </a>
             </a>
-            <a class="dropdown-item d-block d-md-none s2bold" *ngFor="let category of hireCategories" data-toggle="collapse"
+            <a class="dropdown-item d-block d-md-none s2bold" *ngFor="let category of serviceCategories" data-toggle="collapse"
               data-target=".navbar-collapse">
-              <a class="s2bold" *ngIf="isBrowser==true" [routerLink]="[ '/products', 1, category.categoryId ]"
+              <a class="s2bold" *ngIf="isBrowser==true" [routerLink]="[ '/services', 2, category.categoryId ]"
                 (click)="updateCategoryStatus(category.categoryName)">
                 <h1>{{category.categoryName}}</h1>
               </a>
-              <a *ngIf="isBrowser==false" href = 'http://luxedreameventhire.co.nz/products/1/{{category.categoryId}}'
+              <a *ngIf="isBrowser==false" href = 'http://luxedreameventhire.co.nz/services/2/{{category.categoryId}}'
                 (click)="updateCategoryStatus(category.categoryName)">
                 {{category.categoryName}}
               </a>
