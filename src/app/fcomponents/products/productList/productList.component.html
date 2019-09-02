@@ -18,13 +18,19 @@
               {{selectedCate}}
             </button>
             <div class="dropdown-menu w-100 text-left s1" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" routerLink="/hire">All {{typeTitle}}s</a>
-              <!-- <div *ngFor="let category of allCategories"> <a class="dropdown-item" (click)="changeCate(category.categoryId,$event)">{{category.categoryName}}</a></div> -->
+                <a class="dropdown-item" [routerLink]="[ '/products', 1, 0 ]" (click)="changeCate(0,$event)">
+                  All {{typeTitle}}s
+                </a>
               <div *ngFor="let category of allCategories">
-                <a class="dropdown-item" [routerLink]="[ '/products/', category.prodTypeId, category.categoryId ]">
-                  <h1 class="s1">{{category.categoryName}}</h1>
+                <a class="dropdown-item" [routerLink]="[ '/products', 1, category.categoryId ]" (click)="changeCate(category.categoryId,$event)">
+                  {{category.categoryName}}
                 </a>
               </div>
+            <!-- <div *ngFor="let category of allCategories">
+                <a class="dropdown-item" [routerLink]="[ '/products/', typeId, category.categoryId ]" (click)="updateCategoryStatus(category.categoryName)">
+                  <h1 class="s1">{{category.categoryName}}</h1>
+                </a>
+            </div> -->
             </div>
           </div>
         </div>

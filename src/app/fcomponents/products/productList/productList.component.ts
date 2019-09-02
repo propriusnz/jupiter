@@ -38,8 +38,6 @@ export class ProductListComponent implements OnInit {
     this.titleService.setTitle('Luxe Dream Auckland Event and Party Hire | Hire');
   }
 
-
-
   // with initiation, if type 1 or (Hire) run function with category selection, If other types, simply get data from database
   initiation() {
     // See if is type 1
@@ -72,13 +70,26 @@ export class ProductListComponent implements OnInit {
     // Process what data to display
   }
 
-
-
   // Below error change to this format
 
   ngOnInit() {
+    this.routerSubscribe();
     // Watch the changes of route and reload component
-    this.route.params.subscribe(
+    if (this.typeName === 'service') {
+      this.sortByType(2);
+    }
+    if (this.typeName === 'package') {
+      this.sortByType(3);
+    }
+    this.selectedCate = this.productService.getCategory();
+    this.productService.getSelectedCategory().subscribe(
+      res => {
+        this.selectedCate = res;
+      }
+    );
+  }
+  routerSubscribe() {
+    return this.route.params.subscribe(
       params => {
         this.typeId = this.route.snapshot.params['productTypeId'];
         this.categoryId = this.route.snapshot.params['categoryTypeId'];
@@ -93,23 +104,11 @@ export class ProductListComponent implements OnInit {
         }
       }
     );
-    if (this.typeName === 'service') {
-      this.sortByType(2);
-    }
-    if (this.typeName === 'package') {
-      this.sortByType(3);
-    }
-    this.selectedCate = this.productService.getCategory();
-    this.productService.getSelectedCategory().subscribe(
-      res => {
-        this.selectedCate = res;
-      }
-    );
   }
-
   // sort product by type => Hire | Service | Package
   sortByType(id: number) {
     this.isLoading = true;
+    this.clearPageStatus();
     this.productService.indexType(id).subscribe(
       (res) => {
         this.isLoading = false;
@@ -127,18 +126,22 @@ export class ProductListComponent implements OnInit {
   // sort product by category
   changeCate(id, e?) {
     this.isLoading = true;
+    this.clearPageStatus();
     if (e) {
       this.selectedCate = e.srcElement.innerHTML;
     }
+    if (id === 0) {
+      return this.sortByType(this.typeId);
+    }
+    return this.getCategoryById(id);
+  }
+  getCategoryById(id: number) {
     this.productService.indexCategoryId(id).subscribe((res) => {
       this.isLoading = false;
       this.allProducts = res;
       if (this.allProducts.length > 11) {
         this.groupProducts();
       }
-      // if (res[0]['category']['categoryName']) {
-      //   this.selectedCate = res[0]['category']['categoryName'];
-      // }
     }, (error) => {
       this.isLoading = false;
       console.log(error);
@@ -165,5 +168,9 @@ export class ProductListComponent implements OnInit {
     this.currentPageNumber = page;
     this.allProducts = this.groupedProducts[page];
     this.categorySelectionElement.nativeElement.scrollIntoView();
+  }
+  clearPageStatus() {
+    this.groupedProducts = [];
+    this.isProductsGrouped = false;
   }
 }

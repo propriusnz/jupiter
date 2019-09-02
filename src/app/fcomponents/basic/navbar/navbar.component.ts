@@ -10,7 +10,8 @@ import { ProductService } from '../../../service/product.service';
 })
 
 export class NavbarComponent implements OnInit {
-  allTypes: any = [];
+  hireCategories: any = [];
+  serviceCategories: any = [];
   isBrowser = false;
   galleriesData: any;
   constructor(
@@ -31,13 +32,17 @@ export class NavbarComponent implements OnInit {
     this.getGalleryTypes();
   }
   // get all the categories and show on navbar
-  getCategories() {
+  getCategories(): void {
     this.productService.getProductType().toPromise()
       .then((res) => {
-        this.allTypes = Object.values(res).filter((v) => v.prodTypeId !== 2 && v.prodTypeId !== 3);
+        const returnData = [...Object.values(res)];
+        this.hireCategories = returnData.filter((v) => v.typeName === 'Hire')['0']['productCategory']
+        this.serviceCategories = returnData.filter((v) => v.typeName === 'Party Services')['0']['productCategory'];
+        console.log(returnData.filter((v) => v.typeName === 'Hire'));
       })
       .catch(err => console.log(err));
   }
+
   getGalleryTypes() {
     this.productService.getEventType().subscribe(
       (res) => {
