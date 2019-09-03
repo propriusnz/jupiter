@@ -258,7 +258,7 @@ export class ProductDialogComponent implements OnInit {
     });
   }
   isCategoryDropdownShown(status: string): boolean {
-    const isTypeIdCorrect: boolean = this.productForm.prodTypeId !== 2 && this.productForm.prodTypeId !== 3;
+    const isTypeIdCorrect: boolean = this.productForm.prodTypeId !== 3;
     switch (status) {
       case 'update':
         if (this.displayData && isTypeIdCorrect) {
