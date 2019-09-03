@@ -30,7 +30,7 @@ export class AdminImagesComponent implements OnInit {
     this.productService.getHomepageCarousel().subscribe((res) => {
       this.isLoading = false;
       this.displayedImages = res;
-      console.log(res);
+      // console.log(res);
     }, (err) => {
       this.isLoading = false;
       console.log(err);

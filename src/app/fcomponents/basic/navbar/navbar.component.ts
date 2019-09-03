@@ -38,7 +38,6 @@ export class NavbarComponent implements OnInit {
         const returnData = [...Object.values(res)];
         this.hireCategories = returnData.filter((v) => v.typeName === 'Hire')['0']['productCategory']
         this.serviceCategories = returnData.filter((v) => v.typeName === 'Party Services')['0']['productCategory'];
-        console.log(returnData.filter((v) => v.typeName === 'Hire'));
       })
       .catch(err => console.log(err));
   }

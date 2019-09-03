@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light border-bottom p-0 lspace-3">
   <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-    <ul class="navbar-nav" style="width:90%; margin:0 auto;">
+    <ul class="navbar-nav" style="width:80%; margin:0 auto;">
+      <span class="navspace"></span>
       <!--!Home-->
       <li class="nav-item">
         <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/' routerLinkActive="active">
@@ -10,7 +11,7 @@
           <h1 class="s2bold">Home</h1>
         </a>
       </li>
-      <!-- <span class="navspace"></span> -->
+      <span class="navspace"></span>
       <!-- !Products -->
       <!-- <li class="nav-item dropdown pl-lg-2" *ngFor="let typeItem of allTypes, index as i">
           <div class="nav-link dropdown-toggle s2bold" id="navbarDropdownMenuLink{{i}}" role="button" data-toggle="dropdown"
@@ -83,7 +84,7 @@
             (click)="updateCategoryStatus('All Hires')">
             <h1>All Hires</h1>
           </a>
-          <a *ngIf="isBrowser==false" class="dropdown-item d-none d-md-block" href='http://luxedreameventhire.co.nz/products/1/0'
+          <a *ngIf="isBrowser==false" class="dropdown-item d-none d-md-block s2bold" href='http://luxedreameventhire.co.nz/products/1/0'
             (click)="updateCategoryStatus('All Hires')">
             All Hires
           </a>
@@ -127,18 +128,8 @@
         </div>
       </li>
 
-      <!-- <span class="navspace"></span> -->
+      <span class="navspace"></span>
       <!--!Party services-->
-      <!-- <li class="nav-item pl-lg-2">
-        <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/services' routerLinkActive="active">
-          <h1 class="s2bold">Party Services</h1>
-        </a>
-        <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/services'>
-          <h1 class="s2bold">Party Services</h1>
-        </a>
-      </li> -->
-
-      <!-- *duplicate hire start -->
       <li class="nav-item dropdown">
           <div class="nav-link dropdown-toggle s2bold" id="navbarDropdownMenuLink2" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
@@ -194,8 +185,17 @@
             </a>
           </div>
         </li>
-      <!-- *duplicate hire end -->
+      <span class="navspace"></span>
 
+      <!-- !Party Packages-->
+      <li class="nav-item">
+        <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/packages' routerLinkActive="active">
+          <h1 class="s2bold">Party Packages</h1>
+        </a>
+        <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/packages'>
+          <h1 class="s2bold">Party Packages</h1>
+        </a>
+      </li>
     </ul>
   </div>
   
@@ -214,16 +214,7 @@
     </div>
     
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-      <ul class="navbar-nav" style="width:90%;margin:0 auto;">
-      <!-- !Party Packages-->
-        <li class="nav-item">
-          <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/packages' routerLinkActive="active">
-            <h1 class="s2bold">Party Packages</h1>
-          </a>
-          <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/packages'>
-            <h1 class="s2bold">Party Packages</h1>
-          </a>
-        </li>
+      <ul class="navbar-nav" style="width:80%;margin:0 auto;">
         <span class="navspace"></span>
       <!--!Gallery-->
       <li class="nav-item dropdown">

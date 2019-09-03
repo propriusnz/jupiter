@@ -85,7 +85,7 @@ export class AdminDashboardComponent implements OnInit {
         cateUpdatedList.push(element.value);
       }
     });
-    console.log('new cateList', cateUpdatedList);
+    // console.log('new cateList', cateUpdatedList);
 
     this.productService.updateCategory(id, cateUpdatedList).subscribe((res) => {
       this.isLoadingCategory = false;

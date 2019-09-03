@@ -10,11 +10,9 @@ a{
     color: inherit;
     cursor: pointer;
 }
-/* .navbar-collapse{
-    padding-left:20px;
-} */
+
 .navspace{
-    width:4%;
+    width:8%;
 }
 .navbar-toggler{
     border:0;

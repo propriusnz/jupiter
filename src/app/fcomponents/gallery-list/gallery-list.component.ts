@@ -28,7 +28,6 @@ export class GalleryListComponent implements OnInit {
     this.productService.getEventType().subscribe(
       (res) => {
         this.eventTypeList = res;
-        console.log(res);
       }, (error) => {
         console.log(error);
       }

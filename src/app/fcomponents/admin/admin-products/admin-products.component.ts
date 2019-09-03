@@ -57,7 +57,6 @@ export class AdminProductsComponent implements OnInit {
       (res) => {
         this.isLoading = false;
         this.displayedProductData = res['data'];
-        console.log(res);
       },
       (err) => {
         this.isLoading = false;

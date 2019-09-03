@@ -87,6 +87,7 @@ export class ProductListComponent implements OnInit {
   routerSubscribe() {
     return this.route.params.subscribe(
       params => {
+        this.clearPageStatus();
         this.typeId = this.route.snapshot.params['productTypeId'];
         this.categoryId = this.route.snapshot.params['categoryTypeId'];
         this.typeName = this.route.snapshot.data['some_data'];
@@ -123,9 +124,9 @@ export class ProductListComponent implements OnInit {
   changeCate(id, e?) {
     this.isLoading = true;
     this.clearPageStatus();
-    if (e) {
-      this.selectedCate = e.srcElement.innerHTML;
-    }
+    // if (e) {
+    //   this.selectedCate = e.srcElement.innerText;
+    // }
     if (id === 0) {
       return this.sortByType(this.typeId);
     }
@@ -148,7 +149,11 @@ export class ProductListComponent implements OnInit {
     this.productService.getCategoryByType(typeId).subscribe((res) => {
       this.allCategories = res['productCategory'];
       this.typeTitle = res['typeName'];
-      console.log(res);
+      if (Number(this.categoryId) === 0) {
+        this.selectedCate = 'All ' + this.typeTitle;
+      } else {
+        this.selectedCate = Object.values(this.allCategories).filter((v) => v['categoryId'] === Number(this.categoryId))[0]['categoryName'];
+      }
     }, (error) => { console.log(error), this.errorMessage = 'Server fault'; });
   }
   // pagination

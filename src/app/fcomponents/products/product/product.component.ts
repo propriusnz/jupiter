@@ -44,7 +44,6 @@ export class ProductComponent implements OnInit {
       (res) => {
         this.isLoading = false;
         this.productDetail = res;
-        console.log('res', this.productDetail);
         this.createItem(res);
         this.prodMediaUrl =  this.productDetail.productMedia;
       },

@@ -72,7 +72,6 @@ export class HomepageComponent implements OnInit {
     this.productService.getSpecialProduct().subscribe(
       (res) => {
         this.specialProducts = res['data'];
-        console.log(this.specialProducts);
         this.separateSpecials();
       },
       (error) => {
@@ -100,7 +99,6 @@ export class HomepageComponent implements OnInit {
   getCarouselImages() {
     this.productService.getHomepageCarousel().subscribe((res) => {
       this.displayedCarouselImages = res;
-      console.log(res);
     }, (err) => {
       console.log(err);
     });
