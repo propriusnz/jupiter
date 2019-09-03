@@ -12,7 +12,8 @@ import { FaqDialogComponent } from '../../AdminDialogs/FaqDialog/FaqDialog.compo
 export class AdminFaqComponent implements OnInit {
   displayedFaqData: any;
   isLoading = false;
-
+  feedbackMessage:any;
+  
   constructor(
     private productService: ProductService,
     private dialog: MatDialog

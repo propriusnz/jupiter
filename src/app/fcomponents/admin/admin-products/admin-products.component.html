@@ -25,7 +25,7 @@
           <th scope="col">Subtitle<br><span>副标题</span></th>
           <th scope="col" >Price<br><span>价格</span></th>
           <th scope="col" >Discount<br><span>折后价</span></th>
-          <th scope="col" *ngIf="productTypeId === 1" >Category<br><span>类别</span></th>
+          <th scope="col" *ngIf="productTypeId === '1' || productTypeId === '2'" >Category<br><span>类别</span></th>
           <th scope="col" >Total stock<br><span>总库存</span></th>
           <th scope="col" >Available stock<br><span>现库存</span></th>
           <th scope="col" >Special Order<br><span>特殊展示</span></th>
