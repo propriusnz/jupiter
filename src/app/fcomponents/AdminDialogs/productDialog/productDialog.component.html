@@ -27,15 +27,18 @@
         <input class="form-control"  min="0" type="number" name="discount" placeholder="Discount" [(ngModel)]="productForm.discount" #discount="ngModel">
     </div>            
      <!-- choose category -->
-    <div class="col-12" *ngIf="displayData && productForm.prodTypeId==1">Choose category of product:</div>
+    <div class="col-12" *ngIf="isCategoryDropdownShown('update') ">
+        Choose category of product:
+    </div>
     <div class="form-group col-12">
         <!-- !when update hire product -->
-        <select *ngIf="displayData && productForm.prodTypeId==1" class="custom-select form-control" name="categoryId"
+        <select *ngIf="isCategoryDropdownShown('update')" class="custom-select form-control" name="categoryId"
         [(ngModel)]="productForm.categoryId" #categoryId="ngModel">
             <option *ngFor="let cate of allCategories, index as i" value= {{cate.categoryId}} [selected]="displayData.categoryId == cate.categoryId">{{cate.categoryName}}</option>
         </select>
         <!-- !when create hire product -->
-        <select *ngIf="!displayData && productForm.prodTypeId==1" class="custom-select form-control" name="categoryId" [(ngModel)]="productForm.categoryId" #categoryId="ngModel">
+        <select *ngIf="isCategoryDropdownShown('create')" class="custom-select form-control" name="categoryId"
+        [(ngModel)]="productForm.categoryId" #categoryId="ngModel">
             <option value="null" disabled selected>Choose a product type</option>
             <option *ngFor="let cate of allCategories, index as i" value= {{cate.categoryId}}>{{cate.categoryName}}</option>
         </select>
@@ -43,7 +46,8 @@
     <!-- choose special order displayed on homepage-->
     <div class="col-12">Display order (display from num 1 to 100):</div>
     <div class="form-group col-12">
-        <input class="form-control" type="number" name="specialOrder" placeholder="special order" [(ngModel)]="productForm.specialOrder" #specialOrder="ngModel">
+        <input class="form-control" type="number" name="specialOrder" placeholder="special order" min="0"
+        [(ngModel)]="productForm.specialOrder" #specialOrder="ngModel">
     </div>            
     <!-- Details of Product -->
     <div style="margin-top:14px;" class="col-12" *ngIf="status=='update'">
@@ -83,7 +87,7 @@
     <!-- !show images -->
     <div *ngIf="imageList" class="row mb-5" >
         <div *ngFor="let img of imageList" class="ml-3">
-            <img src="http://luxedreameventhire.co.nz:5000/{{img.url}}"><br>
+            <img src="{{baseImageUrl}}{{img.url}}"><br>
             <!-- !delete image -->
             <button type="button" class="btn btn-outline-danger btn-sm mt-2" id="{{img.id}}" (click)="deleteImage(img.id)" *ngIf="!isLoading" [disabled] = "isLoading">Delete</button>
         </div>

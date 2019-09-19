@@ -1,0 +1,58 @@
+<div class="text-center mt-5 pt-5" *ngIf="isLoading">
+    <app-loading></app-loading>
+</div>
+
+<div>
+    <div class="row mt-3">
+      <div class="ml-3 mr-5">
+        <h2>{{productTitle}}</h2>
+      </div>
+      <div class="pt-2 col">
+        <button type="button" style="border-radius: 5px;" title="Add" (click)="createProduct()">
+          <i class="fas fa-plus"></i>
+          <span>Add</span>
+        </button>
+      </div>
+      <div class="pt-2 col">
+        <input type="text" id="productSearch" placeholder="search the title of products here" [formControl]="searchField">
+      </div>
+    </div>
+    <table class="table">
+      <thead>
+        <tr class="table-secondary">
+          <th scope="col">Id<br><span>编号</span></th>
+          <th scope="col">Title<br><span>标题</span></th>
+          <th scope="col">Subtitle<br><span>副标题</span></th>
+          <th scope="col" >Price<br><span>价格</span></th>
+          <th scope="col" >Discount<br><span>折后价</span></th>
+          <th scope="col" *ngIf="productTypeId === 1" >Category<br><span>类别</span></th>
+          <th scope="col" >Total stock<br><span>总库存</span></th>
+          <th scope="col" >Available stock<br><span>现库存</span></th>
+          <th scope="col" >Special Order<br><span>特殊展示</span></th>
+          <th scope="col" >Description<br><span>描述</span></th>
+          <th scope="col" >Edit<br><span>编辑</span></th>
+          <th scope="col" >Delete<br><span>删除</span></th>
+        </tr>
+      </thead>
+      <tbody *ngIf="displayedProductData">
+        <tr *ngFor="let data of displayedProductData">
+          <td>{{data.prodId}}</td>
+          <td>{{data.title}}</td>
+          <td style="text-align:center;">{{data.subTitle}}</td>
+          <td style="text-align:center;">${{data.price}}</td>
+          <td style="text-align:center;">${{data.price - data.discount}}</td>
+          <td *ngIf="blockCode == 2" style="text-align:center;">
+            <div *ngIf="data.category">{{data.category.categoryName}}</div>
+          </td>
+          <td >{{data.totalStock}}</td>
+          <td>{{data.availableStock}}</td>
+          <td>{{data.specialOrder}}</td>
+
+          <td style="text-align:center; font-size:10px;">{{data.description}}</td>
+          <td ><i class="far fa-edit" (click)="openProduct(data)" title="Edit"></i></td>
+          <td ><i class="far fa-trash-alt" title="Delete"
+              (click)="deleteProduct(data)"></i></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

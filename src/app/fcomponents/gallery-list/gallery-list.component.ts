@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { ProductService } from '../../service/product.service';
-
+import { environment } from '../../../environments/environment.prod';
 
 @Component({
   selector: 'app-gallery-list',
@@ -11,6 +11,7 @@ import { ProductService } from '../../service/product.service';
 export class GalleryListComponent implements OnInit {
   num = '1';
   eventTypeList: any;
+  baseImageUrl = environment.baseLink;
   constructor(
     private meta: Meta,
     private titleService: Title,
@@ -27,7 +28,6 @@ export class GalleryListComponent implements OnInit {
     this.productService.getEventType().subscribe(
       (res) => {
         this.eventTypeList = res;
-        console.log(res);
       }, (error) => {
         console.log(error);
       }

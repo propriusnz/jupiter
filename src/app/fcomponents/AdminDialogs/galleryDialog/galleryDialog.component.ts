@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, ElementRef, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { ProductService } from '../../../service/product.service';
+import { environment } from '../../../../environments/environment.prod';
 
 @Component({
   selector: 'app-galleryDialog',
@@ -12,6 +13,7 @@ export class GalleryDialogComponent implements OnInit {
   imageList: any;
   selectedImg: File = null;
   isImageEmpty = false;
+  baseImageLink = environment.baseLink;
   @ViewChild('imageInput') imageInput: ElementRef;
   galleryForm = {
     CustomerName: '',

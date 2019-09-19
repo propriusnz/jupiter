@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ProductService } from '../../../service/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
+import { environment } from '../../../../environments/environment.prod';
 
 @Component({
   selector: 'app-productList',
@@ -9,15 +10,20 @@ import { Meta, Title } from '@angular/platform-browser';
   styleUrls: ['./productList.component.css']
 })
 export class ProductListComponent implements OnInit {
+  @ViewChild("categorySelection") categorySelectionElement: ElementRef;
   allProducts: any = [];
   allCategories: any = [];
   typeName: any;
-  selectedCate = 'All Products';
+  typeTitle: string;
+  selectedCate: string;
   errorMessage: string;
-  categoryId: number;
+  typeId: number;
+  categoryId: string;
   isLoading = false;
   groupedProducts: any = [];
   isProductsGrouped = false;
+  baseImageLink = environment.baseLink;
+  currentPageNumber = 0;
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
@@ -26,13 +32,11 @@ export class ProductListComponent implements OnInit {
   ) {
     // Following section in constructor for SEO Purposes
     this.meta.addTags([
-      { name: 'keywords', content: 'Luxedream Hire, Party hire, wedding hire, birthday party hire, event hire, auckland event hire'},
-      { name: 'description', content: 'One stop event and party hire and services in Auckland.'},
+      { name: 'keywords', content: 'Luxedream Hire, Party hire, wedding hire, birthday party hire, event hire, auckland event hire' },
+      { name: 'description', content: 'One stop event and party hire and services in Auckland.' },
     ]);
     this.titleService.setTitle('Luxe Dream Auckland Event and Party Hire | Hire');
   }
-
-
 
   // with initiation, if type 1 or (Hire) run function with category selection, If other types, simply get data from database
   initiation() {
@@ -66,75 +70,90 @@ export class ProductListComponent implements OnInit {
     // Process what data to display
   }
 
-
-
   // Below error change to this format
 
   ngOnInit() {
-    // Watch the changes of categoryId and reload component
-    this.route.params.subscribe(
-      params => {
-        if (this.route.snapshot.params['id']) {
-          this.categoryId = this.route.snapshot.params['id'];
-          this.changeCate(this.categoryId);
-        }
-        this.typeName = this.route.snapshot.data['some_data'];
-        this.getCategories();
-      }
-    );
-
-    if (this.typeName == 'hire') {
-      this.sortByType(1);
-    }
-    if (this.typeName == 'service') {
-      this.sortByType(2);
-    }
-    if (this.typeName == 'package') {
+    this.routerSubscribe();
+    if (this.typeName === 'package') {
       this.sortByType(3);
     }
-      // this.selectedCate = "All Products"
+    this.selectedCate = this.productService.getCategory();
+    this.productService.getSelectedCategory().subscribe(
+      res => {
+        this.selectedCate = res;
+      }
+    );
   }
-
+  routerSubscribe() {
+    return this.route.params.subscribe(
+      params => {
+        this.clearPageStatus();
+        this.typeId = this.route.snapshot.params['productTypeId'];
+        this.categoryId = this.route.snapshot.params['categoryTypeId'];
+        this.typeName = this.route.snapshot.data['some_data'];
+        if (this.typeName !== 'package') {
+          this.getCategories(this.typeId);
+          if (this.categoryId !== '0') {
+            this.changeCate(this.categoryId);
+          } else {
+            this.sortByType(this.typeId);
+          }
+        }
+      }
+    );
+  }
   // sort product by type => Hire | Service | Package
   sortByType(id: number) {
     this.isLoading = true;
+    this.clearPageStatus();
     this.productService.indexType(id).subscribe(
       (res) => {
         this.isLoading = false;
-        this.allProducts = res;
-        if (id == 1) {
-          this.getCategories();
+        this.allProducts = res['data'];
+        if (id === 1) {
+          this.getCategories(this.typeId);
         }
         if (this.allProducts.length > 11) {
           this.groupProducts();
         }
       },
-      (err) => {console.log(err), this.errorMessage = 'Server fault', this.isLoading = false;}
-      );
+      (err) => { console.log(err), this.errorMessage = 'Server fault', this.isLoading = false; }
+    );
   }
   // sort product by category
   changeCate(id, e?) {
     this.isLoading = true;
-    if (e) {
-      this.selectedCate = e.srcElement.innerHTML;
+    this.clearPageStatus();
+
+    if (id === 0) {
+      return this.sortByType(this.typeId);
     }
+    return this.getCategoryById(id);
+  }
+  getCategoryById(id: number) {
     this.productService.indexCategoryId(id).subscribe((res) => {
       this.isLoading = false;
       this.allProducts = res;
       if (this.allProducts.length > 11) {
         this.groupProducts();
       }
-      this.selectedCate = res[0]['category']['categoryName'];
     }, (error) => {
       this.isLoading = false;
       console.log(error);
     });
   }
   // Get all the categories => dropDown menu
-  getCategories() {
-    this.productService.indexCategory().subscribe((res) => {
-      this.allCategories = res;
-    }, (error) => {console.log(error), this.errorMessage = 'Server fault';});
+  getCategories(typeId: number) {
+    this.productService.getCategoryByType(typeId).subscribe((res) => {
+      this.allCategories = res['productCategory'];
+      this.typeTitle = res['typeName'];
+      if (Number(this.categoryId) === 0) {
+        this.selectedCate = 'All ' + this.typeTitle;
+      } else {
+        this.selectedCate = Object.values(this.allCategories)
+          .filter((v) => v['categoryId'] === Number(this.categoryId))[0]['categoryName'];
+      }
+    }, (error) => { console.log(error), this.errorMessage = 'Server fault'; });
   }
   // pagination
   groupProducts() {
@@ -145,7 +164,13 @@ export class ProductListComponent implements OnInit {
     }
     this.allProducts = this.groupedProducts[0];
   }
-  changePage(page: number) {
+  changePage(page: number): void {
+    this.currentPageNumber = page;
     this.allProducts = this.groupedProducts[page];
+    this.categorySelectionElement.nativeElement.scrollIntoView();
+  }
+  clearPageStatus() {
+    this.groupedProducts = [];
+    this.isProductsGrouped = false;
   }
 }

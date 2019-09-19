@@ -62,6 +62,7 @@ export class CartDialogComponent implements OnInit {
     this.productService.updateContacts(this.displayData['contactId'], this.contactForm).subscribe(
       (res) => {
         this.isLoading = false;
+        alert('Update contact successfully!');
         this.dataChanges.emit();
       }, (error) => {
         this.isLoading = false;

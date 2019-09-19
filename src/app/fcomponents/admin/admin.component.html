@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <!-- !sidebar -->
-    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <!-- <nav class="col-md-2 d-none d-md-block bg-light sidebar">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
@@ -48,25 +48,25 @@
           </li>
         </ul>
       </div>
-    </nav>
-
+    </nav> -->
+    <div class="col-md-2 d-none d-md-block bg-light sidebar">
+      <app-admin-sideBar></app-admin-sideBar>
+    </div>
 
     <main role="main" class="col-md-10 ml-sm-auto col-lg-10">
-      <!-- loading -->
-      <div class="text-center mt-5 pt-5" *ngIf="isLoading">
-          Loading Data...Please wait
-          <div class="spinner-border text-info ml-2" role="status">
-            <span class="sr-only">Loading...</span>
-          </div>
-      </div>
+      
+        <router-outlet></router-outlet>
 
-      <div *ngIf="!isLoading">
+      <!-- loading -->
+      <!-- <div class="text-center mt-5 pt-5" *ngIf="isLoading">
+        <app-loading></app-loading>
+      </div> -->
 
       <!-- !Dashboard -->
-      <div *ngIf="blockCode == '1'" style="text-align:center;padding-top:4%;">
+      <!-- <div *ngIf="blockCode == '1'" style="text-align:center;padding-top:4%;">
       <h1>Welcome to Dashboard</h1><br>
       <hr><br>
-      <!-- Edit productCategory -->
+
       <div class="row ">
         <div class="col-6">
           <h2>Edit Categories </h2>
@@ -80,7 +80,7 @@
                     </div>
                 </div>
             </form>
-            <!-- category is loading... -->
+
             <div *ngIf="isLoadingCategory">
               Loading categories...
                 <div class="spinner-border text-info" role="status">
@@ -96,10 +96,10 @@
         </div>
       </div><br><br>
       </div>
-      
+       -->
 
       <!-- !Hire || Service || Package-->
-      <div *ngIf="blockCode == '2' || blockCode == '3' || blockCode == '4'">
+      <!-- <div *ngIf="blockCode == '2' || blockCode == '3' || blockCode == '4'">
         <div class="row mt-3">
           <div class="col-1" *ngIf="blockCode == 2">
             <h2>Hires</h2>
@@ -155,10 +155,10 @@
             </tr>
           </tbody>
         </table>
-      </div>
+      </div> -->
 
       <!-- !Gallery -->
-      <div *ngIf="blockCode == '5'">
+      <!-- <div *ngIf="blockCode == '5'">
         <div class="row mt-3">
           <div class="col-1">
             <h2>Gallery</h2>
@@ -174,11 +174,9 @@
         <div class="accordion mb-4" id="accordionExample">
           <div class="card eventTypeImageToggle">
             <div class = "pt-3" id="headingOne">
-              <!-- <h2 class = "mb-0"> -->
                 <button class="btn dropdown-toggle eventTypeImageToggle pl-0" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                   <b>Edit images of event types</b>
                 </button>
-              <!-- </h2> -->
             </div>
         
             <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionExample">
@@ -186,7 +184,7 @@
                 <div *ngIf="allEventTypes" class="eventTypeImageEditor">
                   <div *ngFor="let event of allEventTypes" class="eventTypeImageEditorBlocks pt-2">
                     <span class="s2">{{event.eventName}}</span><br>
-                    <img *ngIf="event.eventName" src="http://luxedreameventhire.co.nz:5000/{{event.eventTypeImage}}" class="eventTypeImage mr-2">
+                    <img *ngIf="event.eventName" src="{{baseImageLink}}{{event.eventTypeImage}}" class="eventTypeImage mr-2">
                     <input #eventImageInput type="file" (change)="onEventTypeImageSelected($event)" class="eventTypeImageEditorTools">
                     <button type="button" class="btn btn-outline-info btn-sm eventTypeImageEditorTools" (click)="onUploadEventTypeImage(event)" [disabled] = "isLoading">upload</button>
                   </div>
@@ -218,10 +216,10 @@
             </tr>
           </tbody>
         </table>
-      </div>
+      </div> -->
 
       <!-- !Faq -->
-      <div *ngIf="blockCode == '6'">
+      <!-- <div *ngIf="blockCode == '6'">
         <div class="row mt-3">
           <div class="col-1">
             <h2>Faq</h2>
@@ -254,10 +252,10 @@
             </tr>
           </tbody>
         </table>
-      </div>
+      </div> -->
 
       <!-- !Cart -->
-      <div *ngIf="blockCode == '7'">
+      <!-- <div *ngIf="blockCode == '7'">
         <div class="mt-3">
           <h2>Carts</h2>
         </div>
@@ -277,13 +275,13 @@
           </thead>
           <tbody *ngIf="displayData">
             <tr *ngFor="let data of displayData">
-              <td>{{data.cartId}}</td>
+              <td>{{data.cartId}}</td> -->
               <!--CartProds-->
-              <td>
+              <!-- <td>
                 <div class="dropdown">
                   <button class="btn btn-secondary" type="button" (click)="openCart(data)">
                     View Detail
-                  </button>
+                  </button> -->
                   <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" *ngIf="data.cartProd">
                     <div *ngFor="let cart of data.cartProd">
                       <div class="dropdown-item">
@@ -294,11 +292,11 @@
                     </div>
                     <a class="dropdown-item" *ngIf="data.cartProd.length==0">Empty</a>
                   </div> -->
-                </div>
-              </td>
+                <!-- </div>
+              </td> -->
               <!--End CartProds-->
               <!--Contact-->
-              <td>
+              <!-- <td>
                 <div class="dropdown">
                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -313,20 +311,21 @@
                     </div>
                   </div>
                 </div>
-              </td>
+              </td> -->
               <!--End Contact-->
-              <td>${{data.price}}</td>
+              <!-- <td>${{data.price}}</td>
               <td>{{data.location}}</td>
               <td style="font-size:10px;">{{data.createOn | date:'mediumDate'}}</td>
               <td style="font-size:10px;">{{data.plannedTime | date:'short'}}</td>
-              <td style="font-size:10px;">{{data.updateOn | date:'mediumDate'}}</td>
+              <td style="font-size:10px;">{{data.updateOn | date:'mediumDate'}}</td> -->
               <!-- <td><i class="far fa-edit" (click)="openCart(data)" title="Edit"></i></td> -->
-              <td ><i class="far fa-trash-alt" title="Delete" (click)="deleteCart(data)"></i></td>
+              <!-- <td ><i class="far fa-trash-alt" title="Delete" (click)="deleteCart(data)"></i></td>
             </tr>
           </tbody>
         </table>
       </div>
-    </div>
+    </div> -->
     </main>
   </div>
 </div>
+

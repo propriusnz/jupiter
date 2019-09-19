@@ -1,0 +1,7 @@
+.fas.fa-trash-alt:hover{
+    color:red;
+    cursor: pointer;
+}
+.dropdown-item:hover {
+    cursor: pointer;
+}

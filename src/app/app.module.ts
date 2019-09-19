@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule, MatInputModule, MatFormFieldModule, MatNativeDateModule, MatDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule, Routes }   from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxJsonLdModule } from 'ngx-json-ld';
 
 // All service follow
-import{ProductService} from './service/product.service';
+import {ProductService} from './service/product.service';
 
 
 // All components follow
@@ -34,26 +34,45 @@ import { ProductDialogComponent } from './fcomponents/AdminDialogs/productDialog
 import { CartDialogComponent } from './fcomponents/AdminDialogs/CartDialog/CartDialog.component';
 import { ShoppingCheckoutComponent } from './fcomponents/shopping-checkout/shopping-checkout.component';
 import { ThankYouComponent } from './fcomponents/thankYou/thankYou.component';
+import {LoadingComponent} from './fcomponents/basic/loading/loading.component';
 
+// admin components
+import { AdminFaqComponent } from './fcomponents/admin/admin-faq/admin-faq.component';
+import { AdminProductsComponent } from './fcomponents/admin/admin-products/admin-products.component';
+import { AdminSideBarComponent } from './fcomponents/admin/admin-sideBar/admin-sideBar.component';
+import { AdminCartComponent } from './fcomponents/admin/admin-cart/admin-cart.component';
+import { AdminDashboardComponent } from './fcomponents/admin/admin-dashboard/admin-dashboard.component';
+import { AdminGalleriesComponent } from './fcomponents/admin/admin-galleries/admin-galleries.component';
+import { AdminImagesComponent } from './fcomponents/admin/admin-images/admin-images.component';
 // All Routes follow
 const appRoutes: Routes = [
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'home', component: HomepageComponent},
   {path: 'contactUs', component: ContactUsComponent},
   {path: 'aboutUs', component: AboutUsComponent},
   {path: 'faq', component: FaqComponent},
-  {path: '', component: HomepageComponent},
-  {path: 'category/:id', component: ProductListComponent, data : {some_data : 'category'}},
-  {path: 'hire', component: ProductListComponent, data : {some_data : 'hire'}},
-  {path: 'services', component: ProductListComponent, data : {some_data : 'service'}},
+  // {path: 'category/:id', component: ProductListComponent, data : {some_data : 'category'}},
+  {path: 'products/:productTypeId/:categoryTypeId', component: ProductListComponent, data : {some_data : 'products'}},
+  {path: 'services/:productTypeId/:categoryTypeId', component: ProductListComponent, data : {some_data : 'services'}},
   {path: 'packages', component: ProductListComponent, data : {some_data : 'package'}},
   {path: 'product/:id', component: ProductComponent},
-  // {path:'shoppingCart',component:Shopping_cartComponent},
-  // {path:'userInfo',component:UserInfoComponent},
   {path: 'galleries', component: GalleryListComponent},
   {path: 'galleries/:id', component: GalleryComponent},
-  {path: 'admin', component: AdminComponent},
+  {path: 'admin', component: AdminComponent,
+    children: [
+      {path: '', redirectTo: 'adminDashboard', pathMatch: 'full'},
+      {path: 'adminDashboard', component: AdminDashboardComponent},
+      {path: 'adminFaq', component: AdminFaqComponent},
+      {path: 'adminProducts/:productTypeId', component: AdminProductsComponent},
+      {path: 'adminCarts', component: AdminCartComponent},
+      {path: 'adminGalleries', component: AdminGalleriesComponent},
+      {path: 'adminImages', component: AdminImagesComponent},
+    ]
+  },
   {path: 'login', component: LoginComponent},
   {path: 'checkout', component: ShoppingCheckoutComponent},
-  {path: 'thankYou', component: ThankYouComponent}
+  {path: 'thankYou', component: ThankYouComponent},
+  {path: '**', component: HomepageComponent}
 ];
 
 @NgModule({
@@ -78,7 +97,15 @@ const appRoutes: Routes = [
     ProductDialogComponent,
     CartDialogComponent,
     ShoppingCheckoutComponent,
-    ThankYouComponent
+    ThankYouComponent,
+    LoadingComponent,
+    AdminFaqComponent,
+    AdminProductsComponent,
+    AdminSideBarComponent,
+    AdminCartComponent,
+    AdminDashboardComponent,
+    AdminGalleriesComponent,
+    AdminImagesComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

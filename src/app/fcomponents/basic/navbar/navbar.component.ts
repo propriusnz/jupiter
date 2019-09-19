@@ -1,4 +1,4 @@
-import { Component, OnInit , HostListener, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, HostListener, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 import { ProductService } from '../../../service/product.service';
@@ -10,34 +10,38 @@ import { ProductService } from '../../../service/product.service';
 })
 
 export class NavbarComponent implements OnInit {
-  allCategories: any = [];
+  hireCategories: any = [];
+  serviceCategories: any = [];
   isBrowser = false;
-  // galleriesData = ['Weddings','Birthday', 'Girls Night', 'Corporate Event', 'Baby Shower', 'Luxe Dream Floral Studio']
   galleriesData: any;
   constructor(
     @Inject(PLATFORM_ID) private platformId,
-    private productService: ProductService)
-    {
-      if (isPlatformBrowser(this.platformId)) {
-        this.isBrowser = true;
-      }
+    private productService: ProductService) {
+    if (isPlatformBrowser(this.platformId)) {
+      this.isBrowser = true;
     }
+  }
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       // on mobile screen, click navItems and hide navbar
-      $('.navbar-nav>li>a').on('click', function() {
+      $('.navbar-nav>li>a').on('click', function () {
         $('.navbar-collapse').collapse('hide');
-    });
+      });
     }
     this.getCategories();
     this.getGalleryTypes();
   }
   // get all the categories and show on navbar
-  getCategories() {
-    this.productService.indexCategory().subscribe((res) => {
-      this.allCategories = res;
-    }, (error) => {console.log(error);});
+  getCategories(): void {
+    this.productService.getProductType().toPromise()
+      .then((res) => {
+        const returnData = [...Object.values(res)];
+        this.hireCategories = returnData.filter((v) => v.typeName === 'Hire')['0']['productCategory']
+        this.serviceCategories = returnData.filter((v) => v.typeName === 'Party Services')['0']['productCategory'];
+      })
+      .catch(err => console.log(err));
   }
+
   getGalleryTypes() {
     this.productService.getEventType().subscribe(
       (res) => {
@@ -47,4 +51,9 @@ export class NavbarComponent implements OnInit {
       }
     );
   }
+
+  updateCategoryStatus(status: string) {
+    this.productService.setSelectedCategory(status);
+  }
+
 }

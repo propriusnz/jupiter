@@ -13,12 +13,14 @@ export class ProductService {
   httpHeader1: HttpHeaders;
   baseUrl = environment.baseUrl;
   isShoppingCartValid = new Subject<any>();
-constructor(
-  @Inject(PLATFORM_ID) private platformId,
-  private http: HttpClient
+  categoryStatus = new Subject<string>();
+  selectedCate: string;
+  constructor(
+    @Inject(PLATFORM_ID) private platformId,
+    private http: HttpClient
   ) {
-      // this.httpHeader1= new HttpHeaders({'Authorization': "Bearer " + sessionStorage.getItem('access_token')});
-   }
+    // this.httpHeader1= new HttpHeaders({'Authorization': "Bearer " + sessionStorage.getItem('access_token')});
+  }
 
   // !Products
   showProduct(id: number) {
@@ -29,15 +31,19 @@ constructor(
   }
   updateProduct(id, newProduct) {
     return this.http.put(this.baseUrl + '/Products/' + id, newProduct,
-     { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   addProduct(newProduct) {
     return this.http.post(this.baseUrl + '/Products', newProduct,
-    { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
-  deleteProduct(id) {
+  deleteProduct(id: number) {
     return this.http.delete(this.baseUrl + '/Products/' + id,
-    { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
+  }
+  searchProducts(typeId: number, name: string) {
+    return this.http.post(this.baseUrl + '/Products/GetSearchedProduct/' + typeId, name,
+    { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   // !Gallery
   indexGallery() {
@@ -48,62 +54,71 @@ constructor(
   }
   updateGallery(id, newGallery) {
     return this.http.put(this.baseUrl + '/projects/' + id, newGallery,
-    { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   addGallery(newGallery) {
     return this.http.post(this.baseUrl + '/projects', newGallery,
-    { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   deleteGallery(id: number) {
     return this.http.delete(this.baseUrl + '/projects/' + id,
-    { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   // !Category
-  indexCategory() {
-    return this.http.get(this.baseUrl + '/ProductCategories');
+  // getAllCategories() {
+  //   return this.http.get(this.baseUrl + '/ProductCategories');
+  // }
+
+  getCategoryByType(id) {
+    return this.http.get(this.baseUrl + '/ProductCategories/GetProductCategoriesByType/' + id);
   }
   indexCategoryId(id: number) {
     return this.http.get(this.baseUrl + '/ProductCategories/' + id);
   }
   updateCategory(id: number, cateList) {
     return this.http.put(this.baseUrl + '/ProductCategories/' + id, cateList,
-    { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   deleteCategory(id: number) {
     return this.http.delete(this.baseUrl + '/ProductCategories/' + id,
-    { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
+
   // !Product Type
+
+  getProductType() {
+    return this.http.get(this.baseUrl + '/ProductTypes');
+  }
   indexType(id: number) {
     return this.http.get(this.baseUrl + '/ProductTypes/' + id);
   }
   // !Carts
   getCarts() {
     return this.http.get(this.baseUrl + '/Carts',
-    { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   addCart(newcart: any) {
     return this.http.post(this.baseUrl + '/Carts', newcart);
   }
   updateCart(id: number, newcart) {
     return this.http.put(this.baseUrl + '/Carts/' + id, newcart,
-    { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   deleteCart(id: number) {
     return this.http.delete(this.baseUrl + '/Carts/' + id,
-    { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   // !cartProd
   getCardProd(id: number) {
     return this.http.get(this.baseUrl + '/CartProds/GetCartProdByCart/' + id,
-    { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   addCartProd(cartProdList: any) {
     return this.http.post(this.baseUrl + '/CartProds', cartProdList);
   }
   deleteCartProd(id: number) {
     return this.http.delete(this.baseUrl + '/CartProds/' + id,
-    { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   // !Contacts
   getContacts() {
@@ -114,7 +129,7 @@ constructor(
   }
   updateContacts(id: number, contact) {
     return this.http.put(this.baseUrl + '/Contacts/' + id, contact,
-    { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   // !FAQ
   getFaq() {
@@ -122,15 +137,15 @@ constructor(
   }
   updateFaq(id: number, faq) {
     return this.http.put(this.baseUrl + '/Faqs?id=' + id, faq,
-    { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   addFaq(faq) {
     return this.http.post(this.baseUrl + '/Faqs', faq,
-    { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   deleteFaq(id: number) {
     return this.http.delete(this.baseUrl + '/Faqs/' + id,
-    { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   // !contact email
   sendContactEmail(contactEmail) {
@@ -152,50 +167,72 @@ constructor(
   }
   getUser() {
     return this.http.get(this.baseUrl + '/admins',
-    { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   // !images
   addImg(files) {
     return this.http.post(this.baseUrl + '/ProductMedias/', files,
-    { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   getImg(id: number) {
     return this.http.get(this.baseUrl + '/ProductMedias/' + id);
   }
   addGalleryImg(files) {
     return this.http.post(this.baseUrl + '/ProjectMedias/', files,
-    { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   getGalleryImg(id: number) {
     return this.http.get(this.baseUrl + '/ProjectMedias/' + id);
   }
   deleteImg(id: number) {
     return this.http.delete(this.baseUrl + '/ProductMedias/' + id,
-    { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   deleteGalleryImg(id: number) {
     return this.http.delete(this.baseUrl + '/ProjectMedias/' + id,
-    { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   // !productDetails
   updateProductDetails(productId, detailList) {
     return this.http.put(this.baseUrl + '/ProductDetails/' + productId, detailList,
-    { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   deleteProductDetail(id: number) {
     return this.http.delete(this.baseUrl + '/ProductDetails/' + id,
-    { headers: new HttpHeaders({'Authorization': 'Bearer ' + sessionStorage.getItem('access_token')}) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   // !share status of shopping cart
   setShoppingCartStatus(isValid: boolean) {
     if (isValid) {
-      this.isShoppingCartValid.next({isValid : true});
+      this.isShoppingCartValid.next({ isValid: true });
 
     } else {
-      this.isShoppingCartValid.next({isValid : false});
+      this.isShoppingCartValid.next({ isValid: false });
     }
   }
   getShoppingCartStatus() {
     return this.isShoppingCartValid.asObservable();
+  }
+  setSelectedCategory(status: string) {
+    this.selectedCate = status;
+    this.categoryStatus.next(this.selectedCate);
+  }
+  getSelectedCategory() {
+    return this.categoryStatus.asObservable();
+  }
+  getCategory() {
+    return this.selectedCate;
+  }
+  // ! homepageCarousel
+  getHomepageCarousel() {
+    return this.http.get(this.baseUrl + '/HomepageCarouselMedia');
+  }
+  addHomepageCarousel(files) {
+    return this.http.post(this.baseUrl + '/HomepageCarouselMedia/', files,
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
+  }
+  removeHomepageCarousel(id: number) {
+    return this.http.delete(this.baseUrl + '/HomepageCarouselMedia/' + id,
+    { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
 }

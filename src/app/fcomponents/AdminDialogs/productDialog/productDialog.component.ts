@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { ProductService } from '../../../service/product.service';
+import { environment } from '../../../../environments/environment.prod';
 
 @Component({
   selector: 'app-productDialog',
@@ -23,6 +24,8 @@ export class ProductDialogComponent implements OnInit {
   detailForm: FormGroup;
   detailItems: FormArray;
 
+  baseImageUrl = environment.baseLink;
+
   @ViewChild('imageInput') imageInput: ElementRef;
   productForm: {
     title: string,
@@ -36,17 +39,17 @@ export class ProductDialogComponent implements OnInit {
     discount: number,
     specialOrder: number
   } = {
-    title: '',
-    subTitle: '',
-    totalStock: 0,
-    availableStock: 0,
-    description: '',
-    prodTypeId: 0,
-    categoryId: null,
-    price: null,
-    discount: null,
-    specialOrder: null
-  };
+      title: '',
+      subTitle: '',
+      totalStock: 0,
+      availableStock: 0,
+      description: '',
+      prodTypeId: 0,
+      categoryId: null,
+      price: null,
+      discount: null,
+      specialOrder: null
+    };
   status: string;
   displayData: any;
   dialogTitle: string;
@@ -74,7 +77,7 @@ export class ProductDialogComponent implements OnInit {
         this.detailList = data.data['productDetail'];
       }
     }
-    this.productForm.prodTypeId = Number(data.blockCode) - 1;
+    this.productForm.prodTypeId = Number(data.blockCode);
     this.dialogTitle = data.title;
     this.status = data.action;
   }
@@ -96,7 +99,7 @@ export class ProductDialogComponent implements OnInit {
   // save changes to product and close this dialog
   save() {
     console.log(this.productForm);
-    if ( this.productForm.discount == null) {
+    if (this.productForm.discount == null) {
       this.productForm.discount = 0;
     }
     if (this.productForm.specialOrder == null) {
@@ -105,9 +108,9 @@ export class ProductDialogComponent implements OnInit {
     this.productService.updateProduct(this.id, this.productForm).subscribe(
       (res) => {
         this.dialogRef.close();
-    }, (error) => {
-      console.log(error);
-    });
+      }, (error) => {
+        console.log(error);
+      });
     if (this.isDetailFormChanged === true) {
       this.updateDetails();
     }
@@ -123,18 +126,18 @@ export class ProductDialogComponent implements OnInit {
       (res) => {
         this.isLoading = false;
         this.newProduct = res;
-      this.dialogRef.close();
-    }, (error) => {
-      this.isLoading = false;
-      console.log(error);
-    }
+        this.dialogRef.close();
+      }, (error) => {
+        this.isLoading = false;
+        console.log(error);
+      }
     );
   }
   // get the categories of product
   getCategories() {
-    this.productService.indexCategory().subscribe(
+    this.productService.getCategoryByType(this.productForm.prodTypeId).subscribe(
       (res) => {
-        this.allCategories = res;
+        this.allCategories = res['productCategory'];
       },
       (error) => {
         console.log(error);
@@ -253,5 +256,20 @@ export class ProductDialogComponent implements OnInit {
     }, (error) => {
       console.log(error);
     });
+  }
+  isCategoryDropdownShown(status: string): boolean {
+    const isTypeIdCorrect: boolean = this.productForm.prodTypeId !== 3;
+    switch (status) {
+      case 'update':
+        if (this.displayData && isTypeIdCorrect) {
+          return true;
+        }
+        return false;
+      case 'create':
+        if (!this.displayData && isTypeIdCorrect) {
+          return true;
+        }
+        return false;
+    }
   }
 }
