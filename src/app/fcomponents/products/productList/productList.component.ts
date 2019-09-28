@@ -124,9 +124,7 @@ export class ProductListComponent implements OnInit {
   changeCate(id, e?) {
     this.isLoading = true;
     this.clearPageStatus();
-    // if (e) {
-    //   this.selectedCate = e.srcElement.innerText;
-    // }
+
     if (id === 0) {
       return this.sortByType(this.typeId);
     }
@@ -152,7 +150,8 @@ export class ProductListComponent implements OnInit {
       if (Number(this.categoryId) === 0) {
         this.selectedCate = 'All ' + this.typeTitle;
       } else {
-        this.selectedCate = Object.values(this.allCategories).filter((v) => v['categoryId'] === Number(this.categoryId))[0]['categoryName'];
+        this.selectedCate = Object.values(this.allCategories)
+          .filter((v) => v['categoryId'] === Number(this.categoryId))[0]['categoryName'];
       }
     }, (error) => { console.log(error), this.errorMessage = 'Server fault'; });
   }
