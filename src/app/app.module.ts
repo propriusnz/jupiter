@@ -10,6 +10,8 @@ import { NgxJsonLdModule } from 'ngx-json-ld';
 // All service follow
 import {ProductService} from './service/product.service';
 
+// All Guard follow
+import {AuthGuardService} from './guards/admin-auth.guard'
 
 // All components follow
 import { AppRoutingModule } from './app-routing.module';
@@ -58,7 +60,7 @@ const appRoutes: Routes = [
   {path: 'product/:id', component: ProductComponent},
   {path: 'galleries', component: GalleryListComponent},
   {path: 'galleries/:id', component: GalleryComponent},
-  {path: 'admin', component: AdminComponent,
+  {path: 'admin', component: AdminComponent, canActivate: [AuthGuardService],
     children: [
       {path: '', redirectTo: 'adminDashboard', pathMatch: 'full'},
       {path: 'adminDashboard', component: AdminDashboardComponent},
