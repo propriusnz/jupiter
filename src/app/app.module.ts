@@ -10,6 +10,8 @@ import { NgxJsonLdModule } from 'ngx-json-ld';
 // All service follow
 import {ProductService} from './service/product.service';
 
+// All Guard follow
+import {AuthGuardService} from './guards/admin-auth.guard'
 
 // All components follow
 import { AppRoutingModule } from './app-routing.module';
@@ -44,6 +46,8 @@ import { AdminCartComponent } from './fcomponents/admin/admin-cart/admin-cart.co
 import { AdminDashboardComponent } from './fcomponents/admin/admin-dashboard/admin-dashboard.component';
 import { AdminGalleriesComponent } from './fcomponents/admin/admin-galleries/admin-galleries.component';
 import { AdminImagesComponent } from './fcomponents/admin/admin-images/admin-images.component';
+import { SignUpComponent } from './fcomponents/sign-up/sign-up.component';
+import { SignupDialogComponent } from './fcomponents/AdminDialogs/signup-dialog/signup-dialog.component';
 // All Routes follow
 const appRoutes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -58,7 +62,7 @@ const appRoutes: Routes = [
   {path: 'product/:id', component: ProductComponent},
   {path: 'galleries', component: GalleryListComponent},
   {path: 'galleries/:id', component: GalleryComponent},
-  {path: 'admin', component: AdminComponent,
+  {path: 'admin', component: AdminComponent, canActivate: [AuthGuardService],
     children: [
       {path: '', redirectTo: 'adminDashboard', pathMatch: 'full'},
       {path: 'adminDashboard', component: AdminDashboardComponent},
@@ -105,7 +109,9 @@ const appRoutes: Routes = [
     AdminCartComponent,
     AdminDashboardComponent,
     AdminGalleriesComponent,
-    AdminImagesComponent
+    AdminImagesComponent,
+    SignUpComponent,
+    SignupDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -130,7 +136,8 @@ const appRoutes: Routes = [
     FaqDialogComponent,
     GalleryDialogComponent,
     ProductDialogComponent,
-    CartDialogComponent
-  ]
+    CartDialogComponent,
+    SignupDialogComponent
+  ],
 })
 export class AppModule { }

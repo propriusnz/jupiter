@@ -159,7 +159,9 @@ export class ProductService {
     return this.http.get(this.baseUrl + '/EventTypes/' + id);
   }
   updateEventTypeImage(file) {
-    return this.http.put(this.baseUrl + '/ProjectTypeImage/', file);
+    return this.http.put(this.baseUrl + '/ProjectTypeImage/', file,
+    { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) }
+    );
   }
   // !admin
   login(adminModel) {

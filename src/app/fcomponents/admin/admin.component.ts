@@ -37,11 +37,11 @@ export class AdminComponent implements OnInit {
     private dialog: MatDialog,
     private formBuilder: FormBuilder
     ) {
-      if (isPlatformBrowser(this.platformId)) {
-      // !if no JWT, redirect to login page
-      if (sessionStorage.getItem('access_token') === '' || sessionStorage.getItem('access_token') == null) {
-        this.router.navigate(['/login']);
-      }}
+      // if (isPlatformBrowser(this.platformId)) {
+      // // !if no JWT, redirect to login page
+      // if (sessionStorage.getItem('access_token') === '' || sessionStorage.getItem('access_token') == null) {
+      //   this.router.navigate(['/login']);
+      // }}
     }
 
   ngOnInit() {
