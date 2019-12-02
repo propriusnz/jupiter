@@ -46,6 +46,8 @@ import { AdminCartComponent } from './fcomponents/admin/admin-cart/admin-cart.co
 import { AdminDashboardComponent } from './fcomponents/admin/admin-dashboard/admin-dashboard.component';
 import { AdminGalleriesComponent } from './fcomponents/admin/admin-galleries/admin-galleries.component';
 import { AdminImagesComponent } from './fcomponents/admin/admin-images/admin-images.component';
+import { SignUpComponent } from './fcomponents/sign-up/sign-up.component';
+import { SignupDialogComponent } from './fcomponents/AdminDialogs/signup-dialog/signup-dialog.component';
 // All Routes follow
 const appRoutes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -107,7 +109,9 @@ const appRoutes: Routes = [
     AdminCartComponent,
     AdminDashboardComponent,
     AdminGalleriesComponent,
-    AdminImagesComponent
+    AdminImagesComponent,
+    SignUpComponent,
+    SignupDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -132,7 +136,8 @@ const appRoutes: Routes = [
     FaqDialogComponent,
     GalleryDialogComponent,
     ProductDialogComponent,
-    CartDialogComponent
-  ]
+    CartDialogComponent,
+    SignupDialogComponent
+  ],
 })
 export class AppModule { }
