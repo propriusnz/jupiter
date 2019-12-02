@@ -48,6 +48,7 @@ import { AdminGalleriesComponent } from './fcomponents/admin/admin-galleries/adm
 import { AdminImagesComponent } from './fcomponents/admin/admin-images/admin-images.component';
 import { SignUpComponent } from './fcomponents/sign-up/sign-up.component';
 import { SignupDialogComponent } from './fcomponents/AdminDialogs/signup-dialog/signup-dialog.component';
+import { DialogComponent } from './fcomponents/basic/dialog/dialog.component';
 // All Routes follow
 const appRoutes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -111,7 +112,8 @@ const appRoutes: Routes = [
     AdminGalleriesComponent,
     AdminImagesComponent,
     SignUpComponent,
-    SignupDialogComponent
+    SignupDialogComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
