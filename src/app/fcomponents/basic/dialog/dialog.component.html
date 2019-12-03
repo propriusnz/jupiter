@@ -1,3 +1,50 @@
-<p>
-  dialog works!
-</p>
+<style>
+	#wrap {
+		width: 80%;
+		margin: 0 auto;
+	}
+	#LogoWrap {
+		width: 100%;
+		margin: 0 auto;
+		text-align: center;
+	}
+	#FormWrap {
+		margin: 0 auto;
+		text-align: center;
+	}
+	#ButtonsWrap {
+		text-align: center;
+	}
+	mat-form-field, a {
+		display: block;
+	}
+</style>
+
+<div id="wrap">
+	<div id="LogoWrap">
+		<img src="../../../../assets/images/Asset1-4x-mid.png" alt="logo" width="150px" height="100px">
+		<hr>
+		<h5>Customer Login</h5>
+	</div>
+	
+	<div id="FormWrap" class="my-5">
+		<mat-form-field>
+			<input type="text" matInput placeholder="Your Email">
+		</mat-form-field>
+
+		<mat-form-field>
+			<input type="text" matInput [type]="hide? 'password' : 'text'" placeholder="Your Password">
+			<button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+				<mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+			</button>
+		</mat-form-field>
+
+		<a href="" class="mt-2">I forgot my password</a>
+	</div>
+
+	<div id="ButtonsWrap">
+		<button mat-raised-button color="basic" mat-dialog-close>Cancel</button>
+		<button mat-raised-button color="primary" type="submit" class="mx-2">Log in</button>
+	</div>
+	
+</div>

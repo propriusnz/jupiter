@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { ProductService } from '../../service/product.service';
-import { environment } from '../../../environments/environment.prod';
+import { ProductService } from '../../../service/product.service';
+import { environment } from '../../../../environments/environment.prod';
 
 @Component({
   selector: 'app-gallery-list',

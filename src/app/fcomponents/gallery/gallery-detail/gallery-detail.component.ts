@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
-import { ProductService } from '../../service/product.service';
-
-import { environment } from '../../../environments/environment.prod';
+import { ProductService } from '../../../service/product.service';
+import { environment } from '../../../../environments/environment.prod';
 
 @Component({
-  selector: 'app-gallery',
-  templateUrl: './gallery.component.html',
-  styleUrls: ['./gallery.component.css']
+  selector: 'app-gallery-detail',
+  templateUrl: './gallery-detail.component.html',
+  styleUrls: ['./gallery-detail.component.css']
 })
-export class GalleryComponent implements OnInit {
+export class GalleryDetailComponent implements OnInit {
   gallery: any;
   galleryList: any;
   galleryName: any;
