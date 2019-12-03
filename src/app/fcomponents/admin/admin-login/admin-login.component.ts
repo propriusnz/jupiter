@@ -1,15 +1,15 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { LOCAL_STORAGE } from '@ng-toolkit/universal';
-import { ProductService } from '../../service/product.service';
+import { ProductService } from '../../../service/product.service';
 import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-admin-login',
+  templateUrl: './admin-login.component.html',
+  styleUrls: ['./admin-login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class AdminLoginComponent implements OnInit {
   loginFailed: Boolean = false;
   loginFailedMessage: string;
   fillAll: string;

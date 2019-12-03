@@ -14,7 +14,6 @@ import {ProductService} from './service/product.service';
 import {AuthGuardService} from './guards/admin-auth.guard'
 
 // All components follow
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './fcomponents/basic/navbar/navbar.component';
 import { HomepageComponent } from './fcomponents/pages/homepage/homepage.component';
@@ -26,10 +25,10 @@ import { ProductComponent } from './fcomponents/products/product/product.compone
 import { FooterComponent } from './fcomponents/basic/footer/footer.component';
 import { Shopping_cartComponent } from './fcomponents/shopping_cart/shopping_cart.component';
 import { UserInfoComponent} from './fcomponents/userInfo/userInfo.component';
-import { GalleryComponent} from './fcomponents/gallery/gallery.component';
-import { GalleryListComponent } from './fcomponents/gallery-list/gallery-list.component';
+import { GalleryDetailComponent} from './fcomponents/gallery/gallery-detail/gallery-detail.component';
+import { GalleryListComponent } from './fcomponents/gallery/gallery-list/gallery-list.component';
 import { AdminComponent } from './fcomponents/admin/admin.component';
-import { LoginComponent } from './fcomponents/login/login.component';
+import { AdminLoginComponent } from './fcomponents/admin/admin-login/admin-login.component';
 import { FaqDialogComponent } from './fcomponents/AdminDialogs/FaqDialog/FaqDialog.component';
 import { GalleryDialogComponent } from './fcomponents/AdminDialogs/galleryDialog/galleryDialog.component';
 import { ProductDialogComponent } from './fcomponents/AdminDialogs/productDialog/productDialog.component';
@@ -46,7 +45,6 @@ import { AdminCartComponent } from './fcomponents/admin/admin-cart/admin-cart.co
 import { AdminDashboardComponent } from './fcomponents/admin/admin-dashboard/admin-dashboard.component';
 import { AdminGalleriesComponent } from './fcomponents/admin/admin-galleries/admin-galleries.component';
 import { AdminImagesComponent } from './fcomponents/admin/admin-images/admin-images.component';
-import { SignUpComponent } from './fcomponents/sign-up/sign-up.component';
 import { SignupDialogComponent } from './fcomponents/AdminDialogs/signup-dialog/signup-dialog.component';
 // All Routes follow
 const appRoutes: Routes = [
@@ -61,7 +59,7 @@ const appRoutes: Routes = [
   {path: 'packages', component: ProductListComponent, data : {some_data : 'package'}},
   {path: 'product/:id', component: ProductComponent},
   {path: 'galleries', component: GalleryListComponent},
-  {path: 'galleries/:id', component: GalleryComponent},
+  {path: 'galleries/:id', component: GalleryDetailComponent},
   {path: 'admin', component: AdminComponent, canActivate: [AuthGuardService],
     children: [
       {path: '', redirectTo: 'adminDashboard', pathMatch: 'full'},
@@ -73,7 +71,7 @@ const appRoutes: Routes = [
       {path: 'adminImages', component: AdminImagesComponent},
     ]
   },
-  {path: 'login', component: LoginComponent},
+  {path: 'login', component: AdminLoginComponent},
   {path: 'checkout', component: ShoppingCheckoutComponent},
   {path: 'thankYou', component: ThankYouComponent},
   {path: '**', component: HomepageComponent}
@@ -92,10 +90,10 @@ const appRoutes: Routes = [
     FooterComponent,
     Shopping_cartComponent,
     UserInfoComponent,
-    GalleryComponent,
+    GalleryDetailComponent,
     GalleryListComponent,
     AdminComponent,
-    LoginComponent,
+    AdminLoginComponent,
     FaqDialogComponent,
     GalleryDialogComponent,
     ProductDialogComponent,
@@ -110,13 +108,11 @@ const appRoutes: Routes = [
     AdminDashboardComponent,
     AdminGalleriesComponent,
     AdminImagesComponent,
-    SignUpComponent,
     SignupDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     NgxJsonLdModule,
-    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     MatDatepickerModule,
