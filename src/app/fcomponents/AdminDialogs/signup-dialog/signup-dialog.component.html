@@ -1,2 +1,26 @@
-<h2 mat-dialog-title>Session Timeout</h2>
-<mat-dialog-content>You will be logged out due to inactivity</mat-dialog-content>
+<div id="logowrap">
+<img src="../../../../assets/images/Asset1-4x-mid.png" alt="logo" width="150px" height="100px"> 
+</div>
+<hr>
+<h1 mat-dialog-title style="text-align:center;">Sign Up</h1>
+<div class=wrap>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput placeholder="Username (Email address)" [formControl]="username" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'">
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="ReEnter Password" [type]="hide ? 'password' : 'text'">
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+  </mat-form-field>
+  
+</div>
+
+</div>

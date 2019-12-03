@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import {FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-signup-dialog',
@@ -7,19 +7,14 @@ import {FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 })
 export class SignupDialogComponent implements OnInit {
   registrationForm:FormGroup;
-  constructor(private fb:FormBuilder) { }
-  
+  hide=true;
+  nameErrorMessage="Please enter valid username"
+  constructor(private fb:FormBuilder){}
   ngOnInit() {
     this.registrationForm=this.fb.group({
       username: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100),Validators.pattern('[a-zA-Z ]*')]],
-      email: ['', [Validators.required, Validators.email]]
     })
     
-    
   }
-    getErrorMessage() {
-      return this.registrationForm.value.email.hasError('required') ? 'You must enter a value' :
-          this.registrationForm.value.email.hasError('email') ? 'Not a valid email' :
-              '';
-    } 
+    
 }

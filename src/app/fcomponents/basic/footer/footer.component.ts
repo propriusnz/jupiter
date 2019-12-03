@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatDialogRef,MAT_DIALOG_DATA} from '@angular/material';
 import { SignupDialogComponent } from '../../AdminDialogs/signup-dialog/signup-dialog.component';
 @Component({
   selector: 'app-footer',
@@ -10,7 +10,10 @@ export class FooterComponent implements OnInit {
 
   constructor(public dialog:MatDialog) { }
   openDialog(){
-    this.dialog.open(SignupDialogComponent);
+    let dialogRef=this.dialog.open(SignupDialogComponent, {
+      width:'500px',
+      height:'500px'
+    });
   }
   ngOnInit() {
   }
