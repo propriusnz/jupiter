@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { CartDialogComponent } from './CartDialog.component';
+import { CartdialogComponent } from './cart-dialog.component';
 
-describe('CartDialogComponent', () => {
-  let component: CartDialogComponent;
-  let fixture: ComponentFixture<CartDialogComponent>;
+describe('CartdialogComponent', () => {
+  let component: CartdialogComponent;
+  let fixture: ComponentFixture<CartdialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CartDialogComponent ]
+      declarations: [ CartdialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CartDialogComponent);
+    fixture = TestBed.createComponent(CartdialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

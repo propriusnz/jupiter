@@ -1,15 +1,15 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
-import { ProductService } from '../../../service/product.service';
-import { environment } from '../../../../environments/environment.prod';
+import { ProductService } from '../../../../service/product.service';
+import { environment } from '../../../../../environments/environment.prod';
 
 @Component({
-  selector: 'app-productDialog',
-  templateUrl: './productDialog.component.html',
-  styleUrls: ['./productDialog.component.css']
+  selector: 'app-product-dialog',
+  templateUrl: './product-dialog.component.html',
+  styleUrls: ['./product-dialog.component.css']
 })
-export class ProductDialogComponent implements OnInit {
+export class ProductdialogComponent implements OnInit {
   id: number;
   selectedImg: File = null;
   newProduct: any;
@@ -55,7 +55,7 @@ export class ProductDialogComponent implements OnInit {
   dialogTitle: string;
   allCategories: any;
   constructor(
-    private dialogRef: MatDialogRef<ProductDialogComponent>,
+    private dialogRef: MatDialogRef<ProductdialogComponent>,
     @Inject(MAT_DIALOG_DATA) data,
     private productService: ProductService,
     // initial formBuilder

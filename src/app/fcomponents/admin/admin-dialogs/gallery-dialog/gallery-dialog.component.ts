@@ -1,14 +1,14 @@
 import { Component, OnInit, Inject, ElementRef, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { ProductService } from '../../../service/product.service';
-import { environment } from '../../../../environments/environment.prod';
+import { ProductService } from '../../../../service/product.service';
+import { environment } from '../../../../../environments/environment.prod';
 
 @Component({
-  selector: 'app-galleryDialog',
-  templateUrl: './galleryDialog.component.html',
-  styleUrls: ['./galleryDialog.component.css']
+  selector: 'app-gallery-dialog',
+  templateUrl: './gallery-dialog.component.html',
+  styleUrls: ['./gallery-dialog.component.css']
 })
-export class GalleryDialogComponent implements OnInit {
+export class GallerydialogComponent implements OnInit {
   id: number;
   imageList: any;
   selectedImg: File = null;
@@ -28,7 +28,7 @@ export class GalleryDialogComponent implements OnInit {
   isLoading = false;
   feedbackMessage: string;
   constructor(
-    private dialogRef: MatDialogRef<GalleryDialogComponent>,
+    private dialogRef: MatDialogRef<GallerydialogComponent>,
     @Inject(MAT_DIALOG_DATA) data,
     private productService: ProductService
   ) {

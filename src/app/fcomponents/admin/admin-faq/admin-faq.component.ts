@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../service/product.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { FaqDialogComponent } from '../../AdminDialogs/FaqDialog/FaqDialog.component';
+import { FaqdialogComponent } from '../admin-dialogs/faq-dialog/faq-dialog.component';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { FaqDialogComponent } from '../../AdminDialogs/FaqDialog/FaqDialog.compo
   templateUrl: './admin-faq.component.html',
   styleUrls: ['./admin-faq.component.css']
 })
-export class AdminFaqComponent implements OnInit {
+export class AdminfaqComponent implements OnInit {
   displayedFaqData: any;
   isLoading = false;
   feedbackMessage:any;
@@ -48,7 +48,7 @@ export class AdminFaqComponent implements OnInit {
       data: dataRecord,
       action: 'update'
     };
-    const dialogRef = this.dialog.open(FaqDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(FaqdialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(() => {
       this.getFaqData();
     });
@@ -67,7 +67,7 @@ export class AdminFaqComponent implements OnInit {
       title: 'Create FAQ',
       action: 'create'
     };
-    const dialogRef = this.dialog.open(FaqDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(FaqdialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(() => {
       this.getFaqData();
     });

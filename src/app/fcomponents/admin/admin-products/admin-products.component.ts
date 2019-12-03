@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from './../../../service/product.service';
 import { AdminPanelService } from '../../../service/admin-panel.service';
-import { ProductDialogComponent } from '../../AdminDialogs/productDialog/productDialog.component';
+import { ProductdialogComponent } from '../admin-dialogs/product-dialog/product-dialog.component';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
@@ -77,7 +77,7 @@ export class AdminProductsComponent implements OnInit {
       action: 'update',
       blockCode: this.productTypeId
     };
-    const dialogRef = this.dialog.open(ProductDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(ProductdialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(() => {
       this.getProductData(this.productTypeId);
     });
@@ -95,7 +95,7 @@ export class AdminProductsComponent implements OnInit {
       action: 'create',
       blockCode: this.productTypeId
     };
-    const dialogRef = this.dialog.open(ProductDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(ProductdialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(() => {
       this.getProductData(this.productTypeId);
     });

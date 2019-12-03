@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { UserloginDialogComponent } from '../userlogin-dialog/userlogin-dialog.component';
-import {UserregistrationDialogComponent} from '../../AdminDialogs/userregistration-dialog/userregistration-dialog.component'
+import { UserloginDialogComponent } from '../user-dialog/userlogin-dialog/userlogin-dialog.component';
+import {UserregistrationDialogComponent} from '../user-dialog/userregistration-dialog/userregistration-dialog.component'
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',

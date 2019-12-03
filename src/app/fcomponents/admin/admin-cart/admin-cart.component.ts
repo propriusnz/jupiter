@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../service/product.service';
 import { MatDialog, MatDialogConfig} from '@angular/material';
-import { CartDialogComponent } from '../../AdminDialogs/CartDialog/CartDialog.component';
+import { CartdialogComponent } from '../admin-dialogs/cart-dialog/cart-dialog.component';
 
 
 @Component({
@@ -66,7 +66,7 @@ export class AdminCartComponent implements OnInit {
       data: data,
       action: 'update'
     };
-    const dialogRef = this.dialog.open(CartDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(CartdialogComponent, dialogConfig);
     let isDataChanged = false;
     const sub = dialogRef.componentInstance.dataChanges.subscribe(() => {
       isDataChanged = true;

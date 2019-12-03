@@ -1,13 +1,13 @@
 import { Component, OnInit, Inject, EventEmitter } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { ProductService } from '../../../service/product.service';
+import { ProductService } from '../../../../service/product.service';
 
 @Component({
-  selector: 'app-CartDialog',
-  templateUrl: './CartDialog.component.html',
-  styleUrls: ['./CartDialog.component.css']
+  selector: 'app-cart-dialog',
+  templateUrl: './cart-dialog.component.html',
+  styleUrls: ['./cart-dialog.component.css']
 })
-export class CartDialogComponent implements OnInit {
+export class CartdialogComponent implements OnInit {
   cartId: number;
   contactId: number;
   status: string;
@@ -30,7 +30,7 @@ export class CartDialogComponent implements OnInit {
     price: 0,
   };
   constructor(
-    private dialogRef: MatDialogRef<CartDialogComponent>,
+    private dialogRef: MatDialogRef<CartdialogComponent>,
     @Inject(MAT_DIALOG_DATA) data,
     private productService: ProductService
   ) {

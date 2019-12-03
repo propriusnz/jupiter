@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { GalleryDialogComponent } from './galleryDialog.component';
+import { FaqDialogComponent } from './faq-dialog.component';
 
-describe('GalleryDialogComponent', () => {
-  let component: GalleryDialogComponent;
-  let fixture: ComponentFixture<GalleryDialogComponent>;
+describe('FaqDialogComponent', () => {
+  let component: FaqDialogComponent;
+  let fixture: ComponentFixture<FaqDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GalleryDialogComponent ]
+      declarations: [ FaqDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GalleryDialogComponent);
+    fixture = TestBed.createComponent(FaqDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

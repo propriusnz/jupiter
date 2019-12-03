@@ -1,13 +1,13 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
-import { ProductService } from '../../../service/product.service'
+import { ProductService } from '../../../../service/product.service'
 
 @Component({
-  selector: 'app-FaqDialog',
-  templateUrl: './FaqDialog.component.html',
-  styleUrls: ['./FaqDialog.component.css']
+  selector: 'app-faq-dialog',
+  templateUrl: './faq-dialog.component.html',
+  styleUrls: ['./faq-dialog.component.css']
 })
-export class FaqDialogComponent implements OnInit {
+export class FaqdialogComponent implements OnInit {
   id:number;
   faqForm = {
     Question:'',
@@ -18,7 +18,7 @@ export class FaqDialogComponent implements OnInit {
   displayData:any
   title:string
   constructor(
-    private dialogRef: MatDialogRef<FaqDialogComponent>,
+    private dialogRef: MatDialogRef<FaqdialogComponent>,
     @Inject(MAT_DIALOG_DATA) data,
     private productService : ProductService
   ) { 

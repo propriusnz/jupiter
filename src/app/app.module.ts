@@ -29,24 +29,24 @@ import { GalleryDetailComponent} from './fcomponents/gallery/gallery-detail/gall
 import { GalleryListComponent } from './fcomponents/gallery/gallery-list/gallery-list.component';
 import { AdminComponent } from './fcomponents/admin/admin.component';
 import { AdminLoginComponent } from './fcomponents/admin/admin-login/admin-login.component';
-import { FaqDialogComponent } from './fcomponents/AdminDialogs/FaqDialog/FaqDialog.component';
-import { GalleryDialogComponent } from './fcomponents/AdminDialogs/galleryDialog/galleryDialog.component';
-import { ProductDialogComponent } from './fcomponents/AdminDialogs/productDialog/productDialog.component';
-import { CartDialogComponent } from './fcomponents/AdminDialogs/CartDialog/CartDialog.component';
+import { FaqdialogComponent } from './fcomponents/admin/admin-dialogs/faq-dialog/faq-dialog.component';
+import { GallerydialogComponent } from './fcomponents/admin/admin-dialogs/gallery-dialog/gallery-dialog.component';
+import { ProductdialogComponent } from './fcomponents/admin/admin-dialogs/product-dialog/product-dialog.component';
+import { CartdialogComponent } from './fcomponents/admin/admin-dialogs/cart-dialog/cart-dialog.component';
 import { ShoppingCheckoutComponent } from './fcomponents/shopping-checkout/shopping-checkout.component';
 import { ThankYouComponent } from './fcomponents/thankYou/thankYou.component';
 import {LoadingComponent} from './fcomponents/basic/loading/loading.component';
-
+import { UserregistrationDialogComponent } from './fcomponents/basic/user-dialog/userregistration-dialog/userregistration-dialog.component';
+import { UserloginDialogComponent } from './fcomponents/basic/user-dialog/userlogin-dialog/userlogin-dialog.component';
 // admin components
-import { AdminFaqComponent } from './fcomponents/admin/admin-faq/admin-faq.component';
+import { AdminfaqComponent } from './fcomponents/admin/admin-faq/admin-faq.component';
 import { AdminProductsComponent } from './fcomponents/admin/admin-products/admin-products.component';
 import { AdminSideBarComponent } from './fcomponents/admin/admin-sideBar/admin-sideBar.component';
 import { AdminCartComponent } from './fcomponents/admin/admin-cart/admin-cart.component';
 import { AdminDashboardComponent } from './fcomponents/admin/admin-dashboard/admin-dashboard.component';
 import { AdminGalleriesComponent } from './fcomponents/admin/admin-galleries/admin-galleries.component';
 import { AdminImagesComponent } from './fcomponents/admin/admin-images/admin-images.component';
-import { UserregistrationDialogComponent } from './fcomponents/AdminDialogs/userregistration-dialog/userregistration-dialog.component';
-import { UserloginDialogComponent } from './fcomponents/basic/userlogin-dialog/userlogin-dialog.component';
+
 // All Routes follow
 const appRoutes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -65,7 +65,7 @@ const appRoutes: Routes = [
     children: [
       {path: '', redirectTo: 'adminDashboard', pathMatch: 'full'},
       {path: 'adminDashboard', component: AdminDashboardComponent},
-      {path: 'adminFaq', component: AdminFaqComponent},
+      {path: 'adminFaq', component: AdminfaqComponent},
       {path: 'adminProducts/:productTypeId', component: AdminProductsComponent},
       {path: 'adminCarts', component: AdminCartComponent},
       {path: 'adminGalleries', component: AdminGalleriesComponent},
@@ -95,14 +95,14 @@ const appRoutes: Routes = [
     GalleryListComponent,
     AdminComponent,
     AdminLoginComponent,
-    FaqDialogComponent,
-    GalleryDialogComponent,
-    ProductDialogComponent,
-    CartDialogComponent,
+    FaqdialogComponent,
+    GallerydialogComponent,
+    ProductdialogComponent,
+    CartdialogComponent,
     ShoppingCheckoutComponent,
     ThankYouComponent,
     LoadingComponent,
-    AdminFaqComponent,
+    AdminfaqComponent,
     AdminProductsComponent,
     AdminSideBarComponent,
     AdminCartComponent,
@@ -133,10 +133,10 @@ const appRoutes: Routes = [
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    FaqDialogComponent,
-    GalleryDialogComponent,
-    ProductDialogComponent,
-    CartDialogComponent,
+    FaqdialogComponent,
+    GallerydialogComponent,
+    ProductdialogComponent,
+    CartdialogComponent,
 	  UserregistrationDialogComponent ,
 	  UserloginDialogComponent
   ],

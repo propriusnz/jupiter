@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../service/product.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { GalleryDialogComponent } from '../../AdminDialogs/galleryDialog/galleryDialog.component';
+import { GallerydialogComponent } from '../admin-dialogs/gallery-dialog/gallery-dialog.component';
 import { environment } from '../../../../environments/environment.prod';
 
 
@@ -84,7 +84,7 @@ export class AdminGalleriesComponent implements OnInit {
       data: data,
       action: 'update'
     };
-    const dialogRef = this.dialog.open(GalleryDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(GallerydialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(() => {
       this.getData();
     });
@@ -103,7 +103,7 @@ export class AdminGalleriesComponent implements OnInit {
       title: 'Create Gallery',
       action: 'create'
     };
-    const dialogRef = this.dialog.open(GalleryDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(GallerydialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(() => {
       this.getData();
     });
