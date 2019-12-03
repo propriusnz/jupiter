@@ -45,7 +45,7 @@ import { AdminCartComponent } from './fcomponents/admin/admin-cart/admin-cart.co
 import { AdminDashboardComponent } from './fcomponents/admin/admin-dashboard/admin-dashboard.component';
 import { AdminGalleriesComponent } from './fcomponents/admin/admin-galleries/admin-galleries.component';
 import { AdminImagesComponent } from './fcomponents/admin/admin-images/admin-images.component';
-import { SignupDialogComponent } from './fcomponents/AdminDialogs/signup-dialog/signup-dialog.component';
+import { UserregistrationDialogComponent } from './fcomponents/AdminDialogs/userregistration-dialog/userregistration-dialog.component';
 import { DialogComponent } from './fcomponents/basic/dialog/dialog.component';
 // All Routes follow
 const appRoutes: Routes = [
@@ -109,7 +109,7 @@ const appRoutes: Routes = [
     AdminDashboardComponent,
     AdminGalleriesComponent,
     AdminImagesComponent,
-    SignupDialogComponent,
+    UserregistrationDialogComponent,
     DialogComponent
   ],
   imports: [
@@ -137,8 +137,8 @@ const appRoutes: Routes = [
     GalleryDialogComponent,
     ProductDialogComponent,
     CartDialogComponent,
-	SignupDialogComponent,
-	DialogComponent
+	  UserregistrationDialogComponent ,
+	  DialogComponent
   ],
 })
 export class AppModule { }
