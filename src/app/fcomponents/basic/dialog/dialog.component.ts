@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DialogComponent implements OnInit {
 
-  constructor() { }
-
+  hide = true;
+  
   ngOnInit() {
   }
 

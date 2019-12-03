@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -19,4 +20,5 @@ export class AppComponent {
       "contactType": "Customer service"
     }
   };
+
 }

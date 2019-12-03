@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDatepickerModule, MatInputModule, MatFormFieldModule, MatNativeDateModule, MatDialogModule } from '@angular/material';
+import { MatDatepickerModule, MatInputModule, MatFormFieldModule, MatNativeDateModule, MatDialogModule, MatButtonModule, MatIconModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -125,7 +125,9 @@ const appRoutes: Routes = [
     MatInputModule,
     MatFormFieldModule,
     MatNativeDateModule,
-    MatDialogModule,
+	MatDialogModule,
+	MatButtonModule,
+	MatIconModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes, {scrollPositionRestoration: 'enabled'}),
     HttpClientModule
@@ -139,7 +141,8 @@ const appRoutes: Routes = [
     GalleryDialogComponent,
     ProductDialogComponent,
     CartDialogComponent,
-    SignupDialogComponent
+	SignupDialogComponent,
+	DialogComponent
   ],
 })
 export class AppModule { }
