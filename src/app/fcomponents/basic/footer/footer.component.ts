@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { SignupDialogComponent } from '../../AdminDialogs/signup-dialog/signup-dialog.component';
-import { DialogComponent } from '../dialog/dialog.component';
+import { UserloginDialogComponent } from '../userlogin-dialog/userlogin-dialog.component';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -19,7 +19,7 @@ export class FooterComponent implements OnInit {
   // Customer Login  
   loginDialog() {
 	
-	let dialogRef = this.dialog.open(DialogComponent, {
+	let dialogRef = this.dialog.open(UserloginDialogComponent, {
 		minWidth: '350px',
 		minHeight: '500px',
 	});
