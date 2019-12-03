@@ -1,11 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 @Component({
-  selector: 'app-signup-dialog',
-  templateUrl: './signup-dialog.component.html',
-  styleUrls: ['./signup-dialog.component.css']
+  selector: 'app-userregistration-dialog',
+  templateUrl: './userregistration-dialog.component.html',
+  styleUrls: ['./userregistration-dialog.component.css']
 })
-export class SignupDialogComponent implements OnInit {
+export class UserregistrationDialogComponent implements OnInit {
   registrationForm:FormGroup;
   hide=true;
   nameErrorMessage="Please enter valid username"
