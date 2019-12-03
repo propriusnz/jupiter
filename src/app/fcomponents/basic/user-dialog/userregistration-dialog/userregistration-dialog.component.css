@@ -1,25 +1,11 @@
 .wrap{
-    display: flex;
-    flex-direction: column;
-    width:50%;
+    width:80%;
     margin:0 auto;
 }
   
 .wrap> * {
     width: 100%;
 }
-.example-right-align {
-    text-align: right;
-  }
-  
-  input.example-right-align::-webkit-outer-spin-button,
-  input.example-right-align::-webkit-inner-spin-button {
-    display: none;
-  }
-  
-  input.example-right-align {
-    -moz-appearance: textfield;
-  }
 #logowrap{
   width:100%;
   margin:0 auto;
