@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { UserregistrationDialogComponent } from '../userregistration-dialog/userregistration-dialog.component'
 
 @Component({
@@ -10,8 +10,9 @@ import { UserregistrationDialogComponent } from '../userregistration-dialog/user
 })
 export class UserloginDialogComponent implements OnInit {
   hide = true;   //Hide password by default
-  userLoginForm: FormGroup;  
-  constructor(private fb: FormBuilder, public dialog: MatDialog) {
+  userLoginForm: FormGroup; 
+
+  constructor(private fb: FormBuilder, public dialogRef:MatDialogRef<UserloginDialogComponent>, public dialog: MatDialog) {
 
   }
 
@@ -38,10 +39,11 @@ export class UserloginDialogComponent implements OnInit {
   }
   
   signupDialog() {
-    let dialogRef = this.dialog.open(UserregistrationDialogComponent, {
+	this.dialogRef.close()
+    this.dialog.open(UserregistrationDialogComponent, {
       width: '400px',
-      height: '600px'
-    });
+      height: '650px'
+	});
   }
   
   get email() {

@@ -11,6 +11,12 @@
 		margin: 0 auto;
 		text-align: center;
 	}
+	#ButtonsWrap {
+		width: 100%;
+		margin: 0 auto;
+		text-align: center;
+		margin-top: 10px;
+	}
 	.mat-form-field {
 		display: block;
 	}
@@ -18,9 +24,12 @@
 		background-color: #c48f45;
 		color: white;
 	}
-	mat-form-field	{
+	mat-form-field {
 		display: block;
 		margin-bottom: 10px;
+	}
+	mat-dialog-actions {
+		display: block;
 	}
 </style>
 
@@ -28,42 +37,51 @@
 <div class=wrap>
 	<div id="logowrap">
 		<img src="../../../../assets/images/Asset1-4x-mid.png" alt="logo" width="150px">
+		<hr>
+		<h5 mat-dialog-title>Sign Up</h5>
 	</div>
-	<hr>
-	<h1 mat-dialog-title style="text-align:center;">Sign Up</h1>
 
-  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm.value)">
-    <mat-dialog-content>
-    <mat-form-field>
-      <input matInput placeholder="Username (Email address)" formControlName="username" required>
-      <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Password" formControlName="password" [type]="hide ? 'password' : 'text'" required>
-      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hide">
-        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
+	<form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm.value)">
+		<mat-dialog-content>
+			<mat-form-field>
+				<input matInput placeholder="Username (Email address)" formControlName="username" required>
+				<mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
+			</mat-form-field>
 
-      <mat-error *ngIf="password.invalid">{{getErrorMessage2()}}</mat-error>
-     
-       
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Confirm Password" formControlName="confirmpassword"[type]="hide ? 'password' : 'text'" required>
-      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hide">
-        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
-       
-          <mat-error *ngIf="confirmpassword.invalid">{{getErrorMessage3()}}</mat-error>
-    </mat-form-field>
-    </mat-dialog-content>
-    <mat-dialog-actions>
-      <div style="margin: 0 auto" id="ButtonsWrap">
-        <button mat-raised-button color="basic" mat-dialog-close>Cancel</button>
-        <button mat-raised-button type="submit" class="mx-2 primaryButton">Sign Up</button>
-      </div>
-    </mat-dialog-actions>
-  </form>
+			<mat-form-field>
+				<input matInput placeholder="Password" formControlName="password" [type]="hide ? 'password' : 'text'"
+					required>
+				<button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+					[attr.aria-pressed]="hide">
+					<mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+				</button>
+
+				<mat-error *ngIf="password.invalid">{{getErrorMessage2()}}</mat-error>
+			</mat-form-field>
+
+			<mat-form-field>
+				<input matInput placeholder="Confirm Password" formControlName="confirmpassword"
+					[type]="hide ? 'password' : 'text'" required>
+				<button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+					[attr.aria-pressed]="hide">
+					<mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+				</button>
+
+				<mat-error *ngIf="confirmpassword.invalid">{{getErrorMessage3()}}</mat-error>
+			</mat-form-field>
+		</mat-dialog-content>
+
+		<mat-dialog-actions>
+			<div id="ButtonsWrap" class="mb-3">
+				<button mat-raised-button color="basic" mat-dialog-close>Cancel</button>
+				<button mat-raised-button type="submit" class="mx-2 primaryButton">Sign Up</button>
+			</div>
+		</mat-dialog-actions>
+		<hr>
+	</form>
+	
+	<div id="ButtonsWrap">
+		<p>Already have a account?</p>
+		<button mat-raised-button (click)="loginDialog()" class="primaryButton">Log in now!</button>
+	</div>
 </div>

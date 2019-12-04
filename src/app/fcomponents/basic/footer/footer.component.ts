@@ -12,17 +12,17 @@ export class FooterComponent implements OnInit {
 
   //Customer Signup   
   signupDialog() {
-    let dialogRef = this.dialog.open(UserregistrationDialogComponent, {
+    this.dialog.open(UserregistrationDialogComponent, {
       width: '400px',
-      height: '600px'
+      height: '650px'
     });
   }
   
   // Customer Login  
   loginDialog() {
-    let dialogRef = this.dialog.open(UserloginDialogComponent, {
+    this.dialog.open(UserloginDialogComponent, {
       width: '400px',
-      height: '600px',
+      height: '650px',
     });
   }
 
