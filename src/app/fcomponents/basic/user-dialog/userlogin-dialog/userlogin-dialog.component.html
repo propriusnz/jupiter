@@ -27,7 +27,6 @@
 		margin-bottom: 10px;
 	}
 	a {
-		display: block;
 		cursor: pointer;
 	}
 </style>
@@ -50,11 +49,11 @@
 				</mat-form-field>
 		
 				<mat-form-field>
-					<input matInput formControlName="passwd" [type]="hide? 'passwd' : 'text'" placeholder="Your Password">
+					<input matInput formControlName="password" [type]="hide? 'password' : 'text'" placeholder="Your Password">
 					<button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-						<mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+						<mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
 					</button>
-					<mat-error *ngIf="passwd.invalid">{{ getPasswdErrorMessage() }}</mat-error>
+					<mat-error *ngIf="password.invalid">{{ getPasswordErrorMessage() }}</mat-error>
 				</mat-form-field>
 			</mat-dialog-content>
 		</div>
@@ -62,7 +61,7 @@
 		<div id="ButtonsWrap">
 			<button mat-raised-button color="basic" mat-dialog-close>Cancel</button>
 			<button mat-raised-button type="submit" class="primaryButton mx-2">Log in</button>
-			<a href="" class="my-3">I forgot my password</a>
+			<div class="mt-4"><a href="" class="my-3">I forgot my password</a></div>
 			<hr>
 		</div>
 	</form>

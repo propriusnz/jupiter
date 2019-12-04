@@ -9,7 +9,7 @@ import { UserregistrationDialogComponent } from '../userregistration-dialog/user
   styleUrls: ['./userlogin-dialog.component.css']
 })
 export class UserloginDialogComponent implements OnInit {
-//   hide = true;
+  hide = true;   //Hide password by default
   userLoginForm: FormGroup;  
   constructor(private fb: FormBuilder, public dialog: MatDialog) {
 
@@ -19,7 +19,7 @@ export class UserloginDialogComponent implements OnInit {
 	  this.userLoginForm = this.fb.group({
 		email: ['', [Validators.required,
 					 Validators.email]],
-		passwd: ['', [Validators.required,
+		password: ['', [Validators.required,
 					  Validators.minLength(8),
 					  Validators.maxLength(20)]]
 	  })
@@ -31,9 +31,9 @@ export class UserloginDialogComponent implements OnInit {
 		'';
   }
 
-  getPasswdErrorMessage() {
-	return this.passwd.hasError('required') ? 'Please enter your password' :
-		this.passwd.hasError('minlength' || 'maxlength') ? 'Your password should be 8-20 characters' :
+  getPasswordErrorMessage() {
+	return this.password.hasError('required') ? 'Please enter your password' :
+		this.password.hasError('minlength' || 'maxlength') ? 'Your password should be 8-20 characters' :
 		'';
   }
   
@@ -48,8 +48,8 @@ export class UserloginDialogComponent implements OnInit {
 	  return this.userLoginForm.get('email');
   }
 
-  get passwd() {
-	  return this.userLoginForm.get('passwd');
+  get password() {
+	  return this.userLoginForm.get('password');
   }
 
   onSubmit() {
