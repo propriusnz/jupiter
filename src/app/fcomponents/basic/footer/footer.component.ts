@@ -9,19 +9,20 @@ import { UserregistrationDialogComponent } from '../user-dialog/userregistration
 })
 export class FooterComponent implements OnInit {
   constructor(public dialog: MatDialog) { }
+
+  //Customer Signup   
   signupDialog() {
     let dialogRef = this.dialog.open(UserregistrationDialogComponent, {
-      width: '500px',
-      height: '500px'
+      width: '400px',
+      height: '600px'
     });
   }
   
   // Customer Login  
   loginDialog() {
-
     let dialogRef = this.dialog.open(UserloginDialogComponent, {
-      minWidth: '500px',
-      minHeight: '500px',
+      width: '400px',
+      height: '600px',
     });
   }
 
