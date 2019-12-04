@@ -5,7 +5,7 @@
   <hr>
   <h1 mat-dialog-title style="text-align:center;">Sign Up</h1>
 
-  <form [formGroup]="registrationForm">
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm.value)">
     <mat-dialog-content>
     <mat-form-field>
       <input matInput placeholder="Username (Email address)" formControlName="username" required>
@@ -17,17 +17,23 @@
         [attr.aria-pressed]="hide">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
+
+      <mat-error *ngIf="password.invalid">{{getErrorMessage2()}}</mat-error>
+     
+       
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Re-enter Password" formControlName="passwordagain"[type]="hide ? 'password' : 'text'" required>
+      <input matInput placeholder="Confirm Password" formControlName="confirmpassword"[type]="hide ? 'password' : 'text'" required>
       <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
         [attr.aria-pressed]="hide">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
+       
+          <mat-error *ngIf="confirmpassword.invalid">{{getErrorMessage3()}}</mat-error>
     </mat-form-field>
     </mat-dialog-content>
     <mat-dialog-actions>
-      <div id="ButtonsWrap">
+      <div style="margin: 0 auto" id="ButtonsWrap">
         <button mat-raised-button color="basic" mat-dialog-close>Cancel</button>
         <button mat-raised-button color="primary" type="submit" class="mx-2">Sign Up</button>
       </div>
