@@ -17,7 +17,7 @@ export class UserregistrationDialogComponent implements OnInit {
   ngOnInit() {
     this.registrationForm=this.fb.group({
       username: ['', [Validators.required, Validators.email,Validators.minLength(8)]],
-      password: ['',[Validators.required,Validators.minLength(8),Validators.maxLength(20)]],
+      password: ['',[Validators.required,Validators.minLength(8),Validators.maxLength(20),Validators.pattern('(?!^[0-9 ]*$)(?!^[a-zA-Z ]*$)^([a-zA-Z0-9 ]{8,20})$')]],
       confirmpassword:['',[Validators.required]],
     },{validator:this.MustMatch('password','confirmpassword')
   }); 
@@ -31,7 +31,8 @@ export class UserregistrationDialogComponent implements OnInit {
   getErrorMessage2(){
     return this.password.hasError('required') ? 'Please enter a value' :
     this.password.hasError('minlength') ? 'Please enter at least 8 characters' :
-    this.password.hasError('maxlength') ? 'Please enter no more than 20 characters' :''
+    this.password.hasError('maxlength') ? 'Please enter no more than 20 characters' :
+    this.password.hasError('pattern') ? 'Please use combination of letters and characters' :''
   }
 
   getErrorMessage3(){

@@ -41,12 +41,18 @@
 		<h5 mat-dialog-title>Sign Up</h5>
 	</div>
 
-	<form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm.value)">
-		<mat-dialog-content>
-			<mat-form-field>
-				<input matInput placeholder="Username (Email address)" formControlName="username" required>
-				<mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
-			</mat-form-field>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm.value)">
+    <mat-dialog-content>
+    <mat-form-field>
+      <input matInput placeholder="Email address" formControlName="username" required>
+      <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Password" formControlName="password" [type]="hide ? 'password' : 'text'" required>
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
 
 			<mat-form-field>
 				<input matInput placeholder="Password" formControlName="password" [type]="hide ? 'password' : 'text'"
