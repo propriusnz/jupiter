@@ -35,7 +35,7 @@
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm.value)">
     <mat-dialog-content>
     <mat-form-field>
-      <input matInput placeholder="Username (Email address)" formControlName="username" required>
+      <input matInput placeholder="Email address" formControlName="username" required>
       <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
