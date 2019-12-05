@@ -46,6 +46,7 @@ import { AdminCartComponent } from './fcomponents/admin/admin-cart/admin-cart.co
 import { AdminDashboardComponent } from './fcomponents/admin/admin-dashboard/admin-dashboard.component';
 import { AdminGalleriesComponent } from './fcomponents/admin/admin-galleries/admin-galleries.component';
 import { AdminImagesComponent } from './fcomponents/admin/admin-images/admin-images.component';
+import { ForgotPasswordComponent } from './fcomponents/basic/user-dialog/forgot-password/forgot-password.component';
 
 // All Routes follow
 const appRoutes: Routes = [
@@ -110,7 +111,8 @@ const appRoutes: Routes = [
     AdminGalleriesComponent,
     AdminImagesComponent,
     UserregistrationDialogComponent,
-    UserloginDialogComponent
+    UserloginDialogComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -138,7 +140,8 @@ const appRoutes: Routes = [
     ProductdialogComponent,
     CartdialogComponent,
 	  UserregistrationDialogComponent ,
-	  UserloginDialogComponent
+	  UserloginDialogComponent,
+	  ForgotPasswordComponent
   ],
 })
 export class AppModule { }

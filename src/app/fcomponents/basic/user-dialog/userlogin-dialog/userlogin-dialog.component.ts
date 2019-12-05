@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { UserregistrationDialogComponent } from '../userregistration-dialog/userregistration-dialog.component'
+import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component'
 
 @Component({
   selector: 'app-userlogin-dialog',
@@ -12,9 +13,7 @@ export class UserloginDialogComponent implements OnInit {
   hide = true;   //Hide password by default
   userLoginForm: FormGroup; 
 
-  constructor(private fb: FormBuilder, public dialogRef:MatDialogRef<UserloginDialogComponent>, public dialog: MatDialog) {
-
-  }
+  constructor(private fb: FormBuilder, public dialogRef:MatDialogRef<UserloginDialogComponent>, public dialog: MatDialog) { }
 
   ngOnInit() {
 	  this.userLoginForm = this.fb.group({
@@ -37,9 +36,17 @@ export class UserloginDialogComponent implements OnInit {
 		this.password.hasError('minlength' || 'maxlength') ? 'Your password should be 8-20 characters' :
 		'';
   }
+
+  forgotDialog() {
+	this.dialogRef.close();
+	this.dialog.open(ForgotPasswordComponent, {
+		width: '300px',
+		height: '450px',
+	});
+  }
   
   signupDialog() {
-	this.dialogRef.close()
+	this.dialogRef.close();
     this.dialog.open(UserregistrationDialogComponent, {
       width: '400px',
       height: '650px'

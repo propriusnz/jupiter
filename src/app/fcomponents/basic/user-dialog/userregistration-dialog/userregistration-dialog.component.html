@@ -53,6 +53,7 @@
 				[attr.aria-pressed]="hide">
 				<mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
 			</button>
+			<mat-error *ngIf="password.invalid">{{getErrorMessage2()}}</mat-error>
 		</mat-form-field>
 
 		<mat-form-field>

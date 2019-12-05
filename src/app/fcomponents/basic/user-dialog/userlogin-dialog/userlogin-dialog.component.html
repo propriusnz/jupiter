@@ -28,9 +28,13 @@
 	}
 	a {
 		cursor: pointer;
+		color: #c48f45;
+		text-decoration: underline;
+	}
+	p {
+		color: #c48f45;
 	}
 </style>
-
 
 <!-- Log in form for users -->
 <div id="wrap">
@@ -40,7 +44,7 @@
 		<h5>Customer Login</h5>
 	</div>
 	
-	<form [formGroup]="userLoginForm" (ngsubmit)="onsubmit()">
+	<form [formGroup]="userLoginForm" (ngSubmit)="onSubmit()">
 		<div id="FormWrap">
 			<mat-dialog-content>
 				<mat-form-field>
@@ -61,12 +65,12 @@
 		<div id="ButtonsWrap">
 			<button mat-raised-button color="basic" mat-dialog-close>Cancel</button>
 			<button mat-raised-button type="submit" class="primaryButton mx-2">Log in</button>
-			<div class="mt-4"><a href="" class="my-3">I forgot my password</a></div>
+			<div class="mt-4"><a (click)="forgotDialog()" class="my-3">I forgot my password</a></div>
 			<hr>
 		</div>
 	</form>
 
-	<div id="ButtonsWrap">
+	<div id="ButtonsWrap" class="mt-4">
 		<p>Don't have an account?</p>
 		<button mat-raised-button (click)="signupDialog()" class="primaryButton">Sign up now!</button>
 	</div>
