@@ -1,8 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { UserloginDialogComponent } from '../userlogin-dialog/userlogin-dialog.component';
-
+import {DataService} from '../../../../service/data.service'
 @Component({
   selector: 'app-userregistration-dialog',
   templateUrl: './userregistration-dialog.component.html',
@@ -11,9 +10,8 @@ import { UserloginDialogComponent } from '../userlogin-dialog/userlogin-dialog.c
 export class UserregistrationDialogComponent implements OnInit {
   registrationForm:FormGroup;
   hide=true;
-  nameErrorMessage="Please enter valid username";
-  passwordvalue="adsfadf";
-  constructor(private fb:FormBuilder, public dialogRef:MatDialogRef<UserregistrationDialogComponent>, public dialog: MatDialog){}
+  message:string;
+  constructor(private data:DataService,private fb:FormBuilder, public dialogRef:MatDialogRef<UserregistrationDialogComponent>, public dialog: MatDialog){}
   ngOnInit() {
     this.registrationForm=this.fb.group({
       username: ['', [Validators.required, Validators.email,Validators.minLength(8)]],
@@ -21,7 +19,7 @@ export class UserregistrationDialogComponent implements OnInit {
       confirmpassword:['',[Validators.required]],
     },{validator:this.MustMatch('password','confirmpassword')
   }); 
-    
+  this.data.currentloginmessage.subscribe(currentloginmessage=> this.message=currentloginmessage)
   }
   getErrorMessage() {
     return this.username.hasError('required') ? 'Please enter a value' :
@@ -57,11 +55,8 @@ export class UserregistrationDialogComponent implements OnInit {
   }
 
   loginDialog() {
-	this.dialogRef.close()
-    this.dialog.open(UserloginDialogComponent, {
-      width: '400px',
-      height: '650px',
-    });
+    this.dialogRef.close();
+    this.data.changeloginMessage("open");
   }
   
   get username(){return this.registrationForm.get('username')};

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { UserregistrationDialogComponent } from '../userregistration-dialog/userregistration-dialog.component'
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component'
+import {DataService} from '../../../../service/data.service'
 
 @Component({
   selector: 'app-userlogin-dialog',
@@ -12,8 +12,9 @@ import { ForgotPasswordComponent } from '../forgot-password/forgot-password.comp
 export class UserloginDialogComponent implements OnInit {
   hide = true;   //Hide password by default
   userLoginForm: FormGroup; 
+  message:string;
 
-  constructor(private fb: FormBuilder, public dialogRef:MatDialogRef<UserloginDialogComponent>, public dialog: MatDialog) { }
+  constructor(private data:DataService, private fb: FormBuilder, public dialogRef:MatDialogRef<UserloginDialogComponent>, public dialog: MatDialog) { }
 
   ngOnInit() {
 	  this.userLoginForm = this.fb.group({
@@ -22,7 +23,8 @@ export class UserloginDialogComponent implements OnInit {
 		password: ['', [Validators.required,
 					  Validators.minLength(8),
 					  Validators.maxLength(20)]]
-	  })
+    })
+    this.data.currentsignupmessage.subscribe(currentsignupmessage=> this.message=currentsignupmessage)
   }
   
   getEmailErrorMessage() {
@@ -46,11 +48,8 @@ export class UserloginDialogComponent implements OnInit {
   }
   
   signupDialog() {
-	this.dialogRef.close();
-    this.dialog.open(UserregistrationDialogComponent, {
-      width: '400px',
-      height: '650px'
-	});
+  this.dialogRef.close();
+  this.data.changesignupMessage("open")
   }
   
   get email() {
