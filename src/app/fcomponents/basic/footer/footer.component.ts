@@ -47,7 +47,7 @@ export class FooterComponent implements OnInit {
       {this.loginmessage=currentloginmessage;this.newloginDialog()}
     
       )
-    this.data.currentsignupmessage.subscribe(currentsignupmessage=>{this.signupmessage=currentsignupmessage;this.newsignupDialog()}
+    this.data.currentsignupmessage.subscribe(currentsignupmessage=>{this.signupmessage=currentsignupmessage;this.newsignupDialog();}
     )
   }
 
