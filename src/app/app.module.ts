@@ -12,7 +12,8 @@ import {ProductService} from './service/product.service';
 
 // All Guard follow
 import {AuthGuardService} from './guards/admin-auth.guard'
-
+//All Data Follow
+import { DataService } from './service/data.service';
 // All components follow
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './fcomponents/basic/navbar/navbar.component';
@@ -47,6 +48,7 @@ import { AdminDashboardComponent } from './fcomponents/admin/admin-dashboard/adm
 import { AdminGalleriesComponent } from './fcomponents/admin/admin-galleries/admin-galleries.component';
 import { AdminImagesComponent } from './fcomponents/admin/admin-images/admin-images.component';
 import { ForgotPasswordComponent } from './fcomponents/basic/user-dialog/forgot-password/forgot-password.component';
+
 
 // All Routes follow
 const appRoutes: Routes = [
@@ -131,7 +133,7 @@ const appRoutes: Routes = [
     HttpClientModule
   ],
   providers: [
-    ProductService
+    ProductService,DataService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
