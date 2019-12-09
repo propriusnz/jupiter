@@ -31,7 +31,7 @@
   <div class="row my-5">
   <div class="col-12 col-md-6 col-lg-7 ">
      <!-- images display -->
-    <div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel" *ngIf="prodMediaUrl">
+    <div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel " *ngIf="prodMediaUrl">
         <ol class="carousel-indicators" *ngIf="prodMediaUrl.length > 1">
             <li data-target="#carouselExampleControls" data-slide-to="i" class="active" *ngFor="let img of prodMediaUrl, index as i" [ngClass]="{'active': i == 0}"></li>
           </ol>
