@@ -206,4 +206,6 @@ export class ProductComponent implements OnInit {
     this.rightCarouselControlPosition = containerWidth - imageWidth;
     this.rightControl.nativeElement.style.right = this.rightCarouselControlPosition + 'px';
   }
+  
 }
+
