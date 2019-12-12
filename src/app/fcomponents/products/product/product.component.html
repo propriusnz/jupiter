@@ -94,10 +94,9 @@
       </div>
       <div class="col-6 col-lg-6">
         <button class='btn btn_gold' (click)="manageCartProds()" [disabled] = "(0>= this.quantity || this.quantity > this.productDetail.availableStock) && (this.cartForm.invalid || this.isInputZero)">Add to cart</button>
-      </div>
-	</div>
-	
-	<div class="mt-3">
+	  </div>
+	  
+	  <div class="mt-3">
 		<input 
 			bsDaterangepicker 
 			type="text" class="form-control" formControlName="dateRange" placeholder="Select your Desired time frame" 
@@ -106,6 +105,8 @@
 			[maxDate]="maxDate"
 			[bsConfig]="dpConfig"
 			>
+	</div>
+	  
 	</div>
 
     <div class="row justify-content-end">
