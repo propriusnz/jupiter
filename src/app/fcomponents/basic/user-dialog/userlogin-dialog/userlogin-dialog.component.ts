@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component'
-import {DataService} from '../../../../service/data.service'
+import { DataService } from '../../../../service/data.service'
 
 @Component({
   selector: 'app-userlogin-dialog',
@@ -12,7 +12,7 @@ import {DataService} from '../../../../service/data.service'
 export class UserloginDialogComponent implements OnInit {
   hide = true;   //Hide password by default
   userLoginForm: FormGroup; 
-  message:string;
+  message: string;
 
   constructor(private data:DataService, private fb: FormBuilder, public dialogRef:MatDialogRef<UserloginDialogComponent>, public dialog: MatDialog) { }
 

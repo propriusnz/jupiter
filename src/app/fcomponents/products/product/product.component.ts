@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef, Inject, PLATFORM_ID, SimpleChanges } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import {ProductService} from '../../../service/product.service';
+import { ProductService } from '../../../service/product.service';
 import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { environment } from '../../../../environments/environment.prod';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { setTheme } from 'ngx-bootstrap/utils';
 
 @Component({
   selector: 'app-product',
@@ -23,6 +26,10 @@ export class ProductComponent implements OnInit {
   isLoading = true;
   rightCarouselControlPosition: number;
   baseImageLink = environment.baseLink;
+  public dpConfig: Partial<BsDatepickerConfig> = new BsDatepickerConfig();
+  minDate: Date;
+  maxDate: Date;
+  
   @ViewChild ('imageContainer') imageContainer: ElementRef;
   @ViewChild ('prodImage') prodImage: ElementRef;
   @ViewChild ('rightControl') rightControl: ElementRef;
@@ -31,13 +38,20 @@ export class ProductComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private productService: ProductService,
-    private formBuilder: FormBuilder
+	private formBuilder: FormBuilder,
   ) {
-    this.productId = this.route.snapshot.params['id'];
+	this.productId = this.route.snapshot.params['id'];
+	setTheme('bs4');
+	this.minDate = new Date();
+    this.maxDate = new Date();
+    this.minDate.setDate(this.minDate.getDate());
+	this.maxDate.setDate(this.maxDate.getDate() + 30);
+	this.dpConfig.containerClass = 'theme-orange';
   }
   ngOnInit() {
     this.cartForm = this.formBuilder.group({
-      cartItems: this.formBuilder.array([])
+	  cartItems: this.formBuilder.array([]),
+	  dateRange: ['', Validators.required]
     });
     // get the detail of product
     this.productService.showProduct(this.productId).subscribe(
@@ -75,11 +89,12 @@ export class ProductComponent implements OnInit {
             Quantity: [0, [Validators.min(0), Validators.max(prod.availableStock), Validators.required]],
             Price: (prod.discount && prod.discount > 0) ? prod.price - prod.discount : prod.price,
             Discount: prod.discount,
-            AvailableStock: prod.availableStock
+			AvailableStock: prod.availableStock
           })
         );
       }
-    });
+	});
+	console.log(res);
   }
   // check incomplete specifications
   validateItem(item): boolean {
