@@ -167,6 +167,9 @@ export class ProductService {
   login(adminModel) {
     return this.http.post(this.baseUrl + '/admins', adminModel);
   }
+  userlogin(loginModel){
+    return this.http.post(this.baseUrl+ '/user/login',loginModel);
+  }
   getUser() {
     return this.http.get(this.baseUrl + '/admins',
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
