@@ -7,14 +7,21 @@ import { DataService } from '../../../../service/data.service'
   templateUrl: './userregistration-dialog.component.html',
   styleUrls: ['./userregistration-dialog.component.css']
 })
+
 export class UserregistrationDialogComponent implements OnInit {
   registrationForm: FormGroup;
   hide = true;
   message: string;
-  constructor(private data: DataService, private fb: FormBuilder, public dialogRef: MatDialogRef<UserregistrationDialogComponent>, public dialog: MatDialog) { }
+  
+  constructor (
+	  private data: DataService, 
+	  private fb: FormBuilder, 
+	  public dialogRef: MatDialogRef<UserregistrationDialogComponent>, 
+	  public dialog: MatDialog
+	  ) { }
+
   ngOnInit() {
     this.registrationForm = this.fb.group({
-      fullname: ['', [Validators.required]],
       username: ['', [Validators.required, Validators.email, Validators.minLength(8)]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.pattern('(?!^[0-9 ]*$)(?!^[a-zA-Z ]*$)^([a-zA-Z0-9 ]{8,20})$')]],
       confirmpassword: ['', [Validators.required]],
@@ -23,9 +30,11 @@ export class UserregistrationDialogComponent implements OnInit {
     });
     this.data.currentloginmessage.subscribe(currentloginmessage => this.message = currentloginmessage)
   }
+
   getNameErrorMessage() {
     return this.fullname.hasError('required') ? 'Please enter a value' : '';
   }
+
   getErrorMessage() {
     return this.username.hasError('required') ? 'Please enter a value' :
       this.username.hasError('email') ? 'Not a valid username' : ''
@@ -68,6 +77,7 @@ export class UserregistrationDialogComponent implements OnInit {
   get password() { return this.registrationForm.get('password') };
   get confirmpassword() { return this.registrationForm.get('confirmpassword') };
   get fullname() { return this.registrationForm.get('fullname') };
+
   onSubmit(value) {
     console.log(value.password, value.confirmpassword);
   }

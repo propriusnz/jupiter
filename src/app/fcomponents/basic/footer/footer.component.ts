@@ -18,7 +18,7 @@ export class FooterComponent implements OnInit {
   signupDialog() {
     this.dialog.open(UserregistrationDialogComponent, {
       width: '400px',
-      height: '750px'
+      height: '650px'
     });
   }
   
