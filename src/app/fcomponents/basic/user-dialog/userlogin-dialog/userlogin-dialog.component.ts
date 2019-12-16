@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component'
 import { DataService } from '../../../../service/data.service'
+import { ProductService } from 'src/app/service/product.service';
+import { ClassGetter } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-userlogin-dialog',
@@ -13,8 +15,11 @@ export class UserloginDialogComponent implements OnInit {
   hide = true;   //Hide password by default
   userLoginForm: FormGroup; 
   message: string;
-
-  constructor(private data:DataService, private fb: FormBuilder, public dialogRef:MatDialogRef<UserloginDialogComponent>, public dialog: MatDialog) { }
+  user = {
+    Email: '',
+    Password: ''
+  };
+  constructor(private data:DataService, private fb: FormBuilder, public dialogRef:MatDialogRef<UserloginDialogComponent>, public dialog: MatDialog,private productservice: ProductService,) { }
 
   ngOnInit() {
 	  this.userLoginForm = this.fb.group({
@@ -61,6 +66,14 @@ export class UserloginDialogComponent implements OnInit {
   }
 
   onSubmit() {
-	  console.log(this.userLoginForm);
+      this.user={
+        Email:this.userLoginForm.value.email,
+        Password:this.userLoginForm.value.password
+      }
+      console.log(this.user);
+      this.productservice.userlogin(this.user).subscribe(
+        res=>console.log(res),
+        err=>console.log(err)
+      );
   }
 }
