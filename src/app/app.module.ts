@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule, MatInputModule, MatFormFieldModule, MatNativeDateModule, MatDialogModule, MatButtonModule, MatIconModule } from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -52,6 +53,7 @@ import { ForgotPasswordComponent } from './fcomponents/basic/user-dialog/forgot-
 import { PaymentoptionsComponent } from './fcomponents/paymentoptions/paymentoptions.component';
 import { ChangeinfoComponent } from './fcomponents/changeinfo/changeinfo.component';
 import { EmailsentDialogComponent } from './fcomponents/basic/user-dialog/emailsent-dialog/emailsent-dialog.component';
+import { ResetPasswordComponent } from './fcomponents/reset-password/reset-password.component';
 
 
 // All Routes follow
@@ -80,6 +82,7 @@ const appRoutes: Routes = [
     ]
   },
   {path: 'login', component: AdminLoginComponent},
+  {path: 'reset', component: ResetPasswordComponent},
   {path: 'checkout', component: ShoppingCheckoutComponent},
   {path: 'thankYou', component: ThankYouComponent},
   {path: 'paymentoptions',component: PaymentoptionsComponent},
@@ -122,7 +125,8 @@ const appRoutes: Routes = [
     ForgotPasswordComponent,
     PaymentoptionsComponent,
     ChangeinfoComponent,
-    EmailsentDialogComponent
+    EmailsentDialogComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -131,7 +135,8 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     MatDatepickerModule,
     MatInputModule,
-    MatFormFieldModule,
+	MatFormFieldModule,
+	MatCardModule,
     MatNativeDateModule,
 	  MatDialogModule,
 	  MatButtonModule,
