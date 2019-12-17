@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { ProductService } from '../../service/product.service';
+import { MatchService } from 'src/app/service/match.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -16,7 +17,7 @@ export class ResetPasswordComponent implements OnInit {
 
   constructor(
 	private fb: FormBuilder, 
-	private productservice: ProductService
+	private matchservice: MatchService
   ) { }
 
   ngOnInit() {
@@ -27,7 +28,7 @@ export class ResetPasswordComponent implements OnInit {
 						Validators.pattern('(?!^[0-9 ]*$)(?!^[a-zA-Z ]*$)^([a-zA-Z0-9 ]{8,20})$')]],
 		confirmpassword: ['', [Validators.required]],
 	}, {
-	validator: this.MustMatch('password', 'confirmpassword')
+	validator: this.matchservice.MustMatch('password', 'confirmpassword')
 	});
   }
 
@@ -37,23 +38,6 @@ export class ResetPasswordComponent implements OnInit {
   get confirmpassword() { 
 	  return this.resetPasswordForm.get('confirmpassword') 
   };
-
-  MustMatch(controlName: string, matchingControlName: string) {
-    return (group: FormGroup) => {
-      const control = group.controls[controlName];
-      const matchingControl = group.controls[matchingControlName];
-      if (matchingControl.errors && !matchingControl.errors.notSame) {
-        //return if another validator has already found an error on the matchingControl
-        return;
-      }
-      //set error on matchingControl if validation fails
-      if (control.value !== matchingControl.value) {
-        matchingControl.setErrors({ notSame: true });
-      } else {
-        matchingControl.setErrors(null);
-      }
-    };
-  }
 
   getErrorMessage2() {
     return this.password.hasError('required') ? 'Please enter a value' :

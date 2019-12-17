@@ -23,10 +23,10 @@ export class UserregistrationDialogComponent implements OnInit {
   signupFailed = false;
 
   constructor (
-	  private data: DataService, 
-	  private fb: FormBuilder, 
-	  public dialogRef: MatDialogRef<UserregistrationDialogComponent>, 
-	  public dialog: MatDialog,
+	private data: DataService, 
+	private fb: FormBuilder, 
+	public dialogRef: MatDialogRef<UserregistrationDialogComponent>, 
+	public dialog: MatDialog,
     private productservice: ProductService,
     private matchservice: MatchService
 	) { }
