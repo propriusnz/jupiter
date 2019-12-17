@@ -69,7 +69,7 @@
 			</mat-form-field>
 
 			<mat-form-field>
-				<input matInput placeholder="Confirm Password" formControlName="confirmpassword"
+				<input matInput (ngModleChange)="update()" placeholder="Confirm Password" formControlName="confirmpassword"
 					[type]="hide ? 'password' : 'text'" required>
 				<button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
 					[attr.aria-pressed]="hide">

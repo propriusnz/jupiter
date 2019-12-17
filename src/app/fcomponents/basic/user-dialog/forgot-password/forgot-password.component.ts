@@ -42,9 +42,8 @@ export class ForgotPasswordComponent implements OnInit {
     console.log(this.user);
     this.productservice.forgotpassword(this.user).subscribe(
       res => {
-        console.log(res)
+        console.log(typeof(res['data']))
         localStorage.setItem('forgotpassword_token', res['token']);
-        this.opendialog();
       },
       err => {
         console.log(err)

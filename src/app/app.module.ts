@@ -10,7 +10,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 // All service follow
 import { ProductService } from './service/product.service';
-
+import { MatchService } from './service/match.service';
 // All Guard follow
 import { AuthGuardService } from './guards/admin-auth.guard'
 //All Data Follow
@@ -52,6 +52,7 @@ import { ForgotPasswordComponent } from './fcomponents/basic/user-dialog/forgot-
 import { PaymentoptionsComponent } from './fcomponents/paymentoptions/paymentoptions.component';
 import { ChangeinfoComponent } from './fcomponents/changeinfo/changeinfo.component';
 import { EmailsentDialogComponent } from './fcomponents/basic/user-dialog/emailsent-dialog/emailsent-dialog.component';
+
 
 
 // All Routes follow
@@ -142,7 +143,7 @@ const appRoutes: Routes = [
 	BsDatepickerModule.forRoot()
   ],
   providers: [
-    ProductService,DataService
+    ProductService,DataService, MatchService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
