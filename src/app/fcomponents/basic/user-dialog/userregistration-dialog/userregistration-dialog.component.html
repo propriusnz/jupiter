@@ -55,10 +55,6 @@
 	<form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm.value)">
 		<mat-dialog-content>
 			<mat-form-field>
-				<input matInput placeholder="Full Name" formControlName="fullname" required>
-				<mat-error *ngIf="fullname.invalid">{{getNameErrorMessage()}}</mat-error>
-			</mat-form-field>
-			<mat-form-field>
 				<input matInput placeholder="Email address" formControlName="username" required>
 				<mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
 			</mat-form-field>
@@ -98,3 +94,4 @@
 		<button mat-raised-button (click)="loginDialog()" class="primaryButton">Log in now!</button>
 	</div>
 </div>
+

@@ -14,7 +14,6 @@ export class UserregistrationDialogComponent implements OnInit {
   constructor(private data: DataService, private fb: FormBuilder, public dialogRef: MatDialogRef<UserregistrationDialogComponent>, public dialog: MatDialog) { }
   ngOnInit() {
     this.registrationForm = this.fb.group({
-      fullname: ['', [Validators.required]],
       username: ['', [Validators.required, Validators.email, Validators.minLength(8)]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.pattern('(?!^[0-9 ]*$)(?!^[a-zA-Z ]*$)^([a-zA-Z0-9 ]{8,20})$')]],
       confirmpassword: ['', [Validators.required]],
@@ -22,9 +21,6 @@ export class UserregistrationDialogComponent implements OnInit {
       validator: this.MustMatch('password', 'confirmpassword')
     });
     this.data.currentloginmessage.subscribe(currentloginmessage => this.message = currentloginmessage)
-  }
-  getNameErrorMessage() {
-    return this.fullname.hasError('required') ? 'Please enter a value' : '';
   }
   getErrorMessage() {
     return this.username.hasError('required') ? 'Please enter a value' :
