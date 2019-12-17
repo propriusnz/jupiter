@@ -9,10 +9,10 @@ import { NgxJsonLdModule } from 'ngx-json-ld';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 // All service follow
-import {ProductService} from './service/product.service';
+import { ProductService } from './service/product.service';
 
 // All Guard follow
-import {AuthGuardService} from './guards/admin-auth.guard'
+import { AuthGuardService } from './guards/admin-auth.guard'
 //All Data Follow
 import { DataService } from './service/data.service';
 // All components follow
@@ -37,7 +37,7 @@ import { ProductdialogComponent } from './fcomponents/admin/admin-dialogs/produc
 import { CartdialogComponent } from './fcomponents/admin/admin-dialogs/cart-dialog/cart-dialog.component';
 import { ShoppingCheckoutComponent } from './fcomponents/shopping-checkout/shopping-checkout.component';
 import { ThankYouComponent } from './fcomponents/thankYou/thankYou.component';
-import {LoadingComponent} from './fcomponents/basic/loading/loading.component';
+import { LoadingComponent } from './fcomponents/basic/loading/loading.component';
 import { UserregistrationDialogComponent } from './fcomponents/basic/user-dialog/userregistration-dialog/userregistration-dialog.component';
 import { UserloginDialogComponent } from './fcomponents/basic/user-dialog/userlogin-dialog/userlogin-dialog.component';
 // admin components

@@ -3,34 +3,41 @@
 		width: 100%;
 		margin: 0 auto;
 	}
+
 	#LogoWrap {
 		width: 100%;
 		margin: 0 auto;
 		text-align: center;
 	}
+
 	#FormWrap {
 		width: 80%;
 		margin: 0 auto;
 		text-align: center;
 	}
+
 	#ButtonsWrap {
 		text-align: center;
 		margin-top: 10px;
 	}
+
 	.primaryButton {
 		background-color: #c48f45;
 		color: white;
 	}
-	mat-form-field	{
+
+	mat-form-field {
 		display: block;
 		margin-top: 10px;
 		margin-bottom: 10px;
 	}
+
 	a {
 		cursor: pointer;
 		color: #c48f45;
 		text-decoration: underline;
 	}
+
 	p {
 		color: #c48f45;
 	}
@@ -43,25 +50,29 @@
 		<hr>
 		<h5>Customer Login</h5>
 	</div>
-	
+
 	<form [formGroup]="userLoginForm" (ngSubmit)="onSubmit()">
 		<div id="FormWrap">
 			<mat-dialog-content>
 				<mat-form-field>
-					<input matInput formControlName="email" placeholder="Your Email" required>
+					<input matInput formControlName="email" (ngModelChange)="update()" placeholder="Your Email" required>
 					<mat-error *ngIf="email.invalid">{{ getEmailErrorMessage() }}</mat-error>
 				</mat-form-field>
-		
+
 				<mat-form-field>
-					<input matInput formControlName="password" [type]="hide? 'password' : 'text'" placeholder="Your Password">
-					<button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+					<input matInput formControlName="password" (ngModelChange)="update()" [type]="hide? 'password' : 'text'"
+						placeholder="Your Password"> 
+					<button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+						[attr.aria-pressed]="hide">
 						<mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
 					</button>
 					<mat-error *ngIf="password.invalid">{{ getPasswordErrorMessage() }}</mat-error>
 				</mat-form-field>
 			</mat-dialog-content>
 		</div>
-
+		<div *ngIf="this.userLoginForm.valid && loggedinfailed" class="alert alert-danger text-center s2" role="alert">
+			{{errorMessage}}
+		</div>
 		<div id="ButtonsWrap">
 			<button mat-raised-button color="basic" mat-dialog-close>Cancel</button>
 			<button mat-raised-button type="submit" class="primaryButton mx-2">Log in</button>
@@ -69,6 +80,7 @@
 			<hr>
 		</div>
 	</form>
+
 
 	<div id="ButtonsWrap" class="mt-4">
 		<p>Don't have an account?</p>

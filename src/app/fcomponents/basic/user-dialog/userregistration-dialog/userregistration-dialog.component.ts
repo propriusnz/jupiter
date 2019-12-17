@@ -2,6 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DataService } from '../../../../service/data.service'
+import { ProductService } from '../../../../service/product.service';
+
 @Component({
   selector: 'app-userregistration-dialog',
   templateUrl: './userregistration-dialog.component.html',
@@ -12,39 +14,46 @@ export class UserregistrationDialogComponent implements OnInit {
   registrationForm: FormGroup;
   hide = true;
   message: string;
-  
+  user = {
+	  Email: '',
+	  Password: ''
+  };
+  errorMessage = '';
+  signupFailed = false;
+
   constructor (
 	  private data: DataService, 
 	  private fb: FormBuilder, 
 	  public dialogRef: MatDialogRef<UserregistrationDialogComponent>, 
-	  public dialog: MatDialog
-	  ) { }
+	  public dialog: MatDialog,
+	  private productservice: ProductService
+	) { }
 
   ngOnInit() {
     this.registrationForm = this.fb.group({
-      username: ['', [Validators.required, Validators.email, Validators.minLength(8)]],
-      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.pattern('(?!^[0-9 ]*$)(?!^[a-zA-Z ]*$)^([a-zA-Z0-9 ]{8,20})$')]],
+	  email: ['', [Validators.required, Validators.email, 				  
+		           Validators.minLength(8)]],
+	  password: ['', [Validators.required, 			
+					  Validators.minLength(8), 
+					  Validators.maxLength(20), 
+					  Validators.pattern('(?!^[0-9 ]*$)(?!^[a-zA-Z ]*$)^([a-zA-Z0-9 ]{8,20})$')]],
       confirmpassword: ['', [Validators.required]],
     }, {
       validator: this.MustMatch('password', 'confirmpassword')
     });
-    this.data.currentloginmessage.subscribe(currentloginmessage => this.message = currentloginmessage)
-  }
-
-  getNameErrorMessage() {
-    return this.fullname.hasError('required') ? 'Please enter a value' : '';
+      this.data.currentloginmessage.subscribe(currentloginmessage => this.message = currentloginmessage)
   }
 
   getErrorMessage() {
-    return this.username.hasError('required') ? 'Please enter a value' :
-      this.username.hasError('email') ? 'Not a valid username' : ''
+    return this.email.hasError('required') ? 'Please enter a value' :
+    this.email.hasError('email') ? 'Not a valid email' : ''
   }
 
   getErrorMessage2() {
     return this.password.hasError('required') ? 'Please enter a value' :
-      this.password.hasError('minlength') ? 'Please enter at least 8 characters' :
-        this.password.hasError('maxlength') ? 'Please enter no more than 20 characters' :
-          this.password.hasError('pattern') ? 'Please use combination of letters and characters' : ''
+    this.password.hasError('minlength') ? 'Please enter at least 8 characters' :
+    this.password.hasError('maxlength') ? 'Please enter no more than 20 characters' :
+   	this.password.hasError('pattern') ? 'Please use combination of letters and characters' : ''
   }
 
   getErrorMessage3() {
@@ -73,13 +82,30 @@ export class UserregistrationDialogComponent implements OnInit {
     this.data.changeloginMessage("open");
   }
 
-  get username() { return this.registrationForm.get('username') };
+  get email() { return this.registrationForm.get('email') };
   get password() { return this.registrationForm.get('password') };
   get confirmpassword() { return this.registrationForm.get('confirmpassword') };
-  get fullname() { return this.registrationForm.get('fullname') };
 
-  onSubmit(value) {
-    console.log(value.password, value.confirmpassword);
+  update () {
+	  this.signupFailed = false;
+  }
+
+  onSubmit() {
+	this.user = {
+		Email: this.registrationForm.value.email,
+		Password: this.registrationForm.value.password
+	}
+	console.log(this.user);
+	this.productservice.register(this.user).subscribe(
+		res => {
+			console.log(res)
+			this.dialogRef.close()
+		},
+		err => {
+			console.log(err)
+			this.signupFailed = true
+			this.errorMessage = "Sign up failed"
+		}
+	);
   }
 }
-

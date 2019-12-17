@@ -55,12 +55,12 @@
 	<form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm.value)">
 		<mat-dialog-content>
 			<mat-form-field>
-				<input matInput placeholder="Email address" formControlName="username" required>
-				<mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
+				<input matInput placeholder="Email address" formControlName="email" (ngModleChange)="update()" required>
+				<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
 			</mat-form-field>
 			<mat-form-field>
 				<input matInput placeholder="Password" formControlName="password" [type]="hide ? 'password' : 'text'"
-					required>
+				(ngModleChange)="update()" required>
 				<button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
 					[attr.aria-pressed]="hide">
 					<mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -79,6 +79,10 @@
 				<mat-error *ngIf="confirmpassword.invalid">{{getErrorMessage3()}}</mat-error>
 			</mat-form-field>
 		</mat-dialog-content>
+
+		<div *ngIf="this.registrationForm.valid && signupFailed" class="alert alert-danger text-center">
+			{{ errorMessage }}
+		</div>
 
 		<mat-dialog-actions>
 			<div id="ButtonsWrap" class="mb-3">

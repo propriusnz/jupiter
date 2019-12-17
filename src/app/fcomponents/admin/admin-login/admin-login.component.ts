@@ -26,7 +26,7 @@ export class AdminLoginComponent implements OnInit {
     @Inject(PLATFORM_ID) private platformId,
     private productservice: ProductService,
     public router: Router
-  ) {
+  ){
     if (isPlatformBrowser(this.platformId)) {
       this.isBrowser = true;
     }

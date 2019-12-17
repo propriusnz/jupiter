@@ -163,6 +163,9 @@ export class ProductService {
     { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) }
     );
   }
+  register(user) {
+	  return this.http.post(this.baseUrl + '/user/register', user);
+  }
   // !admin
   login(adminModel) {
     return this.http.post(this.baseUrl + '/admins', adminModel);
