@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DataService } from '../../../../service/data.service'
 import { ProductService } from '../../../../service/product.service';
+import { MatchService } from 'src/app/service/match.service';
 
 @Component({
   selector: 'app-userregistration-dialog',
@@ -26,7 +27,8 @@ export class UserregistrationDialogComponent implements OnInit {
 	  private fb: FormBuilder, 
 	  public dialogRef: MatDialogRef<UserregistrationDialogComponent>, 
 	  public dialog: MatDialog,
-	  private productservice: ProductService
+    private productservice: ProductService,
+    private matchservice: MatchService
 	) { }
 
   ngOnInit() {
@@ -39,7 +41,7 @@ export class UserregistrationDialogComponent implements OnInit {
 					  Validators.pattern('(?!^[0-9 ]*$)(?!^[a-zA-Z ]*$)^([a-zA-Z0-9 ]{8,20})$')]],
       confirmpassword: ['', [Validators.required]],
     }, {
-      validator: this.MustMatch('password', 'confirmpassword')
+      validator: this.matchservice.MustMatch('password', 'confirmpassword')
     });
       this.data.currentloginmessage.subscribe(currentloginmessage => this.message = currentloginmessage)
   }
@@ -58,23 +60,6 @@ export class UserregistrationDialogComponent implements OnInit {
 
   getErrorMessage3() {
     return this.confirmpassword.hasError('required') ? 'Please enter a value' : this.confirmpassword.hasError('notSame') ? 'Password does not match' : ''
-  }
-
-  MustMatch(controlName: string, matchingControlName: string) {
-    return (group: FormGroup) => {
-      const control = group.controls[controlName];
-      const matchingControl = group.controls[matchingControlName];
-      if (matchingControl.errors && !matchingControl.errors.notSame) {
-        //return if another validator has already found an error on the matchingControl
-        return;
-      }
-      //set error on matchingControl if validation fails
-      if (control.value !== matchingControl.value) {
-        matchingControl.setErrors({ notSame: true });
-      } else {
-        matchingControl.setErrors(null);
-      }
-    };
   }
 
   loginDialog() {

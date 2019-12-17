@@ -14,7 +14,7 @@ export class ForgotPasswordComponent implements OnInit {
   user={
     Email: String
   }
-  loggedinfailed=false;
+  sendemailfailed=false;
   errorMessage='';
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<ForgotPasswordComponent>, public dialog: MatDialog,private productservice: ProductService) { }
 
@@ -40,14 +40,15 @@ export class ForgotPasswordComponent implements OnInit {
       Email: this.forgotPasswordForm.value.email,
     }
     console.log(this.user);
-    this.productservice.userlogin(this.user).subscribe(
+    this.productservice.forgotpassword(this.user).subscribe(
       res => {
         console.log(res)
-        this.dialogRef.close()
+        localStorage.setItem('forgotpassword_token', res['token']);
+        this.opendialog();
       },
       err => {
         console.log(err)
-        this.loggedinfailed = true
+        this.sendemailfailed = true
         this.errorMessage = "Incorrect Email"
       }
     );
@@ -61,6 +62,6 @@ export class ForgotPasswordComponent implements OnInit {
   }
   
   update(){
-    this.loggedinfailed=false;
+    this.sendemailfailed=false;
   } 
 }
