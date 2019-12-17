@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { EmailsentDialogComponent } from '../emailsent-dialog/emailsent-dialog.component';
 import { ProductService } from 'src/app/service/product.service';
+import { reduce } from 'rxjs/operators';
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
@@ -11,56 +12,64 @@ import { ProductService } from 'src/app/service/product.service';
 export class ForgotPasswordComponent implements OnInit {
 
   forgotPasswordForm: FormGroup;
-  user={
+  user = {
     Email: String
   }
-  sendemailfailed=false;
-  errorMessage='';
-  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<ForgotPasswordComponent>, public dialog: MatDialog,private productservice: ProductService) { }
+  sendemailfailed = false;
+  errorMessage = '';
+  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<ForgotPasswordComponent>, public dialog: MatDialog, private productservice: ProductService) { }
 
   ngOnInit() {
-	  this.forgotPasswordForm = this.fb.group({
-		  email:['', [Validators.required,
-					  Validators.email]]
-	  })
+    this.forgotPasswordForm = this.fb.group({
+      email: ['', [Validators.required,
+      Validators.email]]
+    })
   }
 
   get email() {
-	return this.forgotPasswordForm.get('email');
+    return this.forgotPasswordForm.get('email');
   }
 
   getEmailErrorMessage() {
-	return this.email.hasError('required') ? 'Please enter your email' :
-		this.email.hasError('email') ? 'Please enter a valid email address with @' : 
-		'';
+    return this.email.hasError('required') ? 'Please enter your email' :
+      this.email.hasError('email') ? 'Please enter a valid email address with @' :
+        '';
   }
 
   onSubmit() {
     this.user = {
       Email: this.forgotPasswordForm.value.email,
     }
-    console.log(this.user);
     this.productservice.forgotpassword(this.user).subscribe(
       res => {
-        console.log(typeof(res['data']))
-        localStorage.setItem('forgotpassword_token', res['token']);
+        console.log(res)
+        console.log(res['data'])
+        console.log(typeof(res))
+        if (res['isSuccess']===false) {
+          this.sendemailfailed = true
+          this.errorMessage = "Incorrect Email"
+        }else{
+          console.log(res)
+          this.opendialog()
+          localStorage.setItem('forgotpassword_token', res['token'])
+          localStorage.setItem("forgotpassword_userid",res['userId'])
+        }
+        
       },
       err => {
         console.log(err)
-        this.sendemailfailed = true
-        this.errorMessage = "Incorrect Email"
       }
     );
   }
-  opendialog(){
+  opendialog() {
     this.dialogRef.close();
     this.dialog.open(EmailsentDialogComponent, {
       width: '500px',
       height: '250px'
     });
   }
-  
-  update(){
-    this.sendemailfailed=false;
-  } 
+
+  update() {
+    this.sendemailfailed = false;
+  }
 }

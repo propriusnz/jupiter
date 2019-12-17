@@ -176,6 +176,9 @@ export class ProductService {
   forgotpassword(useremail){
     return this.http.post(this.baseUrl+'/user/forgotpassword',useremail);
   }
+  resetpassword(newemail){
+    return this.http.post(this.baseUrl+'/user/resetpassword',newemail,{ headers: new HttpHeaders({ 'Authorization': 'Bearer ' + localStorage.getItem('forgotpassword_token') }) })
+  }
   getUser() {
     return this.http.get(this.baseUrl + '/admins',
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });

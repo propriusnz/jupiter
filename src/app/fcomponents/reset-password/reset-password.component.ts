@@ -14,10 +14,13 @@ export class ResetPasswordComponent implements OnInit {
 	hide = true;
 	errorMessage = '';
 	resetFailed = false;
-
+  user={
+    Email:String,
+  }
   constructor(
 	private fb: FormBuilder, 
-	private matchservice: MatchService
+  private matchservice: MatchService,
+  private _resetpasswordservice: ProductService
   ) { }
 
   ngOnInit() {
@@ -52,5 +55,26 @@ export class ResetPasswordComponent implements OnInit {
 
   update () {
 	this.resetFailed = false;
+  }
+  onSubmit(){
+    this.user = {
+      Email: this.resetPasswordForm.value.email
+    }
+    this._resetpasswordservice.resetpassword(this.user).subscribe(
+      res => {
+        console.log(res)
+        console.log(res['data'])
+        console.log(typeof(res))
+        if (res['isSuccess']===false) {
+          this.resetFailed = true
+          this.errorMessage = "Reset Failed"
+        }else{
+          console.log(res)
+        }
+      },
+      err => {
+        console.log(err)
+      }
+    );
   }
 }
