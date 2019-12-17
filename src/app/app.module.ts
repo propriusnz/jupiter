@@ -51,6 +51,7 @@ import { AdminImagesComponent } from './fcomponents/admin/admin-images/admin-ima
 import { ForgotPasswordComponent } from './fcomponents/basic/user-dialog/forgot-password/forgot-password.component';
 import { PaymentoptionsComponent } from './fcomponents/paymentoptions/paymentoptions.component';
 import { ChangeinfoComponent } from './fcomponents/changeinfo/changeinfo.component';
+import { EmailsentDialogComponent } from './fcomponents/basic/user-dialog/emailsent-dialog/emailsent-dialog.component';
 
 
 // All Routes follow
@@ -120,7 +121,8 @@ const appRoutes: Routes = [
     UserloginDialogComponent,
     ForgotPasswordComponent,
     PaymentoptionsComponent,
-    ChangeinfoComponent
+    ChangeinfoComponent,
+    EmailsentDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -150,7 +152,8 @@ const appRoutes: Routes = [
     CartdialogComponent,
 	  UserregistrationDialogComponent ,
 	  UserloginDialogComponent,
-	  ForgotPasswordComponent
+    ForgotPasswordComponent,
+    EmailsentDialogComponent
   ],
 })
 export class AppModule { }
