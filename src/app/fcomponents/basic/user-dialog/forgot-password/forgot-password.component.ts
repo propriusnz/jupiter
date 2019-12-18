@@ -51,8 +51,6 @@ export class ForgotPasswordComponent implements OnInit {
         }else{
           console.log(res)
           this.opendialog()
-          localStorage.setItem('forgotpassword_token', res['token'])
-          localStorage.setItem("forgotpassword_userid",res['userId'])
         }
         
       },
