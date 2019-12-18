@@ -3,7 +3,6 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ProductService } from '../../../service/product.service';
 import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { environment } from '../../../../environments/environment.prod';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { setTheme } from 'ngx-bootstrap/utils';
 
@@ -51,7 +50,6 @@ export class ProductComponent implements OnInit {
   ngOnInit() {
     this.cartForm = this.formBuilder.group({
 	  cartItems: this.formBuilder.array([]),
-	  dateRange: ['', Validators.required]
     });
     // get the detail of product
     this.productService.showProduct(this.productId).subscribe(
@@ -186,6 +184,7 @@ export class ProductComponent implements OnInit {
           localStorage.setItem('cartList', JSON.stringify(this.cartList));
         }
       });
+      console.log(this.minDate);
   }
   // click the path and re-navigate
   backClicked(type: string, id?: number) {

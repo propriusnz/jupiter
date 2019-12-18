@@ -18,7 +18,7 @@ export class ResetPasswordComponent implements OnInit {
 	hide = true;
 	errorMessage = '';
 	resetFailed = false;
-    user = {
+  user = {
 	  Password: '',
 	  Token: ''
 	}
