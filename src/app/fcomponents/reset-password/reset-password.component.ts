@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
 import { ProductService } from '../../service/product.service';
 import { MatchService } from 'src/app/service/match.service';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-reset-password',
@@ -13,14 +13,16 @@ export class ResetPasswordComponent implements OnInit {
 	resetPasswordForm: FormGroup;
 	hide = true;
 	errorMessage = '';
-	resetFailed = false;
-  user={
-    Email:String,
-  }
+	resetFailed = true;
+	user = {
+		Email:String,
+	}
+
   constructor(
+	private router: Router,
 	private fb: FormBuilder, 
-  private matchservice: MatchService,
-  private _resetpasswordservice: ProductService
+    private matchservice: MatchService,
+  	private _resetpasswordservice: ProductService
   ) { }
 
   ngOnInit() {
@@ -31,7 +33,7 @@ export class ResetPasswordComponent implements OnInit {
 						Validators.pattern('(?!^[0-9 ]*$)(?!^[a-zA-Z ]*$)^([a-zA-Z0-9 ]{8,20})$')]],
 		confirmpassword: ['', [Validators.required]],
 	}, {
-	validator: this.matchservice.MustMatch('password', 'confirmpassword')
+		validator: this.matchservice.MustMatch('password', 'confirmpassword')
 	});
   }
 
@@ -56,7 +58,9 @@ export class ResetPasswordComponent implements OnInit {
   update () {
 	this.resetFailed = false;
   }
-  onSubmit(){
+  onSubmit() {
+	alert("Password Reset Successful!"); //test
+	this.router.navigateByUrl("home"); //test
     this.user = {
       Email: this.resetPasswordForm.value.email
     }
@@ -65,11 +69,13 @@ export class ResetPasswordComponent implements OnInit {
         console.log(res)
         console.log(res['data'])
         console.log(typeof(res))
-        if (res['isSuccess']===false) {
+        if (res['isSuccess'] === false) {
           this.resetFailed = true
           this.errorMessage = "Reset Failed"
-        }else{
-          console.log(res)
+        } else {
+		  console.log(res);
+		  this.resetFailed = false;
+		  this.router.navigateByUrl("home");
         }
       },
       err => {
