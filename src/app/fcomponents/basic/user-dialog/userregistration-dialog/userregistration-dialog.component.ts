@@ -33,7 +33,7 @@ export class UserregistrationDialogComponent implements OnInit {
 
   ngOnInit() {
     this.registrationForm = this.fb.group({
-	  email: ['', [Validators.required, Validators.email, 				  
+	  email: ['', [Validators.required, Validators.email,  
 		           Validators.minLength(8)]],
 	  password: ['', [Validators.required, 			
 					  Validators.minLength(8), 

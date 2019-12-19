@@ -246,38 +246,41 @@
         </div>
       </li>
 
-
-      <span class="navspace"></span>
+	  <span class="navspace"></span>
+	  
       <!--!About us-->
       <li class="nav-item">
-        <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/aboutUs' routerLinkActive="active">
-          <h1 class="s2bold">About us</h1>
+        <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/' routerLinkActive="active">
+          <h1 class="s2bold">/</h1>
         </a>
-        <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/aboutUs'>
-          <h1 class="s2bold">About us</h1>
+        <a *ngIf="isBrowser==false" class="nav-link s2bold" href=' '>
+          <h1 class="s2bold">/</h1>
         </a>
       </li>
-      <span class="navspace"></span>
+	  <span class="navspace"></span>
+	  
       <!--!FAQ-->
       <li class="nav-item">
-        <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/faq' routerLinkActive="active">
-          <h1 class="s2bold">FAQ</h1>
+        <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink=' ' routerLinkActive="active">
+          <h1 class="s2bold">/</h1>
         </a>
-        <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/faq'>
-          <h1 class="s2bold">FAQ</h1>
+        <a *ngIf="isBrowser==false" class="nav-link s2bold" href=' '>
+          <h1 class="s2bold">/</h1>
         </a>
       </li>
-      <span class="navspace"></span>
-      <!--!Contact us-->
+	  <span class="navspace"></span>
+	  
+      <!--!User DashBoard-->
       <li class="nav-item">
-        <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/contactUs' routerLinkActive="active">
-          <h1 class="s2bold">Contact us</h1>
+        <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/userDashboard' routerLinkActive="active">
+          <h1 class="s2bold">User Dashboard</h1>
         </a>
-        <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/contactUs'>
-          <h1 class="s2bold">Contact us</h1>
+        <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/userDashboard'>
+          <h1 class="s2bold">User Dashboard</h1>
         </a>
       </li>
-      <span class="navspace"></span>
+	  <span class="navspace"></span>
+	  
       <!--!Shooping Cart-->
       <li class="nav-item pl-md-1">
         <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/checkout' routerLinkActive="active">
@@ -290,7 +293,8 @@
               <i class="fas fa-shopping-cart" title="View Shopping Cart"></i>
           </h1>
         </a>
-      </li>
+	  </li>
+	  
     </ul>
   </div>
 </nav>
