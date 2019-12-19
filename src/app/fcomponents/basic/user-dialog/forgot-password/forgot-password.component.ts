@@ -17,6 +17,7 @@ export class ForgotPasswordComponent implements OnInit {
   }
   sendemailfailed = false;
   errorMessage = '';
+  
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<ForgotPasswordComponent>, public dialog: MatDialog, private productservice: ProductService) { }
 
   ngOnInit() {

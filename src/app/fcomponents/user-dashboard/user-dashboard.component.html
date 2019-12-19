@@ -1,0 +1,132 @@
+<div class="container">
+	<mat-tab-group dynamicHeight  mat-align-tabs="center">
+		<mat-tab label="Profile">
+			<div class="card">
+				<div class="card-header">
+					<h4>Your Profile</h4>	
+				</div>
+				<div class="card-body bg-light text-center">
+					<h4>James Bond</h4>
+					<hr>
+					<div class="mt-5">
+						<p><span>Email:</span><em> jamesbond@mi6.com</em></p>
+						<p><span>Phone:</span> 1234567</p>
+						<p><span>Company:</span> MI 6</p>
+					</div>
+				</div>
+			</div>
+		</mat-tab>
+
+		<mat-tab label="Order History">
+			<div class="card">
+				<div class="card-header">
+					<h4>Your Order History</h4>
+				</div>
+				<div class="card-body bg-light text-center">
+					Nothing here yet ...
+				</div>
+			</div>
+		</mat-tab>
+
+		<mat-tab label="Settings">
+			<div class="card">
+				<div class="card-header">
+					<h4>Manage Your Settings</h4>
+				</div>
+				<div class="card-body bg-light text-center py-3">
+					<form [formGroup]="changePasswdForm" (ngSubmit)="onSubmit()">
+						<mat-form-field>
+							<input matInput placeholder="Old Password" formControlName="oldpassword" [type]="hide ? 'password' : 'text'"
+							(ngModleChange)="update()" required>
+							<button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+								[attr.aria-pressed]="hide">
+								<mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+							</button>
+							<mat-error *ngIf="password.invalid">{{getErrorMessage2()}}</mat-error>
+						</mat-form-field>
+						<mat-form-field>
+							<input matInput placeholder="Password" formControlName="password" [type]="hide ? 'password' : 'text'"
+							(ngModleChange)="update()" required>
+							<button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+								[attr.aria-pressed]="hide">
+								<mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+							</button>
+							<mat-error *ngIf="password.invalid">{{getErrorMessage2()}}</mat-error>
+						</mat-form-field>
+			
+						<mat-form-field>
+							<input matInput (ngModleChange)="update()" placeholder="Confirm Password" formControlName="confirmpassword"
+								[type]="hide ? 'password' : 'text'" required>
+							<button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+								[attr.aria-pressed]="hide">
+								<mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+							</button>
+			
+							<mat-error *ngIf="confirmpassword.invalid">{{getErrorMessage3()}}</mat-error>
+						</mat-form-field>
+						<div class="slide">
+							<mat-slide-toggle aria-label="Subscribe" color="primary"></mat-slide-toggle>
+							<span> Subscribe to our news letter</span>
+						</div>
+						<div *ngIf="this.changePasswdForm.valid && signupFailed" class="alert alert-danger text-center">
+							{{ errorMessage }}
+						</div>
+						<hr>
+						<button type="submit" mat-raised-button class="primaryButton">Update</button>
+					</form>
+				</div>
+			</div>
+		</mat-tab>
+	</mat-tab-group>
+
+	<div id="buttonsWrap">
+		<button mat-raised-button class="primaryButton" routerLink='/home'>OK</button>
+	</div>
+</div>
+<style>
+	mat-tab-group {
+		margin: 0 auto;
+		margin-top: 1%;
+	}
+	mat-form-field	{
+		display: block;
+	}
+	p {
+		font-size: 1.1rem;
+	}
+	span {
+		color: #c48f45;
+	}
+	form {
+		margin: 0px 80px 0px 80px;
+	}
+	.card {
+		min-height: 350px;
+		width: 500px;
+		margin: 0 auto;
+		margin-top: 3%;
+	}
+	.card-body {
+		width: 100%;
+	}
+	.card-header {
+		background-color: #c48f45;
+		color: white;
+		text-align: center;
+	}
+	.primaryButton {
+		background-color: #c48f45;
+		color: white;
+	}
+	.slide {
+		margin: 0 auto;
+		margin: 30px 0px 30px 0px;
+		text-align: center;
+	}
+	#buttonsWrap {
+		margin: 0 auto;
+		text-align: center;
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+</style>

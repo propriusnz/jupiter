@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDatepickerModule, MatInputModule, MatFormFieldModule, MatNativeDateModule, MatDialogModule, MatButtonModule, MatIconModule } from '@angular/material';
+import { MatDatepickerModule, MatInputModule, MatFormFieldModule, MatNativeDateModule, MatDialogModule, MatButtonModule, MatIconModule, MatDialogRef } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -54,7 +56,7 @@ import { PaymentoptionsComponent } from './fcomponents/paymentoptions/paymentopt
 import { ChangeinfoComponent } from './fcomponents/changeinfo/changeinfo.component';
 import { EmailsentDialogComponent } from './fcomponents/basic/user-dialog/emailsent-dialog/emailsent-dialog.component';
 import { ResetPasswordComponent } from './fcomponents/reset-password/reset-password.component';
-
+import { UserDashboardComponent } from './fcomponents/user-dashboard/user-dashboard.component';
 
 
 // All Routes follow
@@ -84,6 +86,7 @@ const appRoutes: Routes = [
   },
   {path: 'login', component: AdminLoginComponent},
   {path: 'reset', component: ResetPasswordComponent},
+  {path: 'userDashboard', component: UserDashboardComponent},
   {path: 'checkout', component: ShoppingCheckoutComponent},
   {path: 'thankYou', component: ThankYouComponent},
   {path: 'paymentoptions',component: PaymentoptionsComponent},
@@ -127,7 +130,8 @@ const appRoutes: Routes = [
     PaymentoptionsComponent,
     ChangeinfoComponent,
     EmailsentDialogComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    UserDashboardComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -139,16 +143,18 @@ const appRoutes: Routes = [
 	MatFormFieldModule,
 	MatCardModule,
     MatNativeDateModule,
-	  MatDialogModule,
-	  MatButtonModule,
-	  MatIconModule,
+	MatDialogModule,
+	MatButtonModule,
+	MatIconModule,
+	MatTabsModule,
+	MatSlideToggleModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes, {scrollPositionRestoration: 'enabled'}),
 	HttpClientModule,
 	BsDatepickerModule.forRoot()
   ],
   providers: [
-    ProductService,DataService, MatchService
+    ProductService, DataService, MatchService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
