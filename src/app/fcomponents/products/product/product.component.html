@@ -89,7 +89,7 @@
                   formControlName="Title" [attr.disabled]="true">
                 $<input style="background-color:white; border-width: 0px; width:42px;" type="text"
                   formControlName="Price" [attr.disabled]="true">
-                <input style="width:40px; height:20px; font-size:14px; border:none; border-bottom:1px solid #919191"
+                <input style="width:40px; height:20px; font-size:14px; border:none; border-bottom:1px solid #919191" (ngModelChange)="addQuantity($event,detail)"
                   type="number" min="0" formControlName="Quantity" placeholder="Quantity">
                 <div *ngIf="cartForm.controls.cartItems.controls[i].controls.Quantity.invalid" class="invalid_feedback"
                   style="padding-bottom:10px;" role="alert">Only {{detail.value.AvailableStock}} are available. Please
@@ -117,7 +117,7 @@
 
         <div class="mt-3">
           <input bsDaterangepicker type="text" class="form-control"
-            placeholder="Select your Desired time frame" style="width: 260px;" [(minDate)]="minDate" [(maxDate)]="maxDate"
+            placeholder="Select your Desired time frame" style="width: 260px;" [isDisabled]="dateControl" [(minDate)]="minDate" [datesDisabled]="disabledDates" [(maxDate)]="maxDate"
             [bsConfig]="dpConfig">
         </div>
 

@@ -28,7 +28,14 @@ export class ProductComponent implements OnInit {
   public dpConfig: Partial<BsDatepickerConfig> = new BsDatepickerConfig();
   minDate: Date;
   maxDate: Date;
-  
+  dateControl=false;
+  disabledDates = [
+    new Date('2019-12-25'),
+    new Date('2019-12-31')
+  ];
+  orderquantity=0;
+  detailTest='';
+  orderlist=[];
   @ViewChild ('imageContainer') imageContainer: ElementRef;
   @ViewChild ('prodImage') prodImage: ElementRef;
   @ViewChild ('rightControl') rightControl: ElementRef;
@@ -44,7 +51,7 @@ export class ProductComponent implements OnInit {
 	this.minDate = new Date();
     this.maxDate = new Date();
     this.minDate.setDate(this.minDate.getDate());
-	this.maxDate.setDate(this.maxDate.getDate() + 30);
+	this.maxDate.setDate(this.maxDate.getDate() + 90);
 	this.dpConfig.containerClass = 'theme-orange';
   }
   ngOnInit() {
@@ -117,6 +124,8 @@ export class ProductComponent implements OnInit {
   }
   // add product into a list
   manageCartProds() {
+    console.log(this.orderquantity);
+    console.log(this.detailTest);
     const newCartList = [];
       // if product detail exist
     if (this.productDetail['productDetail'] && this.productDetail['productDetail'].length !== 0) {
@@ -220,6 +229,9 @@ export class ProductComponent implements OnInit {
     this.rightCarouselControlPosition = containerWidth - imageWidth;
     this.rightControl.nativeElement.style.right = this.rightCarouselControlPosition + 'px';
   }
-  
+  addQuantity(value,detail){
+    this.orderquantity=value;
+    this.detailTest=detail
+  }
 }
 
