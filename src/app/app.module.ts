@@ -10,7 +10,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxJsonLdModule } from 'ngx-json-ld';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-
 // All service follow
 import { ProductService } from './service/product.service';
 import { MatchService } from './service/match.service';
@@ -151,7 +150,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes, {scrollPositionRestoration: 'enabled'}),
 	HttpClientModule,
-	BsDatepickerModule.forRoot()
+  BsDatepickerModule.forRoot()
   ],
   providers: [
     ProductService, DataService, MatchService

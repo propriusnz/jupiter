@@ -14,7 +14,7 @@ export class Shopping_cartComponent implements OnInit {
   stockUnavailable = false;
   userInputQuantityArray = [];
   baseImageLink = environment.baseLink;
-  @ViewChild('quantityInput') quantityInput: ElementRef;
+  @ViewChild('quantityInput', { static: false }) quantityInput: ElementRef;
   constructor(
     private productService: ProductService
     ){}

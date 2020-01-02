@@ -14,7 +14,7 @@ export class GallerydialogComponent implements OnInit {
   selectedImg: File = null;
   isImageEmpty = false;
   baseImageLink = environment.baseLink;
-  @ViewChild('imageInput') imageInput: ElementRef;
+  @ViewChild('imageInput', { static: false }) imageInput: ElementRef;
   galleryForm = {
     CustomerName: '',
     eventtypeId: 0,

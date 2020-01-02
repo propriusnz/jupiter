@@ -10,7 +10,7 @@ import { environment } from '../../../../environments/environment.prod';
   styleUrls: ['./productList.component.css']
 })
 export class ProductListComponent implements OnInit {
-  @ViewChild("categorySelection") categorySelectionElement: ElementRef;
+  @ViewChild("categorySelection", { static: false }) categorySelectionElement: ElementRef;
   allProducts: any = [];
   allCategories: any = [];
   typeName: any;

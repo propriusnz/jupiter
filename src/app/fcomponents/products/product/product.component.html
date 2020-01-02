@@ -71,10 +71,7 @@
         <span class="s1 mr-3" *ngIf="productDetail.productDetail.length > 1">Starting from:
           ${{productDetail.price}}</span>
       </div>
-      <br />
       <h3 class="s2 mb-2" style="white-space: pre-line">{{productDetail.description}}</h3>
-      <br />
-
       <div
         *ngIf="productDetail['productDetail'] && productDetail['productDetail'].length!=0 && cartForm.controls.cartItems['controls'].length != 0">
         <div class="s2"><b>Select specifications</b></div><br>
@@ -89,8 +86,8 @@
                   formControlName="Title" [attr.disabled]="true">
                 $<input style="background-color:white; border-width: 0px; width:42px;" type="text"
                   formControlName="Price" [attr.disabled]="true">
-                <input style="width:40px; height:20px; font-size:14px; border:none; border-bottom:1px solid #919191" (ngModelChange)="addQuantity($event,detail)"
-                  type="number" min="0" formControlName="Quantity" placeholder="Quantity">
+                <input style="width:40px; height:20px; font-size:14px; border:none; border-bottom:1px solid #919191"
+                  (click)="addQuantity(detail)" type="number" min="0" formControlName="Quantity" placeholder="Quantity">
                 <div *ngIf="cartForm.controls.cartItems.controls[i].controls.Quantity.invalid" class="invalid_feedback"
                   style="padding-bottom:10px;" role="alert">Only {{detail.value.AvailableStock}} are available. Please
                   contact us if you need more!</div>
@@ -101,7 +98,7 @@
       </div>
 
       <!-- ngIf="cartForm.controls.cartItems['controls'].length != 0 || productDetail.price > 0" -->
-      <div class="row mt-3"
+      <div class="row mt-2"
         *ngIf="productDetail['productDetail'] || (productDetail['productDetail'].length == 0 && productDetail.price > 0)">
         <!-- ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length==0" -->
         <div class="col-6 col-lg-6 s1"
@@ -109,17 +106,18 @@
           Quantity: <input type="number" [value]="quantity" min="0" max={{productDetail.availableStock}}
             [(ngModel)]="quantity">
         </div>
-        <div class="col-6 col-lg-6">
+        <div class="mt-2 ml-2">
+          <input bsDaterangepicker type="text" class="form-control" placeholder="Select your Desired time frame"
+            style="width: 260px;" [isDisabled]="dateControl" [minDate]="minDate" [datesDisabled]="disabledDates"
+            [maxDate]="maxDate" [bsConfig]="dpConfig">
+        </div>
+        <div class="col-6 col-lg-6 mt-2">
           <button class='btn btn_gold' (click)="manageCartProds()"
             [disabled]="(0>= this.quantity || this.quantity > this.productDetail.availableStock) && (this.cartForm.invalid || this.isInputZero)">Add
             to cart</button>
         </div>
 
-        <div class="mt-3">
-          <input bsDaterangepicker type="text" class="form-control"
-            placeholder="Select your Desired time frame" style="width: 260px;" [isDisabled]="dateControl" [(minDate)]="minDate" [datesDisabled]="disabledDates" [(maxDate)]="maxDate"
-            [bsConfig]="dpConfig">
-        </div>
+
 
       </div>
 

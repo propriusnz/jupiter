@@ -28,7 +28,7 @@ export class AdminComponent implements OnInit {
   isEventTypeImageEmpty: boolean;
   baseImageLink = environment.baseLink;
 
-  @ViewChild('eventImageInput') eventImageInput: ElementRef;
+  @ViewChild('eventImageInput', { static: false }) eventImageInput: ElementRef;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId,

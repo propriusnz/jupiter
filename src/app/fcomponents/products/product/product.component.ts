@@ -5,6 +5,8 @@ import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { environment } from '../../../../environments/environment.prod';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { setTheme } from 'ngx-bootstrap/utils';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-product',
@@ -15,7 +17,7 @@ export class ProductComponent implements OnInit {
   productId: number;
   productDetail: any;
   prodMediaUrl: any;
-  quantity = 0 ;
+  quantity = 0;
   isprodAdded = false;
   isStockAvailable = true;
   cartList = [];
@@ -28,43 +30,44 @@ export class ProductComponent implements OnInit {
   public dpConfig: Partial<BsDatepickerConfig> = new BsDatepickerConfig();
   minDate: Date;
   maxDate: Date;
-  dateControl=false;
+  dateControl = false;
   disabledDates = [
     new Date('2019-12-25'),
     new Date('2019-12-31')
   ];
-  orderquantity=0;
-  detailTest='';
-  orderlist=[];
-  @ViewChild ('imageContainer') imageContainer: ElementRef;
-  @ViewChild ('prodImage') prodImage: ElementRef;
-  @ViewChild ('rightControl') rightControl: ElementRef;
+  orderquantity = 0;
+  orderlist = [];
+  map = new Map();
+  @ViewChild('imageContainer', { static: false }) imageContainer: ElementRef;
+  @ViewChild('prodImage', { static: false }) prodImage: ElementRef;
+  @ViewChild('rightControl', { static: false }) rightControl: ElementRef;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private productService: ProductService,
-	private formBuilder: FormBuilder,
+    private formBuilder: FormBuilder,
   ) {
-	this.productId = this.route.snapshot.params['id'];
-	setTheme('bs4');
-	this.minDate = new Date();
+    this.productId = this.route.snapshot.params['id'];
+    setTheme('bs4');
+    this.minDate = new Date();
     this.maxDate = new Date();
     this.minDate.setDate(this.minDate.getDate());
-	this.maxDate.setDate(this.maxDate.getDate() + 90);
-	this.dpConfig.containerClass = 'theme-orange';
+    this.maxDate.setDate(this.maxDate.getDate() + 90);
+    this.dpConfig.containerClass = 'theme-orange';
   }
   ngOnInit() {
     this.cartForm = this.formBuilder.group({
-	  cartItems: this.formBuilder.array([]),
+      cartItems: this.formBuilder.array([]),
     });
     // get the detail of product
     this.productService.showProduct(this.productId).subscribe(
       (res) => {
+        console.log(res)
         this.isLoading = false;
         this.productDetail = res;
         this.createItem(res);
-        this.prodMediaUrl =  this.productDetail.productMedia;
+        this.prodMediaUrl = this.productDetail.productMedia;
       },
       (error) => {
         console.log(error);
@@ -73,13 +76,13 @@ export class ProductComponent implements OnInit {
     );
     this.setStorage();
     this.detectInputAmount();
+  }
+  // tslint:disable-next-line: use-life-cycle-interface
+  ngAfterViewChecked() {
+    if (this.imageContainer && this.prodImage && this.rightControl) {
+      this.showElements();
     }
-// tslint:disable-next-line: use-life-cycle-interface
-    ngAfterViewChecked() {
-      if (this.imageContainer && this.prodImage && this.rightControl) {
-        this.showElements();
-      }
-    }
+  }
 
   // add product descriptions into formArray
   createItem(res) {
@@ -90,16 +93,16 @@ export class ProductComponent implements OnInit {
           this.formBuilder.group({
             ProdId: prod.prodId,
             // Title: ({value : prod.productDetail1, disabled : true}),
+            Id: prod.id,
             Title: prod.productDetail1,
             Quantity: [0, [Validators.min(0), Validators.max(prod.availableStock), Validators.required]],
             Price: (prod.discount && prod.discount > 0) ? prod.price - prod.discount : prod.price,
             Discount: prod.discount,
-			AvailableStock: prod.availableStock
+            AvailableStock: prod.availableStock
           })
         );
       }
-	});
-	console.log(res);
+    });
   }
   // check incomplete specifications
   validateItem(item): boolean {
@@ -115,22 +118,21 @@ export class ProductComponent implements OnInit {
   }
   // get cartList from localStorage or initialize cartList in localStorage
   setStorage() {
-      if ('cartList' in localStorage) {
-        this.cartList = JSON.parse(localStorage.getItem('cartList'));
-      } else {
-        localStorage.setItem('cartList', JSON.stringify(this.cartList));
-      }
-      // localStorage.setItem('userId', 'aaa ')
+    if ('cartList' in localStorage) {
+      this.cartList = JSON.parse(localStorage.getItem('cartList'));
+    } else {
+      localStorage.setItem('cartList', JSON.stringify(this.cartList));
+    }
+    // localStorage.setItem('userId', 'aaa ')
   }
   // add product into a list
   manageCartProds() {
-    console.log(this.orderquantity);
-    console.log(this.detailTest);
     const newCartList = [];
-      // if product detail exist
+    // if product detail exist
     if (this.productDetail['productDetail'] && this.productDetail['productDetail'].length !== 0) {
       this.cartForm.controls.cartItems['value'].forEach(cartItem => {
         const item = {
+          Id: cartItem.Id,
           ProdId: cartItem.ProdId,
           Price: cartItem.Price * cartItem.Quantity,
           Title: this.productDetail.title + ': ' + cartItem.Title,
@@ -142,10 +144,11 @@ export class ProductComponent implements OnInit {
         }
       });
       this.addToCart(newCartList);
+
     } else {
       // if no product detail
       let productPrice = (this.productDetail.discount && this.productDetail.discount > 0) ?
-      this.productDetail.price - this.productDetail.discount : this.productDetail.price;
+        this.productDetail.price - this.productDetail.discount : this.productDetail.price;
       const item = {
         ProdId: Number(this.productId),
         Price: this.quantity * productPrice,
@@ -165,35 +168,34 @@ export class ProductComponent implements OnInit {
   addToCart(list) {
     this.isStockAvailable = true;
     this.isprodAdded = true;
-    setTimeout( () => {
+    setTimeout(() => {
       this.isprodAdded = false;
-      }, 1000);
-      list.forEach(item => {
-        let a = false;
-        // if cartList if not empty
-        if (this.cartList.length > 0) {
-          for (let i = 0; i < this.cartList.length; i++) {
-            // if product already exists in cartList
-            if (this.cartList[i].Title === item.Title) {
-              a = true;
-              this.cartList[i].Quantity += item.Quantity;
-              this.cartList[i].Price = this.cartList[i].Quantity * item.Price;
-              localStorage.setItem('cartList', JSON.stringify(this.cartList));
-            }
-          }
-          // if product not in cartList
-          if (a === false) {
-            this.cartList.push(item);
+    }, 1000);
+    list.forEach(item => {
+      let a = false;
+      // if cartList if not empty
+      if (this.cartList.length > 0) {
+        for (let i = 0; i < this.cartList.length; i++) {
+          // if product already exists in cartList
+          if (this.cartList[i].Title === item.Title) {
+            a = true;
+            this.cartList[i].Quantity += item.Quantity;
+            this.cartList[i].Price = this.cartList[i].Quantity * item.Price;
             localStorage.setItem('cartList', JSON.stringify(this.cartList));
           }
-        } else {
-          // if nothing in cartList
-          this.cartList = JSON.parse(localStorage.getItem('cartList'));
+        }
+        // if product not in cartList
+        if (a === false) {
           this.cartList.push(item);
           localStorage.setItem('cartList', JSON.stringify(this.cartList));
         }
-      });
-      console.log(this.minDate);
+      } else {
+        // if nothing in cartList
+        this.cartList = JSON.parse(localStorage.getItem('cartList'));
+        this.cartList.push(item);
+        localStorage.setItem('cartList', JSON.stringify(this.cartList));
+      }
+    });
   }
   // click the path and re-navigate
   backClicked(type: string, id?: number) {
@@ -210,18 +212,18 @@ export class ProductComponent implements OnInit {
   // check whether all of the input value of specifications are 0
   detectInputAmount() {
     this.cartForm.valueChanges.subscribe(dt => {
-        let a = 0;
-        this.cartForm.controls.cartItems['value'].forEach(item => {
-          if (item.Quantity === 0) {
-            a += 1;
-          }
-        });
-        if (a === this.cartForm.controls.cartItems['value'].length) {
-          this.isInputZero = true;
-        } else {
-          this.isInputZero = false;
+      let a = 0;
+      this.cartForm.controls.cartItems['value'].forEach(item => {
+        if (item.Quantity === 0) {
+          a += 1;
         }
       });
+      if (a === this.cartForm.controls.cartItems['value'].length) {
+        this.isInputZero = true;
+      } else {
+        this.isInputZero = false;
+      }
+    });
   }
   showElements() {
     const containerWidth = this.imageContainer.nativeElement.clientWidth;
@@ -229,9 +231,33 @@ export class ProductComponent implements OnInit {
     this.rightCarouselControlPosition = containerWidth - imageWidth;
     this.rightControl.nativeElement.style.right = this.rightCarouselControlPosition + 'px';
   }
-  addQuantity(value,detail){
-    this.orderquantity=value;
-    this.detailTest=detail
+  addQuantity(proddetail) {
+    let prodId=proddetail['value'].Id
+    let quantityvalue=proddetail['value'].Quantity
+    console.log(proddetail.valid)
+    if(this.cartForm.valid){
+    if (!this.map.has(proddetail['value'].Id) && proddetail.valid) {
+      let neworder = {
+        id: prodId,
+        quantity: quantityvalue,
+        beginDate: this.datetoYMD(this.minDate)
+      }
+      this.map.set(prodId,neworder)
+    }else if(this.map.has(proddetail['value'].Id) && quantityvalue!=0 && quantityvalue <=proddetail['value'].AvaiableStock){
+      this.map.get(prodId).quantity=quantityvalue
+    }else{
+      this.map.delete(prodId)
+    }
+  }
+    console.log(this.map)
+    
+    
+  }
+  datetoYMD(date){
+    var d = date.getDate();
+    var m = date.getMonth() + 1; //Month from 0 to 11
+    var y = date.getFullYear();
+    return '' + y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
   }
 }
 

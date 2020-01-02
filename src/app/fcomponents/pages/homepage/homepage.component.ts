@@ -18,8 +18,8 @@ export class HomepageComponent implements OnInit {
   windowResize: number;
   baseImageLink = environment.baseLink;
   displayedCarouselImages: any;
-  @ViewChild('bgat') bgat: ElementRef;
-  @ViewChild('list') list: ElementRef;
+  @ViewChild('bgat', { static: true }) bgat: ElementRef;
+  @ViewChild('list', { static: false }) list: ElementRef;
   @HostListener('window:resize', ['$event'])
   sizeChange(event) {
     if (this.isBrowser) {

@@ -26,7 +26,7 @@ export class ProductdialogComponent implements OnInit {
 
   baseImageUrl = environment.baseLink;
 
-  @ViewChild('imageInput') imageInput: ElementRef;
+  @ViewChild('imageInput', { static: false }) imageInput: ElementRef;
   productForm: {
     title: string,
     subTitle: string,

@@ -14,7 +14,7 @@ export class AdminImagesComponent implements OnInit {
   isLoading = true;
   feedbackMessage: string = null;
   baseImageUrl: string;
-  @ViewChild('imageInput') imageInput: ElementRef;
+  @ViewChild('imageInput', { static: true }) imageInput: ElementRef;
 
   constructor(
     private productService: ProductService
