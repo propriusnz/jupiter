@@ -1,6 +1,19 @@
+<style>
+    .ul-menu {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+        .ul-menu {
+            width: 90%;
+        }
+    }
+</style>
+
 <nav class="navbar navbar-expand-md navbar-light bg-light border-bottom p-0 lspace-3">
   <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-    <ul class="navbar-nav" style="width:80%; margin:0 auto;">
+    <ul class="navbar-nav col-lg-10 ul-menu">
       <span class="navspace"></span>
       <!--!Home-->
       <li class="nav-item">
@@ -214,7 +227,7 @@
     </div>
     
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-      <ul class="navbar-nav" style="width:80%;margin:0 auto;">
+      <ul class="navbar-nav ul-menu">
         <span class="navspace"></span>
       <!--!Gallery-->
       <li class="nav-item dropdown">
@@ -235,7 +248,7 @@
 
           <!-- !mobile dropdown -->
           <a class="dropdown-item d-block d-md-none" data-toggle="collapse" data-target=".navbar-collapse1">
-            <a  class="s2bold" *ngIf="isBrowser==true" routerLink='/galleries'><h1>All Galleries</h1></a>
+            <a class="s2bold" *ngIf="isBrowser==true" routerLink='/galleries'><h1>All Galleries</h1></a>
             <a *ngIf="isBrowser==false" href='http://luxedreameventhire.co.nz/galleries'>All Galleries</a>
           </a>
           <a class="dropdown-item d-block d-md-none s2bold" *ngFor="let gallery of galleriesData" data-toggle="collapse"
@@ -248,29 +261,29 @@
 
 	  <span class="navspace"></span>
 	  
-      <!--!About us-->
+      <!--! Customer Log in -->
       <li class="nav-item">
-        <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/' routerLinkActive="active">
-          <h1 class="s2bold">/</h1>
+        <a *ngIf="isBrowser==true" class="nav-link s2bold" (click)="loginDialog()">
+          <h1 class="s2bold">Log in</h1>
         </a>
-        <a *ngIf="isBrowser==false" class="nav-link s2bold" href=' '>
-          <h1 class="s2bold">/</h1>
+        <a *ngIf="isBrowser==false" class="nav-link s2bold">
+          <h1 class="s2bold">Log in</h1>
         </a>
       </li>
 	  <span class="navspace"></span>
 	  
-      <!--!FAQ-->
+      <!--! Sign up -->
       <li class="nav-item">
-        <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink=' ' routerLinkActive="active">
-          <h1 class="s2bold">/</h1>
+        <a *ngIf="isBrowser==true" class="nav-link s2bold" (click)="signupDialog()">
+          <h1 class="s2bold">Sign up</h1>
         </a>
-        <a *ngIf="isBrowser==false" class="nav-link s2bold" href=' '>
-          <h1 class="s2bold">/</h1>
+        <a *ngIf="isBrowser==false" class="nav-link s2bold">
+          <h1 class="s2bold">Sign up</h1>
         </a>
       </li>
 	  <span class="navspace"></span>
 	  
-      <!--!User DashBoard-->
+      <!--! User DashBoard-->
       <li class="nav-item">
         <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/userDashboard' routerLinkActive="active">
           <h1 class="s2bold">User Dashboard</h1>
@@ -279,10 +292,10 @@
           <h1 class="s2bold">User Dashboard</h1>
         </a>
       </li>
-	  <span class="navspace"></span>
+	  <!-- <span class="navspace"></span> -->
 	  
-      <!--!Shooping Cart-->
-      <li class="nav-item pl-md-1">
+      <!--!Shopping Cart-->
+      <li class="nav-item ml-lg-4 pl-md-1">
         <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/checkout' routerLinkActive="active">
           <h1 class="s2bold">
               <i class="fas fa-shopping-cart" title="View Shopping Cart"></i>

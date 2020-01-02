@@ -1,6 +1,9 @@
 import { Component, OnInit, HostListener, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
-
+import { MatDialog } from '@angular/material';
+import { UserloginDialogComponent } from '../user-dialog/userlogin-dialog/userlogin-dialog.component';
+import { UserregistrationDialogComponent } from '../user-dialog/userregistration-dialog/userregistration-dialog.component'
+import { DataService } from '../../../service/data.service'
 import { ProductService } from '../../../service/product.service';
 
 @Component({
@@ -15,8 +18,11 @@ export class NavbarComponent implements OnInit {
   isBrowser = false;
   galleriesData: any;
   constructor(
-    @Inject(PLATFORM_ID) private platformId,
-    private productService: ProductService) {
+        @Inject(PLATFORM_ID) private platformId,
+        private productService: ProductService,
+        private data:DataService,
+        public dialog: MatDialog
+    ) {
     if (isPlatformBrowser(this.platformId)) {
       this.isBrowser = true;
     }
@@ -56,4 +62,29 @@ export class NavbarComponent implements OnInit {
     this.productService.setSelectedCategory(status);
   }
 
+  loginDialog() {
+    this.dialog.open(UserloginDialogComponent, {
+      width: '400px',
+      height: '650px',
+    });
+  }
+  newsignupDialog(){
+    if(this.signupmessage.localeCompare('open')==0){
+    this.signupDialog()
+    this.data.changesignupMessage("close") 
+    }
+    
+  } 
+  newloginDialog(){
+    if(this.loginmessage.localeCompare('open')==0){
+    this.loginDialog()
+    this.data.changeloginMessage("close")
+    }
+  }
+  signupDialog() {
+    this.dialog.open(UserregistrationDialogComponent, {
+      width: '400px',
+      height: '650px'
+    });
+  }
 }
