@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { UserloginDialogComponent } from '../user-dialog/userlogin-dialog/userlogin-dialog.component';
 import { UserregistrationDialogComponent } from '../user-dialog/userregistration-dialog/userregistration-dialog.component'
-import {DataService} from '../../../service/data.service'
+import { DataService } from '../../../service/data.service'
 
 @Component({
   selector: 'app-footer',
@@ -12,7 +12,10 @@ import {DataService} from '../../../service/data.service'
 export class FooterComponent implements OnInit {
   loginmessage:string;
   signupmessage:string;
-  constructor(private data:DataService,public dialog: MatDialog) { }
+  constructor(
+      private data:DataService, 
+      public dialog: MatDialog
+  ) { }
 
   //Customer Signup   
   signupDialog() {

@@ -17,6 +17,8 @@ export class NavbarComponent implements OnInit {
   serviceCategories: any = [];
   isBrowser = false;
   galleriesData: any;
+  loginmessage:string;
+  signupmessage:string;
   constructor(
         @Inject(PLATFORM_ID) private platformId,
         private productService: ProductService,
