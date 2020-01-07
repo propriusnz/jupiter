@@ -6,6 +6,7 @@ import { environment } from '../../../../environments/environment.prod';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { setTheme } from 'ngx-bootstrap/utils';
 import * as moment from 'moment';
+import { isBefore } from 'ngx-bootstrap/chronos/public_api';
 
 
 @Component({
@@ -27,20 +28,27 @@ export class ProductComponent implements OnInit {
   isLoading = true;
   rightCarouselControlPosition: number;
   baseImageLink = environment.baseLink;
-  public dpConfig: Partial<BsDatepickerConfig> = new BsDatepickerConfig();
-  minDate: Date;
-  maxDate: Date;
-  dateControl = false;
-  disabledDates = [
-    new Date('2019-12-25'),
-    new Date('2019-12-31')
-  ];
+  minDate_start: Date;
+  maxDate_start: Date;
+  minDate_return: Date;
+  maxDate_return: Date;
+  dateStartControl = true;
+  dateReturnControl = true;
+  dateStartInput:any
+  dateReturnInput:any
+  // hiringtime=[];
+  disabledDates = []
+  myMoment:any
+  unavailableDates:any
   orderquantity = 0;
   orderlist = [];
   map = new Map();
   @ViewChild('imageContainer', { static: false }) imageContainer: ElementRef;
   @ViewChild('prodImage', { static: false }) prodImage: ElementRef;
   @ViewChild('rightControl', { static: false }) rightControl: ElementRef;
+  // hiringtime:{proddetailid: string;
+  //   quantity: string;
+  //   beginDate: string};
 
   constructor(
     private route: ActivatedRoute,
@@ -48,13 +56,13 @@ export class ProductComponent implements OnInit {
     private productService: ProductService,
     private formBuilder: FormBuilder,
   ) {
+
     this.productId = this.route.snapshot.params['id'];
     setTheme('bs4');
-    this.minDate = new Date();
-    this.maxDate = new Date();
-    this.minDate.setDate(this.minDate.getDate());
-    this.maxDate.setDate(this.maxDate.getDate() + 90);
-    this.dpConfig.containerClass = 'theme-orange';
+    this.minDate_start = new Date();
+    this.maxDate_start = new Date();
+    this.minDate_start.setDate(this.minDate_start.getDate());
+    this.maxDate_start.setDate(this.maxDate_start.getDate() + 90);
   }
   ngOnInit() {
     this.cartForm = this.formBuilder.group({
@@ -82,8 +90,8 @@ export class ProductComponent implements OnInit {
     if (this.imageContainer && this.prodImage && this.rightControl) {
       this.showElements();
     }
-  }
 
+  }
   // add product descriptions into formArray
   createItem(res) {
     res['productDetail'].forEach(prod => {
@@ -232,32 +240,91 @@ export class ProductComponent implements OnInit {
     this.rightControl.nativeElement.style.right = this.rightCarouselControlPosition + 'px';
   }
   addQuantity(proddetail) {
-    let prodId=proddetail['value'].Id
-    let quantityvalue=proddetail['value'].Quantity
-    console.log(proddetail.valid)
-    if(this.cartForm.valid){
-    if (!this.map.has(proddetail['value'].Id) && proddetail.valid) {
+    console.log(proddetail)
+    let prodId = proddetail['value'].Id
+    let quantityvalue = proddetail['value'].Quantity
+    if (!this.map.has(prodId) && proddetail.valid && quantityvalue != 0) {
       let neworder = {
         id: prodId,
         quantity: quantityvalue,
-        beginDate: this.datetoYMD(this.minDate)
+        beginDate: this.datetoYMD(this.minDate_start)
       }
-      this.map.set(prodId,neworder)
-    }else if(this.map.has(proddetail['value'].Id) && quantityvalue!=0 && quantityvalue <=proddetail['value'].AvaiableStock){
-      this.map.get(prodId).quantity=quantityvalue
-    }else{
+      this.map.set(prodId, neworder)
+    } else if (this.map.has(prodId) && quantityvalue != 0 && quantityvalue <= proddetail['value'].AvailableStock) {
+      this.map.get(prodId).quantity = quantityvalue
+    } else {
       this.map.delete(prodId)
     }
-  }
+    if (this.map.size != 0) {
+      this.dateStartControl = false;
+    } else if (this.map.size == 0) {
+      this.dateStartControl = true;
+    }
+
     console.log(this.map)
-    
-    
+    this.calculateTime()
+
   }
-  datetoYMD(date){
+  datetoYMD(date) {
     var d = date.getDate();
     var m = date.getMonth() + 1; //Month from 0 to 11
     var y = date.getFullYear();
-    return '' + y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+    return '' + y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
   }
+  calculateTime() {
+    let hiringdetail = []
+    let iterable = this.map.values()
+    let current = iterable.next().value
+    while (current != null) {
+      let productHiringDetail = {
+        proddetailid: current.id,
+        quantity: current.quantity,
+        beginDate: current.beginDate
+      }
+      hiringdetail.push(productHiringDetail)
+      current = iterable.next().value
+    }
+    console.log(hiringdetail)
+    if (this.map.size != 0) {
+      this.productService.calculateTime(hiringdetail).subscribe(
+        res => {
+          console.log(res)
+          this.unavailableDates = res
+          for(let i=0;i<this.unavailableDates.length;i++){
+            let myMoment=moment(this.unavailableDates[i],'YYYY-MM-DD')
+            this.disabledDates.push(myMoment)
+          }
+        },
+        err => {
+          console.log(err)
+        }
+      );
+    }
+  }
+  quantitycheck() {
+    if (this.quantity > 0) {
+      this.dateStartControl = false;
+      this.dateReturnControl = false;
+    } else if (this.quantity == 0) {
+      this.dateStartControl = true;
+      this.dateReturnControl = true;
+    }
+
+  }
+  onStartChange(value){
+    this.dateReturnControl=false;
+    this.minDate_return=value;
+    for(let i=0;i<this.unavailableDates.length;i++){
+      let myMoment=moment(this.unavailableDates[i],'YYYY-MM-DD')
+      if(myMoment.isAfter(this.minDate_return)){
+        this.maxDate_return=myMoment.toDate()
+      }
+    }
+  }
+  onReturnChange(value){
+    this.maxDate_start=value;
+  }
+
 }
+
 

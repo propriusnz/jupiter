@@ -45,6 +45,9 @@ export class ProductService {
     return this.http.post(this.baseUrl + '/Products/GetSearchedProduct/' + typeId, name,
     { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
+  calculateTime(hiringtime){
+    return this.http.post(this.baseUrl+'/ProductTime/CalculateTime/',hiringtime);
+  }
   // !Gallery
   indexGallery() {
     return this.http.get(this.baseUrl + '/projects');
@@ -163,12 +166,14 @@ export class ProductService {
     { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) }
     );
   }
-  register(user) {
-	  return this.http.post(this.baseUrl + '/user/register', user);
-  }
-  // !admin
+   // !admin
   login(adminModel) {
     return this.http.post(this.baseUrl + '/admins', adminModel);
+  }
+  
+  // !user
+  register(user) {
+	  return this.http.post(this.baseUrl + '/user/register', user);
   }
   userlogin(loginModel){
     return this.http.post(this.baseUrl+ '/user/login',loginModel);
