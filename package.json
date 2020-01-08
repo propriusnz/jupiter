@@ -31,7 +31,6 @@
     "@ng-toolkit/universal": "^1.1.51",
     "@nguniversal/express-engine": "^7.1.1",
     "@nguniversal/module-map-ngfactory-loader": "0.0.0",
-    "angular-mydatepicker": "^0.3.4",
     "bootstrap": "^4.4.1",
     "core-js": "^2.6.11",
     "express": "^4.17.1",

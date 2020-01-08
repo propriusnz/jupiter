@@ -34,15 +34,20 @@ export class ProductComponent implements OnInit {
   maxDate_return: Date;
   dateStartControl = true;
   dateReturnControl = true;
-  dateStartInput:any
-  dateReturnInput:any
+  dateStartInput: any
+  dateReturnInput: any
   // hiringtime=[];
   disabledDates = []
-  myMoment:any
-  unavailableDates:any
+  startMoment: any;
+  returnMoment: any;
+  unavailableDates: any
   orderquantity = 0;
   orderlist = [];
   map = new Map();
+  mySet = new Set();
+  addToCartControl = true;
+
+
   @ViewChild('imageContainer', { static: false }) imageContainer: ElementRef;
   @ViewChild('prodImage', { static: false }) prodImage: ElementRef;
   @ViewChild('rightControl', { static: false }) rightControl: ElementRef;
@@ -135,6 +140,10 @@ export class ProductComponent implements OnInit {
   }
   // add product into a list
   manageCartProds() {
+    if (this.addToCartControl && (0 >= this.quantity || this.quantity > this.productDetail.availableStock) && (this.cartForm.invalid || this.isInputZero)) {
+      console.log('error')
+      return;
+    }
     const newCartList = [];
     // if product detail exist
     if (this.productDetail['productDetail'] && this.productDetail['productDetail'].length !== 0) {
@@ -241,6 +250,7 @@ export class ProductComponent implements OnInit {
   }
   addQuantity(proddetail) {
     console.log(proddetail)
+    console.log(proddetail['value'])
     let prodId = proddetail['value'].Id
     let quantityvalue = proddetail['value'].Quantity
     if (!this.map.has(prodId) && proddetail.valid && quantityvalue != 0) {
@@ -259,11 +269,11 @@ export class ProductComponent implements OnInit {
       this.dateStartControl = false;
     } else if (this.map.size == 0) {
       this.dateStartControl = true;
+      this.dateReturnControl = true;
     }
-
-    console.log(this.map)
+    //Calculate Time
     this.calculateTime()
-
+    //
   }
   datetoYMD(date) {
     var d = date.getDate();
@@ -273,6 +283,8 @@ export class ProductComponent implements OnInit {
   }
   calculateTime() {
     let hiringdetail = []
+    let tmpDates = []
+    let tmpSet = new Set()
     let iterable = this.map.values()
     let current = iterable.next().value
     while (current != null) {
@@ -284,15 +296,37 @@ export class ProductComponent implements OnInit {
       hiringdetail.push(productHiringDetail)
       current = iterable.next().value
     }
-    console.log(hiringdetail)
     if (this.map.size != 0) {
       this.productService.calculateTime(hiringdetail).subscribe(
         res => {
           console.log(res)
           this.unavailableDates = res
-          for(let i=0;i<this.unavailableDates.length;i++){
-            let myMoment=moment(this.unavailableDates[i],'YYYY-MM-DD')
-            this.disabledDates.push(myMoment)
+          for (let i = 0; i < this.unavailableDates.length; i++) {
+            let myMoment = moment(this.unavailableDates[i], 'YYYY-MM-DD')
+            tmpDates.push(myMoment.toDate())
+            tmpSet.add(myMoment.toDate().toString())
+          }
+          this.disabledDates = tmpDates
+          this.mySet = tmpSet
+          for (let i = 0; i < this.disabledDates.length; i++) {
+            let myMoment = moment(this.disabledDates[i], 'YYYY-MM-DD')
+            if (myMoment.isAfter(this.dateStartInput)) {
+              let myMoment_date = myMoment.toDate()
+              myMoment_date.setDate(myMoment.toDate().getDate() - 1);
+              this.maxDate_return = myMoment_date
+              break
+            }
+          }
+          if (this.disabledDates.length == 0) {
+            this.maxDate_return = this.maxDate_start
+          }
+          if (this.startMoment != null && this.returnMoment != null) {
+            if ((this.startMoment.isAfter(this.returnMoment)) || this.mySet.has(this.startMoment.toDate().toString()) || this.mySet.has(this.returnMoment.toDate().toString()) || this.checkDisabledDates()) {
+              this.addToCartControl = true
+            } else {
+              this.addToCartControl = false
+            }
+
           }
         },
         err => {
@@ -301,7 +335,10 @@ export class ProductComponent implements OnInit {
       );
     }
   }
-  quantitycheck() {
+
+  quantitycheck(proddetail) {
+    let hiringdetail = []
+    let tmpDates = []
     if (this.quantity > 0) {
       this.dateStartControl = false;
       this.dateReturnControl = false;
@@ -309,20 +346,74 @@ export class ProductComponent implements OnInit {
       this.dateStartControl = true;
       this.dateReturnControl = true;
     }
+    let productHiringDetail = {
+      prodid: proddetail.prodId,
+      quantity: this.quantity,
+      beginDate: this.datetoYMD(this.minDate_start)
+    }
+    hiringdetail.push(productHiringDetail)
+    if (this.quantity != 0) {
+      this.productService.calculateTime(hiringdetail).subscribe(
+        res => {
+          console.log(res)
+          this.unavailableDates = res
+          for (let i = 0; i < this.unavailableDates.length; i++) {
+            let myMoment = moment(this.unavailableDates[i], 'YYYY-MM-DD')
+            tmpDates.push(myMoment.toDate())
+          }
+          this.disabledDates = tmpDates
+          if (this.startMoment != null && this.returnMoment != null) {
+            if ((this.startMoment.isAfter(this.returnMoment))) {
+              this.addToCartControl = true
+            } else {
+              this.addToCartControl = false
+            }
 
+          }
+        },
+        err => {
+          console.log(err)
+        }
+      );
+    }
   }
-  onStartChange(value){
-    this.dateReturnControl=false;
-    this.minDate_return=value;
-    for(let i=0;i<this.unavailableDates.length;i++){
-      let myMoment=moment(this.unavailableDates[i],'YYYY-MM-DD')
-      if(myMoment.isAfter(this.minDate_return)){
-        this.maxDate_return=myMoment.toDate()
+  onStartChange(value) {
+    this.dateStartInput = value;
+    this.dateReturnControl = false;
+    this.minDate_return = value;
+
+    for (let i = 0; i < this.disabledDates.length; i++) {
+      let myMoment = moment(this.disabledDates[i], 'YYYY-MM-DD')
+      if (myMoment.isAfter(this.dateStartInput)) {
+        let myMoment_date = myMoment.toDate()
+        myMoment_date.setDate(myMoment.toDate().getDate() - 1);
+        this.maxDate_return = myMoment_date
+        break
+      } else {
+        this.maxDate_return = this.maxDate_start
+      }
+    }
+
+    this.startMoment = moment(this.dateStartInput)
+    if (this.startMoment != null && this.returnMoment != null) {
+      if (this.startMoment.isAfter(this.returnMoment)) {
+        this.addToCartControl = true
+      } else {
+        this.addToCartControl = false
       }
     }
   }
-  onReturnChange(value){
-    this.maxDate_start=value;
+  onReturnChange(value) {
+    this.dateReturnInput = value;
+    this.returnMoment = moment(this.dateReturnInput)
+  }
+  checkDisabledDates(){
+    for(let i=0;i<this.disabledDates.length;i++){
+      if(moment(this.disabledDates[i]).isAfter(this.startMoment) || moment(this.disabledDates[i]).isBefore(this.returnMoment)){
+        return true
+      }
+    }
+    return false
   }
 
 }
