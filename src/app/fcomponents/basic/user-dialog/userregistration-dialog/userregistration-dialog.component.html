@@ -25,6 +25,13 @@
 		display: block;
 	}
 
+	.slide {
+		margin: 0 auto;
+		margin-bottom: 20px;
+		text-align: center;
+		color: #c48f45;
+	}
+
 	.primaryButton {
 		background-color: #c48f45;
 		color: white;
@@ -82,6 +89,11 @@
 
 		<div *ngIf="this.registrationForm.valid && signupFailed" class="alert alert-danger text-center">
 			{{ errorMessage }}
+		</div>
+
+		<div class="slide">
+			<mat-slide-toggle aria-label="Subscribe" color="primary"></mat-slide-toggle>
+			<span> Subscribe to our news letter</span>
 		</div>
 
 		<mat-dialog-actions>
