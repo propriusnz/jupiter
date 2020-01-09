@@ -406,6 +406,13 @@ export class ProductComponent implements OnInit {
   onReturnChange(value) {
     this.dateReturnInput = value;
     this.returnMoment = moment(this.dateReturnInput)
+    if (this.startMoment != null && this.returnMoment != null) {
+      if (this.startMoment.isAfter(this.returnMoment)) {
+        this.addToCartControl = true
+      } else {
+        this.addToCartControl = false
+      }
+    }
   }
   checkDisabledDates(){
     for(let i=0;i<this.disabledDates.length;i++){

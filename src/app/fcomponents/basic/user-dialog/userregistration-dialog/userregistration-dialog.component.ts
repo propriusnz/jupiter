@@ -15,10 +15,7 @@ export class UserregistrationDialogComponent implements OnInit {
   registrationForm: FormGroup;
   hide = true;
   message: string;
-  user = {
-	  Email: '',
-	  Password: ''
-  };
+  subscribe:any
   errorMessage = '';
   signupFailed = false;
 
@@ -76,12 +73,13 @@ export class UserregistrationDialogComponent implements OnInit {
   }
 
   onSubmit() {
-	this.user = {
-		Email: this.registrationForm.value.email,
-		Password: this.registrationForm.value.password
+	let user = {
+		email: this.registrationForm.value.email,
+    password: this.registrationForm.value.password,
+    isSubscribe:this.subscribe
 	}
-	console.log(this.user);
-	this.productservice.register(this.user).subscribe(
+	console.log(user);
+	this.productservice.register(user).subscribe(
 		res => {
 			console.log(res)
 			this.dialogRef.close()
@@ -92,5 +90,13 @@ export class UserregistrationDialogComponent implements OnInit {
 			this.errorMessage = "Sign up failed"
 		}
 	);
+  }
+  onSlideChange(subscribe){
+    if(subscribe.checked){
+      this.subscribe=1
+    }else{
+      this.subscribe=0
+    }
+    console.log(this.subscribe)
   }
 }
