@@ -22,6 +22,7 @@ export class ProductComponent implements OnInit {
   isprodAdded = false;
   isStockAvailable = true;
   cartList = [];
+  productTimetable = [];
   cartForm: FormGroup;
   cartItems: FormArray;
   isInputZero = true;
@@ -46,6 +47,8 @@ export class ProductComponent implements OnInit {
   map = new Map();
   mySet = new Set();
   addToCartControl = true;
+  prodDetailIdlist = []
+  prodIdlist = []
 
 
   @ViewChild('imageContainer', { static: false }) imageContainer: ElementRef;
@@ -136,6 +139,11 @@ export class ProductComponent implements OnInit {
     } else {
       localStorage.setItem('cartList', JSON.stringify(this.cartList));
     }
+    if ('productTimetable' in localStorage) {
+      this.productTimetable = JSON.parse(localStorage.getItem('productTimetable'));
+    } else {
+      localStorage.setItem('productTimetable', JSON.stringify(this.productTimetable));
+    }
     // localStorage.setItem('userId', 'aaa ')
   }
   // add product into a list
@@ -183,6 +191,22 @@ export class ProductComponent implements OnInit {
   }
   // add cartList into localStorage
   addToCart(list) {
+    let tmp = []
+    console.log(this.map)
+    console.log(list)
+    console.log(list.length)
+    for (let i = 0; i < this.prodDetailIdlist.length; i++) {
+        let neworder = {
+          prodDetailId: this.prodDetailIdlist[i].proddetailid,
+          beginDate: this.prodDetailIdlist[i].beginDate,
+          endDate: this.datetoYMD(this.returnMoment.toDate()),
+          quantity: this.prodDetailIdlist[i].quantity
+        }
+        tmp.push(neworder)
+    }
+    
+    this.productTimetable=tmp
+    console.log(this.productTimetable)
     this.isStockAvailable = true;
     this.isprodAdded = true;
     setTimeout(() => {
@@ -196,7 +220,7 @@ export class ProductComponent implements OnInit {
           // if product already exists in cartList
           if (this.cartList[i].Title === item.Title) {
             a = true;
-            this.cartList[i].Quantity += item.Quantity;
+            this.cartList[i].Quantity = item.Quantity;
             this.cartList[i].Price = this.cartList[i].Quantity * item.Price;
             localStorage.setItem('cartList', JSON.stringify(this.cartList));
           }
@@ -250,7 +274,6 @@ export class ProductComponent implements OnInit {
   }
   addQuantity(proddetail) {
     console.log(proddetail)
-    console.log(proddetail['value'])
     let prodId = proddetail['value'].Id
     let quantityvalue = proddetail['value'].Quantity
     if (!this.map.has(prodId) && proddetail.valid && quantityvalue != 0) {
@@ -274,6 +297,7 @@ export class ProductComponent implements OnInit {
     //Calculate Time
     this.calculateTime()
     //
+    console.log(this.map)
   }
   datetoYMD(date) {
     var d = date.getDate();
@@ -296,6 +320,7 @@ export class ProductComponent implements OnInit {
       hiringdetail.push(productHiringDetail)
       current = iterable.next().value
     }
+    this.prodDetailIdlist = hiringdetail
     if (this.map.size != 0) {
       this.productService.calculateTime(hiringdetail).subscribe(
         res => {
@@ -310,7 +335,8 @@ export class ProductComponent implements OnInit {
           this.mySet = tmpSet
           for (let i = 0; i < this.disabledDates.length; i++) {
             let myMoment = moment(this.disabledDates[i], 'YYYY-MM-DD')
-            if (myMoment.isAfter(this.dateStartInput)) {
+            if (myMoment.startOf('day'
+            ).isAfter(moment(this.dateStartInput).startOf('day'))) {
               let myMoment_date = myMoment.toDate()
               myMoment_date.setDate(myMoment.toDate().getDate() - 1);
               this.maxDate_return = myMoment_date
@@ -321,8 +347,9 @@ export class ProductComponent implements OnInit {
             this.maxDate_return = this.maxDate_start
           }
           if (this.startMoment != null && this.returnMoment != null) {
-            if ((this.startMoment.isAfter(this.returnMoment)) || this.mySet.has(this.startMoment.toDate().toString()) || this.mySet.has(this.returnMoment.toDate().toString()) || this.checkDisabledDates()) {
+            if ((this.startMoment.startOf('day').isAfter(this.returnMoment.startOf('day'))) || this.mySet.has(this.startMoment.toDate().toString()) || this.mySet.has(this.returnMoment.toDate().toString()) || this.checkDisabledDates()) {
               this.addToCartControl = true
+              console.log("adfadf")
             } else {
               this.addToCartControl = false
             }
@@ -363,7 +390,7 @@ export class ProductComponent implements OnInit {
           }
           this.disabledDates = tmpDates
           if (this.startMoment != null && this.returnMoment != null) {
-            if ((this.startMoment.isAfter(this.returnMoment))) {
+            if ((this.startMoment.startOf('day').isAfter(this.returnMoment.startOf('day')))) {
               this.addToCartControl = true
             } else {
               this.addToCartControl = false
@@ -384,7 +411,7 @@ export class ProductComponent implements OnInit {
 
     for (let i = 0; i < this.disabledDates.length; i++) {
       let myMoment = moment(this.disabledDates[i], 'YYYY-MM-DD')
-      if (myMoment.isAfter(this.dateStartInput)) {
+      if (myMoment.startOf('day').isAfter(moment(this.dateStartInput).startOf('day'))) {
         let myMoment_date = myMoment.toDate()
         myMoment_date.setDate(myMoment.toDate().getDate() - 1);
         this.maxDate_return = myMoment_date
@@ -396,7 +423,7 @@ export class ProductComponent implements OnInit {
 
     this.startMoment = moment(this.dateStartInput)
     if (this.startMoment != null && this.returnMoment != null) {
-      if (this.startMoment.isAfter(this.returnMoment)) {
+      if (this.startMoment.startOf('day').isAfter(this.returnMoment.startOf('day'))) {
         this.addToCartControl = true
       } else {
         this.addToCartControl = false
@@ -407,19 +434,23 @@ export class ProductComponent implements OnInit {
     this.dateReturnInput = value;
     this.returnMoment = moment(this.dateReturnInput)
     if (this.startMoment != null && this.returnMoment != null) {
-      if (this.startMoment.isAfter(this.returnMoment)) {
+      if (this.startMoment.startOf('day').isAfter(this.returnMoment.startOf('day'))) {
         this.addToCartControl = true
-      } else {
+        console.log("hahhaha")
+        console.log(this.startMoment)
+        console.log(this.returnMoment)
+      } else{
         this.addToCartControl = false
       }
     }
   }
-  checkDisabledDates(){
-    for(let i=0;i<this.disabledDates.length;i++){
-      if(moment(this.disabledDates[i]).isAfter(this.startMoment) || moment(this.disabledDates[i]).isBefore(this.returnMoment)){
+  checkDisabledDates() {
+    for (let i = 0; i < this.disabledDates.length; i++) {
+      if (moment(this.disabledDates[i]).startOf('day').isAfter(this.startMoment.startOf('day')) && moment(this.disabledDates[i]).startOf('day').isBefore(this.returnMoment.startOf('day')) && !this.startMoment.startOf('day').isSame(this.returnMoment.startOf('day'))) {
         return true
       }
     }
+    console.log("adflkahjdflkajhdf")
     return false
   }
 

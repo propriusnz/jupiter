@@ -71,11 +71,16 @@ export class UserInfoComponent implements OnInit {
       location: `${this.userInfo.streetAddress}, ${this.userInfo.city}`,
       price: Number(localStorage.getItem('totalPrice')),
       PlannedTime: this.PlannedTime,
-      CartProd: data
+      deliveryfee:20,
+      depositfee:90,
+      ispickup:1,
+      region:"CBD",
+      CartProd: data,
     };
     const cartContact = {
       CartModel: cartData,
-      ContactModel: post
+      ContactModel: post,
+      ProductTimeTableModel:0//to do here 
     };
     this.addCart(cartContact);
   }
