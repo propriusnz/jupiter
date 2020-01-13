@@ -1,0 +1,19 @@
+[
+	{
+		"fname": "James",
+		"lname": "Bond",
+		"email": "jamesbond@mi6.com",
+		"phone": 123456,
+		"company": "MI6",
+		"subscribe": 0
+	},
+
+	{
+		"fname": "David",
+		"lname": "Jones",
+		"email": "davidjones@flyingdutch.com",
+		"phone": 45678,
+		"company": "Flying Dutch ltd.",
+		"subscribe": 0
+	}
+]
