@@ -46,6 +46,8 @@ export class ProductComponent implements OnInit {
   orderlist = [];
   map = new Map();
   mySet = new Set();
+  tmpDetailID = new Map()//used for storing products with both ProdId and Id
+  tmpProdID = new Map()//used for storing products with only ProdId
   addToCartControl = true;
   prodDetailIdlist = []
   prodIdlist = []
@@ -144,6 +146,7 @@ export class ProductComponent implements OnInit {
     } else {
       localStorage.setItem('productTimetable', JSON.stringify(this.productTimetable));
     }
+    
     // localStorage.setItem('userId', 'aaa ')
   }
   // add product into a list
@@ -191,22 +194,21 @@ export class ProductComponent implements OnInit {
   }
   // add cartList into localStorage
   addToCart(list) {
-    let tmp = []
-    console.log(this.map)
-    console.log(list)
-    console.log(list.length)
     for (let i = 0; i < this.prodDetailIdlist.length; i++) {
-        let neworder = {
-          prodDetailId: this.prodDetailIdlist[i].proddetailid,
-          beginDate: this.prodDetailIdlist[i].beginDate,
-          endDate: this.datetoYMD(this.returnMoment.toDate()),
-          quantity: this.prodDetailIdlist[i].quantity
-        }
-        tmp.push(neworder)
+      let neworder = {
+        prodDetailId: this.prodDetailIdlist[i].proddetailid,
+        beginDate: this.datetoYMD(this.startMoment.toDate()),
+        endDate: this.datetoYMD(this.returnMoment.toDate()),
+        quantity: this.prodDetailIdlist[i].quantity
+      }
+      if (!this.tmpDetailID.has(this.prodDetailIdlist[i].proddetailid)) {
+        this.tmpDetailID.set(this.prodDetailIdlist[i].proddetailid, neworder)
+      } else {
+        this.tmpDetailID.get(this.prodDetailIdlist[i].proddetailid).quantity = neworder.quantity
+        this.tmpDetailID.get(this.prodDetailIdlist[i].proddetailid).beginDate= neworder.beginDate
+        this.tmpDetailID.get(this.prodDetailIdlist[i].proddetailid).endDate= neworder.endDate
+      }
     }
-    
-    this.productTimetable=tmp
-    console.log(this.productTimetable)
     this.isStockAvailable = true;
     this.isprodAdded = true;
     setTimeout(() => {
@@ -214,6 +216,19 @@ export class ProductComponent implements OnInit {
     }, 1000);
     list.forEach(item => {
       let a = false;
+      if (!item.hasOwnProperty('Id')) {
+        let neworder = {
+          prodId: item.ProdId,
+          beginDate: this.datetoYMD(this.startMoment.toDate()),
+          endDate: this.datetoYMD(this.returnMoment.toDate()),
+          quantity: item.Quantity
+        }
+        if (!this.tmpProdID.has(item.ProdId)) {
+          this.tmpProdID.set(item.ProdId, neworder)
+        } else {
+          this.tmpProdID.get(item.ProdId).quantity = neworder.quantity
+        }
+      }
       // if cartList if not empty
       if (this.cartList.length > 0) {
         for (let i = 0; i < this.cartList.length; i++) {
@@ -237,6 +252,38 @@ export class ProductComponent implements OnInit {
         localStorage.setItem('cartList', JSON.stringify(this.cartList));
       }
     });
+    console.log(this.tmpDetailID)
+    this.productTimetable = JSON.parse(localStorage.getItem('productTimetable'));
+    this.productTimetable.forEach(item => {
+      if (this.tmpDetailID.get(item.prodDetailId) != null || this.tmpProdID.get(item.prodId) != null) {
+        if (item.hasOwnProperty('prodDetailId')) {
+          item.quantity = this.tmpDetailID.get(item.prodDetailId).quantity
+          item.beginDate= this.tmpDetailID.get(item.prodDetailId).beginDate
+          item.endDate= this.tmpDetailID.get(item.prodDetailId).endDate
+          this.tmpDetailID.delete(item.prodDetailId)
+        } else if (!item.hasOwnProperty('prodDetailId')) {
+          item.quantity = this.tmpProdID.get(item.prodId).quantity
+          item.beginDate= this.tmpProdID.get(item.prodId).beginDate
+          item.endDate= this.tmpProdID.get(item.prodId).endDate
+          this.tmpProdID.delete(item.prodId)
+        }
+      }
+    })
+    let iterable = this.tmpDetailID.values()
+    let current = iterable.next().value
+    while (current != null) {
+      this.productTimetable.push(current)
+      current = iterable.next().value
+    }
+    iterable = this.tmpProdID.values()
+    current = iterable.next().value
+    while (current != null) {
+      this.productTimetable.push(current)
+      current = iterable.next().value
+    }
+    localStorage.setItem('productTimetable', JSON.stringify(this.productTimetable));
+    this.productTimetable = JSON.parse(localStorage.getItem('productTimetable'))
+    console.log(this.productTimetable)
   }
   // click the path and re-navigate
   backClicked(type: string, id?: number) {
@@ -273,7 +320,6 @@ export class ProductComponent implements OnInit {
     this.rightControl.nativeElement.style.right = this.rightCarouselControlPosition + 'px';
   }
   addQuantity(proddetail) {
-    console.log(proddetail)
     let prodId = proddetail['value'].Id
     let quantityvalue = proddetail['value'].Quantity
     if (!this.map.has(prodId) && proddetail.valid && quantityvalue != 0) {
@@ -297,7 +343,6 @@ export class ProductComponent implements OnInit {
     //Calculate Time
     this.calculateTime()
     //
-    console.log(this.map)
   }
   datetoYMD(date) {
     var d = date.getDate();
@@ -349,7 +394,6 @@ export class ProductComponent implements OnInit {
           if (this.startMoment != null && this.returnMoment != null) {
             if ((this.startMoment.startOf('day').isAfter(this.returnMoment.startOf('day'))) || this.mySet.has(this.startMoment.toDate().toString()) || this.mySet.has(this.returnMoment.toDate().toString()) || this.checkDisabledDates()) {
               this.addToCartControl = true
-              console.log("adfadf")
             } else {
               this.addToCartControl = false
             }
@@ -436,10 +480,7 @@ export class ProductComponent implements OnInit {
     if (this.startMoment != null && this.returnMoment != null) {
       if (this.startMoment.startOf('day').isAfter(this.returnMoment.startOf('day'))) {
         this.addToCartControl = true
-        console.log("hahhaha")
-        console.log(this.startMoment)
-        console.log(this.returnMoment)
-      } else{
+      } else {
         this.addToCartControl = false
       }
     }
@@ -450,7 +491,7 @@ export class ProductComponent implements OnInit {
         return true
       }
     }
-    console.log("adflkahjdflkajhdf")
+
     return false
   }
 

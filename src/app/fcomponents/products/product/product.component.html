@@ -88,7 +88,7 @@
                   formControlName="Price" [attr.disabled]="true">
                 <input style="width:40px; height:20px; font-size:14px; border:none; border-bottom:1px solid #919191"
                   (click)="addQuantity(detail)" type="number" min="0" formControlName="Quantity" placeholder="Quantity">
-                <div *ngIf="cartForm.controls.cartItems.controls[i].controls.Quantity.invalid" class="invalid_feedback"
+                <div *ngIf="detail.controls.Quantity.invalid" class="invalid_feedback"
                   style="padding-bottom:10px;" role="alert">Only {{detail.value.AvailableStock}} are available. Please
                   contact us if you need more!</div>
               </div>

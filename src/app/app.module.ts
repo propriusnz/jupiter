@@ -27,7 +27,7 @@ import { ProductListComponent } from './fcomponents/products/productList/product
 import { AboutUsComponent } from './fcomponents/pages/aboutUs/aboutUs.component';
 import { ProductComponent } from './fcomponents/products/product/product.component';
 import { FooterComponent } from './fcomponents/basic/footer/footer.component';
-import { Shopping_cartComponent } from './fcomponents/shopping_cart/shopping_cart.component';
+import { ShoppingCartComponent } from './fcomponents/shopping-cart/shopping-cart.component';
 import { UserInfoComponent } from './fcomponents/userInfo/userInfo.component';
 import { GalleryDetailComponent } from './fcomponents/gallery/gallery-detail/gallery-detail.component';
 import { GalleryListComponent } from './fcomponents/gallery/gallery-list/gallery-list.component';
@@ -51,7 +51,7 @@ import { AdminDashboardComponent } from './fcomponents/admin/admin-dashboard/adm
 import { AdminGalleriesComponent } from './fcomponents/admin/admin-galleries/admin-galleries.component';
 import { AdminImagesComponent } from './fcomponents/admin/admin-images/admin-images.component';
 import { ForgotPasswordComponent } from './fcomponents/basic/user-dialog/forgot-password/forgot-password.component';
-import { PaymentoptionsComponent } from './fcomponents/paymentoptions/paymentoptions.component';
+import { PaymentOptionsComponent } from './fcomponents/payment-options/payment-options.component';
 import { ChangeinfoComponent } from './fcomponents/changeinfo/changeinfo.component';
 import { EmailsentDialogComponent } from './fcomponents/basic/user-dialog/emailsent-dialog/emailsent-dialog.component';
 import { ResetPasswordComponent } from './fcomponents/reset-password/reset-password.component';
@@ -59,6 +59,7 @@ import { UserDashboardComponent } from './fcomponents/user-dashboard/user-dashbo
 import { UserProfileComponent } from './fcomponents/user-dashboard/user-profile/user-profile.component';
 import { OrderHistoryComponent } from './fcomponents/user-dashboard/order-history/order-history.component';
 import { ManagePasswordComponent } from './fcomponents/user-dashboard/manage-password/manage-password.component';
+import { PaymentResultComponent } from './fcomponents/payment-result/payment-result.component';
 
 
 // All Routes follow
@@ -92,7 +93,8 @@ const appRoutes: Routes = [
   { path: 'userDashboard', component: UserDashboardComponent },
   { path: 'checkout', component: ShoppingCheckoutComponent },
   { path: 'thankYou', component: ThankYouComponent },
-  { path: 'paymentoptions', component: PaymentoptionsComponent },
+  { path: 'paymentoptions', component: PaymentOptionsComponent },
+  { path: 'paymentresult',component:PaymentResultComponent},
   { path: '**', component: HomepageComponent }
 ];
 
@@ -107,7 +109,7 @@ const appRoutes: Routes = [
     AboutUsComponent,
     ProductComponent,
     FooterComponent,
-    Shopping_cartComponent,
+    ShoppingCartComponent,
     UserInfoComponent,
     GalleryDetailComponent,
     GalleryListComponent,
@@ -130,14 +132,15 @@ const appRoutes: Routes = [
     UserregistrationDialogComponent,
     UserloginDialogComponent,
     ForgotPasswordComponent,
-    PaymentoptionsComponent,
+    PaymentOptionsComponent,
     ChangeinfoComponent,
     EmailsentDialogComponent,
     ResetPasswordComponent,
     UserDashboardComponent,
     UserProfileComponent,
     OrderHistoryComponent,
-    ManagePasswordComponent
+    ManagePasswordComponent,
+    PaymentResultComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

@@ -3,11 +3,11 @@ import { ProductService } from '../../service/product.service';
 import { environment } from '../../../environments/environment.prod';
 
 @Component({
-  selector: 'app-shopping_cart',
-  templateUrl: './shopping_cart.component.html',
-  styleUrls: ['./shopping_cart.component.css']
+  selector: 'app-shopping-cart',
+  templateUrl: './shopping-cart.component.html',
+  styleUrls: ['./shopping-cart.component.css']
 })
-export class Shopping_cartComponent implements OnInit {
+export class ShoppingCartComponent implements OnInit {
   totalPrice = 0;
   prodsInCart: any;
   productDetail: any;
