@@ -14,6 +14,7 @@ export class ShoppingCartComponent implements OnInit {
   stockUnavailable = false;
   userInputQuantityArray = [];
   baseImageLink = environment.baseLink;
+  productTimetable=[]
   @ViewChild('quantityInput', { static: false }) quantityInput: ElementRef;
   constructor(
     private productService: ProductService
@@ -21,6 +22,8 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit() {
     // get the current shopping cart
+    this.productTimetable=JSON.parse(localStorage.getItem('productTimetable') || '[]');
+    console.log(this.productTimetable)
     this.prodsInCart = JSON.parse(localStorage.getItem('cartList') || '[]');
     if (this.prodsInCart == null || this.prodsInCart.length === 0) {
       this.productService.setShoppingCartStatus(false);
@@ -58,34 +61,5 @@ export class ShoppingCartComponent implements OnInit {
         element.availableStock = res['availableStock'];
       }));
     });
-  }
-
-  quantityChanged(e, i) {
-    let errorAmount = 0;
-    this.userInputQuantityArray[i] = e.srcElement.valueAsNumber;
-    let unitPrice = this.prodsInCart[i].Price / this.prodsInCart[i].Quantity;
-    let totalPriceOfProduct = unitPrice * this.userInputQuantityArray[i];
-    // update localStorage when shoppingCart is valid
-    if (this.prodsInCart[i].availableStock >= this.userInputQuantityArray[i]) {
-      this.prodsInCart[i].Quantity = this.userInputQuantityArray[i];
-      this.prodsInCart[i].Price = totalPriceOfProduct;
-      this.price();
-      localStorage.setItem('cartList', JSON.stringify(this.prodsInCart));
-    }
-    // get the amount of invalid input
-    for (let a = 0; a < this.userInputQuantityArray.length; a++) {
-      if (this.userInputQuantityArray[a] > this.prodsInCart[a].availableStock) {
-        errorAmount += 0;
-      } else {
-        errorAmount += 1;
-      }
-    }
-    if (errorAmount === this.prodsInCart.length) {
-      // all inputs are valid, user can submit shopping cart
-      this.productService.setShoppingCartStatus(true);
-    } else {
-      // one or more inputs is/are invalid, disable the submit button
-      this.productService.setShoppingCartStatus(false);
-    }
   }
 }
