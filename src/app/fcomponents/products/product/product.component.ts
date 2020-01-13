@@ -8,7 +8,6 @@ import { setTheme } from 'ngx-bootstrap/utils';
 import * as moment from 'moment';
 import { isBefore } from 'ngx-bootstrap/chronos/public_api';
 
-
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -496,5 +495,3 @@ export class ProductComponent implements OnInit {
   }
 
 }
-
-
