@@ -90,6 +90,7 @@ export class UserloginDialogComponent implements OnInit {
     this.productservice.userlogin(this.user).subscribe(
       res => {
         console.log(res)
+        localStorage.setItem('userId',JSON.stringify(res['data'].userId))
         this.dialogRef.close()
       },
       err => {
