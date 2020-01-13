@@ -1,6 +1,6 @@
 <div class="card">
 	<div class="card-header">
-		<h4>James Bond</h4>	
+		<h4></h4>	
 	</div>
 	<div class="card-body bg-light text-center">
 		<form>
@@ -13,7 +13,7 @@
 			</mat-form-field>
 
 			<mat-form-field>
-				<input matInput placeholder="Email Address" value="jamesbond@mi6.com">
+				<input matInput placeholder="Email Address" value="jamesbond@mi6.com" required>
 			</mat-form-field>
 
 			<mat-form-field>
@@ -25,13 +25,12 @@
 			</mat-form-field>
 		
 			<div id="buttonsWrap" class="mt-2">
-				<button mat-raised-button class="primaryButton" routerLink='/home'>Update</button>
+				<button mat-raised-button class="primaryButton">Update</button>
 			</div>
 		</form>
-	</div>
 
-	<h5 style="margin: 0 auto; margin-top: 30px;">Current Users:</h5><hr>
-	<ul *ngFor="let profile of profile" class="text-center" style="list-style: none; padding: 0;">
+		<h5 style="margin: 0 auto; margin-top: 30px;">Current Users:</h5><hr>
+		<ul *ngFor="let profile of profile" class="text-center" style="list-style: none; padding: 0;">
 		
 		<li>
 			<h5>{{ profile.fname }} {{ profile.lname }}</h5>
@@ -39,7 +38,9 @@
 
 		</li>
 		<hr>
-	</ul>
+		</ul>
+		
+	</div>
 </div>
 
 <style>
