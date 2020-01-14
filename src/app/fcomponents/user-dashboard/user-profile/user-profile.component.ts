@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { DataService } from '../../../service/data.service';
+import { ProductService } from '../../../service/product.service';
 import { Profile } from '../../../service/data.service';
 
 @Component({
@@ -11,24 +10,34 @@ import { Profile } from '../../../service/data.service';
 })
 export class UserProfileComponent implements OnInit {
 	updateProfileForm: FormGroup;
-	profile: Profile[];
+	profile: any;
+	userId: number;
+	subscribe: boolean;
 
   constructor(
 	  private fb: FormBuilder,
-	  private service: DataService
+	  private service: ProductService
   ) { }
 
   ngOnInit() {
-	  this.service.getProfile().subscribe(profile => {
-		  this.profile = profile;
-	  });
+	  this.userId = JSON.parse(localStorage.getItem("userId"));
+
+	  this.service.getProfile(this.userId).subscribe(
+		  profile => {
+			console.log(profile);
+			  this.profile= profile;
+			//   console.log(this.profile['data'][0].email);
+	  	  },
+	  	  err => {
+			console.log(err);
+		  }
+	  );
 
 	  this.updateProfileForm = this.fb.group({
-		  fname: ['', [Validators.required,
-						Validators.minLength(1),
-						Validators.maxLength(20),]],
-		  lname: ['', []],
-		  email: ['', []],
+		  fname: ['', [Validators.minLength(1),
+					   Validators.maxLength(20)]],
+		  lname: ['', [Validators.minLength(1),
+			           Validators.maxLength(20)]],
 		  phone: ['', []],
 		  company: ['', []],
 		  subscribe: ['',]
@@ -43,10 +52,6 @@ export class UserProfileComponent implements OnInit {
 	return this.updateProfileForm.get('lname');
   }
 
-  get email() {
-	return this.updateProfileForm.get('email');
-  }
-
   get phone() {
 	return this.updateProfileForm.get('phone');
   }
@@ -55,7 +60,12 @@ export class UserProfileComponent implements OnInit {
 	return this.updateProfileForm.get('company');
   }
 
-  get subscribe() {
-	return this.updateProfileForm.get('subscribe');
+  onSlideChange(subscribe){
+    if(subscribe.checked){
+      this.subscribe = true;
+    }else{
+      this.subscribe = false;
+    }
+    console.log(this.subscribe)
   }
 }

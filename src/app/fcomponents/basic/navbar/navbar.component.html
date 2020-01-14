@@ -262,7 +262,7 @@
 	  <span class="navspace"></span>
 	  
       <!--! Customer Log in -->
-      <li class="nav-item">
+      <li *ngIf="!usertoken" class="nav-item">
         <a *ngIf="isBrowser==true" class="nav-link s2bold" (click)="loginDialog()">
           <h1 class="s2bold">Log in</h1>
         </a>

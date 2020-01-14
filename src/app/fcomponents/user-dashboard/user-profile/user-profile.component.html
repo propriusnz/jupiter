@@ -1,45 +1,38 @@
 <div class="card">
 	<div class="card-header">
-		<h4></h4>	
+		<h4>User #{{ userId }}</h4>	
 	</div>
-	<div class="card-body bg-light text-center">
+	<div *ngIf="profile" class="card-body bg-light text-center">
 		<form>
 			<mat-form-field>
-				<input matInput placeholder="First Name" value="James">
+				<input matInput placeholder="First Name" value="{{ profile['data'][0].fname }}">
 			</mat-form-field>
 
 			<mat-form-field>
-				<input matInput placeholder="Last Name" value="Bond">
+				<input matInput placeholder="Last Name" value="{{ profile['data'][0].lname }}">
 			</mat-form-field>
 
 			<mat-form-field>
-				<input matInput placeholder="Email Address" value="jamesbond@mi6.com" required>
+				<input matInput placeholder="Email Address (Disabled)" value="{{ profile['data'][0].email }}" disabled>
 			</mat-form-field>
 
 			<mat-form-field>
-				<input matInput placeholder="Phone No." value="1234567">
+				<input matInput placeholder="Phone No." value="{{ profile['data'][0].phone }}">
 			</mat-form-field>
 
 			<mat-form-field>
-				<input matInput placeholder="Company" value="MI6">
+				<input matInput placeholder="Company" value="{{ profile['data'][0].company }}">
 			</mat-form-field>
+
+			<div class="slide">
+				<mat-slide-toggle (change)="onSlideChange($event)" aria-label="Subscribe" color="primary"></mat-slide-toggle>
+				<span> Subscribe to our news letter</span>
+			</div>
 		
 			<div id="buttonsWrap" class="mt-2">
 				<button mat-raised-button class="primaryButton">Update</button>
 			</div>
 		</form>
-
-		<h5 style="margin: 0 auto; margin-top: 30px;">Current Users:</h5><hr>
-		<ul *ngFor="let profile of profile" class="text-center" style="list-style: none; padding: 0;">
-		
-		<li>
-			<h5>{{ profile.fname }} {{ profile.lname }}</h5>
-			<p>Email: {{ profile.email }}</p>
-
-		</li>
-		<hr>
-		</ul>
-		
 	</div>
 </div>
 

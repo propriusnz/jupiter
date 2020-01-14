@@ -15,7 +15,7 @@ export class UserregistrationDialogComponent implements OnInit {
   registrationForm: FormGroup;
   hide = true;
   message: string;
-  subscribe:any
+  subscribe: boolean;
   errorMessage = '';
   signupFailed = false;
 
@@ -75,8 +75,8 @@ export class UserregistrationDialogComponent implements OnInit {
   onSubmit() {
 	let user = {
 		email: this.registrationForm.value.email,
-    password: this.registrationForm.value.password,
-    isSubscribe:this.subscribe
+      	password: this.registrationForm.value.password,
+    	isSubscribe: this.subscribe
 	}
 	console.log(user);
 	this.productservice.register(user).subscribe(
@@ -93,9 +93,9 @@ export class UserregistrationDialogComponent implements OnInit {
   }
   onSlideChange(subscribe){
     if(subscribe.checked){
-      this.subscribe=1
+      this.subscribe = true;
     }else{
-      this.subscribe=0
+      this.subscribe = false;
     }
     console.log(this.subscribe)
   }

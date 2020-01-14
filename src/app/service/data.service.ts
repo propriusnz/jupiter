@@ -11,8 +11,13 @@ export class DataService {
   
   private messagesignupSource=new BehaviorSubject<string>('');
   currentsignupmessage=this.messagesignupSource.asObservable();
+
+  //Toggle Login element   
+  private previousState = new BehaviorSubject<string>(0);
+  newState = this.previousState.asObservable();
   
   constructor(private http: HttpClient) { }
+
   changeloginMessage(message:string){
     this.messageloginSource.next(message)
   }
@@ -20,13 +25,17 @@ export class DataService {
     this.messagesignupSource.next(message)
   }
 
-
-  // Get User Profile
-  url = '../../../../assets/users.json';
-
-  getProfile(): Observable<Profile[]> {
-	return this.http.get<Profile[]>(this.url);
+  //Toggle login element
+  changeElementStatus(state: string) {
+	this.previousState.next(state);
   }
+
+//   // Get User Profile
+//   url = '../../../../assets/users.json';
+
+//   getProfile(): Observable<Profile[]> {
+// 	return this.http.get<Profile[]>(this.url);
+//   }
 }
 
 // user profile model

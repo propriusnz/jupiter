@@ -185,6 +185,9 @@ export class ProductService {
     return this.http.get(this.baseUrl + '/admins',
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
+  getProfile (userId) {
+	  return this.http.get(this.baseUrl+ '/user/' + userId);
+  }
   // !images
   addImg(files) {
     return this.http.post(this.baseUrl + '/ProductMedias/', files,

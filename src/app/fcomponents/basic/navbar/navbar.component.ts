@@ -17,12 +17,14 @@ export class NavbarComponent implements OnInit {
   serviceCategories: any = [];
   isBrowser = false;
   galleriesData: any;
-  loginmessage:string;
-  signupmessage:string;
+  loginmessage: string;
+  signupmessage: string;
+  userLoginControl: string;
+
   constructor(
         @Inject(PLATFORM_ID) private platformId,
         private productService: ProductService,
-        private data:DataService,
+        private data: DataService,
         public dialog: MatDialog
     ) {
     if (isPlatformBrowser(this.platformId)) {
@@ -37,7 +39,12 @@ export class NavbarComponent implements OnInit {
       });
     }
     this.getCategories();
-    this.getGalleryTypes();
+	this.getGalleryTypes();
+	
+	if (localStorage.getItem("userToken")!== null) {
+		this.userLoginControl = JSON.parse(localStorage.getItem('userLoginControl'));
+		this.data.newState.subscribe(newState => this.userLoginControl = newState);
+	} 
   }
   // get all the categories and show on navbar
   getCategories(): void {
@@ -75,7 +82,6 @@ export class NavbarComponent implements OnInit {
     this.signupDialog()
     this.data.changesignupMessage("close") 
     }
-    
   } 
   newloginDialog(){
     if(this.loginmessage.localeCompare('open')==0){

@@ -41,7 +41,7 @@ export class UserloginDialogComponent implements OnInit {
       Validators.minLength(8),
       Validators.maxLength(20)]]
     })
-    this.data.currentsignupmessage.subscribe(currentsignupmessage => this.message = currentsignupmessage)
+	this.data.currentsignupmessage.subscribe(currentsignupmessage => this.message = currentsignupmessage);
   }
 
   getEmailErrorMessage() {
@@ -89,9 +89,12 @@ export class UserloginDialogComponent implements OnInit {
     console.log(this.user);
     this.productservice.userlogin(this.user).subscribe(
       res => {
-        console.log(res)
-        localStorage.setItem('userId',JSON.stringify(res['data'].userId))
-        this.dialogRef.close()
+        console.log(res);
+		localStorage.setItem('userId', JSON.stringify(res['data'].userId));
+		localStorage.setItem('userToken', JSON.stringify(res['data'].token));
+		localStorage.setItem('userLoginControl', JSON.stringify(1));
+		this.data.changeElementStatus(1);
+        this.dialogRef.close();
       },
       err => {
         console.log(err)
