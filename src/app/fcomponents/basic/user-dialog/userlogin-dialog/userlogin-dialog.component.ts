@@ -93,7 +93,7 @@ export class UserloginDialogComponent implements OnInit {
 		localStorage.setItem('userId', JSON.stringify(res['data'].userId));
 		localStorage.setItem('userToken', JSON.stringify(res['data'].token));
 		localStorage.setItem('userLoginControl', JSON.stringify(1));
-		this.data.changeElementStatus(1);
+		this.data.changeElementStatus('1');
         this.dialogRef.close();
       },
       err => {

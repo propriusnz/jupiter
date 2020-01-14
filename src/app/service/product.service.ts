@@ -186,7 +186,7 @@ export class ProductService {
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   getProfile (userId) {
-	  return this.http.get(this.baseUrl+ '/user/' + userId);
+	return this.http.get(this.baseUrl+ '/user/' + userId);
   }
   paymentResult(url){
     return this.http.post(this.baseUrl+'/PxPay/ResponseOutput',url)

@@ -13,7 +13,7 @@ export class DataService {
   currentsignupmessage=this.messagesignupSource.asObservable();
 
   //Toggle Login element   
-  private previousState = new BehaviorSubject<string>(0);
+  private previousState = new BehaviorSubject<string>('0');
   newState = this.previousState.asObservable();
   
   constructor(private http: HttpClient) { }
