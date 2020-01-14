@@ -2,7 +2,6 @@ import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { ProductService } from '../../service/product.service';
 import { isPlatformBrowser, DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-userInfo',
@@ -17,7 +16,6 @@ export class UserInfoComponent implements OnInit {
   isSendSuccess = false;
   isCartEmpty = false;
   isShoppingCartValid = true;
-  subscription: Subscription;
   userInfo = {
     FirstName: '',
     LastName: '',
@@ -38,7 +36,7 @@ export class UserInfoComponent implements OnInit {
           this.isCartEmpty = true;
         }}
         // subscribe the status of shopping cart
-        this.subscription = this.productService.getShoppingCartStatus().subscribe(
+        this.productService.getShoppingCartStatus().subscribe(
           status => { this.isShoppingCartValid = status.isValid; }
           );
      }

@@ -59,7 +59,7 @@
 		<h5 mat-dialog-title>Sign Up</h5>
 	</div>
 
-	<form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm.value)">
+	<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
 		<mat-dialog-content>
 			<mat-form-field>
 				<input matInput placeholder="Email address" formControlName="email" (ngModleChange)="update()" required>

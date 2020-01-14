@@ -9,8 +9,8 @@
         <div>
           Amount: {{userInputQuantityArray[i]}}
         </div>
-        <div>Start date:</div>
-        <div>Return date:</div>
+        <div>Start date: {{productTimetable[i].beginDate}}</div>
+        <div>Return date: {{productTimetable[i].endDate}}</div>
         <div class="bg-gray divdetails"> NZ ${{prod.Price}}</div>
         <div class="mt-2 divdetails">
           <button class="btn btn-outline-blue" [routerLink]="[ '/product/', prod.ProdId ]">View Detail</button>
@@ -33,9 +33,6 @@
     <div class="justify-content-end mb-3" *ngIf="prodsInCart.length!=0">
       <button class="btn btn_gold btn-sm" routerLink="/" type="button">
         <i class="fas fa-arrow-left"></i>&nbsp;Continue Shopping
-      </button>
-      <button class="btn btn_gold btn-sm" style="float:right;" routerLink="/paymentoptions" type="button">
-        <i class="fas fa-arrow-right"></i>&nbsp;Continue to Checkout
       </button>
     </div>
     <br><br>

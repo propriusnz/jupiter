@@ -185,6 +185,9 @@ export class ProductService {
     return this.http.get(this.baseUrl + '/admins',
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
+  paymentResult(url){
+    return this.http.post(this.baseUrl+'/PxPay/ResponseOutput',url)
+  }
   // !images
   addImg(files) {
     return this.http.post(this.baseUrl + '/ProductMedias/', files,

@@ -226,6 +226,8 @@ export class ProductComponent implements OnInit {
           this.tmpProdID.set(item.ProdId, neworder)
         } else {
           this.tmpProdID.get(item.ProdId).quantity = neworder.quantity
+          this.tmpProdID.get(item.ProdId).beginDate= neworder.beginDate
+          this.tmpProdID.get(item.ProdId).endDate= neworder.endDate
         }
       }
       // if cartList if not empty
