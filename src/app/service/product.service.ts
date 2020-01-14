@@ -43,10 +43,10 @@ export class ProductService {
   }
   searchProducts(typeId: number, name: string) {
     return this.http.post(this.baseUrl + '/Products/GetSearchedProduct/' + typeId, name,
-    { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
-  calculateTime(hiringtime){
-    return this.http.post(this.baseUrl+'/ProductTime/CalculateTime/',hiringtime);
+  calculateTime(hiringtime) {
+    return this.http.post(this.baseUrl + '/ProductTime/CalculateTime/', hiringtime);
   }
   // !Gallery
   indexGallery() {
@@ -163,33 +163,32 @@ export class ProductService {
   }
   updateEventTypeImage(file) {
     return this.http.put(this.baseUrl + '/ProjectTypeImage/', file,
-    { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) }
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) }
     );
   }
-   // !admin
+  // !admin
   login(adminModel) {
     return this.http.post(this.baseUrl + '/admins', adminModel);
-  }
-  
-  // !user
-  register(user) {
-	  return this.http.post(this.baseUrl + '/user/register', user);
-  }
-  userlogin(loginModel){
-    return this.http.post(this.baseUrl+ '/user/login',loginModel);
-  }
-  forgotpassword(useremail){
-    return this.http.post(this.baseUrl+'/user/forgotpassword',useremail);
   }
   getUser() {
     return this.http.get(this.baseUrl + '/admins',
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
-  getProfile (userId) {
-	return this.http.get(this.baseUrl+ '/user/' + userId);
+  // !user
+  register(user) {
+    return this.http.post(this.baseUrl + '/user/register', user);
   }
-  paymentResult(url){
-    return this.http.post(this.baseUrl+'/PxPay/ResponseOutput',url)
+  userlogin(loginModel) {
+    return this.http.post(this.baseUrl + '/user/login', loginModel);
+  }
+  forgotpassword(useremail) {
+    return this.http.post(this.baseUrl + '/user/forgotpassword', useremail);
+  }
+  getProfile() {
+    return this.http.get(this.baseUrl + '/user/', { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + localStorage.getItem('userId') }) });
+  }
+  paymentResult(url) {
+    return this.http.post(this.baseUrl + '/PxPay/ResponseOutput', url)
   }
   // !images
   addImg(files) {
@@ -255,6 +254,6 @@ export class ProductService {
   }
   removeHomepageCarousel(id: number) {
     return this.http.delete(this.baseUrl + '/HomepageCarouselMedia/' + id,
-    { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
 }
