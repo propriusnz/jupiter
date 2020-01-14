@@ -22,7 +22,7 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
 	  this.userId = JSON.parse(localStorage.getItem('userId'));
 
-	  this.service.getProfile().subscribe(
+	  this.service.getProfile(this.userId).subscribe(
 		  profile => {
 			console.log(profile);
 			  this.profile= profile;
