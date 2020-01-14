@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ProductService } from '../../service/product.service';
 import { environment } from '../../../environments/environment.prod';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -15,6 +16,7 @@ export class ShoppingCartComponent implements OnInit {
   userInputQuantityArray = [];
   baseImageLink = environment.baseLink;
   productTimetable=[]
+  errorMessage='Please change '
   @ViewChild('quantityInput', { static: false }) quantityInput: ElementRef;
   constructor(
     private productService: ProductService
@@ -25,6 +27,17 @@ export class ShoppingCartComponent implements OnInit {
     this.productTimetable=JSON.parse(localStorage.getItem('productTimetable') || '[]');
     console.log(this.productTimetable)
     this.prodsInCart = JSON.parse(localStorage.getItem('cartList') || '[]');
+    console.log(this.prodsInCart)
+    if(this.productTimetable.length>=2){
+    let tmpBeginDate=this.productTimetable[0].beginDate
+    let tmpEndDate=this.productTimetable[0].endDate
+    for(let i=1;i<=this.productTimetable.length-1;i++){
+      if(tmpBeginDate!=this.productTimetable[i].beginDate || tmpEndDate!=this.productTimetable[i].endDate){
+        this.productService.setShoppingCartStatus(false);
+        break
+      }
+    }
+    }
     if (this.prodsInCart == null || this.prodsInCart.length === 0) {
       this.productService.setShoppingCartStatus(false);
     }
@@ -41,7 +54,9 @@ export class ShoppingCartComponent implements OnInit {
   // delete items of shopping cart
   deleteCart(id) {
     this.prodsInCart.splice(id, 1);
+    this.productTimetable.splice(id,1);
     localStorage.setItem('cartList', JSON.stringify(this.prodsInCart));
+    localStorage.setItem('productTimetable',JSON.stringify(this.prodsInCart))
     if (this.prodsInCart.length === 0) {
       this.productService.setShoppingCartStatus(false);
     }

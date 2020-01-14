@@ -188,6 +188,9 @@ export class ProductService {
   getProfile (userId) {
 	  return this.http.get(this.baseUrl+ '/user/' + userId);
   }
+  paymentResult(url){
+    return this.http.post(this.baseUrl+'/PxPay/ResponseOutput',url)
+  }
   // !images
   addImg(files) {
     return this.http.post(this.baseUrl + '/ProductMedias/', files,
