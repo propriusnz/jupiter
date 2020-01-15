@@ -95,4 +95,9 @@ export class NavbarComponent implements OnInit {
       height: '680px'
     });
   }
+  logout(){
+	localStorage.clear();
+	sessionStorage.clear();
+	location.reload();
+  }
 }

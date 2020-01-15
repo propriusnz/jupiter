@@ -4,7 +4,6 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component'
 import { DataService } from '../../../../service/data.service'
 import { ProductService } from 'src/app/service/product.service';
-import { ClassGetter } from '@angular/compiler/src/output/output_ast';
 import { Router } from '@angular/router';
 
 @Component({
@@ -94,7 +93,8 @@ export class UserloginDialogComponent implements OnInit {
 		localStorage.setItem('userToken', JSON.stringify(res['data'].token));
 		localStorage.setItem('userLoginControl', JSON.stringify(1));
 		this.data.changeElementStatus('1');
-        this.dialogRef.close();
+		this.dialogRef.close();
+		location.reload();
       },
       err => {
         console.log(err)
