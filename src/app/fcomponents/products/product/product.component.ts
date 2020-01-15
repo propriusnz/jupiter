@@ -3,10 +3,9 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ProductService } from '../../../service/product.service';
 import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { environment } from '../../../../environments/environment.prod';
-import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { setTheme } from 'ngx-bootstrap/utils';
-import moment from 'moment-timezone'
-import { isBefore } from 'ngx-bootstrap/chronos/public_api';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-product',
@@ -68,7 +67,6 @@ export class ProductComponent implements OnInit {
 
     this.productId = this.route.snapshot.params['id'];
     setTheme('bs4');
-    var zoneOffset=12
     var offset2 =new Date().getTimezoneOffset()* 60 * 1000;
     var nowDate2 = new Date().getTime();
     this.minDate_start=new Date(nowDate2 + offset2);
