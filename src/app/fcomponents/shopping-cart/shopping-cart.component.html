@@ -27,6 +27,7 @@
       <br>
       <br>
     </div>
+    <div class="mb-2" *ngIf="!isShoppingCartValid && prodsInCart.length!=0" style="color:red">{{errorMessage}}</div>
     <div class="text-right mb-2" *ngIf="totalPrice!=0">
       Total Price: NZ $<span class="s2bold">{{totalPrice}}</span>
     </div>

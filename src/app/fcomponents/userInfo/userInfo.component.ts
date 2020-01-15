@@ -16,6 +16,7 @@ export class UserInfoComponent implements OnInit {
   isSendSuccess = false;
   isCartEmpty = false;
   isShoppingCartValid = true;
+  userId:number
   userInfo = {
     FirstName: '',
     LastName: '',
@@ -24,7 +25,9 @@ export class UserInfoComponent implements OnInit {
     company: '',
     streetAddress: '',
     city: '',
-    Message: ''
+    Message: '',
+    District:'',
+    isPickup:''
   };
   constructor(
     @Inject(PLATFORM_ID) private platformId,
@@ -41,7 +44,21 @@ export class UserInfoComponent implements OnInit {
           );
      }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if('userId' in localStorage){
+      this.userId=JSON.parse(localStorage.getItem('userId'))
+      this.productService.getProfile(this.userId).subscribe(
+        res=>{
+          console.log(res)
+          this.userInfo.Email=res['data'][0].email
+          this.userInfo.FirstName=res['data'][0].userInfo[0].firstName
+          this.userInfo.LastName=res['data'][0].userInfo[0].lastName
+          this.userInfo.PhoneNum=res['data'][0].userInfo[0].phoneNumber
+          this.userInfo.company=res['data'][0].userInfo[0].company
+        }
+      )
+    }
+  }
   // check whether form is valid
   onSubmit({valid}: {valid: boolean}) {
     if (!valid) {
