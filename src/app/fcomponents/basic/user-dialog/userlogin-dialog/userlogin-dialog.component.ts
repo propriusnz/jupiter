@@ -35,23 +35,23 @@ export class UserloginDialogComponent implements OnInit {
   ngOnInit() {
     this.userLoginForm = this.fb.group({
       email: ['', [Validators.required,
-      Validators.email]],
+				   Validators.email,
+				   Validators.minLength(8),
+				   Validators.maxLength(30)]],
       password: ['', [Validators.required,
-      Validators.minLength(8),
-      Validators.maxLength(20)]]
+      				  Validators.minLength(5),
+      				  Validators.maxLength(30)]]
     })
 	this.data.currentsignupmessage.subscribe(currentsignupmessage => this.message = currentsignupmessage);
   }
 
   getEmailErrorMessage() {
-    return this.email.hasError('required') ? 'Please enter your email' :
-      this.email.hasError('email') ? 'Please enter a valid email address with @' :
-        '';
+	return this.email.hasError('required') ? 'Please enter your email' : this.email.hasError('email') ? 'Please enter a valid email' : this.email.hasError('minLength') ? 'At least 5 characters required' : this.email.hasError('maxlength') ? 'No more than 20 characters required' : '';
   }
 
   getPasswordErrorMessage() {
     return this.password.hasError('required') ? 'Please enter your password' :
-      this.password.hasError('minlength' || 'maxlength') ? 'Your password should be 8-20 characters' :
+      this.password.hasError('minlength || maxlength') ? 'Your password should be 8-20 characters' :
         '';
   }
 

@@ -15,7 +15,7 @@ export class UserregistrationDialogComponent implements OnInit {
   registrationForm: FormGroup;
   hide = true;
   message: string;
-  subscribe: boolean;
+  subscribe: number;
   errorMessage = '';
   signupFailed = false;
 
@@ -30,8 +30,10 @@ export class UserregistrationDialogComponent implements OnInit {
 
   ngOnInit() {
     this.registrationForm = this.fb.group({
-	  email: ['', [Validators.required, Validators.email,  
-		           Validators.minLength(8)]],
+	  email: ['', [Validators.required, 
+				   Validators.email,  
+		           Validators.minLength(8),
+		           Validators.maxLength(30)]],
 	  password: ['', [Validators.required, 			
 					  Validators.minLength(8), 
 					  Validators.maxLength(20), 
@@ -44,8 +46,11 @@ export class UserregistrationDialogComponent implements OnInit {
   }
 
   getErrorMessage() {
-    return this.email.hasError('required') ? 'Please enter a value' :
-    this.email.hasError('email') ? 'Not a valid email' : ''
+    return this.email.hasError('required') ? 'Your email address required' :
+		this.email.hasError('email') ? 'Please enter a valid email' : 
+		this.email.hasError('minLength') ? 'At least 5 characters required' :
+		this.email.hasError('maxlength') ? 'No more than 20 characters required' :
+		'';
   }
 
   getErrorMessage2() {
@@ -85,7 +90,7 @@ export class UserregistrationDialogComponent implements OnInit {
 			this.dialogRef.close()
 		},
 		err => {
-			console.log(err)
+			console.log("Sign up failed:", err)
 			this.signupFailed = true
 			this.errorMessage = "Sign up failed"
 		}
@@ -93,10 +98,10 @@ export class UserregistrationDialogComponent implements OnInit {
   }
   onSlideChange(subscribe){
     if(subscribe.checked){
-      this.subscribe = true;
+      this.subscribe = 1;
     }else{
-      this.subscribe = false;
+      this.subscribe = 0;
     }
-    console.log(this.subscribe)
+    // console.log(this.subscribe)
   }
 }
