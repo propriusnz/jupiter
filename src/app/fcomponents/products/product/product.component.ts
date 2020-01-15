@@ -3,10 +3,9 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ProductService } from '../../../service/product.service';
 import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { environment } from '../../../../environments/environment.prod';
-import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { setTheme } from 'ngx-bootstrap/utils';
 import * as moment from 'moment';
-import { isBefore } from 'ngx-bootstrap/chronos/public_api';
+
 
 @Component({
   selector: 'app-product',
@@ -28,7 +27,7 @@ export class ProductComponent implements OnInit {
   isLoading = true;
   rightCarouselControlPosition: number;
   baseImageLink = environment.baseLink;
-  minDate_start: Date;
+  minDate_start:Date;
   maxDate_start: Date;
   minDate_return: Date;
   maxDate_return: Date;
@@ -68,12 +67,17 @@ export class ProductComponent implements OnInit {
 
     this.productId = this.route.snapshot.params['id'];
     setTheme('bs4');
-    this.minDate_start = new Date();
+    var offset2 =new Date().getTimezoneOffset()* 60 * 1000;
+    var nowDate2 = new Date().getTime();
+    this.minDate_start=new Date(nowDate2 + offset2);
     this.maxDate_start = new Date();
     this.minDate_start.setDate(this.minDate_start.getDate());
     this.maxDate_start.setDate(this.maxDate_start.getDate() + 90);
   }
   ngOnInit() {
+    console.log(this.minDate_start)
+    console.log(new Date())
+    console.log(this.maxDate_start)
     this.cartForm = this.formBuilder.group({
       cartItems: this.formBuilder.array([]),
     });
@@ -283,8 +287,6 @@ export class ProductComponent implements OnInit {
       current = iterable.next().value
     }
     localStorage.setItem('productTimetable', JSON.stringify(this.productTimetable));
-    this.productTimetable = JSON.parse(localStorage.getItem('productTimetable'))
-    console.log(this.productTimetable)
   }
   // click the path and re-navigate
   backClicked(type: string, id?: number) {
@@ -361,12 +363,13 @@ export class ProductComponent implements OnInit {
       let productHiringDetail = {
         proddetailid: current.id,
         quantity: current.quantity,
-        beginDate: current.beginDate
+        beginDate: current.begindate
       }
       hiringdetail.push(productHiringDetail)
       current = iterable.next().value
     }
     this.prodDetailIdlist = hiringdetail
+    console.log(this.prodDetailIdlist)
     if (this.map.size != 0) {
       this.productService.calculateTime(hiringdetail).subscribe(
         res => {

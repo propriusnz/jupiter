@@ -1,38 +1,54 @@
-    <div class="row mb-3 productdiv" *ngFor="let prod of prodsInCart; index as i">
-      <div class="col-4 col-sm-4 col-md-4 col-lg-3" *ngIf="prod.url">
-        <img src="{{baseImageLink}}{{prod.url}}" class="cartProdHeight">
-      </div>
-      <div class="col-8 col-sm-8 col-md-8 col-lg-9">
-        <div class="divdetails"><span class="m2">{{prod.Title}}</span></div>
-        <div class="divdetails">Unit Price: ${{prod.Price/prod.Quantity}}</div>
+<div class="row" *ngIf="prodsInCart.length!=0">
+  <div class="mt-2 ml-2">
+    <input bsDatepicker type="text" class="form-control" placeholder="Start Date" style="width: 260px;"
+       [minDate]="minDate_start" [datesDisabled]="disabledDates"
+      [maxDate]="maxDate_start" [bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}"
+      (bsValueChange)="onStartChange($event)">
+  </div>
+  <div class="mt-2 ml-2">
+    <input bsDatepicker type="text" class="form-control" placeholder="Return Date" style="width: 260px;"
+      [isDisabled]="dateReturnControl" [minDate]="minDate_return"  [datesDisabled]="disabledDates"
+      [maxDate]="maxDate_return" [bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}"
+      (bsValueChange)="onReturnChange($event)">
+  </div>
+</div>
+<hr>
+<div class="row mb-3 productdiv" *ngFor="let prod of prodsInCart; index as i">
+  <div class="col-4 col-sm-4 col-md-4 col-lg-3" *ngIf="prod.url">
+    <img src="{{baseImageLink}}{{prod.url}}" class="cartProdHeight">
+  </div>
+  <div class="col-8 col-sm-8 col-md-8 col-lg-9">
+    <div class="divdetails"><span class="m2">{{prod.Title}}</span></div>
+    <div class="divdetails">Unit Price: ${{prod.Price/prod.Quantity}}</div>
 
-        <div>
-          Amount: {{userInputQuantityArray[i]}}
-        </div>
-        <div>Start date: {{productTimetable[i].beginDate}}</div>
-        <div>Return date: {{productTimetable[i].endDate}}</div>
-        <div class="bg-gray divdetails"> NZ ${{prod.Price}}</div>
-        <div class="mt-2 divdetails">
-          <button class="btn btn-outline-blue" [routerLink]="[ '/product/', prod.ProdId ]">View Detail</button>
-          <button class="btn btn-outline-red" (click)="deleteCart(i)" style="float:right;">Delete</button>
-        </div>
-      </div>
+    <div>
+      Amount: {{userInputQuantityArray[i]}}
     </div>
+    <div>Start date: {{productTimetable[i].beginDate}}</div>
+    <div>Return date: {{productTimetable[i].endDate}}</div>
+    <div class="bg-gray divdetails"> NZ ${{prod.Price}}</div>
+    <div class="mt-2 divdetails">
+      <button class="btn btn-outline-blue" [routerLink]="[ '/product/', prod.ProdId ]">View Detail</button>
+      <button class="btn btn-outline-red" (click)="deleteCart(i)" style="float:right;">Delete</button>
+    </div>
+  </div>
+</div>
 
-    <div *ngIf="prodsInCart.length==0">
-      <br>
-      <br>
-      <span class="s2">You don't have anything in your shopping cart yet!</span> <br>
-      <button class="btn btn-outline-gold mt-3" routerLink="/hire">View Our Products</button>
-      <br>
-      <br>
-    </div>
-    <div class="text-right mb-2" *ngIf="totalPrice!=0">
-      Total Price: NZ $<span class="s2bold">{{totalPrice}}</span>
-    </div>
-    <div class="justify-content-end mb-3" *ngIf="prodsInCart.length!=0">
-      <button class="btn btn_gold btn-sm" routerLink="/" type="button">
-        <i class="fas fa-arrow-left"></i>&nbsp;Continue Shopping
-      </button>
-    </div>
-    <br><br>
+<div *ngIf="prodsInCart.length==0">
+  <br>
+  <br>
+  <span class="s2">You don't have anything in your shopping cart yet!</span> <br>
+  <button class="btn btn-outline-gold mt-3" routerLink="/hire">View Our Products</button>
+  <br>
+  <br>
+</div>
+<div class="mb-2" *ngIf="!isShoppingCartValid && prodsInCart.length!=0" style="color:red">{{errorMessage}}</div>
+<div class="text-right mb-2" *ngIf="totalPrice!=0">
+  Total Price: NZ $<span class="s2bold">{{totalPrice}}</span>
+</div>
+<div class="justify-content-end mb-3" *ngIf="prodsInCart.length!=0">
+  <button class="btn btn_gold btn-sm" routerLink="/" type="button">
+    <i class="fas fa-arrow-left"></i>&nbsp;Continue Shopping
+  </button>
+</div>
+<br><br>
