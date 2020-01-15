@@ -22,29 +22,29 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
 	  private fb: FormBuilder,
-	  private service: ProductService,
+	  private productservice: ProductService
   ) { }
 
   ngOnInit() {
 	  this.userId = JSON.parse(localStorage.getItem('userId'));
+	//   console.log(this.userId);
 
-	  this.service.getProfile(this.userId).subscribe(
+	  this.productservice.getProfile(this.userId).subscribe(
 		  profile => {
 			console.log('Current logged in user：', profile);
 			  this.profile= profile;
 			//   console.log(this.profile['data'][0].email);
-			this.firstname = profile['data'][0]['userInfo'][0].firstName;
-			this.lastname = profile['data'][0]['userInfo'][0].lastName;
+			this.firstname = profile['data'][0]['userInfo'][0] ? profile['data'][0]['userInfo'][0].firstName: null;
+			this.lastname = profile['data'][0]['userInfo'][0] ? profile['data'][0]['userInfo'][0].lastName: null;
 			this.email = profile['data'][0].email;
-			this.phoneno = profile['data'][0]['userInfo'][0].phoneNumber;
-			this.com = profile['data'][0]['userInfo'][0].company;
+			this.phoneno = profile['data'][0]['userInfo'][0] ? profile['data'][0]['userInfo'][0].phoneNumber: null;
+			this.com = profile['data'][0]['userInfo'][0] ? profile['data'][0]['userInfo'][0].company: null;
 			
 			if (profile['data'][0].isSubscribe == 1) {
 				this.subs = true;
 			}else{
 				this.subs = false;
 			}
-
 			this.form();
 	  	  },
 	  	  err => {
@@ -115,7 +115,14 @@ export class UserProfileComponent implements OnInit {
     	isSubscribe: this.subs
 	}
 	console.log('Updated user profile: ', user);
-
+	this.productservice.updateProfile(this.userId).subscribe(
+		response => {
+			console.log(response);
+		},
+		error => {
+			console.log('Update Failed Error', error);
+		}
+	)
   }
   
   onSlideChange(subscribe){

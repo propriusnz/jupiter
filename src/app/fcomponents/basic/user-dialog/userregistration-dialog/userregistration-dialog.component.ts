@@ -84,13 +84,13 @@ export class UserregistrationDialogComponent implements OnInit {
     console.log(user);
     this.productservice.register(user).subscribe(
       res => {
-        console.log(res)
-        this.dialogRef.close()
+        console.log(res);
+        this.dialogRef.close();
       },
       err => {
-        console.log(err)
-        this.signupFailed = true
-        this.errorMessage = "Sign up failed."
+        console.log(err);
+        this.signupFailed = true;
+        this.errorMessage = "Sign up failed.";
       }
     );
   }

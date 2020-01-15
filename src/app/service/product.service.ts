@@ -188,8 +188,8 @@ export class ProductService {
   getProfile(userId) {
     return this.http.get(this.baseUrl + '/user/' + userId, { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + localStorage.getItem('userId') }) });
   }
-  updateProfile(userId, user) {
-	  return this.http.put(this.baseUrl + '/UserContactInfo/' + userId, user)
+  updateProfile(userId) {
+	  return this.http.put(this.baseUrl + '/UserContactInfo/' + userId, userId);
   }
 
   paymentResult(url) {
