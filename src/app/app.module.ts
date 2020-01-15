@@ -5,6 +5,7 @@ import { MatDatepickerModule, MatInputModule, MatFormFieldModule, MatNativeDateM
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatMenuModule } from '@angular/material/menu';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -156,7 +157,8 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatIconModule,
     MatTabsModule,
-    MatSlideToggleModule,
+	MatSlideToggleModule,
+	MatMenuModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes, { scrollPositionRestoration: 'enabled' }),
     HttpClientModule,

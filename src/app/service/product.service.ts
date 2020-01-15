@@ -185,7 +185,7 @@ export class ProductService {
     return this.http.post(this.baseUrl + '/user/forgotpassword', useremail);
   }
   getProfile(userId) {
-    return this.http.get(this.baseUrl + '/user/'+userId, { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + localStorage.getItem('userId') }) });
+    return this.http.get(this.baseUrl + '/user/'+ userId, { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + localStorage.getItem('userId') }) });
   }
   paymentResult(url) {
     return this.http.post(this.baseUrl + '/PxPay/ResponseOutput', url)
