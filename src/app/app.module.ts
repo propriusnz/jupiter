@@ -30,8 +30,8 @@ import { ProductListComponent } from './fcomponents/products/productList/product
 import { AboutUsComponent } from './fcomponents/pages/aboutUs/aboutUs.component';
 import { ProductComponent } from './fcomponents/products/product/product.component';
 import { FooterComponent } from './fcomponents/basic/footer/footer.component';
-import { ShoppingCartComponent } from './fcomponents/shopping-cart/shopping-cart.component';
-import { UserInfoComponent } from './fcomponents/userInfo/userInfo.component';
+import { ShoppingCartComponent } from './fcomponents/shopping-checkout/shopping-cart/shopping-cart.component';
+import { ShoppingUserinfoComponent } from './fcomponents/shopping-checkout/shopping-userinfo/shopping-userinfo.component'
 import { GalleryDetailComponent } from './fcomponents/gallery/gallery-detail/gallery-detail.component';
 import { GalleryListComponent } from './fcomponents/gallery/gallery-list/gallery-list.component';
 import { AdminComponent } from './fcomponents/admin/admin.component';
@@ -113,7 +113,7 @@ const appRoutes: Routes = [
     ProductComponent,
     FooterComponent,
     ShoppingCartComponent,
-    UserInfoComponent,
+    ShoppingUserinfoComponent,
     GalleryDetailComponent,
     GalleryListComponent,
     AdminComponent,

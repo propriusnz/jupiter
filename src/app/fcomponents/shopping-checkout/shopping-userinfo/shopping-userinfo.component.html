@@ -95,7 +95,7 @@
       <hr>
       <mat-form-field>
          <mat-label>Select a district</mat-label>
-         <mat-select [(value)]="districtSelected">
+         <mat-select (selectionChange)="selectionChange($event)">
            <mat-option value="1">NorthShoreCity</mat-option>
            <mat-option value="2">AucklandCity</mat-option>
            <mat-option value="3">ManukauCity</mat-option>

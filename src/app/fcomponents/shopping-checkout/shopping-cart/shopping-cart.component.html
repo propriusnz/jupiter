@@ -1,13 +1,13 @@
 <div class="row" *ngIf="prodsInCart.length!=0">
   <div class="mt-2 ml-2">
     <input bsDatepicker type="text" class="form-control" placeholder="Start Date" style="width: 260px;"
-       [minDate]="minDate_start" [datesDisabled]="disabledDates"
-      [maxDate]="maxDate_start" [bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}"
+      [minDate]="minDate_start" [datesDisabled]="disabledDates" [maxDate]="maxDate_start"
+      [bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}"
       (bsValueChange)="onStartChange($event)">
   </div>
   <div class="mt-2 ml-2">
     <input bsDatepicker type="text" class="form-control" placeholder="Return Date" style="width: 260px;"
-      [isDisabled]="dateReturnControl" [minDate]="minDate_return"  [datesDisabled]="disabledDates"
+      [isDisabled]="dateReturnControl" [minDate]="minDate_return" [datesDisabled]="disabledDates"
       [maxDate]="maxDate_return" [bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}"
       (bsValueChange)="onReturnChange($event)">
   </div>
@@ -43,12 +43,12 @@
   <br>
 </div>
 <div class="mb-2" *ngIf="!isShoppingCartValid && prodsInCart.length!=0" style="color:red">{{errorMessage}}</div>
-<div class="text-right mb-2" *ngIf="totalPrice!=0">
-  Total Price: NZ $<span class="s2bold">{{totalPrice}}</span> (15% GST included)
+<div class="text-right" *ngIf="totalPrice!=0">
+  <div class="mb-1" *ngIf="!pickupMessage">Delivery Fee:</div>
+  <div class="mb-1">Total Price: NZ $<span class="s2bold">{{totalPrice}}</span></div>
+  <div class="mb-1" style="font-size:x-small;">(15% GST included)</div>
 </div>
-<div class="text-right mb-2" *ngIf="totalPrice!=0">
-  Total Price: NZ $<span class="s2bold">{{totalPrice}}</span> (15% GST included)
-</div>
+
 <div class="justify-content-end mb-3" *ngIf="prodsInCart.length!=0">
   <button class="btn btn_gold btn-sm" routerLink="/" type="button">
     <i class="fas fa-arrow-left"></i>&nbsp;Continue Shopping

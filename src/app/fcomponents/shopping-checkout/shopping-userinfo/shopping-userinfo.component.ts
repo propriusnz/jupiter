@@ -1,13 +1,13 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
-import { ProductService } from '../../service/product.service';
+import { Component, OnInit, Inject, PLATFORM_ID, Output ,EventEmitter} from '@angular/core';
+import { ProductService } from '../../../service/product.service'
 import { isPlatformBrowser, DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 @Component({
-  selector: 'app-userInfo',
-  templateUrl: './userInfo.component.html',
-  styleUrls: ['./userInfo.component.css']
+  selector: 'app-shopping-userinfo',
+  templateUrl: './shopping-userinfo.component.html',
+  styleUrls: ['./shopping-userinfo.component.css']
 })
-export class UserInfoComponent implements OnInit {
+export class ShoppingUserinfoComponent implements OnInit {
   feedback_message: string;
   successMessage: string;
   PlannedTime: any;
@@ -36,6 +36,8 @@ export class UserInfoComponent implements OnInit {
   ManukauCity = 40
   WaitakereCity = 50
   minDate: Date
+  @Output() isPickup=new EventEmitter();
+  @Output() district=new EventEmitter();
   constructor(
     @Inject(PLATFORM_ID) private platformId,
     private productService: ProductService,
@@ -137,9 +139,18 @@ export class UserInfoComponent implements OnInit {
     this.userInfo.isPickup=input['value']
     if(input['value']==0){
       this.districtSelectControl=true
+      this.userInfo.isPickup="0"
+      this.isPickup.emit(this.userInfo.isPickup)
     }else if(input['value']==1){
       this.districtSelectControl=false
+      this.userInfo.isPickup="1"
+      this.isPickup.emit(this.userInfo.isPickup)
     }
+    
+  }
+  selectionChange(input){
+    console.log(input.value)
+    this.district.emit(input.value)
   }
   // clear the shopping cart stored in local storage
   cleanStorage() {
