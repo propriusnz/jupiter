@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatchService } from 'src/app/service/match.service';
+import { ProductService } from '../../../service/product.service';
 
 @Component({
   selector: 'app-manage-password',
@@ -12,10 +13,13 @@ export class ManagePasswordComponent implements OnInit {
 	hide = true;
 	errorMesage = '';
 	changeFailed = true;
+	errorMessage = '';
+	userId: number;
 
   constructor(
 	private fb: FormBuilder, 
-	private matchservice: MatchService
+	private matchservice: MatchService,
+	private productservice: ProductService
   ) { }
 
   ngOnInit() {
@@ -63,6 +67,14 @@ export class ManagePasswordComponent implements OnInit {
   get confirmpassword() { return this.changePasswdForm.get('confirmpassword') };
 
   onSubmit() {
-      console.log('Password updated: ' );
+	this.productservice.changePassword(this.userId).subscribe(
+	  success => {
+		console.log('Password updated: ', success);
+	  },
+	  error => {
+		  console.log('Change passwd failed', error);
+		  this.errorMessage = "CHange password failed";
+	  }
+	); 
   }
 }

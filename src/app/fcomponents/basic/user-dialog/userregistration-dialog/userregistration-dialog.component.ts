@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DataService } from '../../../../service/data.service'
 import { ProductService } from '../../../../service/product.service';
 import { MatchService } from 'src/app/service/match.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-userregistration-dialog',
@@ -25,17 +26,19 @@ export class UserregistrationDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<UserregistrationDialogComponent>,
     public dialog: MatDialog,
     private productservice: ProductService,
-    private matchservice: MatchService
+	private matchservice: MatchService,
+	private router: Router
   ) { }
 
   ngOnInit() {
     this.registrationForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email,
-      Validators.minLength(8)]],
+	  email: ['', [Validators.required, 
+				   Validators.email,
+      			   Validators.minLength(8)]],
       password: ['', [Validators.required,
-      Validators.minLength(8),
-      Validators.maxLength(20),
-      Validators.pattern('(?!^[0-9 ]*$)(?!^[a-zA-Z ]*$)^([a-zA-Z0-9 ]{8,20})$')]],
+      				  Validators.minLength(8),
+      				  Validators.maxLength(20),
+      				  Validators.pattern('(?!^[0-9 ]*$)(?!^[a-zA-Z ]*$)^([a-zA-Z0-9 ]{8,20})$')]],
       confirmpassword: ['', [Validators.required]],
     }, {
       validator: this.matchservice.MustMatch('password', 'confirmpassword')
@@ -85,7 +88,8 @@ export class UserregistrationDialogComponent implements OnInit {
     this.productservice.register(user).subscribe(
       res => {
         console.log(res);
-        this.dialogRef.close();
+		this.dialogRef.close();
+		this.redirect();
       },
       err => {
         console.log(err);
@@ -102,4 +106,8 @@ export class UserregistrationDialogComponent implements OnInit {
     }
     // console.log(this.subscribe)
   }
+
+  redirect() {
+	this.router.navigate(['userDashboard'])
+}
 }

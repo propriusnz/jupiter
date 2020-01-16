@@ -175,6 +175,7 @@ export class ProductService {
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
 
+
   // !user
   register(user) {
     return this.http.post(this.baseUrl + '/user/register', user);
@@ -188,9 +189,13 @@ export class ProductService {
   getProfile(userId) {
     return this.http.get(this.baseUrl + '/user/' + userId, { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + localStorage.getItem('userId') }) });
   }
-  updateProfile(userId) {
-	  return this.http.put(this.baseUrl + '/UserContactInfo/' + userId, userId);
+  updateProfile(user,userId) {
+	return this.http.put(this.baseUrl + '/UserContactInfo/' + userId, user);
   }
+  changePassword(userId) {
+	return this.http.put(this.baseUrl + '/ChangePassword/' + userId, userId);
+  }
+
 
   paymentResult(url) {
     return this.http.post(this.baseUrl + '/PxPay/ResponseOutput', url)

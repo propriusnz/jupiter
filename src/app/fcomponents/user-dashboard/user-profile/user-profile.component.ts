@@ -18,7 +18,8 @@ export class UserProfileComponent implements OnInit {
 	email: string;
 	phoneno: string;
 	com: string;
-	subs: boolean;
+	subs: number;
+	errorMessage = '';
 
   constructor(
 	  private fb: FormBuilder,
@@ -41,9 +42,9 @@ export class UserProfileComponent implements OnInit {
 			this.com = profile['data'][0]['userInfo'][0] ? profile['data'][0]['userInfo'][0].company: null;
 			
 			if (profile['data'][0].isSubscribe == 1) {
-				this.subs = true;
+				this.subs = 1;
 			}else{
-				this.subs = false;
+				this.subs = 0;
 			}
 			this.form();
 	  	  },
@@ -105,31 +106,32 @@ export class UserProfileComponent implements OnInit {
 	return this.company.hasError('minlength' || 'maxlength') ? '2 - 20 characters required' :
 	  '';
   }
-  
-  onSubmit() {
-	let user = {
-		fname: this.updateProfileForm.value.fname,
-      	lname: this.updateProfileForm.value.lname,
-      	phone: this.updateProfileForm.value.phone,
-      	company: this.updateProfileForm.value.company,
-    	isSubscribe: this.subs
-	}
-	console.log('Updated user profile: ', user);
-	this.productservice.updateProfile(this.userId).subscribe(
-		response => {
-			console.log(response);
-		},
-		error => {
-			console.log('Update Failed Error', error);
-		}
-	)
-  }
-  
+
   onSlideChange(subscribe){
     if(subscribe.checked){
       this.subscribe = true;
     }else{
       this.subscribe = false;
     }
+  }
+  
+  onSubmit() {
+	let user = {
+		FirstName: this.updateProfileForm.value.fname,
+      	LastName: this.updateProfileForm.value.lname,
+      	PhoneNumber: this.updateProfileForm.value.phone,
+      	Company: this.updateProfileForm.value.company,
+    	IsSubscribe: this.subs
+	}
+	console.log('Updated user profile: ', user);
+	this.productservice.updateProfile(user,this.userId).subscribe(
+		success => {
+			console.log(success);
+		},
+		error => {
+			console.log('Update Failed Error', error);
+			this.errorMessage = "Update failed";
+		}
+	);
   }
 }
