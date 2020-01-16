@@ -5,6 +5,9 @@ import { MatDatepickerModule, MatInputModule, MatFormFieldModule, MatNativeDateM
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatRadioModule } from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -94,7 +97,7 @@ const appRoutes: Routes = [
   { path: 'checkout', component: ShoppingCheckoutComponent },
   { path: 'thankYou', component: ThankYouComponent },
   { path: 'paymentoptions', component: PaymentOptionsComponent },
-  { path: 'paymentresult',component:PaymentResultComponent},
+  { path: 'paymentresult', component: PaymentResultComponent },
   { path: '**', component: HomepageComponent }
 ];
 
@@ -147,6 +150,7 @@ const appRoutes: Routes = [
     NgxJsonLdModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     MatDatepickerModule,
     MatInputModule,
     MatFormFieldModule,
@@ -158,6 +162,10 @@ const appRoutes: Routes = [
     MatTabsModule,
 	MatSlideToggleModule,
     BrowserAnimationsModule,
+    MatSlideToggleModule,
+    MatMenuModule,
+    MatRadioModule,
+    MatSelectModule,
     RouterModule.forRoot(appRoutes, { scrollPositionRestoration: 'enabled' }),
     HttpClientModule,
     BsDatepickerModule.forRoot(),

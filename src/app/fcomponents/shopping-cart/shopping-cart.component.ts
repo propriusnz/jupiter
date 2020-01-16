@@ -17,8 +17,8 @@ export class ShoppingCartComponent implements OnInit {
   baseImageLink = environment.baseLink;
   productTimetable = []
   errorMessage = ''
-  isShoppingCartValid=true
-  minDate_start:Date;
+  isShoppingCartValid = true
+  minDate_start: Date;
   maxDate_start: Date;
   minDate_return: Date;
   maxDate_return: Date;
@@ -31,14 +31,15 @@ export class ShoppingCartComponent implements OnInit {
   startMoment: any;
   returnMoment: any;
   unavailableDates: any
+  mySet = new Set();
   @ViewChild('quantityInput', { static: false }) quantityInput: ElementRef;
   constructor(
     private productService: ProductService
 
-  ) { 
-    var offset2 =new Date().getTimezoneOffset()* 60 * 1000;
+  ) {
+    var offset2 = new Date().getTimezoneOffset() * 60 * 1000;
     var nowDate2 = new Date().getTime();
-    this.minDate_start=new Date(nowDate2 + offset2);
+    this.minDate_start = new Date(nowDate2 + offset2);
     this.maxDate_start = new Date();
     this.minDate_start.setDate(this.minDate_start.getDate());
     this.maxDate_start.setDate(this.maxDate_start.getDate() + 90);
@@ -47,8 +48,9 @@ export class ShoppingCartComponent implements OnInit {
   ngOnInit() {
     // get the current shopping cart
     this.productService.getShoppingCartStatus().subscribe(
-      status => { 
-        this.isShoppingCartValid = status.isValid; }
+      status => {
+        this.isShoppingCartValid = status.isValid;
+      }
     );
     this.productTimetable = JSON.parse(localStorage.getItem('productTimetable') || '[]');
     console.log(this.productTimetable)
@@ -57,6 +59,9 @@ export class ShoppingCartComponent implements OnInit {
     this.checkTimeConflict()
     if (this.prodsInCart == null || this.prodsInCart.length === 0) {
       this.productService.setShoppingCartStatus(false);
+    }
+    if(this.prodsInCart.length>=1){
+      this.calculateTime()
     }
     // get the image of product
     this.prodsInCart.forEach(element => {
@@ -73,11 +78,12 @@ export class ShoppingCartComponent implements OnInit {
     this.prodsInCart.splice(id, 1);
     this.productTimetable.splice(id, 1);
     localStorage.setItem('cartList', JSON.stringify(this.prodsInCart));
-    localStorage.setItem('productTimetable', JSON.stringify(this.prodsInCart))
+    localStorage.setItem('productTimetable', JSON.stringify(this.productTimetable))
     if (this.prodsInCart.length === 0) {
       this.productService.setShoppingCartStatus(false);
     }
     this.checkTimeConflict()
+    this.calculateTime()
     this.price();
   }
   // calculate total price of shopping cart
@@ -97,21 +103,21 @@ export class ShoppingCartComponent implements OnInit {
   }
   checkTimeConflict() {
     if (this.productTimetable.length >= 2) {
-      let control=false
+      let control = false
       let tmpBeginDate = this.productTimetable[0].beginDate
       let tmpEndDate = this.productTimetable[0].endDate
       for (let i = 1; i <= this.productTimetable.length - 1; i++) {
         if (tmpBeginDate != this.productTimetable[i].beginDate || tmpEndDate != this.productTimetable[i].endDate) {
           this.productService.setShoppingCartStatus(false);
-          this.errorMessage = 'Sorry, Start date and Return date for all items should be same. Please reselct another date range.' 
+          this.errorMessage = 'Sorry, Start date and Return date for all items should be same. Please reselect another date range.'
           this.isShoppingCartValid = false
-          control=false
+          control = false
           break
-        }else{
-          control=true
+        } else {
+          control = true
         }
       }
-      if(control){
+      if (control) {
         this.productService.setShoppingCartStatus(true);
       }
     }
@@ -120,7 +126,10 @@ export class ShoppingCartComponent implements OnInit {
     this.dateStartInput = value;
     this.dateReturnControl = false;
     this.minDate_return = value;
-
+    this.productTimetable.forEach(item=>{
+      item.beginDate=this.datetoYMD(this.dateStartInput)
+    })
+    this.checkTimeConflict()
     for (let i = 0; i < this.disabledDates.length; i++) {
       let myMoment = moment(this.disabledDates[i], 'YYYY-MM-DD')
       if (myMoment.startOf('day').isAfter(moment(this.dateStartInput).startOf('day'))) {
@@ -132,20 +141,84 @@ export class ShoppingCartComponent implements OnInit {
         this.maxDate_return = this.maxDate_start
       }
     }
-
-    this.startMoment = moment(this.dateStartInput)
+    localStorage.setItem('productTimetable', JSON.stringify(this.productTimetable))
   }
   onReturnChange(value) {
     this.dateReturnInput = value;
-    this.returnMoment = moment(this.dateReturnInput)
+    this.productTimetable.forEach(item=>{
+      item.endDate=this.datetoYMD(this.dateReturnInput)
+    })
+    this.checkTimeConflict()
+    localStorage.setItem('productTimetable', JSON.stringify(this.productTimetable))
   }
-  checkDisabledDates() {
+  calculateTime() {
+    let hiringdetail = []
+    let tmpDates = []
+    let tmpSet = new Set()
+    let productHiringDetail = {}
+    this.productTimetable.forEach(item => {
+      if (item.hasOwnProperty('prodId')) {
+        productHiringDetail = {
+          prodid: item.prodId,
+          quantity: item.quantity,
+          beginDate: this.minDate_start
+        }
+      } else if (item.hasOwnProperty('prodDetailId')) {
+        productHiringDetail = {
+          proddetailid: item.prodDetailId,
+          quantity: item.quantity,
+          beginDate: this.minDate_start
+        }
+      }
+      hiringdetail.push(productHiringDetail)
+    })
+    console.log(hiringdetail)
+    this.productService.calculateTime(hiringdetail).subscribe(
+      res => {
+        console.log(res)
+        this.unavailableDates = res
+        for (let i = 0; i < this.unavailableDates.length; i++) {
+          let myMoment = moment(this.unavailableDates[i], 'YYYY-MM-DD')
+          tmpDates.push(myMoment.toDate())
+          tmpSet.add(myMoment.toDate().toString())
+        }
+        this.disabledDates = tmpDates
+        this.mySet = tmpSet
+        for (let i = 0; i < this.disabledDates.length; i++) {
+          let myMoment = moment(this.disabledDates[i], 'YYYY-MM-DD')
+          if (myMoment.startOf('day'
+          ).isAfter(moment(this.dateStartInput).startOf('day'))) {
+            let myMoment_date = myMoment.toDate()
+            myMoment_date.setDate(myMoment.toDate().getDate() - 1);
+            this.maxDate_return = myMoment_date
+            break
+          }
+        }
+        if (this.disabledDates.length == 0) {
+          this.maxDate_return = this.maxDate_start
+        }
+      },
+      err => {
+        console.log(err)
+      }
+    );
     for (let i = 0; i < this.disabledDates.length; i++) {
-      if (moment(this.disabledDates[i]).startOf('day').isAfter(this.startMoment.startOf('day')) && moment(this.disabledDates[i]).startOf('day').isBefore(this.returnMoment.startOf('day')) && !this.startMoment.startOf('day').isSame(this.returnMoment.startOf('day'))) {
-        return true
+      let myMoment = moment(this.disabledDates[i], 'YYYY-MM-DD')
+      if (myMoment.startOf('day').isAfter(moment(this.dateStartInput).startOf('day'))) {
+        let myMoment_date = myMoment.toDate()
+        myMoment_date.setDate(myMoment.toDate().getDate() - 1);
+        this.maxDate_return = myMoment_date
+        break
+      } else {
+        this.maxDate_return = this.maxDate_start
       }
     }
-
-    return false
   }
-}
+  datetoYMD(date) {
+    var d = date.getDate();
+    var m = date.getMonth() + 1; //Month from 0 to 11
+    var y = date.getFullYear();
+    return '' + y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+  }
+
+  }

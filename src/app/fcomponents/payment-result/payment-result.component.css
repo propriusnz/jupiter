@@ -1,0 +1,14 @@
+.card {
+    min-height: 350px;
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 3%;
+}
+.card-body {
+    width: 100%;
+}
+.card-header {
+    background-color: #c48f45;
+    color: white;
+    text-align: center;
+}
