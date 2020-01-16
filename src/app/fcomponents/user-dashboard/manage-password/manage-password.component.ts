@@ -34,22 +34,35 @@ export class ManagePasswordComponent implements OnInit {
 	  })
   }
 
-  getErrorMessage2() {
-    return this.password.hasError('required') ? 'Please enter a value' :
+  getErrorMessage1() {
+    return this.oldpassword.hasError('required') ? 'Please enter your old password' :
+    this.oldpassword.hasError('minlength') ? 'Please enter at least 8 characters' :
+    this.oldpassword.hasError('maxlength') ? 'Please enter no more than 20 characters' :
+   	this.oldpassword.hasError('pattern') ? 'Please use combination of letters and characters' : ''
+  }
+
+  getErrorMessage2() {  //  New Password
+    return this.password.hasError('required') ? 'Please enter your new password' :
     this.password.hasError('minlength') ? 'Please enter at least 8 characters' :
     this.password.hasError('maxlength') ? 'Please enter no more than 20 characters' :
    	this.password.hasError('pattern') ? 'Please use combination of letters and characters' : ''
   }
 
-  getErrorMessage3() {
-    return this.confirmpassword.hasError('required') ? 'Please enter a value' : this.confirmpassword.hasError('notSame') ? 'Password does not match' : ''
+  getErrorMessage3() {   // Confirm New Password
+    return this.confirmpassword.hasError('required') ? 'Please confirm your new password' : this.confirmpassword.hasError('notSame') ? 'New password does not match' : ''
   }
 
   update () {
 	this.changeFailed = false;
   }
+
+  get oldpassword() { return this.changePasswdForm.get('oldpassword')};
   
   get password() { return this.changePasswdForm.get('password') };
 
   get confirmpassword() { return this.changePasswdForm.get('confirmpassword') };
+
+  onSubmit() {
+      console.log('Password updated: ' );
+  }
 }

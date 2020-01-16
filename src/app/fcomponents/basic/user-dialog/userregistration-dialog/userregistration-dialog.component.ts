@@ -44,19 +44,22 @@ export class UserregistrationDialogComponent implements OnInit {
   }
 
   getErrorMessage() {
-    return this.email.hasError('required') ? 'Please enter a value' :
-      this.email.hasError('email') ? 'Not a valid email' : ''
+    return this.email.hasError('required') ? 'Your email address required' :
+		this.email.hasError('email') ? 'Please enter a valid email' : 
+		this.email.hasError('minLength') ? 'At least 5 characters required' :
+		this.email.hasError('maxlength') ? 'No more than 20 characters required' :
+		'';
   }
 
   getErrorMessage2() {
-    return this.password.hasError('required') ? 'Please enter a value' :
+    return this.password.hasError('required') ? 'Please set your password' :
       this.password.hasError('minlength') ? 'Please enter at least 8 characters' :
-        this.password.hasError('maxlength') ? 'Please enter no more than 20 characters' :
-          this.password.hasError('pattern') ? 'Please use combination of letters and characters' : ''
+      this.password.hasError('maxlength') ? 'Please enter no more than 20 characters' :
+      this.password.hasError('pattern') ? 'Please use combination of letters and characters' : ''
   }
 
   getErrorMessage3() {
-    return this.confirmpassword.hasError('required') ? 'Please enter a value' : this.confirmpassword.hasError('notSame') ? 'Password does not match' : ''
+    return this.confirmpassword.hasError('required') ? 'Please re-enter your password' : this.confirmpassword.hasError('notSame') ? 'Password does not match' : ''
   }
 
   loginDialog() {
@@ -81,13 +84,13 @@ export class UserregistrationDialogComponent implements OnInit {
     console.log(user);
     this.productservice.register(user).subscribe(
       res => {
-        console.log(res)
-        this.dialogRef.close()
+        console.log(res);
+        this.dialogRef.close();
       },
       err => {
-        console.log(err)
-        this.signupFailed = true
-        this.errorMessage = "Sign up failed."
+        console.log(err);
+        this.signupFailed = true;
+        this.errorMessage = "Sign up failed.";
       }
     );
   }
@@ -97,6 +100,6 @@ export class UserregistrationDialogComponent implements OnInit {
     } else {
       this.subscribe = 0;
     }
-    console.log(this.subscribe)
+    // console.log(this.subscribe)
   }
 }
