@@ -36,8 +36,7 @@ export class UserloginDialogComponent implements OnInit {
     this.userLoginForm = this.fb.group({
       email: ['', [Validators.required,
 				   Validators.email,
-				   Validators.minLength(8),
-				   Validators.maxLength(30)]],
+				   ]],
       password: ['', [Validators.required,
       				  Validators.minLength(5),
       				  Validators.maxLength(30)]]
@@ -46,7 +45,7 @@ export class UserloginDialogComponent implements OnInit {
   }
 
   getEmailErrorMessage() {
-	return this.email.hasError('required') ? 'Please enter your email' : this.email.hasError('email') ? 'Please enter a valid email' : this.email.hasError('minLength') ? 'At least 5 characters required' : this.email.hasError('maxlength') ? 'No more than 20 characters required' : '';
+	return this.email.hasError('required') ? 'Please enter your email' : this.email.hasError('email') ? 'Please enter a valid email' : '';
   }
 
   getPasswordErrorMessage() {

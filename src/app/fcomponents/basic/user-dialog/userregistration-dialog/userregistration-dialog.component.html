@@ -62,12 +62,12 @@
 	<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
 		<mat-dialog-content>
 			<mat-form-field>
-				<input matInput placeholder="Email address" formControlName="email" (ngModleChange)="update()" required>
+				<input matInput placeholder="Email address" formControlName="email"  required>
 				<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
 			</mat-form-field>
 			<mat-form-field>
 				<input matInput placeholder="Password" formControlName="password" [type]="hide ? 'password' : 'text'"
-				(ngModleChange)="update()" required>
+				 required>
 				<button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
 					[attr.aria-pressed]="hide">
 					<mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -76,7 +76,7 @@
 			</mat-form-field>
 
 			<mat-form-field>
-				<input matInput (ngModleChange)="update()" placeholder="Confirm Password" formControlName="confirmpassword"
+				<input matInput  (ngModelChange)="update()" placeholder="Confirm Password" formControlName="confirmpassword"
 					[type]="hide ? 'password' : 'text'" required>
 				<button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
 					[attr.aria-pressed]="hide">
@@ -92,14 +92,14 @@
 		</div>
 
 		<div class="slide">
-			<mat-slide-toggle  (change)="onSlideChange($event)" aria-label="Subscribe" color="primary"></mat-slide-toggle>
+			<mat-slide-toggle  formControlName="slider" (change)="onSlideChange($event)" aria-label="Subscribe" color="primary"></mat-slide-toggle>
 			<span> Subscribe to our news letter</span>
 		</div>
 
 		<mat-dialog-actions>
 			<div id="ButtonsWrap" class="mb-3">
 				<button mat-raised-button color="basic" mat-dialog-close>Cancel</button>
-				<button mat-raised-button type="submit" class="mx-2 primaryButton">Sign Up</button>
+				<button mat-raised-button [disabled]="!this.registrationForm.valid" type="submit" class="mx-2 primaryButton">Sign Up</button>
 			</div>
 		</mat-dialog-actions>
 		<hr>

@@ -31,12 +31,12 @@ export class UserregistrationDialogComponent implements OnInit {
   ngOnInit() {
     this.registrationForm = this.fb.group({
       email: ['', [Validators.required, Validators.email,
-      Validators.minLength(8)]],
+      ]],
       password: ['', [Validators.required,
       Validators.minLength(8),
       Validators.maxLength(20),
       Validators.pattern('(?!^[0-9 ]*$)(?!^[a-zA-Z ]*$)^([a-zA-Z0-9 ]{8,20})$')]],
-      confirmpassword: ['', [Validators.required]],
+      confirmpassword: ['', [Validators.required]]
     }, {
       validator: this.matchservice.MustMatch('password', 'confirmpassword')
     });
@@ -44,22 +44,19 @@ export class UserregistrationDialogComponent implements OnInit {
   }
 
   getErrorMessage() {
-    return this.email.hasError('required') ? 'Your email address required' :
-		this.email.hasError('email') ? 'Please enter a valid email' : 
-		this.email.hasError('minLength') ? 'At least 5 characters required' :
-		this.email.hasError('maxlength') ? 'No more than 20 characters required' :
-		'';
+    return this.email.hasError('required') ? 'Please enter a value' :
+      this.email.hasError('email') ? 'Not a valid email' :''
   }
 
   getErrorMessage2() {
-    return this.password.hasError('required') ? 'Please set your password' :
+    return this.password.hasError('required') ? 'Please enter a value' :
       this.password.hasError('minlength') ? 'Please enter at least 8 characters' :
-      this.password.hasError('maxlength') ? 'Please enter no more than 20 characters' :
-      this.password.hasError('pattern') ? 'Please use combination of letters and characters' : ''
+        this.password.hasError('maxlength') ? 'Please enter no more than 20 characters' :
+          this.password.hasError('pattern') ? 'Please use combination of letters and characters' : ''
   }
 
   getErrorMessage3() {
-    return this.confirmpassword.hasError('required') ? 'Please re-enter your password' : this.confirmpassword.hasError('notSame') ? 'Password does not match' : ''
+    return this.confirmpassword.hasError('required') ? 'Please enter a value' : this.confirmpassword.hasError('notSame') ? 'Password does not match' : ''
   }
 
   loginDialog() {
@@ -71,9 +68,6 @@ export class UserregistrationDialogComponent implements OnInit {
   get password() { return this.registrationForm.get('password') };
   get confirmpassword() { return this.registrationForm.get('confirmpassword') };
 
-  update() {
-    this.signupFailed = false;
-  }
 
   onSubmit() {
     let user = {
@@ -84,13 +78,22 @@ export class UserregistrationDialogComponent implements OnInit {
     console.log(user);
     this.productservice.register(user).subscribe(
       res => {
-        console.log(res);
-        this.dialogRef.close();
+        console.log(res)
+        this.dialogRef.close()
       },
       err => {
-        console.log(err);
-        this.signupFailed = true;
-        this.errorMessage = "Sign up failed.";
+        if(err.hasOwnProperty('error')){
+          console.log("hahaha")
+          if(err.error.hasOwnProperty('errorMessage')){
+            this.errorMessage=err.error.errorMessage
+          }
+        }else{
+          this.errorMessage = "Sign up failed, Internal Server Error"
+        }
+        
+        console.log(err)
+        this.signupFailed = true
+        
       }
     );
   }
@@ -100,6 +103,9 @@ export class UserregistrationDialogComponent implements OnInit {
     } else {
       this.subscribe = 0;
     }
-    // console.log(this.subscribe)
   }
+  update(){
+    console.log(this.registrationForm)
+  }
+  
 }
