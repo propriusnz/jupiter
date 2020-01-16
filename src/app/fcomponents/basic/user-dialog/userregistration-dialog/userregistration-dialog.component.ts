@@ -104,8 +104,5 @@ export class UserregistrationDialogComponent implements OnInit {
       this.subscribe = 0;
     }
   }
-  update(){
-    console.log(this.registrationForm)
-  }
   
 }
