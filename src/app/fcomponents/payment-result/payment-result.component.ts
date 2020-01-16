@@ -8,6 +8,7 @@ import { ProductService } from '../../service/product.service';
 })
 export class PaymentResultComponent implements OnInit {
   href:string=""
+  paymentStatus="Your payment is successful"
   constructor(
     private router:Router,
     private productService: ProductService

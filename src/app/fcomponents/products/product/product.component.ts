@@ -27,7 +27,7 @@ export class ProductComponent implements OnInit {
   isLoading = true;
   rightCarouselControlPosition: number;
   baseImageLink = environment.baseLink;
-  minDate_start:Date;
+  minDate_start: Date;
   maxDate_start: Date;
   minDate_return: Date;
   maxDate_return: Date;
@@ -67,17 +67,13 @@ export class ProductComponent implements OnInit {
 
     this.productId = this.route.snapshot.params['id'];
     setTheme('bs4');
-    var offset2 =new Date().getTimezoneOffset()* 60 * 1000;
-    var nowDate2 = new Date().getTime();
-    this.minDate_start=new Date(nowDate2 + offset2);
+    let offset2 = new Date().getTimezoneOffset() * 60 * 1000;
+    let nowDate2 = new Date().getTime();
+    this.minDate_start = new Date(nowDate2 + offset2);
     this.maxDate_start = new Date();
-    this.minDate_start.setDate(this.minDate_start.getDate());
-    this.maxDate_start.setDate(this.maxDate_start.getDate() + 90);
+    this.maxDate_start.setDate(this.minDate_start.getDate() + 90);
   }
   ngOnInit() {
-    console.log(this.minDate_start)
-    console.log(new Date())
-    console.log(this.maxDate_start)
     this.cartForm = this.formBuilder.group({
       cartItems: this.formBuilder.array([]),
     });
@@ -149,7 +145,7 @@ export class ProductComponent implements OnInit {
     } else {
       localStorage.setItem('productTimetable', JSON.stringify(this.productTimetable));
     }
-    
+
     // localStorage.setItem('userId', 'aaa ')
   }
   // add product into a list
@@ -197,19 +193,20 @@ export class ProductComponent implements OnInit {
   }
   // add cartList into localStorage
   addToCart(list) {
+    console.log(list)
     for (let i = 0; i < this.prodDetailIdlist.length; i++) {
       let neworder = {
-        prodDetailId: this.prodDetailIdlist[i].proddetailid,
+        prodDetailId: this.prodDetailIdlist[i].prodDetailid,
         beginDate: this.datetoYMD(this.startMoment.toDate()),
         endDate: this.datetoYMD(this.returnMoment.toDate()),
         quantity: this.prodDetailIdlist[i].quantity
       }
       if (!this.tmpDetailID.has(this.prodDetailIdlist[i].proddetailid)) {
-        this.tmpDetailID.set(this.prodDetailIdlist[i].proddetailid, neworder)
+        this.tmpDetailID.set(this.prodDetailIdlist[i].prodDetailid, neworder)
       } else {
-        this.tmpDetailID.get(this.prodDetailIdlist[i].proddetailid).quantity = neworder.quantity
-        this.tmpDetailID.get(this.prodDetailIdlist[i].proddetailid).beginDate= neworder.beginDate
-        this.tmpDetailID.get(this.prodDetailIdlist[i].proddetailid).endDate= neworder.endDate
+        this.tmpDetailID.get(this.prodDetailIdlist[i].prodDetailid).quantity = neworder.quantity
+        this.tmpDetailID.get(this.prodDetailIdlist[i].prodDetailid).beginDate = neworder.beginDate
+        this.tmpDetailID.get(this.prodDetailIdlist[i].prodDetailid).endDate = neworder.endDate
       }
     }
     this.isStockAvailable = true;
@@ -230,8 +227,8 @@ export class ProductComponent implements OnInit {
           this.tmpProdID.set(item.ProdId, neworder)
         } else {
           this.tmpProdID.get(item.ProdId).quantity = neworder.quantity
-          this.tmpProdID.get(item.ProdId).beginDate= neworder.beginDate
-          this.tmpProdID.get(item.ProdId).endDate= neworder.endDate
+          this.tmpProdID.get(item.ProdId).beginDate = neworder.beginDate
+          this.tmpProdID.get(item.ProdId).endDate = neworder.endDate
         }
       }
       // if cartList if not empty
@@ -263,13 +260,13 @@ export class ProductComponent implements OnInit {
       if (this.tmpDetailID.get(item.prodDetailId) != null || this.tmpProdID.get(item.prodId) != null) {
         if (item.hasOwnProperty('prodDetailId')) {
           item.quantity = this.tmpDetailID.get(item.prodDetailId).quantity
-          item.beginDate= this.tmpDetailID.get(item.prodDetailId).beginDate
-          item.endDate= this.tmpDetailID.get(item.prodDetailId).endDate
+          item.beginDate = this.tmpDetailID.get(item.prodDetailId).beginDate
+          item.endDate = this.tmpDetailID.get(item.prodDetailId).endDate
           this.tmpDetailID.delete(item.prodDetailId)
         } else if (!item.hasOwnProperty('prodDetailId')) {
           item.quantity = this.tmpProdID.get(item.prodId).quantity
-          item.beginDate= this.tmpProdID.get(item.prodId).beginDate
-          item.endDate= this.tmpProdID.get(item.prodId).endDate
+          item.beginDate = this.tmpProdID.get(item.prodId).beginDate
+          item.endDate = this.tmpProdID.get(item.prodId).endDate
           this.tmpProdID.delete(item.prodId)
         }
       }
@@ -325,11 +322,12 @@ export class ProductComponent implements OnInit {
   addQuantity(proddetail) {
     let prodId = proddetail['value'].Id
     let quantityvalue = proddetail['value'].Quantity
+    console.log(proddetail)
     if (!this.map.has(prodId) && proddetail.valid && quantityvalue != 0) {
       let neworder = {
         id: prodId,
         quantity: quantityvalue,
-        beginDate: this.datetoYMD(this.minDate_start)
+        beginDate: this.minDate_start
       }
       this.map.set(prodId, neworder)
     } else if (this.map.has(prodId) && quantityvalue != 0 && quantityvalue <= proddetail['value'].AvailableStock) {
@@ -361,12 +359,13 @@ export class ProductComponent implements OnInit {
     let current = iterable.next().value
     while (current != null) {
       let productHiringDetail = {
-        proddetailid: current.id,
+        prodDetailid: current.id,
         quantity: current.quantity,
-        beginDate: current.begindate
+        beginDate: current.beginDate
       }
       hiringdetail.push(productHiringDetail)
       current = iterable.next().value
+      console.log(productHiringDetail.beginDate)
     }
     this.prodDetailIdlist = hiringdetail
     console.log(this.prodDetailIdlist)
@@ -422,11 +421,12 @@ export class ProductComponent implements OnInit {
       this.dateReturnControl = true;
     }
     let productHiringDetail = {
-      prodid: proddetail.prodId,
+      prodId: proddetail.prodId,
       quantity: this.quantity,
       beginDate: this.datetoYMD(this.minDate_start)
     }
     hiringdetail.push(productHiringDetail)
+    console.log(hiringdetail)
     if (this.quantity != 0) {
       this.productService.calculateTime(hiringdetail).subscribe(
         res => {
