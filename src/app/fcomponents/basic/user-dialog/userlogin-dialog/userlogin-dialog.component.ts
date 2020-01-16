@@ -96,9 +96,9 @@ export class UserloginDialogComponent implements OnInit {
 		location.reload();
       },
       err => {
-        console.log(err)
-        this.loggedinfailed = true
-        this.errorMessage = "Incorrect Password or Email"
+        console.log(err);
+        this.loggedinfailed = true;
+        this.errorMessage = "Incorrect Password or Email";
       }
     );
   }

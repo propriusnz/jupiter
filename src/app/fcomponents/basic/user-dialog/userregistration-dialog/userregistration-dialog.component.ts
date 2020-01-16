@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DataService } from '../../../../service/data.service'
 import { ProductService } from '../../../../service/product.service';
 import { MatchService } from 'src/app/service/match.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-userregistration-dialog',
@@ -25,7 +26,8 @@ export class UserregistrationDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<UserregistrationDialogComponent>,
     public dialog: MatDialog,
     private productservice: ProductService,
-    private matchservice: MatchService
+	private matchservice: MatchService,
+	private router: Router
   ) { }
 
   ngOnInit() {
@@ -78,8 +80,9 @@ export class UserregistrationDialogComponent implements OnInit {
     console.log(user);
     this.productservice.register(user).subscribe(
       res => {
-        console.log(res)
-        this.dialogRef.close()
+        console.log(res);
+		this.dialogRef.close();
+		this.redirect();
       },
       err => {
         if(err.hasOwnProperty('error')){
@@ -104,5 +107,8 @@ export class UserregistrationDialogComponent implements OnInit {
       this.subscribe = 0;
     }
   }
-  
+
+  redirect() {
+	this.router.navigate(['userDashboard'])
+  }
 }

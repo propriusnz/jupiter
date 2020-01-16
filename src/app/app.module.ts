@@ -160,6 +160,8 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatIconModule,
     MatTabsModule,
+	MatSlideToggleModule,
+    BrowserAnimationsModule,
     MatSlideToggleModule,
     MatMenuModule,
     MatRadioModule,
