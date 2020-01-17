@@ -20,10 +20,10 @@ export class ShoppingUserinfoComponent implements OnInit {
   buttonError = false
   userId: number
   districtSelectControl = false
-  districtError=false
+  districtError = false
   districtSelected: number
-  totalPrice=0
-  bondFee=150
+  totalPrice = 0
+  bondFee = 150
   userInfo = {
     FirstName: '',
     LastName: '',
@@ -36,8 +36,8 @@ export class ShoppingUserinfoComponent implements OnInit {
     District: '',
     isPickup: ''
   };
-  deliveryFee:number
-  districtName=''
+  deliveryFee: number
+  districtName = ''
   minDate: Date
   @Output() isPickup = new EventEmitter();
   @Output() district = new EventEmitter();
@@ -58,7 +58,7 @@ export class ShoppingUserinfoComponent implements OnInit {
     );
     let offset2 = new Date().getTimezoneOffset() * 60 * 1000;
     let nowDate2 = new Date().getTime();
-    this.minDate = new Date(nowDate2 + offset2+13*60*60*1000);
+    this.minDate = new Date(nowDate2 + offset2 + 13 * 60 * 60 * 1000);
   }
 
   ngOnInit() {
@@ -68,14 +68,18 @@ export class ShoppingUserinfoComponent implements OnInit {
         res => {
           console.log(res)
           this.userInfo.Email = res['data'][0].email
-          if (res['data'].length != 0) {
-            if (res['data'].hasOwnProperty('firstName')) {
+          let info = res['data'][0].userInfo//user information
+          if (info.length == 1) {
+            if (info[0].hasOwnProperty('firstName')) {
               this.userInfo.FirstName = res['data'][0].userInfo[0].firstName
-            } else if (res['data'].hasOwnProperty('lastName')) {
+            }
+            if (info[0].hasOwnProperty('lastName')) {
               this.userInfo.LastName = res['data'][0].userInfo[0].lastName
-            } else if (res['data'].hasOwnProperty('phoneNumber')) {
+            }
+            if (info[0].hasOwnProperty('phoneNumber')) {
               this.userInfo.PhoneNum = res['data'][0].userInfo[0].phoneNumber
-            } else if (res['data'].hasOwnProperty('company')) {
+            }
+            if (info[0].hasOwnProperty('company')) {
               this.userInfo.company = res['data'][0].userInfo[0].company
             }
           }
@@ -89,13 +93,13 @@ export class ShoppingUserinfoComponent implements OnInit {
   onSubmit({ valid }: { valid: boolean }) {
     if (this.userInfo.isPickup != "1" && this.userInfo.isPickup != "0") {
       this.buttonError = true
-    }else{
-      this.buttonError=false
+    } else {
+      this.buttonError = false
     }
-    if(this.districtSelected==null){
-      this.districtError=true
-    }else{
-      this.districtError=false
+    if (this.districtSelected == null) {
+      this.districtError = true
+    } else {
+      this.districtError = false
     }
     if (!valid || this.districtError || this.buttonError) {
       this.feedback_message = 'Please check all inputs and fill up the form';
@@ -114,33 +118,33 @@ export class ShoppingUserinfoComponent implements OnInit {
       this.submitCart(post);
     }
   }
-  
-  
+
+
   calculateDeliveryFee() {
-    if(this.districtSelected==1){
-      this.deliveryFee=20
-      this.districtName="NorthShoreCity"
-    }else if(this.districtSelected==2){
-      this.deliveryFee=30
-      this.districtName="AucklandCity"
-    }else if(this.districtSelected==3){
-      this.deliveryFee=50
-      this.districtName="ManukauCity"
-    }else if(this.districtSelected==4){
-      this.deliveryFee=40
-      this.districtName="WaitakereCity"
+    if (this.districtSelected == 1) {
+      this.deliveryFee = 20
+      this.districtName = "NorthShoreCity"
+    } else if (this.districtSelected == 2) {
+      this.deliveryFee = 30
+      this.districtName = "AucklandCity"
+    } else if (this.districtSelected == 3) {
+      this.deliveryFee = 50
+      this.districtName = "ManukauCity"
+    } else if (this.districtSelected == 4) {
+      this.deliveryFee = 40
+      this.districtName = "WaitakereCity"
     }
   }
   calculateDepositFee() {
-    if('totalPrice' in localStorage){
-    this.totalPrice=JSON.parse(localStorage.getItem('totalPrice'));
+    if ('totalPrice' in localStorage) {
+      this.totalPrice = JSON.parse(localStorage.getItem('totalPrice'));
     }
-    if(this.totalPrice<=250){
-      this.bondFee=150
-    }else if(this.totalPrice<=750 && this.totalPrice>250){
-      this.bondFee=300
-    }else if(this.totalPrice>750){
-      this.bondFee=500
+    if (this.totalPrice <= 250) {
+      this.bondFee = 150
+    } else if (this.totalPrice <= 750 && this.totalPrice > 250) {
+      this.bondFee = 300
+    } else if (this.totalPrice > 750) {
+      this.bondFee = 500
     }
 
   }
@@ -149,7 +153,7 @@ export class ShoppingUserinfoComponent implements OnInit {
     const data = JSON.parse(localStorage.getItem('cartList') || '[]');
     delete data.availableStock;
     delete data.url;
-    const timetable=JSON.parse(localStorage.getItem('productTimetable') || '[]');
+    const timetable = JSON.parse(localStorage.getItem('productTimetable') || '[]');
     // combine shopping cart data
     const cartData = {
       location: `${this.userInfo.streetAddress}, ${this.userInfo.city}`,
@@ -164,7 +168,7 @@ export class ShoppingUserinfoComponent implements OnInit {
     const cartContact = {
       CartModel: cartData,
       ContactModel: post,
-      ProductTimeTableModel:timetable
+      ProductTimeTableModel: timetable
     };
     console.log(cartContact)
     this.addCart(cartContact);
@@ -198,14 +202,14 @@ export class ShoppingUserinfoComponent implements OnInit {
       this.isPickup.emit(this.userInfo.isPickup)
     }
     this.buttonError = false
-    this.districtError=false
+    this.districtError = false
   }
   selectionChange(input) {
     this.district.emit(input.value)
-    this.districtSelected=input.value
-    this.districtError=false
+    this.districtSelected = input.value
+    this.districtError = false
   }
   // clear the shopping cart stored in local storage
- 
+
 
 }
