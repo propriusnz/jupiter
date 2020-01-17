@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ProductService } from '../../service/product.service';
-import { environment } from '../../../environments/environment.prod';
+import { Component, OnInit, ViewChild, ElementRef, Input, SimpleChanges } from '@angular/core';
+import { ProductService } from '../../../service/product.service'
+import { environment } from '../../../../environments/environment.prod';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import * as moment from 'moment';
 @Component({
@@ -32,6 +32,10 @@ export class ShoppingCartComponent implements OnInit {
   returnMoment: any;
   unavailableDates: any
   mySet = new Set();
+  pickupMessage:boolean
+  deliveryFee:number
+  @Input() isPickup=''
+  @Input() district=''
   @ViewChild('quantityInput', { static: false }) quantityInput: ElementRef;
   constructor(
     private productService: ProductService
@@ -44,9 +48,22 @@ export class ShoppingCartComponent implements OnInit {
     this.minDate_start.setDate(this.minDate_start.getDate());
     this.maxDate_start.setDate(this.maxDate_start.getDate() + 90);
   }
-
+  ngOnChanges(changes:SimpleChanges) {
+    console.log(changes);
+    const pickupValue=changes['isPickup'];
+    if(pickupValue!=null){
+    if(pickupValue.currentValue=="1"){
+      this.pickupMessage=true;
+    }else{
+      this.pickupMessage=false;
+    }
+    
+  }
+  }
   ngOnInit() {
     // get the current shopping cart
+    this.pickupMessage=true
+    console.log(this.pickupMessage)
     this.productService.getShoppingCartStatus().subscribe(
       status => {
         this.isShoppingCartValid = status.isValid;
@@ -123,6 +140,8 @@ export class ShoppingCartComponent implements OnInit {
     }
   }
   onStartChange(value) {
+    console.log(this.isPickup)
+    console.log(this.district)
     this.dateStartInput = value;
     this.dateReturnControl = false;
     this.minDate_return = value;
