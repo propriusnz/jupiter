@@ -11,10 +11,6 @@ export class DataService {
   
   private messagesignupSource=new BehaviorSubject<string>('');
   currentsignupmessage=this.messagesignupSource.asObservable();
-
-  //Toggle Login element   
-  private previousState = new BehaviorSubject<string>('0');
-  newState = this.previousState.asObservable();
   
   constructor(private http: HttpClient) { }
 
@@ -23,11 +19,6 @@ export class DataService {
   }
   changesignupMessage(message:string){
     this.messagesignupSource.next(message)
-  }
-
-  //Toggle login element
-  changeElementStatus(state: string) {
-	this.previousState.next(state);
   }
 
 //   // Get User Profile

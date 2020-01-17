@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { MatDialog } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserloginDialogComponent } from '../user-dialog/userlogin-dialog/userlogin-dialog.component';
 import { UserregistrationDialogComponent } from '../user-dialog/userregistration-dialog/userregistration-dialog.component'
 import { DataService } from '../../../service/data.service'
@@ -20,12 +21,16 @@ export class NavbarComponent implements OnInit {
   loginmessage: string;
   signupmessage: string;
   userLoginControl: string;
+  loggedIn: boolean;
+  snackBarmessage = 'Log in successful, welcome!';
+  snackBaraction = 'x';
 
   constructor(
         @Inject(PLATFORM_ID) private platformId,
         private productService: ProductService,
         private data: DataService,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        private _LoggedIn_snackBar: MatSnackBar
     ) {
     if (isPlatformBrowser(this.platformId)) {
       this.isBrowser = true;
@@ -39,12 +44,12 @@ export class NavbarComponent implements OnInit {
       });
     }
     this.getCategories();
-	this.getGalleryTypes();
-	
-	if (localStorage.getItem("userToken")!== null) {
-		this.userLoginControl = JSON.parse(localStorage.getItem('userLoginControl'));
-		this.data.newState.subscribe(newState => this.userLoginControl = newState);
-	} 
+    this.getGalleryTypes();
+    this.ifLoggedIn();
+
+    if(this.loggedIn == true) {
+        this.openSnackBar(this.snackBarmessage, this.snackBaraction);
+    }
   }
   // get all the categories and show on navbar
   getCategories(): void {
@@ -97,7 +102,25 @@ export class NavbarComponent implements OnInit {
   }
   logout(){
 	localStorage.clear();
-	sessionStorage.clear();
+    sessionStorage.clear();
+    alert('You are now loged out!');
 	location.reload();
+  }
+  ifLoggedIn() {
+      if (localStorage.getItem('userToken')) {
+          this.loggedIn = true;
+          console.log('true');
+      } else {
+          this.loggedIn = false;
+          console.log('false');
+      }
+  }
+
+  // Log in successful snackbar
+  openSnackBar(message: string, action: string) {
+    this._LoggedIn_snackBar.open(message, action, {
+      duration: 3500,
+      verticalPosition: 'top'
+    });
   }
 }

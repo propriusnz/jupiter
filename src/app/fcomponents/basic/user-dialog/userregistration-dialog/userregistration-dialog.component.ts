@@ -81,16 +81,6 @@ export class UserregistrationDialogComponent implements OnInit {
     this.productservice.register(user).subscribe(
       res => {
         console.log(res);
-<<<<<<< HEAD
-        this.dialogRef.close();
-        this.redirect();
-      },
-      err => {
-        if (err.hasOwnProperty('error')) {
-          console.log("hahaha")
-          if (err.error.hasOwnProperty('errorMessage')) {
-            this.errorMessage = err.error.errorMessage
-=======
 		this.dialogRef.close();
 		// this.redirect();
       },
@@ -98,20 +88,12 @@ export class UserregistrationDialogComponent implements OnInit {
         if(err.hasOwnProperty('error')){
           if(err.error.hasOwnProperty('errorMessage')){
             this.errorMessage=err.error.errorMessage
->>>>>>> 6c92129d1bd7925ad9154407cdad9d9c93a5a3d2
           }
         } else {
           this.errorMessage = "Sign up failed, Internal Server Error"
         }
-<<<<<<< HEAD
-
-        console.log(err)
-        this.signupFailed = true
-
-=======
         console.log(err);
         this.signupFailed = true;
->>>>>>> 6c92129d1bd7925ad9154407cdad9d9c93a5a3d2
       }
     );
   }

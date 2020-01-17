@@ -259,10 +259,10 @@
         </div>
       </li>
 
-	  <span class="navspace"></span>
+	  <span *ngIf="loggedIn == false" class="navspace"></span>
 	  
       <!--! Customer Log in -->
-      <li *ngIf="!usertoken" class="nav-item">
+      <li *ngIf="loggedIn == false" class="nav-item">
         <a *ngIf="isBrowser==true" class="nav-link s2bold" (click)="loginDialog()">
           <h1 class="s2bold">Log in</h1>
         </a>
@@ -270,10 +270,10 @@
           <h1 class="s2bold">Log in</h1>
         </a>
       </li>
-	  <span class="navspace"></span>
+	  <span *ngIf="loggedIn == false" class="navspace"></span>
 	  
       <!--! Sign up -->
-      <li class="nav-item">
+      <li *ngIf="loggedIn == false" class="nav-item">
         <a *ngIf="isBrowser==true" class="nav-link s2bold" (click)="signupDialog()">
           <h1 class="s2bold">Sign up</h1>
         </a>
@@ -281,31 +281,33 @@
           <h1 class="s2bold">Sign up</h1>
         </a>
       </li>
-	  <span class="navspace"></span>
+	  <span *ngIf="loggedIn == true" class="navspace"></span>
 	  
       <!--! User DashBoard-->
-      <li class="nav-item">
+      <li *ngIf="loggedIn == true" class="nav-item">
         <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/userDashboard' routerLinkActive="active">
-          <h1 class="s2bold">User Dashboard</h1>
+          <h1 class="s2bold">Dashboard</h1>
         </a>
         <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/userDashboard'>
-          <h1 class="s2bold">User Dashboard</h1>
+          <h1 class="s2bold">Dashboard</h1>
         </a>
       </li>
-	  <!-- <span class="navspace"></span> -->
 
-	  <span class="navspace"></span>
-	  <li class="nav-item">
+      <!-- Log Out -->
+	  <span *ngIf="loggedIn == true" class="navspace"></span>
+	  <li *ngIf="loggedIn == true" class="nav-item">
 		  <a class="nav-link s2bold" (click)="logout()">
 			  <h1 class="s2bold">Log out</h1>
 		  </a>
 	  </li>
-	  
+      <span class="navspace"></span>
+      
       <!--!Shopping Cart-->
-      <li class="nav-item ml-lg-4 pl-md-1">
+      <li class="nav-item pl-md-1">
         <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/checkout' routerLinkActive="active">
           <h1 class="s2bold">
               <i class="fas fa-shopping-cart" title="View Shopping Cart"></i>
+              Shopping Cart
           </h1>
         </a>
         <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/checkout'>

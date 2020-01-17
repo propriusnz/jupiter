@@ -29,7 +29,7 @@ export class UserloginDialogComponent implements OnInit {
 	  private fb: FormBuilder, 
 	  public dialogRef: MatDialogRef<UserloginDialogComponent>, 
 	  public dialog: MatDialog, 
-	  private productservice: ProductService
+      private productservice: ProductService,
   ) { }
 
   ngOnInit() {
@@ -90,10 +90,8 @@ export class UserloginDialogComponent implements OnInit {
         console.log(res);
 		localStorage.setItem('userId', JSON.stringify(res['data'].userId));
 		localStorage.setItem('userToken', JSON.stringify(res['data'].token));
-		localStorage.setItem('userLoginControl', JSON.stringify(1));
-		this.data.changeElementStatus('1');
-		this.dialogRef.close();
-		location.reload();
+        this.dialogRef.close();
+        location.reload();
       },
       err => {
         console.log(err);
