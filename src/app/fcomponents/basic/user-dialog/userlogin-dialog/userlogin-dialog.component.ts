@@ -5,6 +5,7 @@ import { ForgotPasswordComponent } from '../forgot-password/forgot-password.comp
 import { DataService } from '../../../../service/data.service'
 import { ProductService } from 'src/app/service/product.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-userlogin-dialog',
@@ -22,30 +23,34 @@ export class UserloginDialogComponent implements OnInit {
   };
   loggedinfailed = false;
   errorMessage = '';
+  snackBarmessage = 'Log in successful, welcome!';
+  snackBaraction = 'x';
+
   public router: Router;
 
   constructor(
-	  private data: DataService, 
-	  private fb: FormBuilder, 
-	  public dialogRef: MatDialogRef<UserloginDialogComponent>, 
-	  public dialog: MatDialog, 
-      private productservice: ProductService,
+    private data: DataService,
+    private fb: FormBuilder,
+    public dialogRef: MatDialogRef<UserloginDialogComponent>,
+    public dialog: MatDialog,
+    private productservice: ProductService,
+    private _LoggedIn_snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
     this.userLoginForm = this.fb.group({
       email: ['', [Validators.required,
-				   Validators.email,
-				   ]],
+      Validators.email,
+      ]],
       password: ['', [Validators.required,
-      				  Validators.minLength(5),
-      				  Validators.maxLength(30)]]
+      Validators.minLength(5),
+      Validators.maxLength(30)]]
     })
-	this.data.currentsignupmessage.subscribe(currentsignupmessage => this.message = currentsignupmessage);
+    this.data.currentsignupmessage.subscribe(currentsignupmessage => this.message = currentsignupmessage);
   }
 
   getEmailErrorMessage() {
-	return this.email.hasError('required') ? 'Please enter your email' : this.email.hasError('email') ? 'Please enter a valid email' : '';
+    return this.email.hasError('required') ? 'Please enter your email' : this.email.hasError('email') ? 'Please enter a valid email' : '';
   }
 
   getPasswordErrorMessage() {
@@ -74,11 +79,11 @@ export class UserloginDialogComponent implements OnInit {
   get password() {
     return this.userLoginForm.get('password');
   }
-  
-  update(){
-    this.loggedinfailed=false;
+
+  update() {
+    this.loggedinfailed = false;
   }
-  
+
   onSubmit() {
     this.user = {
       Email: this.userLoginForm.value.email,
@@ -88,10 +93,12 @@ export class UserloginDialogComponent implements OnInit {
     this.productservice.userlogin(this.user).subscribe(
       res => {
         console.log(res);
-		localStorage.setItem('userId', JSON.stringify(res['data'].userId));
-		localStorage.setItem('userToken', JSON.stringify(res['data'].token));
+        localStorage.setItem('userId', JSON.stringify(res['data'].userId));
+        localStorage.setItem('userToken', JSON.stringify(res['data'].token));
         this.dialogRef.close();
+        this.openSnackBar(this.snackBarmessage, this.snackBaraction);
         location.reload();
+        
       },
       err => {
         console.log(err);
@@ -99,5 +106,11 @@ export class UserloginDialogComponent implements OnInit {
         this.errorMessage = "Incorrect Password or Email";
       }
     );
+  }
+  openSnackBar(message: string, action: string) {
+    this._LoggedIn_snackBar.open(message, action, {
+      duration: 5000,
+      verticalPosition: 'top'
+    });
   }
 }

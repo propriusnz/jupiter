@@ -22,15 +22,12 @@ export class NavbarComponent implements OnInit {
   signupmessage: string;
   userLoginControl: string;
   loggedIn: boolean;
-  snackBarmessage = 'Log in successful, welcome!';
-  snackBaraction = 'x';
 
   constructor(
         @Inject(PLATFORM_ID) private platformId,
         private productService: ProductService,
         private data: DataService,
         public dialog: MatDialog,
-        private _LoggedIn_snackBar: MatSnackBar
     ) {
     if (isPlatformBrowser(this.platformId)) {
       this.isBrowser = true;
@@ -46,10 +43,6 @@ export class NavbarComponent implements OnInit {
     this.getCategories();
     this.getGalleryTypes();
     this.ifLoggedIn();
-
-    if(this.loggedIn == true) {
-        this.openSnackBar(this.snackBarmessage, this.snackBaraction);
-    }
   }
   // get all the categories and show on navbar
   getCategories(): void {
@@ -103,7 +96,7 @@ export class NavbarComponent implements OnInit {
   logout(){
 	localStorage.clear();
     sessionStorage.clear();
-    alert('You are now loged out!');
+    alert('You are now logged out!');
 	location.reload();
   }
   ifLoggedIn() {
@@ -117,10 +110,5 @@ export class NavbarComponent implements OnInit {
   }
 
   // Log in successful snackbar
-  openSnackBar(message: string, action: string) {
-    this._LoggedIn_snackBar.open(message, action, {
-      duration: 3500,
-      verticalPosition: 'top'
-    });
-  }
+  
 }
