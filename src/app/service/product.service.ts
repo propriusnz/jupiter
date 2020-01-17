@@ -170,10 +170,10 @@ export class ProductService {
   login(adminModel) {
     return this.http.post(this.baseUrl + '/admins', adminModel);
   }
-  getUser() {
-    return this.http.get(this.baseUrl + '/admins',
-      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
-  }
+//   getUser() {  //Admin account
+//     return this.http.get(this.baseUrl + '/admins',
+//       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
+//   }
 
 
   // !user
@@ -194,6 +194,9 @@ export class ProductService {
   }
   changePassword(userId) {
 	return this.http.put(this.baseUrl + '/ChangePassword/' + userId, userId);
+  }
+  getUserList() {
+	return this.http.get(this.baseUrl + '/User', { headers: new HttpHeaders({ 'Authorization': 'Bearer' }) });
   }
 
 

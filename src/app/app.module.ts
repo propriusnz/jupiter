@@ -63,6 +63,7 @@ import { UserProfileComponent } from './fcomponents/user-dashboard/user-profile/
 import { OrderHistoryComponent } from './fcomponents/user-dashboard/order-history/order-history.component';
 import { ManagePasswordComponent } from './fcomponents/user-dashboard/manage-password/manage-password.component';
 import { PaymentResultComponent } from './fcomponents/payment-result/payment-result.component';
+import { AdminUserListComponent } from './fcomponents/admin/admin-user-list/admin-user-list.component';
 
 
 // All Routes follow
@@ -88,7 +89,8 @@ const appRoutes: Routes = [
       { path: 'adminProducts/:productTypeId', component: AdminProductsComponent },
       { path: 'adminCarts', component: AdminCartComponent },
       { path: 'adminGalleries', component: AdminGalleriesComponent },
-      { path: 'adminImages', component: AdminImagesComponent },
+	  { path: 'adminImages', component: AdminImagesComponent },
+	  { path: 'adminUserlist', component: AdminUserListComponent}
     ]
   },
   { path: 'login', component: AdminLoginComponent },
@@ -143,7 +145,8 @@ const appRoutes: Routes = [
     UserProfileComponent,
     OrderHistoryComponent,
     ManagePasswordComponent,
-    PaymentResultComponent
+    PaymentResultComponent,
+    AdminUserListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
