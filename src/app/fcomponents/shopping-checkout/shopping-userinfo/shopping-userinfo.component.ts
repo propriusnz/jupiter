@@ -174,10 +174,11 @@ export class ShoppingUserinfoComponent implements OnInit {
     this.isSendingEmail = true;
     this.productService.addCart(cartContact).subscribe(
       (res) => {
+        console.log(res)
         this.isSendingEmail = false;
         this.isSendSuccess = true;
         this.router.navigate(['/thankYou']);
-        this.cleanStorage();
+        localStorage.clear()
       },
       (error) => {
         this.isSendingEmail = false;
@@ -205,8 +206,6 @@ export class ShoppingUserinfoComponent implements OnInit {
     this.districtError=false
   }
   // clear the shopping cart stored in local storage
-  cleanStorage() {
-    localStorage.clear();
-  }
+ 
 
 }
