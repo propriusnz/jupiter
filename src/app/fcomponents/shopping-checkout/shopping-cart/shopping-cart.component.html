@@ -44,7 +44,7 @@
 </div>
 <div class="mb-2" *ngIf="!isShoppingCartValid && prodsInCart.length!=0" style="color:red">{{errorMessage}}</div>
 <div class="text-right" *ngIf="totalPrice!=0">
-  <div class="mb-1" *ngIf="!pickupMessage">Delivery Fee:</div>
+  <div class="mb-1" *ngIf="!pickupMessage">Delivery Fee: NZ $<span class="s2bold">{{deliveryFee}}</span></div>
   <div class="mb-1">Total Price: NZ $<span class="s2bold">{{totalPrice}}</span></div>
   <div class="mb-1" style="font-size:x-small;">(15% GST included)</div>
 </div>

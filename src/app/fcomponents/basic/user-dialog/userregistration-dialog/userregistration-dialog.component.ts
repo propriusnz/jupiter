@@ -26,8 +26,8 @@ export class UserregistrationDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<UserregistrationDialogComponent>,
     public dialog: MatDialog,
     private productservice: ProductService,
-	private matchservice: MatchService,
-	private router: Router
+    private matchservice: MatchService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -47,7 +47,7 @@ export class UserregistrationDialogComponent implements OnInit {
 
   getErrorMessage() {
     return this.email.hasError('required') ? 'Please enter a value' :
-      this.email.hasError('email') ? 'Not a valid email' :''
+      this.email.hasError('email') ? 'Not a valid email' : ''
   }
 
   getErrorMessage2() {
@@ -81,22 +81,22 @@ export class UserregistrationDialogComponent implements OnInit {
     this.productservice.register(user).subscribe(
       res => {
         console.log(res);
-		this.dialogRef.close();
-		this.redirect();
+        this.dialogRef.close();
+        this.redirect();
       },
       err => {
-        if(err.hasOwnProperty('error')){
+        if (err.hasOwnProperty('error')) {
           console.log("hahaha")
-          if(err.error.hasOwnProperty('errorMessage')){
-            this.errorMessage=err.error.errorMessage
+          if (err.error.hasOwnProperty('errorMessage')) {
+            this.errorMessage = err.error.errorMessage
           }
-        }else{
+        } else {
           this.errorMessage = "Sign up failed, Internal Server Error"
         }
-        
+
         console.log(err)
         this.signupFailed = true
-        
+
       }
     );
   }
@@ -109,6 +109,6 @@ export class UserregistrationDialogComponent implements OnInit {
   }
 
   redirect() {
-	this.router.navigate(['userDashboard'])
+    this.router.navigate(['userDashboard'])
   }
 }

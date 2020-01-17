@@ -31,6 +31,7 @@ export class ProductComponent implements OnInit {
   maxDate_start: Date;
   minDate_return: Date;
   maxDate_return: Date;
+  utcDate_start:Date
   dateStartControl = true;
   dateReturnControl = true;
   dateStartInput: any
@@ -49,6 +50,7 @@ export class ProductComponent implements OnInit {
   addToCartControl = true;
   prodDetailIdlist = []
   prodIdlist = []
+  
 
 
   @ViewChild('imageContainer', { static: false }) imageContainer: ElementRef;
@@ -69,7 +71,8 @@ export class ProductComponent implements OnInit {
     setTheme('bs4');
     let offset2 = new Date().getTimezoneOffset() * 60 * 1000;
     let nowDate2 = new Date().getTime();
-    this.minDate_start = new Date(nowDate2 + offset2);
+    this.utcDate_start=new Date(nowDate2+offset2)
+    this.minDate_start = new Date(nowDate2 + offset2+13*60*60*1000);
     this.maxDate_start = new Date();
     this.maxDate_start.setDate(this.minDate_start.getDate() + 90);
   }
@@ -361,11 +364,10 @@ export class ProductComponent implements OnInit {
       let productHiringDetail = {
         prodDetailid: current.id,
         quantity: current.quantity,
-        beginDate: current.beginDate
+        beginDate: this.utcDate_start
       }
       hiringdetail.push(productHiringDetail)
       current = iterable.next().value
-      console.log(productHiringDetail.beginDate)
     }
     this.prodDetailIdlist = hiringdetail
     console.log(this.prodDetailIdlist)

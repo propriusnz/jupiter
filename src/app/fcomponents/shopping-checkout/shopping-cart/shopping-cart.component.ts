@@ -22,6 +22,7 @@ export class ShoppingCartComponent implements OnInit {
   maxDate_start: Date;
   minDate_return: Date;
   maxDate_return: Date;
+  utcDate_start:Date
   dateStartControl = true;
   dateReturnControl = true;
   dateStartInput: any
@@ -32,9 +33,9 @@ export class ShoppingCartComponent implements OnInit {
   returnMoment: any;
   unavailableDates: any
   mySet = new Set();
-  pickupMessage:boolean
-  deliveryFee:number
-  @Input() isPickup=''
+  pickupMessage: boolean
+  deliveryFee=0
+  @Input() isPickup = ''
   @Input() district=''
   @ViewChild('quantityInput', { static: false }) quantityInput: ElementRef;
   constructor(
@@ -43,27 +44,43 @@ export class ShoppingCartComponent implements OnInit {
   ) {
     var offset2 = new Date().getTimezoneOffset() * 60 * 1000;
     var nowDate2 = new Date().getTime();
-    this.minDate_start = new Date(nowDate2 + offset2);
+    this.minDate_start = new Date(nowDate2 + offset2+13*60*60*1000);
     this.maxDate_start = new Date();
+    this.utcDate_start=new Date(nowDate2+offset2)
     this.minDate_start.setDate(this.minDate_start.getDate());
     this.maxDate_start.setDate(this.maxDate_start.getDate() + 90);
   }
-  ngOnChanges(changes:SimpleChanges) {
-    console.log(changes);
-    const pickupValue=changes['isPickup'];
-    if(pickupValue!=null){
-    if(pickupValue.currentValue=="1"){
-      this.pickupMessage=true;
-    }else{
-      this.pickupMessage=false;
+  ngOnChanges(changes: SimpleChanges) {
+    const pickupValue = changes['isPickup'];
+    const districtValue=changes['district']
+    if (pickupValue != null) {
+      if (pickupValue.currentValue == "1") {
+        this.pickupMessage = true;
+      } else {
+        this.pickupMessage = false;
+      }
+      this.totalPrice-=this.deliveryFee
+      this.deliveryFee=0
+      localStorage.setItem('totalPrice', JSON.stringify(this.totalPrice));
+    }
+    if(districtValue!=null){
+      if(districtValue.currentValue.localeCompare("1")==0){
+        this.deliveryFee=20
+      }else if(districtValue.currentValue.localeCompare("2")==0){
+        this.deliveryFee=30
+      }else if(districtValue.currentValue.localeCompare("3")==0){
+        this.deliveryFee=50
+      }else if(districtValue.currentValue.localeCompare("4")==0){
+        this.deliveryFee=40
+      }
+      this.totalPrice+=this.deliveryFee
+      localStorage.setItem('totalPrice', JSON.stringify(this.totalPrice));
     }
     
   }
-  }
   ngOnInit() {
     // get the current shopping cart
-    this.pickupMessage=true
-    console.log(this.pickupMessage)
+    this.pickupMessage = true
     this.productService.getShoppingCartStatus().subscribe(
       status => {
         this.isShoppingCartValid = status.isValid;
@@ -77,7 +94,7 @@ export class ShoppingCartComponent implements OnInit {
     if (this.prodsInCart == null || this.prodsInCart.length === 0) {
       this.productService.setShoppingCartStatus(false);
     }
-    if(this.prodsInCart.length>=1){
+    if (this.prodsInCart.length >= 1) {
       this.calculateTime()
     }
     // get the image of product
@@ -119,8 +136,8 @@ export class ShoppingCartComponent implements OnInit {
     });
   }
   checkTimeConflict() {
+    let control=false
     if (this.productTimetable.length >= 2) {
-      let control = false
       let tmpBeginDate = this.productTimetable[0].beginDate
       let tmpEndDate = this.productTimetable[0].endDate
       for (let i = 1; i <= this.productTimetable.length - 1; i++) {
@@ -134,19 +151,21 @@ export class ShoppingCartComponent implements OnInit {
           control = true
         }
       }
-      if (control) {
+      
+    }
+    if(this.productTimetable.length==1){
+      control=true
+    }
+    if (control) {
         this.productService.setShoppingCartStatus(true);
       }
-    }
   }
   onStartChange(value) {
-    console.log(this.isPickup)
-    console.log(this.district)
     this.dateStartInput = value;
     this.dateReturnControl = false;
     this.minDate_return = value;
-    this.productTimetable.forEach(item=>{
-      item.beginDate=this.datetoYMD(this.dateStartInput)
+    this.productTimetable.forEach(item => {
+      item.beginDate = this.datetoYMD(this.dateStartInput)
     })
     this.checkTimeConflict()
     for (let i = 0; i < this.disabledDates.length; i++) {
@@ -164,8 +183,8 @@ export class ShoppingCartComponent implements OnInit {
   }
   onReturnChange(value) {
     this.dateReturnInput = value;
-    this.productTimetable.forEach(item=>{
-      item.endDate=this.datetoYMD(this.dateReturnInput)
+    this.productTimetable.forEach(item => {
+      item.endDate = this.datetoYMD(this.dateReturnInput)
     })
     this.checkTimeConflict()
     localStorage.setItem('productTimetable', JSON.stringify(this.productTimetable))
@@ -180,18 +199,17 @@ export class ShoppingCartComponent implements OnInit {
         productHiringDetail = {
           prodid: item.prodId,
           quantity: item.quantity,
-          beginDate: this.minDate_start
+          beginDate: this.utcDate_start
         }
       } else if (item.hasOwnProperty('prodDetailId')) {
         productHiringDetail = {
           proddetailid: item.prodDetailId,
           quantity: item.quantity,
-          beginDate: this.minDate_start
+          beginDate: this.utcDate_start
         }
       }
       hiringdetail.push(productHiringDetail)
     })
-    console.log(hiringdetail)
     this.productService.calculateTime(hiringdetail).subscribe(
       res => {
         console.log(res)
@@ -240,4 +258,4 @@ export class ShoppingCartComponent implements OnInit {
     return '' + y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
   }
 
-  }
+}
