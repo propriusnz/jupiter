@@ -12,7 +12,7 @@ export class UserProfileComponent implements OnInit {
 	updateProfileForm: FormGroup;
 	profile: any;
 	userId: number;
-	subscribe: boolean;
+	subscribe: number;
 	firstname: string;
 	lastname: string;
 	email: string;
@@ -33,7 +33,7 @@ export class UserProfileComponent implements OnInit {
 	  this.productservice.getProfile(this.userId).subscribe(
 		  profile => {
 			console.log('Current logged in user：', profile);
-			  this.profile= profile;
+			  this.profile = profile;
 			//   console.log(this.profile['data'][0].email);
 			this.firstname = profile['data'][0]['userInfo'][0] ? profile['data'][0]['userInfo'][0].firstName: null;
 			this.lastname = profile['data'][0]['userInfo'][0] ? profile['data'][0]['userInfo'][0].lastName: null;
@@ -109,19 +109,20 @@ export class UserProfileComponent implements OnInit {
 
   onSlideChange(subscribe){
     if(subscribe.checked){
-      this.subscribe = true;
+      this.subscribe = 1;
     }else{
-      this.subscribe = false;
+      this.subscribe = 0;
     }
   }
   
   onSubmit() {
 	let user = {
+		UserId: this.userId,
 		FirstName: this.updateProfileForm.value.fname,
       	LastName: this.updateProfileForm.value.lname,
       	PhoneNumber: this.updateProfileForm.value.phone,
       	Company: this.updateProfileForm.value.company,
-    	IsSubscribe: this.subs
+    	IsSubscribe: this.subscribe
 	}
 	console.log('Updated user profile: ', user);
 	this.productservice.updateProfile(user,this.userId).subscribe(

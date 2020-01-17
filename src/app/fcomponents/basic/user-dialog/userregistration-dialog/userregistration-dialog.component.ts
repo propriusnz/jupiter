@@ -82,21 +82,18 @@ export class UserregistrationDialogComponent implements OnInit {
       res => {
         console.log(res);
 		this.dialogRef.close();
-		this.redirect();
+		// this.redirect();
       },
       err => {
         if(err.hasOwnProperty('error')){
-          console.log("hahaha")
           if(err.error.hasOwnProperty('errorMessage')){
             this.errorMessage=err.error.errorMessage
           }
         }else{
           this.errorMessage = "Sign up failed, Internal Server Error"
         }
-        
-        console.log(err)
-        this.signupFailed = true
-        
+        console.log(err);
+        this.signupFailed = true;
       }
     );
   }
