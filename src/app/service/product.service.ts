@@ -48,8 +48,9 @@ export class ProductService {
   calculateTime(hiringtime) {
     return this.http.post(this.baseUrl + '/ProductTime/CalculateTime/', hiringtime);
   }
-
-
+  checkIfAvailable(cartitems){
+    return this.http.post(this.baseUrl+'/ProductTime/CheckIfAvaliable/',cartitems)
+  }
   // !Gallery
   indexGallery() {
     return this.http.get(this.baseUrl + '/projects');
@@ -207,13 +208,13 @@ export class ProductService {
     return this.http.get(this.baseUrl + '/user/' + userId, { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + localStorage.getItem('userId') }) });
   }
   updateProfile(user,userId) {
-	return this.http.put(this.baseUrl + '/UserContactInfo/' + userId, user);
+	return this.http.put(this.baseUrl + '/UserContactInfo/' + userId, user,{ headers: new HttpHeaders({ 'Authorization': 'Bearer ' + localStorage.getItem('userId') }) });
   }
   changePassword(userId) {
-	return this.http.put(this.baseUrl + '/ChangePassword/' + userId, userId);
+	return this.http.put(this.baseUrl + '/ChangePassword/' + userId, userId,);
   }
   getUserList() {
-	return this.http.get(this.baseUrl + '/User', { headers: new HttpHeaders({ 'Authorization': 'Bearer' }) });
+	return this.http.get(this.baseUrl + '/User', { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   paymentResult(url) {
     return this.http.post(this.baseUrl + '/PxPay/ResponseOutput', url)
