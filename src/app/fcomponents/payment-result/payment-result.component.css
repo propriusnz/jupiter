@@ -6,9 +6,16 @@
 }
 .card-body {
     width: 100%;
+    color: green;
+    font-size:x-large;
+    padding-top: 100px;
+
 }
 .card-header {
     background-color: #c48f45;
     color: white;
     text-align: center;
+}
+#buttonsWrap{
+    margin-top:20px
 }

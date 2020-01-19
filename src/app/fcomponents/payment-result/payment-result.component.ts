@@ -8,7 +8,9 @@ import { ProductService } from '../../service/product.service';
 })
 export class PaymentResultComponent implements OnInit {
   href:string=""
-  paymentStatus="Your payment is successful"
+  result=false
+  paymentStatusSuccess="Your payment is successful!"
+  paymentStatusFailure="Payment Declined!"
   constructor(
     private router:Router,
     private productService: ProductService
