@@ -48,6 +48,8 @@ export class ProductService {
   calculateTime(hiringtime) {
     return this.http.post(this.baseUrl + '/ProductTime/CalculateTime/', hiringtime);
   }
+
+
   // !Gallery
   indexGallery() {
     return this.http.get(this.baseUrl + '/projects');
@@ -67,11 +69,12 @@ export class ProductService {
     return this.http.delete(this.baseUrl + '/projects/' + id,
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
+
+
   // !Category
   // getAllCategories() {
   //   return this.http.get(this.baseUrl + '/ProductCategories');
   // }
-
   getCategoryByType(id) {
     return this.http.get(this.baseUrl + '/ProductCategories/GetProductCategoriesByType/' + id);
   }
@@ -87,14 +90,16 @@ export class ProductService {
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
 
-  // !Product Type
 
+  // !Product Type
   getProductType() {
     return this.http.get(this.baseUrl + '/ProductTypes');
   }
   indexType(id: number) {
     return this.http.get(this.baseUrl + '/ProductTypes/' + id);
   }
+
+
   // !Carts
   getCarts() {
     return this.http.get(this.baseUrl + '/Carts',
@@ -111,6 +116,8 @@ export class ProductService {
     return this.http.delete(this.baseUrl + '/Carts/' + id,
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
+
+
   // !cartProd
   getCardProd(id: number) {
     return this.http.get(this.baseUrl + '/CartProds/GetCartProdByCart/' + id,
@@ -123,6 +130,8 @@ export class ProductService {
     return this.http.delete(this.baseUrl + '/CartProds/' + id,
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
+
+
   // !Contacts
   getContacts() {
     return this.http.get(this.baseUrl + '/Contacts');
@@ -134,6 +143,8 @@ export class ProductService {
     return this.http.put(this.baseUrl + '/Contacts/' + id, contact,
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
+
+
   // !FAQ
   getFaq() {
     return this.http.get(this.baseUrl + '/Faqs');
@@ -150,10 +161,14 @@ export class ProductService {
     return this.http.delete(this.baseUrl + '/Faqs/' + id,
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
+
+
   // !contact email
   sendContactEmail(contactEmail) {
     return this.http.post(this.baseUrl + '/ContactEmails', contactEmail);
   }
+
+
   // !EventType
   getEventType() {
     return this.http.get(this.baseUrl + '/EventTypes');
@@ -166,6 +181,8 @@ export class ProductService {
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) }
     );
   }
+
+
   // !admin
   login(adminModel) {
     return this.http.post(this.baseUrl + '/admins', adminModel);
@@ -198,11 +215,11 @@ export class ProductService {
   getUserList() {
 	return this.http.get(this.baseUrl + '/User', { headers: new HttpHeaders({ 'Authorization': 'Bearer' }) });
   }
-
-
   paymentResult(url) {
     return this.http.post(this.baseUrl + '/PxPay/ResponseOutput', url)
   }
+
+
   // !images
   addImg(files) {
     return this.http.post(this.baseUrl + '/ProductMedias/', files,
@@ -226,6 +243,8 @@ export class ProductService {
     return this.http.delete(this.baseUrl + '/ProjectMedias/' + id,
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
+
+
   // !productDetails
   updateProductDetails(productId, detailList) {
     return this.http.put(this.baseUrl + '/ProductDetails/' + productId, detailList,
@@ -257,6 +276,11 @@ export class ProductService {
   getCategory() {
     return this.selectedCate;
   }
+//   getChildItemDetail(id) {
+//       return this.http.get(this.baseUrl + 'ProductDetail' + id);
+//   }
+
+
   // ! homepageCarousel
   getHomepageCarousel() {
     return this.http.get(this.baseUrl + '/HomepageCarouselMedia');

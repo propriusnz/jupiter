@@ -37,14 +37,59 @@
       <tbody *ngIf="displayedProductData">
         <tr *ngFor="let data of displayedProductData">
           <td>{{data.prodId}}</td>
-          <td>{{data.title}}</td>
+          <td>{{data.title}} <br>
+            <a *ngIf="data.prodId == 10" 
+               data-toggle="collapse" 
+               href="#Collapse" 
+               role="button" 
+               aria-expanded="false" aria-controls="Collapse"
+               class="btn btn-primary btn-sm">
+                View
+            </a>
+            <div *ngIf="data.prodId == 10" 
+                 class="collapse mt-3" id="Collapse"
+                 style="position: absolute; width: 680px; max-height: 500px; overflow: scroll; border: #c48f45 3px solid;">
+                <div class="card card-body">
+                    <h6 style="color: #c48f45;">LED Letter Lights</h6>
+                        <table class="table">
+                            <thead class="table-secondary">
+                                <th><span>Child ID <br>子产品ID</span></th>
+                                <th><span>Name <br>名称</span></th>
+                                <th><span>Total Stock <br>总库存</span></th>
+                                <th><span>Available Stock <br>现库存</span></th>
+                                <th><span>Calender <br>日历</span></th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let childProduct of childProducts" >
+                                    <td width="12%">{{ childProduct.id }}</td>
+                                    <td width="30%">{{ childProduct.productDetail1 }}</td>
+                                    <td>{{ childProduct.totalStock }}</td>
+                                    <td>{{ childProduct.availableStock }}</td>
+                                    <td width="25%">
+                                        <mat-form-field>
+                                            <input 
+                                                matInput [matDatepicker]="picker" 
+                                                placeholder="View Availablility"
+                                                [min]="minDate" [max]="maxDate"
+                                                >
+                                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker></mat-datepicker>
+                                          </mat-form-field>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+          </td>
+          
           <td style="text-align:center;">{{data.subTitle}}</td>
           <td style="text-align:center;">${{data.price}}</td>
           <td style="text-align:center;">${{data.price - data.discount}}</td>
           <td *ngIf="blockCode == 2" style="text-align:center;">
             <div *ngIf="data.category">{{data.category.categoryName}}</div>
           </td>
-          <td >{{data.totalStock}}</td>
+          <td>{{data.totalStock}}</td>
           <td>{{data.availableStock}}</td>
           <td>{{data.specialOrder}}</td>
 

@@ -58,8 +58,8 @@ export class AdminCartComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.autoFocus = true;
-    dialogConfig.height = '650px';
-    dialogConfig.width = '750px';
+    dialogConfig.height = '720px';
+    dialogConfig.width = '700px';
     dialogConfig.data = {
       id: 1,
       title: 'Cart Detail',

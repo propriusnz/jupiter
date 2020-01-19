@@ -7,7 +7,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap, filter } from 'rxjs/operators';
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-admin-products',
@@ -19,6 +19,7 @@ export class AdminProductsComponent implements OnInit {
   displayedProductData: any;
   isLoading = false;
   productTitle: string;
+  childProducts: any;
   subscription: Subscription;
   searchField: FormControl = new FormControl();
 
@@ -39,6 +40,14 @@ export class AdminProductsComponent implements OnInit {
     );
     this.getDefaultTitle();
     this.subscription = this.adminPanelService.currentPanel.subscribe(res => this.productTitle = res);
+    // this.productService.getChildItemDetail(this.childId).subscribe(
+    //     childItem => {
+    //         console.log(childItem);
+    //     },
+    //     err => {
+    //         console.log('Get child item failed', err);
+    // })
+
     const searchProduct$ = this.liveSearchProduct();
     this.subscription.add(searchProduct$);
   }
@@ -57,6 +66,9 @@ export class AdminProductsComponent implements OnInit {
       (res) => {
         this.isLoading = false;
         this.displayedProductData = res['data'];
+        // console.log('ProductList:', res);
+        this.childProducts = res['data'][0]['productDetail'];
+        console.log('Child Product List: ', this.childProducts);
       },
       (err) => {
         this.isLoading = false;

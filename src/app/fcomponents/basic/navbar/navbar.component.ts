@@ -102,10 +102,10 @@ export class NavbarComponent implements OnInit {
   ifLoggedIn() {
       if (localStorage.getItem('userToken')) {
           this.loggedIn = true;
-          console.log('true');
+        //   console.log('true');
       } else {
           this.loggedIn = false;
-          console.log('false');
+        //   console.log('false');
       }
   }
 
