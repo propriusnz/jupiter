@@ -39,7 +39,7 @@ export class ShoppingCartComponent implements OnInit {
   @Input() district=''
   @ViewChild('quantityInput', { static: false }) quantityInput: ElementRef;
   constructor(
-    private productService: ProductService
+    private productService: ProductService,
 
   ) {
     var offset2 = new Date().getTimezoneOffset() * 60 * 1000;

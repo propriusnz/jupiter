@@ -24,6 +24,7 @@ export class ShoppingUserinfoComponent implements OnInit {
   districtSelected: number
   totalPrice = 0
   bondFee = 150
+  timetable = []
   userInfo = {
     FirstName: '',
     LastName: '',
@@ -96,7 +97,7 @@ export class ShoppingUserinfoComponent implements OnInit {
     } else {
       this.buttonError = false
     }
-    if (this.districtSelected == null) {
+    if (this.districtSelected == null && this.userInfo.isPickup.localeCompare("0")==0) {
       this.districtError = true
     } else {
       this.districtError = false
@@ -153,7 +154,7 @@ export class ShoppingUserinfoComponent implements OnInit {
     const data = JSON.parse(localStorage.getItem('cartList') || '[]');
     delete data.availableStock;
     delete data.url;
-    const timetable = JSON.parse(localStorage.getItem('productTimetable') || '[]');
+    this.timetable = JSON.parse(localStorage.getItem('productTimetable') || '[]');
     // combine shopping cart data
     const cartData = {
       location: `${this.userInfo.streetAddress}, ${this.userInfo.city}`,
@@ -168,7 +169,7 @@ export class ShoppingUserinfoComponent implements OnInit {
     const cartContact = {
       CartModel: cartData,
       ContactModel: post,
-      ProductTimeTableModel: timetable
+      ProductTimeTableModel: this.timetable
     };
     console.log(cartContact)
     this.addCart(cartContact);
@@ -176,19 +177,34 @@ export class ShoppingUserinfoComponent implements OnInit {
   // pass data to api
   addCart(cartContact) {
     this.isSendingEmail = true;
-    this.productService.addCart(cartContact).subscribe(
+    this.productService.checkIfAvailable(this.timetable).subscribe(
       (res) => {
         console.log(res)
-        this.isSendingEmail = false;
-        this.isSendSuccess = true;
-        this.router.navigate(['/thankYou']);
-        localStorage.clear()
+        if(res['isSuccess']){
+
+          this.productService.addCart(cartContact).subscribe(
+          (res) => {
+            console.log(res)
+            this.isSendingEmail = false;
+            this.isSendSuccess = true;
+            this.router.navigate(['/paymentoptions']);
+            localStorage.clear()
+          },
+          (error) => {
+            this.isSendingEmail = false;
+            console.log(error);
+            this.feedback_message = 'Oops, something went wrong.';
+          });
+        }
+        
       },
       (error) => {
-        this.isSendingEmail = false;
-        console.log(error);
-        this.feedback_message = 'Oops, something went wrong.';
-      });
+        console.log(error)
+        
+      }
+
+    )
+
 
   }
   radioButtonChange(input) {

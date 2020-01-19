@@ -117,12 +117,12 @@ export class UserProfileComponent implements OnInit {
   
   onSubmit() {
 	let user = {
-		UserId: this.userId,
-		FirstName: this.updateProfileForm.value.fname,
-      	LastName: this.updateProfileForm.value.lname,
-      	PhoneNumber: this.updateProfileForm.value.phone,
-      	Company: this.updateProfileForm.value.company,
-    	IsSubscribe: this.subscribe
+		userId: this.userId,
+		firstName: this.updateProfileForm.value.fname,
+      	lastName: this.updateProfileForm.value.lname,
+      	phoneNumber: this.updateProfileForm.value.phone,
+      	company: this.updateProfileForm.value.company,
+    	isSubscribe: this.subscribe
 	}
 	console.log('Updated user profile: ', user);
 	this.productservice.updateProfile(user,this.userId).subscribe(
