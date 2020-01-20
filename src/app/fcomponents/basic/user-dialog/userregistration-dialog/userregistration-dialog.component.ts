@@ -82,7 +82,22 @@ export class UserregistrationDialogComponent implements OnInit {
       res => {
         console.log(res);
         this.dialogRef.close();
-
+        const user = {
+          Email: this.registrationForm.value.email,
+          Password: this.registrationForm.value.password
+        }
+        this.productservice.userlogin(user).subscribe(
+          res => {
+            console.log(res)
+            localStorage.setItem('userId', JSON.stringify(res['data'].userId));
+            localStorage.setItem('userToken', JSON.stringify(res['data'].token));
+            location.reload();
+          },
+          err => {
+            console.log(err);
+          }
+        );
+        this.redirect();
       },
       err => {
         if (err.hasOwnProperty('error')) {

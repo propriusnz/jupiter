@@ -6,6 +6,7 @@ import { UserloginDialogComponent } from '../user-dialog/userlogin-dialog/userlo
 import { UserregistrationDialogComponent } from '../user-dialog/userregistration-dialog/userregistration-dialog.component'
 import { DataService } from '../../../service/data.service'
 import { ProductService } from '../../../service/product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -24,11 +25,12 @@ export class NavbarComponent implements OnInit {
   loggedIn: boolean;
 
   constructor(
-        @Inject(PLATFORM_ID) private platformId,
-        private productService: ProductService,
-        private data: DataService,
-        public dialog: MatDialog,
-    ) {
+    @Inject(PLATFORM_ID) private platformId,
+    private productService: ProductService,
+    private data: DataService,
+    public dialog: MatDialog,
+    private router: Router
+  ) {
     if (isPlatformBrowser(this.platformId)) {
       this.isBrowser = true;
     }
@@ -75,16 +77,16 @@ export class NavbarComponent implements OnInit {
       height: '650px',
     });
   }
-  newsignupDialog(){
-    if(this.signupmessage.localeCompare('open')==0){
-    this.signupDialog()
-    this.data.changesignupMessage("close") 
+  newsignupDialog() {
+    if (this.signupmessage.localeCompare('open') == 0) {
+      this.signupDialog()
+      this.data.changesignupMessage("close")
     }
-  } 
-  newloginDialog(){
-    if(this.loginmessage.localeCompare('open')==0){
-    this.loginDialog()
-    this.data.changeloginMessage("close")
+  }
+  newloginDialog() {
+    if (this.loginmessage.localeCompare('open') == 0) {
+      this.loginDialog()
+      this.data.changeloginMessage("close")
     }
   }
   signupDialog() {
@@ -93,22 +95,23 @@ export class NavbarComponent implements OnInit {
       height: '680px'
     });
   }
-  logout(){
-	localStorage.clear();
+  logout() {
+    localStorage.clear();
     sessionStorage.clear();
+    this.router.navigate(['/home']);
     alert('You are now logged out!');
-	location.reload();
+    location.reload();
   }
   ifLoggedIn() {
-      if (localStorage.getItem('userToken')) {
-          this.loggedIn = true;
-        //   console.log('true');
-      } else {
-          this.loggedIn = false;
-        //   console.log('false');
-      }
+    if (localStorage.getItem('userToken')) {
+      this.loggedIn = true;
+      //   console.log('true');
+    } else {
+      this.loggedIn = false;
+      //   console.log('false');
+    }
   }
 
   // Log in successful snackbar
-  
+
 }
