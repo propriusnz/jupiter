@@ -37,7 +37,7 @@ export class ProductComponent implements OnInit {
   dateStartInput: any
   dateReturnInput: any
   // hiringtime=[];
-  disabledDates = []
+  disabledDates = [];
   startMoment: any;
   returnMoment: any;
   unavailableDates: any
@@ -66,7 +66,6 @@ export class ProductComponent implements OnInit {
     private productService: ProductService,
     private formBuilder: FormBuilder,
   ) {
-
     this.productId = this.route.snapshot.params['id'];
     setTheme('bs4');
     let offset2 = new Date().getTimezoneOffset() * 60 * 1000;
@@ -402,7 +401,6 @@ export class ProductComponent implements OnInit {
             } else {
               this.addToCartControl = false
             }
-
           }
         },
         err => {
