@@ -216,8 +216,8 @@ export class ProductService {
   updateProfile(user,userId) {
 	return this.http.put(this.baseUrl + '/UserContactInfo/' + userId, user,{ headers: new HttpHeaders({ 'Authorization': 'Bearer ' + localStorage.getItem('userId') }) });
   }
-  changePassword(userId) {
-	return this.http.put(this.baseUrl + '/ChangePassword/' + userId, userId,);
+  changePassword(user) {
+	return this.http.put(this.baseUrl + '/User/ChangePassword/', user,);
   }
   getUserList() {
 	return this.http.get(this.baseUrl + '/User', { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });

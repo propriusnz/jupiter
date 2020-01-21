@@ -81,13 +81,28 @@ export class UserregistrationDialogComponent implements OnInit {
     this.productservice.register(user).subscribe(
       res => {
         console.log(res);
-		this.dialogRef.close();
-		// this.redirect();
+        this.dialogRef.close();
+        const user = {
+          Email: this.registrationForm.value.email,
+          Password: this.registrationForm.value.password
+        }
+        this.productservice.userlogin(user).subscribe(
+          res => {
+            console.log(res)
+            localStorage.setItem('userId', JSON.stringify(res['data'].userId));
+            localStorage.setItem('userToken', JSON.stringify(res['data'].token));
+            location.reload();
+          },
+          err => {
+            console.log(err);
+          }
+        );
+        this.redirect();
       },
       err => {
-        if(err.hasOwnProperty('error')){
-          if(err.error.hasOwnProperty('errorMessage')){
-            this.errorMessage=err.error.errorMessage
+        if (err.hasOwnProperty('error')) {
+          if (err.error.hasOwnProperty('errorMessage')) {
+            this.errorMessage = err.error.errorMessage
           }
         } else {
           this.errorMessage = "Sign up failed, Internal Server Error"
