@@ -7,9 +7,14 @@ export class AuthService {
 
   constructor() { }
 
-  isAuthorized(): boolean {
+  isAdminAuthorized(): boolean {
     const authInfo = sessionStorage.getItem('access_token');
     const isAuth = authInfo ? true : false;
     return isAuth;
+  }
+  isUserAuthorized():boolean{
+    const authInfo=localStorage.getItem('userToken');
+    const isAuth=authInfo? true : false;
+    return isAuth
   }
 }

@@ -20,6 +20,7 @@ export class ShoppingUserinfoComponent implements OnInit {
   buttonError = false
   userId: number
   districtSelectControl = false
+  deliveryControl=false
   districtError = false
   districtSelected: number
   totalPrice = 0
@@ -37,7 +38,7 @@ export class ShoppingUserinfoComponent implements OnInit {
     District: '',
     isPickup: ''
   };
-  deliveryFee: number
+  deliveryFee=0
   districtName = ''
   minDate: Date
   @Output() isPickup = new EventEmitter();
@@ -97,7 +98,7 @@ export class ShoppingUserinfoComponent implements OnInit {
     } else {
       this.buttonError = false
     }
-    if (this.districtSelected == null && this.userInfo.isPickup.localeCompare("0")==0) {
+    if (this.districtSelected == null && this.userInfo.isPickup.localeCompare("0") == 0) {
       this.districtError = true
     } else {
       this.districtError = false
@@ -115,7 +116,7 @@ export class ShoppingUserinfoComponent implements OnInit {
         Message: Message
       };
       this.calculateDeliveryFee()
-      this.calculateDepositFee()
+      this.calculateBondFee()
       this.submitCart(post);
     }
   }
@@ -136,7 +137,7 @@ export class ShoppingUserinfoComponent implements OnInit {
       this.districtName = "WaitakereCity"
     }
   }
-  calculateDepositFee() {
+  calculateBondFee() {
     if ('totalPrice' in localStorage) {
       this.totalPrice = JSON.parse(localStorage.getItem('totalPrice'));
     }
@@ -180,27 +181,20 @@ export class ShoppingUserinfoComponent implements OnInit {
     this.productService.checkIfAvailable(this.timetable).subscribe(
       (res) => {
         console.log(res)
-        if(res['isSuccess']){
-
-          this.productService.addCart(cartContact).subscribe(
-          (res) => {
-            console.log(res)
-            this.isSendingEmail = false;
-            this.isSendSuccess = true;
-            this.router.navigate(['/paymentoptions']);
-            localStorage.clear()
-          },
-          (error) => {
-            this.isSendingEmail = false;
-            console.log(error);
-            this.feedback_message = 'Oops, something went wrong.';
-          });
+        if (res['isSuccess']) {
+          if ('userId' in localStorage) {
+            this.cartUser(cartContact)
+          } else {
+            this.cartNotUser(cartContact)
+          }
+        }else{
+          this.isSendingEmail=false
+          this.feedback_message = 'Please modify your time. Your items are booked.'
         }
-        
       },
       (error) => {
         console.log(error)
-        
+
       }
 
     )
@@ -227,5 +221,48 @@ export class ShoppingUserinfoComponent implements OnInit {
   }
   // clear the shopping cart stored in local storage
 
-
-}
+  cartNotUser(cartContact) {
+    console.log(cartContact)
+    this.productService.addCart(cartContact).subscribe(
+      (res) => {
+        console.log(res)
+        this.isSendingEmail = false;
+        this.isSendSuccess = true;
+        console.log(res['data'].cartId)
+        this.getPaymentUrl(res['data'].cartId)
+        this.router.navigate(['/paymentoptions']);
+        localStorage.clear()
+      },
+      (error) => {
+        this.isSendingEmail = false;
+        console.log(error);
+        this.feedback_message = 'Oops, something went wrong.';
+      });
+  }
+  cartUser(cartContact) {
+    this.productService.addCartUser(cartContact, this.userId).subscribe(
+      (res) => {
+        console.log(res)
+        this.isSendingEmail = false;
+        this.isSendSuccess = true;
+        this.getPaymentUrl(res['data'].cartId)
+        this.router.navigate(['/paymentoptions']);
+        localStorage.clear()
+      },
+      (error) => {
+        this.isSendingEmail = false;
+        console.log(error);
+        this.feedback_message = 'Oops, something went wrong.';
+      });
+  }
+  getPaymentUrl(cartId){
+    this.productService.requestPaymentUrl(cartId).subscribe(
+      res => {
+        console.log(res)
+      },
+      err => {
+        console.log(err)
+      }
+    )
+  }
+} 
