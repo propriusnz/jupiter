@@ -30,6 +30,7 @@ export class AdminProductsComponent implements OnInit {
   maxDate: Date;
   startMoment: any; // Start date of monment.js date array
   endMoment: any;
+  currentDate: Date;
   allDates = []; // All dats between minDate & maxDate;
   emptyDates = []; // Days with no bookings at all
   ProductTime: any;
@@ -57,7 +58,7 @@ export class AdminProductsComponent implements OnInit {
 	 	this.allDates.push(day.toDate().toString());
 	 	i ++;
 	   };
-	   console.log(this.allDates);
+	//    console.log(this.allDates);
     }
 
   ngOnInit() {
@@ -87,10 +88,12 @@ export class AdminProductsComponent implements OnInit {
     this.productService.indexType(Number(typeId)).subscribe(
       (res) => {
         this.isLoading = false;
-        this.displayedProductData = res['data'];
-        // console.log('ProductList:', res);
+		this.displayedProductData = res['data'];
+		console.log('ProductList:', res['data']);
+		
+		// ###### Get Child Products ######
         this.childProducts = res['data'][0]['productDetail'];
-        // console.log('Child Product List: ', this.childProducts);
+        console.log('Child Product List: ', this.childProducts);
       },
       (err) => {
         this.isLoading = false;
@@ -161,14 +164,16 @@ export class AdminProductsComponent implements OnInit {
 
   getDetailProductTime(id) {
 	const isDetailId = 1;
-	const beginDate = this.minDate;
+	this.currentDate = new Date();
+	const beginDate = this.currentDate;
 	this.productService.getProductTimeTable(id, isDetailId, this.datetoYMD(beginDate)).subscribe(
 		productTimeTable => {
 			console.log('product Time List: ', productTimeTable);
 			this.ProductTime = productTimeTable;
-			
+			// console.log(typeof(productTimeTable));
 		}
 	)
+	// console.log(this.datetoYMD(this.currentDate));
   }
 
   datetoYMD(date) {

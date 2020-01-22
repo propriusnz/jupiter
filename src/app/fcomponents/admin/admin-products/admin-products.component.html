@@ -16,87 +16,99 @@
       <div class="pt-2 col">
         <input type="text" id="productSearch" placeholder="search the title of products here" [formControl]="searchField">
       </div>
-    </div>
+	</div>
+	
     <table class="table">
       <thead>
         <tr class="table-secondary">
           <th scope="col">Id<br><span>编号</span></th>
           <th scope="col">Title<br><span>标题</span></th>
           <th scope="col">Subtitle<br><span>副标题</span></th>
-          <th scope="col" >Price<br><span>价格</span></th>
-          <th scope="col" >Discount<br><span>折后价</span></th>
+          <th scope="col">Price<br><span>价格</span></th>
+          <th scope="col">Discount<br><span>折后价</span></th>
           <th scope="col" *ngIf="productTypeId === '1' || productTypeId === '2'" >Category<br><span>类别</span></th>
-          <th scope="col" >Total stock<br><span>总库存</span></th>
-          <th scope="col" >Available stock<br><span>现库存</span></th>
-          <th scope="col" >Special Order<br><span>特殊展示</span></th>
-          <th scope="col" >Description<br><span>描述</span></th>
-          <th scope="col" >Edit<br><span>编辑</span></th>
-          <th scope="col" >Delete<br><span>删除</span></th>
+          <th scope="col">Total stock<br><span>总库存</span></th>
+          <th scope="col">Available stock<br><span>现库存</span></th>
+          <th scope="col">Special Order<br><span>特殊展示</span></th>
+          <th scope="col">Description<br><span>描述</span></th>
+          <th scope="col">Edit<br><span>编辑</span></th>
+          <th scope="col">Delete<br><span>删除</span></th>
         </tr>
       </thead>
       <tbody *ngIf="displayedProductData">
         <tr *ngFor="let data of displayedProductData">
           <td>{{data.prodId}}</td>
           <td width="20%">{{data.title}}
-            <a *ngIf="data.prodId == 10" 
+			<br>
+
+			<!-- Collapse Table For LED Letter Lights -->
+            <!-- <a *ngIf="data.prodId == 10"  -->
+            <a *ngIf="data.productDetail[0]" 
                data-toggle="collapse" 
                href="#Collapse" 
                role="button" 
                aria-expanded="false" aria-controls="Collapse"
-               class="btn btn-primary btn-sm">
-                View
-            </a>
+               class="btn btn-info btn-sm">
+			   <i class="far fa-eye mr-1"></i>
+			   <i class="fas fa-angle-down"></i>
+			</a>
+			<!-- Collapse Table -->
             <div *ngIf="data.prodId == 10" 
                  class="collapse mt-3" id="Collapse"
                  style="position: absolute; width: 700px; max-height: 550px; overflow: scroll; border: #c48f45 3px solid;">
                 <div class="card card-body">
-                    <h6 style="color: #c48f45;">LED Letter Lights</h6>
-                        <table class="table">
-                            <thead class="table-secondary">
-                                <th><span>Child ID<br>子产品ID</span></th>
-                                <th><span>Name<br>名称</span></th>
-                                <th><span>Total Stock<br>总库存</span></th>
-                                <th><span>Available Stock<br>现库存</span></th>
-								<th><span>Calender<br>日历</span><br>
-									<span><i>From {{ minDate | date:'dd-MMM-yyy'}} to 
-											      {{ maxDate | date:'dd-MMM-yyy' }}</i></span>
-								</th>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let childProduct of childProducts" >
-                                    <td width="12%">{{ childProduct.id }}</td>
-                                    <td width="20%">{{ childProduct.productDetail1 }}</td>
-                                    <td>{{ childProduct.totalStock }}</td>
-                                    <td>{{ childProduct.availableStock }}</td>
-                                    <td width="25%">
-										<input 
-											bsDaterangepicker type="text" class="form-control" 
-											placeholder="Calender of {{ childProduct.productDetail1 }} " style="width: 280px;"
-											[minDate]="minDate" [datesDisabled]="emptyDates"
-											[maxDate]="maxDate" 
-											[outsideClick]="true"
-											[bsConfig]="{
-												rangeInputFormat: 'MMMM Do', containerClass:'theme-orange',
-												selectFromOtherMonth: true,
-												adaptivePosition: true,
-												showWeekNumbers: false
-											}"
-											(click)="getDetailProductTime(childProduct.id)"
-										>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <h6 style="color: #c48f45;">Child Products</h6>
+					<table class="table">
+						<thead class="table-secondary">
+							<th><span>Child ID<br>子产品ID</span></th>
+							<th><span>Name<br>名称</span></th>
+							<th><span>Total Stock<br>总库存</span></th>
+							<th><span>Available Stock<br>现库存</span></th>
+							<th><span>Calender<br>日历</span><br>
+								<span>From <i> {{ minDate | date:'dd-MMM-yyy' }}</i> 
+									  to   <i> {{ maxDate | date:'dd-MMM-yyy' }}</i> 
+								</span>
+							</th>
+						</thead>
+						<tbody>
+							<tr *ngFor="let childProduct of childProducts" >
+								<td width="12%">{{ childProduct.id }}</td>
+								<td width="20%">{{ childProduct.productDetail1 }}</td>
+								<td>{{ childProduct.totalStock }}</td>
+								<td>{{ childProduct.availableStock }}</td>
+								<td width="25%">
+									<input 
+										bsDaterangepicker type="text" class="form-control" 
+										placeholder="Calender of {{ childProduct.productDetail1 }} " style="width: 280px;"
+										[minDate]="minDate" [datesDisabled]="emptyDates"
+										[maxDate]="maxDate" 
+										[outsideClick]="true"
+										[bsConfig]="{
+											rangeInputFormat: 'MMMM Do', containerClass:'theme-orange',
+											selectFromOtherMonth: true,
+											adaptivePosition: true,
+											showWeekNumbers: false
+										}"
+										(click)="getDetailProductTime(childProduct.id)"
+									>
+								</td>
+							</tr>
+						</tbody>
+					</table>
                 </div>
             </div>
           </td>
-          
-          <td style="text-align:center;">{{data.subTitle}}</td>
+          <td>{{data.subTitle}}</td>
           <td style="text-align:center;">${{data.price}}</td>
-          <td style="text-align:center;">${{data.price - data.discount}}</td>
-          <td *ngIf="blockCode == 2" style="text-align:center;">
+		  <td style="text-align:center;">${{data.price - data.discount}}</td>
+		  <td *ngIf="productTypeId === '1' || productTypeId === '2'">
+			  <span *ngIf="data.category">{{data.category.categoryName}}</span>
+			  <span *ngIf="!data.category">-</span>
+		  </td>
+		  <!-- <td *ngIf="!data.category"></td> -->
+          <!-- <td *ngIf="blockCode == 2" style="text-align:center;">
             <div *ngIf="data.category">{{data.category.categoryName}}</div>
-          </td>
+          </td> -->
           <td>{{data.totalStock}}</td>
           <td>{{data.availableStock}}</td>
           <td>{{data.specialOrder}}</td>
