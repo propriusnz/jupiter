@@ -22,9 +22,10 @@ export class ShoppingCartComponent implements OnInit {
   maxDate_start: Date;
   minDate_return: Date;
   maxDate_return: Date;
-  utcDate_start:Date
+  utcDate_start: Date
   dateStartControl = true;
   dateReturnControl = true;
+  deliveryControl=false
   dateStartInput: any
   dateReturnInput: any
   // hiringtime=[];
@@ -33,10 +34,14 @@ export class ShoppingCartComponent implements OnInit {
   returnMoment: any;
   unavailableDates: any
   mySet = new Set();
-  pickupMessage: boolean
-  deliveryFee=0
+  pickupMessage:boolean
+  deliveryFee = 0
+  depositFeeDue=0;
+  bondFee=150
+  amountDue=0
   @Input() isPickup = ''
-  @Input() district=''
+  @Input() district = ''
+
   @ViewChild('quantityInput', { static: false }) quantityInput: ElementRef;
   constructor(
     private productService: ProductService,
@@ -44,43 +49,45 @@ export class ShoppingCartComponent implements OnInit {
   ) {
     var offset2 = new Date().getTimezoneOffset() * 60 * 1000;
     var nowDate2 = new Date().getTime();
-    this.minDate_start = new Date(nowDate2 + offset2+13*60*60*1000);
+    this.minDate_start = new Date(nowDate2 + offset2 + 13 * 60 * 60 * 1000);
     this.maxDate_start = new Date();
-    this.utcDate_start=new Date(nowDate2+offset2)
+    this.utcDate_start = new Date(nowDate2 + offset2)
     this.minDate_start.setDate(this.minDate_start.getDate());
     this.maxDate_start.setDate(this.maxDate_start.getDate() + 90);
   }
   ngOnChanges(changes: SimpleChanges) {
     const pickupValue = changes['isPickup'];
-    const districtValue=changes['district']
+    const districtValue = changes['district']
     if (pickupValue != null) {
       if (pickupValue.currentValue == "1") {
         this.pickupMessage = true;
+        this.deliveryControl=false
       } else {
         this.pickupMessage = false;
+        this.deliveryControl=true
+        this.deliveryFee=0
       }
-      this.totalPrice-=this.deliveryFee
-      this.deliveryFee=0
+      
+    }
+      
+    if (districtValue != null) {
+      if (districtValue.currentValue.localeCompare("1") == 0) {
+        this.deliveryFee = 20
+      } else if (districtValue.currentValue.localeCompare("2") == 0) {
+        this.deliveryFee = 30
+      } else if (districtValue.currentValue.localeCompare("3") == 0) {
+        this.deliveryFee = 50
+      } else if (districtValue.currentValue.localeCompare("4") == 0) {
+        this.deliveryFee = 40
+      }
+      this.amountDue=this.depositFeeDue+this.deliveryFee
       localStorage.setItem('totalPrice', JSON.stringify(this.totalPrice));
     }
-    if(districtValue!=null){
-      if(districtValue.currentValue.localeCompare("1")==0){
-        this.deliveryFee=20
-      }else if(districtValue.currentValue.localeCompare("2")==0){
-        this.deliveryFee=30
-      }else if(districtValue.currentValue.localeCompare("3")==0){
-        this.deliveryFee=50
-      }else if(districtValue.currentValue.localeCompare("4")==0){
-        this.deliveryFee=40
-      }
-      this.totalPrice+=this.deliveryFee
-      localStorage.setItem('totalPrice', JSON.stringify(this.totalPrice));
-    }
-    
+
   }
   ngOnInit() {
     // get the current shopping cart
-    this.pickupMessage = true
+    this.deliveryControl=false
     this.productService.getShoppingCartStatus().subscribe(
       status => {
         this.isShoppingCartValid = status.isValid;
@@ -115,10 +122,13 @@ export class ShoppingCartComponent implements OnInit {
     localStorage.setItem('productTimetable', JSON.stringify(this.productTimetable))
     if (this.prodsInCart.length === 0) {
       this.productService.setShoppingCartStatus(false);
+    } else {
+      this.checkTimeConflict()
+      this.calculateTime()
+      
     }
-    this.checkTimeConflict()
-    this.calculateTime()
     this.price();
+
   }
   // calculate total price of shopping cart
   price() {
@@ -126,7 +136,10 @@ export class ShoppingCartComponent implements OnInit {
     this.prodsInCart.forEach(prod => {
       this.totalPrice += prod.Price;
     });
+    this.depositFeeDue=this.totalPrice/2
+    this.amountDue=this.totalPrice/2
     localStorage.setItem('totalPrice', JSON.stringify(this.totalPrice));
+    this.calculateBondFee()
   }
   getAllStock() {
     this.prodsInCart.forEach(element => {
@@ -136,14 +149,14 @@ export class ShoppingCartComponent implements OnInit {
     });
   }
   checkTimeConflict() {
-    let control=false
+    let control = false
     if (this.productTimetable.length >= 2) {
       let tmpBeginDate = this.productTimetable[0].beginDate
       let tmpEndDate = this.productTimetable[0].endDate
       for (let i = 1; i <= this.productTimetable.length - 1; i++) {
         if (tmpBeginDate != this.productTimetable[i].beginDate || tmpEndDate != this.productTimetable[i].endDate) {
           this.productService.setShoppingCartStatus(false);
-          this.errorMessage = 'Sorry, Start date and Return date for all items should be same. Please reselect another date range.'
+          this.errorMessage = 'Sorry, Start date and Return date for all items should be the same. Please reselect another date range above.'
           this.isShoppingCartValid = false
           control = false
           break
@@ -151,14 +164,14 @@ export class ShoppingCartComponent implements OnInit {
           control = true
         }
       }
-      
+
     }
-    if(this.productTimetable.length==1){
-      control=true
+    if (this.productTimetable.length == 1) {
+      control = true
     }
     if (control) {
-        this.productService.setShoppingCartStatus(true);
-      }
+      this.productService.setShoppingCartStatus(true);
+    }
   }
   onStartChange(value) {
     this.dateStartInput = value;
@@ -256,6 +269,19 @@ export class ShoppingCartComponent implements OnInit {
     var m = date.getMonth() + 1; //Month from 0 to 11
     var y = date.getFullYear();
     return '' + y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+  }
+  calculateBondFee() {
+    if ('totalPrice' in localStorage) {
+      this.totalPrice = JSON.parse(localStorage.getItem('totalPrice'));
+    }
+    if (this.totalPrice <= 250) {
+      this.bondFee = 150
+    } else if (this.totalPrice <= 750 && this.totalPrice > 250) {
+      this.bondFee = 300
+    } else if (this.totalPrice > 750) {
+      this.bondFee = 500
+    }
+
   }
 
 }

@@ -1,14 +1,15 @@
 <div class="row" *ngIf="prodsInCart.length!=0">
   <div class="mt-2 ml-2">
-    <input bsDatepicker type="text" class="form-control" placeholder="Start Date" style="width: 260px;"
+    <input bsDatepicker type="text" class="form-control " placeholder="Start Date" style="width: 260px;"
       [minDate]="minDate_start" [datesDisabled]="disabledDates" [maxDate]="maxDate_start"
-      [bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}"
+      [bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange',showWeekNumbers:false}"
       (bsValueChange)="onStartChange($event)">
   </div>
   <div class="mt-2 ml-2">
-    <input bsDatepicker type="text" class="form-control" placeholder="Return Date" style="width: 260px;"
+    <input bsDatepicker type="text" class="form-control text-line" placeholder="Return Date" style="width: 260px;"
       [isDisabled]="dateReturnControl" [minDate]="minDate_return" [datesDisabled]="disabledDates"
-      [maxDate]="maxDate_return" [bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}"
+      [maxDate]="maxDate_return"
+      [bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange',showWeekNumbers:false}"
       (bsValueChange)="onReturnChange($event)">
   </div>
 </div>
@@ -42,11 +43,15 @@
   <br>
   <br>
 </div>
-<div class="mb-2" *ngIf="!isShoppingCartValid && prodsInCart.length!=0" style="color:red">{{errorMessage}}</div>
-<div class="text-right" *ngIf="totalPrice!=0">
-  <div class="mb-1" *ngIf="!pickupMessage">Delivery Fee: NZ $<span class="s2bold">{{deliveryFee}}</span></div>
-  <div class="mb-1">Total Price: NZ $<span class="s2bold">{{totalPrice}}</span></div>
-  <div class="mb-1" style="font-size:x-small;">(15% GST included)</div>
+<div class="mb-2" *ngIf="!isShoppingCartValid && prodsInCart.length!=0" style="color:red;font-size:large">{{errorMessage}}</div>
+<div class="text-right" *ngIf="totalPrice!=0 &&isShoppingCartValid">
+  <div class="mb-1">Rental Deposit <span style="color:red">Due Now</span>: NZ $<span class="s2bold">{{depositFeeDue}}</span></div>
+  <div class="mb-1">Rental Due at Delivery or Pick-up: NZ $<span class="s2bold">{{depositFeeDue}}</span></div>
+  <div class="mb-1">Bond Due at Delivery or Pick-up: NZ $<span class="s2bold">{{bondFee}}</span></div>
+  <div class="mb-1" *ngIf="deliveryControl">Delivery Fee <span style="color:red">Due now</span>: NZ $<span class="s2bold">{{deliveryFee}}</span></div>
+  <div class="mb-1">Total Rent Fee: NZ $<span class="s2bold">{{totalPrice}}</span></div>
+  <div class="mb-1">Total Amount <span style="color:red">Due Now</span>: NZ $<span class="s2bold">{{amountDue}}</span></div>
+  <div class="mb-1" style="font-size:x-small;">(15% GST Included)</div>
 </div>
 
 <div class="justify-content-end mb-3" *ngIf="prodsInCart.length!=0">

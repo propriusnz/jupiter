@@ -19,8 +19,11 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 // All service follow
 import { ProductService } from './service/product.service';
 import { MatchService } from './service/match.service';
+import {AuthService} from './service/auth.service';
+import {AdminPanelService} from './service/admin-panel.service';
 // All Guard follow
-import { AuthGuardService } from './guards/admin-auth.guard'
+import { AdminAuthGuard } from './guards/admin-auth.guard'
+import { UserAuthGuard } from './guards/user-auth.guard';
 //All Data Follow
 import { DataService } from './service/data.service';
 // All components follow
@@ -69,6 +72,7 @@ import { PaymentResultComponent } from './fcomponents/payment-result/payment-res
 import { AdminUserListComponent } from './fcomponents/admin/admin-user-list/admin-user-list.component';
 
 
+
 // All Routes follow
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -84,7 +88,7 @@ const appRoutes: Routes = [
   { path: 'galleries', component: GalleryListComponent },
   { path: 'galleries/:id', component: GalleryDetailComponent },
   {
-    path: 'admin', component: AdminComponent, canActivate: [AuthGuardService],
+    path: 'admin', component: AdminComponent, canActivate: [AdminAuthGuard],
     children: [
       { path: '', redirectTo: 'adminDashboard', pathMatch: 'full' },
       { path: 'adminDashboard', component: AdminDashboardComponent },
@@ -98,7 +102,7 @@ const appRoutes: Routes = [
   },
   { path: 'login', component: AdminLoginComponent },
   { path: 'reset', component: ResetPasswordComponent },
-  { path: 'userDashboard', component: UserDashboardComponent },
+  { path: 'userDashboard', component: UserDashboardComponent,canActivate: [UserAuthGuard]},
   { path: 'checkout', component: ShoppingCheckoutComponent },
   { path: 'thankYou', component: ThankYouComponent },
   { path: 'paymentoptions', component: PaymentOptionsComponent },
@@ -178,7 +182,7 @@ const appRoutes: Routes = [
     BsDatepickerModule.forRoot(),
   ],
   providers: [
-    ProductService, DataService, MatchService
+    ProductService, DataService, MatchService,AdminAuthGuard,UserAuthGuard,AuthService,AdminPanelService
   ],
   bootstrap: [AppComponent],
   entryComponents: [

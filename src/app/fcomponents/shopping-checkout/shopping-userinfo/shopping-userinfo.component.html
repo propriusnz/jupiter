@@ -16,7 +16,7 @@
       <div class="invalid_feedback" *ngIf=" FirstName.errors?.minlength && FirstName.touched ">
          Your first name shall be at least 2 characters
       </div>
-      <input class="form-control s2" type="FirstName" required minlength="2" name="FirstName"
+      <input class="form-control s2" type="FirstName" [disabled]="!isShoppingCartValid" required minlength="2" name="FirstName"
          placeholder="Enter your first name" [ngClass]="{'is-invalid':FirstName.errors?.required && FirstName.touched}"
          [(ngModel)]="userInfo.FirstName" #FirstName="ngModel">
    </div>
@@ -29,7 +29,7 @@
       <div class="invalid_feedback" *ngIf=" LastName.errors?.minlength && LastName.touched ">
          Your last shall be at least 2 characters
       </div>
-      <input class="form-control s2" type="LastName" required minlength="2" name="LastName"
+      <input class="form-control s2" type="LastName" [disabled]="!isShoppingCartValid" required minlength="2" name="LastName"
          placeholder="Enter your last name" [ngClass]="{'is-invalid':LastName.errors?.required && LastName.touched}"
          [(ngModel)]="userInfo.LastName" #LastName="ngModel">
    </div>
@@ -38,7 +38,7 @@
       <div class="invalid_feedback" *ngIf="Email.errors?.required && Email.touched ">Please enter your
          E-mail</div>
       <div class="invalid_feedback" *ngIf="Email.errors?.pattern && Email.touched">Incorrect Email entered</div>
-      <input class="form-control s2" type="Email" required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,3}$"
+      <input class="form-control s2" type="Email" [disabled]="!isShoppingCartValid" required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,3}$"
          minlength="6" name="Email" placeholder="Enter your email"
          [ngClass]="{'is-invalid':Email.errors?.required && Email.touched}" [(ngModel)]="userInfo.Email"
          #Email="ngModel">
@@ -51,12 +51,12 @@
       <div class="invalid_feedback" *ngIf="PhoneNum.errors?.pattern && PhoneNum.touched">
          Please enter the correct phone number.
       </div>
-      <input class="form-control s2" type="tel" required pattern="[0-9]{7,15}" minlength="7" name="PhoneNum"
+      <input class="form-control s2" type="tel" [disabled]="!isShoppingCartValid" required pattern="[0-9]{7,15}" minlength="7" name="PhoneNum"
          placeholder="Enter your phone number" [ngClass]="{'is-invalid':PhoneNum.errors?.required && PhoneNum.touched}"
          [(ngModel)]="userInfo.PhoneNum" #PhoneNum="ngModel">
    </div>
    <!-- company -->
-   <div class="form-group "><input class="form-control s2" type="text" placeholder="Company(optional)"
+   <div class="form-group "><input class="form-control s2" type="text" [disabled]="!isShoppingCartValid" placeholder="Company(optional)"
          [(ngModel)]="userInfo.company" name="company"></div>
    <!-- city -->
    <div class="form-group ">
@@ -65,7 +65,7 @@
       <div class="invalid_feedback" *ngIf=" city.errors?.minlength && city.touched ">
          Please enter a correct city.
       </div>
-      <input class="form-control s2" type="city" required minlength="2" name="city" placeholder="Event city"
+      <input class="form-control s2" type="city" [disabled]="!isShoppingCartValid" required minlength="2" name="city" placeholder="Event city"
          [ngClass]="{'is-invalid':city.errors?.required && city.touched}" [(ngModel)]="userInfo.city" #city="ngModel">
    </div>
 
@@ -77,33 +77,24 @@
       <div class="invalid_feedback" *ngIf=" streetAddress.errors?.minlength && streetAddress.touched ">
          Please enter a corrct address.
       </div>
-      <input class="form-control s2" type="streetAddress" required minlength="2" name="streetAddress"
+      <input class="form-control s2" type="streetAddress" [disabled]="!isShoppingCartValid" required minlength="2" name="streetAddress"
          placeholder="Event street address"
          [ngClass]="{'is-invalid':streetAddress.errors?.required && streetAddress.touched}"
          [(ngModel)]="userInfo.streetAddress" #streetAddress="ngModel">
    </div>
-   <!-- event data -->
-   <mat-form-field style="width:100%">
-      <input matInput [matDatepicker]="myDatepicker" [min]="minDate" placeholder="Event date" type="dateOfEvent"
-         required name="dateOfEvent" [ngClass]="{'is-invalid':dateOfEvent.errors?.required && dateOfEvent.touched}"
-         [(ngModel)]="PlannedTime" #dateOfEvent="ngModel">
-      <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-      <mat-datepicker #myDatepicker></mat-datepicker>
-      <mat-error *ngIf="dateOfEvent.invalid">Please enter a date</mat-error>
-   </mat-form-field>
-   <br>
    <br>
    <!--pick up or delivery-->
-   <mat-radio-group required aria-label="Select an option">
-      <mat-radio-button (change)="radioButtonChange($event)" color="primary" value="1">Pick Up</mat-radio-button>
+   <mat-radio-group [disabled]="!isShoppingCartValid"required aria-label="Select an option">
+      <mat-radio-button (change)="radioButtonChange($event)" color="primary" value="1">Pick-up</mat-radio-button>
       <mat-radio-button (change)="radioButtonChange($event)" color="primary" value="0">Delivery</mat-radio-button>
-      <mat-error *ngIf="buttonError">Please make a option for pick-up or delievery</mat-error>
+      <br>
+      <mat-error *ngIf="buttonError && isShoppingCartValid">Please make an option for pick-up or delievery</mat-error>
    </mat-radio-group>
    <!--Select a district for delivery-->
    <div *ngIf="districtSelectControl">
       <hr>
-      <mat-form-field class="form-">
-         <mat-label>Select a district</mat-label>
+      <mat-form-field class="form">
+         <mat-label>Select a region</mat-label>
          <mat-select required (selectionChange)="selectionChange($event)">
             <mat-option value="1">NorthShoreCity</mat-option>
             <mat-option value="2">AucklandCity</mat-option>
@@ -111,17 +102,17 @@
             <mat-option value="4">WaitakereCity</mat-option>
          </mat-select>
       </mat-form-field>
-      <mat-error *ngIf="districtError">Please select a district</mat-error>
+      <mat-error *ngIf="districtError && isShoppingCartValid">Please select a region</mat-error>
    </div>
    <hr>
    <!-- Message -->
    <div class="form-group">
-      <textarea class="form-control s2" rows="5" type="Message" name="Message" placeholder="Send a message:"
+      <textarea class="form-control s2" [disabled]="!isShoppingCartValid" rows="5" type="Message" name="Message" placeholder="Send a message:"
          [(ngModel)]="userInfo.Message" #Message="ngModel">
                       </textarea>
    </div>
 
-   <div class="invalid_feedback mb-4">{{feedback_message}}</div>
+   <div *ngIf="isShoppingCartValid" class="invalid_feedback mb-4">{{feedback_message}}</div>
    <div class="row">
       <div class="col-12 text-center"><button class="btn btn-outline-gold btn-block" type="submit"
             [disabled]="isSendingEmail || isCartEmpty || !isShoppingCartValid">Submit</button></div>
