@@ -51,6 +51,8 @@ export class ProductService {
   checkIfAvailable(cartitems) {
     return this.http.post(this.baseUrl + '/ProductTime/CheckIfAvaliable/', cartitems)
   }
+
+
   // !Gallery
   indexGallery() {
     return this.http.get(this.baseUrl + '/projects');
@@ -193,10 +195,14 @@ export class ProductService {
   login(adminModel) {
     return this.http.post(this.baseUrl + '/admins', adminModel);
   }
-  //   getUser() {  //Admin account
-  //     return this.http.get(this.baseUrl + '/admins',
-  //       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
-  //   }
+  getProductTimeTable(id, isDetailId, beginDate) {
+	return this.http.get(this.baseUrl + '/ProductTime/GetProductTimeByMonth/' + id +'?isDetailId='+isDetailId+'&beginDate='+ beginDate);
+ }
+
+//   getUser() {  //Admin account
+//     return this.http.get(this.baseUrl + '/admins',
+//       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
+//   }
 
 
   // !user
