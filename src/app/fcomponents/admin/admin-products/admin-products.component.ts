@@ -89,7 +89,9 @@ export class AdminProductsComponent implements OnInit {
       (res) => {
         this.isLoading = false;
 		this.displayedProductData = res['data'];
-		console.log('ProductList:', res['data']);
+		console.log('ProductList', res['data']);
+		
+		// this.childProducts = this.displayedProductData[id]['productDetail'];
 		
 		// ###### Get Child Products ######
         this.childProducts = res['data'][0]['productDetail'];
