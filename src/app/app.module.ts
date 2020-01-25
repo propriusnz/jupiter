@@ -160,7 +160,6 @@ const appRoutes: Routes = [
     NgxJsonLdModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
     MatDatepickerModule,
     MatInputModule,
     MatFormFieldModule,

@@ -111,7 +111,4 @@ export class NavbarComponent implements OnInit {
       //   console.log('false');
     }
   }
-
-  // Log in successful snackbar
-
 }

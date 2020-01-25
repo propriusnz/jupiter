@@ -7,14 +7,8 @@ th{
 th:first-child{
     width:56px;
 }
-td{
-    text-align:center;
-}
 .table-secondary  span{
     font-size: 10px;
-}
-.table td{
-    padding: 0.4rem;
 }
 .far.fa-trash-alt:hover{
     color:red;
