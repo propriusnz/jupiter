@@ -17,4 +17,5 @@ export class AuthService {
     const isAuth=authInfo? true : false;
     return isAuth
   }
+  isRaymentAuth
 }
