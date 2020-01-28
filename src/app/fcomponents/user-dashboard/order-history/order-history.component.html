@@ -14,7 +14,7 @@
 			</tr>
 			<tr class="order-list" (click)="itemDialog(order.cartId)" *ngFor="let order of orders">
 				<td>{{order.location}}</td>
-				<td>{{order.plannedTime | date:"MM/dd/yy"}}</td>
+				<td>{{order.plannedTime | date :'short'}}</td>
 				<td>{{order.items}}</td>
 				<td>{{order.price}}</td>
 				<b><td *ngIf="order.isPay === 0 && order.isExpired === 0">Processing</td></b>
@@ -23,39 +23,7 @@
 				<td *ngIf="order.cartStatusId === null">-</td>
 				<td *ngIf="order.cartStatusId === 1">Not Collect</td>
 				<td *ngIf="order.cartStatusId === 2">Collected</td>
-				<!-- location, plannedtime 那些字眼全部都是根据console log里面的资料去取 -->
 			</tr>
 		</table>
 	</div>
 </div>
-
-<style>
-	p {
-		font-size: 1.1rem;
-	}
-	span {
-		color: #c48f45;
-	}
-	.card {
-		min-height: 350px;
-		width: 1000px;
-		margin: 0 auto;
-		margin-top: 3%;
-	}
-	.card-body {
-		width: 100%;
-	}
-	.card-header {
-		background-color: #c48f45;
-		color: white;
-		text-align: center;
-	}
-	.order-list {
-		color: #535353;
-	}
-	.order-list:hover {
-        cursor: pointer;
-        color: #caa26b;
-		text-decoration: none;
-	}
-</style>

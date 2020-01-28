@@ -1,0 +1,25 @@
+.card {
+	min-height: 350px;
+	width: 750px;
+	margin: 0 auto;
+	margin-top: 3%;
+}
+.card-body {
+	width: 100%;
+}
+.card-header {
+	background-color: #c48f45;
+	color: white;
+	text-align: center;
+}
+a {
+	color: #535353;
+}
+a:hover {
+    cursor: pointer;
+    color: #caa26b;
+	text-decoration: none;
+}
+a {
+	text-decoration: none;
+}
