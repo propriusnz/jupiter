@@ -3,7 +3,29 @@
 		<h4>Your Order History</h4>
 	</div>
 	<div class="card-body bg-light text-center">
-		Nothing here yet ...
+		<table class="table">
+			<tr>
+				<th>Event Address</th>
+				<th>Date of Event</th>
+				<th>Items (List)</th>
+				<th>Price</th>
+				<th>Payment Status</th>
+				<th>Order Status</th>
+			</tr>
+			<tr class="order-list" (click)="itemDialog(order.cartId)" *ngFor="let order of orders">
+				<td>{{order.location}}</td>
+				<td>{{order.plannedTime | date:"MM/dd/yy"}}</td>
+				<td>{{order.items}}</td>
+				<td>{{order.price}}</td>
+				<b><td *ngIf="order.isPay === 0 && order.isExpired === 0">Processing</td></b>
+				<b><td *ngIf="order.isPay === 1 && order.isExpired === 0">Paid</td></b>
+				<b><td *ngIf="order.isPay === 0 && order.isExpired === 1">Expired</td></b>
+				<td *ngIf="order.cartStatusId === null">-</td>
+				<td *ngIf="order.cartStatusId === 1">Not Collect</td>
+				<td *ngIf="order.cartStatusId === 2">Collected</td>
+				<!-- location, plannedtime 那些字眼全部都是根据console log里面的资料去取 -->
+			</tr>
+		</table>
 	</div>
 </div>
 
@@ -16,7 +38,7 @@
 	}
 	.card {
 		min-height: 350px;
-		width: 500px;
+		width: 1000px;
 		margin: 0 auto;
 		margin-top: 3%;
 	}
@@ -27,5 +49,13 @@
 		background-color: #c48f45;
 		color: white;
 		text-align: center;
+	}
+	.order-list {
+		color: #535353;
+	}
+	.order-list:hover {
+        cursor: pointer;
+        color: #caa26b;
+		text-decoration: none;
 	}
 </style>
