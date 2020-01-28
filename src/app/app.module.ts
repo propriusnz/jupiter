@@ -1,10 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// Angular Material
 import { MatDatepickerModule, MatInputModule, MatFormFieldModule, MatNativeDateModule, MatDialogModule, MatButtonModule, MatIconModule, MatDialogRef } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -13,8 +19,11 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 // All service follow
 import { ProductService } from './service/product.service';
 import { MatchService } from './service/match.service';
+import {AuthService} from './service/auth.service';
+import {AdminPanelService} from './service/admin-panel.service';
 // All Guard follow
-import { AuthGuardService } from './guards/admin-auth.guard'
+import { AdminAuthGuard } from './guards/admin-auth.guard'
+import { UserAuthGuard } from './guards/user-auth.guard';
 //All Data Follow
 import { DataService } from './service/data.service';
 // All components follow
@@ -27,9 +36,9 @@ import { ProductListComponent } from './fcomponents/products/productList/product
 import { AboutUsComponent } from './fcomponents/pages/aboutUs/aboutUs.component';
 import { ProductComponent } from './fcomponents/products/product/product.component';
 import { FooterComponent } from './fcomponents/basic/footer/footer.component';
-import { Shopping_cartComponent } from './fcomponents/shopping_cart/shopping_cart.component';
-import { UserInfoComponent} from './fcomponents/userInfo/userInfo.component';
-import { GalleryDetailComponent} from './fcomponents/gallery/gallery-detail/gallery-detail.component';
+import { ShoppingCartComponent } from './fcomponents/shopping-checkout/shopping-cart/shopping-cart.component';
+import { ShoppingUserinfoComponent } from './fcomponents/shopping-checkout/shopping-userinfo/shopping-userinfo.component'
+import { GalleryDetailComponent } from './fcomponents/gallery/gallery-detail/gallery-detail.component';
 import { GalleryListComponent } from './fcomponents/gallery/gallery-list/gallery-list.component';
 import { AdminComponent } from './fcomponents/admin/admin.component';
 import { AdminLoginComponent } from './fcomponents/admin/admin-login/admin-login.component';
@@ -51,7 +60,7 @@ import { AdminDashboardComponent } from './fcomponents/admin/admin-dashboard/adm
 import { AdminGalleriesComponent } from './fcomponents/admin/admin-galleries/admin-galleries.component';
 import { AdminImagesComponent } from './fcomponents/admin/admin-images/admin-images.component';
 import { ForgotPasswordComponent } from './fcomponents/basic/user-dialog/forgot-password/forgot-password.component';
-import { PaymentoptionsComponent } from './fcomponents/paymentoptions/paymentoptions.component';
+import { PaymentOptionsComponent } from './fcomponents/payment-options/payment-options.component';
 import { ChangeinfoComponent } from './fcomponents/changeinfo/changeinfo.component';
 import { EmailsentDialogComponent } from './fcomponents/basic/user-dialog/emailsent-dialog/emailsent-dialog.component';
 import { ResetPasswordComponent } from './fcomponents/reset-password/reset-password.component';
@@ -60,40 +69,46 @@ import { UserProfileComponent } from './fcomponents/user-dashboard/user-profile/
 import { OrderHistoryComponent } from './fcomponents/user-dashboard/order-history/order-history.component';
 import { ManagePasswordComponent } from './fcomponents/user-dashboard/manage-password/manage-password.component';
 import { ItemDetailComponent } from './fcomponents/user-dashboard/item-detail/item-detail.component';
+import { PaymentResultComponent } from './fcomponents/payment-result/payment-result.component';
+import { AdminUserListComponent } from './fcomponents/admin/admin-user-list/admin-user-list.component';
+
 
 
 // All Routes follow
 const appRoutes: Routes = [
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: 'home', component: HomepageComponent},
-  {path: 'contactUs', component: ContactUsComponent},
-  {path: 'aboutUs', component: AboutUsComponent},
-  {path: 'faq', component: FaqComponent},
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomepageComponent },
+  { path: 'contactUs', component: ContactUsComponent },
+  { path: 'aboutUs', component: AboutUsComponent },
+  { path: 'faq', component: FaqComponent },
   // {path: 'category/:id', component: ProductListComponent, data : {some_data : 'category'}},
-  {path: 'products/:productTypeId/:categoryTypeId', component: ProductListComponent, data : {some_data : 'products'}},
-  {path: 'services/:productTypeId/:categoryTypeId', component: ProductListComponent, data : {some_data : 'services'}},
-  {path: 'packages', component: ProductListComponent, data : {some_data : 'package'}},
-  {path: 'product/:id', component: ProductComponent},
-  {path: 'galleries', component: GalleryListComponent},
-  {path: 'galleries/:id', component: GalleryDetailComponent},
-  {path: 'admin', component: AdminComponent, canActivate: [AuthGuardService],
+  { path: 'products/:productTypeId/:categoryTypeId', component: ProductListComponent, data: { some_data: 'products' } },
+  { path: 'services/:productTypeId/:categoryTypeId', component: ProductListComponent, data: { some_data: 'services' } },
+  { path: 'packages', component: ProductListComponent, data: { some_data: 'package' } },
+  { path: 'product/:id', component: ProductComponent },
+  { path: 'galleries', component: GalleryListComponent },
+  { path: 'galleries/:id', component: GalleryDetailComponent },
+  {
+    path: 'admin', component: AdminComponent, canActivate: [AdminAuthGuard],
     children: [
-      {path: '', redirectTo: 'adminDashboard', pathMatch: 'full'},
-      {path: 'adminDashboard', component: AdminDashboardComponent},
-      {path: 'adminFaq', component: AdminfaqComponent},
-      {path: 'adminProducts/:productTypeId', component: AdminProductsComponent},
-      {path: 'adminCarts', component: AdminCartComponent},
-      {path: 'adminGalleries', component: AdminGalleriesComponent},
-      {path: 'adminImages', component: AdminImagesComponent},
+      { path: '', redirectTo: 'adminDashboard', pathMatch: 'full' },
+      { path: 'adminDashboard', component: AdminDashboardComponent },
+      { path: 'adminFaq', component: AdminfaqComponent },
+      { path: 'adminProducts/:productTypeId', component: AdminProductsComponent },
+      { path: 'adminCarts', component: AdminCartComponent },
+      { path: 'adminGalleries', component: AdminGalleriesComponent },
+	  { path: 'adminImages', component: AdminImagesComponent },
+	  { path: 'adminUserlist', component: AdminUserListComponent}
     ]
   },
-  {path: 'login', component: AdminLoginComponent},
-  {path: 'reset', component: ResetPasswordComponent},
-  {path: 'userDashboard', component: UserDashboardComponent},
-  {path: 'checkout', component: ShoppingCheckoutComponent},
-  {path: 'thankYou', component: ThankYouComponent},
-  {path: 'paymentoptions',component: PaymentoptionsComponent},
-  {path: '**', component: HomepageComponent}
+  { path: 'login', component: AdminLoginComponent },
+  { path: 'reset', component: ResetPasswordComponent },
+  { path: 'userDashboard', component: UserDashboardComponent,canActivate: [UserAuthGuard]},
+  { path: 'checkout', component: ShoppingCheckoutComponent },
+  { path: 'thankYou', component: ThankYouComponent },
+  { path: 'paymentoptions', component: PaymentOptionsComponent },
+  { path: 'paymentresult', component: PaymentResultComponent },
+  { path: '**', component: HomepageComponent }
 ];
 
 @NgModule({
@@ -107,8 +122,8 @@ const appRoutes: Routes = [
     AboutUsComponent,
     ProductComponent,
     FooterComponent,
-    Shopping_cartComponent,
-    UserInfoComponent,
+    ShoppingCartComponent,
+    ShoppingUserinfoComponent,
     GalleryDetailComponent,
     GalleryListComponent,
     AdminComponent,
@@ -130,7 +145,7 @@ const appRoutes: Routes = [
     UserregistrationDialogComponent,
     UserloginDialogComponent,
     ForgotPasswordComponent,
-    PaymentoptionsComponent,
+    PaymentOptionsComponent,
     ChangeinfoComponent,
     EmailsentDialogComponent,
     ResetPasswordComponent,
@@ -138,7 +153,9 @@ const appRoutes: Routes = [
     UserProfileComponent,
     OrderHistoryComponent,
     ManagePasswordComponent,
-    ItemDetailComponent
+    ItemDetailComponent,
+    PaymentResultComponent,
+    AdminUserListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -147,21 +164,26 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     MatDatepickerModule,
     MatInputModule,
-	MatFormFieldModule,
-	MatCardModule,
+    MatFormFieldModule,
+    MatCardModule,
     MatNativeDateModule,
-	MatDialogModule,
-	MatButtonModule,
-	MatIconModule,
-	MatTabsModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTabsModule,
 	MatSlideToggleModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(appRoutes, {scrollPositionRestoration: 'enabled'}),
-	HttpClientModule,
-  BsDatepickerModule.forRoot()
+    MatSlideToggleModule,
+    MatMenuModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatSnackBarModule,
+    RouterModule.forRoot(appRoutes, { scrollPositionRestoration: 'enabled' }),
+    HttpClientModule,
+    BsDatepickerModule.forRoot(),
   ],
   providers: [
-    ProductService, DataService, MatchService
+    ProductService, DataService, MatchService,AdminAuthGuard,UserAuthGuard,AuthService,AdminPanelService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
@@ -169,8 +191,8 @@ const appRoutes: Routes = [
     GallerydialogComponent,
     ProductdialogComponent,
     CartdialogComponent,
-	  UserregistrationDialogComponent ,
-	  UserloginDialogComponent,
+    UserregistrationDialogComponent,
+    UserloginDialogComponent,
     ForgotPasswordComponent,
     EmailsentDialogComponent,
     ItemDetailComponent

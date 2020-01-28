@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DataService } from '../../../../service/data.service'
 import { ProductService } from '../../../../service/product.service';
 import { MatchService } from 'src/app/service/match.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-userregistration-dialog',
@@ -15,47 +16,45 @@ export class UserregistrationDialogComponent implements OnInit {
   registrationForm: FormGroup;
   hide = true;
   message: string;
-  user = {
-	  Email: '',
-	  Password: ''
-  };
+  subscribe: number;
   errorMessage = '';
   signupFailed = false;
 
-  constructor (
-	private data: DataService, 
-	private fb: FormBuilder, 
-	public dialogRef: MatDialogRef<UserregistrationDialogComponent>, 
-	public dialog: MatDialog,
+  constructor(
+    private data: DataService,
+    private fb: FormBuilder,
+    public dialogRef: MatDialogRef<UserregistrationDialogComponent>,
+    public dialog: MatDialog,
     private productservice: ProductService,
-    private matchservice: MatchService
-	) { }
+    private matchservice: MatchService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.registrationForm = this.fb.group({
-	  email: ['', [Validators.required, Validators.email,  
-		           Validators.minLength(8)]],
-	  password: ['', [Validators.required, 			
-					  Validators.minLength(8), 
-					  Validators.maxLength(20), 
-					  Validators.pattern('(?!^[0-9 ]*$)(?!^[a-zA-Z ]*$)^([a-zA-Z0-9 ]{8,20})$')]],
-      confirmpassword: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email,
+      ]],
+      password: ['', [Validators.required,
+      Validators.minLength(8),
+      Validators.maxLength(20),
+      Validators.pattern('(?!^[0-9 ]*$)(?!^[a-zA-Z ]*$)^([a-zA-Z0-9 ]{8,20})$')]],
+      confirmpassword: ['', [Validators.required]]
     }, {
       validator: this.matchservice.MustMatch('password', 'confirmpassword')
     });
-      this.data.currentloginmessage.subscribe(currentloginmessage => this.message = currentloginmessage)
+    this.data.currentloginmessage.subscribe(currentloginmessage => this.message = currentloginmessage)
   }
 
   getErrorMessage() {
     return this.email.hasError('required') ? 'Please enter a value' :
-    this.email.hasError('email') ? 'Not a valid email' : ''
+      this.email.hasError('email') ? 'Not a valid email' : ''
   }
 
   getErrorMessage2() {
     return this.password.hasError('required') ? 'Please enter a value' :
-    this.password.hasError('minlength') ? 'Please enter at least 8 characters' :
-    this.password.hasError('maxlength') ? 'Please enter no more than 20 characters' :
-   	this.password.hasError('pattern') ? 'Please use combination of letters and characters' : ''
+      this.password.hasError('minlength') ? 'Please enter at least 8 characters' :
+        this.password.hasError('maxlength') ? 'Please enter no more than 20 characters' :
+          this.password.hasError('pattern') ? 'Please use combination of letters and characters' : ''
   }
 
   getErrorMessage3() {
@@ -71,26 +70,57 @@ export class UserregistrationDialogComponent implements OnInit {
   get password() { return this.registrationForm.get('password') };
   get confirmpassword() { return this.registrationForm.get('confirmpassword') };
 
-  update () {
-	  this.signupFailed = false;
-  }
 
   onSubmit() {
-	this.user = {
-		Email: this.registrationForm.value.email,
-		Password: this.registrationForm.value.password
-	}
-	console.log(this.user);
-	this.productservice.register(this.user).subscribe(
-		res => {
-			console.log(res)
-			this.dialogRef.close()
-		},
-		err => {
-			console.log(err)
-			this.signupFailed = true
-			this.errorMessage = "Sign up failed"
-		}
-	);
+    let user = {
+      email: this.registrationForm.value.email,
+      password: this.registrationForm.value.password,
+      isSubscribe: this.subscribe
+    }
+    console.log(user);
+    this.productservice.register(user).subscribe(
+      res => {
+        console.log(res);
+        this.dialogRef.close();
+        const user = {
+          Email: this.registrationForm.value.email,
+          Password: this.registrationForm.value.password
+        }
+        this.productservice.userlogin(user).subscribe(
+          res => {
+            console.log(res)
+            localStorage.setItem('userId', JSON.stringify(res['data'].userId));
+            localStorage.setItem('userToken', JSON.stringify(res['data'].token));
+            location.reload();
+          },
+          err => {
+            console.log(err);
+          }
+        );
+        this.redirect();
+      },
+      err => {
+        if (err.hasOwnProperty('error')) {
+          if (err.error.hasOwnProperty('errorMessage')) {
+            this.errorMessage = err.error.errorMessage
+          }
+        } else {
+          this.errorMessage = "Sign up failed, Internal Server Error"
+        }
+        console.log(err);
+        this.signupFailed = true;
+      }
+    );
+  }
+  onSlideChange(subscribe) {
+    if (subscribe.checked) {
+      this.subscribe = 1;
+    } else {
+      this.subscribe = 0;
+    }
+  }
+
+  redirect() {
+    this.router.navigate(['userDashboard'])
   }
 }

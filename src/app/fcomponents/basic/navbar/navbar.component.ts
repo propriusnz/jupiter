@@ -1,10 +1,12 @@
 import { Component, OnInit, HostListener, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { MatDialog } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserloginDialogComponent } from '../user-dialog/userlogin-dialog/userlogin-dialog.component';
 import { UserregistrationDialogComponent } from '../user-dialog/userregistration-dialog/userregistration-dialog.component'
 import { DataService } from '../../../service/data.service'
 import { ProductService } from '../../../service/product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -17,14 +19,18 @@ export class NavbarComponent implements OnInit {
   serviceCategories: any = [];
   isBrowser = false;
   galleriesData: any;
-  loginmessage:string;
-  signupmessage:string;
+  loginmessage: string;
+  signupmessage: string;
+  userLoginControl: string;
+  loggedIn: boolean;
+
   constructor(
-        @Inject(PLATFORM_ID) private platformId,
-        private productService: ProductService,
-        private data:DataService,
-        public dialog: MatDialog
-    ) {
+    @Inject(PLATFORM_ID) private platformId,
+    private productService: ProductService,
+    private data: DataService,
+    public dialog: MatDialog,
+    private router: Router
+  ) {
     if (isPlatformBrowser(this.platformId)) {
       this.isBrowser = true;
     }
@@ -38,6 +44,7 @@ export class NavbarComponent implements OnInit {
     }
     this.getCategories();
     this.getGalleryTypes();
+    this.ifLoggedIn();
   }
   // get all the categories and show on navbar
   getCategories(): void {
@@ -70,23 +77,38 @@ export class NavbarComponent implements OnInit {
       height: '650px',
     });
   }
-  newsignupDialog(){
-    if(this.signupmessage.localeCompare('open')==0){
-    this.signupDialog()
-    this.data.changesignupMessage("close") 
+  newsignupDialog() {
+    if (this.signupmessage.localeCompare('open') == 0) {
+      this.signupDialog()
+      this.data.changesignupMessage("close")
     }
-    
-  } 
-  newloginDialog(){
-    if(this.loginmessage.localeCompare('open')==0){
-    this.loginDialog()
-    this.data.changeloginMessage("close")
+  }
+  newloginDialog() {
+    if (this.loginmessage.localeCompare('open') == 0) {
+      this.loginDialog()
+      this.data.changeloginMessage("close")
     }
   }
   signupDialog() {
     this.dialog.open(UserregistrationDialogComponent, {
       width: '400px',
-      height: '650px'
+      height: '680px'
     });
+  }
+  logout() {
+    localStorage.clear();
+    sessionStorage.clear();
+    this.router.navigate(['/home']);
+    alert('You are now logged out!');
+    location.reload();
+  }
+  ifLoggedIn() {
+    if (localStorage.getItem('userToken')) {
+      this.loggedIn = true;
+      //   console.log('true');
+    } else {
+      this.loggedIn = false;
+      //   console.log('false');
+    }
   }
 }

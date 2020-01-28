@@ -88,7 +88,7 @@
                   formControlName="Price" [attr.disabled]="true">
                 <input style="width:40px; height:20px; font-size:14px; border:none; border-bottom:1px solid #919191"
                   (click)="addQuantity(detail)" type="number" min="0" formControlName="Quantity" placeholder="Quantity">
-                <div *ngIf="cartForm.controls.cartItems.controls[i].controls.Quantity.invalid" class="invalid_feedback"
+                <div *ngIf="detail.controls.Quantity.invalid" class="invalid_feedback"
                   style="padding-bottom:10px;" role="alert">Only {{detail.value.AvailableStock}} are available. Please
                   contact us if you need more!</div>
               </div>
@@ -104,20 +104,40 @@
         <div class="col-6 col-lg-6 s1"
           *ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length==0">
           Quantity: <input type="number" [value]="quantity" min="0" max={{productDetail.availableStock}}
-            [(ngModel)]="quantity">
+            [(ngModel)]="quantity" (click)="quantitycheck(productDetail)">
         </div>
-        <div class="mt-2 ml-2">
-          <input bsDaterangepicker type="text" class="form-control" placeholder="Select your Desired time frame"
-            style="width: 260px;" [isDisabled]="dateControl" [minDate]="minDate" [datesDisabled]="disabledDates"
-            [maxDate]="maxDate" [bsConfig]="dpConfig">
+        <div *ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length>0">
+          <div class="mt-2 ml-2">
+            <input bsDatepicker type="text" class="form-control" placeholder="Start Date" style="width: 260px;"
+              [isDisabled]="dateStartControl" [minDate]="minDate_start" [datesDisabled]="disabledDates" [maxDate]="maxDate_start"
+              [bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}"  (bsValueChange)="onStartChange($event)">
+          </div>
+          <div class="mt-2 ml-2">
+            <input bsDatepicker type="text" class="form-control" placeholder="Return Date" style="width: 260px;"
+              [isDisabled]="dateReturnControl" [minDate]="minDate_return" [datesDisabled]="disabledDates" [maxDate]="maxDate_return"
+              [bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}"(bsValueChange)="onReturnChange($event)" >
+          </div>
+        </div>
+        <div class="row" *ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length==0">
+          <div class="ml-4 mt-1">
+            <input bsDatepicker type="text" class="form-control" placeholder="Start Date" style="width: 170px;"
+              [isDisabled]="dateStartControl" [minDate]="minDate_start" [datesDisabled]="disabledDates" [maxDate]="maxDate_start"
+              [bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}" (bsValueChange)="onStartChange($event)">
+          </div>
+          <div class="ml-1 mt-1">
+            <input bsDatepicker type="text" class="form-control" placeholder="Return Date" style="width: 170px;"
+              [isDisabled]="dateReturnControl" [minDate]="minDate_return" [datesDisabled]="disabledDates" [maxDate]="maxDate_return"
+              [bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}" (bsValueChange)="onReturnChange($event)">
+          </div>
         </div>
         <div class="col-6 col-lg-6 mt-2">
           <button class='btn btn_gold' (click)="manageCartProds()"
-            [disabled]="(0>= this.quantity || this.quantity > this.productDetail.availableStock) && (this.cartForm.invalid || this.isInputZero)">Add
+            [disabled]="this.addToCartControl || (0>= this.quantity || this.quantity > this.productDetail.availableStock) && (this.cartForm.invalid || this.isInputZero)" >Add
             to cart</button>
         </div>
-
-
+        <!--&& (0>= this.quantity || this.quantity > this.productDetail.availableStock) && (this.cartForm.invalid || this.isInputZero)
+ -->
+        
 
       </div>
 

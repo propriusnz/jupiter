@@ -7,6 +7,10 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap, filter } from 'rxjs/operators';
+import { environment } from '../../../../environments/environment.prod';
+import { setTheme } from 'ngx-bootstrap/utils';
+import * as moment from 'moment';
+import { setDate } from 'ngx-bootstrap/chronos/utils/date-setters';
 
 
 @Component({
@@ -19,15 +23,43 @@ export class AdminProductsComponent implements OnInit {
   displayedProductData: any;
   isLoading = false;
   productTitle: string;
+  childProducts: any;
   subscription: Subscription;
   searchField: FormControl = new FormControl();
+  minDate: Date; // Start date of calender
+  maxDate: Date;
+  startMoment: any; // Start date of monment.js date array
+  endMoment: any;
+  currentDate: Date;
+  allDates = []; // All dats between minDate & maxDate;
+  emptyDates = []; // Days with no bookings at all
+  ProductTime: any;
 
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
     private dialog: MatDialog,
     private adminPanelService: AdminPanelService
-  ) { }
+  ) { 
+	  this.minDate = new Date;
+		  this.minDate.setDate(this.minDate.getDate() - 90);
+		//   console.log('minDate: ', this.minDate, typeof(this.minDate));
+	  this.maxDate = new Date();
+	  	  this.maxDate.setDate(this.maxDate.getDate() + 90);
+	  this.startMoment = moment(new Date()).subtract(60, 'days');
+	//   console.log('Before: ', this.startMoment, typeof(this.startMoment));
+	  this.endMoment = moment(new Date()).add(30, 'days');
+	//   this.endMoment = moment(this.endMoment, "DD-MMM-YYYY");
+	//  console.log('After: ', this.startMoment, typeof(this.startMoment));
+	   this.allDates.push(this.startMoment.toDate().toString()); // Push begin date (day1)
+	   let i = 1;
+	   while (i <= 90) {
+		 let day = this.startMoment.add(i, 'days');
+	 	this.allDates.push(day.toDate().toString());
+	 	i ++;
+	   };
+	//    console.log(this.allDates);
+    }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -40,7 +72,7 @@ export class AdminProductsComponent implements OnInit {
     this.getDefaultTitle();
     this.subscription = this.adminPanelService.currentPanel.subscribe(res => this.productTitle = res);
     const searchProduct$ = this.liveSearchProduct();
-    this.subscription.add(searchProduct$);
+	this.subscription.add(searchProduct$);
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -56,7 +88,14 @@ export class AdminProductsComponent implements OnInit {
     this.productService.indexType(Number(typeId)).subscribe(
       (res) => {
         this.isLoading = false;
-        this.displayedProductData = res['data'];
+		this.displayedProductData = res['data'];
+		console.log('ProductList', res['data']);
+		
+		// this.childProducts = this.displayedProductData[id]['productDetail'];
+		
+		// ###### Get Child Products ######
+        this.childProducts = res['data'][0]['productDetail'];
+        console.log('Child Product List: ', this.childProducts);
       },
       (err) => {
         this.isLoading = false;
@@ -123,5 +162,26 @@ export class AdminProductsComponent implements OnInit {
       switchMap((query) => query ?
         this.productService.searchProducts(Number(this.productTypeId), query) : this.productService.indexType(Number(this.productTypeId)))
     ).subscribe(result => this.displayedProductData = result['data']);
+  }
+
+  getDetailProductTime(id) {
+	const isDetailId = 1;
+	this.currentDate = new Date();
+	const beginDate = this.currentDate;
+	this.productService.getProductTimeTable(id, isDetailId, this.datetoYMD(beginDate)).subscribe(
+		productTimeTable => {
+			console.log('product Time List: ', productTimeTable);
+			this.ProductTime = productTimeTable;
+			// console.log(typeof(productTimeTable));
+		}
+	)
+	// console.log(this.datetoYMD(this.currentDate));
+  }
+
+  datetoYMD(date) {
+    var d = date.getDate();
+    var m = date.getMonth() + 1; //Month from 0 to 11
+    var y = date.getFullYear();
+    return '' + y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
   }
 }

@@ -1,23 +1,45 @@
-<div class="card">
+<div *ngIf="profile" class="card">
 	<div class="card-header">
-		<h4>James Bond</h4>	
+		<h4>{{ firstname }} {{ lastname }}</h4>	
+		<h5 *ngIf="firstname == null && lastname == null">Please update your details</h5>
 	</div>
 	<div class="card-body bg-light text-center">
-		<form>
-			<div class="formBody my-4">
-				<p><span>Email:</span><em> jamesbond@mi6.com</em></p>
-				<p><span>Phone:</span> 1234567</p>
-				<p><span>Company:</span> MI 6</p>
-			</div>
+		<form [formGroup]="updateProfileForm" (ngSubmit)="onSubmit()">
+			<mat-form-field>
+				<input matInput formControlName="fname" placeholder="First Name">
+				<mat-error *ngIf="fname.invalid">{{getErrorMessage1()}}</mat-error>
+			</mat-form-field>
+
+			<mat-form-field>
+				<input matInput formControlName="lname" placeholder="Last Name">
+				<mat-error *ngIf="lname.invalid">{{getErrorMessage2()}}</mat-error>
+			</mat-form-field>
+
+			<mat-form-field>
+				<input matInput placeholder="Email Address" value="{{ email }}" disabled>
+			</mat-form-field>
+
+			<mat-form-field>
+				<input matInput formControlName="phone" placeholder="Phone No.">
+				<mat-error *ngIf="phone.invalid">{{getErrorMessage3()}}</mat-error>
+			</mat-form-field>
+
+			<mat-form-field>
+				<input matInput formControlName="company" placeholder="Company">
+				<mat-error *ngIf="company.invalid">{{getErrorMessage4()}}</mat-error>
+			</mat-form-field>
 
 			<div class="slide">
-				<mat-slide-toggle aria-label="Subscribe" color="primary"></mat-slide-toggle>
-				<span> Subscribe to our news letter</span>
+				<mat-slide-toggle (change)="onSlideChange($event)" aria-label="Subscribe" formControlName="subscribe" color="primary"></mat-slide-toggle>
+				<span> Subscribe to our news letter</span><br>
 			</div>
 
-			<hr>
+			<div *ngIf="this.updateProfileForm.valid && errorMessage" class="alert alert-danger text-center s2" role="alert">
+				{{errorMessage}}
+			</div>
+		
 			<div id="buttonsWrap" class="mt-2">
-				<button mat-raised-button class="primaryButton" routerLink='/home'>Update</button>
+				<button mat-raised-button type="submit" class="primaryButton">Update</button>
 			</div>
 		</form>
 	</div>
@@ -33,6 +55,10 @@
 	span {
 		color: #c48f45;
 	}
+	form {
+		width: 50%;
+		margin: 0 auto;
+	}
 	.card {
 		min-height: 350px;
 		width: 500px;
@@ -46,6 +72,7 @@
 		background-color: #c48f45;
 		color: white;
 		text-align: center;
+		min-height: 60px;
 	}
 	.slide {
 		margin: 0 auto;

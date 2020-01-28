@@ -3,7 +3,6 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ProductService } from '../../../service/product.service';
 import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { environment } from '../../../../environments/environment.prod';
-import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { setTheme } from 'ngx-bootstrap/utils';
 import * as moment from 'moment';
 
@@ -21,26 +20,45 @@ export class ProductComponent implements OnInit {
   isprodAdded = false;
   isStockAvailable = true;
   cartList = [];
+  productTimetable = [];
   cartForm: FormGroup;
   cartItems: FormArray;
   isInputZero = true;
   isLoading = true;
   rightCarouselControlPosition: number;
   baseImageLink = environment.baseLink;
-  public dpConfig: Partial<BsDatepickerConfig> = new BsDatepickerConfig();
-  minDate: Date;
-  maxDate: Date;
-  dateControl = false;
-  disabledDates = [
-    new Date('2019-12-25'),
-    new Date('2019-12-31')
-  ];
+  minDate_start: Date;
+  maxDate_start: Date;
+  minDate_return: Date;
+  maxDate_return: Date;
+  utcDate_start:Date
+  dateStartControl = true;
+  dateReturnControl = true;
+  dateStartInput: any
+  dateReturnInput: any
+  // hiringtime=[];
+  disabledDates = [];
+  startMoment: any;
+  returnMoment: any;
+  unavailableDates: any
   orderquantity = 0;
   orderlist = [];
   map = new Map();
+  mySet = new Set();
+  tmpDetailID = new Map()//used for storing products with both ProdId and Id
+  tmpProdID = new Map()//used for storing products with only ProdId
+  addToCartControl = true;
+  prodDetailIdlist = []
+  prodIdlist = []
+  
+
+
   @ViewChild('imageContainer', { static: false }) imageContainer: ElementRef;
   @ViewChild('prodImage', { static: false }) prodImage: ElementRef;
   @ViewChild('rightControl', { static: false }) rightControl: ElementRef;
+  // hiringtime:{proddetailid: string;
+  //   quantity: string;
+  //   beginDate: string};
 
   constructor(
     private route: ActivatedRoute,
@@ -50,11 +68,12 @@ export class ProductComponent implements OnInit {
   ) {
     this.productId = this.route.snapshot.params['id'];
     setTheme('bs4');
-    this.minDate = new Date();
-    this.maxDate = new Date();
-    this.minDate.setDate(this.minDate.getDate());
-    this.maxDate.setDate(this.maxDate.getDate() + 90);
-    this.dpConfig.containerClass = 'theme-orange';
+    let offset2 = new Date().getTimezoneOffset() * 60 * 1000;
+    let nowDate2 = new Date().getTime();
+    this.utcDate_start=new Date(nowDate2+offset2)
+    this.minDate_start = new Date(nowDate2 + offset2+13*60*60*1000);
+    this.maxDate_start = new Date();
+    this.maxDate_start.setDate(this.minDate_start.getDate() + 90);
   }
   ngOnInit() {
     this.cartForm = this.formBuilder.group({
@@ -82,8 +101,8 @@ export class ProductComponent implements OnInit {
     if (this.imageContainer && this.prodImage && this.rightControl) {
       this.showElements();
     }
-  }
 
+  }
   // add product descriptions into formArray
   createItem(res) {
     res['productDetail'].forEach(prod => {
@@ -123,10 +142,20 @@ export class ProductComponent implements OnInit {
     } else {
       localStorage.setItem('cartList', JSON.stringify(this.cartList));
     }
+    if ('productTimetable' in localStorage) {
+      this.productTimetable = JSON.parse(localStorage.getItem('productTimetable'));
+    } else {
+      localStorage.setItem('productTimetable', JSON.stringify(this.productTimetable));
+    }
+
     // localStorage.setItem('userId', 'aaa ')
   }
   // add product into a list
   manageCartProds() {
+    if (this.addToCartControl && (0 >= this.quantity || this.quantity > this.productDetail.availableStock) && (this.cartForm.invalid || this.isInputZero)) {
+      console.log('error')
+      return;
+    }
     const newCartList = [];
     // if product detail exist
     if (this.productDetail['productDetail'] && this.productDetail['productDetail'].length !== 0) {
@@ -166,6 +195,22 @@ export class ProductComponent implements OnInit {
   }
   // add cartList into localStorage
   addToCart(list) {
+    console.log(list)
+    for (let i = 0; i < this.prodDetailIdlist.length; i++) {
+      let neworder = {
+        prodDetailId: this.prodDetailIdlist[i].prodDetailid,
+        beginDate: this.datetoYMD(this.startMoment.toDate()),
+        endDate: this.datetoYMD(this.returnMoment.toDate()),
+        quantity: this.prodDetailIdlist[i].quantity
+      }
+      if (!this.tmpDetailID.has(this.prodDetailIdlist[i].proddetailid)) {
+        this.tmpDetailID.set(this.prodDetailIdlist[i].prodDetailid, neworder)
+      } else {
+        this.tmpDetailID.get(this.prodDetailIdlist[i].prodDetailid).quantity = neworder.quantity
+        this.tmpDetailID.get(this.prodDetailIdlist[i].prodDetailid).beginDate = neworder.beginDate
+        this.tmpDetailID.get(this.prodDetailIdlist[i].prodDetailid).endDate = neworder.endDate
+      }
+    }
     this.isStockAvailable = true;
     this.isprodAdded = true;
     setTimeout(() => {
@@ -173,13 +218,28 @@ export class ProductComponent implements OnInit {
     }, 1000);
     list.forEach(item => {
       let a = false;
+      if (!item.hasOwnProperty('Id')) {
+        let neworder = {
+          prodId: item.ProdId,
+          beginDate: this.datetoYMD(this.startMoment.toDate()),
+          endDate: this.datetoYMD(this.returnMoment.toDate()),
+          quantity: item.Quantity
+        }
+        if (!this.tmpProdID.has(item.ProdId)) {
+          this.tmpProdID.set(item.ProdId, neworder)
+        } else {
+          this.tmpProdID.get(item.ProdId).quantity = neworder.quantity
+          this.tmpProdID.get(item.ProdId).beginDate = neworder.beginDate
+          this.tmpProdID.get(item.ProdId).endDate = neworder.endDate
+        }
+      }
       // if cartList if not empty
       if (this.cartList.length > 0) {
         for (let i = 0; i < this.cartList.length; i++) {
           // if product already exists in cartList
           if (this.cartList[i].Title === item.Title) {
             a = true;
-            this.cartList[i].Quantity += item.Quantity;
+            this.cartList[i].Quantity = item.Quantity;
             this.cartList[i].Price = this.cartList[i].Quantity * item.Price;
             localStorage.setItem('cartList', JSON.stringify(this.cartList));
           }
@@ -196,6 +256,36 @@ export class ProductComponent implements OnInit {
         localStorage.setItem('cartList', JSON.stringify(this.cartList));
       }
     });
+    console.log(this.tmpDetailID)
+    this.productTimetable = JSON.parse(localStorage.getItem('productTimetable'));
+    this.productTimetable.forEach(item => {
+      if (this.tmpDetailID.get(item.prodDetailId) != null || this.tmpProdID.get(item.prodId) != null) {
+        if (item.hasOwnProperty('prodDetailId')) {
+          item.quantity = this.tmpDetailID.get(item.prodDetailId).quantity
+          item.beginDate = this.tmpDetailID.get(item.prodDetailId).beginDate
+          item.endDate = this.tmpDetailID.get(item.prodDetailId).endDate
+          this.tmpDetailID.delete(item.prodDetailId)
+        } else if (!item.hasOwnProperty('prodDetailId')) {
+          item.quantity = this.tmpProdID.get(item.prodId).quantity
+          item.beginDate = this.tmpProdID.get(item.prodId).beginDate
+          item.endDate = this.tmpProdID.get(item.prodId).endDate
+          this.tmpProdID.delete(item.prodId)
+        }
+      }
+    })
+    let iterable = this.tmpDetailID.values()
+    let current = iterable.next().value
+    while (current != null) {
+      this.productTimetable.push(current)
+      current = iterable.next().value
+    }
+    iterable = this.tmpProdID.values()
+    current = iterable.next().value
+    while (current != null) {
+      this.productTimetable.push(current)
+      current = iterable.next().value
+    }
+    localStorage.setItem('productTimetable', JSON.stringify(this.productTimetable));
   }
   // click the path and re-navigate
   backClicked(type: string, id?: number) {
@@ -232,32 +322,181 @@ export class ProductComponent implements OnInit {
     this.rightControl.nativeElement.style.right = this.rightCarouselControlPosition + 'px';
   }
   addQuantity(proddetail) {
-    let prodId=proddetail['value'].Id
-    let quantityvalue=proddetail['value'].Quantity
-    console.log(proddetail.valid)
-    if(this.cartForm.valid){
-    if (!this.map.has(proddetail['value'].Id) && proddetail.valid) {
+    let prodId = proddetail['value'].Id
+    let quantityvalue = proddetail['value'].Quantity
+    console.log(proddetail)
+    if (!this.map.has(prodId) && proddetail.valid && quantityvalue != 0) {
       let neworder = {
         id: prodId,
         quantity: quantityvalue,
-        beginDate: this.datetoYMD(this.minDate)
+        beginDate: this.minDate_start
       }
-      this.map.set(prodId,neworder)
-    }else if(this.map.has(proddetail['value'].Id) && quantityvalue!=0 && quantityvalue <=proddetail['value'].AvaiableStock){
-      this.map.get(prodId).quantity=quantityvalue
-    }else{
+      this.map.set(prodId, neworder)
+    } else if (this.map.has(prodId) && quantityvalue != 0 && quantityvalue <= proddetail['value'].AvailableStock) {
+      this.map.get(prodId).quantity = quantityvalue
+    } else {
       this.map.delete(prodId)
     }
+    if (this.map.size != 0) {
+      this.dateStartControl = false;
+    } else if (this.map.size == 0) {
+      this.dateStartControl = true;
+      this.dateReturnControl = true;
+    }
+    //Calculate Time
+    this.calculateTime()
+    //
   }
-    console.log(this.map)
-    
-    
-  }
-  datetoYMD(date){
+  datetoYMD(date) {
     var d = date.getDate();
     var m = date.getMonth() + 1; //Month from 0 to 11
     var y = date.getFullYear();
-    return '' + y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+    return '' + y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
   }
-}
+  calculateTime() {
+    let hiringdetail = []
+    let tmpDates = []
+    let tmpSet = new Set()
+    let iterable = this.map.values()
+    let current = iterable.next().value
+    while (current != null) {
+      let productHiringDetail = {
+        prodDetailid: current.id,
+        quantity: current.quantity,
+        beginDate: this.utcDate_start
+      }
+      hiringdetail.push(productHiringDetail)
+      current = iterable.next().value
+    }
+    this.prodDetailIdlist = hiringdetail
+    console.log(this.prodDetailIdlist)
+    if (this.map.size != 0) {
+      this.productService.calculateTime(hiringdetail).subscribe(
+        res => {
+          console.log(res)
+          this.unavailableDates = res
+          for (let i = 0; i < this.unavailableDates.length; i++) {
+            let myMoment = moment(this.unavailableDates[i], 'YYYY-MM-DD')
+            tmpDates.push(myMoment.toDate())
+            tmpSet.add(myMoment.toDate().toString())
+          }
+          this.disabledDates = tmpDates
+          this.mySet = tmpSet
+          for (let i = 0; i < this.disabledDates.length; i++) {
+            let myMoment = moment(this.disabledDates[i], 'YYYY-MM-DD')
+            if (myMoment.startOf('day'
+            ).isAfter(moment(this.dateStartInput).startOf('day'))) {
+              let myMoment_date = myMoment.toDate()
+              myMoment_date.setDate(myMoment.toDate().getDate() - 1);
+              this.maxDate_return = myMoment_date
+              break
+            }
+          }
+          if (this.disabledDates.length == 0) {
+            this.maxDate_return = this.maxDate_start
+          }
+          if (this.startMoment != null && this.returnMoment != null) {
+            if ((this.startMoment.startOf('day').isAfter(this.returnMoment.startOf('day'))) || this.mySet.has(this.startMoment.toDate().toString()) || this.mySet.has(this.returnMoment.toDate().toString()) || this.checkDisabledDates()) {
+              this.addToCartControl = true
+            } else {
+              this.addToCartControl = false
+            }
+          }
+        },
+        err => {
+          console.log(err)
+        }
+      );
+    }
+  }
 
+  quantitycheck(proddetail) {
+    let hiringdetail = []
+    let tmpDates = []
+    if (this.quantity > 0) {
+      this.dateStartControl = false;
+      this.dateReturnControl = false;
+    } else if (this.quantity == 0) {
+      this.dateStartControl = true;
+      this.dateReturnControl = true;
+    }
+    let productHiringDetail = {
+      prodId: proddetail.prodId,
+      quantity: this.quantity,
+      beginDate: this.datetoYMD(this.minDate_start)
+    }
+    hiringdetail.push(productHiringDetail)
+    console.log(hiringdetail)
+    if (this.quantity != 0) {
+      this.productService.calculateTime(hiringdetail).subscribe(
+        res => {
+          console.log(res)
+          this.unavailableDates = res
+          for (let i = 0; i < this.unavailableDates.length; i++) {
+            let myMoment = moment(this.unavailableDates[i], 'YYYY-MM-DD')
+            tmpDates.push(myMoment.toDate())
+          }
+          this.disabledDates = tmpDates
+          if (this.startMoment != null && this.returnMoment != null) {
+            if ((this.startMoment.startOf('day').isAfter(this.returnMoment.startOf('day')))) {
+              this.addToCartControl = true
+            } else {
+              this.addToCartControl = false
+            }
+
+          }
+        },
+        err => {
+          console.log(err)
+        }
+      );
+    }
+  }
+  onStartChange(value) {
+    this.dateStartInput = value;
+    this.dateReturnControl = false;
+    this.minDate_return = value;
+
+    for (let i = 0; i < this.disabledDates.length; i++) {
+      let myMoment = moment(this.disabledDates[i], 'YYYY-MM-DD')
+      if (myMoment.startOf('day').isAfter(moment(this.dateStartInput).startOf('day'))) {
+        let myMoment_date = myMoment.toDate()
+        myMoment_date.setDate(myMoment.toDate().getDate() - 1);
+        this.maxDate_return = myMoment_date
+        break
+      } else {
+        this.maxDate_return = this.maxDate_start
+      }
+    }
+
+    this.startMoment = moment(this.dateStartInput)
+    if (this.startMoment != null && this.returnMoment != null) {
+      if (this.startMoment.startOf('day').isAfter(this.returnMoment.startOf('day'))) {
+        this.addToCartControl = true
+      } else {
+        this.addToCartControl = false
+      }
+    }
+  }
+  onReturnChange(value) {
+    this.dateReturnInput = value;
+    this.returnMoment = moment(this.dateReturnInput)
+    if (this.startMoment != null && this.returnMoment != null) {
+      if (this.startMoment.startOf('day').isAfter(this.returnMoment.startOf('day'))) {
+        this.addToCartControl = true
+      } else {
+        this.addToCartControl = false
+      }
+    }
+  }
+  checkDisabledDates() {
+    for (let i = 0; i < this.disabledDates.length; i++) {
+      if (moment(this.disabledDates[i]).startOf('day').isAfter(this.startMoment.startOf('day')) && moment(this.disabledDates[i]).startOf('day').isBefore(this.returnMoment.startOf('day')) && !this.startMoment.startOf('day').isSame(this.returnMoment.startOf('day'))) {
+        return true
+      }
+    }
+
+    return false
+  }
+
+}
