@@ -70,6 +70,7 @@ import { OrderHistoryComponent } from './fcomponents/user-dashboard/order-histor
 import { ManagePasswordComponent } from './fcomponents/user-dashboard/manage-password/manage-password.component';
 import { PaymentResultComponent } from './fcomponents/payment-result/payment-result.component';
 import { AdminUserListComponent } from './fcomponents/admin/admin-user-list/admin-user-list.component';
+import { ProfileDialogComponent } from './fcomponents/admin/admin-dialogs/profile-dialog/profile-dialog.component';
 
 
 
@@ -153,7 +154,8 @@ const appRoutes: Routes = [
     OrderHistoryComponent,
     ManagePasswordComponent,
     PaymentResultComponent,
-    AdminUserListComponent
+    AdminUserListComponent,
+    ProfileDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -192,7 +194,8 @@ const appRoutes: Routes = [
     UserregistrationDialogComponent,
     UserloginDialogComponent,
     ForgotPasswordComponent,
-    EmailsentDialogComponent
+	EmailsentDialogComponent,
+	ProfileDialogComponent
   ],
 })
 export class AppModule { }

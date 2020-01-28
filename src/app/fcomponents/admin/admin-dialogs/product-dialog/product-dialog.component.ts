@@ -27,6 +27,7 @@ export class ProductdialogComponent implements OnInit {
   baseImageUrl = environment.baseLink;
 
   @ViewChild('imageInput', { static: false }) imageInput: ElementRef;
+
   productForm: {
     title: string,
     subTitle: string,
@@ -54,6 +55,7 @@ export class ProductdialogComponent implements OnInit {
   displayData: any;
   dialogTitle: string;
   allCategories: any;
+  
   constructor(
     private dialogRef: MatDialogRef<ProductdialogComponent>,
     @Inject(MAT_DIALOG_DATA) data,
@@ -96,6 +98,7 @@ export class ProductdialogComponent implements OnInit {
       }
     );
   }
+
   // save changes to product and close this dialog
   save() {
     console.log(this.productForm);

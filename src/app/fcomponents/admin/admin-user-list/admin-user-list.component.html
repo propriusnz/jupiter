@@ -15,9 +15,9 @@
 					<th>Phone</th>
 					<th>Company</th>
 					<th>Contact ID</th>
+					<th>Discount Level</th>
 					<th>Subscribed</th>
-					
-					<th></th>
+					<th>Edit Profile</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -41,9 +41,18 @@
 						<span *ngIf="user.userInfo[0]">{{ user.userInfo[0].company }}</span>
 					</td>
 					<td *ngIf="!user.userInfo[0]">-</td>
-					<td *ngIf="user.userInfo[0]">{{ user.userInfo[0].userContactId }}</td>
+					<td *ngIf="user.userInfo[0]">
+						{{ user.userInfo[0].userContactId }}
+					</td>
+					<td>
+						<span *ngIf="!user.userInfo[0]">-</span>
+						<span *ngIf="user.userInfo[0]"></span>
+					</td>
 					<td *ngIf="user.isSubscribe == 1" class="px-4">&radic;</td>
 					<td *ngIf="user.isSubscribe == 0"></td>
+					<td style="text-align: center;">
+						<i  class="far fa-edit" (click)="openEditProfile(user)" title="Edit"></i>
+					</td>
 					
 					<!-- <td>
 						<button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
@@ -59,5 +68,9 @@
         position: sticky;
         top: -10px;
         /* z-index: 99; */
-    }
+	}
+	.far.fa-edit:hover {
+		color:rgb(55, 162, 233);
+		cursor: pointer;
+	}
 </style>

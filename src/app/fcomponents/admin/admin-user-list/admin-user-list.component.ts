@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../service/product.service';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { ProfileDialogComponent } from '../admin-dialogs/profile-dialog/profile-dialog.component';
 
 @Component({
   selector: 'app-admin-user-list',
@@ -13,6 +15,7 @@ export class AdminUserListComponent implements OnInit {
 	
   constructor(
 	private productservice: ProductService,
+	private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -35,5 +38,16 @@ export class AdminUserListComponent implements OnInit {
 			});
 		  }
 	  );
+  }
+
+  openEditProfile(user) {
+	  const dialogConfig = new MatDialogConfig();
+	  dialogConfig.autoFocus = true;
+	  dialogConfig.height = '700px';
+	  dialogConfig.width = '500px';
+	  dialogConfig.data = {
+		  data: user
+	  }
+	  this.dialog.open(ProfileDialogComponent, dialogConfig);
   }
 }
