@@ -1,0 +1,28 @@
+p {
+    font-size: 1.1rem;
+}
+span {
+    color: #c48f45;
+}
+.card {
+    min-height: 350px;
+    width: 1000px;
+    margin: 0 auto;
+    margin-top: 3%;
+}
+.card-body {
+    width: 100%;
+}
+.card-header {
+    background-color: #c48f45;
+    color: white;
+    text-align: center;
+}
+.order-list {
+    color: #535353;
+}
+.order-list:hover {
+    cursor: pointer;
+    color: #caa26b;
+    text-decoration: none;
+}

@@ -305,4 +305,17 @@ export class ProductService {
     return this.http.delete(this.baseUrl + '/HomepageCarouselMedia/' + id,
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
+  
+  // details of this order
+  getUserOrderHistory(cartId) {
+    return this.http.get(this.baseUrl + '/carts/' + cartId,
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
+  }
+
+  // get list of orders for this user
+  getUserOrdersHistory(userId) {
+    return this.http.get(this.baseUrl + '/usercarts/' + userId,
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
+  }
+
 }

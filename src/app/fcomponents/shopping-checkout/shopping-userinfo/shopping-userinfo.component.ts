@@ -20,7 +20,6 @@ export class ShoppingUserinfoComponent implements OnInit {
   buttonError = false
   userId: number
   districtSelectControl = false
-  deliveryControl=false
   districtError = false
   districtSelected: number
   totalPrice = 0

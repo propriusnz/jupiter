@@ -68,6 +68,7 @@ import { UserDashboardComponent } from './fcomponents/user-dashboard/user-dashbo
 import { UserProfileComponent } from './fcomponents/user-dashboard/user-profile/user-profile.component';
 import { OrderHistoryComponent } from './fcomponents/user-dashboard/order-history/order-history.component';
 import { ManagePasswordComponent } from './fcomponents/user-dashboard/manage-password/manage-password.component';
+import { ItemDetailComponent } from './fcomponents/user-dashboard/item-detail/item-detail.component';
 import { PaymentResultComponent } from './fcomponents/payment-result/payment-result.component';
 import { AdminUserListComponent } from './fcomponents/admin/admin-user-list/admin-user-list.component';
 import { ProfileDialogComponent } from './fcomponents/admin/admin-dialogs/profile-dialog/profile-dialog.component';
@@ -153,6 +154,7 @@ const appRoutes: Routes = [
     UserProfileComponent,
     OrderHistoryComponent,
     ManagePasswordComponent,
+    ItemDetailComponent,
     PaymentResultComponent,
     AdminUserListComponent,
     ProfileDialogComponent
@@ -195,7 +197,9 @@ const appRoutes: Routes = [
     UserloginDialogComponent,
     ForgotPasswordComponent,
 	EmailsentDialogComponent,
-	ProfileDialogComponent
+	ProfileDialogComponent,
+    EmailsentDialogComponent,
+    ItemDetailComponent
   ],
 })
 export class AppModule { }

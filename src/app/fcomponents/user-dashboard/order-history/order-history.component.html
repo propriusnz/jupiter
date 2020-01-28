@@ -3,29 +3,27 @@
 		<h4>Your Order History</h4>
 	</div>
 	<div class="card-body bg-light text-center">
-		Nothing here yet ...
+		<table class="table">
+			<tr>
+				<th>Event Address</th>
+				<th>Date of Event</th>
+				<th>Items (List)</th>
+				<th>Price</th>
+				<th>Payment Status</th>
+				<th>Order Status</th>
+			</tr>
+			<tr class="order-list" (click)="itemDialog(order.cartId)" *ngFor="let order of orders">
+				<td>{{order.location}}</td>
+				<td>{{order.plannedTime | date :'short'}}</td>
+				<td>{{order.items}}</td>
+				<td>{{order.price}}</td>
+				<b><td *ngIf="order.isPay === 0 && order.isExpired === 0">Processing</td></b>
+				<b><td *ngIf="order.isPay === 1 && order.isExpired === 0">Paid</td></b>
+				<b><td *ngIf="order.isPay === 0 && order.isExpired === 1">Expired</td></b>
+				<td *ngIf="order.cartStatusId === null">-</td>
+				<td *ngIf="order.cartStatusId === 1">Not Collect</td>
+				<td *ngIf="order.cartStatusId === 2">Collected</td>
+			</tr>
+		</table>
 	</div>
 </div>
-
-<style>
-	p {
-		font-size: 1.1rem;
-	}
-	span {
-		color: #c48f45;
-	}
-	.card {
-		min-height: 350px;
-		width: 500px;
-		margin: 0 auto;
-		margin-top: 3%;
-	}
-	.card-body {
-		width: 100%;
-	}
-	.card-header {
-		background-color: #c48f45;
-		color: white;
-		text-align: center;
-	}
-</style>
