@@ -93,7 +93,7 @@ export class UserProfileComponent implements OnInit {
 
   getErrorMessage2() {
 	return this.lname.hasError('required') ? 'Please enter your last name' :
-	this.fname.hasError('minlength' || 'maxlength') ? '8 - 20 characters required' :
+	this.lname.hasError('minlength' || 'maxlength') ? '8 - 20 characters required' :
 	  '';
   }
 

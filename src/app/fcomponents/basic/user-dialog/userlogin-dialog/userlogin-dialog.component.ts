@@ -40,11 +40,10 @@ export class UserloginDialogComponent implements OnInit {
   ngOnInit() {
     this.userLoginForm = this.fb.group({
       email: ['', [Validators.required,
-      Validators.email,
-      ]],
+      			   Validators.email]],
       password: ['', [Validators.required,
-      Validators.minLength(5),
-      Validators.maxLength(30)]]
+      				  Validators.minLength(5),
+      				  Validators.maxLength(30)]]
     })
     this.data.currentsignupmessage.subscribe(currentsignupmessage => this.message = currentsignupmessage);
   }
@@ -107,6 +106,7 @@ export class UserloginDialogComponent implements OnInit {
       }
     );
   }
+
   openSnackBar(message: string, action: string) {
     this._LoggedIn_snackBar.open(message, action, {
       duration: 5000,

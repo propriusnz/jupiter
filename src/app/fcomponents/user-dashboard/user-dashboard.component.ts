@@ -1,8 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserProfileComponent } from 'src/app/fcomponents/user-dashboard/user-profile/user-profile.component';
-import { OrderHistoryComponent } from 'src/app/fcomponents/user-dashboard/order-history/order-history.component';
-import { ManagePasswordComponent } from 'src/app/fcomponents/user-dashboard/manage-password/manage-password.component';
-
 
 @Component({
   selector: 'app-user-dashboard',
@@ -12,9 +8,7 @@ import { ManagePasswordComponent } from 'src/app/fcomponents/user-dashboard/mana
 
 export class UserDashboardComponent implements OnInit {
 	
-  constructor(
-	
-  ) { }
+  constructor() { }
 
   ngOnInit() {
 	 
