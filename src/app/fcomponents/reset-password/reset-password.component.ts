@@ -82,9 +82,9 @@ export class ResetPasswordComponent implements OnInit {
       err => {
         this.resetFailed = true
         console.log(err)
-        if (err['status'] === 401) {
-          this.errorMessage = 'This link has expired.';
-        }
+        //if (err['status'] === 401) {
+        this.errorMessage = 'This link has expired.';
+        //}
       }
     );
   }

@@ -1,12 +1,13 @@
 <div class="row" *ngIf="prodsInCart.length!=0">
+  
   <div class="mt-2 ml-2">
-    <input bsDatepicker type="text" class="form-control " placeholder="Start Date" style="width: 260px;"
+    <input bsDatepicker type="text" [style.border-bottom]="borderStyleControl ? borderstyleA :borderstyleB" class="form-control text-line" placeholder="Start Date" style="width: 260px;"
       [minDate]="minDate_start" [datesDisabled]="disabledDates" [maxDate]="maxDate_start"
       [bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange',showWeekNumbers:false}"
       (bsValueChange)="onStartChange($event)">
   </div>
   <div class="mt-2 ml-2">
-    <input bsDatepicker type="text" class="form-control text-line" placeholder="Return Date" style="width: 260px;"
+    <input bsDatepicker type="text" [style.border-bottom]="borderStyleControl ? borderstyleA :borderstyleB" class="form-control text-line" placeholder="Return Date" style="width: 260px;"
       [isDisabled]="dateReturnControl" [minDate]="minDate_return" [datesDisabled]="disabledDates"
       [maxDate]="maxDate_return"
       [bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange',showWeekNumbers:false}"
