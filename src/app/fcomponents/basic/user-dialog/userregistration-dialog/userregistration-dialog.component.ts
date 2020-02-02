@@ -91,13 +91,12 @@ export class UserregistrationDialogComponent implements OnInit {
             console.log(res)
             localStorage.setItem('userId', JSON.stringify(res['data'].userId));
             localStorage.setItem('userToken', JSON.stringify(res['data'].token));
-            location.reload();
+			this.redirect();
           },
           err => {
             console.log(err);
           }
         );
-        this.redirect();
       },
       err => {
         if (err.hasOwnProperty('error')) {

@@ -1,156 +1,167 @@
 <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
 <div class="container">
-  <!-- loading -->
-  <div class="text-center mt-5 pt-5" *ngIf="isLoading">
-    Loading Product...Please wait
-    <div class="spinner-border text-info ml-2" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
-  </div>
-  <!-- !product path -->
-  <div class="row mt-5">
-    <div class="col-12" *ngIf="productDetail">
-      <!-- Hire -->
-      <a *ngIf="productDetail.category" (click)="backClicked('hire',productDetail.categoryId)">
-        <h2 class="s2goldbold">{{productDetail.category.categoryName}}</h2>
-      </a>
-      <!-- Party Services -->
-      <a *ngIf="productDetail.prodTypeId == 2" (click)="backClicked('services')">
-        <h2 class="s2goldbold">Party Services</h2>
-      </a>
-      <!-- Party Packages -->
-      <a *ngIf="productDetail.prodTypeId == 3" (click)="backClicked('packages')">
-        <h2 class="s2goldbold">Party Packages</h2>
-      </a>
+	<!-- loading -->
+	<div class="text-center mt-5 pt-5" *ngIf="isLoading">
+		Loading Product...Please wait
+		<div class="spinner-border text-info ml-2" role="status">
+			<span class="sr-only">Loading...</span>
+		</div>
+	</div>
+	<!-- !product path -->
+	<div class="row mt-5">
+		<div class="col-12" *ngIf="productDetail">
+			<!-- Hire -->
+			<a *ngIf="productDetail.category" (click)="backClicked('hire',productDetail.categoryId)">
+				<h2 class="s2goldbold">{{productDetail.category.categoryName}}</h2>
+			</a>
+			<!-- Party Services -->
+			<a *ngIf="productDetail.prodTypeId == 2" (click)="backClicked('services')">
+				<h2 class="s2goldbold">Party Services</h2>
+			</a>
+			<!-- Party Packages -->
+			<a *ngIf="productDetail.prodTypeId == 3" (click)="backClicked('packages')">
+				<h2 class="s2goldbold">Party Packages</h2>
+			</a>
 
-      <h2 class="s2goldbold"> / {{productDetail.title}}</h2>
-    </div>
-  </div>
-  <!-- TODO: delete this button -->
-  <!-- <button (click)="showElements()">show elements</button> -->
-  <div class="row my-5">
-    <div class="col-12 col-md-6 col-lg-7 ">
-      <!-- images display -->
-      <div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel " *ngIf="prodMediaUrl">
-        <ol class="carousel-indicators" *ngIf="prodMediaUrl.length > 1">
-          <li data-target="#carouselExampleControls" data-slide-to="i" class="active"
-            *ngFor="let img of prodMediaUrl, index as i" [ngClass]="{'active': i == 0}"></li>
-        </ol>
-        <div #imageContainer class="carousel-inner">
-          <div class="carousel-item h490 active" *ngFor="let img of prodMediaUrl, index as i"
-            [ngClass]="{'active': i == 0}">
-            <img #prodImage src="{{baseImageLink}}{{img.url}}" class="d-block autofix">
-          </div>
-        </div>
-        <a class="carousel-control-prev" *ngIf="prodMediaUrl.length > 1" href="#carouselExampleControls" role="button"
-          data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a #rightControl class="carousel-control-next" *ngIf="prodMediaUrl.length > 1" href="#carouselExampleControls"
-          role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-      <br>
-    </div>
+			<h2 class="s2goldbold"> / {{productDetail.title}}</h2>
+		</div>
+	</div>
+	<!-- TODO: delete this button -->
+	<!-- <button (click)="showElements()">show elements</button> -->
 
-    <div style="padding:0px;" *ngIf="productDetail" class="col-12 col-md-6 col-lg-5 ">
-      <h1 class="l3">{{productDetail.title}}<br /></h1>
-      <!-- products with discount -->
-      <div class="my-4" *ngIf="productDetail.discount && productDetail.discount>0">
-        <span class="s1 mr-3" *ngIf="1 > productDetail.productDetail.length">Price:
-          ${{productDetail.price - productDetail.discount}}</span>
-        <span class="s1 mr-3" *ngIf="productDetail.productDetail.length > 1">Starting from:
-          ${{productDetail.price - productDetail.discount}}</span>
-      </div>
-      <!-- products without discount -->
-      <div class="my-4" *ngIf="!productDetail.discount || productDetail.discount == 0">
-        <span class="s1" *ngIf="1 > productDetail.productDetail.length">${{productDetail.price}}</span>
-        <span class="s1 mr-3" *ngIf="productDetail.productDetail.length > 1">Starting from:
-          ${{productDetail.price}}</span>
-      </div>
-      <h3 class="s2 mb-2" style="white-space: pre-line">{{productDetail.description}}</h3>
-      <div
-        *ngIf="productDetail['productDetail'] && productDetail['productDetail'].length!=0 && cartForm.controls.cartItems['controls'].length != 0">
-        <div class="s2"><b>Select specifications</b></div><br>
-        <form [formGroup]="cartForm">
+	<div class="row my-5">
+		<div class="col-12 col-md-6 col-lg-7 ">
+			<!-- images display -->
+			<div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel "
+				*ngIf="prodMediaUrl">
+				<ol class="carousel-indicators" *ngIf="prodMediaUrl.length > 1">
+					<li data-target="#carouselExampleControls" data-slide-to="i" class="active"
+						*ngFor="let img of prodMediaUrl, index as i" [ngClass]="{'active': i == 0}"></li>
+				</ol>
+				<div #imageContainer class="carousel-inner">
+					<div class="carousel-item h490 active" *ngFor="let img of prodMediaUrl, index as i"
+						[ngClass]="{'active': i == 0}">
+						<img #prodImage src="{{baseImageLink}}{{img.url}}" class="d-block autofix">
+					</div>
+				</div>
+				<a class="carousel-control-prev" *ngIf="prodMediaUrl.length > 1" href="#carouselExampleControls"
+					role="button" data-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</a>
+				<a #rightControl class="carousel-control-next" *ngIf="prodMediaUrl.length > 1"
+					href="#carouselExampleControls" role="button" data-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
+			</div>
+			<br>
+		</div>
 
-          <div class="row" style="padding:0px;" formArrayName="cartItems">
-            <!-- <div style="margin-left:152px; font-size:13px;" class="s2">Quantity</div> -->
-            <div style="font-size:16px; padding-right:0px; " class="col-md-6 col-sm-6 col-xs-12 s2"
-              *ngFor="let detail of cartForm.controls.cartItems.controls, index as i">
-              <div [formGroupName]="i">
-                <input style="background-color:white; border-width: 0px; width:90px;" type="text"
-                  formControlName="Title" [attr.disabled]="true">
-                $<input style="background-color:white; border-width: 0px; width:42px;" type="text"
-                  formControlName="Price" [attr.disabled]="true">
-                <input style="width:40px; height:20px; font-size:14px; border:none; border-bottom:1px solid #919191"
-                  (click)="addQuantity(detail)" type="number" min="0" formControlName="Quantity" placeholder="Quantity">
-                <div *ngIf="detail.controls.Quantity.invalid" class="invalid_feedback"
-                  style="padding-bottom:10px;" role="alert">Only {{detail.value.AvailableStock}} are available. Please
-                  contact us if you need more!</div>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
+		<div style="padding:0px;" *ngIf="productDetail" class="col-12 col-md-6 col-lg-5 pl-5">
+			<h1 class="l3">{{productDetail.title}}<br /></h1>
+			<!-- products with discount -->
+			<div class="my-4" *ngIf="productDetail.discount && productDetail.discount>0">
+				<span class="s1 mr-3" *ngIf="1 > productDetail.productDetail.length">Price:
+					${{productDetail.price - productDetail.discount}}</span>
+				<span class="s1 mr-3" *ngIf="productDetail.productDetail.length > 1">Starting from:
+					${{productDetail.price - productDetail.discount}}</span>
+			</div>
+			<!-- products without discount -->
+			<div class="my-4" *ngIf="!productDetail.discount || productDetail.discount == 0">
+				<span class="s1" *ngIf="1 > productDetail.productDetail.length">${{productDetail.price}}</span>
+				<span class="s1 mr-3" *ngIf="productDetail.productDetail.length > 1">Starting from:
+					${{productDetail.price}}</span>
+			</div>
+			<h3 class="s2 mb-2" style="white-space: pre-line">{{productDetail.description}}</h3>
+			<div *ngIf="productDetail['productDetail'] && productDetail['productDetail'].length!=0 && cartForm.controls.cartItems['controls'].length != 0">
+				<div class="s2"><b>Select specifications</b></div><br>
+				<form [formGroup]="cartForm">
+					<div class="row" style="padding:0px;" formArrayName="cartItems">
+						<!-- <div style="margin-left:152px; font-size:13px;" class="s2">Quantity</div> -->
+						<div style="font-size:16px; padding-right:0px; " class="col-md-6 col-sm-6 col-xs-12 s2"
+							*ngFor="let detail of cartForm.controls.cartItems.controls, index as i">
+							<div [formGroupName]="i">
+								<input style="background-color:white; border-width: 0px; width:90px;" type="text"
+									formControlName="Title" [attr.disabled]="true">
+								$<input style="background-color:white; border-width: 0px; width:42px;" type="text"
+									formControlName="Price" [attr.disabled]="true">
+								<input
+									style="width:40px; height:20px; font-size:14px; border:none; border-bottom:1px solid #919191"
+									(click)="addQuantity(detail)" type="number" min="0" formControlName="Quantity"
+									placeholder="Quantity">
+								<div *ngIf="detail.controls.Quantity.invalid" class="invalid_feedback"
+									style="padding-bottom:10px;" role="alert">Only {{detail.value.AvailableStock}} are
+									available. Please
+									contact us if you need more!</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
 
-      <!-- ngIf="cartForm.controls.cartItems['controls'].length != 0 || productDetail.price > 0" -->
-      <div class="row mt-2"
-        *ngIf="productDetail['productDetail'] || (productDetail['productDetail'].length == 0 && productDetail.price > 0)">
-        <!-- ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length==0" -->
-        <div class="col-6 col-lg-6 s1"
-          *ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length==0">
-          Quantity: <input type="number" [value]="quantity" min="0" max={{productDetail.availableStock}}
-            [(ngModel)]="quantity" (click)="quantitycheck(productDetail)">
-        </div>
-        <div *ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length>0">
-          <div class="mt-2 ml-2">
-            <input bsDatepicker type="text" class="form-control" placeholder="Start Date" style="width: 260px;"
-              [isDisabled]="dateStartControl" [minDate]="minDate_start" [datesDisabled]="disabledDates" [maxDate]="maxDate_start"
-              [bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}"  (bsValueChange)="onStartChange($event)">
-          </div>
-          <div class="mt-2 ml-2">
-            <input bsDatepicker type="text" class="form-control" placeholder="Return Date" style="width: 260px;"
-              [isDisabled]="dateReturnControl" [minDate]="minDate_return" [datesDisabled]="disabledDates" [maxDate]="maxDate_return"
-              [bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}"(bsValueChange)="onReturnChange($event)" >
-          </div>
-        </div>
-        <div class="row" *ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length==0">
-          <div class="ml-4 mt-1">
-            <input bsDatepicker type="text" class="form-control" placeholder="Start Date" style="width: 170px;"
-              [isDisabled]="dateStartControl" [minDate]="minDate_start" [datesDisabled]="disabledDates" [maxDate]="maxDate_start"
-              [bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}" (bsValueChange)="onStartChange($event)">
-          </div>
-          <div class="ml-1 mt-1">
-            <input bsDatepicker type="text" class="form-control" placeholder="Return Date" style="width: 170px;"
-              [isDisabled]="dateReturnControl" [minDate]="minDate_return" [datesDisabled]="disabledDates" [maxDate]="maxDate_return"
-              [bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}" (bsValueChange)="onReturnChange($event)">
-          </div>
-        </div>
-        <div class="col-6 col-lg-6 mt-2">
-          <button class='btn btn_gold' (click)="manageCartProds()"
-            [disabled]="this.addToCartControl || (0>= this.quantity || this.quantity > this.productDetail.availableStock) && (this.cartForm.invalid || this.isInputZero)" >Add
-            to cart</button>
-        </div>
-        <!--&& (0>= this.quantity || this.quantity > this.productDetail.availableStock) && (this.cartForm.invalid || this.isInputZero)
- -->
-        
+			<!-- ngIf="cartForm.controls.cartItems['controls'].length != 0 || productDetail.price > 0" -->
+			<div class="row mt-2" *ngIf="productDetail['productDetail'] || (productDetail['productDetail'].length == 0 && productDetail.price > 0)">
+				<!-- ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length==0" -->
+				<div class="col-6 col-lg-6 s1"
+					*ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length==0">
+					Quantity: <input type="number" [value]="quantity" min="0" max={{productDetail.availableStock}}
+						[(ngModel)]="quantity" (click)="quantitycheck(productDetail)">
+				</div>
+				<div *ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length>0">
 
-      </div>
+					<!-- ##### Date Picker ##### -->
+					<div class="mt-2 ml-2">
+						<input bsDatepicker type="text" class="form-control" placeholder="Start Date"
+							style="width: 260px;" placement="right" [isDisabled]="dateStartControl"
+							[minDate]="minDate_start" [datesDisabled]="disabledDates" [maxDate]="maxDate_start"
+							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}"
+							(bsValueChange)="onStartChange($event)">
+					</div>
+					<div class="mt-2 ml-2">
+						<input bsDatepicker type="text" class="form-control" placeholder="Return Date"
+							style="width: 260px;" placement="right" [isDisabled]="dateReturnControl"
+							[minDate]="minDate_return" [datesDisabled]="disabledDates" [maxDate]="maxDate_return"
+							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}"
+							(bsValueChange)="onReturnChange($event)">
+					</div>
+				</div>
+				<div class="row" *ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length==0">
+					<div class="ml-4 mt-1">
+						<input bsDatepicker type="text" class="form-control" placeholder="Start Date"
+							style="width: 170px;" [isDisabled]="dateStartControl" [minDate]="minDate_start"
+							[datesDisabled]="disabledDates" [maxDate]="maxDate_start"
+							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}"
+							(bsValueChange)="onStartChange($event)">
+					</div>
+					<div class="ml-1 mt-1">
+						<input bsDatepicker type="text" class="form-control" placeholder="Return Date"
+							style="width: 170px;" [isDisabled]="dateReturnControl" [minDate]="minDate_return"
+							[datesDisabled]="disabledDates" [maxDate]="maxDate_return"
+							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}"
+							(bsValueChange)="onReturnChange($event)">
+					</div>
+				</div>
+				
+				<div class="col-6 col-lg-6 mt-5">
+					<button class='btn btn_gold' (click)="manageCartProds()"
+						[disabled]="this.addToCartControl || (0>= this.quantity || this.quantity > this.productDetail.availableStock) && (this.cartForm.invalid || this.isInputZero)">Add to cart</button>
+				</div>
+				<!--&& (0>= this.quantity || this.quantity > this.productDetail.availableStock) && (this.cartForm.invalid || this.isInputZero) -->
+			</div>
 
-      <div class="row justify-content-end">
-        <!-- <div class="col-6 col-lg-4 alert alert-danger mt-3" role="alert" *ngIf="!isStockAvailable" >Only {{productDetail.availableStock}} left in stock.</div> -->
-        <div class="col-6 col-lg-4 alert alert-success mt-3" role="alert" *ngIf="isprodAdded && isStockAvailable">
-          Added into cart.
-        </div>
-        <!-- if quantity larger than available stock, then alert -->
-        <div class="col-12 invalid_feedback mt-3" role="alert" *ngIf="quantity > productDetail.availableStock">Only
-          {{productDetail.availableStock}} are available. Please contact us if you need more!</div>
-      </div>
+			<div class="row justify-content-end">
+				<!-- <div class="col-6 col-lg-4 alert alert-danger mt-3" role="alert" *ngIf="!isStockAvailable" >Only {{productDetail.availableStock}} left in stock.</div> -->
+				<div class="col-6 col-lg-4 alert alert-success mt-3" role="alert"
+					*ngIf="isprodAdded && isStockAvailable">
+					Added into cart.
+				</div>
+				<!-- if quantity larger than available stock, then alert -->
+				<div class="col-12 invalid_feedback mt-3" role="alert" *ngIf="quantity > productDetail.availableStock">
+					Only
+					{{productDetail.availableStock}} are available. Please contact us if you need more!</div>
+			</div>
 
-    </div>
-  </div>
+		</div>
+	</div>
 </div>
