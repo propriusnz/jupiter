@@ -138,6 +138,9 @@ export class ProductService {
     return this.http.delete(this.baseUrl + '/CartProds/' + id,
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
+  getCartStatus(cartId){
+    return this.http.get(this.baseUrl+'/Carts/'+cartId);
+  }
 
 
   // !Contacts
