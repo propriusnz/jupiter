@@ -37,9 +37,10 @@ export class ShoppingUserinfoComponent implements OnInit {
     District: '',
     isPickup: ''
   };
-  deliveryFee=0
+  deliveryFee = 0
   districtName = ''
   minDate: Date
+  url: any
   @Output() isPickup = new EventEmitter();
   @Output() district = new EventEmitter();
   constructor(
@@ -186,8 +187,8 @@ export class ShoppingUserinfoComponent implements OnInit {
           } else {
             this.cartNotUser(cartContact)
           }
-        }else{
-          this.isSendingEmail=false
+        } else {
+          this.isSendingEmail = false
           this.feedback_message = 'Please modify your time. Your items are booked.'
         }
       },
@@ -228,9 +229,10 @@ export class ShoppingUserinfoComponent implements OnInit {
         this.isSendingEmail = false;
         this.isSendSuccess = true;
         console.log(res['data'].cartId)
+        localStorage.setItem('cartId', JSON.stringify(res['data'].cartId))
+        console.log(JSON.parse(localStorage.getItem('cartId')))
         this.getPaymentUrl(res['data'].cartId)
-        this.router.navigate(['/paymentoptions']);
-        localStorage.clear()
+        //this.router.navigate(['/paymentoptions']);
       },
       (error) => {
         this.isSendingEmail = false;
@@ -244,9 +246,10 @@ export class ShoppingUserinfoComponent implements OnInit {
         console.log(res)
         this.isSendingEmail = false;
         this.isSendSuccess = true;
+        localStorage.setItem('cartId', JSON.stringify(res['data'].cartId))
+        console.log(JSON.parse(localStorage.getItem('cartId')))
         this.getPaymentUrl(res['data'].cartId)
-        this.router.navigate(['/paymentoptions']);
-        localStorage.clear()
+        //this.router.navigate(['/paymentoptions']);
       },
       (error) => {
         this.isSendingEmail = false;
@@ -254,10 +257,14 @@ export class ShoppingUserinfoComponent implements OnInit {
         this.feedback_message = 'Oops, something went wrong.';
       });
   }
-  getPaymentUrl(cartId){
+  getPaymentUrl(cartId) {
     this.productService.requestPaymentUrl(cartId).subscribe(
       res => {
-        console.log(res)
+        console.log(res['url'])
+        window.location.assign(res['url'])
+        localStorage.removeItem('productTimetable')
+        localStorage.removeItem('cartList')
+        localStorage.removeItem('totalPrice')
       },
       err => {
         console.log(err)
