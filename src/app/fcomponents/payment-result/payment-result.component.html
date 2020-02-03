@@ -23,19 +23,25 @@
     <div class="card-header">
       <h4>Your Payment Status</h4>
     </div>
-    <div class="card-body bg-light text-center text-danger">
-      {{paymentStatusFailure}}
-      
-      <div *ngIf="!expired" id="buttonsWrap">
-        <i class="fas fa-arrow-right"></i><button mat-raised-button (click)="payAgain()">Pay Again</button>
+    <div class="card-body bg-light text-center">
+      <span class="text-danger">{{paymentStatusFailure}}</span>
+      <div id="buttonsWrap">
+        <i class="fas fa-arrow-right text-danger"></i><button mat-raised-button (click)="payAgain()">Pay Again</button>
       </div>
-      <div *ngIf="user&&!expired" id="buttonsWrap">
-        <i class="fas fa-arrow-right"></i><button mat-raised-button routerLink='/userDashboard'>Check the order in your dashboard </button>
+      <div *ngIf="user" id="buttonsWrap">
+        <i class="fas fa-arrow-right text-danger"></i><button mat-raised-button routerLink='/userDashboard'>Check the order in your dashboard </button>
       </div>
-      <div *ngIf="expired" class="alert alert-danger text-center">
+      <div *ngIf="isAskingStatus">Processing... Please wait...
+        <div class="spinner-border text-info" role="status">
+           <span class="sr-only">Loading...</span>
+        </div>
+     </div>
+      <div *ngIf="expired" style="margin-top:20px" class="alert alert-danger text-center">
         {{ errorMessage }}
+        <button class="btn btn_gold btn-sm" routerLink="/" type="button">
+          <i class="fas fa-arrow-right"></i>&nbsp;Continue Shopping
+        </button>
       </div>
-  
     </div>
   </div>
 

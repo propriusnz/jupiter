@@ -18,6 +18,7 @@ export class PaymentResultComponent implements OnInit {
   errorMessage="This order is expired."
   cartId: any
   user=true
+  isAskingStatus=false
   constructor(
     private router: Router,
     private productService: ProductService
@@ -34,28 +35,6 @@ export class PaymentResultComponent implements OnInit {
     }
     this.cartId = JSON.parse(localStorage.getItem('cartId'))
     console.log(this.cartId)
-    this.productService.getCartStatus(this.cartId).subscribe(
-      res=>{
-        console.log(res)
-        if(res['isPay']==0 && res['isExpired']==1){
-          this.expired=true
-        }else if(res['isPay']==0 && res['isExpired']==0){
-          this.productService.requestPaymentUrl(this.cartId).subscribe(
-            res=>{
-              console.log(res)
-              this.payAgainUrl=res['url']
-            },
-            err=>{
-              console.log(err)
-            }
-          )
-        }
-        
-      },
-      err=>{
-        console.log(err)
-      }
-    )
     this.href = this.router.url
     console.log(this.href)
     let url = {
@@ -84,7 +63,33 @@ export class PaymentResultComponent implements OnInit {
 
   }
   payAgain(){
-    window.location.assign(this.payAgainUrl)
+    this.isAskingStatus=true
+    this.productService.getCartStatus(this.cartId).subscribe(
+      res=>{
+        console.log(res)
+        this.isAskingStatus=false
+        if(res['isPay']==0 && res['isExpired']==1){
+          this.expired=true
+        }else if(res['isPay']==0 && res['isExpired']==0){
+          this.productService.requestPaymentUrl(this.cartId).subscribe(
+            res=>{
+              console.log(res)
+              this.payAgainUrl=res['url']
+              window.location.assign(this.payAgainUrl)
+            },
+            err=>{
+              this.isAskingStatus=false
+              console.log(err)
+            }
+          )
+        }
+        
+      },
+      err=>{
+        this.isAskingStatus=false
+        console.log(err)
+      }
+    )
   }
 }
 
