@@ -73,13 +73,12 @@ a:hover {
   width:50px;
   margin-left:15px;
 }
-.text-line {
-  outline: none;
-  outline-style: none;
-  outline-offset: 0;
+
+.input_line {
   border-top: none;
   border-left: none;
   border-right: none;
+  border-bottom: #c48f45 solid;
+  border-radius: 0;
   padding: 3px 10px;
 }
-
