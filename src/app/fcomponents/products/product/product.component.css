@@ -1,83 +1,81 @@
-.smallImg{
-    width:100%;
+.smallImg {
+  width: 100%;
 }
-.smallImg:hover{
-    cursor: pointer;
+.smallImg:hover {
+  cursor: pointer;
 }
-#shadow{
-    display: none;
-    position: absolute;
-    top:0px;
-    background-color: #000;
-    opacity: 0.3;
-    height: 250px;
-    width: 250px;
+#shadow {
+  display: none;
+  position: absolute;
+  top: 0px;
+  background-color: #000;
+  opacity: 0.3;
+  height: 250px;
+  width: 250px;
 }
-#showDetails{
-    width:500px;
-    height: 500px;
-    position: absolute;
-    top:0;
-    display: none;
-    overflow: hidden;
-    z-index: 99;
+#showDetails {
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  top: 0;
+  display: none;
+  overflow: hidden;
+  z-index: 99;
 }
-#showDetails img{
-    position: absolute;
-    zoom:1.5;
+#showDetails img {
+  position: absolute;
+  zoom: 1.5;
 }
-a{
-    text-decoration: none;
-    cursor: pointer;
+a {
+  text-decoration: none;
+  cursor: pointer;
 }
-.h490{
-    /* height: */
-    position: relative;
-    padding-top: 86%;
-    width:100%;
-    display: block;
-    padding-bottom: 0px;
-    margin-bottom: 0px;
+.h490 {
+  /* height: */
+  position: relative;
+  padding-top: 86%;
+  width: 100%;
+  display: block;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
 }
-@media (max-width:767px) {
-    .h490 {
-        padding-top: 100%;
-        width:100%;
-    }
+@media (max-width: 767px) {
+  .h490 {
+    padding-top: 100%;
+    width: 100%;
   }
+}
 
 .h490 img {
-	position:  absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-    width: 100%;
-    object-fit: cover;
-
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  object-fit: cover;
 }
-.autofix{
-	width: 100%;
-    height: 100%;
-    object-fit: cover;
+.autofix {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-h2{
-    display: inline;
+h2 {
+  display: inline;
 }
-.indicator{
-    color: rgb(192, 7, 7); 
-    font-size: 15px;
+.indicator {
+  color: rgb(192, 7, 7);
+  font-size: 15px;
 }
-input{
-    width:50px;
+input {
+  width: 50px;
 }
-.text-line {
-    outline: none;
-    outline-style: none;
-    outline-offset: 0;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    padding: 3px 10px;
-    border-bottom:'solid black 1px'
+.DatePicker > .input_line {
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom: #c48f45 solid;
+	border-radius: 0;
+	padding: 3px 10px;
+	width: 150px;
   }
