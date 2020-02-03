@@ -71,3 +71,13 @@ h2{
 input{
     width:50px;
 }
+.text-line {
+    outline: none;
+    outline-style: none;
+    outline-offset: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding: 3px 10px;
+    border-bottom:'solid black 1px'
+  }

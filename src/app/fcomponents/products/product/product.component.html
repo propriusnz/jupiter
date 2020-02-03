@@ -112,14 +112,14 @@
 
 					<!-- ##### Date Picker ##### -->
 					<div class="mt-2 ml-2">
-						<input bsDatepicker type="text" class="form-control" placeholder="Start Date"
+						<input bsDatepicker type="text" class="form-control text-line " placeholder="Start Date"
 							style="width: 260px;" placement="right" [isDisabled]="dateStartControl"
 							[minDate]="minDate_start" [datesDisabled]="disabledDates" [maxDate]="maxDate_start"
 							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}"
 							(bsValueChange)="onStartChange($event)">
 					</div>
 					<div class="mt-2 ml-2">
-						<input bsDatepicker type="text" class="form-control" placeholder="Return Date"
+						<input bsDatepicker type="text" class="form-control text-line " placeholder="Return Date"
 							style="width: 260px;" placement="right" [isDisabled]="dateReturnControl"
 							[minDate]="minDate_return" [datesDisabled]="disabledDates" [maxDate]="maxDate_return"
 							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}"
@@ -128,14 +128,14 @@
 				</div>
 				<div class="row" *ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length==0">
 					<div class="ml-4 mt-1">
-						<input bsDatepicker type="text" class="form-control" placeholder="Start Date"
+						<input bsDatepicker type="text" class="form-control text-line " placeholder="Start Date"
 							style="width: 170px;" [isDisabled]="dateStartControl" [minDate]="minDate_start"
 							[datesDisabled]="disabledDates" [maxDate]="maxDate_start"
 							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}"
 							(bsValueChange)="onStartChange($event)">
 					</div>
 					<div class="ml-1 mt-1">
-						<input bsDatepicker type="text" class="form-control" placeholder="Return Date"
+						<input bsDatepicker type="text" class="form-control text-line " placeholder="Return Date"
 							style="width: 170px;" [isDisabled]="dateReturnControl" [minDate]="minDate_return"
 							[datesDisabled]="disabledDates" [maxDate]="maxDate_return"
 							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}"
