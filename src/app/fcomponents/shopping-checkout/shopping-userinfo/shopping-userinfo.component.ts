@@ -40,6 +40,7 @@ export class ShoppingUserinfoComponent implements OnInit {
   deliveryFee=0
   districtName = ''
   minDate: Date
+  url:any
   @Output() isPickup = new EventEmitter();
   @Output() district = new EventEmitter();
   constructor(
@@ -229,8 +230,7 @@ export class ShoppingUserinfoComponent implements OnInit {
         this.isSendSuccess = true;
         console.log(res['data'].cartId)
         this.getPaymentUrl(res['data'].cartId)
-        this.router.navigate(['/paymentoptions']);
-        localStorage.clear()
+        //this.router.navigate(['/paymentoptions']);
       },
       (error) => {
         this.isSendingEmail = false;
@@ -245,8 +245,7 @@ export class ShoppingUserinfoComponent implements OnInit {
         this.isSendingEmail = false;
         this.isSendSuccess = true;
         this.getPaymentUrl(res['data'].cartId)
-        this.router.navigate(['/paymentoptions']);
-        localStorage.clear()
+        //this.router.navigate(['/paymentoptions']);
       },
       (error) => {
         this.isSendingEmail = false;
@@ -255,9 +254,14 @@ export class ShoppingUserinfoComponent implements OnInit {
       });
   }
   getPaymentUrl(cartId){
+    localStorage.setItem('cartId', JSON.stringify(cartId))
     this.productService.requestPaymentUrl(cartId).subscribe(
       res => {
-        console.log(res)
+        console.log(res['url'])
+        window.location.assign(res['url'])
+        localStorage.removeItem('productTimetable')
+        localStorage.removeItem('cartList')
+        localStorage.removeItem('totalPrice')
       },
       err => {
         console.log(err)
