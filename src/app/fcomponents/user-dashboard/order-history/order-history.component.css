@@ -5,24 +5,27 @@ span {
     color: #c48f45;
 }
 .card {
-    min-height: 350px;
+	min-height: 350px;
+	max-height: 500px;
+	overflow: scroll;
     width: 1000px;
     margin: 0 auto;
     margin-top: 3%;
 }
 .card-body {
-    width: 100%;
+	width: 100%;
+	padding: 0;
 }
 .card-header {
     background-color: #c48f45;
     color: white;
-    text-align: center;
+	text-align: center;
+	margin-top: -10px;
 }
 .order-list {
     color: #535353;
 }
 .order-list:hover {
-    cursor: pointer;
     color: #caa26b;
     text-decoration: none;
 }

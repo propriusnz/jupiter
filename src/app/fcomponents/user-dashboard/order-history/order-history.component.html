@@ -1,26 +1,33 @@
 <div class="card">
-	<div class="card-header">
-		<h4>Your Order History</h4>
-	</div>
 	<div class="card-body bg-light text-center">
 		<table class="table">
-			<tr>
+			<tr class="card-header">
 				<th>Event Address</th>
 				<th>Date of Event</th>
 				<th>Price</th>
 				<th>Payment Status</th>
 				<th>Order Status</th>
+				<th>View Detail</th>
 			</tr>
-			<tr class="order-list" (click)="itemDialog(order)" *ngFor="let order of orders">
+			<tr class="order-list" *ngFor="let order of orders">
 				<td>{{order.location}}</td>
 				<td>{{order.plannedTime | date :'short'}}</td>
-				<td>{{order.price}}</td>
-				<b><td *ngIf="order.isPay === 0 && order.isExpired === 0">Processing <button mat-raised-button (click)="payAgain(order.cartId)">Pay Again</button></td></b>
-				<b><td *ngIf="order.isPay === 1 && order.isExpired === 0">Paid</td></b>
-				<b><td *ngIf="order.isPay === 0 && order.isExpired === 1">Expired</td></b>
+				<td>$ {{order.price}}</td>
+				<td *ngIf="order.isPay === 0 && order.isExpired === 0">
+					<b>Processing</b><br>
+					<button class="btn btn-sm btn-info mt-1" *ngIf="order.isPay === 0 && order.isExpired === 0" (click)="payAgain(order.cartId)">
+						Pay Again
+					</button>
+				</td>
+				<td *ngIf="order.isPay === 1 && order.isExpired === 0"><b>Paid</b></td>
+				<td *ngIf="order.isPay === 0 && order.isExpired === 1"><b>Expired</b></td>
 				<td *ngIf="order.cartStatusId === null">-</td>
 				<td *ngIf="order.cartStatusId !=null">{{order.cartStatus.cartStatusName}}</td>
-
+				<td>
+					<button class="btn btn-info btn-sm" (click)="itemDialog(order)">
+						<i class="far fa-eye mr-1"></i>
+					</button>
+				</td>
 			</tr>
 		</table>
 	</div>
