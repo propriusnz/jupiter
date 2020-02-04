@@ -323,5 +323,4 @@ export class ProductService {
     return this.http.get(this.baseUrl + '/usercarts/' + userId,
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
-
 }

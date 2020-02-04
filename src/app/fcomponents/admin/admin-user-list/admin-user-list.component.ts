@@ -42,8 +42,8 @@ export class AdminUserListComponent implements OnInit {
 
   openEditProfile(user) {
 	  const dialogConfig = new MatDialogConfig();
-	  dialogConfig.height = '700px';
-	  dialogConfig.width = '550px';
+	  dialogConfig.height = '650px';
+	  dialogConfig.width = '400px';
 	  dialogConfig.autoFocus = false;
 	  dialogConfig.data = {
 		  data: user

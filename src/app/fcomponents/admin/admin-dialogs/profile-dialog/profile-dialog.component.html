@@ -1,4 +1,9 @@
-<div class="container" *ngIf="userProfile">
+<div *ngIf="!userProfile['userInfo'][0]" class="text-center mt-5">
+	<h5 style="color: red;">Error</h5><br>
+	<p>User Contact ID For This Account Not Found ! <br>Please Check Database</p>
+</div>
+
+<div class="container" *ngIf="userProfile['userInfo'][0]">
 	<div class="row">
 		<h3 mat-dialog-title>
 			User id #<b>{{ userProfile.id }}</b>
@@ -19,7 +24,7 @@
 			</mat-form-field>
 			
 			<mat-form-field>
-				<input matInput class="form-control" placeholder="Change Email Disabled" disabled>
+				<input matInput class="form-control" formControlName="email" placeholder="Email Address" disabled>
 			</mat-form-field>
 
 			<mat-form-field>
@@ -37,7 +42,7 @@
 			</mat-form-field>
 		</form>
 
-		<div id="ButtonsWrap" class="mx-3">
+		<div id="ButtonsWrap" class="mt-3">
 			<button mat-raised-button color="basic" mat-dialog-close>Cancel</button>
 			<button mat-raised-button type="submit" class="primaryButton mx-2">Update</button>
 		</div>
@@ -56,7 +61,7 @@
 		margin: 0 auto;
 	}
 	mat-dialog-content {
-		min-height: 550px;
+		min-height: 520px;
 	}
 	mat-form-field {
 		display: block;

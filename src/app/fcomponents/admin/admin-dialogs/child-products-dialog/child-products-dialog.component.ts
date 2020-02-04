@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { ProductService } from 'src/app/service/product.service';
 
 @Component({
   selector: 'app-child-products-dialog',
@@ -7,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChildProductsDialogComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+	private dialogRef: MatDialogRef<ChildProductsDialogComponent>,
+	private productservice: ProductService,
+  ) { }
 
   ngOnInit() {
   }
