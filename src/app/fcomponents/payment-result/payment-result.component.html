@@ -2,8 +2,12 @@
 
 
 
-
-  <div *ngIf="result" class="card">
+  <div *ngIf="isSendingRequest">We are processing your Order Status. Please wait...
+    <div class="spinner-border text-info" role="status">
+       <span class="sr-only">Loading...</span>
+    </div>
+ </div>
+  <div *ngIf="isSendSuccess && result" class="card">
     <div class="card-header">
       <h4>Your Payment Status</h4>
     </div>
@@ -15,15 +19,28 @@
       </div>
     </div>
   </div>
-  <div *ngIf="!result" class="card">
+  <div *ngIf="isSendSuccess && !result" class="card">
     <div class="card-header">
       <h4>Your Payment Status</h4>
     </div>
-    <div class="card-body bg-light text-center text-danger">
-      {{paymentStatusFailure}}
-
+    <div class="card-body bg-light text-center">
+      <span class="text-danger">{{paymentStatusFailure}}</span>
       <div id="buttonsWrap">
-        <button mat-raised-button routerLink='/paymentoptions'>Pay Again</button>
+        <i class="fas fa-arrow-right text-danger"></i><button mat-raised-button (click)="payAgain()">Pay Again</button>
+      </div>
+      <div *ngIf="user" id="buttonsWrap">
+        <i class="fas fa-arrow-right text-danger"></i><button mat-raised-button routerLink='/userDashboard'>Check the order in your dashboard </button>
+      </div>
+      <div *ngIf="isAskingStatus">Processing... Please wait...
+        <div class="spinner-border text-info" role="status">
+           <span class="sr-only">Loading...</span>
+        </div>
+     </div>
+      <div *ngIf="expired" style="margin-top:20px" class="alert alert-danger text-center">
+        {{ errorMessage }}
+        <button class="btn btn_gold btn-sm" routerLink="/" type="button">
+          <i class="fas fa-arrow-right"></i>&nbsp;Continue Shopping
+        </button>
       </div>
     </div>
   </div>

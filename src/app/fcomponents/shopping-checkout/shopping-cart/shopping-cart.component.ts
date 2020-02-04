@@ -43,7 +43,6 @@ export class ShoppingCartComponent implements OnInit {
   @Input() isPickup = ''
   @Input() district = ''
   @ViewChild('quantityInput', { static: false }) quantityInput: ElementRef;
-  borderstyleA='solid black 1px';
   borderstyleB='solid red 2px';
 constructor(
   private productService: ProductService,

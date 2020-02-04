@@ -24,6 +24,7 @@ import {AdminPanelService} from './service/admin-panel.service';
 // All Guard follow
 import { AdminAuthGuard } from './guards/admin-auth.guard'
 import { UserAuthGuard } from './guards/user-auth.guard';
+import { PaymentAuthGuard } from './guards/payment-auth.guard';
 //All Data Follow
 import { DataService } from './service/data.service';
 // All components follow
@@ -76,6 +77,7 @@ import { ChildProductsDialogComponent } from './fcomponents/admin/admin-dialogs/
 
 
 
+
 // All Routes follow
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -109,7 +111,7 @@ const appRoutes: Routes = [
   { path: 'checkout', component: ShoppingCheckoutComponent },
   { path: 'thankYou', component: ThankYouComponent },
   { path: 'paymentoptions', component: PaymentOptionsComponent },
-  { path: 'paymentresult', component: PaymentResultComponent },
+  { path: 'paymentresult', component: PaymentResultComponent,canActivate: [PaymentAuthGuard]},
   { path: '**', component: HomepageComponent }
 ];
 
@@ -187,7 +189,7 @@ const appRoutes: Routes = [
     BsDatepickerModule.forRoot(),
   ],
   providers: [
-    ProductService, DataService, MatchService,AdminAuthGuard,UserAuthGuard,AuthService,AdminPanelService
+    ProductService, DataService, MatchService,AdminAuthGuard,UserAuthGuard,PaymentAuthGuard,AuthService,AdminPanelService
   ],
   bootstrap: [AppComponent],
   entryComponents: [

@@ -17,5 +17,11 @@ export class AuthService {
     const isAuth=authInfo? true : false;
     return isAuth
   }
-  isRaymentAuth
+  isPaymentAuthrized(url):boolean{
+    if(url.localeCompare('/paymentresult')==0){
+      return false
+    }
+    return true
+    
+  }
 }

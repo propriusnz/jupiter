@@ -19,19 +19,44 @@ export class OrderHistoryComponent implements OnInit {
 
   ngOnInit() {
     this.productService.getUserOrdersHistory(this.userID).subscribe(
-      (res)=>{console.log(res),
+      (res)=>{
+        console.log(res),
         this.orders = res
       },
       (err)=>{console.warn(err)}
     )
   }
 
-  itemDialog(id) {
-    console.log(id)
+  itemDialog(order) {
+    
     this.dialog.open(ItemDetailComponent, {
       width: '850px',
       height: '450px',
-      data: id
+      data: order['cartId']
     });
+  }
+  payAgain(cartId){
+    this.productService.getCartStatus(cartId).subscribe(
+      res=>{
+        console.log(res)
+        if(res['isPay']==0 && res['isExpired']==1){
+          location.reload();
+        }else if(res['isPay']==0 && res['isExpired']==0){
+          this.productService.requestPaymentUrl(cartId).subscribe(
+            res=>{
+              console.log(res)
+              window.location.assign(res['url'])
+            },
+            err=>{
+              console.log(err)
+            }
+          )
+        }
+        
+      },
+      err=>{
+        console.log(err)
+      }
+    )
   }
 }

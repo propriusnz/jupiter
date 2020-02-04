@@ -7,22 +7,20 @@
 			<tr>
 				<th>Event Address</th>
 				<th>Date of Event</th>
-				<th>Items (List)</th>
 				<th>Price</th>
 				<th>Payment Status</th>
 				<th>Order Status</th>
 			</tr>
-			<tr class="order-list" (click)="itemDialog(order.cartId)" *ngFor="let order of orders">
+			<tr class="order-list" (click)="itemDialog(order)" *ngFor="let order of orders">
 				<td>{{order.location}}</td>
 				<td>{{order.plannedTime | date :'short'}}</td>
-				<td>{{order.items}}</td>
 				<td>{{order.price}}</td>
-				<b><td *ngIf="order.isPay === 0 && order.isExpired === 0">Processing</td></b>
+				<b><td *ngIf="order.isPay === 0 && order.isExpired === 0">Processing <button mat-raised-button (click)="payAgain(order.cartId)">Pay Again</button></td></b>
 				<b><td *ngIf="order.isPay === 1 && order.isExpired === 0">Paid</td></b>
 				<b><td *ngIf="order.isPay === 0 && order.isExpired === 1">Expired</td></b>
 				<td *ngIf="order.cartStatusId === null">-</td>
-				<td *ngIf="order.cartStatusId === 1">Not Collect</td>
-				<td *ngIf="order.cartStatusId === 2">Collected</td>
+				<td *ngIf="order.cartStatusId !=null">{{order.cartStatus.cartStatusName}}</td>
+
 			</tr>
 		</table>
 	</div>
