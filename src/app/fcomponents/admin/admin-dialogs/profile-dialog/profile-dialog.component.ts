@@ -24,22 +24,26 @@ export class ProfileDialogComponent implements OnInit {
 	}
 
   	ngOnInit() {
-		this.profileForm = this.fb.group({
-			firstName: [this.userProfile['userInfo'][0]['firstName'], 
-					   [Validators.minLength(2),
-						Validators.maxLength(20)]],
-			lastName: [this.userProfile['userInfo'][0]['lastName'],
-					  [Validators.minLength(2),
-					   Validators.maxLength(20)]],
-			email: [this.userProfile['email']],
-			phoneNumber: [this.userProfile['userInfo'][0]['phoneNumber'],
-						 [Validators.pattern('[0-9]*'),
-						  Validators.minLength(7)]],
-			company: [this.userProfile['userInfo'][0]['company'],
-					 [Validators.minLength(2),
-					  Validators.maxLength(20)]],
-			discountLevel: [this.userProfile['userInfo'][0]['discountLevel']]
-		})
+		if (this.userProfile['userInfo'][0]) {
+			this.profileForm = this.fb.group({
+				firstName: [this.userProfile['userInfo'][0]['firstName'], 
+							[Validators.minLength(2),
+							Validators.maxLength(20)]],
+				lastName: [this.userProfile['userInfo'][0]['lastName'],
+							[Validators.minLength(2),
+							Validators.maxLength(20)]],
+				email: [this.userProfile['email'], 
+						[Validators.required,
+						Validators.email]],
+				phoneNumber: [this.userProfile['userInfo'][0]['phoneNumber'],
+								[Validators.pattern('[0-9]*'),
+								Validators.minLength(7)]],
+				company: [this.userProfile['userInfo'][0]['company'],
+							[Validators.minLength(2),
+							Validators.maxLength(20)]],
+				discountLevel: [this.userProfile['userInfo'][0]['discountLevel']]
+			})
+		}
 	}
 
 	get firstName() {
@@ -47,19 +51,23 @@ export class ProfileDialogComponent implements OnInit {
 	}
 
 	get lastName() {
-	return this.profileForm.get('lastName');
+		return this.profileForm.get('lastName');
+	}
+
+	get email() {
+		return this.profileForm.get('email');
 	}
 
 	get phoneNumber() {
-	return this.profileForm.get('phoneNumber');
+		return this.profileForm.get('phoneNumber');
 	}
 
 	get company() {
-	return this.profileForm.get('company');
+		return this.profileForm.get('company');
 	}
 
 	get discountLevel() {
-	return this.profileForm.get('discountLevel');
+		return this.profileForm.get('discountLevel');
 	}
 
 	getErrorMessageFname() {

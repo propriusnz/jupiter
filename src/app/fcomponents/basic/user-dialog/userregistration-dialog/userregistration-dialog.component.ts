@@ -32,12 +32,14 @@ export class UserregistrationDialogComponent implements OnInit {
 
   ngOnInit() {
     this.registrationForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email,
-      ]],
+	  email: ['', [Validators.required, 
+				   Validators.email]],
       password: ['', [Validators.required,
-      Validators.minLength(8),
-      Validators.maxLength(20),
-      Validators.pattern('(?!^[0-9 ]*$)(?!^[a-zA-Z ]*$)^([a-zA-Z0-9 ]{8,20})$')]],
+      				  Validators.minLength(8),
+      				  Validators.maxLength(20),
+     		 		  Validators.pattern(
+						'(?!^[0-9 ]*$)(?!^[a-zA-Z ]*$)^([a-zA-Z0-9 ]{8,20})$'
+					  )]],
       confirmpassword: ['', [Validators.required]]
     }, {
       validator: this.matchservice.MustMatch('password', 'confirmpassword')
