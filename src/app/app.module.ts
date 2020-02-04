@@ -74,6 +74,7 @@ import { PaymentResultComponent } from './fcomponents/payment-result/payment-res
 import { AdminUserListComponent } from './fcomponents/admin/admin-user-list/admin-user-list.component';
 import { ProfileDialogComponent } from './fcomponents/admin/admin-dialogs/profile-dialog/profile-dialog.component';
 import { ChildProductsDialogComponent } from './fcomponents/admin/admin-dialogs/child-products-dialog/child-products-dialog.component';
+import { PopupDialogComponent } from './fcomponents/basic/user-dialog/popup-dialog/popup-dialog.component';
 
 
 
@@ -161,7 +162,8 @@ const appRoutes: Routes = [
     PaymentResultComponent,
     AdminUserListComponent,
     ProfileDialogComponent,
-    ChildProductsDialogComponent
+    ChildProductsDialogComponent,
+    PopupDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -203,7 +205,8 @@ const appRoutes: Routes = [
 	EmailsentDialogComponent,
 	ProfileDialogComponent,
     EmailsentDialogComponent,
-    ItemDetailComponent
+    ItemDetailComponent,
+    PopupDialogComponent
   ],
 })
 export class AppModule { }

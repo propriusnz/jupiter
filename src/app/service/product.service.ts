@@ -154,6 +154,9 @@ export class ProductService {
     return this.http.put(this.baseUrl + '/Contacts/' + id, contact,
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
+  popupContacts(contact){
+    return this.http.post(this.baseUrl+'/Contactemails/CustomerMessage',contact)
+  }
 
 
   // !FAQ
