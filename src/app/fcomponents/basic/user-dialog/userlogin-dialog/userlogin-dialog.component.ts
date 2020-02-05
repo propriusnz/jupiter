@@ -6,6 +6,7 @@ import { DataService } from '../../../../service/data.service'
 import { ProductService } from 'src/app/service/product.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { UserregistrationDialogComponent } from '../userregistration-dialog/userregistration-dialog.component';
 
 @Component({
   selector: 'app-userlogin-dialog',
@@ -68,7 +69,13 @@ export class UserloginDialogComponent implements OnInit {
 
   signupDialog() {
     this.dialogRef.close();
+    
     this.data.changesignupMessage("open")
+    this.dialog.open(UserregistrationDialogComponent, {
+      width: '450px',
+      // height: '450px',
+    });
+
   }
 
   get email() {

@@ -18,5 +18,5 @@ export class ShoppingCheckoutComponent implements OnInit {
   districtOption(option){
     this.district=option
   }
-  
+
 }

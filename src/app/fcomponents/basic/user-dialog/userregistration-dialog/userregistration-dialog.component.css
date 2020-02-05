@@ -1,0 +1,50 @@
+.wrap {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.wrap>* {
+    width: 100%;
+}
+
+#logowrap {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#ButtonsWrap {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.mat-form-field {
+    display: block;
+}
+
+.slide {
+    margin: 0 auto;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #c48f45;
+}
+
+.primaryButton {
+    background-color: #c48f45;
+    color: white;
+}
+
+p {
+    color: #c48f45;
+}
+
+mat-form-field {
+    display: block;
+    margin-bottom: 10px;
+}
+
+mat-dialog-actions {
+    display: block;
+}
