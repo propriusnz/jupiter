@@ -27,10 +27,10 @@
       </div>
       <br><br><br>
       <div style="text-align: left;" class="m1">Shopping Bag</div>
-      <app-shopping-cart [isPickup]="isPickup" [district]="district"></app-shopping-cart>
+      <app-shopping-cart (EventStartDate)="StartDate($event)" (EventEndDate)="EndDate($event)" [isPickup]="isPickup" [district]="district"></app-shopping-cart>
     </div>
     <div class="col-lg-4 col-12">
-      <app-shopping-userinfo (isPickup)="pickupOrdelievery($event)" (district)="districtOption($event)"></app-shopping-userinfo>
+      <app-shopping-userinfo (isPickup)="pickupOrdelievery($event)" (district)="districtOption($event)" [EventStartDate]="EventStartDate" [EventEndDate]="EventEndDate"></app-shopping-userinfo>
       <br>
     </div>
   </div>

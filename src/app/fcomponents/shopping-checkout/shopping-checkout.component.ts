@@ -8,6 +8,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 export class ShoppingCheckoutComponent implements OnInit {
   isPickup=''
   district=''
+  EventStartDate=''
+  EventEndDate=''
   constructor() { }
 
   ngOnInit() {
@@ -17,6 +19,12 @@ export class ShoppingCheckoutComponent implements OnInit {
   }
   districtOption(option){
     this.district=option
+  }
+  StartDate(date){
+    this.EventStartDate=date
+  }
+  EndDate(date){
+    this.EventEndDate=date
   }
 
 }
