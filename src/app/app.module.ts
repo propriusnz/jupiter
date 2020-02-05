@@ -205,6 +205,8 @@ const appRoutes: Routes = [
 	EmailsentDialogComponent,
 	ProfileDialogComponent,
     EmailsentDialogComponent,
+	ItemDetailComponent,
+	ChildProductsDialogComponent,
     ItemDetailComponent,
     PopupDialogComponent
   ],

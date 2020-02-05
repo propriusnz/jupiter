@@ -70,7 +70,7 @@ h2 {
 input {
   width: 50px;
 }
-.DatePicker > .input_line {
+.input_line {
 	border-top: none;
 	border-left: none;
 	border-right: none;

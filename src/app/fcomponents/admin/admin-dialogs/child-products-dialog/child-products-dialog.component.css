@@ -1,0 +1,15 @@
+h5 {
+	font-size: medium; 
+	text-align: center; 
+	color: #c48f45;
+	font-size: 1.5rem;
+}
+input{
+    width: 300px;
+}
+th{
+    position: sticky;
+    top: -25px;
+    z-index: 99;
+    text-align:center;
+}
