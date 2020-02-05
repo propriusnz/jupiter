@@ -203,7 +203,8 @@ const appRoutes: Routes = [
 	EmailsentDialogComponent,
 	ProfileDialogComponent,
     EmailsentDialogComponent,
-    ItemDetailComponent
+	ItemDetailComponent,
+	ChildProductsDialogComponent
   ],
 })
 export class AppModule { }

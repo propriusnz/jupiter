@@ -106,7 +106,8 @@
 				<div class="col-6 col-lg-6 s1"
 					*ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length==0">
 					Quantity: <input type="number" [value]="quantity" min="0" max={{productDetail.availableStock}}
-						[(ngModel)]="quantity" (click)="quantitycheck(productDetail)">
+						[(ngModel)]="quantity" (click)="quantitycheck(productDetail)"
+						style="width:40px; height:20px; font-size:14px; border:none; border-bottom:1px solid #919191">
 				</div>
 				<div *ngIf="!this.productDetail['productDetail'] 
 							|| this.productDetail['productDetail'].length>0">
@@ -134,14 +135,14 @@
 				</div>
 				<div class="row" *ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length==0">
 					<div class="ml-4 mt-1">
-						<input bsDatepicker type="text" class="form-control text-line " placeholder="Start Date"
+						<span>From </span>
+						<input bsDatepicker type="text" class="input_line" placeholder="Start Date"
 							style="width: 170px;" [isDisabled]="dateStartControl" [minDate]="minDate_start"
 							[datesDisabled]="disabledDates" [maxDate]="maxDate_start"
 							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}"
 							(bsValueChange)="onStartChange($event)">
-					</div>
-					<div class="ml-1 mt-1">
-						<input bsDatepicker type="text" class="form-control text-line " placeholder="Return Date"
+						<span class="mx-2">to</span>
+						<input bsDatepicker type="text" class="input_line" placeholder="Return Date"
 							style="width: 170px;" [isDisabled]="dateReturnControl" [minDate]="minDate_return"
 							[datesDisabled]="disabledDates" [maxDate]="maxDate_return"
 							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}"
@@ -153,7 +154,6 @@
 					<button class='btn btn_gold' (click)="manageCartProds()"
 						[disabled]="this.addToCartControl || (0>= this.quantity || this.quantity > this.productDetail.availableStock) && (this.cartForm.invalid || this.isInputZero)">Add to cart</button>
 				</div>
-				<!--&& (0>= this.quantity || this.quantity > this.productDetail.availableStock) && (this.cartForm.invalid || this.isInputZero) -->
 			</div>
 
 			<div class="row justify-content-end">

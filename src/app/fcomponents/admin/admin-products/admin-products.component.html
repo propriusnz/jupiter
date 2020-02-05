@@ -1,123 +1,74 @@
 <div class="text-center mt-5 pt-5" *ngIf="isLoading">
-    <app-loading></app-loading>
+	<app-loading></app-loading>
 </div>
 
 <div>
-    <div class="row mt-3">
-      <div class="ml-3 mr-5">
-        <h2>{{productTitle}}</h2>
-      </div>
-      <div class="pt-2 col">
-        <button type="button" style="border-radius: 5px;" title="Add" (click)="createProduct()">
-          <i class="fas fa-plus"></i>
-          <span>Add</span>
-        </button>
-      </div>
-      <div class="pt-2 col">
-        <input type="text" id="productSearch" class="form-control mb-2" placeholder="search the title of products here" [formControl]="searchField">
-      </div>
+	<div class="row mt-3">
+		<div class="ml-3 mr-5">
+			<h2>{{productTitle}}</h2>
+		</div>
+		<div class="pt-2 col">
+			<button type="button" style="border-radius: 5px;" title="Add" (click)="createProduct()">
+				<i class="fas fa-plus"></i>
+				<span>Add</span>
+			</button>
+		</div>
+		<div class="pt-2 col">
+			<input type="text" id="productSearch" class="form-control mb-2"
+				placeholder="search the title of products here" [formControl]="searchField">
+		</div>
 	</div>
-	
-    <table class="table">
-      <thead>
-        <tr class="table-secondary">
-          <th scope="col">Id<br><span>编号</span></th>
-          <th scope="col">Title<br><span>标题</span></th>
-          <th scope="col">Subtitle<br><span>副标题</span></th>
-          <th scope="col">Price<br><span>价格</span></th>
-          <th scope="col">Discount<br><span>折后价</span></th>
-          <th scope="col" *ngIf="productTypeId === '1' || productTypeId === '2'" >Category<br><span>类别</span></th>
-          <th scope="col">Total stock<br><span>总库存</span></th>
-          <th scope="col">Available stock<br><span>现库存</span></th>
-          <th scope="col">Special Order<br><span>特殊展示</span></th>
-          <th scope="col">Description<br><span>描述</span></th>
-          <th scope="col">Edit<br><span>编辑</span></th>
-          <th scope="col">Delete<br><span>删除</span></th>
-        </tr>
-      </thead>
-      <tbody *ngIf="displayedProductData">
-        <tr *ngFor="let data of displayedProductData">
-          <td>{{data.prodId}}</td>
-          <td width="20%">{{data.title}}
-			<br>
 
-			<!-- Collapse Table For LED Letter Lights -->
-            <!-- <a *ngIf="data.prodId == 10"  -->
-            <a *ngIf="data.productDetail[0]" 
-               data-toggle="collapse" 
-               href="#Collapse" 
-               role="button" 
-               aria-expanded="false" aria-controls="Collapse"
-               class="btn btn-info btn-sm">
-			   <i class="far fa-eye mr-1"></i>
-			   <i class="fas fa-angle-down"></i>
-			</a>
-			<!-- Collapse Table -->
-            <div *ngIf="data.prodId == 10" 
-                 class="collapse mt-3" id="Collapse"
-                 style="position: absolute; width: 700px; max-height: 550px; overflow: scroll; border: #c48f45 3px solid;">
-                <div class="card card-body">
-                    <h6 style="color: #c48f45;">Child Products</h6>
-					<table class="table">
-						<thead class="table-secondary">
-							<th><span>Child ID<br>子产品ID</span></th>
-							<th><span>Name<br>名称</span></th>
-							<th><span>Total Stock<br>总库存</span></th>
-							<th><span>Available Stock<br>现库存</span></th>
-							<th><span>Calender<br>日历</span><br>
-								<span>From <i> {{ minDate | date:'dd-MMM-yyy' }}</i> 
-									  to   <i> {{ maxDate | date:'dd-MMM-yyy' }}</i> 
-								</span>
-							</th>
-						</thead>
-						<tbody>
-							<tr *ngFor="let childProduct of childProducts" style="text-align: center;">
-								<td width="12%">{{ childProduct.id }}</td>
-								<td width="20%">{{ childProduct.productDetail1 }}</td>
-								<td>{{ childProduct.totalStock }}</td>
-								<td>{{ childProduct.availableStock }}</td>
-								<td width="25%">
-									<input 
-										bsDaterangepicker type="text" class="form-control" 
-										placeholder="Calender of {{ childProduct.productDetail1 }} " style="width: 280px;"
-										[minDate]="minDate" [datesDisabled]="emptyDates"
-										[maxDate]="maxDate" 
-										[outsideClick]="true"
-										[bsConfig]="{
-											rangeInputFormat: 'MMMM Do', containerClass:'theme-orange',
-											selectFromOtherMonth: true,
-											adaptivePosition: true,
-											showWeekNumbers: false
-										}"
-										(click)="getDetailProductTime(childProduct.id)"
-									>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-                </div>
-            </div>
-          </td>
-          <td>{{data.subTitle}}</td>
-          <td style="text-align:center;">${{data.price}}</td>
-		  <td style="text-align:center;">${{data.price - data.discount}}</td>
-		  <td *ngIf="productTypeId === '1' || productTypeId === '2'">
-			  <span *ngIf="data.category">{{data.category.categoryName}}</span>
-			  <span *ngIf="!data.category">-</span>
-		  </td>
-		  <!-- <td *ngIf="!data.category"></td> -->
-          <!-- <td *ngIf="blockCode == 2" style="text-align:center;">
+	<table class="table">
+		<!-- Table Head -->
+		<thead>
+			<tr class="table-secondary">
+				<th scope="col">Id<br><span>编号</span></th>
+				<th scope="col">Title<br><span>标题</span></th>
+				<th scope="col">Subtitle<br><span>副标题</span></th>
+				<th scope="col">Price<br><span>价格</span></th>
+				<th scope="col">Discount<br><span>折后价</span></th>
+				<th scope="col" *ngIf="productTypeId === '1' || productTypeId === '2'">Category<br><span>类别</span></th>
+				<th scope="col">Total stock<br><span>总库存</span></th>
+				<th scope="col">Available stock<br><span>现库存</span></th>
+				<th scope="col">Special Order<br><span>特殊展示</span></th>
+				<th scope="col">Description<br><span>描述</span></th>
+				<th scope="col">Edit<br><span>编辑</span></th>
+				<th scope="col">Delete<br><span>删除</span></th>
+			</tr>
+		</thead>
+
+		<!-- Table Body -->
+		<tbody *ngIf="displayedProductData">
+			<tr *ngFor="let data of displayedProductData">
+				<td>{{data.prodId}}</td>
+				<td width="20%">{{data.title}}
+					<br>
+					<!-- Button to Toggle Child Product List Dialog  -->
+					<button *ngIf="data.productDetail[0]" (click)="openChildProductDialog(data)"
+						class="btn btn-info btn-sm">
+						<i class="far fa-eye mr-1"></i>
+						<i class="fas fa-angle-down"></i>
+					</button>
+				</td>
+				<td>{{data.subTitle}}</td>
+				<td style="text-align:center;">${{data.price}}</td>
+				<td style="text-align:center;">${{data.price - data.discount}}</td>
+				<td *ngIf="productTypeId === '1' || productTypeId === '2'">
+					<span *ngIf="data.category">{{data.category.categoryName}}</span>
+					<span *ngIf="!data.category">-</span>
+				</td>
+				<!-- <td *ngIf="!data.category"></td> -->
+				<!-- <td *ngIf="blockCode == 2" style="text-align:center;">
             <div *ngIf="data.category">{{data.category.categoryName}}</div>
           </td> -->
-          <td>{{data.totalStock}}</td>
-          <td>{{data.availableStock}}</td>
-          <td>{{data.specialOrder}}</td>
-
-          <td style="text-align:center; font-size:10px;">{{data.description}}</td>
-          <td ><i class="far fa-edit" (click)="openProduct(data)" title="Edit"></i></td>
-          <td ><i class="far fa-trash-alt" title="Delete"
-              (click)="deleteProduct(data)"></i></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+				<td>{{data.totalStock}}</td>
+				<td>{{data.availableStock}}</td>
+				<td>{{data.specialOrder}}</td>
+				<td style="text-align:center; font-size:10px;">{{data.description}}</td>
+				<td><i class="far fa-edit" (click)="openProduct(data)" title="Edit"></i></td>
+				<td><i class="far fa-trash-alt" title="Delete" (click)="deleteProduct(data)"></i></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

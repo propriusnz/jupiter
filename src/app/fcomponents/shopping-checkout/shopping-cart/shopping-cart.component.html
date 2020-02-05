@@ -2,14 +2,14 @@
 
 	<div class="my-2 ml-3">
 		<span>From </span>
-		<input bsDatepicker type="text" class="input_line" placeholder="Start Date"  
+		<input bsDatepicker type="text" class="input_line" placeholder="Start Date" placement="top"
 			[minDate]="minDate_start" [style.border-bottom]="!borderStyleControl ? borderstyleB:''"
 			[datesDisabled]="disabledDates" [maxDate]="maxDate_start"
 			[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange',showWeekNumbers:false}"
 			(bsValueChange)="onStartChange($event)">
 		<span class="mx-3">to</span>
-		<input bsDatepicker type="text" class="input_line" placeholder="Return Date"
-    [style.border-bottom]="!borderStyleControl ? borderstyleB:''" [isDisabled]="dateReturnControl" [minDate]="minDate_return" [style.border-bottom]="borderStyleControl ? borderstyleA :borderstyleB" [datesDisabled]="disabledDates"
+		<input bsDatepicker type="text" class="input_line" placeholder="Return Date" placement="top"
+    		[style.border-bottom]="!borderStyleControl ? borderstyleB:''" [isDisabled]="dateReturnControl" [minDate]="minDate_return" [style.border-bottom]="borderStyleControl ? borderstyleA :borderstyleB" [datesDisabled]="disabledDates"
 			[maxDate]="maxDate_return"
 			[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange',showWeekNumbers:false}"
 			(bsValueChange)="onReturnChange($event)">
