@@ -12,7 +12,6 @@ export class ShoppingUserinfoComponent implements OnInit {
   userContactInfoForm: FormGroup
   feedback_message: string;
   successMessage: string;
-  PlannedTime: any;
   isSendingEmail = false;
   isSendSuccess = false;
   isCartEmpty = false;
@@ -25,6 +24,7 @@ export class ShoppingUserinfoComponent implements OnInit {
   totalPrice = 0
   bondFee = 150
   timetable = []
+  paymentSpinnerControl=false
   userInfo = {
     FirstName: '',
     LastName: '',
@@ -160,7 +160,6 @@ export class ShoppingUserinfoComponent implements OnInit {
     const cartData = {
       location: `${this.userInfo.streetAddress}, ${this.userInfo.city}`,
       price: Number(localStorage.getItem('totalPrice')),
-      PlannedTime: this.PlannedTime,
       deliveryfee: this.deliveryFee,
       depositfee: this.bondFee,
       ispickup: this.userInfo.isPickup,
@@ -261,6 +260,7 @@ export class ShoppingUserinfoComponent implements OnInit {
     this.productService.requestPaymentUrl(cartId).subscribe(
       res => {
         console.log(res['url'])
+        this.paymentSpinnerControl=true
         window.location.assign(res['url'])
         localStorage.removeItem('productTimetable')
         localStorage.removeItem('cartList')

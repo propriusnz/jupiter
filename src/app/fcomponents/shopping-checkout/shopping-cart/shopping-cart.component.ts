@@ -18,6 +18,8 @@ export class ShoppingCartComponent implements OnInit {
   productTimetable = []
   errorMessage = ''
   isShoppingCartValid = true
+  initialStartDate:any
+  initialEndDate:any
   minDate_start: Date;
   maxDate_start: Date;
   minDate_return: Date;
@@ -175,6 +177,9 @@ checkTimeConflict() {
     control = true
   }
   if (control) {
+    console.log("test")
+    this.initialStartDate=this.productTimetable[0].beginDate
+    this.initialEndDate=this.productTimetable[0].endDate
     this.productService.setShoppingCartStatus(true);
     this.borderStyleControl=true
   }

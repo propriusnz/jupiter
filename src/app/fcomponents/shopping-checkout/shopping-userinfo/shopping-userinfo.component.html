@@ -118,6 +118,7 @@
             [disabled]="isSendingEmail || isCartEmpty || !isShoppingCartValid">Submit</button></div>
    </div>
 </form>
+<div *ngIf="paymentSpinnerControl" class="loader"></div>
 <!-- order summary -->
 <!-- <div class="col-4 border-left">
           <div class="row">Order Summary</div>
