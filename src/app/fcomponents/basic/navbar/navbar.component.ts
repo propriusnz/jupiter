@@ -98,6 +98,7 @@ export class NavbarComponent implements OnInit {
   logout() {
     localStorage.clear();
     // sessionStorage.clear();
+    localStorage.setItem('isVisitied','1')
     this.router.navigate(['/home']);
     alert('You are now logged out!');
     location.reload();
