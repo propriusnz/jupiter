@@ -122,6 +122,8 @@ export class UserregistrationDialogComponent implements OnInit {
   }
 
   redirect() {
-    this.router.navigate(['userDashboard'])
+    this.router.navigate(['userDashboard']);
+    location.reload();
+
   }
 }
