@@ -49,7 +49,7 @@ export class ProductService {
     return this.http.post(this.baseUrl + '/ProductTime/CalculateTime/', hiringtime);
   }
   checkIfAvailable(cartitems) {
-    return this.http.post(this.baseUrl + '/ProductTime/CheckIfAvaliable/', cartitems)
+    return this.http.post(this.baseUrl + '/ProductTime/CheckIfAvailable/', cartitems)
   }
 
 

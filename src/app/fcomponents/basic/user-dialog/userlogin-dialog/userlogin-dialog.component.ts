@@ -72,8 +72,8 @@ export class UserloginDialogComponent implements OnInit {
     
     this.data.changesignupMessage("open")
     this.dialog.open(UserregistrationDialogComponent, {
-      width: '450px',
-      // height: '450px',
+      width: '400px',
+      height: '680px',
     });
 
   }
