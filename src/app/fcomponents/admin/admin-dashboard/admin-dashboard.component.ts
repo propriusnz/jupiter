@@ -54,7 +54,7 @@ export class AdminDashboardComponent implements OnInit {
     this.selectedType = this.displayedTypeData.filter(
       item => item.prodTypeId === typeId
 	);
-	console.log(this.selectedType, typeof(this.selectedType));
+	// console.log(this.selectedType, typeof(this.selectedType));
 
     // add categories into formarray
     this.selectedType["0"].productCategory.forEach(prod => {

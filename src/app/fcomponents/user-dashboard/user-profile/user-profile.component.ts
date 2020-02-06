@@ -32,7 +32,7 @@ export class UserProfileComponent implements OnInit {
 
 	  this.productservice.getProfile(this.userId).subscribe(
 		  profile => {
-			console.log('Current logged in user：', profile);
+			// console.log('Current logged in user：', profile);
 			  this.profile = profile;
 			//   console.log(this.profile['data'][0].email);
 			this.firstname = profile['data'][0]['userInfo'][0] ? profile['data'][0]['userInfo'][0].firstName: null;

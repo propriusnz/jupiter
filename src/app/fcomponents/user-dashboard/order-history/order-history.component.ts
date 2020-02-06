@@ -21,7 +21,7 @@ export class OrderHistoryComponent implements OnInit {
     this.userID = JSON.parse(localStorage.getItem('userId'))
     this.productService.getUserOrdersHistory(this.userID).subscribe(
       (res)=>{
-        console.log(res),
+        // console.log(res),
         this.orders = res
       },
       (err)=>{console.warn(err)}
