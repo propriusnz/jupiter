@@ -15,7 +15,7 @@ export class ItemDetailComponent implements OnInit {
     public productService: ProductService,
     @Inject(MAT_DIALOG_DATA) data,
   ) { 
-    console.log(data)
+    // console.log(data)
     this.orderID = data
   }
 

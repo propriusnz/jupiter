@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, EventEmitter } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { ProductService } from '../../../../service/product.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-cart-dialog',
@@ -26,7 +27,8 @@ export class CartdialogComponent implements OnInit {
   };
   cartForm = {
     location: '',
-    plannedTime: '',
+    eventStartDate: '',
+    eventEndDate: '',
     price: 0,
   };
   constructor(
@@ -34,6 +36,7 @@ export class CartdialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data,
     private productService: ProductService
   ) {
+    console.log(data.data)
     // fill in contact form
     this.contactForm.email = data.data['contact']['email'];
     this.contactForm.firstName = data.data['contact']['firstName'];
@@ -42,7 +45,9 @@ export class CartdialogComponent implements OnInit {
     this.contactForm.message = data.data['contact']['message'];
     // fill in cart form
     this.cartForm.location = data.data['location'];
-    this.cartForm.plannedTime = data.data['plannedTime'];
+    this.cartForm.eventStartDate = data.data['eventStartDate'];
+    this.cartForm.eventEndDate = data.data['eventEndDate'];
+
     this.cartForm.price  = data.data['price'];
 
     this.cartId = data.data['id'];
@@ -68,11 +73,16 @@ export class CartdialogComponent implements OnInit {
         this.isLoading = false;
         console.log(error);
       });
-  }
+  } 
   updateCart() {
+    this.cartForm.eventEndDate = this.datetoYMD(this.cartForm.eventEndDate)
+    this.cartForm.eventEndDate = this.datetoYMD(this.cartForm.eventEndDate)
     this.isLoading = true;
+    console.log(this.cartForm)
+
     this.productService.updateCart(this.displayData.cartId, this.cartForm).subscribe(
       (res) => {
+        console.log(res)
         this.isLoading = false;
         this.dataChanges.emit();
       }, (error) => {
@@ -100,5 +110,14 @@ export class CartdialogComponent implements OnInit {
     });
   }
 
+  datetoYMD(date) {
+    console.log(date)
+    return moment(date).format('YYYY-MM-DD')
+    // // date = date.format()
+    // var d = date.getDate();
+    // var m = date.getMonth() + 1; //Month from 0 to 11
+    // var y = date.getFullYear();
+    // return '' + y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+  }
 
 }

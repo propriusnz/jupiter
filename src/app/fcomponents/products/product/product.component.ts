@@ -161,7 +161,7 @@ export class ProductComponent implements OnInit {
     if (this.productDetail['productDetail'] && this.productDetail['productDetail'].length !== 0) {
       this.cartForm.controls.cartItems['value'].forEach(cartItem => {
         const item = {
-          Id: cartItem.Id,
+          //Id: cartItem.Id,
           ProdId: cartItem.ProdId,
           Price: cartItem.Price * cartItem.Quantity,
           Title: this.productDetail.title + ': ' + cartItem.Title,

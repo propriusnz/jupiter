@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
 import { ProductService } from '../../../service/product.service'
 import { isPlatformBrowser, DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
@@ -25,6 +25,7 @@ export class ShoppingUserinfoComponent implements OnInit {
   totalPrice = 0
   bondFee = 150
   timetable = []
+  paymentSpinnerControl=false
   userInfo = {
     FirstName: '',
     LastName: '',
@@ -41,6 +42,8 @@ export class ShoppingUserinfoComponent implements OnInit {
   districtName = ''
   minDate: Date
   url: any
+  @Input() EventStartDate = ''
+  @Input() EventEndDate = ''
   @Output() isPickup = new EventEmitter();
   @Output() district = new EventEmitter();
   constructor(
@@ -62,8 +65,9 @@ export class ShoppingUserinfoComponent implements OnInit {
     let nowDate2 = new Date().getTime();
     this.minDate = new Date(nowDate2 + offset2 + 13 * 60 * 60 * 1000);
   }
-
   ngOnInit() {
+    console.log(this.EventStartDate)
+    console.log(this.EventEndDate)
     if ('userId' in localStorage) {
       this.userId = JSON.parse(localStorage.getItem('userId'))
       this.productService.getProfile(this.userId).subscribe(
@@ -160,7 +164,8 @@ export class ShoppingUserinfoComponent implements OnInit {
     const cartData = {
       location: `${this.userInfo.streetAddress}, ${this.userInfo.city}`,
       price: Number(localStorage.getItem('totalPrice')),
-      PlannedTime: this.PlannedTime,
+      EventStartDate:this.EventStartDate,
+      EventEndDate:this.EventEndDate,
       deliveryfee: this.deliveryFee,
       depositfee: this.bondFee,
       ispickup: this.userInfo.isPickup,
@@ -231,6 +236,7 @@ export class ShoppingUserinfoComponent implements OnInit {
         console.log(res['data'].cartId)
         localStorage.setItem('cartId', JSON.stringify(res['data'].cartId))
         console.log(JSON.parse(localStorage.getItem('cartId')))
+        this.paymentSpinnerControl=true
         this.getPaymentUrl(res['data'].cartId)
         //this.router.navigate(['/paymentoptions']);
       },
@@ -248,6 +254,7 @@ export class ShoppingUserinfoComponent implements OnInit {
         this.isSendSuccess = true;
         localStorage.setItem('cartId', JSON.stringify(res['data'].cartId))
         console.log(JSON.parse(localStorage.getItem('cartId')))
+        this.paymentSpinnerControl=true
         this.getPaymentUrl(res['data'].cartId)
         //this.router.navigate(['/paymentoptions']);
       },
@@ -262,12 +269,15 @@ export class ShoppingUserinfoComponent implements OnInit {
       res => {
         console.log(res['url'])
         window.location.assign(res['url'])
+        this.paymentSpinnerControl=true
         localStorage.removeItem('productTimetable')
         localStorage.removeItem('cartList')
         localStorage.removeItem('totalPrice')
       },
       err => {
+        this.paymentSpinnerControl=true
         console.log(err)
+        this.feedback_message = 'Oops, something went wrong.';
       }
     )
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, SimpleChanges, EventEmitter, Output } from '@angular/core';
 import { ProductService } from '../../../service/product.service'
 import { environment } from '../../../../environments/environment.prod';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
@@ -18,6 +18,8 @@ export class ShoppingCartComponent implements OnInit {
   productTimetable = []
   errorMessage = ''
   isShoppingCartValid = true
+  initialStartDate:any
+  initialEndDate:any
   minDate_start: Date;
   maxDate_start: Date;
   minDate_return: Date;
@@ -42,6 +44,8 @@ export class ShoppingCartComponent implements OnInit {
   amountDue = 0
   @Input() isPickup = ''
   @Input() district = ''
+  @Output() EventStartDate= new EventEmitter();
+  @Output() EventEndDate= new EventEmitter();
   @ViewChild('quantityInput', { static: false }) quantityInput: ElementRef;
   borderstyleB='solid red 2px';
 constructor(
@@ -175,11 +179,17 @@ checkTimeConflict() {
     control = true
   }
   if (control) {
+    console.log("test")
+    this.initialStartDate=this.productTimetable[0].beginDate
+    this.initialEndDate=this.productTimetable[0].endDate
+    this.EventStartDate.emit(this.initialStartDate)
+    this.EventEndDate.emit(this.initialEndDate)
     this.productService.setShoppingCartStatus(true);
     this.borderStyleControl=true
   }
 }
 onStartChange(value) {
+  this.EventStartDate.emit(value)
   this.dateStartInput = value;
   this.dateReturnControl = false;
   this.minDate_return = value;
@@ -201,6 +211,7 @@ onStartChange(value) {
   localStorage.setItem('productTimetable', JSON.stringify(this.productTimetable))
 }
 onReturnChange(value) {
+  this.EventEndDate.emit(value)
   this.dateReturnInput = value;
   this.productTimetable.forEach(item => {
     item.endDate = this.datetoYMD(this.dateReturnInput)

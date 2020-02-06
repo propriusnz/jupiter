@@ -10,7 +10,7 @@ import { ProductService } from 'src/app/service/product.service';
 })
 export class OrderHistoryComponent implements OnInit {
   orders: any
-  userID = 2
+  userID:number
   constructor( 
     public dialog: MatDialog,
     public productService: ProductService
@@ -18,9 +18,10 @@ export class OrderHistoryComponent implements OnInit {
  }
 
   ngOnInit() {
+    this.userID = JSON.parse(localStorage.getItem('userId'))
     this.productService.getUserOrdersHistory(this.userID).subscribe(
       (res)=>{
-        console.log(res),
+        // console.log(res),
         this.orders = res
       },
       (err)=>{console.warn(err)}

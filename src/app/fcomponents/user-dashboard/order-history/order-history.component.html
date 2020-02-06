@@ -1,7 +1,8 @@
 <div class="card">
-	<div class="card-body bg-light text-center">
+	<div class="card-body text-center">
 		<table class="table">
 			<tr class="card-header">
+				<th>Order ID</th>
 				<th>Event Address</th>
 				<th>Date of Event</th>
 				<th>Price</th>
@@ -10,8 +11,9 @@
 				<th>View Detail</th>
 			</tr>
 			<tr class="order-list" *ngFor="let order of orders">
+				<td>{{order.cartId}}</td>
 				<td>{{order.location}}</td>
-				<td>{{order.plannedTime | date :'short'}}</td>
+				<td>{{order.eventStartDate | date :'mediumDate'}} - {{order.eventEndDate | date :'mediumDate'}} </td>
 				<td>$ {{order.price}}</td>
 				<td *ngIf="order.isPay === 0 && order.isExpired === 0">
 					<b>Processing</b><br>
