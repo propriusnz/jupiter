@@ -1,6 +1,8 @@
+mat-dialog-content {
+	max-height: 750px;
+	overflow: hidden;
+}
 h5 {
-	font-size: medium; 
-	text-align: center; 
 	color: #c48f45;
 	font-size: 1.5rem;
 }
@@ -9,7 +11,10 @@ input{
 }
 th{
     position: sticky;
-    top: -25px;
+    top: -15px;
     z-index: 99;
-    text-align:center;
+	text-align: center;
+}
+.closeButton {
+	position: absolute;
 }

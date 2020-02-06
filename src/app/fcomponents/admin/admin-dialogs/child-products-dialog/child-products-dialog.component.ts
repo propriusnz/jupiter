@@ -23,6 +23,7 @@ export class ChildProductsDialogComponent implements OnInit {
 
   constructor(
 	private productservice: ProductService,
+	private dialogRef: MatDialogRef<ChildProductsDialogComponent>,
 	@Inject(MAT_DIALOG_DATA) data
   ) {
 	  this.childProducts = data.data['productDetail'];
@@ -65,5 +66,9 @@ export class ChildProductsDialogComponent implements OnInit {
     var m = date.getMonth() + 1; //Month from 0 to 11
     var y = date.getFullYear();
     return '' + y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 }
