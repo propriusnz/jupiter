@@ -49,6 +49,9 @@ export class AdminLoginComponent implements OnInit {
         this.isLoggingIn = false
         if (this.isBrowser = true) {
           sessionStorage.setItem('access_token', res['token']);
+          let timeStamp=new Date()
+          timeStamp.setMinutes(timeStamp.getMinutes()+120)
+          sessionStorage.setItem('timeStamp',timeStamp.toISOString())
         }
         this.router.navigate(['/admin'])
       }, (error) => {

@@ -45,6 +45,9 @@ export class AdminComponent implements OnInit {
     }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.router.navigate(['login']);
+    }, 120*60*1000);
     // this.getData();
   }
   changeBoard(e) {
