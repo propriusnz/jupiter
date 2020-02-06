@@ -24,7 +24,7 @@ export class AdminProductsComponent implements OnInit {
   displayedProductData: any;
   isLoading = false;
   productTitle: string;
-  childProducts: any;
+  childProducts: object;
   subscription: Subscription;
   searchField: FormControl = new FormControl();
 

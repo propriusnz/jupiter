@@ -19,7 +19,6 @@ export class ProductdialogComponent implements OnInit {
   isLoading = false;
   isImageEmpty = false;
   isDetailFormChanged = false;
-
   detailList = [];
   detailForm: FormGroup;
   detailItems: FormArray;
@@ -74,7 +73,7 @@ export class ProductdialogComponent implements OnInit {
       this.productForm.categoryId = data.data['categoryId'];
       this.productForm.price = data.data['price'];
       this.productForm.discount = data.data['discount'];
-      this.productForm.specialOrder = data.data['specialOrder'];
+	  this.productForm.specialOrder = data.data['specialOrder'];
       if (data.data['productDetail']) {
         this.detailList = data.data['productDetail'];
       }

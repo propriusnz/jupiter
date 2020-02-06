@@ -3,7 +3,7 @@
 <mat-dialog-content>
    <!-- !contact detail -->
    <div class="row">
-      <div class="col-12">Customer:</div>
+      <div class="col-12"><h5>Customer info 客户信息:</h5></div>
       <div class="col-6">First Name</div><div class="col-6">Last Name</div>
       <div class="form-group col-6">
          <input class="form-control" name="firstName" [(ngModel)]="contactForm.firstName" #firstName="ngModel">
@@ -22,10 +22,18 @@
       <div class="form-group col-12">
          <textarea rows="4" cols="50" class="form-control" name="phoneNum" [(ngModel)]="contactForm.message" #phoneNum="ngModel" style="white-space: pre-line"></textarea>
       </div>
-      <button (click)="updateContact()" [disabled] = "isLoading==true">Save changes to customer</button>
+      <div class="col-12">
+      <button class="btn btn-primary" (click)="updateContact()" [disabled] = "isLoading==true">Save Customer Changes 保存客户信息</button>
    </div>
+   </div>
+   
+   <br>
+   <hr>
+   <br>
+   <br><br>
 
-   <!-- !cartProd Detail -->
+   <!-- List of products & items for this order -->
+   <h5>Items for this Order 本单物品</h5>
    <div class="row pt-2"> 
       <div class="col-12">Products in cart</div>
       <div class="col-12" *ngFor="let prod of cartProdList"> 
@@ -33,18 +41,31 @@
          <button (click)="deleteCardProd(prod.cartId)">Delete</button>
       </div>
    </div>
-
-   <!-- !cart Detail -->
+   <br><br>
+   <!-- Location of this order -->
+   <h5>Order and Event Location 活动&订单地址</h5>
    <div class="row pt-2">
-      <div class="col-12">Cart Detail</div>
+      <!-- <div class="col-12">Cart Detail</div> -->
       <input class="form-control" type = "text" name="location" [(ngModel)]="cartForm.location" #location="ngModel">
-      <mat-form-field style="width:100%" class="pt-3">
-         <input matInput [matDatepicker]="myDatepicker" placeholder="Date of event" type="plannedTime"  name="plannedTime" [(ngModel)]="cartForm.plannedTime" #plannedTime="ngModel">
-         <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-         <mat-datepicker #myDatepicker></mat-datepicker>
-       </mat-form-field>
-      <div class="col-6"><button (click)="updateCart()" [disabled] = "isLoading==true">update cart information</button></div>
    </div>
+   <br><br>
+
+      <!-- Allow uer to change start and end date of event  -->
+     <h5> Event dates  活动日期 </h5>
+   <br>
+      <mat-form-field style="" class="col-md-6">
+         <input matInput [matDatepicker]="myDatepicker1" placeholder="Start date" [(ngModel)]="cartForm.eventStartDate" #eventStartDate="ngModel">
+         <mat-datepicker-toggle matSuffix [for]="myDatepicker1"></mat-datepicker-toggle>
+         <mat-datepicker #myDatepicker1></mat-datepicker>
+       </mat-form-field>
+       
+       <mat-form-field style="" class="col-md-6">
+         <input matInput [matDatepicker]="myDatepicker2" placeholder="End date" [(ngModel)]="cartForm.eventEndDate" #eventEndDate="ngModel">
+         <mat-datepicker-toggle matSuffix [for]="myDatepicker2"></mat-datepicker-toggle>
+         <mat-datepicker #myDatepicker2></mat-datepicker>
+       </mat-form-field>
+
+      <div class="col-6"><button class="btn btn-primary" (click)="updateCart()" [disabled] = "isLoading==true">Save Order Changes 保存订单信息</button></div>
 </mat-dialog-content>
 
 <mat-dialog-actions>

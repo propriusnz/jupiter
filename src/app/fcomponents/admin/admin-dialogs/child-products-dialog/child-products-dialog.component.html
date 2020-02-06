@@ -1,39 +1,47 @@
-<div style="margin: -10px;">
-	<h5>{{ productName }}</h5>
-	
-	<table class="table">
-		<thead class="table-secondary text-center">
-			<th><span>Child ID<br>子产品ID</span></th>
-			<th><span>Name<br>名称</span></th>
-			<th><span>Total Stock<br>总库存</span></th>
-			<th><span>Available Stock<br>现库存</span></th>
-			<th><span>Calender<br>日历</span><br>
-				<span>From <i> {{ minDate | date:'dd-MMM-yyy' }}</i> 
-					  to   <i> {{ maxDate | date:'dd-MMM-yyy' }}</i> 
-				</span>
-			</th>
-		</thead>
-		<tbody>
-			<tr *ngFor="let childProduct of childProducts" style="text-align: center;">
-				<td width="12%">{{ childProduct.id }}</td>
-				<td width="20%">{{ childProduct.productDetail1 }}</td>
-				<td>{{ childProduct.totalStock }}</td>
-				<td>{{ childProduct.availableStock }}</td>
-				<td width="25%">
-					<input bsDaterangepicker type="text" class="form-control" 
-						placeholder="Calender of {{ childProduct.productDetail1 }} " style="width: 280px;"
-						[minDate]="minDate" [datesDisabled]="emptyDates"
-						[maxDate]="maxDate" 
-						[outsideClick]="true"
-						[bsConfig]="{
-							rangeInputFormat: 'MMMM Do', containerClass:'theme-orange',
-							selectFromOtherMonth: true,
-							adaptivePosition: true,
-							showWeekNumbers: false
-						}"
-						(click)="getDetailProductTime(childProduct.id)">
-				</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
+<mat-dialog-content style="margin: -10px;">
+	<div class="row">
+		<h5 class="col-12 text-center">{{ productName }}</h5>
+	</div>
+	<div style="max-height: 680px; overflow: scroll;">
+		<table class="table">
+			<thead class="table-secondary text-center">
+				<th><span>Child ID<br>子产品ID</span></th>
+				<th><span>Name<br>名称</span></th>
+				<th><span>Total Stock<br>总库存</span></th>
+				<th><span>Available Stock<br>现库存</span></th>
+				<th><span>Calender<br>日历</span><br>
+					<span>From <i> {{ minDate | date:'dd-MMM-yyy' }}</i> 
+						  to   <i> {{ maxDate | date:'dd-MMM-yyy' }}</i> 
+					</span>
+				</th>
+			</thead>
+			<tbody>
+				<tr *ngFor="let childProduct of childProducts" style="text-align: center;">
+					<td width="12%">{{ childProduct.id }}</td>
+					<td width="20%">{{ childProduct.productDetail1 }}</td>
+					<td>{{ childProduct.totalStock }}</td>
+					<td>{{ childProduct.availableStock }}</td>
+					<td width="25%">
+						<input bsDaterangepicker type="text" class="form-control" 
+							placeholder="Calender of {{ childProduct.productDetail1 }} " style="width: 280px;"
+							[minDate]="minDate" [datesDisabled]="emptyDates"
+							[maxDate]="maxDate" 
+							[outsideClick]="true"
+							[bsConfig]="{
+								rangeInputFormat: 'MMMM Do', containerClass:'theme-orange',
+								selectFromOtherMonth: true,
+								adaptivePosition: true,
+								showWeekNumbers: false
+							}"
+							(click)="getDetailProductTime(childProduct.id)">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div>
+		<button type="button" class="btn btn-sm btn-info closeButton" (click)="close()">
+			X Close
+		</button>
+	</div>
+</mat-dialog-content>

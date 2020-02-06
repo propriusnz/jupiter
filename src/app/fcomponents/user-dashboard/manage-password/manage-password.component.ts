@@ -24,7 +24,7 @@ export class ManagePasswordComponent implements OnInit {
 
 	ngOnInit() {
 		this.userId = JSON.parse(localStorage.getItem('userId'));
-		console.log(this.userId)
+		// console.log(this.userId)
 		this.productservice.getProfile(this.userId).subscribe(
 			profile => {
 				this.userEmail = profile['data'][0].email;
