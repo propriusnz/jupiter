@@ -25,8 +25,11 @@
     </div>
     <div class="card-body bg-light text-center">
       <span class="text-danger">{{paymentStatusFailure}}</span>
-      <div id="buttonsWrap">
+      <!-- <div id="buttonsWrap">
         <i class="fas fa-arrow-right text-danger"></i><button mat-raised-button (click)="payAgain()">Pay Again</button>
+      </div> -->
+      <div id="buttonsWrap">
+        <i class="fas fa-arrow-right text-danger"></i><button mat-raised-button routerLink='/checkout'>Back to Shopping Cart</button>
       </div>
       <div *ngIf="user" id="buttonsWrap">
         <i class="fas fa-arrow-right text-danger"></i><button mat-raised-button routerLink='/userDashboard'>Check the order in your dashboard </button>

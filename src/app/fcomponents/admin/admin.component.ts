@@ -22,12 +22,11 @@ export class AdminComponent implements OnInit {
   displayData: any;
   selectedImg: File = null;
   isLoading = false;
-
+  myTimeoutValue:any
   feedbackMessage = '';
   allEventTypes: any;
   isEventTypeImageEmpty: boolean;
   baseImageLink = environment.baseLink;
-
   @ViewChild('eventImageInput', { static: false }) eventImageInput: ElementRef;
 
   constructor(
@@ -50,11 +49,11 @@ export class AdminComponent implements OnInit {
     }, 120*60*1000);
     // this.getData();
   }
+  
   changeBoard(e) {
     this.blockCode = e.srcElement.id;
     // this.getData();
   }
-
   // getData() {
   //   this.isLoading = true;
   //   switch (this.blockCode) {

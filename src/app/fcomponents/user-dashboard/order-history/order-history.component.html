@@ -17,12 +17,12 @@
 				<td>$ {{order.price}}</td>
 				<td *ngIf="order.isPay === 0 && order.isExpired === 0">
 					<b>Processing</b><br>
-					<button class="btn btn-sm btn-info mt-1" *ngIf="order.isPay === 0 && order.isExpired === 0" (click)="payAgain(order.cartId)">
+					<!-- <button class="btn btn-sm btn-info mt-1" *ngIf="order.isPay === 0 && order.isExpired === 0" (click)="payAgain(order.cartId)">
 						Pay Again
-					</button>
+					</button> -->
 				</td>
 				<td *ngIf="order.isPay === 1 && order.isExpired === 0"><b>Paid</b></td>
-				<td *ngIf="order.isPay === 0 && order.isExpired === 1"><b>Expired</b></td>
+				<td *ngIf="order.isPay === 0 && order.isExpired === 1"><b>Expired/Declined</b></td>
 				<td *ngIf="order.cartStatusId === null">-</td>
 				<td *ngIf="order.cartStatusId !=null">{{order.cartStatus.cartStatusName}}</td>
 				<td>

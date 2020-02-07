@@ -120,7 +120,7 @@
 							placeholder="Start Date"
 							placement="top" [isDisabled]="dateStartControl"
 							[minDate]="minDate_start" [datesDisabled]="disabledDates" [maxDate]="maxDate_start"
-							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}"
+							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange',showWeekNumbers:false}"
 							(bsValueChange)="onStartChange($event)">
 						
 						<span class="mx-2">to</span>
@@ -129,7 +129,7 @@
 							placeholder="Return Date"
 							placement="top" [isDisabled]="dateReturnControl"
 							[minDate]="minDate_return" [datesDisabled]="disabledDates" [maxDate]="maxDate_return"
-							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}"
+							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange',showWeekNumbers:false}"
 							(bsValueChange)="onReturnChange($event)">
 					</div>
 				</div>
@@ -139,13 +139,13 @@
 						<input bsDatepicker type="text" class="input_line" placeholder="Start Date"
 							style="width: 170px;" [isDisabled]="dateStartControl" [minDate]="minDate_start"
 							[datesDisabled]="disabledDates" [maxDate]="maxDate_start"
-							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}"
+							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange',showWeekNumbers:false}"
 							(bsValueChange)="onStartChange($event)">
 						<span class="mx-2">to</span>
 						<input bsDatepicker type="text" class="input_line" placeholder="Return Date"
 							style="width: 170px;" [isDisabled]="dateReturnControl" [minDate]="minDate_return"
 							[datesDisabled]="disabledDates" [maxDate]="maxDate_return"
-							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange'}"
+							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange',showWeekNumbers:false}"
 							(bsValueChange)="onReturnChange($event)">
 					</div>
 				</div>

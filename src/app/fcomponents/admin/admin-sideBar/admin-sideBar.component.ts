@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../service/product.service';
 import { AdminPanelService } from '../../../service/admin-panel.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-sideBar',
@@ -19,7 +20,8 @@ export class AdminSideBarComponent implements OnInit {
   ]
   constructor(
     private productService: ProductService,
-    private adminPanelService: AdminPanelService
+    private adminPanelService: AdminPanelService,
+    private router : Router
   ) { }
 
   ngOnInit() {
@@ -35,5 +37,13 @@ export class AdminSideBarComponent implements OnInit {
   
   updatePanel(status: string) {
     this.adminPanelService.changePanel(status);
+  }
+  reload(){
+    const url=this.router.url
+    console.log(url)
+    if(url.localeCompare('/admin/adminDashboard')!=0){
+      window.location.reload()
+    }
+    
   }
 }
