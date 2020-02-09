@@ -77,7 +77,7 @@ export class AdminCartComponent implements OnInit {
 
     dialogConfig.autoFocus = true;
     dialogConfig.height = '720px';
-    dialogConfig.width = '700px';
+    dialogConfig.width = '1200px';
     dialogConfig.data = {
       id: 1,
       title: 'Cart Detail',
