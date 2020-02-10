@@ -19,17 +19,18 @@ export class ChildProductsDialogComponent implements OnInit {
   emptyDates = []; // Days with no bookings at all
   allDates = []; // All dats between minDate & maxDate;
   currentDate: Date;
-  ProductTime: any;
+  chosenDate: Date;
+  orderBeginDate: any;
+  beginDates = [];
+  orderEndDate = [];
 
   constructor(
 	private productservice: ProductService,
-	private dialogRef: MatDialogRef<ChildProductsDialogComponent>,
+    private dialogRef: MatDialogRef<ChildProductsDialogComponent>,
 	@Inject(MAT_DIALOG_DATA) data
   ) {
-	  this.childProducts = data.data['productDetail'];
-	  this.productName = data.data.title;
-	//   console.log('data fetched: ', this.childProducts);
-
+    this.childProducts = data.data['productDetail'];
+    this.productName = data.data.title;
 	this.minDate = new Date;
 	this.minDate.setDate(this.minDate.getDate() - 90);
 	this.maxDate = new Date();
@@ -46,19 +47,46 @@ export class ChildProductsDialogComponent implements OnInit {
   }
 
   ngOnInit() {}
-
+  
   getDetailProductTime(id) {
 	const isDetailId = 1;
 	this.currentDate = new Date();
 	const beginDate = this.currentDate;
 	this.productservice.getProductTimeTable(id, isDetailId, this.datetoYMD(beginDate)).subscribe(
-		productTimeTable => {
-			console.log('product Time List: ', productTimeTable);
-			this.ProductTime = productTimeTable;
-			// console.log(typeof(productTimeTable));
-		}
-	)
+		productOrderDetail => {
+            console.log('product Time List: ', productOrderDetail);
+            console.log(Object.keys(productOrderDetail));
+
+            // Below, Loop through object to get order begin date & end date
+            Object.keys(productOrderDetail).forEach((key) => {
+                let i = 0;
+                // while (i <= key.length) {
+
+                // }
+                this.orderBeginDate = productOrderDetail[key]['beginDate'];
+                console.log('orderBeginDate:', this.orderBeginDate, typeof(this.orderBeginDate));
+            })
+        },
+        err => {
+            console.log(err);
+        }
+    ),
+    this.beginDates.push(this.orderBeginDate);
+    console.log('Begin Dates:', this.beginDates, typeof(this.beginDates));
 	// console.log(this.datetoYMD(this.currentDate));
+  }
+
+  getOrderTime() {
+    
+  }
+
+  checkIfBetweenBeginEndDates() {
+    this.datetoYMD(this.chosenDate);
+    
+  }
+
+  onValueChange(value: Date) {
+    this.chosenDate = value;
   }
 
   datetoYMD(date) {

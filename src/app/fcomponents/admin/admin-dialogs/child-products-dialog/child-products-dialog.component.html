@@ -1,32 +1,72 @@
-<mat-dialog-content style="margin: -10px;">
+<mat-dialog-content>
 	<div class="row">
 		<h5 class="col-12 text-center">{{ productName }}</h5>
-	</div>
-	<div style="max-height: 680px; overflow: scroll;">
+    </div>
+    <div class="row ml-2 my-2">
+        <i class="fas fa-calendar-alt mt-1"> </i> 
+        <span class="ml-1">
+            View Specific Date <br>
+            查看指定日期
+        </span>
+        <input bsDatepicker type="text" class="form-control ml-3" 
+            placeholder="Pick a date | 选择日期" style="width: 280px;"
+            [minDate]="minDate" [maxDate]="maxDate"
+            [datesDisabled]="emptyDates" [outsideClick]="true"
+            (bsValueChange)="onValueChange($event)"
+            [bsConfig]="{
+                rangeInputFormat: 'MMMM Do', containerClass:'theme-orange',
+                selectFromOtherMonth: true,
+                adaptivePosition: true,
+                showWeekNumbers: false}">
+        <!-- <span>{{ chosenDate | date }}</span> -->
+       
+    </div>
+
+    <!-- Child Product Table -->
+	<div id="tableWrap">
 		<table class="table">
+            <!-- Table Head -->
 			<thead class="table-secondary text-center">
 				<th><span>Child ID<br>子产品ID</span></th>
 				<th><span>Name<br>名称</span></th>
-				<th><span>Total Stock<br>总库存</span></th>
-				<th><span>Available Stock<br>现库存</span></th>
-				<th><span>Calender<br>日历</span><br>
-					<span>From <i> {{ minDate | date:'dd-MMM-yyy' }}</i> 
-						  to   <i> {{ maxDate | date:'dd-MMM-yyy' }}</i> 
-					</span>
-				</th>
-			</thead>
+				<th><span>Current Total Stock<br>目前总库存</span></th>
+                <th>
+                    <span>Current Available Stock<br>目前可用库存</span>
+                </th>
+				<th>
+                    <span style="font-weight: lighter; font-size: smaller;">
+                        From <i> {{ minDate | date:'dd-MMM-yyy' }}</i> 
+					    <br>to <i> {{ maxDate | date:'dd-MMM-yyy' }}</i> 
+                    </span> <br>
+                    <span>Calender 日历</span>
+                </th>
+                <th *ngIf="chosenDate">
+                    <span style="font-size: smaller;">
+                        Available Stock at <br>
+                        <span style="font-weight: lighter;">
+                            {{ chosenDate | date }}
+                        </span> <br>
+                        当天可用库存
+                    </span>
+                </th>
+            </thead>
+            
+            <!-- Table Body -->
 			<tbody>
-				<tr *ngFor="let childProduct of childProducts" style="text-align: center;">
-					<td width="12%">{{ childProduct.id }}</td>
-					<td width="20%">{{ childProduct.productDetail1 }}</td>
+				<tr *ngFor="let childProduct of childProducts" id="name" style="text-align: center;">
+					<td width="10%">{{ childProduct.id }}</td>
+					<td width="18%">
+                      {{ childProduct.productDetail1 }}
+                    </td>
 					<td>{{ childProduct.totalStock }}</td>
-					<td>{{ childProduct.availableStock }}</td>
+                    <td>{{ childProduct.availableStock }}</td>
 					<td width="25%">
-						<input bsDaterangepicker type="text" class="form-control" 
-							placeholder="Calender of {{ childProduct.productDetail1 }} " style="width: 280px;"
+						<input bsDatepicker type="text" class="form-control" 
+							placeholder="Calender of {{ childProduct.productDetail1 }} " style="width: 200px;"
 							[minDate]="minDate" [datesDisabled]="emptyDates"
 							[maxDate]="maxDate" 
-							[outsideClick]="true"
+                            [outsideClick]="true"
+                            (bsValueChange)="onValueChange($event)"
 							[bsConfig]="{
 								rangeInputFormat: 'MMMM Do', containerClass:'theme-orange',
 								selectFromOtherMonth: true,
@@ -34,14 +74,15 @@
 								showWeekNumbers: false
 							}"
 							(click)="getDetailProductTime(childProduct.id)">
-					</td>
+                    </td>
+                    <td *ngIf="chosenDate">
+                     
+                    </td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-	<div>
-		<button type="button" class="btn btn-sm btn-info closeButton" (click)="close()">
-			X Close
-		</button>
-	</div>
+    <button type="button" class="btn btn-sm btn-info closeButton" (click)="close()">
+        X Close
+    </button>
 </mat-dialog-content>

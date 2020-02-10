@@ -58,13 +58,9 @@
 					<span *ngIf="data.category">{{data.category.categoryName}}</span>
 					<span *ngIf="!data.category">-</span>
 				</td>
-				<!-- <td *ngIf="!data.category"></td> -->
-				<!-- <td *ngIf="blockCode == 2" style="text-align:center;">
-            <div *ngIf="data.category">{{data.category.categoryName}}</div>
-          </td> -->
-				<td>{{data.totalStock}}</td>
-				<td>{{data.availableStock}}</td>
-				<td>{{data.specialOrder}}</td>
+				<td style="text-align:center;">{{data.totalStock}}</td>
+				<td style="text-align:center;">{{data.availableStock}}</td>
+				<td style="text-align:center;">{{data.specialOrder}}</td>
 				<td style="text-align:center; font-size:10px;">{{data.description}}</td>
 				<td><i class="far fa-edit" (click)="openProduct(data)" title="Edit"></i></td>
 				<td><i class="far fa-trash-alt" title="Delete" (click)="deleteProduct(data)"></i></td>
