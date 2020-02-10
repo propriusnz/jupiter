@@ -3,7 +3,6 @@ import { LOCAL_STORAGE } from '@ng-toolkit/universal';
 import { ProductService } from '../../../service/product.service';
 import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
-
 @Component({
   selector: 'app-admin-login',
   templateUrl: './admin-login.component.html',
@@ -25,7 +24,7 @@ export class AdminLoginComponent implements OnInit {
   constructor(
     @Inject(PLATFORM_ID) private platformId,
     private productservice: ProductService,
-    public router: Router
+    public router: Router,
   ){
     if (isPlatformBrowser(this.platformId)) {
       this.isBrowser = true;
@@ -33,6 +32,7 @@ export class AdminLoginComponent implements OnInit {
    }
 
   ngOnInit() {
+    
   }
 
   onSubmit({valid}: { valid: boolean})  {
@@ -49,6 +49,9 @@ export class AdminLoginComponent implements OnInit {
         this.isLoggingIn = false
         if (this.isBrowser = true) {
           sessionStorage.setItem('access_token', res['token']);
+          let timeStamp=new Date()
+          timeStamp.setMinutes(timeStamp.getMinutes()+120)
+          sessionStorage.setItem('timeStamp',timeStamp.toISOString())
         }
         this.router.navigate(['/admin'])
       }, (error) => {

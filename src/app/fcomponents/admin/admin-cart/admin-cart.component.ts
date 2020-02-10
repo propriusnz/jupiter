@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../service/product.service';
-import { MatDialog, MatDialogConfig} from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { CartdialogComponent } from '../admin-dialogs/cart-dialog/cart-dialog.component';
-
-
+import { FormBuilder, FormGroup } from '@angular/forms';
+import * as moment from 'moment';
+import { environment } from '../../../../environments/environment.prod';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-admin-cart',
   templateUrl: './admin-cart.component.html',
@@ -11,16 +13,28 @@ import { CartdialogComponent } from '../admin-dialogs/cart-dialog/cart-dialog.co
 })
 export class AdminCartComponent implements OnInit {
   displayedCartData: any;
+  showData = false
   isLoading = false;
   feedbackMessage: string;
+  singleCartData: any;
+  showSingleCart = false
+  searchForm: FormGroup
+  baseUrl = environment.baseUrl;
   // isDataChanged = false;
 
   constructor(
     private productService: ProductService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private fb: FormBuilder,
+    private http: HttpClient
   ) { }
 
   ngOnInit() {
+    this.searchForm = this.fb.group({
+      phone: [''],
+      eventdate: [''],
+      firstname: ['']
+    })
     this.getCartData();
   }
 
@@ -29,8 +43,12 @@ export class AdminCartComponent implements OnInit {
     this.productService.getCarts().subscribe(
       (res) => {
         this.displayedCartData = res;
+        if (this.displayedCartData.length >= 1) {
+          this.showData = true
+          this.showSingleCart = false
+        }
         this.isLoading = false;
-    },
+      },
       (error) => {
         console.log(error);
         this.isLoading = false;
@@ -59,7 +77,7 @@ export class AdminCartComponent implements OnInit {
 
     dialogConfig.autoFocus = true;
     dialogConfig.height = '720px';
-    dialogConfig.width = '700px';
+    dialogConfig.width = '1200px';
     dialogConfig.data = {
       id: 1,
       title: 'Cart Detail',
@@ -76,6 +94,80 @@ export class AdminCartComponent implements OnInit {
         this.getCartData();
         console.log('data refreshed');
       }
-  });
+    });
   }
+  searchOrderId(orderId) {
+    if (orderId) {
+      this.productService.getCartStatus(orderId).subscribe(
+        (res) => {
+          console.log(res)
+          if (res) {
+            this.showData = false
+            this.showSingleCart = true
+            this.singleCartData = res
+          } else {
+            this.showData = false
+            this.showSingleCart = false
+          }
+        },
+        (error) => {
+          console.log(error);
+          this.feedbackMessage = 'Server Error!';
+        }
+      );
+    } else {
+      this.showData = true
+      this.showSingleCart = false
+    }
+  }
+  update(value) {
+    console.log('testtest')
+    if (!value) {
+      this.showData = true
+      this.showSingleCart = false
+    }else{
+      this.showData=false
+      this.showSingleCart=true
+    }
+    
+
+  }
+  onSubmit() {
+    this.showData = true
+    this.showSingleCart = false
+    console.log(this.searchForm.value.phone)
+    const phone = this.searchForm.value.phone
+    let eventdate = (this.searchForm.value.eventdate)
+    const firstname = this.searchForm.value.firstname
+    if (this.searchForm.value.eventdate) {
+      eventdate = this.datetoYMD(this.searchForm.value.eventdate)
+      this.http.get(this.baseUrl + '/Carts/GetCartByFilter?phoneNumber=' + phone + '&eventDate=' + eventdate + '&firstName=' + firstname).subscribe(
+        res => {
+          this.displayedCartData=res
+          console.log(res)
+        },
+        err => {
+          console.log(err)
+        }
+      )
+    } else if(!this.searchForm.value.eventdate){
+      this.http.get(this.baseUrl + '/Carts/GetCartByFilter?phoneNumber=' + phone +'&firstName=' + firstname).subscribe(
+        res => {
+          this.displayedCartData=res
+          console.log(res)
+        },
+        err => {
+          console.log(err)
+        }
+      )
+    }
+
+    }
+  
+datetoYMD(date) {
+  var d = date.getDate();
+  var m = date.getMonth() + 1; //Month from 0 to 11
+  var y = date.getFullYear();
+  return '' + y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+}
 }

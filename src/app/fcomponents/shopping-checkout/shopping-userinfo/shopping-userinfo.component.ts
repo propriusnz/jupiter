@@ -270,9 +270,6 @@ export class ShoppingUserinfoComponent implements OnInit {
         console.log(res['url'])
         window.location.assign(res['url'])
         this.paymentSpinnerControl=true
-        localStorage.removeItem('productTimetable')
-        localStorage.removeItem('cartList')
-        localStorage.removeItem('totalPrice')
       },
       err => {
         this.paymentSpinnerControl=true
