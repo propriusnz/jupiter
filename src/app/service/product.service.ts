@@ -110,6 +110,9 @@ export class ProductService {
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
 
+  getCartsByPaid(ispaid){
+    return this.http.get(this.baseUrl+'/Carts/GetCartByPaid?isPaid=' + ispaid,{ headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) })
+  }
   updateCart(id: number, newcart) {
     return this.http.put(this.baseUrl + '/Carts/' + id, newcart,
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });

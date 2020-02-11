@@ -40,7 +40,15 @@ td{
 	padding: 3px 10px;
 	width: 150px;
   }
-  .searchButton{
-      width: 100%;
+  .searchButton1{
+      width: 150px;
+      margin-top:4px
+  }
+  .searchButton2{
+      width: 120%;
       margin-bottom:13px
   }
+  .searchButton3{
+      width:200px
+  }
+  

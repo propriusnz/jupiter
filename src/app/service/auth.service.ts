@@ -13,8 +13,6 @@ export class AuthService {
     const isAuth = authInfo ? true : false;
     const authTimeInfo=sessionStorage.getItem('timeStamp')
     const now=new Date().toISOString()
-    console.log(authTimeInfo)
-    console.log(now)
     if(moment(now).toDate()>moment(authTimeInfo).toDate()){
       return false
     }

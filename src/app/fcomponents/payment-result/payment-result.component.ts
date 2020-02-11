@@ -45,24 +45,25 @@ export class PaymentResultComponent implements OnInit {
     }
     this.cartId = JSON.parse(localStorage.getItem('cartId'))
     console.log(this.cartId)
-    this.href = this.router.url
-    console.log(this.href)
-    let url = {
-      result: this.resultUrl,
-      userid:this.userIdUrl
-    }
-    console.log(url)
-    this.productService.paymentResult(url).subscribe(
+    // this.href = this.router.url
+    // console.log(this.href)
+    // let url = {
+    //   result: this.resultUrl,
+    //   userid:this.userIdUrl
+    // }
+    // console.log(url)
+    this.productService.getCartStatus(this.cartId).subscribe(
       (res) => {
         this.isSendingRequest = false
         this.isSendSuccess = true
         console.log(res)
-        if (res['responseText'].localeCompare('APPROVED') == 0) {
+        if (res['isPay']==1) {
           this.result = true
           localStorage.removeItem('productTimetable')
           localStorage.removeItem('cartList')
           localStorage.removeItem('totalPrice')
-        } else if (res['responseText'].localeCompare('DECLINED') == 0) {
+          localStorage.removeItem('cartId')
+        } else if (res['isPay']== 0) {
           this.result = false
           console.log("this is false")
         }

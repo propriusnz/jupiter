@@ -160,4 +160,27 @@ datetoYMD(date) {
   var y = date.getFullYear();
   return '' + y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
 }
+getPaidOrders(){
+  this.productService.getCartsByPaid(1).subscribe(
+    res=>{
+      console.log(res)
+      this.displayedCartData=res
+    },
+    err=>{
+      console.log(err)
+    }
+  )
+}
+getUnpaidOrders(){
+  this.productService.getCartsByPaid(0).subscribe(
+    res=>{
+      console.log(res)
+      this.displayedCartData=res
+    },
+    err=>{
+      console.log(err)
+    }
+  )
+
+}
 }
