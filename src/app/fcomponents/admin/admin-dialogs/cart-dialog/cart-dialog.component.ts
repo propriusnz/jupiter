@@ -82,22 +82,19 @@ export class CartdialogComponent implements OnInit {
     this.cartForm.eventStartDate = this.datetoYMD(this.cartForm.eventStartDate)
     this.cartForm.eventEndDate = this.datetoYMD(this.cartForm.eventEndDate)
     this.isLoading = true;
-    console.log(this.cartProdList)
-    console.log(this.cartForm)
+    
     
     this.cartForm.cartProd = this.cartProdList
-    console.log(this.displayData)
+   
     this.updateDataTransmitted(this.displayData, this.cartForm)
-    console.log(this.displayData)
+   
     let tmpDisplayData=this.displayData
     delete tmpDisplayData.cartProd
     delete tmpDisplayData.contact
-    console.log(tmpDisplayData)
     const updatedCart={
       CartModel:tmpDisplayData,
       cartProdModel:this.cartForm.cartProd
     }
-    console.log(updatedCart)
     this.productService.updateCart(this.displayData.cartId, updatedCart).subscribe(
       (res) => {
         console.log(res)
