@@ -231,12 +231,17 @@ onReturnChange(value) {
   this.checkTimeConflict()
   localStorage.setItem('productTimetable', JSON.stringify(this.productTimetable))
 }
+
+// Im going to use this as a example function
 calculateTime() {
+  // Setting variables for this area (function 1)
   console.log("checking time")
   let hiringdetail = []
   let tmpDates = []
   let tmpSet = new Set()
   let productHiringDetail = {}
+
+  // Loop array (this should be another function) (function 2)
   this.productTimetable.forEach(item => {
     if (item.hasOwnProperty('prodId')) {
       productHiringDetail = {
@@ -254,12 +259,16 @@ calculateTime() {
     hiringdetail.push(productHiringDetail)
   })
   let newhd = hiringdetail
+  // Loop area closure 
 
   console.log(newhd)
+  // Api call area (function 3)
   this.productService.calculateTime(newhd).subscribe(
     res => {
       console.log(res)
       this.unavailableDates = res
+    // Response processing area (function 4) (this function will be the parent function)
+      // Response unavailable dates processing area - loop (function 4a)
       for (let i = 0; i < this.unavailableDates.length; i++) {
         let myMoment = moment(this.unavailableDates[i], 'YYYY-MM-DD')
         tmpDates.push(myMoment.toDate())
@@ -267,6 +276,8 @@ calculateTime() {
       }
       this.disabledDates = tmpDates
       this.mySet = tmpSet
+
+      // Response disabled dates processing area - loop (function 4b)
       for (let i = 0; i < this.disabledDates.length; i++) {
         let myMoment = moment(this.disabledDates[i], 'YYYY-MM-DD')
         if (myMoment.startOf('day'
@@ -281,10 +292,12 @@ calculateTime() {
         this.maxDate_return = this.maxDate_start
       }
     },
+    // close function 4
     err => {
       console.log(err)
     }
   );
+    // function 5
   for (let i = 0; i < this.disabledDates.length; i++) {
     let myMoment = moment(this.disabledDates[i], 'YYYY-MM-DD')
     if (myMoment.startOf('day').isAfter(moment(this.dateStartInput).startOf('day'))) {
