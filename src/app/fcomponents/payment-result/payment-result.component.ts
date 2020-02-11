@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../service/product.service';
 @Component({
   selector: 'app-payment-result',
@@ -19,11 +19,21 @@ export class PaymentResultComponent implements OnInit {
   cartId: any
   user = true
   isAskingStatus = false
+  resultUrl=''
+  userIdUrl=''
   constructor(
     private router: Router,
-    private productService: ProductService
-
+    private productService: ProductService,
+    private route: ActivatedRoute
   ) {
+    this.route.queryParams.subscribe(params => {
+      this.resultUrl = params['result'];
+      this.userIdUrl=params['userid']
+      console.log(this.resultUrl); // Print the parameter to the console. 
+      console.log(this.userIdUrl)
+  });
+    
+    
   }
 
   ngOnInit() {
@@ -38,8 +48,10 @@ export class PaymentResultComponent implements OnInit {
     this.href = this.router.url
     console.log(this.href)
     let url = {
-      url: this.href
+      result: this.resultUrl,
+      userid:this.userIdUrl
     }
+    console.log(url)
     this.productService.paymentResult(url).subscribe(
       (res) => {
         this.isSendingRequest = false

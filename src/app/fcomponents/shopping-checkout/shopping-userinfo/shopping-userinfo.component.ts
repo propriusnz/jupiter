@@ -3,6 +3,7 @@ import { ProductService } from '../../../service/product.service'
 import { isPlatformBrowser, DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormControl, Validators, FormGroupDirective, NgForm, FormGroup, FormBuilder } from '@angular/forms';
+import { DataService } from 'src/app/service/data.service';
 @Component({
   selector: 'app-shopping-userinfo',
   templateUrl: './shopping-userinfo.component.html',
@@ -19,6 +20,7 @@ export class ShoppingUserinfoComponent implements OnInit {
   isShoppingCartValid = true;
   buttonError = false
   userId: number
+  conflictmessage:string
   districtSelectControl = false
   districtError = false
   districtSelected: number
@@ -50,7 +52,8 @@ export class ShoppingUserinfoComponent implements OnInit {
     @Inject(PLATFORM_ID) private platformId,
     private productService: ProductService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private data: DataService
   ) {
     if (isPlatformBrowser(this.platformId)) {
       if (localStorage.getItem('cartList') === '' || localStorage.getItem('cartList') == null) {
@@ -66,8 +69,7 @@ export class ShoppingUserinfoComponent implements OnInit {
     this.minDate = new Date(nowDate2 + offset2 + 13 * 60 * 60 * 1000);
   }
   ngOnInit() {
-    console.log(this.EventStartDate)
-    console.log(this.EventEndDate)
+    this.data.currentconflictmessage.subscribe(currentconflictmessage => this.conflictmessage = currentconflictmessage);
     if ('userId' in localStorage) {
       this.userId = JSON.parse(localStorage.getItem('userId'))
       this.productService.getProfile(this.userId).subscribe(
@@ -170,7 +172,7 @@ export class ShoppingUserinfoComponent implements OnInit {
       depositfee: this.bondFee,
       ispickup: this.userInfo.isPickup,
       region: this.districtName,
-      CartProd: data,
+      CartProd: data
     };
     const cartContact = {
       CartModel: cartData,
@@ -178,7 +180,8 @@ export class ShoppingUserinfoComponent implements OnInit {
       ProductTimeTableModel: this.timetable
     };
     console.log(cartContact)
-    this.addCart(cartContact);
+    console.log(this.timetable)
+     this.addCart(cartContact);
   }
   // pass data to api
   addCart(cartContact) {
@@ -188,13 +191,16 @@ export class ShoppingUserinfoComponent implements OnInit {
         console.log(res)
         if (res['isSuccess']) {
           if ('userId' in localStorage) {
-            this.cartUser(cartContact)
+            //this.cartUser(cartContact) 
           } else {
-            this.cartNotUser(cartContact)
+            //this.cartNotUser(cartContact)
           }
+          this.data.changeTimeConflictMessage('')
         } else {
+          this.data.changeTimeConflictMessage('conflict')
           this.isSendingEmail = false
           this.feedback_message = 'Please modify your time. Your items are booked.'
+          
         }
       },
       (error) => {

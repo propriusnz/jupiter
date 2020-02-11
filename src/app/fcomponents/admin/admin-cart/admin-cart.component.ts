@@ -73,6 +73,7 @@ export class AdminCartComponent implements OnInit {
   }
 
   openCart(data) {
+    console.log(data)
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.autoFocus = true;
@@ -120,18 +121,7 @@ export class AdminCartComponent implements OnInit {
       this.showSingleCart = false
     }
   }
-  update(value) {
-    console.log('testtest')
-    if (!value) {
-      this.showData = true
-      this.showSingleCart = false
-    }else{
-      this.showData=false
-      this.showSingleCart=true
-    }
-    
-
-  }
+  
   onSubmit() {
     this.showData = true
     this.showSingleCart = false

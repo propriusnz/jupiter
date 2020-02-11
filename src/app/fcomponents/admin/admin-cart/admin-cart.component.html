@@ -30,7 +30,7 @@
         <div class="ml-5">
           <td class="pr-3"><mat-form-field class="example-full-width">
             <mat-label>Order Id</mat-label>
-            <input matInput #orderId placeholder="Ex. 220" (onchange)="update(orderId.value)">
+            <input matInput #orderId placeholder="Ex. 220">
           </mat-form-field></td>
           <td><button mat-raised-button type="button" (click)="searchOrderId(orderId.value)" class="searchButton">Search by Order Id</button></td>
         </div>
@@ -59,7 +59,7 @@
         <!--CartProds-->
         <td>
           <div class="dropdown">
-            <button class="btn btn-secondary" type="button" (click)="openCart(data)">
+            <button class="btn btn-secondary" type="button" (click)="openCart(singleCartData)">
               View Detail
             </button>
             <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" *ngIf="data.cartProd">

@@ -12,6 +12,8 @@ export class DataService {
   private messagesignupSource=new BehaviorSubject<string>('');
   currentsignupmessage=this.messagesignupSource.asObservable();
   
+  private timeConflictSource=new BehaviorSubject<string>('')
+  currentconflictmessage=this.timeConflictSource.asObservable()
   constructor(private http: HttpClient) { }
 
   changeloginMessage(message:string){
@@ -19,6 +21,9 @@ export class DataService {
   }
   changesignupMessage(message:string){
     this.messagesignupSource.next(message)
+  }
+  changeTimeConflictMessage(message:string){
+    this.timeConflictSource.next(message)
   }
 
 //   // Get User Profile

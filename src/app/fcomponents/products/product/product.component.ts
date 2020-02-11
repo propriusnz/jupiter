@@ -158,11 +158,14 @@ export class ProductComponent implements OnInit {
     }
     const newCartList = [];
     // if product detail exist
+    console.log(this.productDetail)
+    console.log(this.cartForm)
     if (this.productDetail['productDetail'] && this.productDetail['productDetail'].length !== 0) {
       this.cartForm.controls.cartItems['value'].forEach(cartItem => {
         const item = {
           //Id: cartItem.Id,
           ProdId: cartItem.ProdId,
+          ProdDetailId:cartItem.Id,
           Price: cartItem.Price * cartItem.Quantity,
           Title: this.productDetail.title + ': ' + cartItem.Title,
           Quantity: cartItem.Quantity
@@ -218,7 +221,7 @@ export class ProductComponent implements OnInit {
     }, 1000);
     list.forEach(item => {
       let a = false;
-      if (!item.hasOwnProperty('Id')) {
+      if (this.productDetail.productDetail.length==0) {
         let neworder = {
           prodId: item.ProdId,
           beginDate: this.datetoYMD(this.startMoment.toDate()),
@@ -273,6 +276,8 @@ export class ProductComponent implements OnInit {
         }
       }
     })
+    console.log(this.tmpDetailID)
+    console.log(this.tmpProdID)
     let iterable = this.tmpDetailID.values()
     let current = iterable.next().value
     while (current != null) {
@@ -285,6 +290,7 @@ export class ProductComponent implements OnInit {
       this.productTimetable.push(current)
       current = iterable.next().value
     }
+    console.log(this.productTimetable)
     localStorage.setItem('productTimetable', JSON.stringify(this.productTimetable));
   }
   // click the path and re-navigate
@@ -322,6 +328,7 @@ export class ProductComponent implements OnInit {
     this.rightControl.nativeElement.style.right = this.rightCarouselControlPosition + 'px';
   }
   addQuantity(proddetail) {
+    console.log("test")
     let prodId = proddetail['value'].Id
     let quantityvalue = proddetail['value'].Quantity
     console.log(proddetail)
@@ -357,6 +364,7 @@ export class ProductComponent implements OnInit {
     let hiringdetail = []
     let tmpDates = []
     let tmpSet = new Set()
+    console.log(this.map)
     let iterable = this.map.values()
     let current = iterable.next().value
     while (current != null) {

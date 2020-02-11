@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { DataService } from 'src/app/service/data.service';
 
 @Component({
   selector: 'app-shopping-checkout',
@@ -10,7 +11,10 @@ export class ShoppingCheckoutComponent implements OnInit {
   district=''
   EventStartDate=''
   EventEndDate=''
-  constructor() { }
+  message:string
+  constructor(
+    private data:DataService
+  ) { }
 
   ngOnInit() {
   }
@@ -26,5 +30,10 @@ export class ShoppingCheckoutComponent implements OnInit {
   EndDate(date){
     this.EventEndDate=date
   }
+ 
+    
+    
+    
+  
 
 }

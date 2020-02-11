@@ -5,6 +5,7 @@ import { DataService } from '../../../../service/data.service'
 import { ProductService } from '../../../../service/product.service';
 import { MatchService } from 'src/app/service/match.service';
 import { Router } from '@angular/router';
+import { UserloginDialogComponent } from '../userlogin-dialog/userlogin-dialog.component';
 
 @Component({
   selector: 'app-userregistration-dialog',

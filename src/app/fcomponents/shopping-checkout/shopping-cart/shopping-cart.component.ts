@@ -3,6 +3,7 @@ import { ProductService } from '../../../service/product.service'
 import { environment } from '../../../../environments/environment.prod';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import * as moment from 'moment';
+import { DataService } from 'src/app/service/data.service';
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
@@ -15,6 +16,7 @@ export class ShoppingCartComponent implements OnInit {
   stockUnavailable = false;
   userInputQuantityArray = [];
   baseImageLink = environment.baseLink;
+  conflictmessage: string;
   productTimetable = []
   errorMessage = ''
   isShoppingCartValid = true
@@ -50,7 +52,7 @@ export class ShoppingCartComponent implements OnInit {
   borderstyleB='solid red 2px';
 constructor(
   private productService: ProductService,
-
+  private data: DataService
 ) {
   const offset2 = new Date().getTimezoneOffset() * 60 * 1000;
   const nowDate2 = new Date().getTime();
@@ -61,6 +63,7 @@ constructor(
   this.maxDate_start.setDate(this.maxDate_start.getDate() + 90);
 }
 ngOnChanges(changes: SimpleChanges) {
+  console.log("changes happend")
   const pickupValue = changes['isPickup'];
   const districtValue = changes['district']
   if (pickupValue != null) {
@@ -94,6 +97,15 @@ ngOnChanges(changes: SimpleChanges) {
 
 }
 ngOnInit() {
+  this.data.currentconflictmessage.subscribe(
+    currentconflictmessage=>{
+      this.conflictmessage=currentconflictmessage
+      if(this.conflictmessage.localeCompare('conflict')==0){
+        console.log('conflict happens')
+        this.calculateTime()
+      }
+    }
+    )
   // get the current shopping cart
   this.deliveryControl = false
   this.productService.getShoppingCartStatus().subscribe(
@@ -220,6 +232,7 @@ onReturnChange(value) {
   localStorage.setItem('productTimetable', JSON.stringify(this.productTimetable))
 }
 calculateTime() {
+  console.log("checking time")
   let hiringdetail = []
   let tmpDates = []
   let tmpSet = new Set()
@@ -240,7 +253,10 @@ calculateTime() {
     }
     hiringdetail.push(productHiringDetail)
   })
-  this.productService.calculateTime(hiringdetail).subscribe(
+  let newhd = hiringdetail
+
+  console.log(newhd)
+  this.productService.calculateTime(newhd).subscribe(
     res => {
       console.log(res)
       this.unavailableDates = res

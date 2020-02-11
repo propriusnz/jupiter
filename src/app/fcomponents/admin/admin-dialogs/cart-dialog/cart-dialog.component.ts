@@ -18,6 +18,7 @@ export class CartdialogComponent implements OnInit {
   dataChanges = new EventEmitter();
   isLoading = false;
   isCardProdDeleted = false;
+  hasId=false
   contactForm = {
     email: '',
     firstName: '',
@@ -26,10 +27,12 @@ export class CartdialogComponent implements OnInit {
     phoneNum: ''
   };
   cartForm = {
+    cartId: 0,
     location: '',
     eventStartDate: '',
     eventEndDate: '',
     price: 0,
+    cartProd: []
   };
   constructor(
     private dialogRef: MatDialogRef<CartdialogComponent>,
@@ -45,10 +48,11 @@ export class CartdialogComponent implements OnInit {
     this.contactForm.message = data.data['contact']['message'];
     // fill in cart form
     this.cartForm.location = data.data['location'];
+    this.cartForm.cartId = data.data['cartId']
     this.cartForm.eventStartDate = data.data['eventStartDate'];
     this.cartForm.eventEndDate = data.data['eventEndDate'];
-
-    this.cartForm.price  = data.data['price'];
+    this.cartForm.cartProd = data.data['cartProd']
+    this.cartForm.price = data.data['price'];
 
     this.cartId = data.data['id'];
     this.displayData = data.data;
@@ -73,14 +77,28 @@ export class CartdialogComponent implements OnInit {
         this.isLoading = false;
         console.log(error);
       });
-  } 
+  }
   updateCart() {
-    this.cartForm.eventEndDate = this.datetoYMD(this.cartForm.eventEndDate)
+    this.cartForm.eventStartDate = this.datetoYMD(this.cartForm.eventStartDate)
     this.cartForm.eventEndDate = this.datetoYMD(this.cartForm.eventEndDate)
     this.isLoading = true;
+    console.log(this.cartProdList)
     console.log(this.cartForm)
-
-    this.productService.updateCart(this.displayData.cartId, this.cartForm).subscribe(
+    
+    this.cartForm.cartProd = this.cartProdList
+    console.log(this.displayData)
+    this.updateDataTransmitted(this.displayData, this.cartForm)
+    console.log(this.displayData)
+    let tmpDisplayData=this.displayData
+    delete tmpDisplayData.cartProd
+    delete tmpDisplayData.contact
+    console.log(tmpDisplayData)
+    const updatedCart={
+      CartModel:tmpDisplayData,
+      cartProdModel:this.cartForm.cartProd
+    }
+    console.log(updatedCart)
+    this.productService.updateCart(this.displayData.cartId, updatedCart).subscribe(
       (res) => {
         console.log(res)
         this.isLoading = false;
@@ -90,11 +108,24 @@ export class CartdialogComponent implements OnInit {
         console.log(error);
       }
     );
+
+  }
+  updateDataTransmitted(displayData, cartForm) {
+    displayData.eventStartDate = cartForm.eventStartDate
+    displayData.eventEndDate = cartForm.eventEndDate
+    displayData.price = cartForm.price
+    displayData.cartProd = cartForm.cartProd
+  }
+  updateQuantity(prod, value) {
+    prod.quantity = value
+    this.cartForm.cartProd = this.cartProdList
+    console.log(this.cartForm)
   }
   // get the products in shopping cart
   getCartProds() {
     this.productService.getCardProd(this.displayData.cartId).subscribe(
       (res) => {
+        console.log(res)
         this.cartProdList = res;
       }, (error) => {
         console.log(error);
@@ -102,12 +133,14 @@ export class CartdialogComponent implements OnInit {
     );
   }
   deleteCardProd(id) {
+    console.log(id)
     this.productService.deleteCartProd(id).subscribe(
       (res) => {
+        console.log(res)
         this.getCartProds();
-    }, (error) => {
-      console.log(error);
-    });
+      }, (error) => {
+        console.log(error);
+      });
   }
 
   datetoYMD(date) {
@@ -119,5 +152,41 @@ export class CartdialogComponent implements OnInit {
     // var y = date.getFullYear();
     // return '' + y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
   }
-
+  searchProdId(prodId) {
+    console.log(this.cartProdList)
+    if(prodId){
+      this.productService.showProduct(prodId).subscribe(
+      res => {
+        console.log(res)
+        this.checkIfHasId(res)
+        this.addNewProd(res)
+        // const newCartProd = {
+        //   id: res.data,
+        //   cartId:null,
+        //   prodId:
+        //   price:
+        //   title:
+        //   subTitle:
+        //   quantity:
+        //   cart:
+        //   prod:
+        // }
+      },
+      err => {
+        console.log(err)
+      }
+    )
+    }
+    
+  }
+  checkIfHasId(res) {
+    if(res.productDetail.length==0){
+      this.hasId=false
+    }else{
+      this.hasId=true
+    }
+  }
+  addNewProd(res){
+    
+  }
 }

@@ -36,6 +36,12 @@ export class NavbarComponent implements OnInit {
     }
   }
   ngOnInit() {
+    this.data.currentloginmessage.subscribe(currentloginmessage=> 
+      {this.loginmessage=currentloginmessage;this.newloginDialog()}
+
+      )
+    this.data.currentsignupmessage.subscribe(currentsignupmessage=>{this.signupmessage=currentsignupmessage;this.newsignupDialog()}
+    )
     if (isPlatformBrowser(this.platformId)) {
       // on mobile screen, click navItems and hide navbar
       $('.navbar-nav>li>a').on('click', function () {
