@@ -100,7 +100,7 @@ export class AdminProductsComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.height = '750px';
-    dialogConfig.width = '750px';
+    dialogConfig.width = '888px';
     dialogConfig.data = {
       id: 1,
       title: 'Update Product',
@@ -116,9 +116,9 @@ export class AdminProductsComponent implements OnInit {
 
   openChildProductDialog(data) {
 	  const dialogConfig = new MatDialogConfig();
-	  dialogConfig.autoFocus = true;
-	  dialogConfig.maxHeight = '780px';
-	  dialogConfig.width = '860px';
+	  dialogConfig.autoFocus = false;
+	  dialogConfig.maxHeight = '760px';
+	  dialogConfig.width = '1050px';
 	  dialogConfig.data = {
 		  data: data
 	  }

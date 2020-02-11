@@ -1,6 +1,6 @@
 mat-dialog-content {
 	max-height: 750px;
-	overflow: hidden;
+    overflow: hidden;
 }
 h5 {
 	color: #c48f45;
@@ -15,6 +15,14 @@ th{
     z-index: 99;
 	text-align: center;
 }
+#tableWrap {
+    max-height: 610px; 
+    overflow-y: auto;
+}
+#name:hover {
+    color: #caa26b;
+    text-decoration: none;
+}
 .closeButton {
-	position: absolute;
+    position: absolute;
 }
