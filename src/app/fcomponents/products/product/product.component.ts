@@ -371,7 +371,7 @@ export class ProductComponent implements OnInit {
       let productHiringDetail = {
         prodDetailid: current.id,
         quantity: current.quantity,
-        beginDate: this.utcDate_start
+        beginDate: this.utcDate_start.toDateString()
       }
       hiringdetail.push(productHiringDetail)
       current = iterable.next().value
@@ -431,7 +431,7 @@ export class ProductComponent implements OnInit {
     let productHiringDetail = {
       prodId: proddetail.prodId,
       quantity: this.quantity,
-      beginDate: this.datetoYMD(this.minDate_start)
+      beginDate: this.utcDate_start.toDateString()
     }
     hiringdetail.push(productHiringDetail)
     console.log(hiringdetail)

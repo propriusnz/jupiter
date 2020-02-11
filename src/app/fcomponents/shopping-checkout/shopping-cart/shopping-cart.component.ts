@@ -247,23 +247,22 @@ calculateTime() {
       productHiringDetail = {
         prodid: item.prodId,
         quantity: item.quantity,
-        beginDate: this.utcDate_start
+        beginDate: this.utcDate_start.toDateString()
       }
     } else if (item.hasOwnProperty('prodDetailId')) {
       productHiringDetail = {
         proddetailid: item.prodDetailId,
         quantity: item.quantity,
-        beginDate: this.utcDate_start
+        beginDate: this.utcDate_start.toDateString()
       }
     }
     hiringdetail.push(productHiringDetail)
   })
-  let newhd = hiringdetail
   // Loop area closure 
 
-  console.log(newhd)
+  console.log(hiringdetail)
   // Api call area (function 3)
-  this.productService.calculateTime(newhd).subscribe(
+  this.productService.calculateTime(hiringdetail).subscribe(
     res => {
       console.log(res)
       this.unavailableDates = res

@@ -191,9 +191,9 @@ export class ShoppingUserinfoComponent implements OnInit {
         console.log(res)
         if (res['isSuccess']) {
           if ('userId' in localStorage) {
-            //this.cartUser(cartContact) 
+            this.cartUser(cartContact) 
           } else {
-            //this.cartNotUser(cartContact)
+            this.cartNotUser(cartContact)
           }
           this.data.changeTimeConflictMessage('')
         } else {
