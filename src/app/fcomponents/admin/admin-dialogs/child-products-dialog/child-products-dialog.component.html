@@ -17,7 +17,8 @@
                 rangeInputFormat: 'MMMM Do', containerClass:'theme-orange',
                 selectFromOtherMonth: true,
                 adaptivePosition: true,
-                showWeekNumbers: false}">
+				showWeekNumbers: false,
+				dateInputFormat: 'DD MMM, YYYY'}">
         <!-- <span>{{ chosenDate | date }}</span> -->
        
     </div>
@@ -60,9 +61,11 @@
                     </td>
 					<td>{{ childProduct.totalStock }}</td>
                     <td>{{ childProduct.availableStock }}</td>
-					<td width="25%">
-						<input bsDatepicker type="text" class="form-control" 
-							placeholder="Calender of {{ childProduct.productDetail1 }} " style="width: 200px;"
+					<td width="30%">
+						<i class="fas fa-calendar-alt"> </i> 
+						<input bsDatepicker class="form-control ml-1"
+							placeholder="Calender of {{ childProduct.productDetail1 }}" 
+							style="width: 200px; display: inline-block;"
 							[minDate]="minDate" [datesDisabled]="emptyDates"
 							[maxDate]="maxDate" 
                             [outsideClick]="true"
@@ -71,7 +74,9 @@
 								rangeInputFormat: 'MMMM Do', containerClass:'theme-orange',
 								selectFromOtherMonth: true,
 								adaptivePosition: true,
-								showWeekNumbers: false
+								showWeekNumbers: false,
+								adaptivePosition: true,
+								dateInputFormat: 'DD MMM, YYYY'
 							}"
 							(click)="getDetailProductTime(childProduct.id)">
                     </td>

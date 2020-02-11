@@ -1,6 +1,7 @@
-import { Component, OnInit, Inject } from "@angular/core";
+import { Component, OnInit, Inject, HostListener, ViewChild  } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import { ProductService } from "src/app/service/product.service";
+import { BsDatepickerDirective } from 'ngx-bootstrap/datepicker';
 import * as moment from 'moment';
 
 @Component({
@@ -20,9 +21,8 @@ export class ChildProductsDialogComponent implements OnInit {
   allDates = []; // All dats between minDate & maxDate;
   currentDate: Date;
   chosenDate: Date;
-  orderBeginDate: any;
-  beginDates = [];
-  orderEndDate = [];
+  order = [];
+  orders = [];
 
   constructor(
 	private productservice: ProductService,
@@ -46,6 +46,13 @@ export class ChildProductsDialogComponent implements OnInit {
 	   };
   }
 
+  @ViewChild(BsDatepickerDirective, { static: false }) datepicker: BsDatepickerDirective;
+  
+  @HostListener('window:scroll')
+  onScrollEvent() {
+    this.datepicker.hide();
+  }
+
   ngOnInit() {}
   
   getDetailProductTime(id) {
@@ -54,35 +61,31 @@ export class ChildProductsDialogComponent implements OnInit {
 	const beginDate = this.currentDate;
 	this.productservice.getProductTimeTable(id, isDetailId, this.datetoYMD(beginDate)).subscribe(
 		productOrderDetail => {
-            console.log('product Time List: ', productOrderDetail);
-            console.log(Object.keys(productOrderDetail));
-
-            // Below, Loop through object to get order begin date & end date
+            console.log('ChildProd Time List: ', productOrderDetail);
+            // Loop through object to get order begin date & end date
             Object.keys(productOrderDetail).forEach((key) => {
-                let i = 0;
-                // while (i <= key.length) {
+				let chosenDayHaveOrder: boolean = moment(this.chosenDate).isBetween(
+																	productOrderDetail[key]['beginDate'],
+																	productOrderDetail[key]['endDate']);
+				// if (chosenDayHaveOrder = true) {
+				// }
 
-                // }
-                this.orderBeginDate = productOrderDetail[key]['beginDate'];
-                console.log('orderBeginDate:', this.orderBeginDate, typeof(this.orderBeginDate));
+				// this.order.push(productOrderDetail[key]['cartId'], productOrderDetail[key]['beginDate'], productOrderDetail[key]['endDate'],
+				// 				productOrderDetail[key]['quantity']);
+				// this.orders.push(this.order);
+				// this.beginDates.push(productOrderDetail[key]['beginDate']);
+				// console.log('orderBeginDate:', this.orderBeginDate, typeof(this.orderBeginDate));
+				// this.endDates.push(productOrderDetail[key]['endDate']);
             })
         },
         err => {
-            console.log(err);
+            console.log('Server Error!', err);
         }
-    ),
-    this.beginDates.push(this.orderBeginDate);
-    console.log('Begin Dates:', this.beginDates, typeof(this.beginDates));
+	)
+	// console.log('Orders: ', this.orders);
+    // console.log('Begin Dates:', this.beginDates, typeof(this.beginDates));
+    // console.log('End Dates:', this.endDates, typeof(this.endDates));
 	// console.log(this.datetoYMD(this.currentDate));
-  }
-
-  getOrderTime() {
-    
-  }
-
-  checkIfBetweenBeginEndDates() {
-    this.datetoYMD(this.chosenDate);
-    
   }
 
   onValueChange(value: Date) {
