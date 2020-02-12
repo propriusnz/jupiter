@@ -32,7 +32,7 @@ export class AdminHireCalendarDialogComponent implements OnInit {
     console.log(data)
     data.data.forEach(element => {
       console.log(element)
-      let order = {}
+      let order = <CalendarEvent>{}
       order['start']= startOfDay(new Date(element.beginDate))
       order['end'] = new Date(element.endDate)
       order['title'] = element.quantity
