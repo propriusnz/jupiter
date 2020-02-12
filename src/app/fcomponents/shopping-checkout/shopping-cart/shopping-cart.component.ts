@@ -63,7 +63,6 @@ constructor(
   this.maxDate_start.setDate(this.maxDate_start.getDate() + 90);
 }
 ngOnChanges(changes: SimpleChanges) {
-  console.log("changes happend")
   const pickupValue = changes['isPickup'];
   const districtValue = changes['district']
   if (pickupValue != null) {
@@ -101,12 +100,16 @@ ngOnInit() {
     currentconflictmessage=>{
       this.conflictmessage=currentconflictmessage
       if(this.conflictmessage.localeCompare('conflict')==0){
-        console.log('conflict happens')
         this.calculateTime()
       }
     }
     )
-  // get the current shopping cart
+  this.getCurrentShoppingCart()
+  this.getProductImage()
+  this.getAllStock();
+  this.price();
+}
+getCurrentShoppingCart(){
   this.deliveryControl = false
   this.productService.getShoppingCartStatus().subscribe(
     status => {
@@ -114,9 +117,7 @@ ngOnInit() {
     }
   );
   this.productTimetable = JSON.parse(localStorage.getItem('productTimetable') || '[]');
-  console.log(this.productTimetable)
   this.prodsInCart = JSON.parse(localStorage.getItem('cartList') || '[]');
-  console.log(this.prodsInCart)
   this.checkTimeConflict()
   if (this.prodsInCart == null || this.prodsInCart.length === 0) {
     this.productService.setShoppingCartStatus(false);
@@ -124,15 +125,14 @@ ngOnInit() {
   if (this.prodsInCart.length >= 1) {
     this.calculateTime()
   }
-  // get the image of product
+}
+getProductImage(){
   this.prodsInCart.forEach(element => {
     this.productService.getImg(element.ProdId).subscribe((res => {
       element.url = res[0]['url'];
     }));
     this.userInputQuantityArray.push(element.Quantity);
   });
-  this.getAllStock();
-  this.price();
 }
 // delete items of shopping cart
 deleteCart(id) {
@@ -187,11 +187,14 @@ checkTimeConflict() {
     }
 
   }
+  this.checkTimeTable(control)
+  
+}
+checkTimeTable(control){
   if (this.productTimetable.length == 1) {
     control = true
   }
   if (control) {
-    console.log("test")
     this.initialStartDate=this.productTimetable[0].beginDate
     this.initialEndDate=this.productTimetable[0].endDate
     this.EventStartDate.emit(this.initialStartDate)
@@ -209,19 +212,11 @@ onStartChange(value) {
     item.beginDate = this.datetoYMD(this.dateStartInput)
   })
   this.checkTimeConflict()
-  for (let i = 0; i < this.disabledDates.length; i++) {
-    let myMoment = moment(this.disabledDates[i], 'YYYY-MM-DD')
-    if (myMoment.startOf('day').isAfter(moment(this.dateStartInput).startOf('day'))) {
-      let myMoment_date = myMoment.toDate()
-      myMoment_date.setDate(myMoment.toDate().getDate() - 1);
-      this.maxDate_return = myMoment_date
-      break
-    } else {
-      this.maxDate_return = this.maxDate_start
-    }
-  }
+  this.processDisabledDates()
+  
   localStorage.setItem('productTimetable', JSON.stringify(this.productTimetable))
 }
+
 onReturnChange(value) {
   this.EventEndDate.emit(value)
   this.dateReturnInput = value;
@@ -232,89 +227,80 @@ onReturnChange(value) {
   localStorage.setItem('productTimetable', JSON.stringify(this.productTimetable))
 }
 
-// Im going to use this as a example function
 calculateTime() {
-  // Setting variables for this area (function 1)
-  console.log("checking time")
   let hiringdetail = []
   let tmpDates = []
   let tmpSet = new Set()
   let productHiringDetail = {}
 
-  // Loop array (this should be another function) (function 2)
-  this.productTimetable.forEach(item => {
-    if (item.hasOwnProperty('prodId')) {
-      productHiringDetail = {
-        prodid: item.prodId,
-        quantity: item.quantity,
-        beginDate: this.utcDate_start
-      }
-    } else if (item.hasOwnProperty('prodDetailId')) {
-      productHiringDetail = {
-        proddetailid: item.prodDetailId,
-        quantity: item.quantity,
-        beginDate: this.utcDate_start
-      }
-    }
-    hiringdetail.push(productHiringDetail)
-  })
-  let newhd = hiringdetail
-  // Loop area closure 
-
-  console.log(newhd)
+  this.checkIfhasDetailId(hiringdetail,productHiringDetail)
   // Api call area (function 3)
-  this.productService.calculateTime(newhd).subscribe(
-    res => {
-      console.log(res)
-      this.unavailableDates = res
-    // Response processing area (function 4) (this function will be the parent function)
-      // Response unavailable dates processing area - loop (function 4a)
-      for (let i = 0; i < this.unavailableDates.length; i++) {
-        let myMoment = moment(this.unavailableDates[i], 'YYYY-MM-DD')
-        tmpDates.push(myMoment.toDate())
-        tmpSet.add(myMoment.toDate().toString())
-      }
-      this.disabledDates = tmpDates
-      this.mySet = tmpSet
-
-      // Response disabled dates processing area - loop (function 4b)
-      for (let i = 0; i < this.disabledDates.length; i++) {
-        let myMoment = moment(this.disabledDates[i], 'YYYY-MM-DD')
-        if (myMoment.startOf('day'
-        ).isAfter(moment(this.dateStartInput).startOf('day'))) {
-          let myMoment_date = myMoment.toDate()
-          myMoment_date.setDate(myMoment.toDate().getDate() - 1);
-          this.maxDate_return = myMoment_date
-          break
-        }
-      }
-      if (this.disabledDates.length == 0) {
-        this.maxDate_return = this.maxDate_start
-      }
-    },
-    // close function 4
-    err => {
-      console.log(err)
-    }
-  );
+  this.callAPIforCalculateTime(hiringdetail,tmpDates,tmpSet)
+  
     // function 5
-  for (let i = 0; i < this.disabledDates.length; i++) {
-    let myMoment = moment(this.disabledDates[i], 'YYYY-MM-DD')
-    if (myMoment.startOf('day').isAfter(moment(this.dateStartInput).startOf('day'))) {
-      let myMoment_date = myMoment.toDate()
-      myMoment_date.setDate(myMoment.toDate().getDate() - 1);
-      this.maxDate_return = myMoment_date
-      break
-    } else {
-      this.maxDate_return = this.maxDate_start
-    }
-  }
+  this.processDisabledDates()
 }
 datetoYMD(date) {
   var d = date.getDate();
   var m = date.getMonth() + 1; //Month from 0 to 11
   var y = date.getFullYear();
   return '' + y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+}
+checkIfhasDetailId(hiringdetail,productHiringDetail){
+  this.productTimetable.forEach(item => {
+    if (item.hasOwnProperty('prodId')) {
+      productHiringDetail = {
+        prodid: item.prodId,
+        quantity: item.quantity,
+        beginDate: this.utcDate_start.toDateString()
+      }
+    } else if (item.hasOwnProperty('prodDetailId')) {
+      productHiringDetail = {
+        proddetailid: item.prodDetailId,
+        quantity: item.quantity,
+        beginDate: this.utcDate_start.toDateString()
+      }
+    }
+    hiringdetail.push(productHiringDetail)
+  })
+}
+callAPIforCalculateTime(hiringdetail,tmpDates,tmpSet){
+  this.productService.calculateTime(hiringdetail).subscribe(
+    res => {
+      this.unavailableDates = res
+      this.processUnavailableDates(tmpDates,tmpSet)
+      // Response disabled dates processing area - loop (function 4b)
+      this.processDisabledDates()
+    },
+    // close function 4
+    err => {
+    }
+  );
+}
+processUnavailableDates(tmpDates,tmpSet){
+  for (let i = 0; i < this.unavailableDates.length; i++) {
+    let myMoment = moment(this.unavailableDates[i], 'YYYY-MM-DD')
+    tmpDates.push(myMoment.toDate())
+    tmpSet.add(myMoment.toDate().toString())
+  }
+  this.disabledDates = tmpDates
+  this.mySet = tmpSet
+
+}
+processDisabledDates(){
+  for (let i = 0; i < this.disabledDates.length; i++) {
+    let myMoment = moment(this.disabledDates[i], 'YYYY-MM-DD')
+    if (myMoment.startOf('day'
+    ).isAfter(moment(this.dateStartInput).startOf('day'))) {
+      let myMoment_date = myMoment.toDate()
+      myMoment_date.setDate(myMoment.toDate().getDate() - 1);
+      this.maxDate_return = myMoment_date
+      break
+    }
+  }
+  if (this.disabledDates.length == 0) {
+    this.maxDate_return = this.maxDate_start
+  }
 }
 calculateBondFee() {
   if ('totalPrice' in localStorage) {

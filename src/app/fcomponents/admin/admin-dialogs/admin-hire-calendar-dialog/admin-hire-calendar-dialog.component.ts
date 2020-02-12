@@ -1,11 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Inject } from '@angular/core';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
-import { startOfDay, endOfDay,
-  subDays, addDays,
-  endOfMonth, isSameDay,
-  isSameMonth, addHours
-} from 'date-fns';
+import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay,isSameMonth, addHours } from 'date-fns';
 import { colors } from '../../../../calendar-utils/colors';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-admin-hire-calendar-dialog',
@@ -13,30 +10,35 @@ import { colors } from '../../../../calendar-utils/colors';
   styleUrls: ['./admin-hire-calendar-dialog.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class AdminHireCalendarDialogComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) data
+  ) {
+    this.dataPrep(data)
+  }
   view: CalendarView = CalendarView.Month;
 
   viewDate: Date = new Date();
 
-  sd = new Date();
-  ed = new Date("2020-02-20T00:00:00");
   events: CalendarEvent[] = [
-    {
-      start: startOfDay(this.sd),
-      end: this.ed,
-      title: '1',
-      color: colors.blue
-    }
   ];
 
   ngOnInit() {
-    console.log(this.events[0])
   }
 
-  ab(a){
-    console.log(a)
+  dataPrep(data){
+    console.log(data)
+    data.data.forEach(element => {
+      console.log(element)
+      let order = {}
+      order['start']= startOfDay(new Date(element.beginDate))
+      order['end'] = new Date(element.endDate)
+      order['title'] = element.quantity
+      this.events.push(order)
+    });
+
   }
 
 }

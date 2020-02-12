@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { ProductService } from '../../../../service/product.service';
 import * as moment from 'moment';
 
+
 @Component({
   selector: 'app-cart-dialog',
   templateUrl: './cart-dialog.component.html',
@@ -18,7 +19,11 @@ export class CartdialogComponent implements OnInit {
   dataChanges = new EventEmitter();
   isLoading = false;
   isCardProdDeleted = false;
-  hasId=false
+  rentalFeesPaid: number
+  depositFeesPaid: number
+  deliveryFees: number
+  rentalFees: number
+  depositFees: number
   contactForm = {
     email: '',
     firstName: '',
@@ -53,7 +58,11 @@ export class CartdialogComponent implements OnInit {
     this.cartForm.eventEndDate = data.data['eventEndDate'];
     this.cartForm.cartProd = data.data['cartProd']
     this.cartForm.price = data.data['price'];
-
+    this.rentalFeesPaid = data.data['rentalPaidFee']
+    this.depositFeesPaid = data.data['depositPaidFee']
+    this.deliveryFees = data.data['deliveryFee']
+    this.rentalFees = data.data['price']
+    this.depositFees = data.data['depositFee']
     this.cartId = data.data['id'];
     this.displayData = data.data;
     this.title = data.title;
@@ -82,20 +91,20 @@ export class CartdialogComponent implements OnInit {
     this.cartForm.eventStartDate = this.datetoYMD(this.cartForm.eventStartDate)
     this.cartForm.eventEndDate = this.datetoYMD(this.cartForm.eventEndDate)
     this.isLoading = true;
-    console.log(this.cartProdList)
-    console.log(this.cartForm)
-    
-    this.cartForm.cartProd = this.cartProdList
-    console.log(this.displayData)
+
+
+
     this.updateDataTransmitted(this.displayData, this.cartForm)
-    console.log(this.displayData)
-    let tmpDisplayData=this.displayData
+
+    let tmpDisplayData = this.displayData
+    tmpDisplayData.rentalPaidFee = this.rentalFeesPaid
+    tmpDisplayData.depositPaidFee = this.depositFeesPaid
+    tmpDisplayData.deliveryFee = this.deliveryFees
     delete tmpDisplayData.cartProd
     delete tmpDisplayData.contact
-    console.log(tmpDisplayData)
-    const updatedCart={
-      CartModel:tmpDisplayData,
-      cartProdModel:this.cartForm.cartProd
+    const updatedCart = {
+      CartModel: tmpDisplayData,
+      cartProdModel: this.cartProdList
     }
     console.log(updatedCart)
     this.productService.updateCart(this.displayData.cartId, updatedCart).subscribe(
@@ -152,41 +161,94 @@ export class CartdialogComponent implements OnInit {
     // var y = date.getFullYear();
     // return '' + y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
   }
-  searchProdId(prodId) {
+  searchProdId(prodId, detailId) {
+    console.log(prodId)
+    console.log(detailId)
     console.log(this.cartProdList)
-    if(prodId){
+    if (prodId) {
       this.productService.showProduct(prodId).subscribe(
+        res => {
+          console.log(res)
+          this.addCartByProdId(res, detailId)
+        },
+        err => {
+          console.log(err)
+        }
+
+      )
+    }
+
+
+  }
+  checkIfHasId(res) {
+    if (res.productDetail.length > 0) {
+      return true
+    } else {
+      return false
+    }
+
+  }
+  addCartByProdId(res, detailId) {
+    const hasId = this.checkIfHasId(res)
+    if (!detailId && !hasId) {
+      const newCartProd = {
+        cartId: this.cartForm.cartId,
+        prodId: res.prodId,
+        price: res.price,
+        title: res.title,
+        subTitle: res.subtitle,
+        quantity: 1,
+      }
+      this.callPostCartProdAPI(newCartProd)
+    } else if (detailId && hasId) {
+      this.addCartByDetailId(res, detailId)
+
+    }
+  }
+  addCartByDetailId(res, detailId) {
+    const detailIdTitle = this.getDetailIdTitle(res, detailId)
+    if(detailIdTitle){
+    const newCartProd = {
+      cartId: this.cartForm.cartId,
+      prodId: res.prodId,
+      price: res.price,
+      title: detailIdTitle,
+      subTitle: res.subtitle,
+      quantity: 1,
+      prodDetailId: detailId
+    }
+    this.callPostCartProdAPI(newCartProd)
+  }
+
+
+  }
+
+  getDetailIdTitle(res, detailId) {
+    console.log(detailId)
+    for (let i = 0; i < res.productDetail.length; i++) {
+      if (detailId == res.productDetail[i].id) {
+        return res.title + ': ' + res.productDetail[i].productDetail1
+      }
+    }
+    return false
+  }
+  callPostCartProdAPI(newCartProd) {
+
+    const newCartProdList = []
+    newCartProdList.push(newCartProd)
+    console.log(newCartProdList)
+    this.productService.addCartProd(newCartProdList).subscribe(
       res => {
         console.log(res)
-        this.checkIfHasId(res)
-        this.addNewProd(res)
-        // const newCartProd = {
-        //   id: res.data,
-        //   cartId:null,
-        //   prodId:
-        //   price:
-        //   title:
-        //   subTitle:
-        //   quantity:
-        //   cart:
-        //   prod:
-        // }
+        if (res['isSuccess']) {
+          this.cartProdList.push(newCartProd)
+          this.getCartProds();
+        }
+
       },
       err => {
         console.log(err)
       }
     )
-    }
-    
-  }
-  checkIfHasId(res) {
-    if(res.productDetail.length==0){
-      this.hasId=false
-    }else{
-      this.hasId=true
-    }
-  }
-  addNewProd(res){
-    
   }
 }

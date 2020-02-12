@@ -26,3 +26,6 @@ th{
 .closeButton {
     position: absolute;
 }
+.popover{
+    width: 100% !important;
+}

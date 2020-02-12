@@ -81,20 +81,43 @@
          </table>
          <div class="ml-1 mt-1">
             <mat-form-field style="width:50%">
-              <mat-label>Prod Id</mat-label>
-              <input matInput #prodId placeholder="Ex. 220">
+               <mat-label>Prod Id</mat-label>
+               <input matInput #prodId placeholder="Ex. 220">
             </mat-form-field>
             <br>
-            <mat-form-field *ngIf="hasId" style="width:50%">
+            <mat-form-field style="width:50%">
                <mat-label>Id</mat-label>
-               <input matInput #prodId placeholder="Ex. 220">
-               <br>
+               <input matInput #detailId #detailId placeholder="Ex. 220">
+               
             </mat-form-field>
-           
-            <button  mat-raised-button type="button" (click)="searchProdId(prodId.value)" class="searchButton">Add Product</button>
-          </div>
+            <br>
+
+            <button mat-raised-button type="button" (click)="searchProdId(prodId.value,detailId.value)" class="searchButton">Add
+               Product</button>
+         </div>
          <!-- At end, allow user to add new product by searching the new product's productID and entering a quantity -->
          <br>
+
+         <div class="row">
+            <div class="col-12">
+               <h5>Payment info 付款信息:</h5>
+            </div>
+            <div class="col-12">Rental Fees Paid（Amount Due：${{rentalFees}}）</div>
+            <div class="form-group col-6">
+               <input class="form-control"  name="rentalFeesPaid"[(ngModel)]="rentalFeesPaid" >
+            </div>
+            <div class="col-12">Bond Fees Paid （Amount Due：${{depositFees}}）</div>
+            
+            <div class="form-group col-6">
+               <input class="form-control" name="depositFeesPaid" [(ngModel)]="depositFeesPaid" >
+            </div>
+            <div class="col-12">Transport Fees Paid</div>
+            
+            <div class="form-group col-6">
+               <input class="form-control" name="transportFeesPaid" [(ngModel)]="deliveryFees">
+            </div>
+         </div>
+
 
          <button class="btn btn-primary" (click)="updateCart()" [disabled]="isLoading==true">Save Order Changes
             保存订单信息</button>
@@ -102,31 +125,6 @@
       <br>
       <hr>
       <br><br><br><br><br><br><br>
-   </div>
-   
-   <div class="row mt-2">
-      <div class="col-12">
-         <h5>Payment 付款信息:</h5>
-      </div>
-      <div class="col-4">Rental fees paid</div>
-      <div class="col-4">Bond paid</div>
-      <div class="col-4">Transport fees paid</div>
-      <div class="form-group col-4">
-         <input class="form-control" name="firstName" [(ngModel)]="contactForm.firstName" #firstName="ngModel">
-      </div>
-      <div class="form-group col-4">
-         <input class="form-control" name="lastName" [(ngModel)]="contactForm.lastName" #lastName="ngModel">
-      </div>
-
-      <div class="form-group col-4">
-         <input class="form-control" name="email" [(ngModel)]="contactForm.email" #email="ngModel">
-      </div>
-      <!-- Add  amount this customer has paid in rental fees (deposit) . Allow for user to edit -->
-      <!-- Add amount this customer has paid in bond. Allow user to edit -->
-      <!-- Add amount this customer has paid in transport fees. Allow user to edit -->
-      <div class="col-12">
-         <button class="btn btn-primary" (click)="updateContact()" [disabled]="isLoading==true">Save Payment Information 保存付款信息</button>
-      </div>
    </div>
 
 </mat-dialog-content>

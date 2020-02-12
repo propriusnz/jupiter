@@ -22,18 +22,27 @@
             <mat-label>First Name</mat-label>
             <input matInput  formControlName="firstname" placeholder="Ex. Li">
           </mat-form-field></td>
-           <td><button mat-raised-button type="submit" class="searchButton">Search</button></td>
+           <button mat-raised-button type="submit" class="searchButton1">Search</button>
         </tr></table>
        
         </form>
         <hr>
-        <div class="ml-5">
+        <div class="example-form ml-5" >
+          <table class="example-full-width" cellspacing="0"><tr >
           <td class="pr-3"><mat-form-field class="example-full-width">
             <mat-label>Order Id</mat-label>
             <input matInput #orderId placeholder="Ex. 220">
           </mat-form-field></td>
-          <td><button mat-raised-button type="button" (click)="searchOrderId(orderId.value)" class="searchButton">Search by Order Id</button></td>
+          <td><button mat-raised-button class="searchButton2" type="button" (click)="searchOrderId(orderId.value)" >Search by Order Id</button></td>
+          
+         </tr></table>
         </div>
+        <hr>
+        <div class="ml-5 mt-2">
+          <button mat-raised-button type="button" (click)="getPaidOrders()" class="searchButton3">Search Paid Orders</button>
+          <button mat-raised-button type="button" (click)="getUnpaidOrders()" class="searchButton3 ml-4">Search Unpaid Orders</button>
+        </div>
+        <br><br>
     <!-- Search by phone num -->
 
     <!-- Search by event time -->

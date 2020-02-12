@@ -23,8 +23,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 // All service follow
 import { ProductService } from './service/product.service';
 import { MatchService } from './service/match.service';
-import {AuthService} from './service/auth.service';
-import {AdminPanelService} from './service/admin-panel.service';
+import { AuthService } from './service/auth.service';
+import { AdminPanelService } from './service/admin-panel.service';
 // All Guard follow
 import { AdminAuthGuard } from './guards/admin-auth.guard'
 import { UserAuthGuard } from './guards/user-auth.guard';
@@ -79,6 +79,8 @@ import { ProfileDialogComponent } from './fcomponents/admin/admin-dialogs/profil
 import { ChildProductsDialogComponent } from './fcomponents/admin/admin-dialogs/child-products-dialog/child-products-dialog.component';
 import { PopupDialogComponent } from './fcomponents/basic/user-dialog/popup-dialog/popup-dialog.component';
 import { AdminHireCalendarDialogComponent } from './fcomponents/admin/admin-dialogs/admin-hire-calendar-dialog/admin-hire-calendar-dialog.component';
+import { PopoverModule } from 'ngx-bootstrap/popover';
+
 
 
 
@@ -92,7 +94,7 @@ const appRoutes: Routes = [
   // {path: 'category/:id', component: ProductListComponent, data : {some_data : 'category'}},
   { path: 'products/:productTypeId/:categoryTypeId', component: ProductListComponent, data: { some_data: 'products' } },
   { path: 'services/:productTypeId/:categoryTypeId', component: ProductListComponent, data: { some_data: 'services' } },
-  { path: 'testing', component: AdminHireCalendarDialogComponent },
+  // { path: 'testing', component: AdminHireCalendarDialogComponent },
   { path: 'packages', component: ProductListComponent, data: { some_data: 'package' } },
   { path: 'product/:id', component: ProductComponent },
   { path: 'galleries', component: GalleryListComponent },
@@ -199,12 +201,15 @@ const appRoutes: Routes = [
       useFactory: adapterFactory
     }),
 
+	BsDatepickerModule.forRoot(),
+	PopoverModule.forRoot()
   ],
   providers: [
     ProductService, DataService, MatchService,AdminAuthGuard,UserAuthGuard,PaymentAuthGuard,AuthService,AdminPanelService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
+    AdminHireCalendarDialogComponent,
     FaqdialogComponent,
     GallerydialogComponent,
     ProductdialogComponent,
