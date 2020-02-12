@@ -82,14 +82,14 @@ export class ProductComponent implements OnInit {
     // get the detail of product
     this.productService.showProduct(this.productId).subscribe(
       (res) => {
-        console.log(res)
+        
         this.isLoading = false;
         this.productDetail = res;
         this.createItem(res);
         this.prodMediaUrl = this.productDetail.productMedia;
       },
       (error) => {
-        console.log(error);
+        
         this.isLoading = false;
       }
     );
@@ -153,13 +153,10 @@ export class ProductComponent implements OnInit {
   // add product into a list
   manageCartProds() {
     if (this.addToCartControl && (0 >= this.quantity || this.quantity > this.productDetail.availableStock) && (this.cartForm.invalid || this.isInputZero)) {
-      console.log('error')
       return;
     }
     const newCartList = [];
     // if product detail exist
-    console.log(this.productDetail)
-    console.log(this.cartForm)
     if (this.productDetail['productDetail'] && this.productDetail['productDetail'].length !== 0) {
       this.cartForm.controls.cartItems['value'].forEach(cartItem => {
         const item = {
@@ -198,7 +195,6 @@ export class ProductComponent implements OnInit {
   }
   // add cartList into localStorage
   addToCart(list) {
-    console.log(list)
     for (let i = 0; i < this.prodDetailIdlist.length; i++) {
       let neworder = {
         prodDetailId: this.prodDetailIdlist[i].prodDetailid,
@@ -259,7 +255,6 @@ export class ProductComponent implements OnInit {
         localStorage.setItem('cartList', JSON.stringify(this.cartList));
       }
     });
-    console.log(this.tmpDetailID)
     this.productTimetable = JSON.parse(localStorage.getItem('productTimetable'));
     this.productTimetable.forEach(item => {
       if (this.tmpDetailID.get(item.prodDetailId) != null || this.tmpProdID.get(item.prodId) != null) {
@@ -276,8 +271,6 @@ export class ProductComponent implements OnInit {
         }
       }
     })
-    console.log(this.tmpDetailID)
-    console.log(this.tmpProdID)
     let iterable = this.tmpDetailID.values()
     let current = iterable.next().value
     while (current != null) {
@@ -290,7 +283,6 @@ export class ProductComponent implements OnInit {
       this.productTimetable.push(current)
       current = iterable.next().value
     }
-    console.log(this.productTimetable)
     localStorage.setItem('productTimetable', JSON.stringify(this.productTimetable));
   }
   // click the path and re-navigate
@@ -328,10 +320,8 @@ export class ProductComponent implements OnInit {
     this.rightControl.nativeElement.style.right = this.rightCarouselControlPosition + 'px';
   }
   addQuantity(proddetail) {
-    console.log("test")
     let prodId = proddetail['value'].Id
     let quantityvalue = proddetail['value'].Quantity
-    console.log(proddetail)
     if (!this.map.has(prodId) && proddetail.valid && quantityvalue != 0) {
       let neworder = {
         id: prodId,
@@ -364,7 +354,6 @@ export class ProductComponent implements OnInit {
     let hiringdetail = []
     let tmpDates = []
     let tmpSet = new Set()
-    console.log(this.map)
     let iterable = this.map.values()
     let current = iterable.next().value
     while (current != null) {
@@ -377,11 +366,9 @@ export class ProductComponent implements OnInit {
       current = iterable.next().value
     }
     this.prodDetailIdlist = hiringdetail
-    console.log(this.prodDetailIdlist)
     if (this.map.size != 0) {
       this.productService.calculateTime(hiringdetail).subscribe(
         res => {
-          console.log(res)
           this.unavailableDates = res
           for (let i = 0; i < this.unavailableDates.length; i++) {
             let myMoment = moment(this.unavailableDates[i], 'YYYY-MM-DD')
@@ -412,7 +399,7 @@ export class ProductComponent implements OnInit {
           }
         },
         err => {
-          console.log(err)
+         
         }
       );
     }
@@ -434,11 +421,9 @@ export class ProductComponent implements OnInit {
       beginDate: this.utcDate_start.toDateString()
     }
     hiringdetail.push(productHiringDetail)
-    console.log(hiringdetail)
     if (this.quantity != 0) {
       this.productService.calculateTime(hiringdetail).subscribe(
         res => {
-          console.log(res)
           this.unavailableDates = res
           for (let i = 0; i < this.unavailableDates.length; i++) {
             let myMoment = moment(this.unavailableDates[i], 'YYYY-MM-DD')
@@ -455,7 +440,6 @@ export class ProductComponent implements OnInit {
           }
         },
         err => {
-          console.log(err)
         }
       );
     }

@@ -7,7 +7,6 @@ import { ProductService } from '../../service/product.service';
   styleUrls: ['./payment-result.component.css']
 })
 export class PaymentResultComponent implements OnInit {
-  href: string = ""
   isSendingRequest = false
   isSendSuccess = false
   result = true
@@ -29,8 +28,6 @@ export class PaymentResultComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.resultUrl = params['result'];
       this.userIdUrl=params['userid']
-      console.log(this.resultUrl); // Print the parameter to the console. 
-      console.log(this.userIdUrl)
   });
     
     
@@ -43,20 +40,14 @@ export class PaymentResultComponent implements OnInit {
     } else {
       this.user = false
     }
-    this.cartId = JSON.parse(localStorage.getItem('cartId'))
-    console.log(this.cartId)
-    this.href = this.router.url
-    console.log(this.href)
     let url = {
       result: this.resultUrl,
       userid:this.userIdUrl
     }
-    console.log(url)
     this.productService.paymentResult(url).subscribe(
       (res) => {
         this.isSendingRequest = false
         this.isSendSuccess = true
-        console.log(res)
         if (res['responseText'].localeCompare('APPROVED') == 0) {
           this.result = true
           localStorage.removeItem('productTimetable')
@@ -65,14 +56,12 @@ export class PaymentResultComponent implements OnInit {
           localStorage.removeItem('cartId')
         } else if (res['responseText'].localeCompare('DECLINED') == 0) {
           this.result = false
-          console.log("this is false")
         }
       }
       ,
       (error) => {
         this.isSendingRequest = false
         this.isSendSuccess = true
-        console.log(error);
 
       }
     )

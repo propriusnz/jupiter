@@ -74,7 +74,6 @@ export class ShoppingUserinfoComponent implements OnInit {
       this.userId = JSON.parse(localStorage.getItem('userId'))
       this.productService.getProfile(this.userId).subscribe(
         res => {
-          console.log(res)
           this.userInfo.Email = res['data'][0].email
           let info = res['data'][0].userInfo//user information
           if (info.length == 1) {
@@ -179,8 +178,6 @@ export class ShoppingUserinfoComponent implements OnInit {
       ContactModel: post,
       ProductTimeTableModel: this.timetable
     };
-    console.log(cartContact)
-    console.log(this.timetable)
      this.addCart(cartContact);
   }
   // pass data to api
@@ -188,7 +185,7 @@ export class ShoppingUserinfoComponent implements OnInit {
     this.isSendingEmail = true;
     this.productService.checkIfAvailable(this.timetable).subscribe(
       (res) => {
-        console.log(res)
+      
         if (res['isSuccess']) {
           if ('userId' in localStorage) {
             this.cartUser(cartContact) 
@@ -204,7 +201,6 @@ export class ShoppingUserinfoComponent implements OnInit {
         }
       },
       (error) => {
-        console.log(error)
 
       }
 
@@ -233,53 +229,46 @@ export class ShoppingUserinfoComponent implements OnInit {
   // clear the shopping cart stored in local storage
 
   cartNotUser(cartContact) {
-    console.log(cartContact)
+    
     this.productService.addCart(cartContact).subscribe(
       (res) => {
-        console.log(res)
+        
         this.isSendingEmail = false;
         this.isSendSuccess = true;
-        console.log(res['data'].cartId)
         localStorage.setItem('cartId', JSON.stringify(res['data'].cartId))
-        console.log(JSON.parse(localStorage.getItem('cartId')))
         this.paymentSpinnerControl=true
         this.getPaymentUrl(res['data'].cartId)
         //this.router.navigate(['/paymentoptions']);
       },
       (error) => {
         this.isSendingEmail = false;
-        console.log(error);
+      
         this.feedback_message = 'Oops, something went wrong.';
       });
   }
   cartUser(cartContact) {
     this.productService.addCartUser(cartContact, this.userId).subscribe(
       (res) => {
-        console.log(res)
         this.isSendingEmail = false;
         this.isSendSuccess = true;
         localStorage.setItem('cartId', JSON.stringify(res['data'].cartId))
-        console.log(JSON.parse(localStorage.getItem('cartId')))
         this.paymentSpinnerControl=true
         this.getPaymentUrl(res['data'].cartId)
         //this.router.navigate(['/paymentoptions']);
       },
       (error) => {
         this.isSendingEmail = false;
-        console.log(error);
         this.feedback_message = 'Oops, something went wrong.';
       });
   }
   getPaymentUrl(cartId) {
     this.productService.requestPaymentUrl(cartId).subscribe(
       res => {
-        console.log(res['url'])
         window.location.assign(res['url'])
         this.paymentSpinnerControl=true
       },
       err => {
         this.paymentSpinnerControl=true
-        console.log(err)
         this.feedback_message = 'Oops, something went wrong.';
       }
     )

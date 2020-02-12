@@ -46,7 +46,6 @@ export class ProductService {
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   calculateTime(hiringtime) {
-    console.log("Hello : " + hiringtime)
     return this.http.post(this.baseUrl + '/ProductTime/CalculateTime/', hiringtime);
   }
   checkIfAvailable(cartitems) {
@@ -136,7 +135,7 @@ export class ProductService {
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   addCartProd(cartProdList: any) {
-    return this.http.post(this.baseUrl + '/CartProds', cartProdList);
+    return this.http.post(this.baseUrl + '/CartProds', cartProdList, { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
   }
   deleteCartProd(id: number) {
     return this.http.delete(this.baseUrl + '/CartProds/' + id,
