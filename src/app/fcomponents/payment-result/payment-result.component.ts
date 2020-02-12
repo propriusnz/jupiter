@@ -62,6 +62,7 @@ export class PaymentResultComponent implements OnInit {
           localStorage.removeItem('productTimetable')
           localStorage.removeItem('cartList')
           localStorage.removeItem('totalPrice')
+          localStorage.removeItem('cartId')
         } else if (res['responseText'].localeCompare('DECLINED') == 0) {
           this.result = false
           console.log("this is false")
