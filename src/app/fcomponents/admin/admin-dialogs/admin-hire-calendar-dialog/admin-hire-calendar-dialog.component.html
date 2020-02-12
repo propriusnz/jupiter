@@ -1,0 +1,18 @@
+<mwl-demo-utils-calendar-header [(view)]="view" [(viewDate)]="viewDate">
+</mwl-demo-utils-calendar-header>
+
+
+<ng-template #customCellTemplate let-day="day" let="event of events" let-locale="locale">
+    <div class="cal-cell-top">
+        <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day }}<button (click)="ab(day)">q</button></span>
+        <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+    </div>
+    <div *ngFor="let event of day.events" style="margin: 5px">
+      {{event.title}}
+    </div>
+</ng-template>
+
+<div>
+    <mwl-calendar-month-view [viewDate]="viewDate" [events]="events" [cellTemplate]="customCellTemplate">
+    </mwl-calendar-month-view>
+</div>

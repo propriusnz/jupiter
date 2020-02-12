@@ -11,6 +11,10 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { CalendarUtilsModule } from './calendar-utils/module';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -62,7 +66,6 @@ import { AdminGalleriesComponent } from './fcomponents/admin/admin-galleries/adm
 import { AdminImagesComponent } from './fcomponents/admin/admin-images/admin-images.component';
 import { ForgotPasswordComponent } from './fcomponents/basic/user-dialog/forgot-password/forgot-password.component';
 import { PaymentOptionsComponent } from './fcomponents/payment-options/payment-options.component';
-import { ChangeinfoComponent } from './fcomponents/changeinfo/changeinfo.component';
 import { EmailsentDialogComponent } from './fcomponents/basic/user-dialog/emailsent-dialog/emailsent-dialog.component';
 import { ResetPasswordComponent } from './fcomponents/reset-password/reset-password.component';
 import { UserDashboardComponent } from './fcomponents/user-dashboard/user-dashboard.component';
@@ -75,7 +78,7 @@ import { AdminUserListComponent } from './fcomponents/admin/admin-user-list/admi
 import { ProfileDialogComponent } from './fcomponents/admin/admin-dialogs/profile-dialog/profile-dialog.component';
 import { ChildProductsDialogComponent } from './fcomponents/admin/admin-dialogs/child-products-dialog/child-products-dialog.component';
 import { PopupDialogComponent } from './fcomponents/basic/user-dialog/popup-dialog/popup-dialog.component';
-
+import { AdminHireCalendarDialogComponent } from './fcomponents/admin/admin-dialogs/admin-hire-calendar-dialog/admin-hire-calendar-dialog.component';
 
 
 
@@ -89,6 +92,7 @@ const appRoutes: Routes = [
   // {path: 'category/:id', component: ProductListComponent, data : {some_data : 'category'}},
   { path: 'products/:productTypeId/:categoryTypeId', component: ProductListComponent, data: { some_data: 'products' } },
   { path: 'services/:productTypeId/:categoryTypeId', component: ProductListComponent, data: { some_data: 'services' } },
+  { path: 'testing', component: AdminHireCalendarDialogComponent },
   { path: 'packages', component: ProductListComponent, data: { some_data: 'package' } },
   { path: 'product/:id', component: ProductComponent },
   { path: 'galleries', component: GalleryListComponent },
@@ -151,7 +155,6 @@ const appRoutes: Routes = [
     UserloginDialogComponent,
     ForgotPasswordComponent,
     PaymentOptionsComponent,
-    ChangeinfoComponent,
     EmailsentDialogComponent,
     ResetPasswordComponent,
     UserDashboardComponent,
@@ -163,7 +166,8 @@ const appRoutes: Routes = [
     AdminUserListComponent,
     ProfileDialogComponent,
     ChildProductsDialogComponent,
-    PopupDialogComponent
+    PopupDialogComponent,
+    AdminHireCalendarDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -189,6 +193,12 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes, { scrollPositionRestoration: 'enabled' }),
     HttpClientModule,
     BsDatepickerModule.forRoot(),
+    CalendarUtilsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
+
   ],
   providers: [
     ProductService, DataService, MatchService,AdminAuthGuard,UserAuthGuard,PaymentAuthGuard,AuthService,AdminPanelService
