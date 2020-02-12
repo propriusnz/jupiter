@@ -19,8 +19,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 // All service follow
 import { ProductService } from './service/product.service';
 import { MatchService } from './service/match.service';
-import {AuthService} from './service/auth.service';
-import {AdminPanelService} from './service/admin-panel.service';
+import { AuthService } from './service/auth.service';
+import { AdminPanelService } from './service/admin-panel.service';
 // All Guard follow
 import { AdminAuthGuard } from './guards/admin-auth.guard'
 import { UserAuthGuard } from './guards/user-auth.guard';
@@ -75,6 +75,7 @@ import { AdminUserListComponent } from './fcomponents/admin/admin-user-list/admi
 import { ProfileDialogComponent } from './fcomponents/admin/admin-dialogs/profile-dialog/profile-dialog.component';
 import { ChildProductsDialogComponent } from './fcomponents/admin/admin-dialogs/child-products-dialog/child-products-dialog.component';
 import { PopupDialogComponent } from './fcomponents/basic/user-dialog/popup-dialog/popup-dialog.component';
+import { PopoverModule } from 'ngx-bootstrap/popover';
 
 
 
@@ -188,7 +189,8 @@ const appRoutes: Routes = [
     MatSnackBarModule,
     RouterModule.forRoot(appRoutes, { scrollPositionRestoration: 'enabled' }),
     HttpClientModule,
-    BsDatepickerModule.forRoot(),
+	BsDatepickerModule.forRoot(),
+	PopoverModule.forRoot()
   ],
   providers: [
     ProductService, DataService, MatchService,AdminAuthGuard,UserAuthGuard,PaymentAuthGuard,AuthService,AdminPanelService

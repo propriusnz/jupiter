@@ -33,26 +33,7 @@ export class AdminProductsComponent implements OnInit {
     private productService: ProductService,
     private dialog: MatDialog,
     private adminPanelService: AdminPanelService
-  ) { 
-	//   this.minDate = new Date;
-	// 	  this.minDate.setDate(this.minDate.getDate() - 90);
-	// 	//   console.log('minDate: ', this.minDate, typeof(this.minDate));
-	//   this.maxDate = new Date();
-	//   	  this.maxDate.setDate(this.maxDate.getDate() + 90);
-	//   this.startMoment = moment(new Date()).subtract(60, 'days');
-	//   console.log('Before: ', this.startMoment, typeof(this.startMoment));
-	//   this.endMoment = moment(new Date()).add(30, 'days');
-	//   this.endMoment = moment(this.endMoment, "DD-MMM-YYYY");
-	//  console.log('After: ', this.startMoment, typeof(this.startMoment));
-	//    this.allDates.push(this.startMoment.toDate().toString()); // Push begin date (day1)
-	//    let i = 1;
-	//    while (i <= 90) {
-	// 	 let day = this.startMoment.add(i, 'days');
-	//  	this.allDates.push(day.toDate().toString());
-	//  	i ++;
-	//    };
-	//    console.log(this.allDates);
-    }
+  ) { }
 
   ngOnInit() {
     this.route.params.subscribe(
