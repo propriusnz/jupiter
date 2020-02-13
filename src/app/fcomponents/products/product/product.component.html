@@ -119,7 +119,7 @@
 					<div class="DatePicker mt-2 ml-2">
 						<span>From </span>
 						<input bsDatepicker type="text" class="input_line"
-							placeholder="Choose start Date"
+							placeholder="Choose start date"
 							placement="top" [isDisabled]="dateStartControl"
 							[minDate]="minDate_start" [datesDisabled]="disabledDates" [maxDate]="maxDate_start"
 							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange',showWeekNumbers:false}"
@@ -128,7 +128,7 @@
 						<span class="mx-2">to</span>
 
 						<input bsDatepicker type="text" class="input_line"
-							placeholder="Choose return Date"
+							placeholder="Choose return date"
 							placement="top" [isDisabled]="dateReturnControl"
 							[minDate]="minDate_return" [datesDisabled]="disabledDates" [maxDate]="maxDate_return"
 							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange',showWeekNumbers:false}"
@@ -140,13 +140,13 @@
 					*ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length==0">
 					<div class="ml-4 mt-1">
 						<span>From </span>
-						<input bsDatepicker type="text" class="input_line" placeholder="Choose start Date"
+						<input bsDatepicker type="text" class="input_line" placeholder="Choose start date"
 							style="width: 170px;" [isDisabled]="dateStartControl" [minDate]="minDate_start"
 							[datesDisabled]="disabledDates" [maxDate]="maxDate_start"
 							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange',showWeekNumbers:false}"
 							(bsValueChange)="onStartChange($event)">
 						<span class="mx-2">to</span>
-						<input bsDatepicker type="text" class="input_line" placeholder="Choose return Date"
+						<input bsDatepicker type="text" class="input_line" placeholder="Choose return date"
 							style="width: 170px;" [isDisabled]="dateReturnControl" [minDate]="minDate_return"
 							[datesDisabled]="disabledDates" [maxDate]="maxDate_return"
 							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange',showWeekNumbers:false}"
