@@ -1,0 +1,21 @@
+form {
+	margin: 0 auto;
+}
+h3 {
+	margin: 0 auto;
+}
+mat-dialog-content {
+	min-height: 520px;
+}
+mat-form-field {
+	display: block;
+}
+#ButtonsWrap {
+	text-align: center;
+	margin-top: 10px;
+}
+
+.primaryButton {
+	background-color: #c48f45;
+	color: white;
+}

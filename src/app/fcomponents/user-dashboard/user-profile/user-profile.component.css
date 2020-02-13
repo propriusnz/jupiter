@@ -1,0 +1,43 @@
+mat-form-field	{
+	display: block;
+}
+p {
+	font-size: 1.1rem;
+}
+span {
+	color: #c48f45;
+}
+form {
+	width: 50%;
+	margin: 0 auto;
+}
+.card {
+	min-height: 350px;
+	width: 500px;
+	margin: 0 auto;
+	margin-top: 3%;
+}
+.card-body {
+	width: 100%;
+}
+.card-header {
+	background-color: #c48f45;
+	color: white;
+	text-align: center;
+	min-height: 60px;
+}
+.slide {
+	margin: 0 auto;
+	margin: 30px 0px 30px 0px;
+	text-align: center;
+}
+.primaryButton {
+	background-color: #c48f45;
+	color: white;
+}
+#buttonsWrap {
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}

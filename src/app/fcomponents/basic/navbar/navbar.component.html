@@ -1,16 +1,3 @@
-<style>
-    .ul-menu {
-        width: 80%;
-        margin: 0 auto;
-    }
-
-    @media (max-width: 768px) {
-        .ul-menu {
-            width: 90%;
-        }
-    }
-</style>
-
 <nav class="navbar navbar-expand-md navbar-light bg-light border-bottom p-0 lspace-3">
   <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
     <ul class="navbar-nav col-lg-10 ul-menu">
@@ -25,65 +12,7 @@
         </a>
       </li>
       <span class="navspace"></span>
-      <!-- !Products -->
-      <!-- <li class="nav-item dropdown pl-lg-2" *ngFor="let typeItem of allTypes, index as i">
-          <div class="nav-link dropdown-toggle s2bold" id="navbarDropdownMenuLink{{i}}" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            <h1 class="s2bold" [routerLink]="['/products', typeItem.prodTypeId, 0]" (click)="updateCategoryStatus('All '+ typeItem.typeName + 's')">{{typeItem.typeName}}</h1>
-          </div>
-          <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink" *ngIf="allTypes"> -->
-
-            <!-- !large screen dropdown -->
-            <!-- <a *ngIf="isBrowser==true" class="dropdown-item d-none d-md-block s2bold" [routerLink]="['/products', typeItem.prodTypeId, 0]"
-            (click)="updateCategoryStatus('All '+ typeItem.typeName + 's')">
-              <h1>All {{typeItem.typeName}}s</h1>
-            </a>
-            <a *ngIf="isBrowser==false" class="dropdown-item d-none d-md-block"
-            href='http://luxedreameventhire.co.nz/products/{{typeItem.prodTypeId}}'
-            (click)="updateCategoryStatus('All '+ typeItem.typeName + 's')">
-              All {{typeItem.typeName}}s
-            </a>
-            <div *ngIf="isBrowser==true">
-              <a class="dropdown-item d-none d-md-block s2bold" *ngFor="let category of typeItem.productCategory"
-              [routerLink]="[ '/products', typeItem.prodTypeId, category.categoryId ]"
-              (click)="updateCategoryStatus(category.categoryName)">
-                <h1>{{category.categoryName}}</h1>
-              </a>
-            </div>
-            <div *ngIf="isBrowser==false">
-              <a class="dropdown-item d-none d-md-block" *ngFor="let category of typeItem.productCategory"
-              href = 'http://luxedreameventhire.co.nz/products/{{typeItem.prodTypeId}}/{{category.categoryId}}'
-              (click)="updateCategoryStatus(category.categoryName)">
-                {{category.categoryName}}
-              </a>
-            </div> -->
-
-            <!-- !mobile dropdown -->
-            <!-- <a class="dropdown-item d-block d-md-none" data-toggle="collapse" data-target=".navbar-collapse">
-              <a class="s2bold" *ngIf="isBrowser==true" [routerLink]="['/products', typeItem.prodTypeId, 0]"
-              (click)="updateCategoryStatus('All '+ typeItem.typeName + 's')">
-                <h1>All {{typeItem.typeName}}s</h1>
-              </a>
-              <a *ngIf="isBrowser==false" href='http://luxedreameventhire.co.nz/products/{{typeItem.prodTypeId}}'
-              (click)="updateCategoryStatus('All '+ typeItem.typeName + 's')">
-                All {{typeItem.typeName}}s
-              </a>
-            </a>
-            <a class="dropdown-item d-block d-md-none s2bold" *ngFor="let category of typeItem.productCategory" data-toggle="collapse"
-              data-target=".navbar-collapse">
-              <a class="s2bold" *ngIf="isBrowser==true" [routerLink]="[ '/products', typeItem.prodTypeId, category.categoryId ]"
-              (click)="updateCategoryStatus(category.categoryName)">
-                <h1>{{category.categoryName}}</h1>
-              </a>
-              <a *ngIf="isBrowser==false" href='http://luxedreameventhire.co.nz/products/{{typeItem.prodTypeId}}/{{category.categoryId}}'
-              (click)="updateCategoryStatus(category.categoryName)">
-                {{category.categoryName}}
-              </a>
-            </a>
-          </div>
-        </li>
-         -->
-
+     
       <!--!Hire dropdown-->
       <li class="nav-item dropdown">
         <div class="nav-link dropdown-toggle s2bold" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"

@@ -98,8 +98,8 @@ export class AdminProductsComponent implements OnInit {
   openChildProductDialog(data) {
 	  const dialogConfig = new MatDialogConfig();
 	  dialogConfig.autoFocus = false;
-	  dialogConfig.maxHeight = '760px';
-	  dialogConfig.width = '1050px';
+	  dialogConfig.maxHeight = '900px';
+	  dialogConfig.width = '900px';
 	  dialogConfig.data = {
 		  data: data
 	  }

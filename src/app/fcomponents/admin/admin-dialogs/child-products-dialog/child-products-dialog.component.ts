@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from "@angular/core";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatDialogConfig } from "@angular/material";
 import { ProductService } from "src/app/service/product.service";
 import * as moment from 'moment';
+import { AdminHireCalendarDialogComponent } from '../admin-hire-calendar-dialog/admin-hire-calendar-dialog.component';
 
 @Component({
   selector: "app-child-products-dialog",
@@ -20,10 +21,12 @@ export class ChildProductsDialogComponent implements OnInit {
   currentDate: Date;
 
   constructor(
-	private productservice: ProductService,
+    private productservice: ProductService,
+    private dialog: MatDialog,
     private dialogRef: MatDialogRef<ChildProductsDialogComponent>,
-	@Inject(MAT_DIALOG_DATA) data
+    @Inject(MAT_DIALOG_DATA) data
   ) {
+    console.log(data)
 	this.childProducts = data.data['productDetail'];
 	this.productName = data.data.title;
 	this.prodId = data.data.prodId;
@@ -35,8 +38,8 @@ export class ChildProductsDialogComponent implements OnInit {
 	this.endMoment = moment(new Date()).add(30, 'days');
   }
 
-  ngOnInit() {}
-  
+  ngOnInit() { }
+
   getDetailProductTime(id) {
 	let isDetailId;
 	if (this.childProducts[0]) {
@@ -45,19 +48,29 @@ export class ChildProductsDialogComponent implements OnInit {
 		isDetailId = 0;
 	}
 	this.currentDate = new Date();
-	const beginDate = this.currentDate;
+  const beginDate = this.currentDate;
+  console.log(id)
 	this.productservice.getProductTimeTable(id, isDetailId, this.datetoYMD(beginDate)).subscribe(
 		productOrderDetail => {
             console.log('ChildProd Time List: ', productOrderDetail);
-            // Loop through object to get order begin date & end date
-            Object.keys(productOrderDetail).forEach((key) => {
-			
-            })
+            this.openCalendarDialog(productOrderDetail);
+            // Object.keys(productOrderDetail).forEach((key) => {})
         },
         err => {
             console.log('Server Error!', err);
         }
 	)
+  }
+
+  openCalendarDialog(x){
+    const dialogConfig = new MatDialogConfig();
+	  dialogConfig.autoFocus = false;
+	  dialogConfig.maxHeight = '720px';
+	  dialogConfig.width = '800px';
+	  dialogConfig.data = {
+		  data: x
+	  }
+	  this.dialog.open(AdminHireCalendarDialogComponent, dialogConfig);
   }
 
   datetoYMD(date) {
@@ -70,6 +83,4 @@ export class ChildProductsDialogComponent implements OnInit {
   close() {
     this.dialogRef.close();
   }
-
-
 }

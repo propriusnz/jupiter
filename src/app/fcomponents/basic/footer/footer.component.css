@@ -29,7 +29,8 @@ ul li a:hover{
 }
 a{
     text-decoration: none;
-    color: inherit;
+	color: inherit;
+	cursor: pointer;
 }
 .contactUs i{
     font-size: 18px;

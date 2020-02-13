@@ -6,7 +6,7 @@
 <div class="container" *ngIf="userProfile['userInfo'][0]">
 	<div class="row">
 		<h3 mat-dialog-title>
-			User id #<b>{{ userProfile.id }}</b>
+			User #<b>{{ userProfile.id }}</b>
 		</h3>
 	</div>
 	<hr>
@@ -52,27 +52,3 @@
 		</div>
 	</mat-dialog-content>
 </div>
-
-<style>
-	form {
-		margin: 0 auto;
-	}
-	h3 {
-		margin: 0 auto;
-	}
-	mat-dialog-content {
-		min-height: 520px;
-	}
-	mat-form-field {
-		display: block;
-	}
-	#ButtonsWrap {
-		text-align: center;
-		margin-top: 10px;
-	}
-
-	.primaryButton {
-		background-color: #c48f45;
-		color: white;
-	}
-</style>

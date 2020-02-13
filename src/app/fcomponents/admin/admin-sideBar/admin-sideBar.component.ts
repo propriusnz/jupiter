@@ -38,12 +38,12 @@ export class AdminSideBarComponent implements OnInit {
   updatePanel(status: string) {
     this.adminPanelService.changePanel(status);
   }
+
   reload(){
     const url=this.router.url
     console.log(url)
     if(url.localeCompare('/admin/adminDashboard')!=0){
       window.location.reload()
     }
-    
   }
 }

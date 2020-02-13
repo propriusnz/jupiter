@@ -1,47 +1,36 @@
 <mat-dialog-content>
-	<div class="row">
-		<h5 class="col-12 text-center">{{ productName }}</h5>
+    <div class="row">
+        <h5 class="col-12 text-center">{{ productName }}</h5>
     </div>
-    <div class="row ml-2 my-2">
-        <i class="fas fa-calendar-alt mt-1"> </i> 
-        <span class="ml-1">
-            View Specific Date <br>
-            查看指定日期
-        </span>
-        <input bsDatepicker type="text" class="form-control ml-3" 
-            placeholder="Pick a date | 选择日期" style="width: 280px;"
-            [minDate]="minDate" [maxDate]="maxDate"
-            [datesDisabled]="emptyDates" [outsideClick]="true"
-            (bsValueChange)="onValueChange($event)"
-            [bsConfig]="{
-                rangeInputFormat: 'MMMM Do', containerClass:'theme-orange',
-                selectFromOtherMonth: true,
-                adaptivePosition: true,
-				showWeekNumbers: false,
-				dateInputFormat: 'DD MMM, YYYY'}">
-		<button *ngIf="!childProducts[0]" type="button" class="btn btn-info ml-5" 
-				placement="bottom"
-				popover="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
-				(click)="getDetailProductTime(prodId)">
-			<i class="fas fa-calendar-alt"> </i> 
-		</button>
-    </div>
-
+    <div *ngIf="!childProducts[0]" class="row my-5">
+		<div style="margin: 0 auto; text-align: center;">
+			<p>No Child Product For This Item</p> <br>
+			<button type="button" class="btn btn-lg btn-info"
+					(click)="getDetailProductTime(prodId)">
+				<i class="fas fa-calendar-alt"> </i> 
+			</button>
+	        <h6 class="ml-1" style="color: #c48f45;">
+				<i class="fas fa-calendar-alt mt-1"> </i>
+	            View Specific Date <br>
+				查看指定日期
+			</h6>
+        </div>
+	</div>
     <!-- Child Product Table -->
-	<div id="tableWrap" style="min-height: 200px;">
+	<div id="tableWrap" style="min-height: 50px;">
 		<table *ngIf="childProducts[0]" class="table">
             <!-- Table Head -->
-			<thead class="table-secondary text-center">
-				<th><span>Child ID<br>子产品ID</span></th>
-				<th><span>Name<br>名称</span></th>
-				<th><span>Current Total Stock<br>目前总库存</span></th>
+            <thead class="table-secondary text-center">
+                <th><span>Child ID<br>子产品ID</span></th>
+                <th><span>Name<br>名称</span></th>
+                <th><span>Current Total Stock<br>目前总库存</span></th>
                 <th>
                     <span>Current Available Stock<br>目前可用库存</span>
                 </th>
-				<th>
+                <th>
                     <span style="font-weight: lighter; font-size: smaller;">
-                        From <i> {{ minDate | date:'dd-MMM-yyy' }}</i> 
-					    <br>to <i> {{ maxDate | date:'dd-MMM-yyy' }}</i> 
+                        From <i> {{ minDate | date:'dd-MMM-yyy' }}</i>
+                        <br>to <i> {{ maxDate | date:'dd-MMM-yyy' }}</i>
                     </span> <br>
                     <span>Calender 日历</span>
                 </th>
@@ -55,29 +44,30 @@
                     </span>
                 </th>
             </thead>
-            
+
             <!-- Table Body -->
-			<tbody>
-				<tr *ngFor="let childProduct of childProducts" id="name" style="text-align: center;">
-					<td width="10%">{{ childProduct.id }}</td>
-					<td width="18%">
-                      {{ childProduct.productDetail1 }}
+            <tbody>
+                <tr *ngFor="let childProduct of childProducts" id="name" style="text-align: center;">
+                    <td width="10%">{{ childProduct.id }}</td>
+                    <td width="18%">
+                        {{ childProduct.productDetail1 }}
                     </td>
-					<td>{{ childProduct.totalStock }}</td>
+                    <td>{{ childProduct.totalStock }}</td>
                     <td>{{ childProduct.availableStock }}</td>
 					<td width="30%">
 						<button type="button" class="btn btn-info" 
-								placement="bottom"
-								popover="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
 								(click)="getDetailProductTime(childProduct.id)">
 							<i class="fas fa-calendar-alt"> </i> 
 						</button>
                     </td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <button type="button" class="btn btn-sm btn-info closeButton" (click)="close()">
         X Close
     </button>
+    <!-- <ng-template #popover_content>
+        <app-admin-hire-calendar-dialog></app-admin-hire-calendar-dialog>
+    </ng-template> -->
 </mat-dialog-content>

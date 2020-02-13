@@ -1,0 +1,8 @@
+th {
+	position: sticky;
+	top: -10px;
+}
+.far.fa-edit:hover {
+	color:rgb(55, 162, 233);
+	cursor: pointer;
+}

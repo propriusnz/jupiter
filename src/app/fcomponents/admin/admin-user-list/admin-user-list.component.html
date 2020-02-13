@@ -1,76 +1,58 @@
-<div class="container">
-	<div class="row mt-3">
-		<div class="col-3 mx-auto text-center">
-			<h2>User List</h2>
-		</div>
-	</div>
-	<div class="row">
-		<table class="table">
-			<thead>
-				<tr class="table-secondary">
-					<th>ID</th>
-					<th>Email</th>
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>Phone</th>
-					<th>Company</th>
-					<th>Contact ID</th>
-					<th>Discount Level</th>
-					<th>Subscribed</th>
-					<th>Edit Profile</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr *ngFor="let user of userList">
-					<td>{{ user.id }}</td>
-					<td>{{ user.email }}</td>
-					<td>
-						<span *ngIf="!user.userInfo[0] || user.userInfo[0].firstName == null">-</span>
-						<span *ngIf="user.userInfo[0]">{{ user.userInfo[0].firstName }}</span>
-					</td>
-					<td>
-						<span *ngIf="!user.userInfo[0] || user.userInfo[0].lastName == null">-</span>
-						<span *ngIf="user.userInfo[0]">{{ user.userInfo[0].lastName }}</span>
-					</td>
-					<td>
-						<span *ngIf="!user.userInfo[0] || user.userInfo[0].phoneNumber == null">-</span>
-						<span *ngIf="user.userInfo[0]">{{ user.userInfo[0].phoneNumber }}</span>
-					</td>
-					<td>
-						<span *ngIf="!user.userInfo[0] || user.userInfo[0].company == null">-</span>
-						<span *ngIf="user.userInfo[0]">{{ user.userInfo[0].company }}</span>
-					</td>
-					<td *ngIf="!user.userInfo[0]">-</td>
-					<td *ngIf="user.userInfo[0]">
-						{{ user.userInfo[0].userContactId }}
-					</td>
-					<td>
-						<span *ngIf="!user.userInfo[0]">-</span>
-						<span *ngIf="user.userInfo[0]"></span>
-					</td>
-					<td *ngIf="user.isSubscribe == 1" class="px-4">&radic;</td>
-					<td *ngIf="user.isSubscribe == 0"></td>
-					<td style="text-align: center;">
-						<i  class="far fa-edit" (click)="openEditProfile(user)" title="Edit"></i>
-					</td>
-					
-					<!-- <td>
-						<button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
-					</td> -->
-				</tr>
-			</tbody>
-		</table>
-	</div>
+<div class="mx-2" >
+	<h2 class="mt-3">User List</h2>
+	<table class="table">
+		<thead>
+			<tr class="table-secondary">
+				<th>ID</th>
+				<th>Email</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Phone</th>
+				<th>Company</th>
+				<th>Contact ID</th>
+				<th>Discount Level</th>
+				<th>Subscribed</th>
+				<th>Edit Profile</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let user of userList">
+				<td>{{ user.id }}</td>
+				<td>{{ user.email }}</td>
+				<td>
+					<span *ngIf="!user.userInfo[0] || user.userInfo[0].firstName == null">-</span>
+					<span *ngIf="user.userInfo[0]">{{ user.userInfo[0].firstName }}</span>
+				</td>
+				<td>
+					<span *ngIf="!user.userInfo[0] || user.userInfo[0].lastName == null">-</span>
+					<span *ngIf="user.userInfo[0]">{{ user.userInfo[0].lastName }}</span>
+				</td>
+				<td>
+					<span *ngIf="!user.userInfo[0] || user.userInfo[0].phoneNumber == null">-</span>
+					<span *ngIf="user.userInfo[0]">{{ user.userInfo[0].phoneNumber }}</span>
+				</td>
+				<td>
+					<span *ngIf="!user.userInfo[0] || user.userInfo[0].company == null">-</span>
+					<span *ngIf="user.userInfo[0]">{{ user.userInfo[0].company }}</span>
+				</td>
+				<td *ngIf="!user.userInfo[0]">-</td>
+				<td *ngIf="user.userInfo[0]">
+					{{ user.userInfo[0].userContactId }}
+				</td>
+				<td>
+					<span *ngIf="!user.userInfo[0]">-</span>
+					<span *ngIf="user.userInfo[0]"></span>
+				</td>
+				<td *ngIf="user.isSubscribe == 1" class="px-4">&radic;</td>
+				<td *ngIf="user.isSubscribe == 0"></td>
+				<td style="text-align: center;">
+					<i  class="far fa-edit" (click)="openEditProfile(user)" title="Edit"></i>
+				</td>
+				
+				<!-- <td>
+					<button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+				</td> -->
+			</tr>
+		</tbody>
+	</table>
 </div>
-
-<style>
-    th {
-        position: sticky;
-        top: -10px;
-        /* z-index: 99; */
-	}
-	.far.fa-edit:hover {
-		color:rgb(55, 162, 233);
-		cursor: pointer;
-	}
-</style>

@@ -259,3 +259,16 @@ body{
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.cal-month-view .cal-day-cell {
+	max-height: 60px;
+}
+
+.cal-month-view .cal-day-cell {
+	margin-top: 0;
+}
+
+.cal-month-view .cal-day-number {
+	margin-bottom: 0;
+}

@@ -1,0 +1,22 @@
+.message {
+    color: green;
+    font-weight: 400;
+    font-size: x-large;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    margin-top: 20px;
+  }
+
+  .closeicon {
+    float:right;
+    outline:none;
+    background-color:transparent;
+    cursor:pointer;
+  }
+  .check{
+    color:green;
+    display: inline-block;
+    margin-top: 15px;
+    margin-left: 200px;
+  }

@@ -1,4 +1,3 @@
-
 <!-- Log in form for users -->
 <div id="wrap">
 	<div id="LogoWrap">
@@ -18,10 +17,10 @@
 				<mat-form-field>
 					<input matInput formControlName="password" (ngModelChange)="update()" [type]="hide? 'password' : 'text'"
 						placeholder="Your Password"> 
-					<button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+					<a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
 						[attr.aria-pressed]="hide">
 						<mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-					</button>
+					</a>
 					<mat-error *ngIf="password.invalid">{{ getPasswordErrorMessage() }}</mat-error>
 				</mat-form-field>
 			</mat-dialog-content>
