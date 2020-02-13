@@ -53,22 +53,20 @@ export class ChildProductsDialogComponent implements OnInit {
 	this.productservice.getProductTimeTable(id, isDetailId, this.datetoYMD(beginDate)).subscribe(
 		productOrderDetail => {
             console.log('ChildProd Time List: ', productOrderDetail);
-            // Loop through object to get order begin date & end date
             this.openCalendarDialog(productOrderDetail);
-            Object.keys(productOrderDetail).forEach((key) => {
-			
-            })
+            // Object.keys(productOrderDetail).forEach((key) => {})
         },
         err => {
             console.log('Server Error!', err);
         }
 	)
   }
+
   openCalendarDialog(x){
     const dialogConfig = new MatDialogConfig();
 	  dialogConfig.autoFocus = false;
-	  dialogConfig.maxHeight = '760px';
-	  dialogConfig.width = '1050px';
+	  dialogConfig.maxHeight = '720px';
+	  dialogConfig.width = '800px';
 	  dialogConfig.data = {
 		  data: x
 	  }
@@ -85,6 +83,4 @@ export class ChildProductsDialogComponent implements OnInit {
   close() {
     this.dialogRef.close();
   }
-
-
 }

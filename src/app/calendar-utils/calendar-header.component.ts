@@ -8,7 +8,7 @@ import { CalendarView } from 'angular-calendar';
       <div class="col-md-4">
         <div class="btn-group">
           <div
-            class="btn btn-primary"
+            class="btn btn-sm btn-info"
             mwlCalendarPreviousView
             [view]="view"
             [(viewDate)]="viewDate"
@@ -17,7 +17,7 @@ import { CalendarView } from 'angular-calendar';
             Previous
           </div>
           <div
-            class="btn btn-outline-secondary"
+            class="btn btn-sm btn-outline-secondary"
             mwlCalendarToday
             [(viewDate)]="viewDate"
             (viewDateChange)="viewDateChange.next(viewDate)"
@@ -25,7 +25,7 @@ import { CalendarView } from 'angular-calendar';
             Today
           </div>
           <div
-            class="btn btn-primary"
+            class="btn btn-sm btn-info"
             mwlCalendarNextView
             [view]="view"
             [(viewDate)]="viewDate"
@@ -36,10 +36,9 @@ import { CalendarView } from 'angular-calendar';
         </div>
       </div>
       <div class="col-md-4">
-        <h3>{{ viewDate | calendarDate: view + 'ViewTitle':locale }}</h3>
+        <p>{{ viewDate | calendarDate: view + 'ViewTitle':locale }}</p>
       </div>
     </div>
-    <br />
   `
 })
 export class CalendarHeaderComponent {

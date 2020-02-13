@@ -3,19 +3,25 @@
 
 
 <ng-template #customCellTemplate let-day="day" let="event of events" let-locale="locale">
-    <div style="padding:0px; margin:0px; min-height: 10px !important; height: 20px !important;" class="cal-cell-top">
-        <span style="font-size:10px; " class="cal-day-badge" *ngIf="day.badgeTotal > 0">Total order: {{ day.badgeTotal }}</span>
-        <span  class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
-        <br>
-    </div>
-      <div class="display:inline;"  style="min-height: 10px !important; margin-left:5px; margin-right:5px;">
-      <td style="background-color:green;" *ngFor="let event of day.events" class="cal-day-badge" >
-        {{event.title}} 
-      </td>
-    </div>
+	<div style="padding:0px; margin:0px; min-height: 8px !important; height: 20px !important;" 
+	  class="cal-cell-top">
+		<span style="font-size:10px; " class="cal-day-badge" *ngIf="day.badgeTotal > 0">
+			Total order:
+			{{ day.badgeTotal }}
+		</span>
+		<span class="cal-day-number">
+			{{ day.date | calendarDate:'monthViewDayNumber':locale }}
+		</span>
+		<br>
+	</div>
+	<div class="display:inline;" style="min-height: 8px !important; margin-left:5px; margin-right:5px;">
+		<td style="background-color:green;" *ngFor="let event of day.events" class="cal-day-badge">
+			{{event.title}}
+		</td>
+	</div>
 </ng-template>
 
 <div>
-    <mwl-calendar-month-view [viewDate]="viewDate" [events]="events" [cellTemplate]="customCellTemplate">
-    </mwl-calendar-month-view>
+	<mwl-calendar-month-view [viewDate]="viewDate" [events]="events" [cellTemplate]="customCellTemplate">
+	</mwl-calendar-month-view>
 </div>

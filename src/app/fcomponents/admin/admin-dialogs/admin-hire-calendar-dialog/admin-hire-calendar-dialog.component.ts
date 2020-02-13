@@ -7,7 +7,9 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 @Component({
   selector: 'app-admin-hire-calendar-dialog',
   templateUrl: './admin-hire-calendar-dialog.component.html',
-  styleUrls: ['./admin-hire-calendar-dialog.component.css'],
+  styleUrls: [
+	  './admin-hire-calendar-dialog.component.css'
+	],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
@@ -16,17 +18,15 @@ export class AdminHireCalendarDialogComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) data
   ) {
-    this.dataPrep(data)
+	this.dataPrep(data);
   }
   view: CalendarView = CalendarView.Month;
 
   viewDate: Date = new Date();
 
-  events: CalendarEvent[] = [
-  ];
+  events: CalendarEvent[] = [];
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   dataPrep(data){
     console.log(data)
@@ -38,7 +38,5 @@ export class AdminHireCalendarDialogComponent implements OnInit {
       order['title'] = element.quantity
       this.events.push(order)
     });
-
   }
-
 }
