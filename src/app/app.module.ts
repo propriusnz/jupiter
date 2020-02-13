@@ -62,7 +62,6 @@ import { AdminGalleriesComponent } from './fcomponents/admin/admin-galleries/adm
 import { AdminImagesComponent } from './fcomponents/admin/admin-images/admin-images.component';
 import { ForgotPasswordComponent } from './fcomponents/basic/user-dialog/forgot-password/forgot-password.component';
 import { PaymentOptionsComponent } from './fcomponents/payment-options/payment-options.component';
-import { ChangeinfoComponent } from './fcomponents/changeinfo/changeinfo.component';
 import { EmailsentDialogComponent } from './fcomponents/basic/user-dialog/emailsent-dialog/emailsent-dialog.component';
 import { ResetPasswordComponent } from './fcomponents/reset-password/reset-password.component';
 import { UserDashboardComponent } from './fcomponents/user-dashboard/user-dashboard.component';
@@ -152,7 +151,6 @@ const appRoutes: Routes = [
     UserloginDialogComponent,
     ForgotPasswordComponent,
     PaymentOptionsComponent,
-    ChangeinfoComponent,
     EmailsentDialogComponent,
     ResetPasswordComponent,
     UserDashboardComponent,

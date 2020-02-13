@@ -74,7 +74,8 @@
 					${{productDetail.price}}</span>
 			</div>
 			<h3 class="s2 mb-2" style="white-space: pre-line">{{productDetail.description}}</h3>
-			<div *ngIf="productDetail['productDetail'] && productDetail['productDetail'].length!=0 && cartForm.controls.cartItems['controls'].length != 0">
+			<div
+				*ngIf="productDetail['productDetail'] && productDetail['productDetail'].length!=0 && cartForm.controls.cartItems['controls'].length != 0">
 				<div class="s2"><b>Select specifications</b></div><br>
 				<form [formGroup]="cartForm">
 					<div class="row" style="padding:0px;" formArrayName="cartItems">
@@ -101,7 +102,8 @@
 			</div>
 
 			<!-- ngIf="cartForm.controls.cartItems['controls'].length != 0 || productDetail.price > 0" -->
-			<div class="row mt-2" *ngIf="productDetail['productDetail'] || (productDetail['productDetail'].length == 0 && productDetail.price > 0)">
+			<div class="row mt-2"
+				*ngIf="productDetail['productDetail'] || (productDetail['productDetail'].length == 0 && productDetail.price > 0)">
 				<!-- ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length==0" -->
 				<div class="col-6 col-lg-6 s1"
 					*ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length==0">
@@ -113,27 +115,27 @@
 							|| this.productDetail['productDetail'].length>0">
 					<hr>
 
-					<!-- ##### Date Picker ##### -->
+					<!-- ##### Date Picker for products with detail id##### -->
 					<div class="DatePicker mt-2 ml-2">
 						<span>From </span>
-						<input bsDatepicker type="text" class="input_line"
-							placeholder="Start Date"
-							placement="top" [isDisabled]="dateStartControl"
-							[minDate]="minDate_start" [datesDisabled]="disabledDates" [maxDate]="maxDate_start"
+						<input bsDatepicker type="text" class="input_line" placeholder="Start Date" placement="top"
+							[isDisabled]="dateStartControl" [minDate]="minDate_start" [datesDisabled]="disabledDates"
+							[maxDate]="maxDate_start"
 							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange',showWeekNumbers:false}"
 							(bsValueChange)="onStartChange($event)">
-						
+
 						<span class="mx-2">to</span>
 
-						<input bsDatepicker type="text" class="input_line"
-							placeholder="Return Date"
-							placement="top" [isDisabled]="dateReturnControl"
-							[minDate]="minDate_return" [datesDisabled]="disabledDates" [maxDate]="maxDate_return"
+						<input bsDatepicker type="text" class="input_line" placeholder="Return Date" placement="top"
+							[isDisabled]="dateReturnControl" [minDate]="minDate_return" [datesDisabled]="disabledDates"
+							[maxDate]="maxDate_return"
 							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange',showWeekNumbers:false}"
 							(bsValueChange)="onReturnChange($event)">
 					</div>
 				</div>
-				<div class="row mt-3" *ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length==0">
+				<!-- ##### Date Picker for products without detail id##### -->
+				<div class="row mt-3"
+					*ngIf="!this.productDetail['productDetail'] || this.productDetail['productDetail'].length==0">
 					<div class="ml-4 mt-1">
 						<span>From </span>
 						<input bsDatepicker type="text" class="input_line" placeholder="Start Date"
@@ -149,10 +151,11 @@
 							(bsValueChange)="onReturnChange($event)">
 					</div>
 				</div>
-				
+
 				<div class="col-6 col-lg-6 mt-5">
 					<button class='btn btn_gold' (click)="manageCartProds()"
-						[disabled]="this.addToCartControl || (0>= this.quantity || this.quantity > this.productDetail.availableStock) && (this.cartForm.invalid || this.isInputZero)">Add to cart</button>
+						[disabled]="this.addToCartControl || (0>= this.quantity || this.quantity > this.productDetail.availableStock) && (this.cartForm.invalid || this.isInputZero)">Add
+						to cart</button>
 				</div>
 			</div>
 

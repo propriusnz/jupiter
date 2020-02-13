@@ -75,7 +75,6 @@ export class AdminCartComponent implements OnInit {
   openCart(data) {
     console.log(data)
     const dialogConfig = new MatDialogConfig();
-
     dialogConfig.autoFocus = true;
     dialogConfig.height = '720px';
     dialogConfig.width = '1200px';
@@ -98,7 +97,7 @@ export class AdminCartComponent implements OnInit {
     });
   }
   searchOrderId(orderId) {
-    if (orderId) {
+    if (orderId) { //if the order Id searched is not blank
       this.productService.getCartStatus(orderId).subscribe(
         (res) => {
           console.log(res)
@@ -116,7 +115,7 @@ export class AdminCartComponent implements OnInit {
           this.feedbackMessage = 'Server Error!';
         }
       );
-    } else {
+    } else { //if there is nothing searched
       this.showData = true
       this.showSingleCart = false
     }
@@ -125,11 +124,10 @@ export class AdminCartComponent implements OnInit {
   onSubmit() {
     this.showData = true
     this.showSingleCart = false
-    console.log(this.searchForm.value.phone)
     const phone = this.searchForm.value.phone
     let eventdate = (this.searchForm.value.eventdate)
     const firstname = this.searchForm.value.firstname
-    if (this.searchForm.value.eventdate) {
+    if (this.searchForm.value.eventdate) { //if the cart has an event date
       eventdate = this.datetoYMD(this.searchForm.value.eventdate)
       this.http.get(this.baseUrl + '/Carts/GetCartByFilter?phoneNumber=' + phone + '&eventDate=' + eventdate + '&firstName=' + firstname).subscribe(
         res => {
@@ -140,7 +138,7 @@ export class AdminCartComponent implements OnInit {
           console.log(err)
         }
       )
-    } else if(!this.searchForm.value.eventdate){
+    } else if(!this.searchForm.value.eventdate){//if the cart has no event date
       this.http.get(this.baseUrl + '/Carts/GetCartByFilter?phoneNumber=' + phone +'&firstName=' + firstname).subscribe(
         res => {
           this.displayedCartData=res

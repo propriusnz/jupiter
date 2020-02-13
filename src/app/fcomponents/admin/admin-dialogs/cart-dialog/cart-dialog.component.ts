@@ -84,18 +84,14 @@ export class CartdialogComponent implements OnInit {
         this.dataChanges.emit();
       }, (error) => {
         this.isLoading = false;
-        console.log(error);
+
       });
   }
   updateCart() {
     this.cartForm.eventStartDate = this.datetoYMD(this.cartForm.eventStartDate)
     this.cartForm.eventEndDate = this.datetoYMD(this.cartForm.eventEndDate)
     this.isLoading = true;
-
-
-
     this.updateDataTransmitted(this.displayData, this.cartForm)
-
     let tmpDisplayData = this.displayData
     tmpDisplayData.rentalPaidFee = this.rentalFeesPaid
     tmpDisplayData.depositPaidFee = this.depositFeesPaid
@@ -106,15 +102,13 @@ export class CartdialogComponent implements OnInit {
       CartModel: tmpDisplayData,
       cartProdModel: this.cartProdList
     }
-    console.log(updatedCart)
     this.productService.updateCart(this.displayData.cartId, updatedCart).subscribe(
       (res) => {
-        console.log(res)
         this.isLoading = false;
         this.dataChanges.emit();
       }, (error) => {
         this.isLoading = false;
-        console.log(error);
+
       }
     );
 
@@ -128,32 +122,31 @@ export class CartdialogComponent implements OnInit {
   updateQuantity(prod, value) {
     prod.quantity = value
     this.cartForm.cartProd = this.cartProdList
-    console.log(this.cartForm)
+
   }
   // get the products in shopping cart
   getCartProds() {
     this.productService.getCardProd(this.displayData.cartId).subscribe(
       (res) => {
-        console.log(res)
+
         this.cartProdList = res;
       }, (error) => {
-        console.log(error);
+
       }
     );
   }
+  //delete products in the cart
   deleteCardProd(id) {
-    console.log(id)
+
     this.productService.deleteCartProd(id).subscribe(
       (res) => {
-        console.log(res)
         this.getCartProds();
       }, (error) => {
-        console.log(error);
+
       });
   }
 
   datetoYMD(date) {
-    console.log(date)
     return moment(date).format('YYYY-MM-DD')
     // // date = date.format()
     // var d = date.getDate();
@@ -161,18 +154,14 @@ export class CartdialogComponent implements OnInit {
     // var y = date.getFullYear();
     // return '' + y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
   }
+  //when admin searches prodId
   searchProdId(prodId, detailId) {
-    console.log(prodId)
-    console.log(detailId)
-    console.log(this.cartProdList)
     if (prodId) {
       this.productService.showProduct(prodId).subscribe(
         res => {
-          console.log(res)
           this.addCartByProdId(res, detailId)
         },
         err => {
-          console.log(err)
         }
 
       )
@@ -180,7 +169,8 @@ export class CartdialogComponent implements OnInit {
 
 
   }
-  checkIfHasId(res) {
+  //check if the product searched has detail Id
+  checkIfHasDetailId(res) {
     if (res.productDetail.length > 0) {
       return true
     } else {
@@ -188,8 +178,9 @@ export class CartdialogComponent implements OnInit {
     }
 
   }
+  //add cart using prodId
   addCartByProdId(res, detailId) {
-    const hasId = this.checkIfHasId(res)
+    const hasId = this.checkIfHasDetailId(res)
     if (!detailId && !hasId) {
       const newCartProd = {
         cartId: this.cartForm.cartId,
@@ -205,26 +196,24 @@ export class CartdialogComponent implements OnInit {
 
     }
   }
+  //add cart for products with detail Id
   addCartByDetailId(res, detailId) {
     const detailIdTitle = this.getDetailIdTitle(res, detailId)
-    if(detailIdTitle){
-    const newCartProd = {
-      cartId: this.cartForm.cartId,
-      prodId: res.prodId,
-      price: res.price,
-      title: detailIdTitle,
-      subTitle: res.subtitle,
-      quantity: 1,
-      prodDetailId: detailId
+    if (detailIdTitle) {
+      const newCartProd = {
+        cartId: this.cartForm.cartId,
+        prodId: res.prodId,
+        price: res.price,
+        title: detailIdTitle,
+        subTitle: res.subtitle,
+        quantity: 1,
+        prodDetailId: detailId
+      }
+      this.callPostCartProdAPI(newCartProd)
     }
-    this.callPostCartProdAPI(newCartProd)
   }
-
-
-  }
-
+  //get title for products with detail Id
   getDetailIdTitle(res, detailId) {
-    console.log(detailId)
     for (let i = 0; i < res.productDetail.length; i++) {
       if (detailId == res.productDetail[i].id) {
         return res.title + ': ' + res.productDetail[i].productDetail1
@@ -233,13 +222,10 @@ export class CartdialogComponent implements OnInit {
     return false
   }
   callPostCartProdAPI(newCartProd) {
-
     const newCartProdList = []
     newCartProdList.push(newCartProd)
-    console.log(newCartProdList)
     this.productService.addCartProd(newCartProdList).subscribe(
       res => {
-        console.log(res)
         if (res['isSuccess']) {
           this.cartProdList.push(newCartProd)
           this.getCartProds();
@@ -247,7 +233,6 @@ export class CartdialogComponent implements OnInit {
 
       },
       err => {
-        console.log(err)
       }
     )
   }

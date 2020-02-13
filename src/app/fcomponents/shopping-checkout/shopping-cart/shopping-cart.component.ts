@@ -58,39 +58,15 @@ constructor(
   const nowDate2 = new Date().getTime();
   this.minDate_start = new Date(nowDate2 + offset2 + 13 * 60 * 60 * 1000);
   this.maxDate_start = new Date();
-  this.utcDate_start = new Date(nowDate2 + offset2)
+  this.utcDate_start = new Date(nowDate2 + offset2) //Calculte current UTC date time
   this.minDate_start.setDate(this.minDate_start.getDate());
   this.maxDate_start.setDate(this.maxDate_start.getDate() + 90);
 }
 ngOnChanges(changes: SimpleChanges) {
   const pickupValue = changes['isPickup'];
   const districtValue = changes['district']
-  if (pickupValue != null) {
-    if (pickupValue.currentValue == "1") {
-      this.pickupMessage = true;
-      this.deliveryControl = false
-      this.deliveryFee = 0
-    } else {
-      this.pickupMessage = false;
-      this.deliveryControl = true
-      this.deliveryFee = 0
-    }
-
-  }
-
-  if (districtValue != null) {
-    if (districtValue.currentValue.localeCompare("1") == 0) {
-      this.deliveryFee = 20
-    } else if (districtValue.currentValue.localeCompare("2") == 0) {
-      this.deliveryFee = 30
-    } else if (districtValue.currentValue.localeCompare("3") == 0) {
-      this.deliveryFee = 50
-    } else if (districtValue.currentValue.localeCompare("4") == 0) {
-      this.deliveryFee = 40
-    }
-
-
-  }
+  this.processPickUpValue(pickupValue) //when user selects whether to pickup in user info component 
+  this.calculateDeliveryFee(districtValue) //when user selects which district to deliver
   this.amountDue = this.depositFeeDue + this.deliveryFee
   localStorage.setItem('totalPrice', JSON.stringify(this.totalPrice));
 
@@ -100,7 +76,7 @@ ngOnInit() {
     currentconflictmessage=>{
       this.conflictmessage=currentconflictmessage
       if(this.conflictmessage.localeCompare('conflict')==0){
-        this.calculateTime()
+        this.calculateTime()//calculate disabled dates and update datepicker for products 
       }
     }
     )
@@ -150,6 +126,12 @@ deleteCart(id) {
   this.price();
 
 }
+calculateTime() {
+  let hiringdetail = []
+  this.processHiringDetail(hiringdetail)
+  this.callAPIforCalculateTime(hiringdetail)
+  this.processDisabledDates()
+}
 // calculate total price of shopping cart
 price() {
   this.totalPrice = 0;
@@ -168,6 +150,7 @@ getAllStock() {
     }));
   });
 }
+//check if start dates and return dates of all products in the shopping cart are the same 
 checkTimeConflict() {
   let control = false
   if (this.productTimetable.length >= 2) {
@@ -190,19 +173,21 @@ checkTimeConflict() {
   this.checkTimeTable(control)
   
 }
+
 checkTimeTable(control){
-  if (this.productTimetable.length == 1) {
+  if (this.productTimetable.length == 1) {//if there is only one product in the shopping cart
     control = true
   }
-  if (control) {
+  if (control) { //if there is no time conflict and all dates are the same
     this.initialStartDate=this.productTimetable[0].beginDate
     this.initialEndDate=this.productTimetable[0].endDate
-    this.EventStartDate.emit(this.initialStartDate)
-    this.EventEndDate.emit(this.initialEndDate)
+    this.EventStartDate.emit(this.initialStartDate)//emit to user info component
+    this.EventEndDate.emit(this.initialEndDate)//emit to user info component
     this.productService.setShoppingCartStatus(true);
     this.borderStyleControl=true
   }
 }
+//if there is an input change of start date 
 onStartChange(value) {
   this.EventStartDate.emit(value)
   this.dateStartInput = value;
@@ -216,7 +201,7 @@ onStartChange(value) {
   
   localStorage.setItem('productTimetable', JSON.stringify(this.productTimetable))
 }
-
+//if there is an input change of return date
 onReturnChange(value) {
   this.EventEndDate.emit(value)
   this.dateReturnInput = value;
@@ -227,26 +212,15 @@ onReturnChange(value) {
   localStorage.setItem('productTimetable', JSON.stringify(this.productTimetable))
 }
 
-calculateTime() {
-  let hiringdetail = []
-  let tmpDates = []
-  let tmpSet = new Set()
-  let productHiringDetail = {}
-
-  this.checkIfhasDetailId(hiringdetail,productHiringDetail)
-  // Api call area (function 3)
-  this.callAPIforCalculateTime(hiringdetail,tmpDates,tmpSet)
-  
-    // function 5
-  this.processDisabledDates()
-}
 datetoYMD(date) {
   var d = date.getDate();
   var m = date.getMonth() + 1; //Month from 0 to 11
   var y = date.getFullYear();
   return '' + y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
 }
-checkIfhasDetailId(hiringdetail,productHiringDetail){
+//check items in product time table and push them to hiring detail for API call
+processHiringDetail(hiringdetail){
+  let productHiringDetail = {}
   this.productTimetable.forEach(item => {
     if (item.hasOwnProperty('prodId')) {
       productHiringDetail = {
@@ -264,15 +238,15 @@ checkIfhasDetailId(hiringdetail,productHiringDetail){
     hiringdetail.push(productHiringDetail)
   })
 }
-callAPIforCalculateTime(hiringdetail,tmpDates,tmpSet){
+callAPIforCalculateTime(hiringdetail){
+  let tmpDates = []
+  let tmpSet = new Set()
   this.productService.calculateTime(hiringdetail).subscribe(
     res => {
       this.unavailableDates = res
       this.processUnavailableDates(tmpDates,tmpSet)
-      // Response disabled dates processing area - loop (function 4b)
       this.processDisabledDates()
     },
-    // close function 4
     err => {
     }
   );
@@ -314,6 +288,35 @@ calculateBondFee() {
     this.bondFee = 500
   }
 
+}
+calculateDeliveryFee(districtValue){
+  if (districtValue != null) {
+    if (districtValue.currentValue.localeCompare("1") == 0) {
+      this.deliveryFee = 20
+    } else if (districtValue.currentValue.localeCompare("2") == 0) {
+      this.deliveryFee = 30
+    } else if (districtValue.currentValue.localeCompare("3") == 0) {
+      this.deliveryFee = 50
+    } else if (districtValue.currentValue.localeCompare("4") == 0) {
+      this.deliveryFee = 40
+    }
+
+
+  }
+}
+processPickUpValue(pickupValue){
+  if (pickupValue != null) {
+    if (pickupValue.currentValue == "1") {
+      this.pickupMessage = true;
+      this.deliveryControl = false
+      this.deliveryFee = 0
+    } else {
+      this.pickupMessage = false;
+      this.deliveryControl = true
+      this.deliveryFee = 0
+    }
+
+  }
 }
 
 }

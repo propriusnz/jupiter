@@ -18,8 +18,8 @@ export class PaymentResultComponent implements OnInit {
   cartId: any
   user = true
   isAskingStatus = false
-  resultUrl=''
-  userIdUrl=''
+  resultUrl = ''
+  userIdUrl = ''
   constructor(
     private router: Router,
     private productService: ProductService,
@@ -27,10 +27,10 @@ export class PaymentResultComponent implements OnInit {
   ) {
     this.route.queryParams.subscribe(params => {
       this.resultUrl = params['result'];
-      this.userIdUrl=params['userid']
-  });
-    
-    
+      this.userIdUrl = params['userid']
+    });
+
+
   }
 
   ngOnInit() {
@@ -42,7 +42,7 @@ export class PaymentResultComponent implements OnInit {
     }
     let url = {
       result: this.resultUrl,
-      userid:this.userIdUrl
+      userid: this.userIdUrl
     }
     this.productService.paymentResult(url).subscribe(
       (res) => {
@@ -50,10 +50,7 @@ export class PaymentResultComponent implements OnInit {
         this.isSendSuccess = true
         if (res['responseText'].localeCompare('APPROVED') == 0) {
           this.result = true
-          localStorage.removeItem('productTimetable')
-          localStorage.removeItem('cartList')
-          localStorage.removeItem('totalPrice')
-          localStorage.removeItem('cartId')
+          this.clearLocalStorage()
         } else if (res['responseText'].localeCompare('DECLINED') == 0) {
           this.result = false
         }
@@ -66,6 +63,12 @@ export class PaymentResultComponent implements OnInit {
       }
     )
 
+  }
+  clearLocalStorage() {
+    localStorage.removeItem('productTimetable')
+    localStorage.removeItem('cartList')
+    localStorage.removeItem('totalPrice')
+    localStorage.removeItem('cartId')
   }
   // payAgain(){
   //   this.isAskingStatus=true

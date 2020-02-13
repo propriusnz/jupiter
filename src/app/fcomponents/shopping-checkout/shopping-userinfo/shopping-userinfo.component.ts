@@ -20,14 +20,14 @@ export class ShoppingUserinfoComponent implements OnInit {
   isShoppingCartValid = true;
   buttonError = false
   userId: number
-  conflictmessage:string
+  conflictmessage: string
   districtSelectControl = false
   districtError = false
   districtSelected: number
   totalPrice = 0
   bondFee = 150
   timetable = []
-  paymentSpinnerControl=false
+  paymentSpinnerControl = false
   userInfo = {
     FirstName: '',
     LastName: '',
@@ -77,37 +77,31 @@ export class ShoppingUserinfoComponent implements OnInit {
           this.userInfo.Email = res['data'][0].email
           let info = res['data'][0].userInfo//user information
           if (info.length == 1) {
-            if (info[0].hasOwnProperty('firstName')) {
-              this.userInfo.FirstName = res['data'][0].userInfo[0].firstName
-            }
-            if (info[0].hasOwnProperty('lastName')) {
-              this.userInfo.LastName = res['data'][0].userInfo[0].lastName
-            }
-            if (info[0].hasOwnProperty('phoneNumber')) {
-              this.userInfo.PhoneNum = res['data'][0].userInfo[0].phoneNumber
-            }
-            if (info[0].hasOwnProperty('company')) {
-              this.userInfo.company = res['data'][0].userInfo[0].company
-            }
+            this.getUserInfo(info,res)
           }
 
         })
     }
   }
-
+  getUserInfo(info,res){
+    if (info[0].hasOwnProperty('firstName')) {
+      this.userInfo.FirstName = res['data'][0].userInfo[0].firstName
+    }
+    if (info[0].hasOwnProperty('lastName')) {
+      this.userInfo.LastName = res['data'][0].userInfo[0].lastName
+    }
+    if (info[0].hasOwnProperty('phoneNumber')) {
+      this.userInfo.PhoneNum = res['data'][0].userInfo[0].phoneNumber
+    }
+    if (info[0].hasOwnProperty('company')) {
+      this.userInfo.company = res['data'][0].userInfo[0].company
+    }
+  }
 
   // check whether form is valid
   onSubmit({ valid }: { valid: boolean }) {
-    if (this.userInfo.isPickup != "1" && this.userInfo.isPickup != "0") {
-      this.buttonError = true
-    } else {
-      this.buttonError = false
-    }
-    if (this.districtSelected == null && this.userInfo.isPickup.localeCompare("0") == 0) {
-      this.districtError = true
-    } else {
-      this.districtError = false
-    }
+    this.checkPickUpValue()
+    this.checkDistrictValue()
     if (!valid || this.districtError || this.buttonError) {
       this.feedback_message = 'Please check all inputs and fill up the form';
     } else {
@@ -125,7 +119,22 @@ export class ShoppingUserinfoComponent implements OnInit {
       this.submitCart(post);
     }
   }
-
+  //update buttonError control
+  checkPickUpValue() {
+    if (this.userInfo.isPickup != "1" && this.userInfo.isPickup != "0") {
+      this.buttonError = true
+    } else {
+      this.buttonError = false
+    }
+  }
+  //update districtError control
+  checkDistrictValue() {
+    if (this.districtSelected == null && this.userInfo.isPickup.localeCompare("0") == 0) {
+      this.districtError = true
+    } else {
+      this.districtError = false
+    }
+  }
 
   calculateDeliveryFee() {
     if (this.districtSelected == 1) {
@@ -165,8 +174,8 @@ export class ShoppingUserinfoComponent implements OnInit {
     const cartData = {
       location: `${this.userInfo.streetAddress}, ${this.userInfo.city}`,
       price: Number(localStorage.getItem('totalPrice')),
-      EventStartDate:this.EventStartDate,
-      EventEndDate:this.EventEndDate,
+      EventStartDate: this.EventStartDate,
+      EventEndDate: this.EventEndDate,
       deliveryfee: this.deliveryFee,
       depositfee: this.bondFee,
       ispickup: this.userInfo.isPickup,
@@ -178,17 +187,17 @@ export class ShoppingUserinfoComponent implements OnInit {
       ContactModel: post,
       ProductTimeTableModel: this.timetable
     };
-     this.addCart(cartContact);
+    this.addCart(cartContact);
   }
   // pass data to api
   addCart(cartContact) {
     this.isSendingEmail = true;
     this.productService.checkIfAvailable(this.timetable).subscribe(
       (res) => {
-      
-        if (res['isSuccess']) {
+
+        if (res['isSuccess']) { 
           if ('userId' in localStorage) {
-            this.cartUser(cartContact) 
+            this.cartUser(cartContact)
           } else {
             this.cartNotUser(cartContact)
           }
@@ -197,7 +206,7 @@ export class ShoppingUserinfoComponent implements OnInit {
           this.data.changeTimeConflictMessage('conflict')
           this.isSendingEmail = false
           this.feedback_message = 'Please modify your time. Your items are booked.'
-          
+
         }
       },
       (error) => {
@@ -208,6 +217,7 @@ export class ShoppingUserinfoComponent implements OnInit {
 
 
   }
+  //emit pickup value to shopping cart component
   radioButtonChange(input) {
     if (input['value'] == 0) {
       this.districtSelectControl = true
@@ -221,54 +231,51 @@ export class ShoppingUserinfoComponent implements OnInit {
     this.buttonError = false
     this.districtError = false
   }
+  //emit district selected value to shopping cart component
   selectionChange(input) {
     this.district.emit(input.value)
     this.districtSelected = input.value
     this.districtError = false
   }
-  // clear the shopping cart stored in local storage
-
+  //post cart (not user)
   cartNotUser(cartContact) {
-    
     this.productService.addCart(cartContact).subscribe(
       (res) => {
-        
-        this.isSendingEmail = false;
-        this.isSendSuccess = true;
-        localStorage.setItem('cartId', JSON.stringify(res['data'].cartId))
-        this.paymentSpinnerControl=true
-        this.getPaymentUrl(res['data'].cartId)
+        this.callAPIforAddCart(res)
         //this.router.navigate(['/paymentoptions']);
       },
       (error) => {
         this.isSendingEmail = false;
-      
         this.feedback_message = 'Oops, something went wrong.';
       });
   }
+  //post cart (user)
   cartUser(cartContact) {
     this.productService.addCartUser(cartContact, this.userId).subscribe(
       (res) => {
-        this.isSendingEmail = false;
-        this.isSendSuccess = true;
-        localStorage.setItem('cartId', JSON.stringify(res['data'].cartId))
-        this.paymentSpinnerControl=true
-        this.getPaymentUrl(res['data'].cartId)
+        this.callAPIforAddCart(res)
         //this.router.navigate(['/paymentoptions']);
       },
       (error) => {
         this.isSendingEmail = false;
         this.feedback_message = 'Oops, something went wrong.';
       });
+  }
+  callAPIforAddCart(res) {
+    this.isSendingEmail = false;
+    this.isSendSuccess = true;
+    localStorage.setItem('cartId', JSON.stringify(res['data'].cartId))
+    this.paymentSpinnerControl = true
+    this.getPaymentUrl(res['data'].cartId)
   }
   getPaymentUrl(cartId) {
     this.productService.requestPaymentUrl(cartId).subscribe(
       res => {
         window.location.assign(res['url'])
-        this.paymentSpinnerControl=true
+        this.paymentSpinnerControl = true
       },
       err => {
-        this.paymentSpinnerControl=true
+        this.paymentSpinnerControl = true
         this.feedback_message = 'Oops, something went wrong.';
       }
     )
