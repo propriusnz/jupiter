@@ -88,12 +88,12 @@
       <mat-radio-button (change)="radioButtonChange($event)" color="primary" value="1">Pick-up</mat-radio-button>
       <mat-radio-button (change)="radioButtonChange($event)" color="primary" value="0">Delivery</mat-radio-button>
       <br>
-      <mat-error *ngIf="buttonError && isShoppingCartValid">Please make an option for pick-up or delievery</mat-error>
+      <mat-error *ngIf="buttonError && isShoppingCartValid">Please make an option for pick-up/delivery</mat-error>
    </mat-radio-group>
    <!--Select a district for delivery-->
    <div *ngIf="districtSelectControl">
       <hr>
-      <mat-form-field class="form">
+      <mat-form-field class="regionform">
          <mat-label>Select a region</mat-label>
          <mat-select required (selectionChange)="selectionChange($event)">
             <mat-option value="1">NorthShoreCity</mat-option>
@@ -104,6 +104,16 @@
       </mat-form-field>
       <mat-error *ngIf="districtError && isShoppingCartValid">Please select a region</mat-error>
    </div>
+   <br>
+   <mat-form-field class="timeform">
+      <mat-label>Select a desired pick-up/delivery time</mat-label>
+      <mat-select required (selectionChange)="selectionChangeTime($event)">
+         <mat-option value="9:00 am - 11:00 am">9:00 am - 11:00 am</mat-option>
+         <mat-option value="11:00 am - 2:00 pm">11:00 am - 2:00 pm</mat-option>
+         <mat-option value="2:00 pm - 5:00 pm">2:00 pm - 5:00 pm</mat-option>
+      </mat-select>
+   </mat-form-field>
+   <mat-error *ngIf="timeError && isShoppingCartValid">Please select a time for pick-up/delivery </mat-error>
    <hr>
    <!-- Message -->
    <div class="form-group">

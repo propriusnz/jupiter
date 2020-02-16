@@ -23,7 +23,9 @@ export class ShoppingUserinfoComponent implements OnInit {
   conflictmessage: string
   districtSelectControl = false
   districtError = false
+  timeError = false
   districtSelected: number
+  timeSelected:number
   totalPrice = 0
   bondFee = 150
   timetable = []
@@ -102,7 +104,8 @@ export class ShoppingUserinfoComponent implements OnInit {
   onSubmit({ valid }: { valid: boolean }) {
     this.checkPickUpValue()
     this.checkDistrictValue()
-    if (!valid || this.districtError || this.buttonError) {
+    this.checkTimeValue()
+    if (!valid || this.districtError || this.buttonError || this.timeError) {
       this.feedback_message = 'Please check all inputs and fill up the form';
     } else {
       // combine user info data
@@ -135,7 +138,14 @@ export class ShoppingUserinfoComponent implements OnInit {
       this.districtError = false
     }
   }
-
+  //update timeError control
+  checkTimeValue(){
+    if(this.timeSelected ==null){
+      this.timeError=true
+    }else{
+      this.timeError= false
+    }
+  }
   calculateDeliveryFee() {
     if (this.districtSelected == 1) {
       this.deliveryFee = 20
@@ -180,7 +190,8 @@ export class ShoppingUserinfoComponent implements OnInit {
       depositfee: this.bondFee,
       ispickup: this.userInfo.isPickup,
       region: this.districtName,
-      CartProd: data
+      CartProd: data,
+      TradingTime:this.timeSelected,
     };
     const cartContact = {
       CartModel: cartData,
@@ -237,10 +248,17 @@ export class ShoppingUserinfoComponent implements OnInit {
     this.districtSelected = input.value
     this.districtError = false
   }
+  //updates timeError control when user selects a time for pick-up/delivery
+  selectionChangeTime(input){
+    this.timeSelected=input.value
+    this.timeError=false
+    console.log(input.value)
+  }
   //post cart (not user)
   cartNotUser(cartContact) {
     this.productService.addCart(cartContact).subscribe(
       (res) => {
+        console.log(res)
         this.callAPIforAddCart(res)
         //this.router.navigate(['/paymentoptions']);
       },

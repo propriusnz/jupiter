@@ -40,7 +40,7 @@
          <h5>Order and Event Location 活动&订单地址</h5>
          <input class="form-control" type="text" name="location" [(ngModel)]="cartForm.location" #location="ngModel">
          <br>
-         <!-- Allow uer to change start and end date of event  -->
+         <!-- Allow user to change start and end date of event  -->
 
          <h5> Event dates 活动日期 </h5>
          <mat-form-field class="col-md-6">
@@ -56,6 +56,10 @@
             <mat-datepicker-toggle matSuffix [for]="myDatepicker2"></mat-datepicker-toggle>
             <mat-datepicker #myDatepicker2></mat-datepicker>
          </mat-form-field>
+         <br>
+         <!--Allow user to change pickup/delivery time-->
+         <h5> Pick-up/delivery times 取货/送货时间</h5>
+         <input class="form-control" type="text" name="time" [(ngModel)]="cartForm.time" #time="ngModel">
          <br>
          <!-- List of products & items for this order -->
          <h5>Items for this Order 本单物品</h5>

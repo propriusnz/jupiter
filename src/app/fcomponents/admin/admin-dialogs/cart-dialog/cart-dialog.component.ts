@@ -37,6 +37,7 @@ export class CartdialogComponent implements OnInit {
     eventStartDate: '',
     eventEndDate: '',
     price: 0,
+    time:'',
     cartProd: []
   };
   constructor(
@@ -58,6 +59,7 @@ export class CartdialogComponent implements OnInit {
     this.cartForm.eventEndDate = data.data['eventEndDate'];
     this.cartForm.cartProd = data.data['cartProd']
     this.cartForm.price = data.data['price'];
+    this.cartForm.time=data.data['tradingTime']
     this.rentalFeesPaid = data.data['rentalPaidFee']
     this.depositFeesPaid = data.data['depositPaidFee']
     this.deliveryFees = data.data['deliveryFee']
@@ -93,9 +95,6 @@ export class CartdialogComponent implements OnInit {
     this.isLoading = true;
     this.updateDataTransmitted(this.displayData, this.cartForm)
     let tmpDisplayData = this.displayData
-    tmpDisplayData.rentalPaidFee = this.rentalFeesPaid
-    tmpDisplayData.depositPaidFee = this.depositFeesPaid
-    tmpDisplayData.deliveryFee = this.deliveryFees
     delete tmpDisplayData.cartProd
     delete tmpDisplayData.contact
     const updatedCart = {
@@ -106,6 +105,7 @@ export class CartdialogComponent implements OnInit {
       (res) => {
         this.isLoading = false;
         this.dataChanges.emit();
+        console.log(res)
       }, (error) => {
         this.isLoading = false;
 
@@ -118,6 +118,10 @@ export class CartdialogComponent implements OnInit {
     displayData.eventEndDate = cartForm.eventEndDate
     displayData.price = cartForm.price
     displayData.cartProd = cartForm.cartProd
+    displayData.tradingTime=cartForm.time
+    displayData.rentalPaidFee = this.rentalFeesPaid
+    displayData.depositPaidFee = this.depositFeesPaid
+    displayData.deliveryFee = this.deliveryFees
   }
   updateQuantity(prod, value) {
     prod.quantity = value
