@@ -351,6 +351,7 @@ export class ProductComponent implements OnInit {
   }
   //add product with detail Id
   addQuantity(proddetail) {
+    console.log(proddetail)
     let prodId = proddetail['value'].Id
     let quantityvalue = proddetail['value'].Quantity
     this.processDetailIdMap(proddetail, prodId, quantityvalue)
