@@ -85,6 +85,20 @@ ul li{
     font-size:70px;
     opacity: 0.5;
 }
+.specail-wrapper {
+    min-height: 320px;  
+}
 .specialProductTitle{
     cursor: pointer;
+    text-align: center;
+}
+.specialProductPrice {
+    text-align: center;
+}
+.price {
+    color:#b2823f;
+    font-weight: 600;
+}
+.specailPrice {
+    font-weight: 600;
 }
