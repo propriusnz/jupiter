@@ -182,7 +182,7 @@
           </a>
           <a class="dropdown-item d-block d-md-none s2bold" *ngFor="let gallery of galleriesData" data-toggle="collapse"
             data-target=".navbar-collapse">
-            <a class="s2bold" *ngIf="isBrowser==true" routerLink= '/galleries/{{gallery}}'><h1>{{gallery}}</h1></a>
+            <a class="s2bold" *ngIf="isBrowser==true" routerLink= '/galleries/{{gallery}}'><h1>{{gallery.eventName}}</h1></a>
             <a *ngIf="isBrowser==false" href='http://luxedreameventhire.co.nz/category/galleries/{{gallery}}'>{{gallery}}</a>
           </a>
         </div>
