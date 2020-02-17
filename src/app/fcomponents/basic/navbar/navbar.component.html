@@ -1,7 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light border-bottom p-0 lspace-3">
   <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
     <ul class="navbar-nav col-lg-10 ul-menu d-flex  justify-content-around">
-      <!-- <span class="navspace"></span> -->
       <!--!Home-->
       <li class="nav-item">
         <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/' routerLinkActive="active">
@@ -11,7 +10,6 @@
           <h1 class="s2bold nav-link-title">Home</h1>
         </a>
       </li>
-      <!-- <span class="navspace"></span> -->
      
       <!--!Hire dropdown-->
       <li class="nav-item dropdown">
@@ -70,7 +68,6 @@
         </div>
       </li>
 
-      <!-- <span class="navspace"></span> -->
       <!--!Party services-->
       <li class="nav-item dropdown">
           <div class="nav-link dropdown-toggle s2bold" id="navbarDropdownMenuLink2" role="button" data-toggle="dropdown"
@@ -127,7 +124,6 @@
             </a>
           </div>
         </li>
-      <!-- <span class="navspace"></span> -->
 
       <!-- !Party Packages-->
       <li class="nav-item">
@@ -157,7 +153,6 @@
     
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
       <ul class="navbar-nav ul-menu d-flex  justify-content-around">
-        <!-- <span class="navspace"></span> -->
       <!--!Gallery-->
       <li class="nav-item dropdown">
         <div class="nav-link dropdown-toggle s2bold" id="navbarDropdownMenuLink2" role="button" data-toggle="dropdown"
@@ -188,7 +183,6 @@
         </div>
       </li>
 
-	  <!-- <span *ngIf="loggedIn == false" class="navspace"></span> -->
 	  
       <!--! Customer Log in -->
       <li *ngIf="loggedIn == false" class="nav-item">
@@ -199,7 +193,6 @@
           <h1 class="s2bold nav-link-title">Log in</h1>
         </a>
       </li>
-	  <!-- <span *ngIf="loggedIn == false" class="navspace"></span> -->
 	  
       <!--! Sign up -->
       <li *ngIf="loggedIn == false" class="nav-item">
@@ -210,7 +203,6 @@
           <h1 class="s2bold nav-link-title">Sign up</h1>
         </a>
       </li>
-	  <!-- <span *ngIf="loggedIn == true" class="navspace"></span> -->
 	  
       <!--! User DashBoard-->
       <li *ngIf="loggedIn == true" class="nav-item">
@@ -223,13 +215,11 @@
       </li>
 
       <!-- Log Out -->
-	  <!-- <span *ngIf="loggedIn == true" class="navspace"></span> -->
 	  <li *ngIf="loggedIn == true" class="nav-item">
 		  <a class="nav-link s2bold" (click)="logout()">
 			  <h1 class="s2bold nav-link-title">Log out</h1>
 		  </a>
 	  </li>
-      <!-- <span class="navspace"></span> -->
       
       <!--!Shopping Cart-->
       <li class="nav-item pl-md-1">
