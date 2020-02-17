@@ -13,6 +13,7 @@ ul li a:hover{
 .imgBlocks{
     width:100%;
     max-height: 100%;
+    min-height: 300px;
 }
 .fab.fa-facebook-square:hover{
     color: white;
@@ -34,6 +35,12 @@ a{
 }
 .contactUs i{
     font-size: 18px;
+}
+
+.brand {
+    font-size: 12px;
+    padding: 3px 0 10px 0;
+    font-weight: 600;
 }
 @media (max-width:767px) {
     .col-6{
