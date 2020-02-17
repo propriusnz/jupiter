@@ -18,6 +18,7 @@ export class ProductComponent implements OnInit {
   prodMediaUrl: any;
   quantity = 0;
   isprodAdded = false;
+  isAlert=false
   isStockAvailable = true;
   cartList = [];
   productTimetable = [];
@@ -50,9 +51,8 @@ export class ProductComponent implements OnInit {
   addToCartControl = true;
   prodDetailIdlist = []
   prodIdlist = []
-
-
-
+  startMomentDay:number
+  returnMomentDay:number
   @ViewChild('imageContainer', { static: false }) imageContainer: ElementRef;
   @ViewChild('prodImage', { static: false }) prodImage: ElementRef;
   @ViewChild('rightControl', { static: false }) rightControl: ElementRef;
@@ -204,13 +204,11 @@ export class ProductComponent implements OnInit {
   }
   // add cartList into localStorage
   addToCart(list) {
-    console.log(list)
     this.detailId_getTmpMap()
     this.isStockAvailable = true;
     this.isprodAdded = true;
-    setTimeout(() => {
-      this.isprodAdded = false;
-    }, 1000);
+    this.checkDaySelected()
+    this.setTime()
     list.forEach(item => {
       let control = false;
       if (this.productDetail.productDetail.length == 0) {
@@ -237,6 +235,20 @@ export class ProductComponent implements OnInit {
         this.tmpDetailID.get(this.prodDetailIdlist[i].prodDetailid).endDate = neworder.endDate
       }
     }
+  }
+  //check if user has selected from Friday to Monday
+  checkDaySelected(){
+    if(this.startMomentDay!=5 || this.returnMomentDay!=1){
+      this.isAlert=true
+    }else{
+      this.isAlert=false
+    }
+  }
+  //set timeout for highlight
+  setTime(){
+    setTimeout(() => {
+      this.isprodAdded = false;
+    }, 1000);
   }
   //get tmp prod Id map with no product detail
   getTmpMap(item) {
@@ -351,7 +363,6 @@ export class ProductComponent implements OnInit {
   }
   //add product with detail Id
   addQuantity(proddetail) {
-    console.log(proddetail)
     let prodId = proddetail['value'].Id
     let quantityvalue = proddetail['value'].Quantity
     this.processDetailIdMap(proddetail, prodId, quantityvalue)
@@ -513,8 +524,10 @@ export class ProductComponent implements OnInit {
   onStartChange(value) {
     this.dateStartInput = value;
     this.dateReturnControl = false;
+    this.isAlert=false
     this.minDate_return = value;
     this.startMoment = moment(this.dateStartInput)
+    this.startMomentDay=this.startMoment.day()
     for (let i = 0; i < this.disabledDates.length; i++) {
       let myMoment = moment(this.disabledDates[i], 'YYYY-MM-DD')
       if (myMoment.startOf('day').isAfter(moment(this.dateStartInput).startOf('day'))) {
@@ -530,8 +543,10 @@ export class ProductComponent implements OnInit {
   }
   //when return date input changes
   onReturnChange(value) {
+    this.isAlert=false
     this.dateReturnInput = value;
     this.returnMoment = moment(this.dateReturnInput)
+    this.returnMomentDay=this.returnMoment.day()
     this.updateAddCartButton()
   }
   //check if the previous date inputs are disabled now

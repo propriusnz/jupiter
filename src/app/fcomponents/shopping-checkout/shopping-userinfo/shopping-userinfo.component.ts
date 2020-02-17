@@ -252,7 +252,7 @@ export class ShoppingUserinfoComponent implements OnInit {
   selectionChangeTime(input){
     this.timeSelected=input.value
     this.timeError=false
-    console.log(input.value)
+    
   }
   //post cart (not user)
   cartNotUser(cartContact) {

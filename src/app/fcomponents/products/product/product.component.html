@@ -118,19 +118,17 @@
 					<!-- ##### Date Picker for products with detail id##### -->
 					<div class="DatePicker mt-2 ml-2">
 						<span>From </span>
-						<input bsDatepicker type="text" class="input_line"
-							placeholder="Choose start date"
-							placement="top" [isDisabled]="dateStartControl"
-							[minDate]="minDate_start" [datesDisabled]="disabledDates" [maxDate]="maxDate_start"
+						<input bsDatepicker type="text" class="input_line" placeholder="Choose start date"
+							placement="top" [isDisabled]="dateStartControl" [minDate]="minDate_start"
+							[datesDisabled]="disabledDates" [maxDate]="maxDate_start"
 							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange',showWeekNumbers:false}"
 							(bsValueChange)="onStartChange($event)">
 
 						<span class="mx-2">to</span>
 
-						<input bsDatepicker type="text" class="input_line"
-							placeholder="Choose return date"
-							placement="top" [isDisabled]="dateReturnControl"
-							[minDate]="minDate_return" [datesDisabled]="disabledDates" [maxDate]="maxDate_return"
+						<input bsDatepicker type="text" class="input_line" placeholder="Choose return date"
+							placement="top" [isDisabled]="dateReturnControl" [minDate]="minDate_return"
+							[datesDisabled]="disabledDates" [maxDate]="maxDate_return"
 							[bsConfig]="{dateInputFormat: 'MMMM Do YYYY',containerClass:'theme-orange',showWeekNumbers:false}"
 							(bsValueChange)="onReturnChange($event)">
 					</div>
@@ -172,7 +170,11 @@
 					Only
 					{{productDetail.availableStock}} are available. Please contact us if you need more!</div>
 			</div>
-
+			<!--If customer did not start on Friday and return on Monday-->
+			<div class="alert alert-danger mt-3" role="alert" *ngIf="isAlert">
+				Customer service will confirm this order with you. You can get instant confirmation if you book from
+				Friday to Monday.
+			</div>
 		</div>
 	</div>
 </div>
