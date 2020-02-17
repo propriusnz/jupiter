@@ -33,8 +33,8 @@ export class ProductComponent implements OnInit {
   minDate_return: Date;
   maxDate_return: Date;
   utcDate_start: Date
-  dateStartControl = true;
-  dateReturnControl = true;
+  //dateStartControl = true;
+  //dateReturnControl = true;
   dateStartInput: any
   dateReturnInput: any
   // hiringtime=[];
@@ -74,6 +74,8 @@ export class ProductComponent implements OnInit {
     this.minDate_start = new Date(nowDate2 + offset2 + 13 * 60 * 60 * 1000);
     this.maxDate_start = new Date();
     this.maxDate_start.setDate(this.minDate_start.getDate() + 90);
+    this.minDate_return=this.minDate_start
+    this.maxDate_return=this.maxDate_start
   }
   ngOnInit() {
     this.cartForm = this.formBuilder.group({
@@ -367,7 +369,7 @@ export class ProductComponent implements OnInit {
     let quantityvalue = proddetail['value'].Quantity
     this.processDetailIdMap(proddetail, prodId, quantityvalue)
 
-    this.detailId_DatepickerUpdate()
+    //this.detailId_DatepickerUpdate()
     //Calculate Time
     this.calculateTime()
     //
@@ -386,14 +388,14 @@ export class ProductComponent implements OnInit {
       this.map.delete(prodId)
     }
   }
-  detailId_DatepickerUpdate() {
-    if (this.map.size != 0) {
-      this.dateStartControl = false;
-    } else if (this.map.size == 0) {
-      this.dateStartControl = true;
-      this.dateReturnControl = true;
-    }
-  }
+  // detailId_DatepickerUpdate() {
+  //   if (this.map.size != 0) {
+  //     this.dateStartControl = false;
+  //   } else if (this.map.size == 0) {
+  //     this.dateStartControl = true;
+  //     this.dateReturnControl = true;
+  //   }
+  // }
   datetoYMD(date) {
     var d = date.getDate();
     var m = date.getMonth() + 1; //Month from 0 to 11
@@ -407,6 +409,7 @@ export class ProductComponent implements OnInit {
     if (this.map.size != 0) {
       this.productService.calculateTime(hiringdetail).subscribe(
         res => {
+
           this.unavailableDates = res
           this.detailId_processUnavailableDates()
           this.detailId_processDisabledDates()
@@ -416,6 +419,9 @@ export class ProductComponent implements OnInit {
 
         }
       );
+    }else if(this.map.size==0){
+      this.disabledDates=[]
+      this.detailId_processDisabledDates()
     }
   }
   getDetailIdlist(hiringdetail) {
@@ -447,16 +453,17 @@ export class ProductComponent implements OnInit {
     for (let i = 0; i < this.disabledDates.length; i++) {
       let myMoment = moment(this.disabledDates[i], 'YYYY-MM-DD')
       if (myMoment.startOf('day'
-      ).isAfter(moment(this.dateStartInput).startOf('day'))) {
+      ).isAfter(moment(this.minDate_start).startOf('day'))) {
         let myMoment_date = myMoment.toDate()
-        myMoment_date.setDate(myMoment.toDate().getDate() - 1);
+        myMoment_date.setDate(myMoment.toDate().getDate()-1);
         this.maxDate_return = myMoment_date
         break
       }
     }
-    if (this.disabledDates.length == 0) {
+    if (this.disabledDates.length == 0 || this.dateStartInput==null) {
       this.maxDate_return = this.maxDate_start
     }
+    
   }
   detailId_UpdateAddCartButton() {
     if (this.startMoment != null && this.returnMoment != null) {
@@ -479,7 +486,7 @@ export class ProductComponent implements OnInit {
   //add product Without detail Id
   quantitycheck(proddetail) {
     let hiringdetail = []
-    this.idDatepickerUpdate()
+    //this.idDatepickerUpdate()
     this.getIdList(proddetail, hiringdetail)
     if (this.quantity != 0) {
       this.productService.calculateTime(hiringdetail).subscribe(
@@ -502,15 +509,15 @@ export class ProductComponent implements OnInit {
     this.disabledDates = tmpDates
   }
   //without detail Id
-  idDatepickerUpdate() {
-    if (this.quantity > 0) {
-      this.dateStartControl = false;
-      this.dateReturnControl = false;
-    } else if (this.quantity == 0) {
-      this.dateStartControl = true;
-      this.dateReturnControl = true;
-    }
-  }
+  // idDatepickerUpdate() {
+  //   if (this.quantity > 0) {
+  //     this.dateStartControl = false;
+  //     this.dateReturnControl = false;
+  //   } else if (this.quantity == 0) {
+  //     this.dateStartControl = true;
+  //     this.dateReturnControl = true;
+  //   }
+  // }
   //without detail Id
   getIdList(proddetail, hiringdetail) {
     let productHiringDetail = {
@@ -523,7 +530,6 @@ export class ProductComponent implements OnInit {
   //when start date input changes
   onStartChange(value) {
     this.dateStartInput = value;
-    this.dateReturnControl = false;
     this.isAlert=false
     this.minDate_return = value;
     this.startMoment = moment(this.dateStartInput)

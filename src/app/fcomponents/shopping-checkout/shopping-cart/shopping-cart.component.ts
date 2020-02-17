@@ -20,7 +20,7 @@ export class ShoppingCartComponent implements OnInit {
   productTimetable = []
   errorMessage = ''
   isAlert = false
-  isTimeSame=true
+  isTimeSame = true
   isShoppingCartValid = true
   initialStartDate: any
   initialEndDate: any
@@ -31,8 +31,8 @@ export class ShoppingCartComponent implements OnInit {
   utcDate_start: Date
   startMoment: any
   returnMoment: any
-  dateStartControl = true;
-  dateReturnControl =true;
+  //dateStartControl = true;
+  //dateReturnControl =true;
   deliveryControl = false
   borderStyleControl = true
   dateStartInput: any
@@ -61,8 +61,9 @@ export class ShoppingCartComponent implements OnInit {
     this.minDate_start = new Date(nowDate2 + offset2 + 13 * 60 * 60 * 1000);
     this.maxDate_start = new Date();
     this.utcDate_start = new Date(nowDate2 + offset2) //Calculte current UTC date time
-    this.minDate_start.setDate(this.minDate_start.getDate());
-    this.maxDate_start.setDate(this.maxDate_start.getDate() + 90);
+    this.maxDate_start.setDate(this.minDate_start.getDate() + 90);
+    this.minDate_return=this.minDate_start
+    this.maxDate_return=this.maxDate_start
   }
   ngOnChanges(changes: SimpleChanges) {
     const pickupValue = changes['isPickup'];
@@ -104,16 +105,15 @@ export class ShoppingCartComponent implements OnInit {
       this.calculateTime()
       this.checkDaySelected()
     }
-    
   }
-  updateShoppingCartStatus(){
+  updateShoppingCartStatus() {
     this.startMoment = moment(this.initialStartDate)
     this.returnMoment = moment(this.initialEndDate)
-    let control1=this.checkIfStartIsAfter()
-    let control2=this.checkDisabledDates()
-    if(!control1 && !control2){
+    let control1 = this.checkIfStartIsAfter()
+    let control2 = this.checkDisabledDates()
+    if (!control1 && !control2) {
       this.productService.setShoppingCartStatus(true)
-    }else{
+    } else {
       this.productService.setShoppingCartStatus(false)
     }
 
@@ -199,27 +199,27 @@ export class ShoppingCartComponent implements OnInit {
       this.EventStartDate.emit(this.initialStartDate)//emit to user info component
       this.EventEndDate.emit(this.initialEndDate)//emit to user info component
       this.productService.setShoppingCartStatus(true);
-      this.isTimeSame=true
+      this.isTimeSame = true
       this.borderStyleControl = true
     }
   }
   //check if user selected Friday to Monday
   checkDaySelected() {
     console.log(this.initialStartDate)
-    if(this.initialStartDate !=null && this.initialEndDate!=null){
-    if (moment(this.initialStartDate).day() != 5 || moment(this.initialEndDate).day() != 1) {
-      this.isAlert = true
-    } else {
-      this.isAlert = false
+    if (this.initialStartDate != null && this.initialEndDate != null) {
+      if (moment(this.initialStartDate).day() != 5 || moment(this.initialEndDate).day() != 1) {
+        this.isAlert = true
+      } else {
+        this.isAlert = false
+      }
     }
-  }
   }
   //if there is an input change of start date 
   onStartChange(value) {
     this.isAlert = false
     this.EventStartDate.emit(value)
     this.dateStartInput = value;
-    this.dateReturnControl=false
+    //this.dateReturnControl=false
     this.minDate_return = value;
     this.productTimetable.forEach(item => {
       item.beginDate = this.datetoYMD(this.dateStartInput)
@@ -297,22 +297,22 @@ export class ShoppingCartComponent implements OnInit {
 
   }
   processDisabledDates() {
-    console.log(this.disabledDates)
     for (let i = 0; i < this.disabledDates.length; i++) {
       let myMoment = moment(this.disabledDates[i], 'YYYY-MM-DD')
       if (myMoment.startOf('day'
-      ).isAfter(moment(this.dateStartInput).startOf('day'))) {
+      ).isAfter(moment(this.initialStartDate).startOf('day'))) {
         let myMoment_date = myMoment.toDate()
-        myMoment_date.setDate(myMoment.toDate().getDate() - 1);
+        myMoment_date.setDate(myMoment.toDate().getDate()-1);
         this.maxDate_return = myMoment_date
         break
       }
     }
-    if (this.disabledDates.length == 0) {
+    
+    if (this.disabledDates.length == 0 ||this.dateStartInput==null) {
       this.maxDate_return = this.maxDate_start
     }
   }
-  checkIfStartIsAfter(){
+  checkIfStartIsAfter() {
     if (this.startMoment != null && this.returnMoment != null) {
       if (this.startMoment.startOf('day').isAfter(this.returnMoment.startOf('day'))) {
         return true
@@ -325,14 +325,14 @@ export class ShoppingCartComponent implements OnInit {
   checkDisabledDates() {
     let control = false
     for (let i = 0; i < this.disabledDates.length; i++) {
-      if (moment(this.disabledDates[i]).startOf('day').isSameOrAfter(this.startMoment.startOf('day')) && moment(this.disabledDates[i]).startOf('day').isSameOrBefore(this.returnMoment.startOf('day')) ) {
+      if (moment(this.disabledDates[i]).startOf('day').isSameOrAfter(this.startMoment.startOf('day')) && moment(this.disabledDates[i]).startOf('day').isSameOrBefore(this.returnMoment.startOf('day'))) {
         control = true
         return control
       }
     }
     return control
-    
-    
+
+
   }
   calculateBondFee() {
     if ('totalPrice' in localStorage) {
