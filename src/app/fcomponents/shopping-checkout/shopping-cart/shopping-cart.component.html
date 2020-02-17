@@ -20,7 +20,7 @@
 <div class="alert alert-danger mt-2 mb-2" role="alert" *ngIf="!isTimeSame && prodsInCart.length!=0" >
 	{{errorMessage}}</div>
 <div class="alert alert-danger mt-2 mb-2" role="alert" *ngIf="isAlert && isShoppingCartValid">
-	Customer Service will confirm this order with you. You can get instant confirmation if you book from Friday to Monday.
+	Customer Service will confirm this order with you. You can get <span style="font-size: large;">instant confirmation</span> if you book from Friday to Monday.
 </div>
 <hr>
 <div class="row mb-3 productdiv" *ngFor="let prod of prodsInCart; index as i">
