@@ -1,32 +1,32 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light border-bottom p-0 lspace-3">
   <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-    <ul class="navbar-nav col-lg-10 ul-menu">
-      <span class="navspace"></span>
+    <ul class="navbar-nav col-lg-10 ul-menu d-flex  justify-content-around">
+      <!-- <span class="navspace"></span> -->
       <!--!Home-->
       <li class="nav-item">
         <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/' routerLinkActive="active">
-          <h1 class="s2bold">Home</h1>
+          <h1 class="s2bold nav-link-title">Home</h1>
         </a>
         <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/'>
-          <h1 class="s2bold">Home</h1>
+          <h1 class="s2bold nav-link-title">Home</h1>
         </a>
       </li>
-      <span class="navspace"></span>
+      <!-- <span class="navspace"></span> -->
      
       <!--!Hire dropdown-->
       <li class="nav-item dropdown">
         <div class="nav-link dropdown-toggle s2bold" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          <h1 class="s2bold" [routerLink]="['/products', 1, 0]" (click)="updateCategoryStatus('All Hires')">Hire</h1>
+          <h1 class="s2bold nav-link-title" [routerLink]="['/products', 1, 0]" (click)="updateCategoryStatus('All Hires')">Hire</h1>
         </div>
         <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink" *ngIf="hireCategories">
 
           <!-- !large screen dropdown -->
           <a *ngIf="isBrowser==true" class="dropdown-item d-none d-md-block s2bold" [routerLink]="['/products', 1, 0]"
             (click)="updateCategoryStatus('All Hires')">
-            <h1>All Hires</h1>
+            <h1 class="nav-link-title">All Hires</h1>
           </a>
-          <a *ngIf="isBrowser==false" class="dropdown-item d-none d-md-block s2bold" href='http://luxedreameventhire.co.nz/products/1/0'
+          <a *ngIf="isBrowser==false" class="dropdown-item d-none d-md-block s2bold nav-link-title" href='http://luxedreameventhire.co.nz/products/1/0'
             (click)="updateCategoryStatus('All Hires')">
             All Hires
           </a>
@@ -47,11 +47,11 @@
 
           <!-- !mobile dropdown -->
           <a class="dropdown-item d-block d-md-none" data-toggle="collapse" data-target=".navbar-collapse">
-            <a  class="s2bold" *ngIf="isBrowser==true" [routerLink]="['/products', 1, 0]"
+            <a  class="s2bold nav-link-title" *ngIf="isBrowser==true" [routerLink]="['/products', 1, 0]"
               (click)="updateCategoryStatus('All Hires')">
               <h1>All Hires</h1>
             </a>
-            <a *ngIf="isBrowser==false" href='http://luxedreameventhire.co.nz/products/1/0'
+            <a *ngIf="isBrowser==false" href='http://luxedreameventhire.co.nz/products/1/0' class="nav-link-title"
               (click)="updateCategoryStatus('All Hires')">
               All Hires
             </a>
@@ -70,21 +70,21 @@
         </div>
       </li>
 
-      <span class="navspace"></span>
+      <!-- <span class="navspace"></span> -->
       <!--!Party services-->
       <li class="nav-item dropdown">
           <div class="nav-link dropdown-toggle s2bold" id="navbarDropdownMenuLink2" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            <h1 class="s2bold" [routerLink]="['/services', 2, 0]" (click)="updateCategoryStatus('All Services')">Event Services</h1>
+            <h1 class="s2bold nav-link-title" [routerLink]="['/services', 2, 0]" (click)="updateCategoryStatus('All Services')">Event Services</h1>
           </div>
           <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink2" *ngIf="serviceCategories">
   
             <!-- !large screen dropdown -->
-            <a *ngIf="isBrowser==true" class="dropdown-item d-none d-md-block s2bold" [routerLink]="['/services', 2, 0]"
+            <a *ngIf="isBrowser==true" class="dropdown-item d-none d-md-block s2bold nav-link-title" [routerLink]="['/services', 2, 0]"
               (click)="updateCategoryStatus('All Services')">
               <h1>All Services</h1>
             </a>
-            <a *ngIf="isBrowser==false" class="dropdown-item d-none d-md-block" href='http://luxedreameventhire.co.nz/services/2/0'
+            <a *ngIf="isBrowser==false" class="dropdown-item d-none d-md-block nav-link-title" href='http://luxedreameventhire.co.nz/services/2/0'
               (click)="updateCategoryStatus('All Services')">
               All Services
             </a>
@@ -104,12 +104,12 @@
             </div>
   
             <!-- !mobile dropdown -->
-            <a class="dropdown-item d-block d-md-none" data-toggle="collapse" data-target=".navbar-collapse">
-              <a  class="s2bold" *ngIf="isBrowser==true" [routerLink]="['/services', 2, 0]"
+            <a class="dropdown-item d-block d-md-none " data-toggle="collapse" data-target=".navbar-collapse">
+              <a  class="s2bold nav-link-title" *ngIf="isBrowser==true" [routerLink]="['/services', 2, 0]"
                 (click)="updateCategoryStatus('All Services')">
                 <h1>All Services</h1>
               </a>
-              <a *ngIf="isBrowser==false" href='http://luxedreameventhire.co.nz/services/2/0'
+              <a *ngIf="isBrowser==false" href='http://luxedreameventhire.co.nz/services/2/0' class="nav-link-title"
                 (click)="updateCategoryStatus('All Services')">
                 All Services
               </a>
@@ -127,15 +127,15 @@
             </a>
           </div>
         </li>
-      <span class="navspace"></span>
+      <!-- <span class="navspace"></span> -->
 
       <!-- !Party Packages-->
       <li class="nav-item">
         <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/packages' routerLinkActive="active">
-          <h1 class="s2bold">Party Packages</h1>
+          <h1 class="s2bold nav-link-title nav-link-title-space">Party Packages</h1>
         </a>
         <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/packages'>
-          <h1 class="s2bold">Party Packages</h1>
+          <h1 class="s2bold nav-link-title nav-link-title-space">Party Packages</h1>
         </a>
       </li>
     </ul>
@@ -156,18 +156,18 @@
     </div>
     
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-      <ul class="navbar-nav ul-menu">
-        <span class="navspace"></span>
+      <ul class="navbar-nav ul-menu d-flex  justify-content-around">
+        <!-- <span class="navspace"></span> -->
       <!--!Gallery-->
       <li class="nav-item dropdown">
         <div class="nav-link dropdown-toggle s2bold" id="navbarDropdownMenuLink2" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          <h1 class="s2bold">Gallery</h1>
+          <h1 class="s2bold nav-link-title">Gallery</h1>
         </div>
         <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink2">
           <!-- !large screen dropdown -->
-          <a *ngIf="isBrowser==true" class="dropdown-item d-none d-md-block s2bold" routerLink='/galleries'> <h1>All Galleries</h1></a>
-          <a *ngIf="isBrowser==false" class="dropdown-item d-none d-md-block" href='http://luxedreameventhire.co.nz/galleries'>All Galleries</a>
+          <a *ngIf="isBrowser==true" class="dropdown-item d-none d-md-block s2bold" routerLink='/galleries'> <h1 class="nav-link-title">All Galleries</h1></a>
+          <a *ngIf="isBrowser==false" class="dropdown-item d-none d-md-block nav-link-title" href='http://luxedreameventhire.co.nz/galleries'>All Galleries</a>
           <div *ngIf="isBrowser==true">
             <a class="dropdown-item d-none d-md-block s2bold" *ngFor="let gallery of galleriesData" routerLink= '/galleries/{{gallery.typeId}}'><h1>{{gallery.eventName}}</h1></a>
           </div>
@@ -177,8 +177,8 @@
 
           <!-- !mobile dropdown -->
           <a class="dropdown-item d-block d-md-none" data-toggle="collapse" data-target=".navbar-collapse1">
-            <a class="s2bold" *ngIf="isBrowser==true" routerLink='/galleries'><h1>All Galleries</h1></a>
-            <a *ngIf="isBrowser==false" href='http://luxedreameventhire.co.nz/galleries'>All Galleries</a>
+            <a class="s2bold nav-link-title" *ngIf="isBrowser==true" routerLink='/galleries'><h1>All Galleries</h1></a>
+            <a *ngIf="isBrowser==false" href='http://luxedreameventhire.co.nz/galleries' class="nav-link-title">All Galleries</a>
           </a>
           <a class="dropdown-item d-block d-md-none s2bold" *ngFor="let gallery of galleriesData" data-toggle="collapse"
             data-target=".navbar-collapse">
@@ -188,59 +188,59 @@
         </div>
       </li>
 
-	  <span *ngIf="loggedIn == false" class="navspace"></span>
+	  <!-- <span *ngIf="loggedIn == false" class="navspace"></span> -->
 	  
       <!--! Customer Log in -->
       <li *ngIf="loggedIn == false" class="nav-item">
         <a *ngIf="isBrowser==true" class="nav-link s2bold" (click)="loginDialog()">
-          <h1 class="s2bold">Log in</h1>
+          <h1 class="s2bold nav-link-title">Log in</h1>
         </a>
         <a *ngIf="isBrowser==false" class="nav-link s2bold">
-          <h1 class="s2bold">Log in</h1>
+          <h1 class="s2bold nav-link-title">Log in</h1>
         </a>
       </li>
-	  <span *ngIf="loggedIn == false" class="navspace"></span>
+	  <!-- <span *ngIf="loggedIn == false" class="navspace"></span> -->
 	  
       <!--! Sign up -->
       <li *ngIf="loggedIn == false" class="nav-item">
         <a *ngIf="isBrowser==true" class="nav-link s2bold" (click)="signupDialog()">
-          <h1 class="s2bold">Sign up</h1>
+          <h1 class="s2bold nav-link-title">Sign up</h1>
         </a>
         <a *ngIf="isBrowser==false" class="nav-link s2bold">
-          <h1 class="s2bold">Sign up</h1>
+          <h1 class="s2bold nav-link-title">Sign up</h1>
         </a>
       </li>
-	  <span *ngIf="loggedIn == true" class="navspace"></span>
+	  <!-- <span *ngIf="loggedIn == true" class="navspace"></span> -->
 	  
       <!--! User DashBoard-->
       <li *ngIf="loggedIn == true" class="nav-item">
         <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/userDashboard' routerLinkActive="active">
-          <h1 class="s2bold">Dashboard</h1>
+          <h1 class="s2bold nav-link-title">Dashboard</h1>
         </a>
         <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/userDashboard'>
-          <h1 class="s2bold">Dashboard</h1>
+          <h1 class="s2bold nav-link-title">Dashboard</h1>
         </a>
       </li>
 
       <!-- Log Out -->
-	  <span *ngIf="loggedIn == true" class="navspace"></span>
+	  <!-- <span *ngIf="loggedIn == true" class="navspace"></span> -->
 	  <li *ngIf="loggedIn == true" class="nav-item">
 		  <a class="nav-link s2bold" (click)="logout()">
-			  <h1 class="s2bold">Log out</h1>
+			  <h1 class="s2bold nav-link-title">Log out</h1>
 		  </a>
 	  </li>
-      <span class="navspace"></span>
+      <!-- <span class="navspace"></span> -->
       
       <!--!Shopping Cart-->
       <li class="nav-item pl-md-1">
         <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/checkout' routerLinkActive="active">
-          <h1 class="s2bold">
+          <h1 class="s2bold nav-link-title">
               <i class="fas fa-shopping-cart" title="View Shopping Cart"></i> 
             Cart
           </h1>
         </a>
         <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/checkout'>
-          <h1 class="s2bold">
+          <h1 class="s2bold nav-link-title">
               <i class="fas fa-shopping-cart" title="View Shopping Cart"></i>
           </h1>
         </a>
