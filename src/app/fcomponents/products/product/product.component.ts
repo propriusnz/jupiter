@@ -492,6 +492,7 @@ export class ProductComponent implements OnInit {
       this.productService.calculateTime(hiringdetail).subscribe(
         res => {
           this.unavailableDates = res
+          this.processUnavailableDates()
           this.updateAddCartButton()
         },
         err => {
@@ -500,7 +501,7 @@ export class ProductComponent implements OnInit {
     }
   }
   //without detail Id
-  processUnavailableDate() {
+  processUnavailableDates() {
     let tmpDates = []
     for (let i = 0; i < this.unavailableDates.length; i++) {
       let myMoment = moment(this.unavailableDates[i], 'YYYY-MM-DD')
