@@ -9,49 +9,39 @@
 				<th>Last Name</th>
 				<th>Phone</th>
 				<th>Company</th>
-				<th>Contact ID</th>
 				<th>Discount Level</th>
 				<th>Subscribed</th>
+				<th>Comments & Terms</th>
 				<th>Edit Profile</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr *ngFor="let user of userList">
+				<!-- User ID -->
 				<td>{{ user.id }}</td>
+				<!-- Email -->
 				<td>{{ user.email }}</td>
-				<td>
-					<span *ngIf="!user.userInfo[0] || user.userInfo[0].firstName == null">-</span>
-					<span *ngIf="user.userInfo[0]">{{ user.userInfo[0].firstName }}</span>
-				</td>
-				<td>
-					<span *ngIf="!user.userInfo[0] || user.userInfo[0].lastName == null">-</span>
-					<span *ngIf="user.userInfo[0]">{{ user.userInfo[0].lastName }}</span>
-				</td>
-				<td>
-					<span *ngIf="!user.userInfo[0] || user.userInfo[0].phoneNumber == null">-</span>
-					<span *ngIf="user.userInfo[0]">{{ user.userInfo[0].phoneNumber }}</span>
-				</td>
-				<td>
-					<span *ngIf="!user.userInfo[0] || user.userInfo[0].company == null">-</span>
-					<span *ngIf="user.userInfo[0]">{{ user.userInfo[0].company }}</span>
-				</td>
-				<td *ngIf="!user.userInfo[0]">-</td>
-				<td *ngIf="user.userInfo[0]">
-					{{ user.userInfo[0].userContactId }}
-				</td>
-				<td>
-					<span *ngIf="!user.userInfo[0]">-</span>
-					<span *ngIf="user.userInfo[0]"></span>
-				</td>
+				<!-- First Name -->
+				<td><span *ngIf="user.userInfo[0]">{{ user.userInfo[0].firstName }}</span></td>
+				<!-- Last Name -->
+				<td><span *ngIf="user.userInfo[0]">{{ user.userInfo[0].lastName }}</span></td>
+				<!-- Phone -->
+				<td><span *ngIf="user.userInfo[0]">{{ user.userInfo[0].phoneNumber }}</span></td>
+				<!-- Comapny -->
+				<td><span *ngIf="user.userInfo[0]">{{ user.userInfo[0].company }}</span></td>
+				<!-- Discount Level -->
+				<td><span *ngIf="user.userInfo[0]">{{user.userInfo[0].discountLevel}}</span></td>
+				<!-- Subscribed -->
 				<td *ngIf="user.isSubscribe == 1" class="px-4">&radic;</td>
 				<td *ngIf="user.isSubscribe == 0"></td>
-				<td style="text-align: center;">
-					<i  class="far fa-edit" (click)="openEditProfile(user)" title="Edit"></i>
+				<!-- Comments -->
+				<td style="width: 13%;">
+					<div *ngIf="user.userInfo[0]" style="max-height: 60px; overflow-y: scroll;">{{user.userInfo[0].comments}}</div>
 				</td>
-				
-				<!-- <td>
-					<button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
-				</td> -->
+				<!-- Edit -->
+				<td style="text-align: center;">
+					<i class="far fa-edit" (click)="openEditProfile(user)" title="Edit"></i>
+				</td>
 			</tr>
 		</tbody>
 	</table>

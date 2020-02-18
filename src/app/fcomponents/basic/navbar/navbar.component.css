@@ -85,6 +85,9 @@ a{
     .dropdown-menu{
         background-color: transparent;
     }
+    .nav-item-center {
+        text-align: left;
+    }
 }
 /* TODO: move to global css */
 @media (max-width: 991px) {
