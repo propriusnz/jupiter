@@ -62,3 +62,6 @@ a.dropdown-item:hover{
     color: white;
     border-color: transparent;
 }
+.page-item:hover {
+    cursor: pointer;
+}
