@@ -11,6 +11,7 @@ import { ProductService } from 'src/app/service/product.service';
 export class ProfileDialogComponent implements OnInit {
 	profileForm: FormGroup;
 	userProfile: object;
+	userId: number;
 	errorMessage = '';
 
   	constructor(
@@ -24,6 +25,7 @@ export class ProfileDialogComponent implements OnInit {
 	}
 
   	ngOnInit() {
+		this.userId = this.userProfile['id'];
 		if (this.userProfile['userInfo'][0]) {
 			this.profileForm = this.fb.group({
 				firstName: [this.userProfile['userInfo'][0]['firstName'], 
@@ -41,7 +43,10 @@ export class ProfileDialogComponent implements OnInit {
 				company: [this.userProfile['userInfo'][0]['company'],
 							[Validators.minLength(2),
 							Validators.maxLength(20)]],
-				discountLevel: [this.userProfile['userInfo'][0]['discountLevel']]
+				discountLevel: [this.userProfile['userInfo'][0]['discountLevel']],
+				comments: [this.userProfile['userInfo'][0]['comments'], 
+							[Validators.minLength(2),
+							Validators.maxLength(255)]]
 			})
 		}
 	}
@@ -69,45 +74,57 @@ export class ProfileDialogComponent implements OnInit {
 	get discountLevel() {
 		return this.profileForm.get('discountLevel');
 	}
+	
+	get comments() {
+		return this.profileForm.get('comments');
+	}
 
 	getErrorMessageFname() {
 		return this.firstName.hasError('required') ? 'Please enter your first name' :
-		this.firstName.hasError('minlength' || 'maxlength') ? '8 - 20 characters required' :
+		this.firstName.hasError('minlength') ? '8 - 20 characters required' : this.firstName.hasError('maxlength') ? '8 - 20 characters required' :
 		'';
 	}
 
 	getErrorMessageLname() {
 		return this.lastName.hasError('required') ? 'Please enter your last name' :
-	this.lastName.hasError('minlength' || 'maxlength') ? '8 - 20 characters required' :
+		this.lastName.hasError('minlength') ? '8 - 20 characters required' : this.lastName.hasError('maxlength') ? '8 - 20 characters required' :
 		'';
 	}
 
 	getErrorMessagePhone() {
-		return this.phoneNumber.hasError('minlength' || 'maxlength') ? '7 - 20 digits required' :
-		'';
+		return this.phoneNumber.hasError('minlength') ? '7 - 20 digits required' : this.phoneNumber.hasError('maxlength') ? '7 - 20 digits required' :
+		''; 
 	}
 
 	getErrorMessageCom() {
-		return this.company.hasError('minlength' || 'maxlength') ? '2 - 20 characters required' :
+		return this.company.hasError('minlength', 'maxLength') ? '2 - 20 characters required' :  this.company.hasError('maxlength') ? '2 - 20 characters required' :
+		'';
+	}
+
+	getErrorMessageComments() {
+		return this.comments.hasError('minlength') ? 'At least 2 characters required' : this.comments.hasError('maxlength') ? 'Maximum 255 characters' :
 		'';
 	}
 
 	onSubmit() {
 		let user = {
-			userId: this.profileForm['id'],
-			firstName: this.userProfile['userInfo'][0]['firstName'],
-			lastName: this.userProfile['userInfo'][0]['lastName'],
-			phoneNumber: this.userProfile['userInfo'][0]['phoneNumber'],
-			company: this.userProfile['userInfo'][0]['company'],
+			userId: this.userId,
+			firstName: this.profileForm.value.firstName,
+			lastName: this.profileForm.value.lastName,
+			phoneNumber: this.profileForm.value.phone,
+			company: this.profileForm.value.company,
+			discountLevel: this.profileForm.value.discountLevel,
+			comments: this.profileForm.value.comments
 		}
 		console.log('Updated user profile: ', user);
-		this.productservice.updateProfile(user,this.profileForm['id']).subscribe(
+		this.productservice.updateProfile(user,this.userId).subscribe(
 			success => {
 				console.log(success);
+				location.reload();
 			},
 			error => {
 				console.log('Update Failed Error', error);
-				this.errorMessage = "Update failed";
+				this.errorMessage = "Update Failed";
 			}
 		);
 	}

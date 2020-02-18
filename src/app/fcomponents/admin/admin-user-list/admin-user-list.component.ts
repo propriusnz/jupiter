@@ -10,8 +10,8 @@ import { ProfileDialogComponent } from '../admin-dialogs/profile-dialog/profile-
 })
 export class AdminUserListComponent implements OnInit {
 	userList: any;
-	allUserInfo = [];
 	subscribeState: any;
+	ifComments: boolean;
 	
   constructor(
 	private productservice: ProductService,
@@ -27,15 +27,12 @@ export class AdminUserListComponent implements OnInit {
 			console.log('All Users: ', this.userList);
 			// console.log(this.userList[1].userInfo[0].firstName);
 
-			this.userList.forEach(userInfo => {
-				// console.log(this.userList[userInfo]);
-				if (userInfo[userInfo] != null) {
-					userInfo = this.userList[0];
-					console.log(userInfo);
-				} else {
-					userInfo = null;
-				}
-			});
+			// this.userList.forEach(userInfo => {
+			// 	if (userInfo[userInfo]) {
+			// 		this.ifComments = true;
+			// 		console.log(userInfo[userInfo]);
+			// 	}
+			// });
 		  }
 	  );
   }
@@ -43,7 +40,7 @@ export class AdminUserListComponent implements OnInit {
   openEditProfile(user) {
 	  const dialogConfig = new MatDialogConfig();
 	  dialogConfig.height = '650px';
-	  dialogConfig.width = '400px';
+	  dialogConfig.width = '600px';
 	  dialogConfig.autoFocus = false;
 	  dialogConfig.data = {
 		  data: user

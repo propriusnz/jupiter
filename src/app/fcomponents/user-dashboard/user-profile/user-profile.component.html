@@ -16,7 +16,7 @@
 			</mat-form-field>
 
 			<mat-form-field>
-				<input matInput placeholder="Email Address" value="{{ email }}" disabled>
+				<input matInput placeholder="Email Address" value="{{ email }}" style="cursor: not-allowed;" disabled>
 			</mat-form-field>
 
 			<mat-form-field>
@@ -28,6 +28,11 @@
 				<input matInput formControlName="company" placeholder="Company">
 				<mat-error *ngIf="company.invalid">{{getErrorMessage4()}}</mat-error>
 			</mat-form-field>
+
+			<div id="comment" class="mx-auto" *ngIf="comments">
+				<small><b>Comments & Terms</b></small>
+				<div class="mt-2 border rounded">{{comments}}</div>
+			</div>
 
 			<div class="slide">
 				<mat-slide-toggle (change)="onSlideChange($event)" aria-label="Subscribe" formControlName="subscribe" color="primary"></mat-slide-toggle>

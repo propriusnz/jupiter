@@ -3,52 +3,60 @@
 	<p>User Contact ID For This Account Not Found ! <br>Please Check Database</p>
 </div>
 
-<div class="container" *ngIf="userProfile['userInfo'][0]">
+<div class="container-fluid" *ngIf="userProfile['userInfo'][0]">
 	<div class="row">
 		<h3 mat-dialog-title>
 			User #<b>{{ userProfile.id }}</b>
 		</h3>
 	</div>
 	<hr>
+	<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+		<div class="row">
+			<div class="col-6">
+				<mat-form-field>
+					<input matInput class="form-control" formControlName="firstName" placeholder="First Name">
+					<mat-error *ngIf="firstName.invalid">{{getErrorMessagefname()}}</mat-error>
+				</mat-form-field>
+	
+				<mat-form-field>
+					<input matInput matInput class="form-control" formControlName="lastName" placeholder="Last Name">
+					<mat-error *ngIf="lastName.invalid">{{getErrorMessageLname()}}</mat-error>
+				</mat-form-field>
+				
+				<mat-form-field>
+					<input matInput class="form-control" formControlName="email" placeholder="Email Address">
+				</mat-form-field>
+	
+				<mat-form-field>
+					<input matInput class="form-control" formControlName="phoneNumber" placeholder="Phone No.">
+					<mat-error *ngIf="phoneNumber.invalid">{{getErrorMessagePhone()}}</mat-error>
+				</mat-form-field>
+	
+				<mat-form-field>
+					<input matInput class="form-control" formControlName="company" placeholder="Company">
+					<mat-error *ngIf="company.invalid">{{getErrorMessageCom()}}</mat-error>
+				</mat-form-field>
+	
+				<mat-form-field>
+					<input matInput class="form-control" formControlName="discountLevel" placeholder="Discount Level">
+				</mat-form-field>
+			</div>
 
-	<mat-dialog-content class="row">
-		<form class="col-10" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-			<mat-form-field>
-				<input matInput class="form-control" formControlName="firstName" placeholder="First Name">
-				<mat-error *ngIf="firstName.invalid">{{getErrorMessagefname()}}</mat-error>
-			</mat-form-field>
+			<div class="col-6">
+				<mat-form-field>
+					<textarea matInput formControlName="comments" placeholder="Comments & Terms" style="min-height: 115px;"></textarea>
+					<mat-error *ngIf="comments.invalid">{{getErrorMessageComments()}}</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
 
-			<mat-form-field>
-				<input matInput matInput class="form-control" formControlName="lastName" placeholder="Last Name">
-				<mat-error *ngIf="lastName.invalid">{{getErrorMessageLname()}}</mat-error>
-			</mat-form-field>
-			
-			<mat-form-field>
-				<input matInput class="form-control" formControlName="email" placeholder="Email Address" disabled>
-			</mat-form-field>
-
-			<mat-form-field>
-				<input matInput class="form-control" formControlName="phoneNumber" placeholder="Phone No.">
-				<mat-error *ngIf="phoneNumber.invalid">{{getErrorMessagePhone()}}</mat-error>
-			</mat-form-field>
-
-			<mat-form-field>
-				<input matInput class="form-control" formControlName="company" placeholder="Company">
-				<mat-error *ngIf="company.invalid">{{getErrorMessageCom()}}</mat-error>
-			</mat-form-field>
-
-			<mat-form-field>
-				<input matInput class="form-control" formControlName="discountLevel" placeholder="Discount Level">
-			</mat-form-field>
-		</form>
+		<div *ngIf="this.profileForm.valid && errorMessage" class="alert alert-danger mt-2 text-center s2" role="alert">
+			{{errorMessage}}
+		</div>
 
 		<div id="ButtonsWrap" class="mt-3">
 			<button mat-raised-button color="basic" mat-dialog-close>Cancel</button>
 			<button mat-raised-button type="submit" class="primaryButton mx-2">Update</button>
 		</div>
-
-		<div *ngIf="this.profileForm.valid && errorMessage" class="alert alert-danger text-center s2" role="alert">
-			{{errorMessage}}
-		</div>
-	</mat-dialog-content>
+	</form>
 </div>
