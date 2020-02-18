@@ -250,7 +250,7 @@ export class ProductComponent implements OnInit {
   setTime(){
     setTimeout(() => {
       this.isprodAdded = false;
-    }, 1000);
+    }, 20000);
   }
   //get tmp prod Id map with no product detail
   getTmpMap(item) {
