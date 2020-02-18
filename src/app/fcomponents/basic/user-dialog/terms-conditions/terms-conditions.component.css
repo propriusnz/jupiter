@@ -1,0 +1,8 @@
+#LogoWrap {
+    width: 100%; 
+    text-align: center;
+}
+button {
+    margin:auto;
+    display:block;
+  }

@@ -4,6 +4,8 @@ import { isPlatformBrowser, DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormControl, Validators, FormGroupDirective, NgForm, FormGroup, FormBuilder } from '@angular/forms';
 import { DataService } from 'src/app/service/data.service';
+import { MatDialog } from '@angular/material';
+import { TermsConditionsComponent } from '../../basic/user-dialog/terms-conditions/terms-conditions.component';
 @Component({
   selector: 'app-shopping-userinfo',
   templateUrl: './shopping-userinfo.component.html',
@@ -24,12 +26,15 @@ export class ShoppingUserinfoComponent implements OnInit {
   districtSelectControl = false
   districtError = false
   timeError = false
+  timeReturnError=false
   districtSelected: number
   timeSelected:number
+  timeReturnSelected:number
   totalPrice = 0
   bondFee = 150
   timetable = []
   paymentSpinnerControl = false
+  termsRead=false
   userInfo = {
     FirstName: '',
     LastName: '',
@@ -48,6 +53,7 @@ export class ShoppingUserinfoComponent implements OnInit {
   url: any
   @Input() EventStartDate = ''
   @Input() EventEndDate = ''
+  @Input() Coupon=''
   @Output() isPickup = new EventEmitter();
   @Output() district = new EventEmitter();
   constructor(
@@ -55,7 +61,8 @@ export class ShoppingUserinfoComponent implements OnInit {
     private productService: ProductService,
     private router: Router,
     private fb: FormBuilder,
-    private data: DataService
+    private data: DataService,
+    public dialog: MatDialog
   ) {
     if (isPlatformBrowser(this.platformId)) {
       if (localStorage.getItem('cartList') === '' || localStorage.getItem('cartList') == null) {
@@ -105,8 +112,12 @@ export class ShoppingUserinfoComponent implements OnInit {
     this.checkPickUpValue()
     this.checkDistrictValue()
     this.checkTimeValue()
-    if (!valid || this.districtError || this.buttonError || this.timeError) {
+    this.checkTimeReturnValue()
+    if (!valid || this.districtError || this.buttonError || this.timeError ||this.timeReturnError ||!this.termsRead ) {
       this.feedback_message = 'Please check all inputs and fill up the form';
+      setTimeout(() => {
+        this.feedback_message = '';
+      }, 5000);
     } else {
       // combine user info data
       const { FirstName, LastName, PhoneNum, Email, Message } = this.userInfo;
@@ -144,6 +155,13 @@ export class ShoppingUserinfoComponent implements OnInit {
       this.timeError=true
     }else{
       this.timeError= false
+    }
+  }
+  checkTimeReturnValue(){
+    if(this.timeReturnSelected==null){
+      this.timeReturnError=true
+    }else{
+      this.timeReturnError=false
     }
   }
   calculateDeliveryFee() {
@@ -192,6 +210,8 @@ export class ShoppingUserinfoComponent implements OnInit {
       region: this.districtName,
       CartProd: data,
       TradingTime:this.timeSelected,
+      ReturnTime:this.timeReturnSelected,
+      Coupon:this.Coupon
     };
     const cartContact = {
       CartModel: cartData,
@@ -254,6 +274,11 @@ export class ShoppingUserinfoComponent implements OnInit {
     this.timeError=false
     
   }
+  //updates timeReturnError control when user selects a time for return
+  selectionChangeReturnTime(input){
+      this.timeReturnSelected=input.value
+      this.timeReturnError=false
+  }
   //post cart (not user)
   cartNotUser(cartContact) {
     this.productService.addCart(cartContact).subscribe(
@@ -282,7 +307,6 @@ export class ShoppingUserinfoComponent implements OnInit {
   callAPIforAddCart(res) {
     this.isSendingEmail = false;
     this.isSendSuccess = true;
-    localStorage.setItem('cartId', JSON.stringify(res['data'].cartId))
     this.paymentSpinnerControl = true
     this.getPaymentUrl(res['data'].cartId)
   }
@@ -291,11 +315,30 @@ export class ShoppingUserinfoComponent implements OnInit {
       res => {
         window.location.assign(res['url'])
         this.paymentSpinnerControl = true
+        this.clearLocalStorage()
       },
       err => {
         this.paymentSpinnerControl = true
         this.feedback_message = 'Oops, something went wrong.';
       }
     )
+  }
+  openTCdialog() {
+    this.dialog.open(TermsConditionsComponent, {
+      width: '650px',
+      height: '650px'
+    });
+  }
+  onCheckChange(checkbox){
+    if(checkbox.checked){
+      this.termsRead=true
+    }else{
+      this.termsRead=false
+    }
+  }
+  clearLocalStorage() {
+    localStorage.removeItem('productTimetable')
+    localStorage.removeItem('cartList')
+    localStorage.removeItem('totalPrice')
   }
 } 

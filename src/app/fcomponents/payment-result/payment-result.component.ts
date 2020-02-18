@@ -50,7 +50,6 @@ export class PaymentResultComponent implements OnInit {
         this.isSendSuccess = true
         if (res['responseText'].localeCompare('APPROVED') == 0) {
           this.result = true
-          this.clearLocalStorage()
         } else if (res['responseText'].localeCompare('DECLINED') == 0) {
           this.result = false
         }
@@ -63,12 +62,6 @@ export class PaymentResultComponent implements OnInit {
       }
     )
 
-  }
-  clearLocalStorage() {
-    localStorage.removeItem('productTimetable')
-    localStorage.removeItem('cartList')
-    localStorage.removeItem('totalPrice')
-    localStorage.removeItem('cartId')
   }
   // payAgain(){
   //   this.isAskingStatus=true

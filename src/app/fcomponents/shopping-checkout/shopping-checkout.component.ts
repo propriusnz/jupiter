@@ -12,11 +12,15 @@ export class ShoppingCheckoutComponent implements OnInit {
   EventStartDate=''
   EventEndDate=''
   message:string
+  Coupon=''
   constructor(
     private data:DataService
   ) { }
 
   ngOnInit() {
+    if ('cartID' in localStorage){
+      console.log('still here')
+    }
   }
   pickupOrdelievery(option){
     this.isPickup=option
@@ -29,6 +33,9 @@ export class ShoppingCheckoutComponent implements OnInit {
   }
   EndDate(date){
     this.EventEndDate=date
+  }
+  setCoupon(coupon){
+    this.Coupon=coupon
   }
  
     
