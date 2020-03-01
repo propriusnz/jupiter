@@ -66,7 +66,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "jupiter:build"
+            "browserTarget": "jupiter:build",
+            "hmrWarning": false
           },
           "configurations": {
             "production": {
