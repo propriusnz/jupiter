@@ -11,10 +11,10 @@ if (environment.production) {
   enableProdMode();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//   platformBrowserDynamic().bootstrapModule(AppModule)
+//   .catch(err => console.error(err));
+// });
 
 const bootstrap = () => {
   return platformBrowserDynamic().bootstrapModule(AppModule);
