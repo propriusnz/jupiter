@@ -11,10 +11,10 @@ if (environment.production) {
   enableProdMode();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//   platformBrowserDynamic().bootstrapModule(AppModule)
+//   .catch(err => console.error(err));
+// });
 
 const bootstrap = () => {
   return platformBrowserDynamic().bootstrapModule(AppModule);
@@ -24,7 +24,6 @@ if (environment.hmr) {
   if (module['hot']) {
     hmrBootstrap(module, bootstrap);
   } else {
-    // 未加上 --hmr 时，控制台会有错误提醒
     console.error('HMR is not enabled for webpack-dev-server!');
     console.log('Are you using the --hmr flag for ng serve?');
   }
