@@ -91,6 +91,11 @@ ul li{
 .specialProductTitle{
     cursor: pointer;
     text-align: center;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 .specialProductPrice {
     text-align: center;
@@ -101,4 +106,7 @@ ul li{
 }
 .specailPrice {
     font-weight: 600;
+}
+.title-tooltip {
+    background-color: aquamarine;
 }
