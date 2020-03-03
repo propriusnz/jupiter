@@ -10,7 +10,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { CalendarUtilsModule } from './calendar-utils/module';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
@@ -80,6 +80,7 @@ import { ChildProductsDialogComponent } from './fcomponents/admin/admin-dialogs/
 import { PopupDialogComponent } from './fcomponents/basic/user-dialog/popup-dialog/popup-dialog.component';
 import { AdminHireCalendarDialogComponent } from './fcomponents/admin/admin-dialogs/admin-hire-calendar-dialog/admin-hire-calendar-dialog.component';
 import { PopoverModule } from 'ngx-bootstrap/popover';
+import { TermsConditionsComponent } from './fcomponents/basic/user-dialog/terms-conditions/terms-conditions.component';
 
 
 
@@ -108,17 +109,17 @@ const appRoutes: Routes = [
       { path: 'adminProducts/:productTypeId', component: AdminProductsComponent },
       { path: 'adminCarts', component: AdminCartComponent },
       { path: 'adminGalleries', component: AdminGalleriesComponent },
-	  { path: 'adminImages', component: AdminImagesComponent },
-	  { path: 'adminUserlist', component: AdminUserListComponent}
+      { path: 'adminImages', component: AdminImagesComponent },
+      { path: 'adminUserlist', component: AdminUserListComponent }
     ]
   },
   { path: 'login', component: AdminLoginComponent },
   { path: 'reset', component: ResetPasswordComponent },
-  { path: 'userDashboard', component: UserDashboardComponent,canActivate: [UserAuthGuard]},
+  { path: 'userDashboard', component: UserDashboardComponent, canActivate: [UserAuthGuard] },
   { path: 'checkout', component: ShoppingCheckoutComponent },
   { path: 'thankYou', component: ThankYouComponent },
   { path: 'paymentoptions', component: PaymentOptionsComponent },
-  { path: 'paymentresult', component: PaymentResultComponent,canActivate: [PaymentAuthGuard]},
+  { path: 'paymentresult', component: PaymentResultComponent, canActivate: [PaymentAuthGuard] },
   { path: '**', component: HomepageComponent }
 ];
 
@@ -169,7 +170,8 @@ const appRoutes: Routes = [
     ProfileDialogComponent,
     ChildProductsDialogComponent,
     PopupDialogComponent,
-    AdminHireCalendarDialogComponent
+    AdminHireCalendarDialogComponent,
+    TermsConditionsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -185,13 +187,14 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatIconModule,
     MatTabsModule,
-	MatSlideToggleModule,
+    MatSlideToggleModule,
     BrowserAnimationsModule,
     MatSlideToggleModule,
     MatMenuModule,
     MatRadioModule,
     MatSelectModule,
     MatSnackBarModule,
+    MatCheckboxModule,
     RouterModule.forRoot(appRoutes, { scrollPositionRestoration: 'enabled' }),
     HttpClientModule,
     BsDatepickerModule.forRoot(),
@@ -201,11 +204,11 @@ const appRoutes: Routes = [
       useFactory: adapterFactory
     }),
 
-	BsDatepickerModule.forRoot(),
-	PopoverModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    PopoverModule.forRoot()
   ],
   providers: [
-    ProductService, DataService, MatchService,AdminAuthGuard,UserAuthGuard,PaymentAuthGuard,AuthService,AdminPanelService
+    ProductService, DataService, MatchService, AdminAuthGuard, UserAuthGuard, PaymentAuthGuard, AuthService, AdminPanelService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
@@ -217,13 +220,14 @@ const appRoutes: Routes = [
     UserregistrationDialogComponent,
     UserloginDialogComponent,
     ForgotPasswordComponent,
-	EmailsentDialogComponent,
-	ProfileDialogComponent,
     EmailsentDialogComponent,
-	ItemDetailComponent,
-	ChildProductsDialogComponent,
+    ProfileDialogComponent,
+    EmailsentDialogComponent,
     ItemDetailComponent,
-    PopupDialogComponent
+    ChildProductsDialogComponent,
+    ItemDetailComponent,
+    PopupDialogComponent,
+    TermsConditionsComponent
   ],
 })
 export class AppModule { }

@@ -38,6 +38,7 @@ export class CartdialogComponent implements OnInit {
     eventEndDate: '',
     price: 0,
     time:'',
+    returntime:'',
     cartProd: []
   };
   constructor(
@@ -60,6 +61,7 @@ export class CartdialogComponent implements OnInit {
     this.cartForm.cartProd = data.data['cartProd']
     this.cartForm.price = data.data['price'];
     this.cartForm.time=data.data['tradingTime']
+    this.cartForm.returntime=data.data['returnTime']
     this.rentalFeesPaid = data.data['rentalPaidFee']
     this.depositFeesPaid = data.data['depositPaidFee']
     this.deliveryFees = data.data['deliveryFee']
@@ -83,7 +85,7 @@ export class CartdialogComponent implements OnInit {
       (res) => {
         this.isLoading = false;
         alert('Update contact successfully!');
-        this.dataChanges.emit();
+        this.dataChanges.emit(); 
       }, (error) => {
         this.isLoading = false;
 
@@ -119,6 +121,7 @@ export class CartdialogComponent implements OnInit {
     displayData.price = cartForm.price
     displayData.cartProd = cartForm.cartProd
     displayData.tradingTime=cartForm.time
+    displayData.returnTime=cartForm.returntime
     displayData.rentalPaidFee = this.rentalFeesPaid
     displayData.depositPaidFee = this.depositFeesPaid
     displayData.deliveryFee = this.deliveryFees

@@ -46,10 +46,14 @@ export class ShoppingCartComponent implements OnInit {
   depositFeeDue = 0;
   bondFee = 150
   amountDue = 0
+  showCoupon = true
+  showCouponError = false
+  isCouponValid = false
   @Input() isPickup = ''
   @Input() district = ''
   @Output() EventStartDate = new EventEmitter();
   @Output() EventEndDate = new EventEmitter();
+  @Output() Coupon = new EventEmitter()
   @ViewChild('quantityInput', { static: false }) quantityInput: ElementRef;
   borderstyleB = 'solid red 2px';
   constructor(
@@ -62,8 +66,8 @@ export class ShoppingCartComponent implements OnInit {
     this.maxDate_start = new Date();
     this.utcDate_start = new Date(nowDate2 + offset2) //Calculte current UTC date time
     this.maxDate_start.setDate(this.minDate_start.getDate() + 90);
-    this.minDate_return=this.minDate_start
-    this.maxDate_return=this.maxDate_start
+    this.minDate_return = this.minDate_start
+    this.maxDate_return = this.maxDate_start
   }
   ngOnChanges(changes: SimpleChanges) {
     const pickupValue = changes['isPickup'];
@@ -71,8 +75,6 @@ export class ShoppingCartComponent implements OnInit {
     this.processPickUpValue(pickupValue) //when user selects whether to pickup in user info component 
     this.calculateDeliveryFee(districtValue) //when user selects which district to deliver
     this.amountDue = this.depositFeeDue + this.deliveryFee
-    localStorage.setItem('totalPrice', JSON.stringify(this.totalPrice));
-
   }
   ngOnInit() {
     this.productTimetable = JSON.parse(localStorage.getItem('productTimetable') || '[]');
@@ -302,13 +304,13 @@ export class ShoppingCartComponent implements OnInit {
       if (myMoment.startOf('day'
       ).isAfter(moment(this.initialStartDate).startOf('day'))) {
         let myMoment_date = myMoment.toDate()
-        myMoment_date.setDate(myMoment.toDate().getDate()-1);
+        myMoment_date.setDate(myMoment.toDate().getDate() - 1);
         this.maxDate_return = myMoment_date
         break
       }
     }
-    
-    if (this.disabledDates.length == 0 ||this.dateStartInput==null) {
+
+    if (this.disabledDates.length == 0 || this.dateStartInput == null) {
       this.maxDate_return = this.maxDate_start
     }
   }
@@ -375,6 +377,46 @@ export class ShoppingCartComponent implements OnInit {
       }
 
     }
+  }
+  checkCoupon(coupon) {
+    if ('totalPrice' in localStorage) {
+      this.totalPrice = JSON.parse(localStorage.getItem('totalPrice'));
+    }
+    if (coupon) {
+      this.productService.checkCoupon(coupon.value).subscribe(
+        res => {
+          if (res === 1) {
+            this.processCoupon(coupon)
+          } else {
+            this.showCouponError = true
+            setTimeout(() => {
+              this.showCouponError = false;
+            }, 8000);
+            this.Coupon.emit('')
+          }
+        }
+      )
+    }
+  }
+  processCoupon(coupon) {
+    this.showCoupon = false
+    this.isCouponValid = true
+    this.showCouponError = false
+    this.Coupon.emit(coupon.value)
+    this.totalPrice *= 0.9
+    this.amountDue=this.totalPrice/2
+    localStorage.setItem('totalPrice', JSON.stringify(this.totalPrice));
+  }
+  cancelCoupon() {
+    if ('totalPrice' in localStorage) {
+      this.totalPrice = JSON.parse(localStorage.getItem('totalPrice'));
+    }
+    this.showCoupon = true
+    this.isCouponValid = false
+    this.Coupon.emit('')
+    this.totalPrice /= 0.9
+    this.amountDue=this.totalPrice/2
+    localStorage.setItem('totalPrice', JSON.stringify(this.totalPrice));
   }
 
 }

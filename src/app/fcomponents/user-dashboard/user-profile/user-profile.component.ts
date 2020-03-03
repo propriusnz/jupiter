@@ -19,6 +19,7 @@ export class UserProfileComponent implements OnInit {
 	phoneno: string;
 	com: string;
 	subs: number;
+	comments: string;
 	errorMessage = '';
 
   constructor(
@@ -32,14 +33,14 @@ export class UserProfileComponent implements OnInit {
 
 	  this.productservice.getProfile(this.userId).subscribe(
 		  profile => {
-			// console.log('Current logged in user：', profile);
-			  this.profile = profile;
-			//   console.log(this.profile['data'][0].email);
+			console.log('Current logged in user：', profile);
+			this.profile = profile;
 			this.firstname = profile['data'][0]['userInfo'][0] ? profile['data'][0]['userInfo'][0].firstName: null;
 			this.lastname = profile['data'][0]['userInfo'][0] ? profile['data'][0]['userInfo'][0].lastName: null;
 			this.email = profile['data'][0].email;
 			this.phoneno = profile['data'][0]['userInfo'][0] ? profile['data'][0]['userInfo'][0].phoneNumber: null;
 			this.com = profile['data'][0]['userInfo'][0] ? profile['data'][0]['userInfo'][0].company: null;
+			this.comments = profile['data'][0]['userInfo'][0] ? profile['data'][0]['userInfo'][0].comments: null;
 			
 			if (profile['data'][0].isSubscribe == 1) {
 				this.subs = 1;

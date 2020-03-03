@@ -51,7 +51,9 @@ export class ProductService {
   checkIfAvailable(cartitems) {
     return this.http.post(this.baseUrl + '/ProductTime/CheckIfAvailable/', cartitems)
   }
-
+  checkCoupon(coupon){
+    return this.http.get(this.baseUrl+'/carts/CheckCoupon?coupon='+coupon)
+  }
 
   // !Gallery
   indexGallery() {

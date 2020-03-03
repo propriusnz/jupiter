@@ -61,6 +61,10 @@
          <h5> Pick-up/delivery times 取货/送货时间</h5>
          <input class="form-control" type="text" name="time" [(ngModel)]="cartForm.time" #time="ngModel">
          <br>
+         <!--Allow user to change return time-->
+         <h5> Return times 还货时间</h5>
+         <input class="form-control" type="text" name="time" [(ngModel)]="cartForm.returntime" #returntime="ngModel">
+         <br>
          <!-- List of products & items for this order -->
          <h5>Items for this Order 本单物品</h5>
 
