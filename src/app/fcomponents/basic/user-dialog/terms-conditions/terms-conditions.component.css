@@ -6,3 +6,20 @@ button {
     margin:auto;
     display:block;
   }
+
+  h4{
+    font-family: 'RobotoThin', serif;
+    font-size: 28px;
+    color: #525252;
+    font-weight: 400;
+    /* font-style: italic; */
+    letter-spacing: -0.5px;
+      }
+  h5{
+    font-family: 'RobotoThin', serif;
+    font-size: 22px;
+    color: #525252;
+    font-weight: 400;
+    /* font-style: italic; */
+    letter-spacing: -0.5px;
+  }
