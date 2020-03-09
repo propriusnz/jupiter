@@ -52,8 +52,8 @@ export class FooterComponent implements OnInit {
   }
   openTCdialog() {
     this.dialog.open(TermsConditionsComponent, {
-      width: '650px',
-      height: '650px'
+      width: '700px',
+      height: '800px'
     });
   }
 }

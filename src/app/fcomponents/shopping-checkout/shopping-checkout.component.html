@@ -8,29 +8,48 @@
     <div class="col-lg-8 col-12">
       <!-- Disclaimer Content -->
       <div class="s3">
-        <b>If you would like to proceed with making a booking for this quote, please submit it to us below.</b>
+        <b>If you would like to confirm your order, please click the submit button. Once we confirm your payments, the
+          props will hold on your event date.</b>
         <br>
-        Upon receipt of your booking enquiry, we will determine the availability of your selected items for your chosen date, 
-        and contact you to confirm. To secure your booking, a 50% deposit is payable within 3 days of your acceptance. 
-        Final payment is due before you pick up/delivery day.
+        We will send you the Final Invoice before the event date (paid by Eftpos or Bank transfer). A
+        bond is payable on all hire props, starting from $150.00, it will be increased depends on the
+        value of the props you have hired. Bonds are fully refundable once return the props in original condition minus
+        fair wear and tear*.
         <br><br>
-        A bond is payable on all hire items, starting at $100, calculated depending on the value of items hired. 
-        Bonds are fully refundable on return of items in original condition minus fair wear and tear.
+        <b>No minimum spending is required if you would like to hire on weekends (please note: you must return products
+          on the Monday).</b>
+        The minimum spending is $50.00 if you hire between Tuesday and Thursday.
+        <br>
+        <b>Pick-up and Return time*:</b>
+        <br>
+        Pick-up: Friday 10:00-2:00
+        <br>
+        Return: Monday 10:00-2:00
         <br><br>
-        The standard hire period on all items is 3 days.  
-        <br>
-        <b>No minimum spending is required if you hire on weekends (you must return products by Monday).  </b><br>
-        The minimum spending is $50 if you hire between Monday and Friday. Hire pickup time: every Friday 10:00-2:00.
-        Time to return the products: 10:00-2:00 on Monday. Please let us know if you wish to pick up outside of those times.
-        <br>
-        Please note: Prices listed on the website include GST.
+        <b>Please let us know if you wish to pick up outside of our normal working hours.</b>
+        <br><br>
+
+        <b> Please note:<br>
+
+          *Prices listed on the website include GST.
+          <br>
+          *The standard hire period on all items is 3-calendar-day.
+          <br>
+          *Please make sure you have cleaned the props before you return (eg. stickers, lines, </b>
+        <br><br>
+        <!-- If you have any questions please contact the team on :<br> -->
+        <!-- Phone: 021 087 93899<br>
+Email: info@luxedreameventhire.co.nz<br> -->
+        Please also refer to our FAQ and Terms and Conditions.<br>
       </div>
-      <br><br><br>
+      <br>
       <div style="text-align: left;" class="m1">Shopping Bag</div>
-      <app-shopping-cart (Coupon)="setCoupon($event)"(EventStartDate)="StartDate($event)" (EventEndDate)="EndDate($event)" [isPickup]="isPickup" [district]="district"></app-shopping-cart>
+      <app-shopping-cart (Coupon)="setCoupon($event)" (EventStartDate)="StartDate($event)"
+        (EventEndDate)="EndDate($event)" [isPickup]="isPickup" [district]="district"></app-shopping-cart>
     </div>
     <div class="col-lg-4 col-12">
-      <app-shopping-userinfo (isPickup)="pickupOrdelievery($event)" (district)="districtOption($event)" [Coupon]="Coupon" [EventStartDate]="EventStartDate" [EventEndDate]="EventEndDate"></app-shopping-userinfo>
+      <app-shopping-userinfo (isPickup)="pickupOrdelievery($event)" (district)="districtOption($event)"
+        [Coupon]="Coupon" [EventStartDate]="EventStartDate" [EventEndDate]="EventEndDate"></app-shopping-userinfo>
       <br>
     </div>
   </div>

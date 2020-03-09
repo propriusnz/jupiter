@@ -147,11 +147,12 @@ body{
   color: #535353;
 }
 
-.s2bold {
+.s2 {
   font-family: 'RobotoThin', serif;
   font-size: 17px;
+  font-size: 1.5vw;
+  font-weight: 450;
   color: #535353;
-  font-weight: 700;
 }
 
 .s2gold {
