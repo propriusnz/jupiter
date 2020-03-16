@@ -62,25 +62,28 @@ export class GallerydialogComponent implements OnInit {
     this.galleryForm.eventtypeId = Number(this.galleryForm.eventtypeId);
     this.productService.updateGallery(this.id, this.galleryForm).subscribe(
       (res) => {
+        console.log(res)
         this.isLoading = false;
         this.dialogRef.close();
     }, (error) => {
       this.isLoading = false;
-      console.log(error);
+      console.warn(error);
     }
     );
   }
   // create new gallery
   create() {
     this.isLoading = true;
+    console.log(this.galleryForm)
     this.productService.addGallery(this.galleryForm).subscribe(
       (res) => {
+        console.log(res)
         this.isLoading = false;
       this.dialogRef.close();
-    }, (error) => {
-      this.isLoading = false;
-      console.log(error);
-    }
+      }, (error) => {
+        this.isLoading = false;
+        console.warn(error);
+      }
     );
   }
   // close this dialog

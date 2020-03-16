@@ -45,7 +45,8 @@ export class ShoppingUserinfoComponent implements OnInit {
     city: '',
     Message: '',
     District: '',
-    isPickup: ''
+    isPickup: '',
+    howFoundUs: ''
   };
   deliveryFee = 0
   districtName = ''
@@ -250,6 +251,7 @@ export class ShoppingUserinfoComponent implements OnInit {
   }
   //emit pickup value to shopping cart component
   radioButtonChange(input) {
+    console.log(this.userInfo)
     if (input['value'] == 0) {
       this.districtSelectControl = true
       this.userInfo.isPickup = "0"
@@ -272,7 +274,6 @@ export class ShoppingUserinfoComponent implements OnInit {
   selectionChangeTime(input){
     this.timeSelected=input.value
     this.timeError=false
-    
   }
   //updates timeReturnError control when user selects a time for return
   selectionChangeReturnTime(input){
