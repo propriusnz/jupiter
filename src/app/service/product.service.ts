@@ -21,6 +21,16 @@ export class ProductService {
   ) {
     // this.httpHeader1= new HttpHeaders({'Authorization': "Bearer " + sessionStorage.getItem('access_token')});
   }
+  // Videos get
+  getVideos(){
+    return this.http.get(this.baseUrl + '/video' ) 
+  }
+  // Video update 
+  updateVideo(id, data){
+    return this.http.put(this.baseUrl + '/video/' + id, data,
+      { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
+    
+  }
 
   // !Products
   showProduct(id: number) {

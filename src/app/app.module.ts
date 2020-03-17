@@ -81,7 +81,7 @@ import { PopupDialogComponent } from './fcomponents/basic/user-dialog/popup-dial
 import { AdminHireCalendarDialogComponent } from './fcomponents/admin/admin-dialogs/admin-hire-calendar-dialog/admin-hire-calendar-dialog.component';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { TermsConditionsComponent } from './fcomponents/basic/user-dialog/terms-conditions/terms-conditions.component';
-
+import { AdminVideoComponent } from './fcomponents/admin/admin-videos/admin-video.component';
 
 
 
@@ -110,7 +110,8 @@ const appRoutes: Routes = [
       { path: 'adminCarts', component: AdminCartComponent },
       { path: 'adminGalleries', component: AdminGalleriesComponent },
       { path: 'adminImages', component: AdminImagesComponent },
-      { path: 'adminUserlist', component: AdminUserListComponent }
+      { path: 'adminUserlist', component: AdminUserListComponent },
+      { path: 'video', component: AdminVideoComponent }
     ]
   },
   { path: 'login', component: AdminLoginComponent },
@@ -171,7 +172,8 @@ const appRoutes: Routes = [
     ChildProductsDialogComponent,
     PopupDialogComponent,
     AdminHireCalendarDialogComponent,
-    TermsConditionsComponent
+    TermsConditionsComponent,
+    AdminVideoComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

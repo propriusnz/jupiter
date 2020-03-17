@@ -9,12 +9,14 @@ th{
     top:0;
     z-index:99;
     text-align:center;
+    padding:0px !important;
 }
 th:first-child{
     width:56px;
 }
 td{
     text-align:center;
+    padding:0px !important;
 }
 .table-secondary  span{
     font-size: 10px;

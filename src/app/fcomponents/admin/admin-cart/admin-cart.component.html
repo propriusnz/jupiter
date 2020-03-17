@@ -54,12 +54,18 @@
       <tr class="table-secondary">
         <th scope="col">Id<br><span>编号</span></th>
         <th scope="col">Detail<br><span>详情</span></th>
-        <th scope="col">Contact<br><span>顾客信息</span></th>
+        <!-- <th scope="col">Contact<br><span>顾客信息</span></th> -->
         <th scope="col">Price<br><span>价格</span></th>
+        <th scope="col">Firstname<br><span>名</span></th>
+        <th scope="col">Lastname<br><span>姓</span></th>
+        <th scope="col">Email<br><span>邮箱</span></th>
+        <th scope="col">Phone<br><span>电话</span></th>
+
         <th scope="col">Location<br><span>活动地点</span></th>
         <th scope="col">CreateTime<br><span>创建时间</span></th>
         <th scope="col">EventDate<br><span>活动日期</span></th>
         <th scope="col">UpdateTime<br><span>修改时间</span></th>
+        <th scope="col"><span>怎样找到我们的</span></th>
         <th scope="col">Delete<br><span>删除</span></th>
       </tr>
     </thead>
@@ -135,7 +141,7 @@
         </td>
         <!--End CartProds-->
         <!--Contact-->
-        <td>
+        <!-- <td>
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -150,13 +156,20 @@
               </div>
             </div>
           </div>
-        </td>
+        </td> -->
         <!--End Contact-->
         <td>${{data.price}}</td>
-        <td>{{data.location}}</td>
+
+        <td>{{data.contact.firstName}}</td>
+        <td>{{data.contact.lastName}}</td>
+        <td style="width:150px; font-size:12px;">{{data.contact.email}}</td>
+        <td style="width:100px; font-size:12px;">{{data.contact.phoneNum}}</td>
+
+        <td style="width:200px; font-size:12px;">{{data.location}}</td>
         <td style="font-size:10px;">{{data.createOn | date:'mediumDate'}}</td>
         <td style="font-size:10px;">{{data.eventStartDate | date:'mediumDate'}} - {{data.eventEndDate | date:'mediumDate'}}</td>
         <td style="font-size:10px;">{{data.updateOn | date:'mediumDate'}}</td>
+        <td style="font-size:10px;">{{data.contact.findUs}}</td>
         <!-- <td><i class="far fa-edit" (click)="openCart(data)" title="Edit"></i></td> -->
         <td ><i class="far fa-trash-alt" title="Delete" (click)="deleteCart(data)"></i></td>
       </tr>

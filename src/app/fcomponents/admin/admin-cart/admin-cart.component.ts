@@ -48,6 +48,7 @@ export class AdminCartComponent implements OnInit {
           this.showSingleCart = false
         }
         this.isLoading = false;
+        console.log(res)
       },
       (error) => {
         console.log(error);

@@ -1,0 +1,22 @@
+<h2>Edit Videos
+视频更改
+</h2><br><br>
+<div *ngIf="videoForm">
+
+    <div *ngFor="let video of videoForm.controls">
+        Video Id
+        <input type="text" [formControl]="video.controls.id">
+        Video URL
+        <input type="text" [formControl]="video.controls.url">
+        Video Description
+        <input type="text" [formControl]="video.controls.description">
+        Video Type
+        <input type="text" [formControl]="video.controls.type">
+        &nbsp;   &nbsp;
+        <!-- <iframe width="150" height="100" [src]="videoCleaner(video.value.url)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+
+        <button class="btn btn-primary" (click)="updateVideo(video)">更新Update</button>
+        <br><br>
+    </div>
+
+</div>
