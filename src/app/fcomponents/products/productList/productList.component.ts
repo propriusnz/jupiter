@@ -110,6 +110,7 @@ export class ProductListComponent implements OnInit {
       (res) => {
         this.isLoading = false;
         this.allProducts = res['data'];
+        console.log(this.allProducts)
         if (id === 1) {
           this.getCategories(this.typeId);
         }

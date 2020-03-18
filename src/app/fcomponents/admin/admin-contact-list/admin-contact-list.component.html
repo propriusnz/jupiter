@@ -1,0 +1,52 @@
+<div class="mx-2" >
+	<h2 class="mt-3">Contact us List，  填了联系我们</h2>
+	<table class="table">
+		<thead>
+			<tr class="table-secondary">
+				<th>ID</th>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Phone</th>
+				<th>Company</th>
+				<th>Date of event</th>
+				<th>Location of event</th>
+				<th>Type of event</th>
+				<th>Message</th>
+				<th>How did they find us</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let contact of contactList">
+				<!-- User ID -->
+				<td>{{ contact.id }}</td>
+				<!-- Name -->
+				<td>{{ contact.name }}</td>
+				<!-- Email -->
+				<td>{{ contact.email }}</td>
+				<!-- Phone -->
+				<td><span >{{ contact.phoneNumber }}</span></td>
+				<!-- Comapny -->
+				<td><span >{{ contact.company }}</span></td>
+				<!-- Discount Level -->
+				<td><span >{{contact.dateOfEvent}}</span></td>
+
+				<td><span >{{contact.locationOfEvent}}</span></td>
+
+				<td><span >{{contact.typeOfEvent}}</span></td>
+
+				<td style="width: 13%;"><span *ngIf="contact.message">{{contact.message}}</span></td>
+
+				<td><span >{{contact.findUs}}</span></td>
+
+				<!-- Comments -->
+				<!-- <td style="width: 13%;">
+					<div *ngIf="user.userInfo[0]" style="max-height: 60px; overflow-y: scroll;">{{user.userInfo[0].comments}}</div>
+				</td> -->
+				<!-- Edit -->
+				<!-- <td style="text-align: center;">
+					<i class="far fa-edit" (click)="openEditProfile(user)" title="Edit"></i>
+				</td> -->
+			</tr>
+		</tbody>
+	</table>
+</div>

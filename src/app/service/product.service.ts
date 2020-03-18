@@ -200,6 +200,10 @@ export class ProductService {
     return this.http.post(this.baseUrl + '/ContactEmails', contactEmail);
   }
 
+  getContactEmails(){
+    return this.http.get(this.baseUrl + '/contactemails');
+  }
+
 
   // !EventType
   getEventType() {

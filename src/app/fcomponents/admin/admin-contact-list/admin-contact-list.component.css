@@ -1,0 +1,12 @@
+th {
+	position: sticky;
+	top: -10px;
+}
+tbody > tr:hover {
+	 color: #c48f45;
+	 cursor: default;
+}
+.far.fa-edit:hover {
+	color:rgb(55, 162, 233);
+	cursor: pointer;
+}

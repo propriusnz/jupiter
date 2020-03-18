@@ -82,6 +82,8 @@ import { AdminHireCalendarDialogComponent } from './fcomponents/admin/admin-dial
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { TermsConditionsComponent } from './fcomponents/basic/user-dialog/terms-conditions/terms-conditions.component';
 import { AdminVideoComponent } from './fcomponents/admin/admin-videos/admin-video.component';
+import { AdminContactListComponent } from './fcomponents/admin/admin-contact-list/admin-contact-list.component';
+
 
 
 
@@ -111,6 +113,7 @@ const appRoutes: Routes = [
       { path: 'adminGalleries', component: AdminGalleriesComponent },
       { path: 'adminImages', component: AdminImagesComponent },
       { path: 'adminUserlist', component: AdminUserListComponent },
+      { path: 'admincontactlist', component: AdminContactListComponent },
       { path: 'video', component: AdminVideoComponent }
     ]
   },
@@ -173,7 +176,8 @@ const appRoutes: Routes = [
     PopupDialogComponent,
     AdminHireCalendarDialogComponent,
     TermsConditionsComponent,
-    AdminVideoComponent
+    AdminVideoComponent,
+    AdminContactListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
