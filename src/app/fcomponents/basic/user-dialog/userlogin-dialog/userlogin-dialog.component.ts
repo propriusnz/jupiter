@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component'
@@ -7,6 +7,7 @@ import { ProductService } from '../../../../service/product.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { UserregistrationDialogComponent } from '../userregistration-dialog/userregistration-dialog.component';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-userlogin-dialog',
@@ -30,6 +31,7 @@ export class UserloginDialogComponent implements OnInit {
   public router: Router;
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId,
     private data: DataService,
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<UserloginDialogComponent>,
@@ -39,6 +41,8 @@ export class UserloginDialogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (!isPlatformBrowser(this.platformId)) {return;  }
+
     this.userLoginForm = this.fb.group({
       email: ['', [Validators.required,
       			   Validators.email]],

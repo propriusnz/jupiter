@@ -1,3 +1,14 @@
+const domino = require("domino");
+const fs = require("fs");
+const path = require("path");
+const templateA = fs
+.readFileSync(path.join("dist/browser", "index.html"))
+.toString();
+const win = domino.createWindow(templateA);
+win.Object = Object;
+win.Math = Math;
+
+
 import 'zone.js/dist/zone-node';
 import {enableProdMode} from '@angular/core';
 // Express Engine
@@ -10,6 +21,16 @@ import {join} from 'path';
 
 // Faster server renders w/ Prod mode (dev mode never needed)
 enableProdMode();
+
+global['window'] = win;
+global['Node'] = win.Node;
+global['navigator'] = win.navigator;
+global['Event'] = win.Event;
+global['KeyboardEvent'] = win.Event;
+global['MouseEvent'] = win.Event;
+global['Event']['prototype'] = win.Event.prototype;
+global['document'] = win.document;
+
 
 // Express server
 const app = express();

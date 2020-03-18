@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatchService } from '../../service/match.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment.prod';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-reset-password',
@@ -22,6 +23,7 @@ export class ResetPasswordComponent implements OnInit {
     Password: ''
   }
   constructor(
+    @Inject(PLATFORM_ID) private platformId,
     private router: Router,
     private fb: FormBuilder,
     private matchservice: MatchService,
@@ -30,6 +32,7 @@ export class ResetPasswordComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (!isPlatformBrowser(this.platformId)) {return;  }
 
     console.log(this.router.url)
     var res = this.router.url.split('=')

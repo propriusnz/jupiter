@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { PopupDialogComponent } from './fcomponents/basic/user-dialog/popup-dialog/popup-dialog.component'
+import { PopupDialogComponent } from './fcomponents/basic/user-dialog/popup-dialog/popup-dialog.component';
+  import { isPlatformBrowser } from '@angular/common';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'Luxe Dream Event Hire';
 
@@ -20,8 +23,19 @@ export class AppComponent {
       "contactType": "Customer service"
     }
   };
-  constructor(public dialog: MatDialog,) { }
+  isBrowser: boolean = false;
+
+  constructor(
+    public dialog: MatDialog,
+    @Inject(PLATFORM_ID) private platformId,
+    ) {
+      this.isBrowser = isPlatformBrowser(this.platformId);
+    }
+
   ngOnInit() {
+    if(!this.isBrowser){
+      return ;
+    }
     if(!('isVisited' in localStorage)){
       this.popupDialog()
     }

@@ -78,7 +78,11 @@ export class ShoppingUserinfoComponent implements OnInit {
     let nowDate2 = new Date().getTime();
     this.minDate = new Date(nowDate2 + offset2 + 13 * 60 * 60 * 1000);
   }
+
   ngOnInit() {
+    if(!isPlatformBrowser(this.platformId)){
+      return ;
+    }
     this.data.currentconflictmessage.subscribe(currentconflictmessage => this.conflictmessage = currentconflictmessage);
     if ('userId' in localStorage) {
       this.userId = JSON.parse(localStorage.getItem('userId'))
@@ -90,9 +94,10 @@ export class ShoppingUserinfoComponent implements OnInit {
             this.getUserInfo(info,res)
           }
 
-        })
+      })
     }
   }
+  
   getUserInfo(info,res){
     if (info[0].hasOwnProperty('firstName')) {
       this.userInfo.FirstName = res['data'][0].userInfo[0].firstName
@@ -314,6 +319,9 @@ export class ShoppingUserinfoComponent implements OnInit {
   getPaymentUrl(cartId) {
     this.productService.requestPaymentUrl(cartId).subscribe(
       res => {
+        if(!isPlatformBrowser(this.platformId)){
+          return ;
+        }
         window.location.assign(res['url'])
         this.paymentSpinnerControl = true
         this.clearLocalStorage()

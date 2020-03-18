@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, SimpleChanges, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, SimpleChanges, EventEmitter, Output, PLATFORM_ID, Inject } from '@angular/core';
 import { ProductService } from '../../../service/product.service'
 import { environment } from '../../../../environments/environment.prod';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import * as moment from 'moment';
 import { DataService } from '../../../service/data.service';
+import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
@@ -56,10 +57,14 @@ export class ShoppingCartComponent implements OnInit {
   @Output() Coupon = new EventEmitter()
   @ViewChild('quantityInput', { static: false }) quantityInput: ElementRef;
   borderstyleB = 'solid red 2px';
+
   constructor(
+    @Inject(PLATFORM_ID) private platformId,
     private productService: ProductService,
     private data: DataService
   ) {
+    if (!isPlatformBrowser(this.platformId)) {return;  }
+
     const offset2 = new Date().getTimezoneOffset() * 60 * 1000;
     const nowDate2 = new Date().getTime();
     this.minDate_start = new Date(nowDate2 + offset2 + 13 * 60 * 60 * 1000);
@@ -69,7 +74,9 @@ export class ShoppingCartComponent implements OnInit {
     this.minDate_return = this.minDate_start
     this.maxDate_return = this.maxDate_start
   }
+
   ngOnChanges(changes: SimpleChanges) {
+    if (!isPlatformBrowser(this.platformId)) {return;  }
     const pickupValue = changes['isPickup'];
     const districtValue = changes['district']
     this.processPickUpValue(pickupValue) //when user selects whether to pickup in user info component 
@@ -77,6 +84,8 @@ export class ShoppingCartComponent implements OnInit {
     this.amountDue = this.depositFeeDue + this.deliveryFee
   }
   ngOnInit() {
+    if (!isPlatformBrowser(this.platformId)) {return;  }
+
     this.productTimetable = JSON.parse(localStorage.getItem('productTimetable') || '[]');
     this.prodsInCart = JSON.parse(localStorage.getItem('cartList') || '[]');
     this.data.currentconflictmessage.subscribe(

@@ -79,7 +79,7 @@ import { ProfileDialogComponent } from './fcomponents/admin/admin-dialogs/profil
 import { ChildProductsDialogComponent } from './fcomponents/admin/admin-dialogs/child-products-dialog/child-products-dialog.component';
 import { PopupDialogComponent } from './fcomponents/basic/user-dialog/popup-dialog/popup-dialog.component';
 import { AdminHireCalendarDialogComponent } from './fcomponents/admin/admin-dialogs/admin-hire-calendar-dialog/admin-hire-calendar-dialog.component';
-import { PopoverModule } from 'ngx-bootstrap/popover';
+// import { PopoverModule } from 'ngx-bootstrap/popover';
 import { TermsConditionsComponent } from './fcomponents/basic/user-dialog/terms-conditions/terms-conditions.component';
 import { AdminVideoComponent } from './fcomponents/admin/admin-videos/admin-video.component';
 import { AdminContactListComponent } from './fcomponents/admin/admin-contact-list/admin-contact-list.component';
@@ -211,7 +211,7 @@ const appRoutes: Routes = [
     }),
 
     BsDatepickerModule.forRoot(),
-    PopoverModule.forRoot()
+    // PopoverModule.forRoot()
   ],
   providers: [
     ProductService, DataService, MatchService, AdminAuthGuard, UserAuthGuard, PaymentAuthGuard, AuthService, AdminPanelService

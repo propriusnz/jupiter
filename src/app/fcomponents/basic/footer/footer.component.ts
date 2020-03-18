@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { DataService } from '../../../service/data.service'
 import { TermsConditionsComponent } from '../../../fcomponents/basic/user-dialog/terms-conditions/terms-conditions.component'
+import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -10,9 +11,15 @@ import { TermsConditionsComponent } from '../../../fcomponents/basic/user-dialog
 export class FooterComponent implements OnInit {
   loginmessage: string;
   signupmessage: string;
+
+  
   constructor(
-    public dialog: MatDialog
-  ) { }
+    @Inject(PLATFORM_ID) private platformId,
+    public dialog: MatDialog,
+
+  ) {
+    if (!isPlatformBrowser(this.platformId)) {return;  }
+  }
 
   //   //Customer Signup   
   //   signupDialog() {

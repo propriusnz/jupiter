@@ -5,6 +5,7 @@ import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { environment } from '../../../../environments/environment.prod';
 import { setTheme } from 'ngx-bootstrap/utils';
 import * as moment from 'moment';
+import { isPlatformBrowser } from '@angular/common';
 
 
 @Component({
@@ -61,11 +62,13 @@ export class ProductComponent implements OnInit {
   //   beginDate: string};
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId,
     private route: ActivatedRoute,
     private router: Router,
     private productService: ProductService,
     private formBuilder: FormBuilder,
   ) {
+
     this.productId = this.route.snapshot.params['id'];
     setTheme('bs4');
     let offset2 = new Date().getTimezoneOffset() * 60 * 1000;
@@ -76,8 +79,12 @@ export class ProductComponent implements OnInit {
     this.maxDate_start.setDate(this.minDate_start.getDate() + 90);
     this.minDate_return=this.minDate_start
     this.maxDate_return=this.maxDate_start
+    if (!isPlatformBrowser(this.platformId)) {return;  }
+
   }
   ngOnInit() {
+    if (!isPlatformBrowser(this.platformId)) {return;  }
+
     this.cartForm = this.formBuilder.group({
       cartItems: this.formBuilder.array([]),
     });

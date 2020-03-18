@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, PLATFORM_ID } from '@angular/core';
 import { DataService } from '../../service/data.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-shopping-checkout',
@@ -14,10 +15,13 @@ export class ShoppingCheckoutComponent implements OnInit {
   message:string
   Coupon=''
   constructor(
-    private data:DataService
+    private data:DataService,
+    @Inject(PLATFORM_ID) private platformId,
   ) { }
 
   ngOnInit() {
+    if (!isPlatformBrowser(this.platformId)) {return;  }
+
     if ('cartID' in localStorage){
       console.log('still here')
     }

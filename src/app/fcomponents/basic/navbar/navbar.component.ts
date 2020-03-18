@@ -47,10 +47,11 @@ export class NavbarComponent implements OnInit {
       $('.navbar-nav>li>a').on('click', function () {
         $('.navbar-collapse').collapse('hide');
       });
+
+      this.getCategories();
+      this.getGalleryTypes();
+      this.ifLoggedIn();
     }
-    this.getCategories();
-    this.getGalleryTypes();
-    this.ifLoggedIn();
   }
   // get all the categories and show on navbar
   getCategories(): void {

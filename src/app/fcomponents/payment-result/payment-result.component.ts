@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../service/product.service';
+import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-payment-result',
   templateUrl: './payment-result.component.html',
@@ -22,6 +23,7 @@ export class PaymentResultComponent implements OnInit {
   userIdUrl = ''
   constructor(
     private router: Router,
+    @Inject(PLATFORM_ID) private platformId,
     private productService: ProductService,
     private route: ActivatedRoute
   ) {
@@ -34,6 +36,10 @@ export class PaymentResultComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(!isPlatformBrowser(this.platformId)){
+      return ;
+    }
+
     this.isSendingRequest = true
     if ('userId' in localStorage) {
       this.user = true

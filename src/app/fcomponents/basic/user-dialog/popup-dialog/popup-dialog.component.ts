@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
 import { ProductService } from '../../../../service/product.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-popup-dialog',
@@ -12,9 +13,15 @@ export class PopupDialogComponent implements OnInit {
   informationForm: FormGroup
 
 
-  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<[PopupDialogComponent]>, private productservice: ProductService) { }
+  constructor(
+    @Inject(PLATFORM_ID) private platformId,
+    private fb: FormBuilder, 
+    public dialogRef: MatDialogRef<[PopupDialogComponent]>, 
+    private productservice: ProductService) { }
 
   ngOnInit() {
+    if (!isPlatformBrowser(this.platformId)) {return;  }
+
     this.informationForm = this.fb.group({
       email: ['', [Validators.required, Validators.email
       ]],

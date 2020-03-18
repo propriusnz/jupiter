@@ -51,6 +51,10 @@ export class HomepageComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (!isPlatformBrowser(this.platformId)) {  
+    return
+  }
+
     // large screen
     if (this.isBrowser) {
       window.onscroll = () => {
