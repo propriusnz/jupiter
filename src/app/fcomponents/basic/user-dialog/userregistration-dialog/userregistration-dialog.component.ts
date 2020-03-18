@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DataService } from '../../../../service/data.service'
 import { ProductService } from '../../../../service/product.service';
-import { MatchService } from 'src/app/service/match.service';
+import { MatchService } from '../../../../service/match.service';
 import { Router } from '@angular/router';
 import { UserloginDialogComponent } from '../userlogin-dialog/userlogin-dialog.component';
 

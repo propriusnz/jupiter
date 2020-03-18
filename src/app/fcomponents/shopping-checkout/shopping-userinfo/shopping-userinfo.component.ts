@@ -3,7 +3,7 @@ import { ProductService } from '../../../service/product.service'
 import { isPlatformBrowser, DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormControl, Validators, FormGroupDirective, NgForm, FormGroup, FormBuilder } from '@angular/forms';
-import { DataService } from 'src/app/service/data.service';
+import { DataService } from '../../../service/data.service';
 import { MatDialog } from '@angular/material';
 import { TermsConditionsComponent } from '../../basic/user-dialog/terms-conditions/terms-conditions.component';
 @Component({

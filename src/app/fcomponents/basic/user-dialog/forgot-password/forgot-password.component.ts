@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { EmailsentDialogComponent } from '../emailsent-dialog/emailsent-dialog.component';
-import { ProductService } from 'src/app/service/product.service';
+import { ProductService } from '../../../../service/product.service';
 import { reduce } from 'rxjs/operators';
+
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',

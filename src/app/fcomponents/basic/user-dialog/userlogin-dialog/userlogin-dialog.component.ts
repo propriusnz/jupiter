@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component'
 import { DataService } from '../../../../service/data.service'
-import { ProductService } from 'src/app/service/product.service';
+import { ProductService } from '../../../../service/product.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { UserregistrationDialogComponent } from '../userregistration-dialog/userregistration-dialog.component';

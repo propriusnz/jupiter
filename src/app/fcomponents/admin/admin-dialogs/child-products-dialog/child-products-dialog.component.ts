@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatDialogConfig } from "@angular/material";
-import { ProductService } from "src/app/service/product.service";
+import { ProductService } from "../../../../service/product.service";
 import * as moment from 'moment';
 import { AdminHireCalendarDialogComponent } from '../admin-hire-calendar-dialog/admin-hire-calendar-dialog.component';
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from 'src/app/service/product.service';
+import { ProductService } from '../../service/product.service';
 
 @Component({
   selector: 'app-payment-options',
@@ -9,7 +9,7 @@ import { ProductService } from 'src/app/service/product.service';
 export class PaymentOptionsComponent implements OnInit {
   cartId: number
   constructor(
-    private productService: ProductService
+    // private productService: ProductService
   ) {
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
-import { ProductService } from 'src/app/service/product.service';
+import { ProductService } from '../../../../service/product.service';
 
 @Component({
   selector: 'app-popup-dialog',

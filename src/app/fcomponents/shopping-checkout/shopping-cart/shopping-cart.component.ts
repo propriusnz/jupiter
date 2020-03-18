@@ -3,7 +3,7 @@ import { ProductService } from '../../../service/product.service'
 import { environment } from '../../../../environments/environment.prod';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import * as moment from 'moment';
-import { DataService } from 'src/app/service/data.service';
+import { DataService } from '../../../service/data.service';
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',

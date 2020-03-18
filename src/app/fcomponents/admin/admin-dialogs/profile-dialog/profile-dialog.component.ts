@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { ProductService } from 'src/app/service/product.service';
+import { ProductService } from '../../../../service/product.service';
 
 @Component({
   selector: 'app-profile-dialog',

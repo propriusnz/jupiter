@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemDetailComponent } from '../../user-dashboard/item-detail/item-detail.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ProductService } from 'src/app/service/product.service';
+import { ProductService } from '../../../service/product.service';
 
 @Component({
   selector: 'app-order-history',

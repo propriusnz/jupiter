@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatchService } from 'src/app/service/match.service';
+import { MatchService } from '../../../service/match.service';
 import { ProductService } from '../../../service/product.service';
 
 @Component({
@@ -15,7 +15,8 @@ export class ManagePasswordComponent implements OnInit {
 	changeFailed = true;
 	errorMessage = '';
 	userId: number;
-	userEmail = ''
+	userEmail = '';
+	// signupFailed;
 	constructor(
 		private fb: FormBuilder,
 		private matchservice: MatchService,
