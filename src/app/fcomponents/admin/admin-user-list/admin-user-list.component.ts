@@ -33,7 +33,8 @@ export class AdminUserListComponent implements OnInit {
 			// 		console.log(userInfo[userInfo]);
 			// 	}
 			// });
-		  }
+		  },
+		  (err)=>{console.warn(err)}
 	  );
   }
 

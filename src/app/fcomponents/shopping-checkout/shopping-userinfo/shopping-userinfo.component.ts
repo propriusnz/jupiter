@@ -115,10 +115,13 @@ export class ShoppingUserinfoComponent implements OnInit {
 
   // check whether form is valid
   onSubmit({ valid }: { valid: boolean }) {
-    this.checkPickUpValue()
-    this.checkDistrictValue()
-    this.checkTimeValue()
-    this.checkTimeReturnValue()
+    if (this.districtSelectControl){
+      this.checkPickUpValue()
+      this.checkDistrictValue()
+      this.checkTimeValue()
+      this.checkTimeReturnValue()
+    }
+
     if (!valid || this.districtError || this.buttonError || this.timeError ||this.timeReturnError ||!this.termsRead ) {
       this.feedback_message = 'Please check all inputs and fill up the form';
       setTimeout(() => {
@@ -172,17 +175,20 @@ export class ShoppingUserinfoComponent implements OnInit {
   }
   calculateDeliveryFee() {
     if (this.districtSelected == 1) {
-      this.deliveryFee = 20
+      this.deliveryFee = 100
       this.districtName = "NorthShoreCity"
     } else if (this.districtSelected == 2) {
-      this.deliveryFee = 30
+      this.deliveryFee = 150
       this.districtName = "AucklandCity"
     } else if (this.districtSelected == 3) {
-      this.deliveryFee = 50
+      this.deliveryFee = 260
       this.districtName = "ManukauCity"
     } else if (this.districtSelected == 4) {
-      this.deliveryFee = 40
+      this.deliveryFee = 150
       this.districtName = "WaitakereCity"
+    } else if (this.districtSelected == 5) {
+      this.deliveryFee = 200
+      this.districtName = "EastAuckland"
     }
   }
   calculateBondFee() {

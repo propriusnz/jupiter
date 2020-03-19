@@ -20,8 +20,9 @@
 <div class="alert alert-danger mt-2 mb-2" role="alert" *ngIf="!isTimeSame && prodsInCart.length!=0">
 	{{errorMessage}}</div>
 <div class="alert alert-danger mt-2 mb-2" role="alert" *ngIf="isAlert && isShoppingCartValid">
-	Customer Service will confirm this order with you. You can get <span style="font-size: large;">instant
-		confirmation</span> if you book from Friday to Monday.
+	Customer service will confirm this order with you. You can get instant confirmation if you choose to hire your prop[s] for pick-up on Fridays and return the following Monday
+	<!-- Customer Service will confirm this order with you. You can get <span style="font-size: large;">instant
+		confirmation</span> if you book from Friday to Monday. -->
 </div>
 <hr>
 <div class="row mb-3 productdiv" *ngFor="let prod of prodsInCart; index as i">
@@ -62,8 +63,14 @@
 	<div class="mb-1">Rental Due at Delivery or Pick-up: NZ $<span class="s2bold">{{depositFeeDue}}</span></div>
 	<div class="mb-1">Bond Due at Delivery or Pick-up: NZ $<span class="s2bold">{{bondFee}}</span></div>
 	<div class="mb-1" *ngIf="deliveryControl">Delivery Fee <span style="color:red">Due now</span>: NZ $<span
-			class="s2bold">{{deliveryFee}}</span></div>
-	<div class="mb-1">Total Rent Fee: NZ $<span class="s2bold">{{totalPrice}}</span></div>
+			class="s2bold">{{deliveryFee}}</span> </div>
+
+	<div *ngIf="userDiscount" class="mb-1">Total Rent Fee: NZ ${{totalPrice / userDiscount}}</div>
+	<div *ngIf="userDiscount" class="mb-1">Discounted Fee: NZ $<b>{{totalPrice}}</b></div>
+
+	<div *ngIf="!userDiscount" class="mb-1">Total Rent Fee: NZ $<span class="s2bold">{{totalPrice}}</span></div>
+
+
 	<div class="mb-1">Total Amount <span style="color:red">Due Now</span>: NZ $<span class="s2bold">{{amountDue}}</span>
 	</div>
 	<div class="mb-1" style="font-size:x-small;">(15% GST Included)</div>

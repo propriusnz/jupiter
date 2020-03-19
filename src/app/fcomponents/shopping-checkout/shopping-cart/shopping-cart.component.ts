@@ -11,6 +11,7 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit {
+  userDiscount:any;
   totalPrice = 0;
   prodsInCart: any;
   productDetail: any;
@@ -153,22 +154,58 @@ export class ShoppingCartComponent implements OnInit {
     this.price();
 
   }
+
   calculateTime() {
     let hiringdetail = []
     this.processHiringDetail(hiringdetail)
     this.callAPIforCalculateTime(hiringdetail)
   }
+
   // calculate total price of shopping cart
   price() {
     this.totalPrice = 0;
+    console.log('s')
     this.prodsInCart.forEach(prod => {
       this.totalPrice += prod.Price;
     });
+    let userID = localStorage.getItem('userId')
+    // If user is logged in, check to see if user has discount level
+    if(userID){
+      this.checkUserForDiscount( userID);
+    }
+    else{
+      this.price2()
+    }
+  }
+
+  // If user is logged in, check to see if user has discount level
+  checkUserForDiscount(id){
+    this.productService.getProfile(id).subscribe(
+      (res)=>{console.log(res);
+
+        // Check if user has discount level
+        if (res['data'][0].discount && res['data'][0].discount !== 1){
+          this.userDiscount = res['data'][0].discount
+
+          // Apply discount
+          this.totalPrice = this.totalPrice * this.userDiscount
+        }
+        // Return new price
+        this.price2()
+      },
+      (err)=>{this.price2(), console.warn(err)}
+    )
+  }
+
+  price2(){
+    console.log('price2')
     this.depositFeeDue = this.totalPrice / 2
     this.amountDue = this.totalPrice / 2
     localStorage.setItem('totalPrice', JSON.stringify(this.totalPrice));
     this.calculateBondFee()
   }
+
+
   getAllStock() {
     this.prodsInCart.forEach(element => {
       this.productService.showProduct(element.ProdId).subscribe((res => {
@@ -176,6 +213,7 @@ export class ShoppingCartComponent implements OnInit {
       }));
     });
   }
+
   //check if start dates and return dates of all products in the shopping cart are the same 
   checkTimeConflict() {
     let control = false
@@ -361,13 +399,15 @@ export class ShoppingCartComponent implements OnInit {
   calculateDeliveryFee(districtValue) {
     if (districtValue != null) {
       if (districtValue.currentValue.localeCompare("1") == 0) {
-        this.deliveryFee = 20
+        this.deliveryFee = 100
       } else if (districtValue.currentValue.localeCompare("2") == 0) {
-        this.deliveryFee = 30
+        this.deliveryFee = 150
       } else if (districtValue.currentValue.localeCompare("3") == 0) {
-        this.deliveryFee = 50
+        this.deliveryFee = 260
       } else if (districtValue.currentValue.localeCompare("4") == 0) {
-        this.deliveryFee = 40
+        this.deliveryFee = 150
+      } else if (districtValue.currentValue.localeCompare("5") == 0) {
+        this.deliveryFee = 200
       }
 
 
@@ -407,6 +447,7 @@ export class ShoppingCartComponent implements OnInit {
       )
     }
   }
+
   processCoupon(coupon) {
     this.showCoupon = false
     this.isCouponValid = true
@@ -416,6 +457,7 @@ export class ShoppingCartComponent implements OnInit {
     this.amountDue=this.totalPrice/2
     localStorage.setItem('totalPrice', JSON.stringify(this.totalPrice));
   }
+
   cancelCoupon() {
     if ('totalPrice' in localStorage) {
       this.totalPrice = JSON.parse(localStorage.getItem('totalPrice'));

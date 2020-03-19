@@ -30,10 +30,10 @@
 				<!-- Comapny -->
 				<td><span *ngIf="user.userInfo[0]">{{ user.userInfo[0].company }}</span></td>
 				<!-- Discount Level -->
-				<td><span *ngIf="user.userInfo[0]">{{user.userInfo[0].discountLevel}}</span></td>
+				<td><span *ngIf="user.userInfo[0]">{{user.discount}}</span></td>
 				<!-- Subscribed -->
-				<td *ngIf="user.isSubscribe == 1" class="px-4">&radic;</td>
-				<td *ngIf="user.isSubscribe == 0"></td>
+				<td *ngIf="user.isSubscribe == 1" class="px-4">Yes</td>
+				<td *ngIf="user.isSubscribe == 0">No</td>
 				<!-- Comments -->
 				<td style="width: 13%;">
 					<div *ngIf="user.userInfo[0]" style="max-height: 60px; overflow-y: scroll;">{{user.userInfo[0].comments}}</div>

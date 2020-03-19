@@ -159,12 +159,17 @@ export class ProductdialogComponent implements OnInit {
     if (this.selectedImg == null) {
       this.isImageEmpty = true;
     } else {
+      console.log('uploading')
       this.isImageEmpty = false;
       this.isLoading = true;
       const fd = new FormData();
       fd.append('image', this.selectedImg, this.selectedImg.name);
+      // fd.append('image', this.selectedImg);
       fd.append('prodId', JSON.stringify(this.id));
+
+      console.log(fd)
       this.productService.addImg(fd).subscribe((res) => {
+        console.log(res)
         this.isLoading = false;
         this.feedbackMessage = res['data'];
         this.getProductImages();
@@ -172,7 +177,7 @@ export class ProductdialogComponent implements OnInit {
       }, (error) => {
         this.isLoading = false;
         this.feedbackMessage = 'upload failed';
-        console.log(error);
+        console.warn(error);
       });
     }
   }

@@ -20,6 +20,7 @@ export class ProfileDialogComponent implements OnInit {
 		private productservice: ProductService,
 		@Inject(MAT_DIALOG_DATA) user
 	) { 
+		console.log(user)
 		this.userProfile = user.data;
 		//   console.log(this.userProfile);
 	}
@@ -43,7 +44,7 @@ export class ProfileDialogComponent implements OnInit {
 				company: [this.userProfile['userInfo'][0]['company'],
 							[Validators.minLength(2),
 							Validators.maxLength(20)]],
-				discountLevel: [this.userProfile['userInfo'][0]['discountLevel']],
+				discount: [this.userProfile['discount'], [Validators.min(0), Validators.max(1)]],
 				comments: [this.userProfile['userInfo'][0]['comments'], 
 							[Validators.minLength(2),
 							Validators.maxLength(255)]]
@@ -71,8 +72,8 @@ export class ProfileDialogComponent implements OnInit {
 		return this.profileForm.get('company');
 	}
 
-	get discountLevel() {
-		return this.profileForm.get('discountLevel');
+	get discount() {
+		return this.profileForm.get('discount');
 	}
 	
 	get comments() {
@@ -107,13 +108,18 @@ export class ProfileDialogComponent implements OnInit {
 	}
 
 	onSubmit() {
+		if (!this.profileForm.valid){
+			this.errorMessage = "Theres errors"
+			return
+			;
+		}
 		let user = {
 			userId: this.userId,
 			firstName: this.profileForm.value.firstName,
 			lastName: this.profileForm.value.lastName,
 			phoneNumber: this.profileForm.value.phone,
 			company: this.profileForm.value.company,
-			discountLevel: this.profileForm.value.discountLevel,
+			discount: this.profileForm.value.discount,
 			comments: this.profileForm.value.comments
 		}
 		console.log('Updated user profile: ', user);

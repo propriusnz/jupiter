@@ -127,10 +127,11 @@
       <mat-form-field class="regionform">
          <mat-label>Select a region</mat-label>
          <mat-select required (selectionChange)="selectionChange($event)">
-            <mat-option value="1">NorthShoreCity</mat-option>
-            <mat-option value="2">AucklandCity</mat-option>
-            <mat-option value="3">ManukauCity</mat-option>
-            <mat-option value="4">WaitakereCity</mat-option>
+            <mat-option value="1">North Shore</mat-option>
+            <mat-option value="2">Auckland City</mat-option>
+            <mat-option value="3">Manukau</mat-option>
+            <mat-option value="4">Waitakere</mat-option>
+            <mat-option value="5">Howick & East</mat-option>
          </mat-select>
       </mat-form-field>
       <mat-error *ngIf="districtError && isShoppingCartValid">Please select a region</mat-error>
