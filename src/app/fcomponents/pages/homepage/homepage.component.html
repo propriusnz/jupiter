@@ -95,85 +95,53 @@
       <!--Button of View Our Product-->
       <div class="row justify-content-md-center my-3">
         <div class="col-12 text-center">
-          <button type="button" class="btn btn-outline-gold lspace-3" routerLink="/hire">View our products</button>
+          <button type="button" class="btn btn-outline-gold lspace-3" routerLink="/products/1/0">View our products</button>
         </div>
       </div>
       <!--End Button of View Our Product-->
     </div>
     <!-- End !SecialProducts -->
 
+
     <!-- Title paragraph -->
     <h1 class="l2 text-center mt-5">
-      One stop event hire shop
+      Event Hire Specialists
     </h1>
     <br><br>
     <div class="px-5 text-center s1">
-      We have what you need for any occasion, wedding, birthday, corporate gathering, family reunion, or just another special
-      event, we have got you covered.
-      We offer very competitive prices and high-quality rental equipment.<br><br>
-      Being a locally owned business, Luxe Dream Event Hire has everything you'll need for a great party.
-      Our kid-friendly staff delivers to throughout Auckland.
+      Luxe Dream Event Hire is all about <span style="font-family: 'LuxeDream'">luxury…</span>
       <br>
+      The <span style="font-family: 'LuxeDream'">luxury</span> of hiring props, making your event a little grander than normal…
+      <br>
+      The <span style="font-family: 'LuxeDream'">luxury</span> of having our professionals step in to help style your unique event…
+      <br>
+      The <span style="font-family: 'LuxeDream'">luxury</span> of being surrounded by beautiful exclusive floral pieces…
+      <br><br>
+      Whether your celebrating a wedding, engagement, birthday, baby shower, corporate gathering or any other special event, we’re here to make it a unique day to remember.
+      <br><br>
+      Our professional services include: <span style="font-family: 'LuxeDream'">Prop Hire, Event Styling & Floral Decoration</span>. 
+    <br>
       <a class="getintouch" style="color:#c48f45" href="" routerLink="/contactUs">Get in touch now for a quote</a> !
     </div>
     <br>
-    <div class="row">
       <div class="col-12 text-center s1">Or see our work galleries</div>
-    </div>
-    <div class="row mb-5">
+    <div class="mb-5">
       <div class="col-12 text-center"><button type="button" class="btn btn-outline-gold my-4 lspace-3"
           routerLink="/galleries"> View Our Gallery</button></div>
     </div>
 
-    <!-- styling -->
-    <!-- <div class="row">
-      <div class="col-12 col-md-6" style="height:550px;">
-        <img src="../../../../assets/images/465b91cc5e0f427019fb4363fe65023d.jpg" style="height:100%;width:100%;" />
-      </div>
-      <div class="col-12 col-md-6">
-        <div class="d-none d-md-block"><br><br></div>
-        <h1 class="l2 mt-5 lspace-5">Our event services</h1>
-        <div class="my-3 s2">
-          Want a Instagram worthy event but just not sure where to start or how to bring all the
-          elements together to create a picture-perfect setting?<br /><br />Luxe Dream Event Hire love to create
-          incredible
-          events that inspire and excite!
-        </div>
-        <button type="button" class="btn btn-outline-gold my-md-5 lspace-3" routerLink="/services">View our
-          services</button>
-      </div>
-    </div> -->
-
-
-
-    <div class="row">
-      <div class="col-12 col-md-6" style="height:550px;">
-        <img src="../../../../assets/images/465b91cc5e0f427019fb4363fe65023d.jpg" style="height:100%;width:100%;" />
-      </div>
-      <div class="col-12 col-md-6">
-        <div class="d-none d-md-block"><br><br></div>
-        <h1 class="l2 mt-1 lspace-5">Event Hire Specialists</h1>
-        <div class="my-3 s2">
-          Luxe Dream Event Hire is all about <span style="font-family: 'LuxeDream'">luxury…</span>
-          <br>
-          The <span style="font-family: 'LuxeDream'">luxury</span> of hiring props, making your event a little grander than normal…
-          <br>
-          The <span style="font-family: 'LuxeDream'">luxury</span> of having our professionals step in to help style your unique event…
-          <br>
-          The <span style="font-family: 'LuxeDream'">luxury</span> of being surrounded by beautiful exclusive floral pieces…
-          <br><br>
-          Whether your celebrating a wedding, engagement, birthday, baby shower, corporate gathering or any other special event, we’re here to make it a unique day to remember.
-          <br><br>
-          Our professional services include: <span style="font-family: 'LuxeDream'">Prop Hire, Event Styling & Floral Decoration</span>. 
-        </div>
-    </div>
-    </div>
     <br>
     <div class="row ">
-      <div class="col-12 col-md-6 pt-md-4 order-1 order-md-0">
+      <div *ngIf="video" class="col-12 col-md-6 order-0 order-md-0" style="min-height:360px;">
+        <!-- <img src="../../../../assets/images/5da0c82500e7be45dc17d023ea7e2c83.jpg " style="height:100%;width:100%;"> -->
+        <iframe style="width:100%; height:100%;" [src]="video" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+      </div>
+
+      <div class="col-12 col-md-6 pt-md-4 order-1 order-md-1">
         <div class="d-none d-md-block"><br><br></div>
         <h1 class="l2  lspace-5">Floral Decoration</h1>
-      
+
         <div class="my-3 s2">
           Luxe Dream Floral Studio specialise in flowering weddings and events. <br>
           With our knowledge and understanding of floral availability, designs and colour palettes, our florists can create beautiful blooms, both artificial and fresh.
@@ -184,15 +152,10 @@
         </div>
         <button type="button" class="btn btn-outline-gold my-md-3 lspace-3" routerLink="/services/2/49">View our floral studio</button>
       </div>
-      <div class="col-12 col-md-6 order-0 order-md-1" style="height:550px;"><img
-          src="../../../../assets/images/5da0c82500e7be45dc17d023ea7e2c83.jpg " style="height:100%;width:100%;"></div>
     </div>
     <br>
     <div class="row ">
-      <div class="col-12 col-md-6" style="height:550px;">
-        <img src="../../../../assets/images/465b91cc5e0f427019fb4363fe65023d.jpg" style="height:100%;width:100%;" />
-      </div>
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-6 order-1 order-md-0">
         <div class="d-none d-md-block"><br><br></div>
         <h1 class="l2 lspace-5">Prop Hire</h1>
         <div class="my-3 s2">
@@ -205,10 +168,14 @@
         <br>
         <button type="button" class="btn btn-outline-gold my-md-5 lspace-3" routerLink="/products/1/0">View our props</button>
       </div>
+      <div class="col-12 col-md-6 order-0 order-md-1" style="height:550px;">
+        <img src="../../../../assets/images/465b91cc5e0f427019fb4363fe65023d.jpg" style="height:100%;width:100%;" />
+      </div>
+
     </div>
     <br>
     <div class="row ">
-      <div class="col-12 col-md-6 pt-md-4 order-1 order-md-0">
+      <div class="col-12 col-md-6 pt-md-4 order-1 order-md-1">
         <div class="d-none d-md-block"><br></div>
         <h1 class="l2 lspace-5">Event Styling</h1>
         <div class="my-3 s2">
@@ -225,7 +192,7 @@
           <button type="button" class="btn btn-outline-gold my-md-3 lspace-3" routerLink="/packages">View our packages</button>
         </div>
       </div>
-      <div class="col-12 col-md-6 order-0 order-md-1" style="height:550px;"><img
+      <div class="col-12 col-md-6 order-0 order-md-0" style="height:550px;"><img
           src="../../../../assets/images/5da0c82500e7be45dc17d023ea7e2c83.jpg " style="height:100%;width:100%;"></div>
     </div>
 

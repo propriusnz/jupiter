@@ -29,11 +29,14 @@
 				<mat-error *ngIf="company.invalid">{{getErrorMessage4()}}</mat-error>
 			</mat-form-field>
 
-			<div id="comment" class="mx-auto" *ngIf="comments">
+			<!-- <div id="comment" class="mx-auto" *ngIf="comments">
 				<small><b>Comments & Terms</b></small>
 				<div class="mt-2 border rounded">{{comments}}</div>
+			</div> -->
+			<br>
+			<div *ngIf="discount">
+				You have a discount percentage of {{100 - discount * 100}}%
 			</div>
-
 			<div class="slide">
 				<mat-slide-toggle (change)="onSlideChange($event)" aria-label="Subscribe" formControlName="subscribe" color="primary"></mat-slide-toggle>
 				<span> Subscribe to our news letter</span><br>

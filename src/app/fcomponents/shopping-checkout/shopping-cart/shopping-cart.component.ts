@@ -11,6 +11,8 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit {
+
+  
   userDiscount:any;
   totalPrice = 0;
   prodsInCart: any;
@@ -276,9 +278,15 @@ export class ShoppingCartComponent implements OnInit {
     this.checkTimeConflict()
     this.processDisabledDates()
     this.checkDaySelected()
+    if (!this.checkRentalLength()){
+      this.errorMessage = "Sorry, standard rental period cannot exceed is 7 days."
+      return;
+    }
     this.updateShoppingCartStatus()
     localStorage.setItem('productTimetable', JSON.stringify(this.productTimetable))
+    this.errorMessage=null
   }
+
   //if there is an input change of return date
   onReturnChange(value) {
     this.isAlert = false
@@ -289,9 +297,30 @@ export class ShoppingCartComponent implements OnInit {
     })
     this.checkTimeConflict()
     this.checkDaySelected()
+    if (!this.checkRentalLength()){
+      this.errorMessage = "Sorry, standard rental period cannot exceed is 7 days."
+      return;
+    }
     this.updateShoppingCartStatus()
     localStorage.setItem('productTimetable', JSON.stringify(this.productTimetable))
+    this.errorMessage=null
+  }
 
+  checkRentalLength(){
+    // if (moment(this.initialStartDate).day() != 5 || moment(this.initialEndDate).day() != 1) {
+      console.log("start", this.initialStartDate)
+      console.log("end", this.initialEndDate)
+    let startday= moment(this.initialStartDate)
+    let endday= moment(this.initialEndDate)
+    let daylength = endday.diff(startday, 'days')
+    console.log("length", daylength)
+    if (daylength < 0 || daylength > 7){
+      console.log("problem")
+      return false;
+    }
+    else {
+      return true
+    }
   }
 
   datetoYMD(date) {

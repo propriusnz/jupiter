@@ -14,6 +14,7 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
+  errorMessage:any;
   productId: number;
   productDetail: any;
   prodMediaUrl: any;
@@ -216,7 +217,7 @@ export class ProductComponent implements OnInit {
     this.detailId_getTmpMap()
     this.isStockAvailable = true;
     this.isprodAdded = true;
-    this.checkDaySelected()
+    // this.checkDaySelected()
     this.setTime()
     list.forEach(item => {
       let control = false;
@@ -247,9 +248,11 @@ export class ProductComponent implements OnInit {
   }
   //check if user has selected from Friday to Monday
   checkDaySelected(){
+    if(!this.startMomentDay || !this.returnMomentDay){return  ;}
     if(this.startMomentDay!=5 || this.returnMomentDay!=1){
       this.isAlert=true
     }else{
+      console.log('dsf')
       this.isAlert=false
     }
   }
@@ -304,6 +307,9 @@ export class ProductComponent implements OnInit {
   updateProductTimetable(){
     this.productTimetable = JSON.parse(localStorage.getItem('productTimetable'));
     this.productTimetable.forEach(item => {
+      console.log(this.tmpDetailID.get(item.prodDetailId))
+      console.log(this.tmpDetailID)
+      console.log(item)
       if (this.tmpDetailID.get(item.prodDetailId) != null || this.tmpProdID.get(item.prodId) != null) {
         if (item.hasOwnProperty('prodDetailId')) {
           item.quantity = this.tmpDetailID.get(item.prodDetailId).quantity
@@ -320,6 +326,7 @@ export class ProductComponent implements OnInit {
     })
     this.addItemtoProductTimetable()
   }
+
   //if product is new for produtcTimetable
   addItemtoProductTimetable(){
     let iterable = this.tmpDetailID.values()
@@ -339,10 +346,10 @@ export class ProductComponent implements OnInit {
   // click the path and re-navigate
   backClicked(type: string, id?: number) {
     if (id) {
-      this.router.navigate(['/category/', id]);
+      this.router.navigate(['/products/1/', id]);
     }
     if (type === 'services') {
-      this.router.navigate(['/services']);
+      this.router.navigate(['/services/2']);
     }
     if (type === 'packages') {
       this.router.navigate(['/packages']);
@@ -554,6 +561,13 @@ export class ProductComponent implements OnInit {
       }
     }
     this.updateAddCartButton()
+    this.checkDaySelected()
+    if (!this.checkRentalLength()){
+      this.errorMessage = "Sorry, standard rental period cannot exceed is 7 days."
+      return;
+    }
+    this.errorMessage=null;
+    
   }
   //when return date input changes
   onReturnChange(value) {
@@ -562,6 +576,12 @@ export class ProductComponent implements OnInit {
     this.returnMoment = moment(this.dateReturnInput)
     this.returnMomentDay=this.returnMoment.day()
     this.updateAddCartButton()
+    this.checkDaySelected()
+    if (!this.checkRentalLength()){
+      this.errorMessage = "Sorry, standard rental period cannot exceed is 7 days."
+      return;
+    }
+    this.errorMessage=null;
   }
   //check if the previous date inputs are disabled now
   checkDisabledDates() {
@@ -573,5 +593,24 @@ export class ProductComponent implements OnInit {
 
     return false
   }
+  checkRentalLength(){
+    // if (moment(this.initialStartDate).day() != 5 || moment(this.initialEndDate).day() != 1) {
+    let startday= moment(this.startMoment.format("YYYY-MM-DD"));
+    let endday= moment(this.returnMoment.format("YYYY-MM-DD"));
+
+    console.log("start", startday)
+    console.log("end", endday)
+
+    let daylength = endday.diff(startday, 'days')
+    console.log("length", daylength)
+    if (daylength < 0 || daylength > 7){
+      console.log("problem")
+      return false;
+    }
+    else {
+      return true
+    }
+  }
+
 
 }

@@ -172,8 +172,10 @@
 			</div>
 			<!--If customer did not start on Friday and return on Monday-->
 			<div class="alert alert-danger mt-3" role="alert" *ngIf="isAlert">
-				Customer service will confirm this order with you. You can get <span style="font-size:large">instant confirmation</span> if you book from
-				Friday to Monday.
+				Customer service will confirm this order with you. You can get instant confirmation if you choose to hire your prop[s] for pick-up on Fridays and return the following Monday
+			</div>
+			<div class="alert alert-danger mt-3" role="alert" *ngIf="errorMessage">
+				{{errorMessage}}
 			</div>
 		</div>
 	</div>

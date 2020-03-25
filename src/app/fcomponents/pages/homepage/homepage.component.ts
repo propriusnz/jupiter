@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild, Inject, PLATFORM_ID, HostListener } from '@angular/core';
 import { ProductService } from '../../../service/product.service';
-import { Meta, Title } from '@angular/platform-browser';
+import { Meta, Title, DomSanitizer } from '@angular/platform-browser';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { environment } from '../../../../environments/environment.prod';
 
@@ -10,7 +10,7 @@ import { environment } from '../../../../environments/environment.prod';
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
-
+  video:any;
   num = 0;
   specialProducts: any = [];
   groupedSpecials: any = [];
@@ -28,6 +28,7 @@ export class HomepageComponent implements OnInit {
     }
   }
   constructor(
+    private sanitizer: DomSanitizer,
     @Inject(PLATFORM_ID) private platformId,
     private productService: ProductService,
     private meta: Meta,
@@ -54,6 +55,7 @@ export class HomepageComponent implements OnInit {
     if (!isPlatformBrowser(this.platformId)) {  
     return
   }
+  this.getVideo()
 
     // large screen
     if (this.isBrowser) {
@@ -106,5 +108,12 @@ export class HomepageComponent implements OnInit {
     }, (err) => {
       console.log(err);
     });
+  }
+
+  getVideo(){
+    this.productService.getVideos().subscribe(
+      (res)=>{console.log(res), this.video = this.sanitizer.bypassSecurityTrustResourceUrl(res[0].url) },
+      (err)=>{console.warn(err) }
+  )
   }
 }

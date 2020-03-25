@@ -21,7 +21,7 @@ export class UserProfileComponent implements OnInit {
 	subs: number;
 	comments: string;
 	errorMessage = '';
-
+	discount:any;
   constructor(
 	  private fb: FormBuilder,
 	  private productservice: ProductService
@@ -41,7 +41,9 @@ export class UserProfileComponent implements OnInit {
 			this.phoneno = profile['data'][0]['userInfo'][0] ? profile['data'][0]['userInfo'][0].phoneNumber: null;
 			this.com = profile['data'][0]['userInfo'][0] ? profile['data'][0]['userInfo'][0].company: null;
 			this.comments = profile['data'][0]['userInfo'][0] ? profile['data'][0]['userInfo'][0].comments: null;
-			
+			if (profile['data'][0].discount !=1){
+				this.discount = profile['data'][0].discount;
+			}
 			if (profile['data'][0].isSubscribe == 1) {
 				this.subs = 1;
 			}else{

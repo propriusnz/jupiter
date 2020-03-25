@@ -17,8 +17,11 @@
 			(bsValueChange)="onReturnChange($event)">
 	</div>
 </div>
-<div class="alert alert-danger mt-2 mb-2" role="alert" *ngIf="!isTimeSame && prodsInCart.length!=0">
+<!-- <div class="alert alert-danger mt-2 mb-2" role="alert" *ngIf="!isTimeSame && prodsInCart.length!=0">
+	{{errorMessage}}</div> -->
+	<div class="alert alert-danger mt-2 mb-2" role="alert" *ngIf="errorMessage">
 	{{errorMessage}}</div>
+
 <div class="alert alert-danger mt-2 mb-2" role="alert" *ngIf="isAlert && isShoppingCartValid">
 	Customer service will confirm this order with you. You can get instant confirmation if you choose to hire your prop[s] for pick-up on Fridays and return the following Monday
 	<!-- Customer Service will confirm this order with you. You can get <span style="font-size: large;">instant
@@ -50,7 +53,7 @@
 	<br>
 	<br>
 	<span class="s2">You don't have anything in your shopping cart yet!</span> <br>
-	<button class="btn btn-outline-gold mt-3" routerLink="/hire">View Our Products</button>
+	<button class="btn btn-outline-gold mt-3" routerLink="/products/1/0">View Our Products</button>
 	<br>
 	<br>
 </div>
@@ -59,19 +62,20 @@
 	<mat-error *ngIf="showCouponError">Coupon is not Valid!</mat-error>
 	<div *ngIf="isCouponValid"><span style="color:green">Coupon is Valid!</span> <button class="ml-2" (click)="cancelCoupon()">Cancel</button></div>
 	<div class="mb-1">
-		Rental Deposit <span style="color:red">Due Now</span>: NZ $<span class="s2bold">{{depositFeeDue}}</span></div>
-	<div class="mb-1">Rental Due at Delivery or Pick-up: NZ $<span class="s2bold">{{depositFeeDue}}</span></div>
-	<div class="mb-1">Bond Due at Delivery or Pick-up: NZ $<span class="s2bold">{{bondFee}}</span></div>
+		Rental Deposit <span style="color:red">Due Now</span>: NZ <span class="s2bold">{{depositFeeDue | currency}}</span></div>
+	<div class="mb-1"><b>Rental</b> Due at Delivery or Pick-up: NZ <span class="s2bold">{{depositFeeDue | currency}}</span></div>
+	<div class="mb-1"><b>Bond</b> Due at Delivery or Pick-up: NZ <span class="s2bold">{{bondFee | currency}}</span></div>
 	<div class="mb-1" *ngIf="deliveryControl">Delivery Fee <span style="color:red">Due now</span>: NZ $<span
-			class="s2bold">{{deliveryFee}}</span> </div>
-
-	<div *ngIf="userDiscount" class="mb-1">Total Rent Fee: NZ ${{totalPrice / userDiscount}}</div>
-	<div *ngIf="userDiscount" class="mb-1">Discounted Fee: NZ $<b>{{totalPrice}}</b></div>
-
-	<div *ngIf="!userDiscount" class="mb-1">Total Rent Fee: NZ $<span class="s2bold">{{totalPrice}}</span></div>
+			class="s2bold">{{deliveryFee | currency}}</span> </div>
 
 
-	<div class="mb-1">Total Amount <span style="color:red">Due Now</span>: NZ $<span class="s2bold">{{amountDue}}</span>
+	<div *ngIf="userDiscount" class="mb-1">Total Rental : NZ {{totalPrice / userDiscount | currency}}</div>
+	<div *ngIf="userDiscount" class="mb-1">After discount rental: NZ <b>{{totalPrice | currency}}</b></div>
+
+	<div *ngIf="!userDiscount" class="mb-1">Total Rent Fee: NZ <span class="s2bold">{{totalPrice | currency}}</span></div>
+
+
+	<div class="mb-1">Total Amount <span style="color:red">Due Now</span>: NZ <span class="s2bold">{{amountDue | currency}}</span>
 	</div>
 	<div class="mb-1" style="font-size:x-small;">(15% GST Included)</div>
 </div>
