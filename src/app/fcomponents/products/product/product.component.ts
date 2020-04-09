@@ -248,11 +248,16 @@ export class ProductComponent implements OnInit {
   }
   //check if user has selected from Friday to Monday
   checkDaySelected(){
-    if(!this.startMomentDay || !this.returnMomentDay){return  ;}
-    if(this.startMomentDay!=5 || this.returnMomentDay!=1){
+    console.log(this.startMomentDay, this.returnMomentDay)
+    if(this.startMomentDay == undefined || this.returnMomentDay == undefined){return  ;}
+    let startDay = this.startMomentDay
+    let returnDay = this.returnMomentDay 
+    // console.log(startDay, returnDay)
+    if(startDay!=5 || returnDay!=1){
       this.isAlert=true
-    }else{
-      console.log('dsf')
+      console.log('problem')
+    }
+    else {
       this.isAlert=false
     }
   }
@@ -594,6 +599,7 @@ export class ProductComponent implements OnInit {
     return false
   }
   checkRentalLength(){
+    if(!this.startMoment || !this.returnMoment){return true; }
     // if (moment(this.initialStartDate).day() != 5 || moment(this.initialEndDate).day() != 1) {
     let startday= moment(this.startMoment.format("YYYY-MM-DD"));
     let endday= moment(this.returnMoment.format("YYYY-MM-DD"));

@@ -29,7 +29,6 @@ export class ProductService {
   updateVideo(id, data){
     return this.http.put(this.baseUrl + '/video/' + id, data,
       { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('access_token') }) });
-    
   }
 
   // !Products

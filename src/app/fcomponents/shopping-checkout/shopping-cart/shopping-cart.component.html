@@ -60,7 +60,7 @@
 <div class="text-right" *ngIf="totalPrice!=0 &&isShoppingCartValid">
 	<div class="mb-1" *ngIf="showCoupon">Coupon Code : <input #coupon><button class="ml-2" (click)="checkCoupon(coupon)">Apply</button></div>
 	<mat-error *ngIf="showCouponError">Coupon is not Valid!</mat-error>
-	<div *ngIf="isCouponValid"><span style="color:green">Coupon is Valid!</span> <button class="ml-2" (click)="cancelCoupon()">Cancel</button></div>
+	<!-- <div *ngIf="isCouponValid"><span style="color:green">Coupon is Valid!</span> <button class="ml-2" (click)="cancelCoupon()">Cancel</button></div>
 	<div class="mb-1">
 		Rental Deposit <span style="color:red">Due Now</span>: NZ <span class="s2bold">{{depositFeeDue | currency}}</span></div>
 	<div class="mb-1"><b>Rental</b> Due at Delivery or Pick-up: NZ <span class="s2bold">{{depositFeeDue | currency}}</span></div>
@@ -77,7 +77,19 @@
 
 	<div class="mb-1">Total Amount <span style="color:red">Due Now</span>: NZ <span class="s2bold">{{amountDue | currency}}</span>
 	</div>
-	<div class="mb-1" style="font-size:x-small;">(15% GST Included)</div>
+	<div class="mb-1" style="font-size:x-small;">(15% GST Included)</div> -->
+
+	<div *ngIf="userDiscount" class="mb-1">Total item price(s): {{totalPrice / userDiscount | currency}}</div>
+	<div *ngIf="!userDiscount" class="mb-1">Total item price(s): <span class="s2bold">{{totalPrice | currency}}</span></div>
+
+	<div class="mb-1"> Bond: <span class="s2bold">{{bondFee | currency}}</span></div>
+
+	<div class="mb-1" *ngIf="deliveryControl">Delivery fee due now:  <span class="s2bold">{{deliveryFee | currency}}</span> </div>
+
+	<div class="mb-1">Deposit Due Now: <span class="s2bold">{{depositFeeDue | currency}}</span></div>
+	<div class="mb-1">Remainder due before pick-up date <span class="s2bold">{{depositFeeDue | currency}}</span></div>
+
+
 </div>
 
 <div class="justify-content-end mb-3" *ngIf="prodsInCart.length!=0">

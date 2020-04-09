@@ -36,12 +36,12 @@ export class AppComponent {
     if(!this.isBrowser){
       return ;
     }
-    if(!('isVisited' in localStorage)){
+    if(!('isVisited' in sessionStorage)){
       this.popupDialog()
     }
   }
   popupDialog(){
-    localStorage.setItem('isVisited','1')
+    sessionStorage.setItem('isVisited','1')
     this.dialog.open(PopupDialogComponent,{
         width: '600px',
         height: '600px',

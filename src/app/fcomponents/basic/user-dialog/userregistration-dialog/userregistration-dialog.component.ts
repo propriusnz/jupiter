@@ -7,6 +7,7 @@ import { MatchService } from '../../../../service/match.service';
 import { Router } from '@angular/router';
 import { UserloginDialogComponent } from '../userlogin-dialog/userlogin-dialog.component';
 import { isPlatformBrowser } from '@angular/common';
+import { NewUserInfoDialogComponent } from '../new-user-info-dialog/new-user-info-dialog.component';
 
 @Component({
   selector: 'app-userregistration-dialog',
@@ -120,6 +121,7 @@ export class UserregistrationDialogComponent implements OnInit {
       }
     );
   }
+
   onSlideChange(subscribe) {
     if (subscribe.checked) {
       this.subscribe = 1;
@@ -129,8 +131,9 @@ export class UserregistrationDialogComponent implements OnInit {
   }
 
   redirect() {
-    this.router.navigate(['userDashboard']);
-    location.reload();
-
+    this.dialog.open(NewUserInfoDialogComponent, {
+      width: '550px',
+      height: '680px'
+    });
   }
 }

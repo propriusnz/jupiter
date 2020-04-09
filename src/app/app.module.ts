@@ -83,6 +83,7 @@ import { AdminHireCalendarDialogComponent } from './fcomponents/admin/admin-dial
 import { TermsConditionsComponent } from './fcomponents/basic/user-dialog/terms-conditions/terms-conditions.component';
 import { AdminVideoComponent } from './fcomponents/admin/admin-videos/admin-video.component';
 import { AdminContactListComponent } from './fcomponents/admin/admin-contact-list/admin-contact-list.component';
+import { NewUserInfoDialogComponent } from './fcomponents/basic/user-dialog/new-user-info-dialog/new-user-info-dialog.component';
 
 
 
@@ -177,7 +178,8 @@ const appRoutes: Routes = [
     AdminHireCalendarDialogComponent,
     TermsConditionsComponent,
     AdminVideoComponent,
-    AdminContactListComponent
+    AdminContactListComponent,
+    NewUserInfoDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -233,7 +235,8 @@ const appRoutes: Routes = [
     ChildProductsDialogComponent,
     ItemDetailComponent,
     PopupDialogComponent,
-    TermsConditionsComponent
+    TermsConditionsComponent,
+    NewUserInfoDialogComponent
   ],
 })
 export class AppModule { }
