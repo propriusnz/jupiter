@@ -52,9 +52,11 @@ export class PaymentResultComponent implements OnInit {
     }
     this.productService.paymentResult(url).subscribe(
       (res) => {
+        console.log(res)
         this.isSendingRequest = false
         this.isSendSuccess = true
         if (res['responseText'].localeCompare('APPROVED') == 0) {
+          this.clearLocalStorage()
           this.result = true
         } else if (res['responseText'].localeCompare('DECLINED') == 0) {
           this.result = false
@@ -63,12 +65,18 @@ export class PaymentResultComponent implements OnInit {
       ,
       (error) => {
         this.isSendingRequest = false
-        this.isSendSuccess = true
+        this.isSendSuccess = false
 
       }
     )
 
   }
+  clearLocalStorage() {
+    localStorage.removeItem('productTimetable')
+    localStorage.removeItem('cartList')
+    localStorage.removeItem('totalPrice')
+  }
+
   // payAgain(){
   //   this.isAskingStatus=true
   //   this.productService.getCartStatus(this.cartId).subscribe(

@@ -65,3 +65,7 @@ a.dropdown-item:hover{
 .page-item:hover {
     cursor: pointer;
 }
+.is-active{
+    color:#c48f45;
+    font-weight: 500;
+}

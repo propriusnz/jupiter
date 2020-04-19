@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ProductService } from '../../../service/product.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
 import { environment } from '../../../../environments/environment.prod';
 
@@ -26,6 +26,7 @@ export class ProductListComponent implements OnInit {
   currentPageNumber = 0;
   constructor(
     private productService: ProductService,
+    private router:Router,
     private route: ActivatedRoute,
     private meta: Meta,
     private titleService: Title
@@ -79,7 +80,8 @@ export class ProductListComponent implements OnInit {
     }
     this.selectedCate = this.productService.getCategory();
     this.productService.getSelectedCategory().subscribe(
-      res => {
+      (res) => {
+        console.log(res)
         this.selectedCate = res;
       }
     );
@@ -121,6 +123,7 @@ export class ProductListComponent implements OnInit {
       (err) => { console.log(err), this.errorMessage = 'Server fault', this.isLoading = false; }
     );
   }
+
   // sort product by category
   changeCate(id, e?) {
     this.isLoading = true;
@@ -131,6 +134,7 @@ export class ProductListComponent implements OnInit {
     }
     return this.getCategoryById(id);
   }
+
   getCategoryById(id: number) {
     this.productService.indexCategoryId(id).subscribe((res) => {
       this.isLoading = false;
@@ -143,10 +147,39 @@ export class ProductListComponent implements OnInit {
       console.log(error);
     });
   }
+
+  compareValues(key, order = 'asc') {
+    return function innerSort(a, b) {
+      if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+        // property doesn't exist on either object
+        return 0;
+      }
+  
+      const varA = (typeof a[key] === 'string')
+        ? a[key].toUpperCase() : a[key];
+      const varB = (typeof b[key] === 'string')
+        ? b[key].toUpperCase() : b[key];
+  
+      let comparison = 0;
+      if (varA > varB) {
+        comparison = 1;
+      } else if (varA < varB) {
+        comparison = -1;
+      }
+      return (
+        (order === 'desc') ? (comparison * -1) : comparison
+      );
+    };
+  }
+
   // Get all the categories => dropDown menu
   getCategories(typeId: number) {
     this.productService.getCategoryByType(typeId).subscribe((res) => {
-      this.allCategories = res['productCategory'];
+      console.log(res)
+
+      this.allCategories = res['productCategory'].sort(this.compareValues('categoryName', 'asc'))
+      // this.allCategories = res['productCategory'];
+
       this.typeTitle = res['typeName'];
       if (Number(this.categoryId) === 0) {
         this.selectedCate = 'All ' + this.typeTitle;
@@ -156,22 +189,53 @@ export class ProductListComponent implements OnInit {
       }
     }, (error) => { console.log(error), this.errorMessage = 'Server fault'; });
   }
+
   // pagination
   groupProducts() {
+    this.clearPageStatus();
     this.isProductsGrouped = true;
     for (let i = 0; i < this.allProducts.length; i += 12) {
       const mylist = this.allProducts.slice(i, i + 12);
       this.groupedProducts.push(mylist);
     }
     this.allProducts = this.groupedProducts[0];
+    let pageNum = this.route.queryParams['value'].page
+    console.log(pageNum)
+    if ( !pageNum ) this.addQueryParams(0)
+    else this.changePage(pageNum)
   }
+
   changePage(page: number): void {
+    console.log(page)
+    console.log(this.groupedProducts)
+
     this.currentPageNumber = page;
     this.allProducts = this.groupedProducts[page];
     this.categorySelectionElement.nativeElement.scrollIntoView();
+    this.addQueryParams(page)
   }
+
   clearPageStatus() {
+    // this.allProducts=[]
     this.groupedProducts = [];
     this.isProductsGrouped = false;
   }
+
+  addQueryParams(pageNum){
+    console.log(this.route)
+    console.log(this.router)
+    // changes the route without moving from the current view or
+    // triggering a navigation event,
+    this.router.navigate([], {
+     relativeTo: this.route,
+     queryParams: {
+       page: pageNum
+     },
+    //  queryParamsHandling: 'merge',
+     // preserve the existing query params in the route
+    //  skipLocationChange: true
+     // do not trigger navigation
+   });
+  }
+
 }

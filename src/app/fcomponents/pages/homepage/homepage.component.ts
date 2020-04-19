@@ -3,6 +3,8 @@ import { ProductService } from '../../../service/product.service';
 import { Meta, Title, DomSanitizer } from '@angular/platform-browser';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { environment } from '../../../../environments/environment.prod';
+import { MatDialog } from '@angular/material';
+import { PopupDialogComponent } from '../../basic/user-dialog/popup-dialog/popup-dialog.component';
 
 @Component({
   selector: 'app-homepage',
@@ -28,6 +30,7 @@ export class HomepageComponent implements OnInit {
     }
   }
   constructor(
+    public dialog: MatDialog,
     private sanitizer: DomSanitizer,
     @Inject(PLATFORM_ID) private platformId,
     private productService: ProductService,
@@ -55,6 +58,10 @@ export class HomepageComponent implements OnInit {
     if (!isPlatformBrowser(this.platformId)) {  
     return
   }
+  if(!('isVisited' in sessionStorage)){
+    this.popupDialog()
+  }
+
   this.getVideo()
 
     // large screen
@@ -69,6 +76,15 @@ export class HomepageComponent implements OnInit {
     this.getSpecials();
     this.getCarouselImages();
   }
+
+  popupDialog(){
+    sessionStorage.setItem('isVisited','1')
+    this.dialog.open(PopupDialogComponent,{
+        width: '600px',
+        height: '600px',
+      });
+  }
+
   // control scrolling speed
   backgroundScroll(e) {
     this.bgat.nativeElement.style.backgroundPosition = '0%' + e / 50 + '%';

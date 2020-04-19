@@ -83,3 +83,12 @@ a:hover {
   padding: 3px 10px;
   width:260px;
 }
+tr{
+  padding-top:2px;
+  padding-bottom: 2px;
+}
+
+td{
+  padding-top:4px;
+  padding-bottom: 4px;
+}

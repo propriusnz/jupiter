@@ -57,6 +57,7 @@ export class NavbarComponent implements OnInit {
   getCategories(): void {
     this.productService.getProductType().toPromise()
       .then((res) => {
+        // console.log(res)
         const returnData = [...Object.values(res)];
         this.hireCategories = returnData.filter((v) => v.typeName === 'Hire')['0']['productCategory']
         this.serviceCategories = returnData.filter((v) => v.typeName === 'Party Services')['0']['productCategory'];

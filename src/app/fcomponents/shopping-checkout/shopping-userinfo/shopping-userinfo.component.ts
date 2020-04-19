@@ -330,7 +330,7 @@ export class ShoppingUserinfoComponent implements OnInit {
         }
         window.location.assign(res['url'])
         this.paymentSpinnerControl = true
-        this.clearLocalStorage()
+        // this.clearLocalStorage()
       },
       err => {
         this.paymentSpinnerControl = true

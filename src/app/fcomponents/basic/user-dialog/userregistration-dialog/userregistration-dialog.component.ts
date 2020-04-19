@@ -133,7 +133,8 @@ export class UserregistrationDialogComponent implements OnInit {
   redirect() {
     this.dialog.open(NewUserInfoDialogComponent, {
       width: '550px',
-      height: '680px'
+      height: '680px',
+      data: "New user information"
     });
   }
 }

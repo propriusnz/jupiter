@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,7 +14,7 @@ export class NewUserInfoDialogComponent implements OnInit {
     private router: Router,
     public dialogRef: MatDialogRef<NewUserInfoDialogComponent>,
     public dialog: MatDialog,
-
+    @Inject(MAT_DIALOG_DATA) public data?,
   ) {
 
   }
@@ -25,9 +25,13 @@ export class NewUserInfoDialogComponent implements OnInit {
   }
   
   redirect() {
+    if ( this.data == "New user information") {
+
     this.router.navigate(['userDashboard']);
-    location.reload();
-
+      location.reload();
+    }
+    else{
+      this.dialogRef.close();
+    }
   }
-
 }

@@ -1,7 +1,36 @@
 <div class="card">
 	<div class="card-header">
 		<h4>Your Order Details</h4>
+	</div><br>
+	<div style="padding:10px;" class="row">
+		<div class="col-md-6">
+			<b>Date of event for rental: </b>{{data.eventStartDate | date}}  - {{data.eventEndDate | date}}
+		</div>
+		<div class="col-md-6">
+			<b>Event location: </b>{{data.location}} 
+		</div>
+		<div class="col-md-6">
+			<b>Rental price:</b> {{data.price | currency}} 
+		</div>
+		<div *ngIf="data.savedAmount" class="col-md-6">
+			<b>Savings:</b> {{data.savedAmount | currency}}
+		</div>
+		<div *ngIf="data.deliveryFee" class="col-md-6">
+			<b>Delivery fee: </b>{{data.deliveryFee | currency}} 
+		</div>
+		<div class="col-md-6">
+			<b>Rental paid: </b>{{data.rentalPaidFee | currency}} 
+		</div>
+		<div class="col-md-6">
+			<b>Bond required: </b>{{data.depositFee | currency}} 
+		</div>
+		<div class="col-md-6">
+			<b>Bond paid: </b>{{data.depositPaidFee | currency}} 
+		</div>
+
+
 	</div>
+
 	<div class="card-body bg-light text-center">
 		<table class="table">
 			<tr>

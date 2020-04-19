@@ -1,6 +1,5 @@
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { PopupDialogComponent } from './fcomponents/basic/user-dialog/popup-dialog/popup-dialog.component';
   import { isPlatformBrowser } from '@angular/common';
 
 @Component({
@@ -26,7 +25,6 @@ export class AppComponent {
   isBrowser: boolean = false;
 
   constructor(
-    public dialog: MatDialog,
     @Inject(PLATFORM_ID) private platformId,
     ) {
       this.isBrowser = isPlatformBrowser(this.platformId);
@@ -36,17 +34,9 @@ export class AppComponent {
     if(!this.isBrowser){
       return ;
     }
-    if(!('isVisited' in sessionStorage)){
-      this.popupDialog()
-    }
   }
-  popupDialog(){
-    sessionStorage.setItem('isVisited','1')
-    this.dialog.open(PopupDialogComponent,{
-        width: '600px',
-        height: '600px',
-      });
-  }
+
+
   // Check if isvisit exist in localstorage
 
   // if exist, exit this function

@@ -90,7 +90,7 @@ export class ManagePasswordComponent implements OnInit {
 			},
 			error => {
 				console.log('Change passwd failed', error);
-				this.errorMessage = "CHange password failed";
+				this.errorMessage = "Change password failed";
 			}
 		);
 	}

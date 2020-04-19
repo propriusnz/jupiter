@@ -7,6 +7,7 @@
 				<th>Date of Event</th>
 				<th>Price</th>
 				<th>Payment Status</th>
+				<th>Account Details</th>
 				<th>Order Status</th>
 				<th>View Detail</th>
 			</tr>
@@ -14,7 +15,10 @@
 				<td>{{order.cartId}}</td>
 				<td>{{order.location}}</td>
 				<td>{{order.eventStartDate | date :'mediumDate'}} - {{order.eventEndDate | date :'mediumDate'}} </td>
-				<td>$ {{order.price}}</td>
+				<td>{{order.price | currency}}</td>
+
+				<td>Rental Paid: {{order.rentalPaidFee | currency}}</td>
+
 				<td *ngIf="order.isPay === 0 && order.isExpired === 0">
 					<b>Processing</b><br>
 					<!-- <button class="btn btn-sm btn-info mt-1" *ngIf="order.isPay === 0 && order.isExpired === 0" (click)="payAgain(order.cartId)">

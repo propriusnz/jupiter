@@ -13,13 +13,14 @@ export class ItemDetailComponent implements OnInit {
   orderID: any
   constructor(
     public productService: ProductService,
-    @Inject(MAT_DIALOG_DATA) data,
+     @Inject(MAT_DIALOG_DATA) public data
   ) { 
     // console.log(data)
-    this.orderID = data
+    this.orderID = data.cartId
   }
 
   ngOnInit() {
+    console.log(this.data)
     this.productService.getUserOrderHistory(this.orderID).subscribe(
       (res)=>{console.log(res),
       this.items = res['cartProd']

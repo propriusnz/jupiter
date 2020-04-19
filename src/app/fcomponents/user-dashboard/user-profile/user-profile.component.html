@@ -41,11 +41,12 @@
 				<mat-slide-toggle (change)="onSlideChange($event)" aria-label="Subscribe" formControlName="subscribe" color="primary"></mat-slide-toggle>
 				<span> Subscribe to our news letter</span><br>
 			</div>
-
+			<span style="cursor: pointer;" (click)="openEventPlanningDialog()">Are you a event planning business ?  </span>
+			<br>
 			<div *ngIf="this.updateProfileForm.valid && errorMessage" class="alert alert-danger text-center s2" role="alert">
 				{{errorMessage}}
 			</div>
-		
+			<span style="color:#c48f45; " class="s2" *ngIf="successMessage">{{successMessage}}</span>
 			<div id="buttonsWrap" class="mt-2">
 				<button mat-raised-button type="submit" class="primaryButton">Update</button>
 			</div>

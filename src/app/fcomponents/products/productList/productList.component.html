@@ -24,7 +24,7 @@
                   All {{typeTitle}}s
                 </a>
               <div *ngFor="let category of allCategories">
-                <a class="dropdown-item" [routerLink]="[ '/'+ typeName, typeId, category.categoryId ]" (click)="changeCate(category.categoryId,$event)">
+                <a class="dropdown-item" routerLinkActive="is-active" [routerLink]="[ '/'+ typeName, typeId, category.categoryId ]" (click)="changeCate(category.categoryId,$event)">
                   {{category.categoryName}}
                 </a>
               </div>
@@ -49,7 +49,7 @@
   <!-- *display products -->
 
   <div class="row py-3" *ngIf="allProducts">
-    <div class='col-12 col-sm-6 col-md-6 col-lg-4 pt-4 pb-2' *ngFor="let product of allProducts; index as i">
+    <div class='col-12 col-sm-6 col-md-6 col-lg-3 pt-4 pb-2' *ngFor="let product of allProducts; index as i">
       <div>
           <a [routerLink] = "['/product/',product.prodId]">
             <div class="h490" *ngIf="product.productMedia[0]">
@@ -89,6 +89,5 @@
         </li>
       </ul>
     </nav>
-  
   </div>
 </div>
