@@ -40,15 +40,29 @@
 				打折量 0.7 = 7折, 0.25 = 2.5折， 1 = 没折， 0 = 免费"
 				<input type="number" class="form-control" formControlName="discount" step="0.01" max=1 min=0>
 
-				<!-- <mat-form-field> -->
-					<!-- <input matInput class="form-control" formControlName="discount" placeholder="打折量 e.g. 70 = 7折, 25 = 2.5折， 5 = 0.5折"> -->
-				<!-- </mat-form-field> -->
 			</div>
 
 			<div class="col-6">
 				<mat-form-field>
-					<textarea matInput formControlName="comments" placeholder="Comments & Terms" style="min-height: 115px;"></textarea>
+					<textarea matInput formControlName="comments" placeholder="Comments & Terms"
+						style="min-height: 115px;"></textarea>
 					<mat-error *ngIf="comments.invalid">{{getErrorMessageComments()}}</mat-error>
+				</mat-form-field>
+				<mat-form-field>
+					<input matInput formControlName="website" placeholder="公司网站">
+				</mat-form-field>
+
+				<mat-form-field>
+					<input matInput formControlName="socialMedia" placeholder="公司 媒体 地址">
+				</mat-form-field>
+
+				<mat-form-field>
+					<input matInput formControlName="nzbn" placeholder="NZBN 号">
+				</mat-form-field>
+
+				<mat-form-field>
+					<input matInput formControlName="businessInfo"
+						placeholder="公司介绍 / 更多信息">
 				</mat-form-field>
 			</div>
 		</div>

@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material';
 	styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
+	eventBusiness = false
 	updateProfileForm: FormGroup;
 	profile: any;
 	userId: number;
@@ -25,6 +26,7 @@ export class UserProfileComponent implements OnInit {
 	errorMessage = '';
 	discount: any;
 	successMessage: any;
+	companyData={}
 
 	constructor(
 		private fb: FormBuilder,
@@ -46,6 +48,12 @@ export class UserProfileComponent implements OnInit {
 				this.phoneno = profile['data'][0]['userInfo'][0] ? profile['data'][0]['userInfo'][0].phoneNumber : null;
 				this.com = profile['data'][0]['userInfo'][0] ? profile['data'][0]['userInfo'][0].company : null;
 				this.comments = profile['data'][0]['userInfo'][0] ? profile['data'][0]['userInfo'][0].comments : null;
+				this.companyData = profile['data'][0].userInfo[0]
+				// this.comments = profile['data'][0]['userInfo'][0] ? profile['data'][0]['userInfo'][0].comments : null;
+				// this.comments = profile['data'][0]['userInfo'][0] ? profile['data'][0]['userInfo'][0].comments : null;
+				// this.comments = profile['data'][0]['userInfo'][0] ? profile['data'][0]['userInfo'][0].comments : null;
+				// this.comments = profile['data'][0]['userInfo'][0] ? profile['data'][0]['userInfo'][0].comments : null;
+
 				if (profile['data'][0].discount != 1) {
 					this.discount = profile['data'][0].discount;
 				}
@@ -73,6 +81,10 @@ export class UserProfileComponent implements OnInit {
 			Validators.maxLength(20)]],
 			company: [this.com, [Validators.minLength(2),
 			Validators.maxLength(20)]],
+			website: [this.companyData['website']?this.companyData['website']:null ],
+			socialMedia: [this.companyData['socialMedia']?this.companyData['socialMedia']:null ],
+			nzbn: [this.companyData['nzbn']?this.companyData['nzbn']:null],
+			businessInfo: [this.companyData['businessInfo']?this.companyData['businessInfo']:null],
 			subscribe: [this.subs]
 		});
 	}
@@ -122,6 +134,9 @@ export class UserProfileComponent implements OnInit {
 			this.subscribe = 0;
 		}
 	}
+	plannerChange(value){
+		this.eventBusiness = value
+	}
 
 	onSubmit() {
 		this.errorMessage = null;
@@ -131,7 +146,11 @@ export class UserProfileComponent implements OnInit {
 			lastName: this.updateProfileForm.value.lname,
 			phoneNumber: this.updateProfileForm.value.phone,
 			company: this.updateProfileForm.value.company,
-			isSubscribe: this.subscribe
+			isSubscribe: this.subscribe,
+			website: this.updateProfileForm.value.website,
+			socialMedia:this.updateProfileForm.value.socialMedia,
+			nzbn:this.updateProfileForm.value.nzbn,
+			businessInfo:this.updateProfileForm.value.businessInfo,
 		}
 		console.log('Updated user profile: ', user);
 		this.productservice.updateProfile(user, this.userId).subscribe(
@@ -149,7 +168,7 @@ export class UserProfileComponent implements OnInit {
 		this.dialog.open(NewUserInfoDialogComponent, {
 			width: '550px',
 			height: '680px',
-			data:'For event planners'
+			data: 'For event planners'
 		});
 	}
 }

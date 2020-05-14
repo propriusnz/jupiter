@@ -9,7 +9,7 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class PaymentResultComponent implements OnInit {
   isSendingRequest = false
-  isSendSuccess = false
+  isSendSuccess = null
   result = true
   expired = false
   payAgainUrl = ''
@@ -64,9 +64,9 @@ export class PaymentResultComponent implements OnInit {
       }
       ,
       (error) => {
+        console.warn(error)
         this.isSendingRequest = false
         this.isSendSuccess = false
-
       }
     )
 

@@ -77,7 +77,7 @@ export class ProductComponent implements OnInit {
     this.utcDate_start = new Date(nowDate2 + offset2)
     this.minDate_start = new Date(nowDate2 + offset2 + 13 * 60 * 60 * 1000);
     this.maxDate_start = new Date();
-    this.maxDate_start.setDate(this.minDate_start.getDate() + 90);
+    this.maxDate_start.setDate(this.minDate_start.getDate() + 777);
     this.minDate_return=this.minDate_start
     this.maxDate_return=this.maxDate_start
     if (!isPlatformBrowser(this.platformId)) {return;  }

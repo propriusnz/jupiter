@@ -16,7 +16,7 @@ mat-form-field {
 }
 .card {
 	min-height: 350px;
-	width: 500px;
+	max-width: 900px;
 	margin: 0 auto;
 	margin-top: 3%;
 }

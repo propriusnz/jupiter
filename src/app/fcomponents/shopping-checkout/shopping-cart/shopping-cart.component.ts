@@ -73,7 +73,7 @@ export class ShoppingCartComponent implements OnInit {
     this.minDate_start = new Date(nowDate2 + offset2 + 13 * 60 * 60 * 1000);
     this.maxDate_start = new Date();
     this.utcDate_start = new Date(nowDate2 + offset2) //Calculte current UTC date time
-    this.maxDate_start.setDate(this.minDate_start.getDate() + 90);
+    this.maxDate_start.setDate(this.minDate_start.getDate() + 777);
     this.minDate_return = this.minDate_start
     this.maxDate_return = this.maxDate_start
   }
@@ -416,13 +416,17 @@ export class ShoppingCartComponent implements OnInit {
     if ('totalPrice' in localStorage) {
       this.totalPrice = JSON.parse(localStorage.getItem('totalPrice'));
     }
-    if (this.totalPrice <= 250) {
+    if(this.totalPrice <= 150){
+      this.bondFee = 100
+    }
+      else if (this.totalPrice > 150 && this.totalPrice <= 300) {
       this.bondFee = 150
-    } else if (this.totalPrice <= 750 && this.totalPrice > 250) {
-      this.bondFee = 300
-    } else if (this.totalPrice > 750) {
+    } else if (this.totalPrice > 300 && this.totalPrice <= 700) {
+      this.bondFee = 250
+    } else if (this.totalPrice > 700) {
       this.bondFee = 500
     }
+
 
   }
   calculateDeliveryFee(districtValue) {
@@ -432,7 +436,7 @@ export class ShoppingCartComponent implements OnInit {
       } else if (districtValue.currentValue.localeCompare("2") == 0) {
         this.deliveryFee = 150
       } else if (districtValue.currentValue.localeCompare("3") == 0) {
-        this.deliveryFee = 260
+        this.deliveryFee = 200
       } else if (districtValue.currentValue.localeCompare("4") == 0) {
         this.deliveryFee = 150
       } else if (districtValue.currentValue.localeCompare("5") == 0) {

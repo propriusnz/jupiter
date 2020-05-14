@@ -27,7 +27,11 @@
 		<div class="col-md-6">
 			<b>Bond paid: </b>{{data.depositPaidFee | currency}} 
 		</div>
-
+		<div class="col-md-6">
+		</div>
+		<div class="col-md-6">
+			<b>Total Due (Bond included): </b>{{ data.depositFee  + data.price - data.depositPaidFee - data.rentalPaidFee | currency}} 
+		</div>
 
 	</div>
 

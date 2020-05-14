@@ -27,7 +27,7 @@ export class ItemDetailComponent implements OnInit {
     },
       (err)=>{console.warn(err)}
     )
-  
+
   }
 
 }

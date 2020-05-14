@@ -11,6 +11,7 @@
 				<th>Company</th>
 				<th>Discount Level</th>
 				<th>Subscribed</th>
+				<th>Company website</th>
 				<th>Comments & Terms</th>
 				<th>Edit Profile</th>
 			</tr>
@@ -34,6 +35,9 @@
 				<!-- Subscribed -->
 				<td *ngIf="user.isSubscribe == 1" class="px-4">Yes</td>
 				<td *ngIf="user.isSubscribe == 0">No</td>
+				<!-- Website -->
+				<td><span *ngIf="user.userInfo[0]">{{user.userInfo[0].website}}</span></td>
+
 				<!-- Comments -->
 				<td style="width: 13%;">
 					<div *ngIf="user.userInfo[0]" style="max-height: 60px; overflow-y: scroll;">{{user.userInfo[0].comments}}</div>

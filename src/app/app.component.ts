@@ -1,6 +1,9 @@
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { MatDialog } from '@angular/material';
-  import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/internal/operators/filter';
+declare var gtag
 
 @Component({
   selector: 'app-root',
@@ -25,15 +28,23 @@ export class AppComponent {
   isBrowser: boolean = false;
 
   constructor(
+    private router: Router,
     @Inject(PLATFORM_ID) private platformId,
-    ) {
-      this.isBrowser = isPlatformBrowser(this.platformId);
-    }
+  ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
 
   ngOnInit() {
-    if(!this.isBrowser){
-      return ;
+    if (!this.isBrowser) {
+      return;
     }
+    // Google analytics
+    const navEndEvent$ = this.router.events.pipe(
+      filter(e => e instanceof NavigationEnd)
+    );
+    navEndEvent$.subscribe((e: NavigationEnd) => {
+      gtag('config', 'MY_ID', { 'page_path': e.urlAfterRedirects });
+    });
   }
 
 

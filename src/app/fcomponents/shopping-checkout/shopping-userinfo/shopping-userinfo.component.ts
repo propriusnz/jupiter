@@ -181,7 +181,7 @@ export class ShoppingUserinfoComponent implements OnInit {
       this.deliveryFee = 150
       this.districtName = "AucklandCity"
     } else if (this.districtSelected == 3) {
-      this.deliveryFee = 260
+      this.deliveryFee = 200
       this.districtName = "ManukauCity"
     } else if (this.districtSelected == 4) {
       this.deliveryFee = 150
@@ -195,11 +195,14 @@ export class ShoppingUserinfoComponent implements OnInit {
     if ('totalPrice' in localStorage) {
       this.totalPrice = JSON.parse(localStorage.getItem('totalPrice'));
     }
-    if (this.totalPrice <= 250) {
+    if(this.totalPrice <= 150){
+      this.bondFee = 100
+    }
+      else if (this.totalPrice > 150 && this.totalPrice <= 300) {
       this.bondFee = 150
-    } else if (this.totalPrice <= 750 && this.totalPrice > 250) {
-      this.bondFee = 300
-    } else if (this.totalPrice > 750) {
+    } else if (this.totalPrice > 300 && this.totalPrice <= 700) {
+      this.bondFee = 250
+    } else if (this.totalPrice > 700) {
       this.bondFee = 500
     }
 

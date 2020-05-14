@@ -5,30 +5,57 @@
 	</div>
 	<div class="card-body bg-light text-center">
 		<form [formGroup]="updateProfileForm" (ngSubmit)="onSubmit()">
-			<mat-form-field>
-				<input matInput formControlName="fname" placeholder="First Name">
-				<mat-error *ngIf="fname.invalid">{{getErrorMessage1()}}</mat-error>
-			</mat-form-field>
+			<div class="row">
+				<div class="col-md-6">
+					<mat-form-field>
+						<input matInput formControlName="fname" placeholder="First Name">
+						<mat-error *ngIf="fname.invalid">{{getErrorMessage1()}}</mat-error>
+					</mat-form-field>
+		
+					<mat-form-field>
+						<input matInput formControlName="lname" placeholder="Last Name">
+						<mat-error *ngIf="lname.invalid">{{getErrorMessage2()}}</mat-error>
+					</mat-form-field>
+		
+					<mat-form-field>
+						<input matInput placeholder="Email Address" value="{{ email }}" style="cursor: not-allowed;" disabled>
+					</mat-form-field>
+		
+					<mat-form-field>
+						<input matInput formControlName="phone" placeholder="Phone No.">
+						<mat-error *ngIf="phone.invalid">{{getErrorMessage3()}}</mat-error>
+					</mat-form-field>
+		
+					<mat-form-field>
+						<input matInput formControlName="company" placeholder="Company">
+						<mat-error *ngIf="company.invalid">{{getErrorMessage4()}}</mat-error>
+					</mat-form-field>
+				</div>
+				<div class="col-md-6">
+					<mat-form-field>
+						<input matInput formControlName="website" placeholder="Company website">
+					</mat-form-field>
+		
+					<mat-form-field>
+						<input matInput formControlName="socialMedia" placeholder="Company social media page">
+					</mat-form-field>
+		
+					<mat-form-field>
+						<input matInput formControlName="nzbn" placeholder="NZBN number">
+					</mat-form-field>
+		
+					<mat-form-field>
+						<input matInput formControlName="businessInfo" placeholder="Simple introduction to your organisation">
+					</mat-form-field>
+				</div>
+			</div>
 
-			<mat-form-field>
-				<input matInput formControlName="lname" placeholder="Last Name">
-				<mat-error *ngIf="lname.invalid">{{getErrorMessage2()}}</mat-error>
-			</mat-form-field>
 
-			<mat-form-field>
-				<input matInput placeholder="Email Address" value="{{ email }}" style="cursor: not-allowed;" disabled>
-			</mat-form-field>
+			<!-- <span *ngIf="eventBusiness || companyData.Website" > -->
 
-			<mat-form-field>
-				<input matInput formControlName="phone" placeholder="Phone No.">
-				<mat-error *ngIf="phone.invalid">{{getErrorMessage3()}}</mat-error>
-			</mat-form-field>
 
-			<mat-form-field>
-				<input matInput formControlName="company" placeholder="Company">
-				<mat-error *ngIf="company.invalid">{{getErrorMessage4()}}</mat-error>
-			</mat-form-field>
 
+			<!-- </span> -->
 			<!-- <div id="comment" class="mx-auto" *ngIf="comments">
 				<small><b>Comments & Terms</b></small>
 				<div class="mt-2 border rounded">{{comments}}</div>
@@ -41,7 +68,13 @@
 				<mat-slide-toggle (change)="onSlideChange($event)" aria-label="Subscribe" formControlName="subscribe" color="primary"></mat-slide-toggle>
 				<span> Subscribe to our news letter</span><br>
 			</div>
-			<span style="cursor: pointer;" (click)="openEventPlanningDialog()">Are you a event planning business ?  </span>
+			<!-- Are you a event planning business ?  -->
+			<br>
+			<!-- <mat-checkbox (change)="plannerChange($event.checked)"> </mat-checkbox> -->
+			<span style="cursor: pointer;" (click)="openEventPlanningDialog()">
+				I'm a event planning business</span>
+
+			<br>
 			<br>
 			<div *ngIf="this.updateProfileForm.valid && errorMessage" class="alert alert-danger text-center s2" role="alert">
 				{{errorMessage}}
