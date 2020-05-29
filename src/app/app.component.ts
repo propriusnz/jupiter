@@ -43,7 +43,7 @@ export class AppComponent {
       filter(e => e instanceof NavigationEnd)
     );
     navEndEvent$.subscribe((e: NavigationEnd) => {
-      gtag('config', 'MY_ID', { 'page_path': e.urlAfterRedirects });
+      gtag('config', 'UA-143509424-1', { 'page_path': e.urlAfterRedirects });
     });
   }
 

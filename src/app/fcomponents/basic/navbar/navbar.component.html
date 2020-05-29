@@ -6,7 +6,7 @@
         <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/' routerLinkActive="active">
           <h1 class="s2bold nav-link-title">Home</h1>
         </a>
-        <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/'>
+        <a *ngIf="isBrowser==false" class="nav-link s2bold" href='https://luxedreameventhire.co.nz/'>
           <h1 class="s2bold nav-link-title">Home</h1>
         </a>
       </li>
@@ -24,7 +24,7 @@
             (click)="updateCategoryStatus('All Hires')">
             <h1 class="nav-link-title">All Hires</h1>
           </a>
-          <a *ngIf="isBrowser==false" class="dropdown-item d-none d-md-block s2bold nav-link-title" href='http://luxedreameventhire.co.nz/products/1/0'
+          <a *ngIf="isBrowser==false" class="dropdown-item d-none d-md-block s2bold nav-link-title" href='https://luxedreameventhire.co.nz/products/1/0'
             (click)="updateCategoryStatus('All Hires')">
             All Hires
           </a>
@@ -37,7 +37,7 @@
           </div>
           <div *ngIf="isBrowser==false">
             <a class="dropdown-item d-none d-md-block" *ngFor="let category of hireCategories"
-              href = 'http://luxedreameventhire.co.nz/products/1/{{category.categoryId}}'
+              href = 'https://luxedreameventhire.co.nz/products/1/{{category.categoryId}}'
               (click)="updateCategoryStatus(category.categoryName)">
               {{category.categoryName}}
             </a>
@@ -49,7 +49,7 @@
               (click)="updateCategoryStatus('All Hires')">
               <h1>All Hires</h1>
             </a>
-            <a *ngIf="isBrowser==false" href='http://luxedreameventhire.co.nz/products/1/0' class="nav-link-title"
+            <a *ngIf="isBrowser==false" href='https://luxedreameventhire.co.nz/products/1/0' class="nav-link-title"
               (click)="updateCategoryStatus('All Hires')">
               All Hires
             </a>
@@ -60,7 +60,7 @@
               (click)="updateCategoryStatus(category.categoryName)">
               <h1>{{category.categoryName}}</h1>
             </a>
-            <a *ngIf="isBrowser==false" href = 'http://luxedreameventhire.co.nz/products/1/{{category.categoryId}}'
+            <a *ngIf="isBrowser==false" href = 'https://luxedreameventhire.co.nz/products/1/{{category.categoryId}}'
               (click)="updateCategoryStatus(category.categoryName)">
               {{category.categoryName}}
             </a>
@@ -81,7 +81,7 @@
               (click)="updateCategoryStatus('All Services')">
               <h1>All Services</h1>
             </a>
-            <a *ngIf="isBrowser==false" class="dropdown-item d-none d-md-block nav-link-title" href='http://luxedreameventhire.co.nz/services/2/0'
+            <a *ngIf="isBrowser==false" class="dropdown-item d-none d-md-block nav-link-title" href='https://luxedreameventhire.co.nz/services/2/0'
               (click)="updateCategoryStatus('All Services')">
               All Services
             </a>
@@ -94,7 +94,7 @@
             </div>
             <div *ngIf="isBrowser==false">
               <a class="dropdown-item d-none d-md-block" *ngFor="let category of serviceCategories"
-                href = 'http://luxedreameventhire.co.nz/services/2/{{category.categoryId}}'
+                href = 'https://luxedreameventhire.co.nz/services/2/{{category.categoryId}}'
                 (click)="updateCategoryStatus(category.categoryName)">
                 {{category.categoryName}}
               </a>
@@ -106,7 +106,7 @@
                 (click)="updateCategoryStatus('All Services')">
                 <h1>All Services</h1>
               </a>
-              <a *ngIf="isBrowser==false" href='http://luxedreameventhire.co.nz/services/2/0' class="nav-link-title"
+              <a *ngIf="isBrowser==false" href='https://luxedreameventhire.co.nz/services/2/0' class="nav-link-title"
                 (click)="updateCategoryStatus('All Services')">
                 All Services
               </a>
@@ -117,7 +117,7 @@
                 (click)="updateCategoryStatus(category.categoryName)">
                 <h1>{{category.categoryName}}</h1>
               </a>
-              <a *ngIf="isBrowser==false" href = 'http://luxedreameventhire.co.nz/services/2/{{category.categoryId}}'
+              <a *ngIf="isBrowser==false" href = 'https://luxedreameventhire.co.nz/services/2/{{category.categoryId}}'
                 (click)="updateCategoryStatus(category.categoryName)">
                 {{category.categoryName}}
               </a>
@@ -130,7 +130,7 @@
         <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/packages' routerLinkActive="active">
           <h1 class="s2bold nav-link-title nav-link-title-space">Party Packages</h1>
         </a>
-        <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/packages'>
+        <a *ngIf="isBrowser==false" class="nav-link s2bold" href='https://luxedreameventhire.co.nz/packages'>
           <h1 class="s2bold nav-link-title nav-link-title-space">Party Packages</h1>
         </a>
       </li>
@@ -143,7 +143,7 @@
       <img class="d-none d-lg-block" src="../../../../assets/images/Asset1-4x-big.png" style="zoom:0.5;height:9.4rem;" />
       <img class="d-md-block d-lg-none" src="../../../../assets/images/Asset1-4x-mid.png" style="zoom:0.8;" />
     </a>
-    <a *ngIf="isBrowser==false" class="nav-link p-0 p-md-1" href='http://luxedreameventhire.co.nz'>
+    <a *ngIf="isBrowser==false" class="nav-link p-0 p-md-1" href='https://luxedreameventhire.co.nz'>
       <img class="d-none d-lg-block" src="../../../../assets/images/Asset1-4x-big.png" style="zoom:0.5;height:9.4rem;" />
       <img class="d-md-block d-lg-none" src="../../../../assets/images/Asset1-4x-mid.png" style="zoom:0.8;" />
     </a>
@@ -162,23 +162,23 @@
         <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink2">
           <!-- !large screen dropdown -->
           <a *ngIf="isBrowser==true" class="dropdown-item d-none d-md-block s2bold" routerLink='/galleries'> <h1 class="nav-link-title">All Galleries</h1></a>
-          <a *ngIf="isBrowser==false" class="dropdown-item d-none d-md-block nav-link-title" href='http://luxedreameventhire.co.nz/galleries'>All Galleries</a>
+          <a *ngIf="isBrowser==false" class="dropdown-item d-none d-md-block nav-link-title" href='https://luxedreameventhire.co.nz/galleries'>All Galleries</a>
           <div *ngIf="isBrowser==true">
             <a class="dropdown-item d-none d-md-block s2bold" *ngFor="let gallery of galleriesData" routerLink= '/galleries/{{gallery.typeId}}'><h1>{{gallery.eventName}}</h1></a>
           </div>
           <div *ngIf="isBrowser==false">
-            <a class="dropdown-item d-none d-md-block" *ngFor="let gallery of galleriesData" href = 'http://luxedreameventhire.co.nz/category/galleries/{{gallery}}'>{{gallery}}</a>
+            <a class="dropdown-item d-none d-md-block" *ngFor="let gallery of galleriesData" href = 'https://luxedreameventhire.co.nz/category/galleries/{{gallery}}'>{{gallery}}</a>
           </div>
 
           <!-- !mobile dropdown -->
           <a class="dropdown-item d-block d-md-none" data-toggle="collapse" data-target=".navbar-collapse1">
             <a class="s2bold nav-link-title" *ngIf="isBrowser==true" routerLink='/galleries'><h1>All Galleries</h1></a>
-            <a *ngIf="isBrowser==false" href='http://luxedreameventhire.co.nz/galleries' class="nav-link-title">All Galleries</a>
+            <a *ngIf="isBrowser==false" href='https://luxedreameventhire.co.nz/galleries' class="nav-link-title">All Galleries</a>
           </a>
           <a class="dropdown-item d-block d-md-none s2bold" *ngFor="let gallery of galleriesData" data-toggle="collapse"
             data-target=".navbar-collapse">
-            <a class="s2bold" *ngIf="isBrowser==true" routerLink= '/galleries/{{gallery}}'><h1>{{gallery.eventName}}</h1></a>
-            <a *ngIf="isBrowser==false" href='http://luxedreameventhire.co.nz/category/galleries/{{gallery}}'>{{gallery}}</a>
+            <a class="s2bold" *ngIf="isBrowser==true" routerLink= '/galleries/{{gallery.typeId}}'><h1>{{gallery.eventName}}</h1></a>
+            <a *ngIf="isBrowser==false" href='https://luxedreameventhire.co.nz/category/galleries/{{gallery}}'>{{gallery}}</a>
           </a>
         </div>
       </li>
@@ -209,7 +209,7 @@
         <a *ngIf="isBrowser==true" class="nav-link s2bold" routerLink='/userDashboard' routerLinkActive="active">
           <h1 class="s2bold nav-link-title">Dashboard</h1>
         </a>
-        <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/userDashboard'>
+        <a *ngIf="isBrowser==false" class="nav-link s2bold" href='https://luxedreameventhire.co.nz/userDashboard'>
           <h1 class="s2bold nav-link-title">Dashboard</h1>
         </a>
       </li>
@@ -229,7 +229,7 @@
             Cart
           </h1>
         </a>
-        <a *ngIf="isBrowser==false" class="nav-link s2bold" href='http://luxedreameventhire.co.nz/checkout'>
+        <a *ngIf="isBrowser==false" class="nav-link s2bold" href='https://luxedreameventhire.co.nz/checkout'>
           <h1 class="s2bold nav-link-title">
               <i class="fas fa-shopping-cart" title="View Shopping Cart"></i>
           </h1>
