@@ -4,7 +4,7 @@
 	<!-- title && subtitle-->
 	<div class="row">
 		<div class="col-6">Product Title</div>
-		<div class="col-6"> Product Subtitle</div>
+		<div class="col-6">Product Subtitle</div>
 		<div class="form-group col-6">
 			<input class="form-control" name="title" placeholder="Title *" [(ngModel)]="productForm.title"
 				#title="ngModel">
@@ -63,7 +63,6 @@
 
 		<div class="ml-3 mt-3">
 			<button type="button" class="btn btn-outline-info" (click)="goEditImage()" *ngIf="status == 'update'">Edit product image</button>
-			<button type="button" class="btn btn-outline-secondary ml-2" (click)="addDetails()">+ Add new child product</button>
 		</div>
 
 		<!-- Details of Product -->
@@ -99,6 +98,7 @@
 					</div>
 				</div>
 			</form>
+			<button type="button" class="btn btn-outline-secondary mt-3" (click)="addDetails()">+ New child product</button>
 
 			<div *ngIf="!detailList[0]" 
 				style="color: #c48f45; text-align: center; height: 30px;">
@@ -115,41 +115,51 @@
 				[(ngModel)]="productForm.description" #description="ngModel"></textarea>
 		</div>
 	</div>
+	<hr>
 </mat-dialog-content>
 
 <mat-dialog-content *ngIf="editImage">
-	Edit Product Images
+	<h6>Edit Product Images:</h6>
 	<!-- !show images -->
-	<div *ngIf="imageList" class="row mb-5">
-		<div *ngFor="let img of imageList" class="ml-3">
-			<img src="{{baseImageUrl}}{{img.url}}"><br>
+	<div *ngIf="imageList" class="row mb-5" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)" style="border: 1px solid grey; border-radius: 10px;" >
+		<div class="ml-3 my-2" *ngFor="let img of imageList" cdkDrag>
+			<img src="{{baseImageUrl}}{{img.url}}" style="cursor: move;"><br>
 			<!-- !delete image -->
-			<button type="button" class="btn btn-outline-danger btn-sm mt-2" id="{{img.id}}"
-				(click)="deleteImage(img.id)" *ngIf="!isLoading" [disabled]="isLoading">Delete</button>
+			<button type="button" class="btn btn-outline-danger btn-sm mt-2" id="{{img.id}}" (click)="deleteImage(img.id)" *ngIf="!isLoading" [disabled]="isLoading">
+				Delete
+			</button>
 		</div>
 	</div>
 	<div class="spinner-border text-info" role="status" *ngIf="isLoading">
 		<span class="sr-only">Loading...</span>
 	</div>
 	<!-- !upload img -->
-	<div class="mt-3">
+	<div class="mt-1">
+		<h6 class="pb-2">Upload New Image:</h6>
 		<input #imageInput type="file" (change)="onFileSelected($event)">
 		<button type="button" class="btn btn-outline-info btn-sm" (click)="onUpload()"
 			[disabled]="isLoading">upload</button>
 	</div>
-	<div *ngIf="isImageEmpty" style="color:red"> Please add a image</div>
-	<div class="mt-3"><button type="button" class="btn btn-outline-info" (click)="goEditProduct()">Edit product
-			detail</button></div>
+	<div *ngIf="isImageEmpty" style="color:red">Please add a image</div>
+	<div class="mt-3">
+		<button type="button" class="btn btn-outline-secondary" (click)="goEditProduct()"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back to product detail
+		</button>
+	</div>
 	<br>
 	<div *ngIf="feedbackMessage">
 		{{feedbackMessage}}
 	</div>
+	<hr>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-	<button type="button" class="btn btn-outline-secondary" (click)="close()">Close</button>
+	<button type="button" class="btn btn-outline-secondary" (click)="close()">
+		<i class="fa fa-times" aria-hidden="true"></i> Exit
+	</button>
 	<button type="button" class="btn btn-outline-primary ml-80" (click)="save()" *ngIf="status == 'update'"
-		[disabled]="isLoading == true">Save</button>
-	<button type="button" class="btn btn-outline-primary ml-80" (click)="create()" *ngIf="status == 'create'"
-		[disabled]="isLoading == true">Create</button>
+		[disabled]="isLoading == true">
+		<i class="fa fa-check" aria-hidden="true"></i> Save
+	</button>
+	<button type="button" class="btn btn-outline-primary ml-2" (click)="create()" *ngIf="status == 'create'" [disabled]="isLoading == true">+ Create
+	</button>
 </mat-dialog-actions>

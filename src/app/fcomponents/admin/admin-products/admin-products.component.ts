@@ -7,10 +7,6 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap, filter } from 'rxjs/operators';
-import { environment } from '../../../../environments/environment.prod';
-import { setTheme } from 'ngx-bootstrap/utils';
-import * as moment from 'moment';
-import { setDate } from 'ngx-bootstrap/chronos/utils/date-setters';
 import { ChildProductsDialogComponent } from '../admin-dialogs/child-products-dialog/child-products-dialog.component';
 
 

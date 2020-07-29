@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { ProductService } from '../../../../service/product.service';
 import { environment } from '../../../../../environments/environment.prod';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-product-dialog',
@@ -81,6 +82,10 @@ export class ProductdialogComponent implements OnInit {
     this.productForm.prodTypeId = Number(data.blockCode);
     this.dialogTitle = data.title;
     this.status = data.action;
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.imageList, event.previousIndex, event.currentIndex);
   }
 
   ngOnInit() {
@@ -264,6 +269,7 @@ export class ProductdialogComponent implements OnInit {
       console.log(error);
     });
   }
+  
   isCategoryDropdownShown(status: string): boolean {
     const isTypeIdCorrect: boolean = this.productForm.prodTypeId !== 3;
     switch (status) {

@@ -10,10 +10,11 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { CalendarUtilsModule } from './calendar-utils/module';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
@@ -203,6 +204,7 @@ const appRoutes: Routes = [
     MatSelectModule,
     MatSnackBarModule,
     MatCheckboxModule,
+    DragDropModule,
     RouterModule.forRoot(appRoutes, { scrollPositionRestoration: 'enabled' }),
     HttpClientModule,
     BsDatepickerModule.forRoot(),
